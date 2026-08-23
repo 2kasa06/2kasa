@@ -1,7 +1,7 @@
 /**
  * Beauty Produce テーマのフロント側スクリプト。
  * ヘッダーの背景切り替え、モバイルメニュー、スクロール表示、
- * FAQアコーディオン、ビフォーアフターの比較スライダーを担当します。
+ * ヒーローのパララックス、FAQアコーディオン、比較スライダーを担当します。
  */
 (function () {
 	'use strict';
@@ -14,7 +14,7 @@
 		if (!header) return;
 
 		function onScroll() {
-			header.classList.toggle('is-scrolled', window.scrollY > 24);
+			header.classList.toggle('is-scrolled', window.scrollY > 60);
 		}
 
 		onScroll();
@@ -29,7 +29,6 @@
 
 		function setOpen(open) {
 			burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-			burger.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
 			menu.classList.toggle('is-open', open);
 			menu.setAttribute('aria-hidden', open ? 'false' : 'true');
 			document.body.classList.toggle('bp-menu-open', open);
@@ -77,6 +76,39 @@
 		});
 	}
 
+	/* ---------- ヒーローのパララックス ---------- */
+	function initParallax() {
+		var layers = document.querySelectorAll('[data-bp-parallax]');
+		if (!layers.length || reduceMotion) return;
+
+		var ticking = false;
+
+		function update() {
+			ticking = false;
+			Array.prototype.forEach.call(layers, function (layer) {
+				var section = layer.parentElement;
+				if (!section) return;
+
+				var rect = section.getBoundingClientRect();
+				if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+
+				var progress = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
+				layer.style.transform = 'translate3d(0, ' + progress * 20 + '%, 0)';
+			});
+		}
+
+		function onScroll() {
+			if (!ticking) {
+				ticking = true;
+				window.requestAnimationFrame(update);
+			}
+		}
+
+		update();
+		window.addEventListener('scroll', onScroll, { passive: true });
+		window.addEventListener('resize', onScroll, { passive: true });
+	}
+
 	/* ---------- FAQ ---------- */
 	function initFaq() {
 		var items = document.querySelectorAll('[data-bp-faq]');
@@ -108,18 +140,16 @@
 			var clip = container.querySelector('[data-bp-clip]');
 			var handle = container.querySelector('[data-bp-handle]');
 			var button = handle ? handle.querySelector('button') : null;
-			var tagBefore = container.querySelector('[data-bp-tag-before]');
 			if (!clip || !handle) return;
 
 			var dragging = false;
 
 			function setPosition(value) {
-				var pos = Math.min(100, Math.max(0, value));
+				var pos = Math.min(95, Math.max(5, value));
 				clip.style.clipPath = 'inset(0 ' + (100 - pos) + '% 0 0)';
 				clip.style.webkitClipPath = 'inset(0 ' + (100 - pos) + '% 0 0)';
 				handle.style.left = pos + '%';
 				if (button) button.setAttribute('aria-valuenow', Math.round(pos));
-				if (tagBefore) tagBefore.style.opacity = pos > 18 ? '1' : '0';
 			}
 
 			function positionFromEvent(event) {
@@ -128,13 +158,15 @@
 				setPosition(((clientX - rect.left) / rect.width) * 100);
 			}
 
-			function startDrag(event) {
+			container.addEventListener('mousedown', function (event) {
 				dragging = true;
 				positionFromEvent(event);
-			}
-
-			container.addEventListener('mousedown', startDrag);
-			container.addEventListener('touchstart', startDrag, { passive: true });
+			});
+			container.addEventListener('touchstart', function (event) {
+				dragging = true;
+				positionFromEvent(event);
+			}, { passive: true });
+			container.addEventListener('mouseleave', function () { dragging = false; });
 
 			window.addEventListener('mousemove', function (event) {
 				if (dragging) positionFromEvent(event);
@@ -142,7 +174,6 @@
 			window.addEventListener('touchmove', function (event) {
 				if (dragging) positionFromEvent(event);
 			}, { passive: true });
-
 			window.addEventListener('mouseup', function () { dragging = false; });
 			window.addEventListener('touchend', function () { dragging = false; });
 
@@ -171,7 +202,7 @@
 			if (!link) return;
 
 			var url = new URL(link.href, window.location.href);
-			if (url.pathname !== window.location.pathname || url.origin !== window.location.origin) return;
+			if (url.origin !== window.location.origin || url.pathname !== window.location.pathname) return;
 			if (!url.hash || url.hash === '#') return;
 
 			var target = document.querySelector(url.hash);
@@ -187,6 +218,7 @@
 		initHeader();
 		initMobileMenu();
 		initReveal();
+		initParallax();
 		initFaq();
 		initBeforeAfter();
 		initSmoothAnchors();

@@ -1,6 +1,6 @@
 <?php
 /**
- * 年代選択セクション。
+ * ライフステージ選択。
  *
  * @package BeautyProduce
  */
@@ -9,72 +9,46 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$bp_args = wp_parse_args(
-	isset( $args ) ? $args : array(),
-	array(
-		'exclude'  => 0,
-		'label'    => 'BY AGE',
-		'title'    => '年代から選ぶ',
-		'subtitle' => '同じ「似合う」でも、必要なものは年代で変わります。いまのご自身に近いところからご覧ください。',
-		'wide'     => false,
-		'anchor'   => 'ages',
-		'tone'     => 'white',
-	)
-);
-
 $bp_pages = bp_get_age_pages();
-
-if ( $bp_args['exclude'] ) {
-	$bp_pages = array_values(
-		array_filter(
-			$bp_pages,
-			static function ( $bp_page ) use ( $bp_args ) {
-				return (int) $bp_page->ID !== (int) $bp_args['exclude'];
-			}
-		)
-	);
-}
 
 if ( ! $bp_pages ) {
 	return;
 }
-
-$bp_columns = count( $bp_pages ) >= 4 ? 4 : 3;
 ?>
-<section id="<?php echo esc_attr( $bp_args['anchor'] ); ?>" class="bp-section bp-section--<?php echo esc_attr( $bp_args['tone'] ); ?>">
-	<?php get_template_part( 'template-parts/shapes' ); ?>
+<section id="age-select" class="bp-section" style="background: hsl(42, 35%, 96%);">
+	<span class="bp-age-bg" aria-hidden="true"></span>
 
-	<div class="bp-container">
-		<div class="bp-heading bp-heading--center reveal">
-			<p class="section-label"><?php echo esc_html( $bp_args['label'] ); ?></p>
-			<?php if ( $bp_args['title'] ) : ?>
-				<h2 class="section-title"><?php echo esc_html( $bp_args['title'] ); ?></h2>
-			<?php endif; ?>
-			<?php if ( $bp_args['subtitle'] ) : ?>
-				<p class="section-subtitle"><?php echo esc_html( $bp_args['subtitle'] ); ?></p>
-			<?php endif; ?>
+	<div class="container" style="position:relative;z-index:10;">
+		<div class="bp-head reveal">
+			<span class="section-label">Your Life Stage</span>
+			<h2 class="section-title">あなたのステージを選んでください</h2>
+			<p class="section-subtitle">人生のどのステージにいても、<br />あなたらしい美しさを見つける旅は始められます。</p>
 		</div>
 
-		<div class="bp-grid bp-grid--<?php echo (int) $bp_columns; ?> bp-mt-lg">
+		<div class="bp-grid bp-grid--cards">
 			<?php foreach ( $bp_pages as $bp_index => $bp_page ) : ?>
 				<?php
-				$bp_range = get_post_meta( $bp_page->ID, 'bp_age_range', true );
-				$bp_range = $bp_range ? $bp_range : get_the_title( $bp_page );
-				$bp_label = get_post_meta( $bp_page->ID, 'bp_age_label', true );
-				$bp_card  = get_post_meta( $bp_page->ID, 'bp_age_card', true );
+				$bp_range   = get_post_meta( $bp_page->ID, 'bp_age_range', true );
+				$bp_range   = $bp_range ? $bp_range : get_the_title( $bp_page );
+				$bp_en      = get_post_meta( $bp_page->ID, 'bp_age_en', true );
+				$bp_concept = get_post_meta( $bp_page->ID, 'bp_age_tagline', true );
 				?>
-				<a class="age-card<?php echo $bp_args['wide'] ? ' age-card--wide' : ''; ?> reveal"
-					href="<?php echo esc_url( get_permalink( $bp_page ) ); ?>"
-					style="transition-delay:<?php echo (int) ( $bp_index * 90 ); ?>ms;">
-					<img src="<?php echo esc_url( bp_age_image_url( $bp_page->ID ) ); ?>" alt="<?php echo esc_attr( $bp_range . 'のページ' ); ?>" loading="lazy" />
+				<a class="age-card reveal" href="<?php echo esc_url( get_permalink( $bp_page ) ); ?>"
+					style="transition-delay:<?php echo (int) ( $bp_index * 100 ); ?>ms;">
+					<img src="<?php echo esc_url( bp_age_image_url( $bp_page->ID ) ); ?>" alt="<?php echo esc_attr( $bp_range ); ?>" loading="lazy" />
+					<span class="age-card__veil" aria-hidden="true"></span>
 					<span class="age-card__body">
-						<?php if ( $bp_label ) : ?>
-							<span class="age-card__label"><?php echo esc_html( $bp_label ); ?></span>
+						<?php if ( $bp_en ) : ?>
+							<span class="age-card__en"><?php echo esc_html( $bp_en ); ?></span>
 						<?php endif; ?>
-						<span class="age-card__title"><?php echo esc_html( $bp_range ); ?></span>
-						<?php if ( $bp_card && ! $bp_args['wide'] ) : ?>
-							<span class="age-card__copy"><?php echo esc_html( $bp_card ); ?></span>
+						<span class="age-card__range"><?php echo esc_html( $bp_range ); ?></span>
+						<?php if ( $bp_concept ) : ?>
+							<span class="age-card__concept"><?php echo esc_html( $bp_concept ); ?></span>
 						<?php endif; ?>
+						<span class="age-card__more">
+							詳しく見る
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+						</span>
 					</span>
 				</a>
 			<?php endforeach; ?>

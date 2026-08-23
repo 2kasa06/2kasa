@@ -3,22 +3,28 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "美容プロデュースサービス公式サイト (React + Vite + Tailwind v4)",
+  "description": "美容プロデュースサービス公式サイト (Vite + React + TypeScript)",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "framer-motion": "^11.15.0",
+    "lucide-react": "^0.469.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0"
+    "wouter": "^3.3.5"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "tailwindcss": "^4.0.0",
     "tw-animate-css": "^1.2.5",
+    "typescript": "^5.7.2",
     "vite": "^6.0.7"
   }
 }

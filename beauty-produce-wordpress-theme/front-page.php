@@ -11,37 +11,56 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$bp_hero_title = bp_option( 'bp_hero_title', "あなたらしさを、\nいちばん美しく。" );
-$bp_hero_image = bp_option( 'bp_hero_image' );
-$bp_hero_image = $bp_hero_image ? $bp_hero_image : bp_asset_image( 'hero-illustration.svg' );
-$bp_stats      = array(
-	array( (string) wp_count_posts( 'bp_service' )->publish, 'メニュー' ),
-	array( (string) count( bp_get_age_pages() ), '年代別プラン' ),
-	array( '10代-60代', '対応年代' ),
+$bp_title = bp_split_lines( bp_option( 'bp_hero_title', "あなたらしい美しさを、\nもっと自由に。" ) );
+$bp_hero  = bp_option( 'bp_hero_image' );
+$bp_hero  = $bp_hero ? $bp_hero : bp_asset_image( 'hero-illustration.webp' );
+
+$bp_stats = array(
+	array( bp_option( 'bp_stat1_num', '1,200+' ), bp_option( 'bp_stat1_label', '累計お客様数' ) ),
+	array( bp_option( 'bp_stat2_num', '98%' ), bp_option( 'bp_stat2_label', '満足度' ) ),
+	array( bp_option( 'bp_stat3_num', '10年+' ), bp_option( 'bp_stat3_label', '実績' ) ),
 );
 ?>
 
 <section class="bp-hero">
-	<?php get_template_part( 'template-parts/shapes' ); ?>
+	<span class="float-shape animate-float-1" style="top:-100px;left:-100px;width:400px;height:400px;opacity:.2;background:radial-gradient(circle, hsl(8,40%,65%) 0%, transparent 70%);" aria-hidden="true"></span>
+	<span class="float-shape animate-float-2" style="bottom:10%;left:5%;width:300px;height:300px;opacity:.15;background:radial-gradient(circle, hsl(8,50%,88%) 0%, transparent 70%);" aria-hidden="true"></span>
+	<span class="float-shape animate-float-3" style="top:30%;left:40%;width:200px;height:200px;opacity:.1;background:radial-gradient(circle, hsl(45,55%,60%) 0%, transparent 70%);" aria-hidden="true"></span>
 
-	<div class="bp-container bp-hero__grid">
+	<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.1;pointer-events:none;" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+		<circle cx="200" cy="200" r="150" stroke="hsl(8,40%,65%)" stroke-width="0.5" />
+		<circle cx="200" cy="200" r="250" stroke="hsl(8,40%,65%)" stroke-width="0.3" />
+		<path d="M 100 600 Q 400 400 700 500 T 1300 300" stroke="hsl(8,40%,65%)" stroke-width="0.5" fill="none" />
+		<circle cx="1200" cy="700" r="100" stroke="hsl(8,50%,88%)" stroke-width="0.5" />
+	</svg>
+
+	<div class="bp-hero__media" data-bp-parallax>
+		<img src="<?php echo esc_url( $bp_hero ); ?>" alt="" />
+	</div>
+	<div class="bp-hero__veil" aria-hidden="true"></div>
+
+	<div class="container bp-hero__inner">
 		<div class="bp-hero__body">
-			<p class="section-label reveal-left"><?php echo esc_html( trim( bp_option( 'bp_brand_name', 'BEAUTY' ) . ' ' . bp_option( 'bp_brand_sub', 'PRODUCE' ) ) ); ?></p>
+			<p class="section-label bp-eyebrow reveal-left"><?php echo esc_html( bp_option( 'bp_eyebrow', 'Beauty Produce' ) ); ?></p>
 
-			<h1 class="bp-hero__title reveal-left" style="transition-delay:90ms;">
-				<?php echo nl2br( esc_html( $bp_hero_title ) ); ?>
+			<h1 class="bp-hero__title reveal-left" style="transition-delay:120ms;">
+				<?php echo esc_html( $bp_title['first'] ); ?>
+				<?php if ( $bp_title['em'] ) : ?>
+					<br /><em><?php echo esc_html( $bp_title['em'] ); ?></em>
+				<?php endif; ?>
 			</h1>
 
-			<p class="section-subtitle bp-hero__lead reveal-left" style="transition-delay:180ms;">
-				<?php echo esc_html( bp_option( 'bp_hero_lead' ) ); ?>
-			</p>
+			<p class="bp-hero__lead reveal-left" style="transition-delay:240ms;"><?php echo esc_html( bp_option( 'bp_hero_lead', '人生のステージごとに変化する美しさ・自信・魅力に寄り添う、あなただけの美容プロデュースサービス。' ) ); ?></p>
 
-			<div class="btn-row reveal-left" style="transition-delay:260ms;">
-				<a class="btn-primary" href="<?php echo esc_url( bp_reserve_link() ); ?>">はじめての方へ</a>
-				<a class="btn-outline" href="#ages">年代から選ぶ</a>
+			<div class="bp-btn-row reveal-left" style="transition-delay:360ms;">
+				<a class="btn-primary" href="<?php echo esc_url( bp_reserve_link() ); ?>">
+					無料カウンセリングを予約する
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+				</a>
+				<a class="btn-outline" href="#age-select">あなたのステージを選ぶ</a>
 			</div>
 
-			<dl class="bp-hero__stats reveal-left" style="transition-delay:340ms;">
+			<dl class="bp-stats reveal-left" style="transition-delay:480ms;">
 				<?php foreach ( $bp_stats as $bp_stat ) : ?>
 					<div>
 						<dt><?php echo esc_html( $bp_stat[0] ); ?></dt>
@@ -50,59 +69,22 @@ $bp_stats      = array(
 				<?php endforeach; ?>
 			</dl>
 		</div>
-
-		<div class="bp-hero__figure reveal-right">
-			<img src="<?php echo esc_url( $bp_hero_image ); ?>" alt="<?php echo esc_attr( bp_option( 'bp_tagline' ) ); ?>" width="800" height="800" />
-		</div>
 	</div>
 
-	<a class="bp-scroll-cue" href="#concept" aria-label="下へスクロール">
-		<span>SCROLL</span>
-		<span class="animate-pulse-glow"></span>
+	<a class="bp-scroll-cue" href="#age-select" aria-label="下へスクロール">
+		<span>scroll</span>
+		<i aria-hidden="true"></i>
 	</a>
 </section>
 
-<section id="concept" class="bp-section bp-section--white">
-	<div class="bp-container bp-concept">
-		<div class="bp-concept__figure reveal-left">
-			<img src="<?php echo esc_url( bp_asset_image( 'age-30s.svg' ) ); ?>" alt="カウンセリングの様子をイメージしたイラスト" loading="lazy" width="800" height="800" />
-		</div>
-
-		<div>
-			<div class="bp-heading reveal">
-				<p class="section-label">CONCEPT</p>
-				<h2 class="section-title">診断で終わらせない。</h2>
-				<p class="section-subtitle">似合う色や形がわかっても、明日の服が決まらなければ意味がありません。診断結果を、そのまま毎日の選択に使えるところまで一緒に落とし込みます。</p>
-			</div>
-
-			<div class="bp-points">
-				<?php
-				$bp_points = array(
-					array( '理由まで伝える', 'なぜ似合うのかを言葉にして残すので、ひとりでも判断できるようになります。' ),
-					array( '手持ちから始める', 'まず持っている服とコスメを見直します。買い足しは最小限です。' ),
-					array( '年代に合わせる', '同じ診断結果でも、年代によって取り入れ方は変わります。' ),
-				);
-				foreach ( $bp_points as $bp_index => $bp_point ) :
-					?>
-					<div class="reveal" style="transition-delay:<?php echo (int) ( $bp_index * 90 ); ?>ms;">
-						<span class="bp-rule" aria-hidden="true"></span>
-						<h3><?php echo esc_html( $bp_point[0] ); ?></h3>
-						<p><?php echo esc_html( $bp_point[1] ); ?></p>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		</div>
-	</div>
-</section>
-
 <?php
-get_template_part( 'template-parts/section-services' );
 get_template_part( 'template-parts/section-ages' );
-get_template_part( 'template-parts/section-flow' );
+get_template_part( 'template-parts/section-services' );
+get_template_part( 'template-parts/section-brand' );
 get_template_part( 'template-parts/section-before-after' );
 get_template_part( 'template-parts/section-voice' );
+get_template_part( 'template-parts/section-flow' );
 get_template_part( 'template-parts/section-faq' );
-get_template_part( 'template-parts/section-contact' );
-get_template_part( 'template-parts/section-cta' );
+get_template_part( 'template-parts/section-booking' );
 
 get_footer();
