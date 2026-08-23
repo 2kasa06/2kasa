@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """既存のスタンプ画像を LINE Creators Market の規定に合わせる。
 
-規定:
-  - スタンプ画像 : 横 80〜370px / 縦 80〜320px
-  - main 画像    : 240 x 240px
-  - tab 画像     : 96 x 74px
-  - いずれも縦横とも偶数ピクセルの PNG（透過）
+規定: 横 80〜370px / 縦 80〜320px、縦横とも偶数ピクセルの透過 PNG。
+main.png / tab.png は scripts/make_main_tab.py で作る。
 
 サイズ超過は縮小し、奇数ピクセルは透過ピクセルを 1px 足して偶数に揃える
 （絵柄を再サンプリングしないので画質が落ちない）。
@@ -18,29 +15,8 @@ from pathlib import Path
 
 from PIL import Image
 
-MARGIN = 10
 MAX_W, MAX_H = 370, 320
 MIN_W, MIN_H = 80, 80
-MAIN_SIZE = (240, 240)
-TAB_SIZE = (96, 74)
-
-
-def content_box(image):
-    box = image.getbbox()
-    return box if box else (0, 0, image.width, image.height)
-
-
-def contain(image, size, margin):
-    """透過を除いた中身を size に収めて中央に配置した画像を返す。"""
-    content = image.crop(content_box(image))
-    inner_w, inner_h = size[0] - margin * 2, size[1] - margin * 2
-    scale = min(inner_w / content.width, inner_h / content.height)
-    content = content.resize(
-        (max(1, round(content.width * scale)), max(1, round(content.height * scale))), Image.LANCZOS
-    )
-    canvas = Image.new("RGBA", size, (255, 255, 255, 0))
-    canvas.paste(content, ((size[0] - content.width) // 2, (size[1] - content.height) // 2), content)
-    return canvas
 
 
 def normalize(image):
@@ -71,12 +47,6 @@ def process(directory):
         if after.size != before.size:
             after.save(path)
             changed.append((path, before.size, after.size))
-
-    first = directory / "1.png"
-    if first.exists():
-        source = Image.open(first).convert("RGBA")
-        contain(source, MAIN_SIZE, MARGIN).save(directory / "main.png")
-        contain(source, TAB_SIZE, 4).save(directory / "tab.png")
     return changed
 
 

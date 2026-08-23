@@ -21,8 +21,11 @@
 # 1枚絵を16分割する
 python3 scripts/split_line_stamps.py "<1枚絵.png>" "<出力ディレクトリ>"
 
-# 既存の画像を規定サイズ・偶数pxに揃え、main.png / tab.png を生成する
+# 既存の画像を規定サイズ・偶数pxに揃える
 python3 scripts/normalize_line_stamps.py line-stamps/タコスシリーズ/*/
+
+# main.png / tab.png を作る（元にするスタンプを指定）
+python3 scripts/make_main_tab.py line-stamps/タコスシリーズ/4/14.png
 
 # 「ZIPファイル アップロード」用の ZIP を作る
 python3 scripts/pack_line_stamps.py line-stamps/upload line-stamps/タコスシリーズ/*/
@@ -39,5 +42,25 @@ python3 scripts/pack_line_stamps.py line-stamps/upload line-stamps/タコスシ�
 - 規定サイズに収まるよう縮小し、周囲に 10px の透過余白を付与
 - 縦横が奇数になる場合は透過ピクセルを 1px 足して偶数に揃える（絵柄は再サンプリングしない）
 
-`main.png` / `tab.png` は各シリーズの `1.png` から自動生成しているので、
-別の絵にしたい場合は差し替えること。
+## main.png / tab.png
+
+`main` はセリフ込みの全体、`tab` は 96×74px と小さくて文字が潰れるため、
+セリフとイラストの間のほぼ空の行を検出してイラスト部分だけを使っている。
+
+元にしているスタンプ:
+
+| シリーズ | 元画像 | セリフ |
+| --- | --- | --- |
+| 1 | `1.png` | タコスが食べたい！ |
+| 2 | `1.png` | オラ〜！ |
+| 3 | `1.png` | ありがとう！ |
+| 4 | `14.png` | うれしい！ |
+| 5 | `6.png` | マジ？ |
+| 6 | `8.png` | びっくりした！ |
+| 7 | `7.png` | お先に失礼します |
+| 8季節 | `1.png` | 食欲の秋〜 |
+| 9推し活 | `1.png` | 尊い… |
+| 10ゲーミング | `14.png` | あと1回だけ |
+| 11筋トレ | `1.png` | ジム行ってきます！ |
+
+別の絵にしたい場合は `make_main_tab.py` に元にするスタンプを渡して作り直す。
