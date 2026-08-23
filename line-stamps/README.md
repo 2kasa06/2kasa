@@ -56,7 +56,7 @@ python3 scripts/pack_line_stamps.py line-stamps/upload line-stamps/タコスシ�
 | 3 | `1.png` | ありがとう！ |
 | 4 | `14.png` | うれしい！ |
 | 5 | `6.png` | マジ？ |
-| 6 | `8.png` | びっくりした！ |
+| 6 | `15.png` | ふつうに好き |
 | 7 | `7.png` | お先に失礼します |
 | 8季節 | `1.png` | 食欲の秋〜 |
 | 9推し活 | `1.png` | 尊い… |
