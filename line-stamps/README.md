@@ -3,7 +3,9 @@
 `ChatGPT Image ...png`（4×4 の1枚絵）を 1 スタンプずつ 16 分割したもの。
 
 - `タコスシリーズ/1` 〜 `3` … 元々手作業で分割済みだったもの（規定サイズに調整済み）
-- `タコスシリーズ/4` 〜 `11筋トレ` … `scripts/split_line_stamps.py` で分割
+- `タコスシリーズ/4` 〜 `13` … `scripts/split_line_stamps.py` で分割
+
+`12`（敬語）と `13`（ゲーミング）は `7` `10ゲーミング` と同テーマの別絵柄。
 
 ## LINE Creators Market の規定
 
@@ -62,5 +64,7 @@ python3 scripts/pack_line_stamps.py line-stamps/upload line-stamps/タコスシ�
 | 9推し活 | `1.png` | 尊い… |
 | 10ゲーミング | `14.png` | あと1回だけ |
 | 11筋トレ | `1.png` | ジム行ってきます！ |
+| 12 | `1.png` | ありがとうございます |
+| 13 | `5.png` | ナイス！ |
 
 別の絵にしたい場合は `make_main_tab.py` に元にするスタンプを渡して作り直す。
