@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ヒグチくん プレビュー</title>
+<style>
+  :root{ --navy:#1E3C68; --orange:#F08300; --cream:#FBEFE0; --ink:#2B2B2B; }
+  *{box-sizing:border-box}
+  body{margin:0;padding:48px 24px;font-family:"Hiragino Sans","Yu Gothic",sans-serif;color:var(--ink);background:#F5F3EF}
+  .wrap{max-width:960px;margin:0 auto}
+  h1{font-size:22px;margin:0 0 4px}
+  .sub{color:#6B7280;font-size:14px;margin:0 0 32px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+  .card{background:#fff;border-radius:16px;padding:24px;text-align:center;box-shadow:0 2px 10px rgba(30,60,104,.08)}
+  .card h2{font-size:13px;letter-spacing:.08em;color:#6B7280;margin:0 0 16px;font-weight:600}
+  .card img{width:100%;max-width:200px;height:auto}
+  .dark{background:var(--navy)}
+  .dark h2{color:#A9BEDC}
+  .mono img{filter:grayscale(1) contrast(1.2)}
+  .tiny img{max-width:56px}
+  .pal{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+  .sw{flex:1 1 120px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 2px 10px rgba(30,60,104,.08)}
+  .sw .chip{height:64px}
+  .sw .lb{padding:10px 12px;font-size:12px;line-height:1.5}
+  code{font-family:ui-monospace,monospace;color:#6B7280}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ヒグチくん（案A）たたき台</h1>
+  <p class="sub">株式会社西中洲樋口建設 会社キャラクター案／小サイズ・モノクロでの見え方も確認できます</p>
+
+  <div class="grid">
+    <div class="card"><h2>標準</h2><img src="higuchi-kun.svg" alt="ヒグチくん"></div>
+    <div class="card dark"><h2>濃色背景</h2><img src="higuchi-kun.svg" alt="ヒグチくん（濃色背景）"></div>
+    <div class="card mono"><h2>モノクロ印刷</h2><img src="higuchi-kun.svg" alt="ヒグチくん（モノクロ）"></div>
+    <div class="card tiny"><h2>極小（ヘルメットシール想定）</h2><img src="higuchi-kun.svg" alt="ヒグチくん（極小）"></div>
+  </div>
+
+  <div class="pal">
+    <div class="sw"><div class="chip" style="background:#1E3C68"></div><div class="lb">ネイビー<br><code>#1E3C68</code></div></div>
+    <div class="sw"><div class="chip" style="background:#F08300"></div><div class="lb">オレンジ<br><code>#F08300</code></div></div>
+    <div class="sw"><div class="chip" style="background:#FBEFE0"></div><div class="lb">生成り<br><code>#FBEFE0</code></div></div>
+    <div class="sw"><div class="chip" style="background:#C8925A"></div><div class="lb">木の色<br><code>#C8925A</code></div></div>
+  </div>
+</div>
+</body>
+</html>
