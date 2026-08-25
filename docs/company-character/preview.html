@@ -3,47 +3,75 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ヒグチくん プレビュー</title>
+<title>ふくろうの ヒーくん — 見え方チェック</title>
 <style>
-  :root{ --navy:#1E3C68; --orange:#F08300; --cream:#FBEFE0; --ink:#2B2B2B; }
+  :root{ --navy:#23374F; --grey:#C4CAD1; --cream:#F6F0E9; --brown:#947F6B; --pink:#F0C8C0; --yellow:#E9A73C; --ink:#091624; }
   *{box-sizing:border-box}
-  body{margin:0;padding:48px 24px;font-family:"Hiragino Sans","Yu Gothic",sans-serif;color:var(--ink);background:#F5F3EF}
-  .wrap{max-width:960px;margin:0 auto}
-  h1{font-size:22px;margin:0 0 4px}
-  .sub{color:#6B7280;font-size:14px;margin:0 0 32px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
-  .card{background:#fff;border-radius:16px;padding:24px;text-align:center;box-shadow:0 2px 10px rgba(30,60,104,.08)}
-  .card h2{font-size:13px;letter-spacing:.08em;color:#6B7280;margin:0 0 16px;font-weight:600}
-  .card img{width:100%;max-width:200px;height:auto}
-  .dark{background:var(--navy)}
-  .dark h2{color:#A9BEDC}
-  .mono img{filter:grayscale(1) contrast(1.2)}
-  .tiny img{max-width:56px}
-  .pal{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
-  .sw{flex:1 1 120px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 2px 10px rgba(30,60,104,.08)}
-  .sw .chip{height:64px}
-  .sw .lb{padding:10px 12px;font-size:12px;line-height:1.5}
-  code{font-family:ui-monospace,monospace;color:#6B7280}
+  body{margin:0;padding:48px 24px 80px;font-family:"Hiragino Sans","Yu Gothic",sans-serif;color:var(--ink);background:#F4F2EE}
+  .wrap{max-width:1040px;margin:0 auto}
+  h1{font-size:24px;margin:0 0 4px;color:var(--navy)}
+  .sub{color:#6B7280;font-size:14px;margin:0 0 36px;line-height:1.7}
+  h2.sec{font-size:13px;letter-spacing:.1em;color:#6B7280;font-weight:600;margin:44px 0 16px;padding-bottom:8px;border-bottom:1px solid #DEDAD3}
+  .sheet{background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(35,55,79,.08)}
+  .sheet img{width:100%;height:auto;display:block}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+  .card{background:#fff;border-radius:16px;padding:22px;text-align:center;box-shadow:0 2px 12px rgba(35,55,79,.08);display:flex;flex-direction:column;justify-content:space-between;gap:14px}
+  .card h3{font-size:12px;letter-spacing:.06em;color:#6B7280;margin:0;font-weight:600}
+  .card .stage{display:flex;align-items:center;justify-content:center;min-height:150px}
+  .card img{max-width:100%;height:auto}
+  .dark{background:var(--navy)} .dark h3{color:#A9BEDC}
+  .mono img{filter:grayscale(1) contrast(1.25)}
+  .s-badge img{max-height:40px}   /* ヘルメットシール想定 */
+  .s-favicon img{max-height:24px} /* ファビコン・極小想定 */
+  .s-card img{max-height:56px}    /* 名刺の隅 想定 */
+  .pal{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
+  .sw{border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 2px 12px rgba(35,55,79,.08)}
+  .sw .chip{height:66px}
+  .sw .lb{padding:10px 12px;font-size:12px;line-height:1.6}
+  code{font-family:ui-monospace,SFMono-Regular,monospace;color:#6B7280}
+  .note{margin-top:36px;background:#fff;border-left:4px solid var(--yellow);border-radius:8px;padding:16px 20px;font-size:13px;line-height:1.9;color:#4B5563}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>ヒグチくん（案A）たたき台</h1>
-  <p class="sub">株式会社西中洲樋口建設 会社キャラクター案／小サイズ・モノクロでの見え方も確認できます</p>
+  <h1>ふくろうの ヒーくん</h1>
+  <p class="sub">株式会社西中洲樋口建設 公式キャラクター（採用案）<br>小サイズ・モノクロ・濃色背景での見え方をここで確認できます。設定はこのフォルダの <code>README.md</code> にあります。</p>
 
+  <h2 class="sec">キャラクターシート</h2>
+  <div class="sheet"><img src="assets/hii-kun-charactersheet.png" alt="ヒーくん キャラクターシート"></div>
+
+  <h2 class="sec">サイズ耐性テスト</h2>
   <div class="grid">
-    <div class="card"><h2>標準</h2><img src="higuchi-kun.svg" alt="ヒグチくん"></div>
-    <div class="card dark"><h2>濃色背景</h2><img src="higuchi-kun.svg" alt="ヒグチくん（濃色背景）"></div>
-    <div class="card mono"><h2>モノクロ印刷</h2><img src="higuchi-kun.svg" alt="ヒグチくん（モノクロ）"></div>
-    <div class="card tiny"><h2>極小（ヘルメットシール想定）</h2><img src="higuchi-kun.svg" alt="ヒグチくん（極小）"></div>
+    <div class="card"><h3>全身 標準</h3><div class="stage"><img src="assets/hii-kun-front.png" alt="ヒーくん 全身"></div></div>
+    <div class="card s-card"><h3>名刺の隅サイズ</h3><div class="stage"><img src="assets/hii-kun-front.png" alt="ヒーくん 全身 小"></div></div>
+    <div class="card s-badge"><h3>ヘルメットシール（顔）</h3><div class="stage"><img src="assets/hii-kun-face.png" alt="ヒーくん 顔アイコン 小"></div></div>
+    <div class="card s-favicon"><h3>極小（ファビコン）</h3><div class="stage"><img src="assets/hii-kun-logo.png" alt="ヒーくん ロゴ 極小"></div></div>
   </div>
 
-  <div class="pal">
-    <div class="sw"><div class="chip" style="background:#1E3C68"></div><div class="lb">ネイビー<br><code>#1E3C68</code></div></div>
-    <div class="sw"><div class="chip" style="background:#F08300"></div><div class="lb">オレンジ<br><code>#F08300</code></div></div>
-    <div class="sw"><div class="chip" style="background:#FBEFE0"></div><div class="lb">生成り<br><code>#FBEFE0</code></div></div>
-    <div class="sw"><div class="chip" style="background:#C8925A"></div><div class="lb">木の色<br><code>#C8925A</code></div></div>
+  <h2 class="sec">背景・印刷条件テスト</h2>
+  <div class="grid">
+    <div class="card"><h3>顔アイコン</h3><div class="stage"><img src="assets/hii-kun-face.png" alt="ヒーくん 顔アイコン"></div></div>
+    <div class="card"><h3>ロゴマーク</h3><div class="stage"><img src="assets/hii-kun-logo.png" alt="ヒーくん ロゴマーク"></div></div>
+    <div class="card dark"><h3>濃色背景</h3><div class="stage"><img src="assets/hii-kun-front.png" alt="ヒーくん 濃色背景"></div></div>
+    <div class="card mono"><h3>モノクロ印刷</h3><div class="stage"><img src="assets/hii-kun-front.png" alt="ヒーくん モノクロ"></div></div>
   </div>
+
+  <h2 class="sec">カラーパレット</h2>
+  <div class="pal">
+    <div class="sw"><div class="chip" style="background:#23374F"></div><div class="lb">ネイビー／作業着・線<br><code>#23374F</code></div></div>
+    <div class="sw"><div class="chip" style="background:#C4CAD1"></div><div class="lb">ライトグレー／切り替え<br><code>#C4CAD1</code></div></div>
+    <div class="sw"><div class="chip" style="background:#F6F0E9"></div><div class="lb">オフホワイト／ヘルメット<br><code>#F6F0E9</code></div></div>
+    <div class="sw"><div class="chip" style="background:#947F6B"></div><div class="lb">ブラウン／羽<br><code>#947F6B</code></div></div>
+    <div class="sw"><div class="chip" style="background:#F0C8C0"></div><div class="lb">ペールピンク／頬<br><code>#F0C8C0</code></div></div>
+    <div class="sw"><div class="chip" style="background:#E9A73C"></div><div class="lb">イエロー／くちばし<br><code>#E9A73C</code></div></div>
+    <div class="sw"><div class="chip" style="background:#484C4F"></div><div class="lb">チャコール／安全靴<br><code>#484C4F</code></div></div>
+    <div class="sw"><div class="chip" style="background:#091624"></div><div class="lb">ダークネイビー／線画<br><code>#091624</code></div></div>
+  </div>
+
+  <p class="note">
+    <strong>切り出し画像について：</strong>「全身」「顔アイコン」「ロゴマーク」は、キャラクターシートから機械的に切り出したものです。あくまで検討用で、背景は白のままです（透過ではありません）。<br>
+    実務で使う前に、イラストレーターにベクター化（AI/EPS）・透過PNG・1色版・線画版の作成を依頼してください。詳細は <code>README.md</code> の「6. これからやること」を参照。
+  </p>
 </div>
 </body>
 </html>
