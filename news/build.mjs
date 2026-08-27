@@ -15,6 +15,7 @@ import { summarizeArticles, buildDigest } from './lib/summarize.mjs'
 import { readArchive, mergeArchive, writeArchive } from './lib/store.mjs'
 import { buildStats } from './lib/stats.mjs'
 import { assignRegions } from './lib/region.mjs'
+import { createResolver } from './lib/resolve.mjs'
 import { renderIndex, renderDay, renderArchiveIndex, dayKey } from './lib/render.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -64,10 +65,22 @@ async function main() {
   }
 
   if (primary.length > 0) {
-    log(`  ${primary.length}件の本文を取得中…`)
-    await enrichArticles(primary)
+    // Google ニュースのリンクは JavaScript でしか飛ばないので、
+    // 元記事に辿るにはブラウザが要る。詳しくは news/lib/resolve.mjs のコメント。
+    const resolver = await createResolver()
+    log(`  ${primary.length}件の本文を取得中…（元URLの解決: ${resolver.available ? '有効' : '無効'}）`)
+    if (!resolver.available) log(`    ! ${resolver.reason}`)
+
+    try {
+      await enrichArticles(primary, { resolver })
+    } finally {
+      await resolver.close()
+    }
+
     const withBody = primary.filter((a) => a.hasBody).length
+    const stillRedirect = primary.filter((a) => a.isGoogleLink).length
     log(`    本文が取れた記事: ${withBody}/${primary.length}`)
+    if (stillRedirect > 0) log(`    元URLに辿れなかった記事: ${stillRedirect}件（見出しのみ）`)
   }
 
   // 5. 要約

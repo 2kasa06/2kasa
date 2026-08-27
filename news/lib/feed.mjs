@@ -145,8 +145,8 @@ export function parseFeed(xml) {
     })
   }
 
-  if (items.length === 0) {
-    return { ok: false, items: [], error: '項目が0件' }
-  }
+  // 項目が0件でも、フィードとしては正常に読めている。
+  // 検索フィードは該当が無ければ空で返るので、これを故障として数えると
+  // 情報源の稼働率が実態より悪く出る。
   return { ok: true, items }
 }

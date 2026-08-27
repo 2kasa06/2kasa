@@ -20,6 +20,7 @@ import { mergeArchive } from './lib/store.mjs'
 import { buildStats } from './lib/stats.mjs'
 import { parseFeed, stripHtml } from './lib/feed.mjs'
 import { detectRegion, assignRegions } from './lib/region.mjs'
+import { createResolver } from './lib/resolve.mjs'
 import { regions as mapRegions } from './lib/japan-map.mjs'
 import { regionKeywords } from './config.mjs'
 
@@ -132,9 +133,9 @@ async function withServer(run) {
 }
 
 let failures = 0
-function check(label, fn) {
+async function check(label, fn) {
   try {
-    fn()
+    await fn()
     console.log(`  ✓ ${label}`)
   } catch (err) {
     failures++
@@ -151,10 +152,16 @@ await withServer(async (port) => {
   ]
 
   console.log('\nフィード解析')
-  check('壊れた応答をフィードとして受け付けない', () => {
+  await check('壊れた応答をフィードとして受け付けない', () => {
     assert.equal(parseFeed('<html>nope</html>').ok, false)
   })
-  check('エスケープされたHTMLをテキストに戻す', () => {
+  await check('項目が0件のフィードは故障扱いしない', () => {
+    // 検索フィードは該当が無ければ空で返る。稼働率を実態より悪く見せない。
+    const empty = parseFeed('<?xml version="1.0"?><rss version="2.0"><channel><title>x</title></channel></rss>')
+    assert.equal(empty.ok, true)
+    assert.equal(empty.items.length, 0)
+  })
+  await check('エスケープされたHTMLをテキストに戻す', () => {
     assert.equal(stripHtml('&lt;p&gt;本文&lt;/p&gt;'), '本文')
   })
 
@@ -162,31 +169,31 @@ await withServer(async (port) => {
   const { articles, status } = await collectArticles(testSources, { now: new Date() })
   const titles = articles.map((a) => a.title)
 
-  check('候補URLの1つ目が404でも2つ目で拾える', () => {
+  await check('候補URLの1つ目が404でも2つ目で拾える', () => {
     assert.equal(status.find((s) => s.id === 'pro').ok, true)
   })
-  check('フィードでない情報源は失敗として記録される', () => {
+  await check('フィードでない情報源は失敗として記録される', () => {
     const dead = status.find((s) => s.id === 'dead')
     assert.equal(dead.ok, false)
-    assert.match(dead.note, /読めない|項目が0件/)
+    assert.match(dead.note, /読めない/)
   })
-  check('防衛と無関係な記事（歩道橋）は入らない', () => {
+  await check('防衛と無関係な記事（歩道橋）は入らない', () => {
     assert.equal(titles.some((t) => t.includes('歩道橋')), false)
   })
-  check('期間外の古い記事は入らない', () => {
+  await check('期間外の古い記事は入らない', () => {
     assert.equal(titles.some((t) => t.includes('去年')), false)
   })
-  check('別媒体の同一記事は1件に統合される', () => {
+  await check('別媒体の同一記事は1件に統合される', () => {
     const dupes = titles.filter((t) => t.includes('馬毛島'))
     assert.equal(dupes.length, 1)
     const merged = articles.find((a) => a.title.includes('馬毛島'))
     assert.equal(merged.pickups, 2, `pickups=${merged.pickups}`)
     assert.equal(merged.via.length, 2, `via=${merged.via}`)
   })
-  check('総合紙からも防衛施設の記事は拾える', () => {
+  await check('総合紙からも防衛施設の記事は拾える', () => {
     assert.ok(titles.some((t) => t.includes('火薬庫')), titles.join(' / '))
   })
-  check('新しい順に並ぶ', () => {
+  await check('新しい順に並ぶ', () => {
     const times = articles.map((a) => new Date(a.publishedAt).getTime())
     assert.deepEqual(times, [...times].sort((a, b) => b - a))
   })
@@ -194,53 +201,82 @@ await withServer(async (port) => {
   console.log('\n本文取得')
   await enrichArticles(articles)
   const mage = articles.find((a) => a.title.includes('馬毛島'))
-  check('記事ページから本文を取り出す', () => {
+  await check('記事ページから本文を取り出す', () => {
     assert.ok(mage.hasBody, '本文が取れていない')
     assert.match(mage.body, /総事業費は約4800億円/)
   })
-  check('scriptタグやナビの文言を本文に混ぜない', () => {
+  await check('scriptタグやナビの文言を本文に混ぜない', () => {
     assert.doesNotMatch(mage.body, /これはスクリプト|メニュー|フッター/)
   })
-  check('短すぎる段落は落とす', () => {
+  await check('短すぎる段落は落とす', () => {
     assert.doesNotMatch(mage.body, /^短い$/m)
   })
 
   console.log('\n要約')
   const { articles: summarized, engine } = await summarizeArticles(articles)
-  check('全記事に3行の要約が付く', () => {
+  await check('全記事に3行の要約が付く', () => {
     for (const a of summarized) {
       assert.equal(a.summary.length, 3, `${a.title}: ${a.summary?.length}行`)
       assert.ok(a.category, `${a.title}: カテゴリ無し`)
     }
   })
-  check('カテゴリ推定が妥当（馬毛島 → 南西諸島）', () => {
+  await check('カテゴリ推定が妥当（馬毛島 → 南西諸島）', () => {
     assert.equal(mage.category, 'nansei')
   })
-  check('入札記事は発注カテゴリに入る', () => {
+  await check('入札記事は発注カテゴリに入る', () => {
     const nyusatsu = summarized.find((a) => a.title.includes('入札'))
     assert.equal(nyusatsu.category, 'chotatsu')
   })
 
   console.log('\nアーカイブ')
-  check('2回目の実行で新着が出ない（要約を作り直さない）', () => {
+  await check('2回目の実行で新着が出ない（要約を作り直さない）', () => {
     const { fresh } = mergeArchive(summarized, summarized.map((a) => ({ ...a })))
     assert.equal(fresh.length, 0)
   })
 
+  console.log('\n元URLの解決')
+  await check('解決器が無ければGoogleリンクは触らず、本文も取りに行かない', async () => {
+    const item = { link: `${base}/article/mage`, isGoogleLink: true, description: '' }
+    await enrichArticles([item], { resolver: undefined })
+    assert.equal(item.isGoogleLink, true)
+    assert.equal(item.hasBody, false, 'リダイレクタのまま本文を取りに行っている')
+  })
+  await check('解決器が元URLを返せば、その記事の本文を取る', async () => {
+    const item = { link: 'https://news.google.com/rss/articles/XXXX', isGoogleLink: true, description: '' }
+    const stub = { available: true, resolve: async () => `${base}/article/mage`, close: async () => {} }
+    await enrichArticles([item], { resolver: stub })
+    assert.equal(item.isGoogleLink, false)
+    assert.ok(item.hasBody, '解決したのに本文が取れていない')
+    assert.match(item.body, /総事業費は約4800億円/)
+  })
+  await check('解決に失敗してもリダイレクタのまま落ちない', async () => {
+    const item = { link: 'https://news.google.com/rss/articles/XXXX', isGoogleLink: true, description: '' }
+    const stub = { available: true, resolve: async () => null, close: async () => {} }
+    await enrichArticles([item], { resolver: stub })
+    assert.equal(item.isGoogleLink, true)
+    assert.equal(item.hasBody, false)
+  })
+  await check('ブラウザが無い環境では解決器が理由付きで無効になる', async () => {
+    const resolver = await createResolver({ timeoutMs: 3000 })
+    if (!resolver.available) assert.ok(resolver.reason, '無効なのに理由が無い')
+    assert.equal(await resolver.resolve('https://news.google.com/x'), resolver.available ? await resolver.resolve('https://news.google.com/x') : null)
+    await resolver.close()
+  })
+
   console.log('\n見出しの整形')
-  check('Googleニュースの「 - 媒体名」を落とす', () => {
+  await check('Googleニュースの「 - 媒体名」を落とす', () => {
     assert.equal(stripSourceSuffix('見出し - 47NEWS', '47NEWS'), '見出し')
     assert.equal(stripSourceSuffix('ハイフン - を含む見出し - 読売新聞', '読売新聞'), 'ハイフン - を含む見出し')
     assert.equal(stripSourceSuffix('媒体名が無い見出し', ''), '媒体名が無い見出し')
     assert.equal(stripSourceSuffix('末尾が違う - A社', 'B社'), '末尾が違う - A社')
   })
-  check('媒体違いの同じ記事が1件にまとまる', () => {
+  await check('媒体違いの同じ記事が1件にまとまる', () => {
     // 実データで、同じ記事が媒体名の違いだけで4件並んだ
     const a = articleKey(stripSourceSuffix('外局新設を要求 - 47NEWS', '47NEWS'), 'https://a.jp/1')
     const b = articleKey(stripSourceSuffix('外局新設を要求 - Excite エキサイト', 'Excite エキサイト'), 'https://b.jp/2')
     assert.equal(a, b)
   })
-  check('施設と関係ない防衛ニュースは通さない', () => {
+  await check('施設と関係ない防衛ニュースは通さない', () => {
     // 実データで誤って通っていたもの
     for (const title of [
       '退職隊員庁、110人規模に 防衛省、外局新設を要求',
@@ -250,7 +286,7 @@ await withServer(async (port) => {
       assert.equal(matchesTheme(title).matched, false, title)
     }
   })
-  check('施設の記事は通す', () => {
+  await check('施設の記事は通す', () => {
     for (const title of [
       '馬毛島の自衛隊基地工事に沸く種子島',
       '沖縄防衛局が隊舎整備工事を公告',
@@ -262,7 +298,7 @@ await withServer(async (port) => {
   })
 
   console.log('\n地方の判定')
-  check('施設名から地方を当てる', () => {
+  await check('施設名から地方を当てる', () => {
     const cases = [
       ['馬毛島の基地建設、九州防衛局が工事予定を公表', 'kyushu'],
       ['岩国基地の滑走路改修が完了', 'chugoku'],
@@ -277,14 +313,14 @@ await withServer(async (port) => {
       assert.equal(detectRegion({ title, summary: [] }), expected, title)
     }
   })
-  check('防衛省の所在地として東京が出るだけでは関東にしない', () => {
+  await check('防衛省の所在地として東京が出るだけでは関東にしない', () => {
     // 「辺野古」（施設名・重み3）が「東京」（地名・重み1）に勝つ
     assert.equal(
       detectRegion({ title: '辺野古の地盤改良、防衛省が東京で会見', summary: ['沖縄防衛局が説明'] }),
       'okinawa',
     )
   })
-  check('本文に混ざった地名より見出しを優先する', () => {
+  await check('本文に混ざった地名より見出しを優先する', () => {
     // 実データで、沖縄県知事選の記事が本文に紛れた別速報の「石川県・富山県」に
     // 引きずられて中部と判定された
     assert.equal(
@@ -296,31 +332,31 @@ await withServer(async (port) => {
       'okinawa',
     )
   })
-  check('全国の話は地方を決めない', () => {
+  await check('全国の話は地方を決めない', () => {
     assert.equal(detectRegion({ title: '防衛省、施設整備費を12%増で概算要求', summary: [] }), null)
   })
-  check('決め手が同点なら地方を決めない', () => {
+  await check('決め手が同点なら地方を決めない', () => {
     // 「浜松」と「舞鶴」がどちらも重み3で並ぶ
     assert.equal(detectRegion({ title: '浜松と舞鶴で同時に工事', summary: [] }), null)
   })
-  check('既に地方が付いている記事は上書きしない', () => {
+  await check('既に地方が付いている記事は上書きしない', () => {
     const kept = [{ title: '馬毛島の工事', region: null }]
     assignRegions(kept)
     assert.equal(kept[0].region, null)
   })
 
   console.log('\n地図データ')
-  check('地図の地方IDと判定キーワードのIDが一致する', () => {
+  await check('地図の地方IDと判定キーワードのIDが一致する', () => {
     assert.deepEqual(mapRegions.map((r) => r.id).sort(), Object.keys(regionKeywords).sort())
   })
-  check('パスが絶対座標になっている', () => {
+  await check('パスが絶対座標になっている', () => {
     // 相対パスのまま連結すると2県目以降がずれる。生成時に絶対化している。
     for (const region of mapRegions) {
       assert.doesNotMatch(region.d, /[mlhvcsqtaz]/, `${region.label} に相対コマンドが残っている`)
       assert.match(region.d, /^M/, `${region.label} が M で始まっていない`)
     }
   })
-  check('ピンが地方の外接矩形の中に収まる', () => {
+  await check('ピンが地方の外接矩形の中に収まる', () => {
     for (const region of mapRegions) {
       const [x, y] = region.pin
       assert.ok(x >= region.box.x && x <= region.box.x + region.box.w, `${region.label} のピンX`)
@@ -332,10 +368,10 @@ await withServer(async (port) => {
   const meta = { updatedAt: new Date().toISOString(), engine, sourcesOk: 2, sourcesTotal: 3, status }
   const stats = buildStats({ recent: summarized, archived: summarized, status, freshCount: 2 })
   const html = renderIndex({ articles: summarized, digest: ['要点テスト'], status, meta, stats })
-  check('記事がカードとして出力される', () => {
+  await check('記事がカードとして出力される', () => {
     assert.equal((html.match(/<article class="card/g) || []).length, summarized.length)
   })
-  check('HTMLがエスケープされる', () => {
+  await check('HTMLがエスケープされる', () => {
     const evil = [{
       ...mage,
       title: '<img src=x onerror=alert(1)>',
@@ -360,13 +396,13 @@ await withServer(async (port) => {
     assert.doesNotMatch(page, /data-text="[^"]*"[^>]*onerror/i, '属性から抜け出せている')
   })
 
-  check('日別ページとアーカイブ一覧が組める', () => {
+  await check('日別ページとアーカイブ一覧が組める', () => {
     const day = dayKey(mage.publishedAt)
     assert.match(day, /^\d{4}-\d{2}-\d{2}$/)
     assert.ok(renderDay({ day, articles: summarized, meta, stats }).includes('<!DOCTYPE html>'))
     assert.ok(renderArchiveIndex({ days: [{ day, count: 3 }], meta, stats }).includes(`${day}.html`))
   })
-  check('記事のある地方にだけピンが立つ', () => {
+  await check('記事のある地方にだけピンが立つ', () => {
     const withRegions = summarized.map((a, i) => ({
       ...a,
       region: ['kyushu', 'okinawa', null][i % 3],
@@ -380,12 +416,12 @@ await withServer(async (port) => {
     assert.deepEqual([...pinned].sort(), [...expected].sort())
     assert.ok(!pinned.has('none'), '地方不明にピンが立っている')
   })
-  check('記事カードに地方が入る', () => {
+  await check('記事カードに地方が入る', () => {
     const withRegion = [{ ...mage, region: 'kyushu', summary: ['a', 'b', 'c'], why: '' }]
     const out = renderIndex({ articles: withRegion, digest: [], status, meta, stats })
     assert.match(out, /data-region="kyushu"/)
   })
-  check('カテゴリが欠けた記事も落とさず表示する', () => {
+  await check('カテゴリが欠けた記事も落とさず表示する', () => {
     const orphan = [{ ...mage, category: undefined, summary: ['a', 'b', 'c'], why: '' },
                     { ...mage, key: 'x2', category: '存在しないID', summary: ['a', 'b', 'c'], why: '' }]
     const out = renderIndex({ articles: orphan, digest: [], status: [], meta, stats })
@@ -394,7 +430,7 @@ await withServer(async (port) => {
     assert.doesNotMatch(out, /data-cat="存在しないID"/)
   })
 
-  check('記事0件でも壊れない', () => {
+  await check('記事0件でも壊れない', () => {
     const out = renderIndex({ articles: [], digest: [], status: [], meta, stats })
     assert.ok(out.includes('該当する記事はありませんでした'))
   })

@@ -137,17 +137,6 @@ export const sources = [
     ],
   },
   {
-    id: 'j-defense',
-    name: 'Jディフェンスニュース',
-    kind: 'rss',
-    hint: '防衛専門',
-    urls: [
-      'https://j-defense.ikaros.jp/index.rdf',
-      'https://j-defense.ikaros.jp/feed',
-      'https://j-defense.ikaros.jp/rss.xml',
-    ],
-  },
-  {
     id: 'kensetsunews',
     name: '建設通信新聞',
     kind: 'rss',
@@ -167,50 +156,33 @@ export const sources = [
       'https://www.decn.co.jp/?feed=rss2',
     ],
   },
-  {
-    id: 'kensetsu-plaza',
-    name: 'けんせつPlaza',
-    kind: 'rss',
-    hint: '建設情報',
-    urls: [
-      'https://www.kensetsu-plaza.com/kiji/feed',
-      'https://www.kensetsu-plaza.com/feed',
-    ],
-  },
-
-  // --- 地元紙。基地・施設の話は全国紙より早く、深い ---
-  {
-    id: 'okinawatimes',
-    name: '沖縄タイムス',
-    kind: 'rss',
-    hint: '地元紙',
-    urls: [
-      'https://www.okinawatimes.co.jp/feed',
-      'https://www.okinawatimes.co.jp/rss/news.xml',
-    ],
-  },
-  {
-    id: 'ryukyushimpo',
-    name: '琉球新報',
-    kind: 'rss',
-    hint: '地元紙',
-    urls: [
-      'https://ryukyushimpo.jp/feed/',
-      'https://ryukyushimpo.jp/rss/',
-    ],
-  },
-  {
-    id: '373news',
-    name: '南日本新聞',
-    kind: 'rss',
-    hint: '地元紙（馬毛島）',
-    urls: [
-      'https://373news.com/feed/',
-      'https://373news.com/_rss/news.xml',
-    ],
-  },
 
   // --- 総合媒体。キーワードで絞って取りこぼしを拾う ---
+  //
+  // 地元紙（沖縄タイムス・琉球新報・南日本新聞）は診断の結果 RSS を廃止して
+  // いたため外した。これらの記事は下の Google ニュース検索経由で拾える。
+
+  {
+    id: 'nishinippon',
+    name: '西日本新聞',
+    kind: 'rss',
+    hint: '地元紙（九州）',
+    urls: ['https://www.nishinippon.co.jp/feed/'],
+  },
+  {
+    id: 'jiji',
+    name: '時事通信',
+    kind: 'rss',
+    hint: '通信社',
+    urls: ['https://www.jiji.com/rss/ranking.rdf'],
+  },
+  {
+    id: 'yahoo-domestic',
+    name: 'Yahoo!ニュース 国内',
+    kind: 'rss',
+    hint: '総合',
+    urls: ['https://news.yahoo.co.jp/rss/topics/domestic.xml'],
+  },
   {
     id: 'nhk-main',
     name: 'NHK 主要ニュース',
@@ -239,6 +211,10 @@ export const sources = [
   googleNews('特定利用空港 特定利用港湾 整備', { hint: 'インフラ' }),
   googleNews('防衛予算 施設 概算要求', { hint: '予算' }),
   googleNews('米軍再編 施設 返還 工事', { hint: '在日米軍' }),
+  // RSS を廃止した地元紙の記事を拾い直すための検索
+  googleNews('沖縄 米軍 施設 工事 埋立', { hint: '在日米軍' }),
+  googleNews('鹿児島 自衛隊 施設 建設', { hint: '南西諸島' }),
+  googleNews('防衛省 庁舎 隊舎 建設 発注', { hint: '発注' }),
 ]
 
 /**

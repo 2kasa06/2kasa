@@ -1,7 +1,7 @@
 // 情報源から記事を集め、テーマで絞り、本文を取りに行くところまで。
 
 import { get, mapLimit } from './http.mjs'
-import { parseFeed, stripHtml, decodeEntities } from './feed.mjs'
+import { parseFeed, stripHtml } from './feed.mjs'
 import { keywords, site } from '../config.mjs'
 
 /**
@@ -61,51 +61,6 @@ export function articleKey(title, url) {
   }
   // Google ニュース経由と直リンクで同じ記事が来るので、URL よりタイトルを主にする
   return normalizedTitle || `${host}${path}`
-}
-
-/**
- * Google ニュースのリンクは news.google.com のリダイレクタ。
- * 本文を取るには元記事のURLに解決する必要がある。
- *
- * expectedHost（フィードの <source url> から得た媒体のホスト）が分かっている場合、
- * それと一致する候補だけを採る。ページ内の適当な外部リンクを掴むと、
- * 別の記事の本文で要約を作ってしまい、間違いに気づけない。
- * 確信が持てなければ null を返し、見出しだけで扱う。
- */
-async function resolveGoogleNewsUrl(url, expectedHost) {
-  const sameSite = (candidate) => {
-    if (!expectedHost) return false
-    try {
-      const host = new URL(candidate).hostname.replace(/^www\./, '')
-      return host === expectedHost || host.endsWith(`.${expectedHost}`)
-    } catch {
-      return false
-    }
-  }
-
-  const res = await get(url, { timeoutMs: 15000, retries: 1 })
-  if (!res.ok) return null
-
-  // リダイレクトを追い切れていれば、それが元記事
-  try {
-    if (new URL(res.url).hostname !== 'news.google.com') return res.url
-  } catch {
-    /* URL が壊れていたら下の HTML 走査に落とす */
-  }
-
-  // 追えないときは、返ってきた HTML から外部リンクを拾う
-  const candidates = [...res.body.matchAll(/href\s*=\s*["'](https?:\/\/[^"']+)["']/gi)]
-    .map(([, href]) => decodeEntities(href))
-    .filter((href) => {
-      try {
-        const host = new URL(href).hostname
-        return !/(^|\.)google\.com$/.test(host) && !/(^|\.)gstatic\.com$/.test(host)
-      } catch {
-        return false
-      }
-    })
-
-  return candidates.find(sameSite) ?? null
 }
 
 /** 記事ページから本文らしいテキストを取り出す。取れなければ空文字。 */
@@ -256,12 +211,16 @@ export async function collectArticles(sources, { now = new Date() } = {}) {
   return { articles, status }
 }
 
-/** 新着記事について、元URLの解決と本文取得をまとめて行う */
-export async function enrichArticles(articles) {
+/**
+ * 新着記事について、元URLの解決と本文取得をまとめて行う。
+ *
+ * resolver は Google ニュースのリンクを元記事URLに直すためのもの。
+ * 無い場合はリダイレクタのままとなり、本文は取りに行かず見出しだけの記事になる。
+ */
+export async function enrichArticles(articles, { resolver } = {}) {
   return mapLimit(articles, 4, async (article) => {
-    if (article.isGoogleLink) {
-      const expectedHost = article.sourceHost || ''
-      const resolved = await resolveGoogleNewsUrl(article.link, expectedHost)
+    if (article.isGoogleLink && resolver?.available) {
+      const resolved = await resolver.resolve(article.link)
       if (resolved) {
         article.link = resolved
         article.isGoogleLink = false

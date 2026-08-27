@@ -43,6 +43,19 @@ jobs:
 
       - run: npm ci
 
+      # Google ニュースのリンクは JavaScript でしか元記事に飛ばないため、
+      # 解決にブラウザが要る。詳しくは news/lib/resolve.mjs のコメント。
+      - name: Chromium をキャッシュ
+        id: chromium-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Chromium を用意
+        if: steps.chromium-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+
       # 外部ネットワークを使わない自己テスト。壊れた状態で本番を走らせない。
       - name: 自己テスト
         run: npm run news:test
