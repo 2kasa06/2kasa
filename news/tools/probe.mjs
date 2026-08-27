@@ -154,4 +154,24 @@ if (!gres.ok) {
   }
 }
 
+// ---- 3) ブラウザでの解決 ---------------------------------------------------
+
+section('3. ブラウザで元記事に辿れるか')
+
+const { createResolver } = await import('../lib/resolve.mjs')
+const resolver = await createResolver({ timeoutMs: 20000 })
+console.log(`解決器: ${resolver.available ? '有効' : `無効（${resolver.reason}）`}\n`)
+
+if (resolver.available && gres.ok) {
+  const items = parseFeed(gres.body).items.slice(0, 5)
+  let hit = 0
+  for (const item of items) {
+    const resolved = await resolver.resolve(item.link)
+    if (resolved) hit++
+    console.log(`  ${resolved ? '✓' : '×'} ${item.sourceName.padEnd(16)} → ${resolved ? resolved.slice(0, 76) : '解決できず'}`)
+  }
+  console.log(`\n  解決できた: ${hit}/${items.length}`)
+}
+await resolver.close()
+
 section('診断おわり')

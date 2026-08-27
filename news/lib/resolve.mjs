@@ -12,6 +12,15 @@
 const UA =
   'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36'
 
+/** google.com 配下（同意画面などを含む）はまだ元記事に着いていない */
+function isGoogleUrl(url) {
+  try {
+    return /(^|\.)google\.com$/.test(new URL(url).hostname)
+  } catch {
+    return true
+  }
+}
+
 const NULL_RESOLVER = {
   available: false,
   reason: 'Playwright が使えないため、元記事URLの解決を行いません',
@@ -52,13 +61,21 @@ export async function createResolver({ timeoutMs = 20000 } = {}) {
     async resolve(url) {
       const page = await context.newPage()
       try {
-        await page.goto(url, { waitUntil: 'commit', timeout: timeoutMs })
-        // news.google.com から出たら、そこが元記事
-        await page.waitForURL((current) => current.hostname !== 'news.google.com', {
-          timeout: timeoutMs,
-        })
+        // goto は「遷移中に別の遷移が始まった」で ERR_ABORTED を投げることがある。
+        // このページはまさに JavaScript で即座に飛ぶので、これが普通に起きる。
+        // 遷移そのものは成功しているため、goto の失敗で諦めてはいけない。
+        // （実測: 28件中23件がここで例外になり、解決できていなかった）
+        await page.goto(url, { waitUntil: 'commit', timeout: timeoutMs }).catch(() => {})
+
+        // Google のドメインから出たら、そこが元記事
+        await page
+          .waitForURL((current) => !/(^|\.)google\.com$/.test(current.hostname), {
+            timeout: timeoutMs,
+          })
+          .catch(() => {})
+
         const final = page.url()
-        return new URL(final).hostname === 'news.google.com' ? null : final
+        return isGoogleUrl(final) ? null : final
       } catch {
         return null
       } finally {

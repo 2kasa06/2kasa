@@ -71,10 +71,15 @@ async function main() {
     log(`  ${primary.length}件の本文を取得中…（元URLの解決: ${resolver.available ? '有効' : '無効'}）`)
     if (!resolver.available) log(`    ! ${resolver.reason}`)
 
+    const googleLinks = primary.filter((a) => a.isGoogleLink).length
     try {
       await enrichArticles(primary, { resolver })
     } finally {
       await resolver.close()
+    }
+    if (googleLinks > 0) {
+      const resolved = googleLinks - primary.filter((a) => a.isGoogleLink).length
+      log(`    元URLを解決: ${resolved}/${googleLinks}件`)
     }
 
     const withBody = primary.filter((a) => a.hasBody).length
