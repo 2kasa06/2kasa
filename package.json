@@ -14,7 +14,8 @@
     "news:dry": "node news/build.mjs --dry-run",
     "news:test": "node news/selftest.mjs",
     "news:preview": "node news/preview.mjs",
-    "news:map": "node news/tools/build-map.mjs"
+    "news:map": "node news/tools/build-map.mjs",
+    "news:probe": "node news/tools/probe.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",

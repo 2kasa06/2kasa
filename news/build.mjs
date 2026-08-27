@@ -42,8 +42,10 @@ async function main() {
   const { articles: incoming, status } = await collectArticles(sources, { now })
   const okCount = status.filter((s) => s.ok).length
   log(`  取得成功 ${okCount}/${status.length} 情報源、記事 ${incoming.length}件（重複除去後）`)
-  for (const s of status.filter((s) => !s.ok)) {
-    log(`    × ${s.name}: ${s.note}`)
+  // 何がどれだけ効いているか分からないと情報源を足し引きできないので、
+  // 成功したものも件数を出す。
+  for (const s of status) {
+    log(s.ok ? `    ✓ ${s.name}: ${s.picked}件` : `    × ${s.name}: ${s.note}`)
   }
 
   // 3. 新着だけを取り出す。要約済みの記事は作り直さない。

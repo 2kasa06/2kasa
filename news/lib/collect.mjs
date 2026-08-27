@@ -32,6 +32,17 @@ export function matchesTheme(text) {
   }
 }
 
+/**
+ * Google ニュースの見出しは「本文の見出し - 媒体名」の形で来る。
+ * 媒体名は別枠で持っているので重複だし、末尾が媒体ごとに違うせいで
+ * 同じ記事が別物として残ってしまう（実データで同じ記事が4件並んだ）。
+ */
+export function stripSourceSuffix(title, sourceName) {
+  if (!sourceName) return title
+  const suffix = ` - ${sourceName}`
+  return title.endsWith(suffix) ? title.slice(0, -suffix.length).trim() : title
+}
+
 /** 同じ記事を別経路で拾ったときに揃うキーを作る */
 export function articleKey(title, url) {
   const normalizedTitle = String(title)
@@ -109,10 +120,13 @@ export async function fetchArticleText(url) {
     html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ||
     html
 
-  // <p> を集める方が、ナビや広告のテキストを拾いにくい
+  // <p> を集める方が、ナビや広告のテキストを拾いにくい。
+  // ただし記事の下には別記事の見出しが並ぶので、冒頭の段落だけを使う。
+  // 実データでは、NHK の記事末尾にあった別の速報の見出しが要約に紛れ込んだ。
   const paragraphs = [...scoped.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
     .map(([, inner]) => stripHtml(inner))
     .filter((line) => line.length >= 20)
+    .slice(0, 14)
 
   const text = paragraphs.join('\n')
   if (text.length >= 120) return { text: text.slice(0, 6000), error: null }
@@ -179,10 +193,12 @@ export async function collectArticles(sources, { now = new Date() } = {}) {
       const isGoogle = source.kind === 'gnews'
       const description = isGoogle ? '' : item.description
 
-      const theme = matchesTheme(`${item.title}\n${description}`)
+      const title = isGoogle ? stripSourceSuffix(item.title, item.sourceName) : item.title
+
+      const theme = matchesTheme(`${title}\n${description}`)
       if (!theme.matched) continue
 
-      const key = articleKey(item.title, item.link)
+      const key = articleKey(title, item.link)
       const existing = bucket.get(key)
       if (existing) {
         // 同じ記事を複数の経路で拾った。出典を足して、情報が濃い方を残す。
@@ -201,7 +217,7 @@ export async function collectArticles(sources, { now = new Date() } = {}) {
 
       bucket.set(key, {
         key,
-        title: item.title,
+        title,
         link: item.link,
         isGoogleLink: isGoogle,
         description,

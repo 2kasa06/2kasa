@@ -1,0 +1,22 @@
+name: 情報源の診断
+
+# 情報源が落ちたときに、候補URLとGoogleニュースのリンク解決をまとめて調べる。
+# 本番の更新とは切り離してあるので、気軽に何度でも回せる。
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - claude/personal-news-site-m7eu0k
+    paths:
+      - 'news/tools/probe.mjs'
+      - '.github/workflows/probe.yml'
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node news/tools/probe.mjs

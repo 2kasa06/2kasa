@@ -7,7 +7,13 @@
 import http from 'node:http'
 import assert from 'node:assert/strict'
 
-import { collectArticles, enrichArticles, matchesTheme } from './lib/collect.mjs'
+import {
+  collectArticles,
+  enrichArticles,
+  matchesTheme,
+  stripSourceSuffix,
+  articleKey,
+} from './lib/collect.mjs'
 import { summarizeArticles } from './lib/summarize.mjs'
 import { renderIndex, renderDay, renderArchiveIndex, dayKey } from './lib/render.mjs'
 import { mergeArchive } from './lib/store.mjs'
@@ -221,6 +227,40 @@ await withServer(async (port) => {
     assert.equal(fresh.length, 0)
   })
 
+  console.log('\n見出しの整形')
+  check('Googleニュースの「 - 媒体名」を落とす', () => {
+    assert.equal(stripSourceSuffix('見出し - 47NEWS', '47NEWS'), '見出し')
+    assert.equal(stripSourceSuffix('ハイフン - を含む見出し - 読売新聞', '読売新聞'), 'ハイフン - を含む見出し')
+    assert.equal(stripSourceSuffix('媒体名が無い見出し', ''), '媒体名が無い見出し')
+    assert.equal(stripSourceSuffix('末尾が違う - A社', 'B社'), '末尾が違う - A社')
+  })
+  check('媒体違いの同じ記事が1件にまとまる', () => {
+    // 実データで、同じ記事が媒体名の違いだけで4件並んだ
+    const a = articleKey(stripSourceSuffix('外局新設を要求 - 47NEWS', '47NEWS'), 'https://a.jp/1')
+    const b = articleKey(stripSourceSuffix('外局新設を要求 - Excite エキサイト', 'Excite エキサイト'), 'https://b.jp/2')
+    assert.equal(a, b)
+  })
+  check('施設と関係ない防衛ニュースは通さない', () => {
+    // 実データで誤って通っていたもの
+    for (const title of [
+      '退職隊員庁、110人規模に 防衛省、外局新設を要求',
+      '防衛省、AI指揮統制へ政府クラウド導入 27年度概算要求',
+      '防衛事業を再編する企業に国が出資、「継戦能力」確保へ',
+    ]) {
+      assert.equal(matchesTheme(title).matched, false, title)
+    }
+  })
+  check('施設の記事は通す', () => {
+    for (const title of [
+      '馬毛島の自衛隊基地工事に沸く種子島',
+      '沖縄防衛局が隊舎整備工事を公告',
+      '辺野古の埋立、地盤改良の設計を変更',
+      '政府の「特定利用空港・港湾」指定に反対',
+    ]) {
+      assert.equal(matchesTheme(title).matched, true, title)
+    }
+  })
+
   console.log('\n地方の判定')
   check('施設名から地方を当てる', () => {
     const cases = [
@@ -241,6 +281,18 @@ await withServer(async (port) => {
     // 「辺野古」（施設名・重み3）が「東京」（地名・重み1）に勝つ
     assert.equal(
       detectRegion({ title: '辺野古の地盤改良、防衛省が東京で会見', summary: ['沖縄防衛局が説明'] }),
+      'okinawa',
+    )
+  })
+  check('本文に混ざった地名より見出しを優先する', () => {
+    // 実データで、沖縄県知事選の記事が本文に紛れた別速報の「石川県・富山県」に
+    // 引きずられて中部と判定された
+    assert.equal(
+      detectRegion({
+        title: '沖縄県知事選6人が立候補 基地負担や経済振興で論戦へ',
+        summary: [],
+        body: '【気象予報士解説】大雨特別警報 石川県・富山県 名古屋 静岡 長野の情報も',
+      }),
       'okinawa',
     )
   })
