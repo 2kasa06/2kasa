@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-08-27T08:45:47.116Z",
+  "updatedAt": "2026-08-27T08:54:16.055Z",
   "meta": {
-    "updatedAt": "2026-08-27T08:45:47.116Z",
+    "updatedAt": "2026-08-27T08:54:16.055Z",
     "engine": "extractive",
-    "sourcesOk": 14,
-    "sourcesTotal": 22,
-    "totalArticles": 25,
-    "recentArticles": 25,
-    "freshArticles": 7,
+    "sourcesOk": 23,
+    "sourcesTotal": 23,
+    "totalArticles": 31,
+    "recentArticles": 31,
+    "freshArticles": 6,
     "status": [
       {
         "id": "mod",
@@ -15,13 +15,6 @@
         "ok": true,
         "picked": 0,
         "note": "https://www.mod.go.jp/j/rss/news.xml"
-      },
-      {
-        "id": "j-defense",
-        "name": "Jディフェンスニュース",
-        "ok": false,
-        "picked": 0,
-        "note": "https://j-defense.ikaros.jp/index.rdf → HTTP 404 / https://j-defense.ikaros.jp/feed → HTTP 404 / https://j-defense.ikaros.jp/rss.xml → HTTP 404"
       },
       {
         "id": "kensetsunews",
@@ -38,32 +31,25 @@
         "note": "https://www.decn.co.jp/feed"
       },
       {
-        "id": "kensetsu-plaza",
-        "name": "けんせつPlaza",
-        "ok": false,
+        "id": "nishinippon",
+        "name": "西日本新聞",
+        "ok": true,
         "picked": 0,
-        "note": "https://www.kensetsu-plaza.com/kiji/feed → HTTP 404 / https://www.kensetsu-plaza.com/feed → HTTP 404"
+        "note": "https://www.nishinippon.co.jp/feed/"
       },
       {
-        "id": "okinawatimes",
-        "name": "沖縄タイムス",
-        "ok": false,
+        "id": "jiji",
+        "name": "時事通信",
+        "ok": true,
         "picked": 0,
-        "note": "https://www.okinawatimes.co.jp/feed → HTTP 404 / https://www.okinawatimes.co.jp/rss/news.xml → HTTP 404"
+        "note": "https://www.jiji.com/rss/ranking.rdf"
       },
       {
-        "id": "ryukyushimpo",
-        "name": "琉球新報",
-        "ok": false,
+        "id": "yahoo-domestic",
+        "name": "Yahoo!ニュース 国内",
+        "ok": true,
         "picked": 0,
-        "note": "https://ryukyushimpo.jp/feed/ → フィードとして読めない応答 / https://ryukyushimpo.jp/rss/ → フィードとして読めない応答"
-      },
-      {
-        "id": "373news",
-        "name": "南日本新聞",
-        "ok": false,
-        "picked": 0,
-        "note": "https://373news.com/feed/ → HTTP 404 / https://373news.com/_rss/news.xml → HTTP 404"
+        "note": "https://news.yahoo.co.jp/rss/topics/domestic.xml"
       },
       {
         "id": "nhk-main",
@@ -83,7 +69,7 @@
         "id": "gnews:馬毛島 基地建設",
         "name": "Google ニュース「馬毛島 基地建設」",
         "ok": true,
-        "picked": 4,
+        "picked": 5,
         "note": "https://news.google.com/rss/search?q=%E9%A6%AC%E6%AF%9B%E5%B3%B6%20%E5%9F%BA%E5%9C%B0%E5%BB%BA%E8%A8%AD%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
@@ -117,16 +103,16 @@
       {
         "id": "gnews:防衛局 工事 入札 落札",
         "name": "Google ニュース「防衛局 工事 入札 落札」",
-        "ok": false,
+        "ok": true,
         "picked": 0,
-        "note": "https://news.google.com/rss/search?q=%E9%98%B2%E8%A1%9B%E5%B1%80%20%E5%B7%A5%E4%BA%8B%20%E5%85%A5%E6%9C%AD%20%E8%90%BD%E6%9C%AD%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja → 項目が0件"
+        "note": "https://news.google.com/rss/search?q=%E9%98%B2%E8%A1%9B%E5%B1%80%20%E5%B7%A5%E4%BA%8B%20%E5%85%A5%E6%9C%AD%20%E8%90%BD%E6%9C%AD%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
         "id": "gnews:自衛隊 施設 建設工事 受注",
         "name": "Google ニュース「自衛隊 施設 建設工事 受注」",
-        "ok": false,
+        "ok": true,
         "picked": 0,
-        "note": "https://news.google.com/rss/search?q=%E8%87%AA%E8%A1%9B%E9%9A%8A%20%E6%96%BD%E8%A8%AD%20%E5%BB%BA%E8%A8%AD%E5%B7%A5%E4%BA%8B%20%E5%8F%97%E6%B3%A8%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja → 項目が0件"
+        "note": "https://news.google.com/rss/search?q=%E8%87%AA%E8%A1%9B%E9%9A%8A%20%E6%96%BD%E8%A8%AD%20%E5%BB%BA%E8%A8%AD%E5%B7%A5%E4%BA%8B%20%E5%8F%97%E6%B3%A8%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
         "id": "gnews:南西諸島 石垣 宮古島 与那国 自衛隊 施設",
@@ -138,9 +124,9 @@
       {
         "id": "gnews:司令部 地下化 自衛隊",
         "name": "Google ニュース「司令部 地下化 自衛隊」",
-        "ok": false,
+        "ok": true,
         "picked": 0,
-        "note": "https://news.google.com/rss/search?q=%E5%8F%B8%E4%BB%A4%E9%83%A8%20%E5%9C%B0%E4%B8%8B%E5%8C%96%20%E8%87%AA%E8%A1%9B%E9%9A%8A%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja → 項目が0件"
+        "note": "https://news.google.com/rss/search?q=%E5%8F%B8%E4%BB%A4%E9%83%A8%20%E5%9C%B0%E4%B8%8B%E5%8C%96%20%E8%87%AA%E8%A1%9B%E9%9A%8A%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
         "id": "gnews:特定利用空港 特定利用港湾 整備",
@@ -162,6 +148,27 @@
         "ok": true,
         "picked": 1,
         "note": "https://news.google.com/rss/search?q=%E7%B1%B3%E8%BB%8D%E5%86%8D%E7%B7%A8%20%E6%96%BD%E8%A8%AD%20%E8%BF%94%E9%82%84%20%E5%B7%A5%E4%BA%8B%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
+      },
+      {
+        "id": "gnews:沖縄 米軍 施設 工事 埋立",
+        "name": "Google ニュース「沖縄 米軍 施設 工事 埋立」",
+        "ok": true,
+        "picked": 2,
+        "note": "https://news.google.com/rss/search?q=%E6%B2%96%E7%B8%84%20%E7%B1%B3%E8%BB%8D%20%E6%96%BD%E8%A8%AD%20%E5%B7%A5%E4%BA%8B%20%E5%9F%8B%E7%AB%8B%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
+      },
+      {
+        "id": "gnews:鹿児島 自衛隊 施設 建設",
+        "name": "Google ニュース「鹿児島 自衛隊 施設 建設」",
+        "ok": true,
+        "picked": 3,
+        "note": "https://news.google.com/rss/search?q=%E9%B9%BF%E5%85%90%E5%B3%B6%20%E8%87%AA%E8%A1%9B%E9%9A%8A%20%E6%96%BD%E8%A8%AD%20%E5%BB%BA%E8%A8%AD%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
+      },
+      {
+        "id": "gnews:防衛省 庁舎 隊舎 建設 発注",
+        "name": "Google ニュース「防衛省 庁舎 隊舎 建設 発注」",
+        "ok": true,
+        "picked": 0,
+        "note": "https://news.google.com/rss/search?q=%E9%98%B2%E8%A1%9B%E7%9C%81%20%E5%BA%81%E8%88%8E%20%E9%9A%8A%E8%88%8E%20%E5%BB%BA%E8%A8%AD%20%E7%99%BA%E6%B3%A8%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       }
     ]
   },
@@ -248,6 +255,34 @@
       "importance": "normal",
       "generatedBy": "extractive",
       "region": "okinawa"
+    },
+    {
+      "key": "陸自佐賀駐屯地オスプレイが9月から霧島演習場でも飛行訓練水陸機動団とも連携強化へ鹿児島宮崎",
+      "title": "陸自佐賀駐屯地オスプレイが9月から霧島演習場でも飛行訓練 水陸機動団とも連携強化へ 鹿児島・宮崎",
+      "link": "https://topics.smt.docomo.ne.jp/article/mbc/region/mbc-2899809?fm=latestnews&redirect=1",
+      "isGoogleLink": false,
+      "description": "",
+      "publishedAt": "2026-08-27T00:20:00.000Z",
+      "publisher": "ｄメニューニュース",
+      "via": [
+        "Google ニュース「鹿児島 自衛隊 施設 建設」"
+      ],
+      "sourceHint": "南西諸島",
+      "sourceHost": "topics.smt.docomo.ne.jp",
+      "relevance": 8,
+      "pickups": 1,
+      "body": "陸上自衛隊佐賀駐屯地に配備されている輸送機オスプレイの飛行訓練が9月以降、鹿児島県と宮崎県にまたがる霧島演習場でも始まることになりました。\n陸上自衛隊佐賀駐屯地には去年、輸送機オスプレイ17機が配備されていて、南西諸島などでの有事や災害時に人員や物資の輸送を担います。\n去年8月以降、海上自衛隊鹿屋航空基地や奄美大島の陸上自衛隊瀬戸内分屯地を含む九州各地の自衛隊施設で飛行訓練をしています。\n九州防衛局によりますと、9月1日以降、湧水町とえびの市にまたがる陸上自衛隊霧島演習場への飛行訓練も新たに始め、水陸機動団との部隊訓練などを予定しているということです。\n可能な限り住宅地や市街地などの飛行は避け、高度300メートル以上を確保するとしていますが、具体的な期間や時間帯、飛行ルートなどは明らかになっていません。\n塩田知事は、2023年11月に屋久島沖で起きたアメリカ軍のオスプレイ墜落事故を踏まえ、九州防衛局と陸上自衛隊第1ヘリコプター団に対し、住民の安心・安全の確保に万全の対策を講じるよう文書で要請しました。\nOKITIVE 8/27(木) 12:00\nQAB琉球朝日放送 8/27(木) 11:58\n沖縄タイムス 8/27(木) 11:57\nＫＴＳ鹿児島テレビ 8/27(木) 11:34\nKKB鹿児島放送 8/26(水) 20:03\nＫＴＳ鹿児島テレビ 8/26(水) 18:35\nＫＴＳ鹿児島テレビ 8/26(水) 18:30\nQAB琉球朝日放送 8/26(水) 18:17",
+      "hasBody": true,
+      "category": "nansei",
+      "summary": [
+        "陸上自衛隊佐賀駐屯地に配備されている輸送機オスプレイの飛行訓練が9月以降、鹿児島県と宮崎県にまたがる霧島演習場でも始まることになりました。",
+        "去年8月以降、海上自衛隊鹿屋航空基地や奄美大島の陸上自衛隊瀬戸内分屯地を含む九州各地の自衛隊施設で飛行訓練をしています。",
+        "塩田知事は、2023年11月に屋久島沖で起きたアメリカ軍のオスプレイ墜落事故を踏まえ、九州防衛局と陸上自衛隊第1ヘリコプター団に対し、住民の安心・安全の確保に万全の対策を講じるよう文書で要請しました。"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "high",
+      "generatedBy": "extractive",
+      "region": "kyushu"
     },
     {
       "key": "沖縄県知事選挙きょう告示基地負担や経済など論戦へ",
@@ -386,6 +421,62 @@
       "region": "kyushu"
     },
     {
+      "key": "どこまで議会を軽視するのか馬毛島自衛隊宿舎のごみ問題西之表市が防衛省と覚書処理費用は税金で負担",
+      "title": "「どこまで議会を軽視するのか」馬毛島・自衛隊宿舎の\"ごみ問題\" 西之表市が防衛省と覚書、処理費用は税金で負担",
+      "link": "https://www.fnn.jp/articles/-/1100135?display=full",
+      "isGoogleLink": false,
+      "description": "",
+      "publishedAt": "2026-08-24T06:35:00.000Z",
+      "publisher": "FNNプライムオンライン",
+      "via": [
+        "Google ニュース「鹿児島 自衛隊 施設 建設」"
+      ],
+      "sourceHint": "南西諸島",
+      "sourceHost": "fnn.jp",
+      "relevance": 8,
+      "pickups": 1,
+      "body": "「どこまで議会を軽視しているのか」——西之表市議会の議員がそう声を上げた。馬毛島の整備に絡む自衛隊宿舎の建設予定地で大量のごみが見つかった問題をめぐり、2026年1月、西之表市が防衛省と覚書を交わしていたことが明らかになった。覚書の中身は、ごみの処理費用を市が負担するというものだ。\n問題の舞台は、鹿児島県西之表市下西地区にある土地だ。10階建て自衛隊宿舎の建設が予定されていたこの場所は、1960年代にごみ処理場として使われていた市有地だった。\n2022年、この土地は防衛省に2260万円で売却された。ところが、工事が進む中で地中から大量のごみが発見され、2024年11月から工事は中断している。\n2026年1月に締結された覚書では、工事中断までに出たごみ混じりの土を市の責任で処理することが定められた。さらに、工事中断後に実施された試掘調査と土壌調査で出たごみや土の処理費用についても、市が負担するとされている。\n宿舎建設の可否については、防衛省が土壌調査の結果などを踏まえたうえで判断するとしており、現時点では建設が実現するかどうかも不透明な状況だ。市が費用を負担しながら、建設そのものが白紙になる可能性も残っている。\nさらに問題を複雑にしているのが、議会への対応だ。市は覚書を締結したことを市議会に正式には報告していなかった。\n市の担当者は、覚書締結前の2025年12月に開催された市議会全員協議会の場で、覚書の中身については口頭で伝えていたと説明している。しかし、この説明が十分だったとは言い難い。\nこの問題を追い続けてきた西之表市議会の和田香穂里議員は、覚書の存在が明らかになったことに強い驚きを示した。\n「かなりの議員が『説明が足りていない』と追及して、その時にも出されていない覚書が出てきたのは、驚きとともにどこまで議会を軽視しているのか」\n議員たちが問題を追及していた場でさえ、覚書の存在は示されなかった。その事実が、市の情報共有の姿勢に対する不信感を一層強める結果となっている。\n事態はさらに発展している。ごみ混じりの土の処分費用などをめぐっては、西之表市民18人が住民監査請求を進めている。請求の理由は、「必要性や合理性が全くない支出で違法だ」というものだ。\n市が売却した土地のごみ処理費を市民の税金で賄うことの妥当性、そして議会への説明責任——この問題は、馬毛島整備という国家的な事業が地域社会に投げかける複雑な課題を映し出している。今後の土壌調査の結果と防衛省の判断、そして住民監査請求の行方が注目される。\n【動画で見る▶【判明】馬毛島整備に絡む自衛隊宿舎建設予定地 「市がゴミ処理費負担」西之表市が防衛省と覚書】\n鹿児島の最新ニュース、身近な話題、災害や事故の速報などを発信します。",
+      "hasBody": true,
+      "category": "nansei",
+      "summary": [
+        "「どこまで議会を軽視しているのか」——西之表市議会の議員がそう声を上げた。",
+        "馬毛島の整備に絡む自衛隊宿舎の建設予定地で大量のごみが見つかった問題をめぐり、2026年1月、西之表市が防衛省と覚書を交わしていたことが明らかになった。",
+        "10階建て自衛隊宿舎の建設が予定されていたこの場所は、1960年代にごみ処理場として使われていた市有地だった。"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "high",
+      "generatedBy": "extractive",
+      "region": "kyushu"
+    },
+    {
+      "key": "分水嶺沖縄知事選2026/中基地負担減解なく進む南西シフト知事の権限限定",
+      "title": "分水嶺・沖縄知事選２０２６：／中 基地負担減 「解」なく 進む南西シフト 知事の権限限定",
+      "link": "https://mainichi.jp/articles/20260824/ddp/041/010/006000c",
+      "isGoogleLink": false,
+      "description": "",
+      "publishedAt": "2026-08-23T20:03:38.000Z",
+      "publisher": "毎日新聞",
+      "via": [
+        "Google ニュース「沖縄 米軍 施設 工事 埋立」"
+      ],
+      "sourceHint": "在日米軍",
+      "sourceHost": "mainichi.jp",
+      "relevance": 6,
+      "pickups": 1,
+      "body": "選挙制度の基本から日本全体で見る勢力の変遷まで様々な視点から選挙に関する情報をまとめています。\n「政治は結果がすべて。頑張ったけどできなかったでは許されない」\n残り 1695 文字（全文1727文字）\n1日あたり約35円！\n月額1,078円(税込)で読み放題\nGoogle検索で「毎日新聞」の記事を優先的に表示できます。 1ステップで今すぐ登録する",
+      "hasBody": true,
+      "category": "nansei",
+      "summary": [
+        "選挙制度の基本から日本全体で見る勢力の変遷まで様々な視点から選挙に関する情報をまとめています。",
+        "残り 1695 文字（全文1727文字）",
+        "月額1,078円(税込)で読み放題"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "high",
+      "generatedBy": "extractive",
+      "region": "okinawa"
+    },
+    {
       "key": "退職隊員庁110人規模防衛省外局新設を要求山陰中央新報デジタル",
       "title": "退職隊員庁１１０人規模 防衛省、外局新設を要求 - 山陰中央新報デジタル",
       "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE0xSW5MLVpKX042X1B2NlNSZ283RE9Ma3FSOHBhUkhtam13RlY3MXBoY0YyUUg2OGF2YzR3UHUyX2NsajJGVWJFeFZRMzRLaFVlckV4eE80SVFVa0E?oc=5",
@@ -433,6 +524,34 @@
         "宿は常に満室、木造アパート8万円…馬毛島の自衛隊基地工事に沸く種子島、ホテル・不動産バブルが起きていた - 47NEWS",
         "（自動要約なし。原文を参照してください）",
         "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "high",
+      "generatedBy": "extractive",
+      "region": "kyushu"
+    },
+    {
+      "key": "宿は常に満室木造アパート8万円...馬毛島の自衛隊基地工事に沸く種子島ホテル不動産バブルが起きていた",
+      "title": "宿は常に満室、木造アパート8万円…馬毛島の自衛隊基地工事に沸く種子島、ホテル・不動産バブルが起きていた",
+      "link": "https://www.47news.jp/8839891.html",
+      "isGoogleLink": false,
+      "description": "",
+      "publishedAt": "2026-08-23T07:00:00.000Z",
+      "publisher": "47NEWS",
+      "via": [
+        "Google ニュース「馬毛島 基地建設」"
+      ],
+      "sourceHint": "南西諸島",
+      "sourceHost": "47news.jp",
+      "relevance": 6,
+      "pickups": 1,
+      "body": "鹿児島県 西之表市 馬毛島への米軍機訓練移転を伴う自衛隊基地整備計画は１２日から本体工事に入った。軍事的に台頭する中国をにらみ、面積８平方キロメートルの島は日米の防衛拠点に変貌する。構想が表面化して１６ ...\n鹿児島を代表するローカル紙「南日本新聞」の公式サイト。鹿児島のニュース、生活情報、レジャー観光、気象情報、桜島ライブカメラなど地域ポータルとしてご活用ください。",
+      "hasBody": true,
+      "category": "nansei",
+      "summary": [
+        "鹿児島県 西之表市 馬毛島への米軍機訓練移転を伴う自衛隊基地整備計画は１２日から本体工事に入った。",
+        "軍事的に台頭する中国をにらみ、面積８平方キロメートルの島は日米の防衛拠点に変貌する。",
+        "構想が表面化して１６ ..."
       ],
       "why": "自動抽出による要約です。原文で確認してください。",
       "importance": "high",
@@ -521,6 +640,34 @@
       "region": null
     },
     {
+      "key": "普天間の先行移転に自民難色維新方針に宜野湾市長は注視知事選立候補予定者の見解は",
+      "title": "普天間の「先行移転」に自民難色 維新方針に宜野湾市長は注視 知事選立候補予定者の見解は",
+      "link": "https://www.okinawatimes.co.jp/articles/-/1907195",
+      "isGoogleLink": false,
+      "description": "",
+      "publishedAt": "2026-08-21T21:03:00.000Z",
+      "publisher": "沖縄タイムス社",
+      "via": [
+        "Google ニュース「沖縄 米軍 施設 工事 埋立」"
+      ],
+      "sourceHint": "在日米軍",
+      "sourceHost": "okinawatimes.co.jp",
+      "relevance": 4,
+      "pickups": 1,
+      "body": "９月１３日投開票の知事選に向け、日本維新の会が名護市辺野古で工事がほぼ完了している辺野古側の埋め立て地へ米軍普天間飛行場のヘリパッド訓練機能を先行移転する方針を示したことを受け、普天間の所在する宜野湾市の佐喜真淳市長は２１日、本紙取材に「実現すれば、市民の基地負担軽減の進展が図られ、危険性除去につながる」との考えを示した。一方、維新と連立を組む自民党関係者は「日本の都合だけでできるわけがない」と距離を置いた。（知事選取材班・松田駿太、山城響、田中青葉、東京報道部・玉那覇長輝）",
+      "hasBody": true,
+      "category": "usfj",
+      "summary": [
+        "９月１３日投開票の知事選に向け、日本維新の会が名護市辺野古で工事がほぼ完了している辺野古側の埋め立て地へ米軍普天間飛行場のヘリパッド訓練機能を先行移転する方針を示したことを受け、普天間の所在する宜野湾市の佐喜真淳市長は２１日、本紙取材に「実",
+        "一方、維新と連立を組む自民党関係者は「日本の都合だけでできるわけがない」と距離を置いた。",
+        "（知事選取材班・松田駿太、山城響、田中青葉、東京報道部・玉那覇長輝）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "normal",
+      "generatedBy": "extractive",
+      "region": "okinawa"
+    },
+    {
       "key": "防衛省ai指揮統制へ政府クラウド導入27年度概算要求日本経済新聞",
       "title": "防衛省、AI指揮統制へ政府クラウド導入 27年度概算要求 - 日本経済新聞",
       "link": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5WeTFDRDRobWFWalktZTlfenhHQkwxeUFPNG4yT3A2UlBCS19MSlpHWlpIRHVwSWFUZF9KY3pmR0NfWVJfb1EycERFdENiSTYxZWx5Y0NJMXBSX1FlOXFpdWJmYTA2VEFnYlEzMw?oc=5",
@@ -546,6 +693,34 @@
       "importance": "normal",
       "generatedBy": "extractive",
       "region": null
+    },
+    {
+      "key": "自衛隊宿舎のごみ処理市が国と覚書締結鹿児島県",
+      "title": "自衛隊宿舎のごみ処理 市が国と覚書締結 鹿児島県",
+      "link": "https://topics.smt.docomo.ne.jp/article/kkb/region/kkb-20260821-00004121",
+      "isGoogleLink": false,
+      "description": "",
+      "publishedAt": "2026-08-21T10:28:00.000Z",
+      "publisher": "ｄメニューニュース",
+      "via": [
+        "Google ニュース「鹿児島 自衛隊 施設 建設」"
+      ],
+      "sourceHint": "南西諸島",
+      "sourceHost": "topics.smt.docomo.ne.jp",
+      "relevance": 3,
+      "pickups": 1,
+      "body": "西之表市で計画されている自衛隊宿舎の建設予定地から、大量のゴミが見つかった問題で、市がごみ処理の費用を負担する覚書を防衛省と結んでいたことが分かりました。\n西之表市の馬毛島で進められている新たな自衛隊基地の整備に伴い、西之表市では、国に売却した土地で隊員宿舎の建設が予定されています。しかし、地中から大量のごみが見つかり、宿舎の建設工事はおととしから中断しています。\n市は「予定地がごみ処理場だったことは売却前に防衛省に説明した」としていますが、地中から見つかったごみの処理費用として市が約2000万円の支出を決めています。\n市の対応について、一部の住民は「防衛省との交渉内容が説明されておらず、支出は違法である」などと訴え、公金の支出差し止めを求める住民監査請求を起こしています。\nそんな中、市と防衛省が今年1月、市がごみの処理費用を負担する覚書を締結していたことが分かりました。\n市によりますと、覚書ではおととし10月までに見つかったごみや、今後、土地の状態を調べるための試掘や土壌調査で見つかるごみは、市が処理費用を負担すると記載されているということです。\n市は議会に、これまで覚書の存在を説明していません。\n市はＫＫＢの取材に対し「議会には費用を負担する方針は説明している」としたうえで、「覚書は防衛省と方向性を確認する文書で開示の義務はない」などととしています。\n議会などに説明するかは、今後検討するとしています。\nSaga Shimbun 8/27(木) 17:30\nとちテレニュース 8/27(木) 17:19\nカンテレNEWS 8/27(木) 16:25\n石川テレビ ニュース 8/27(木) 15:58\nSaga Shimbun 8/27(木) 15:30",
+      "hasBody": true,
+      "category": "nansei",
+      "summary": [
+        "西之表市で計画されている自衛隊宿舎の建設予定地から、大量のゴミが見つかった問題で、市がごみ処理の費用を負担する覚書を防衛省と結んでいたことが分かりました。",
+        "西之表市の馬毛島で進められている新たな自衛隊基地の整備に伴い、西之表市では、国に売却した土地で隊員宿舎の建設が予定されています。",
+        "Saga Shimbun 8/27(木) 17:30"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "normal",
+      "generatedBy": "extractive",
+      "region": "kyushu"
     },
     {
       "key": "判明馬毛島整備に絡む自衛隊宿舎建設予定地市がゴミ処理費負担西之表市が防衛省と覚書yahoo!ニュース",
@@ -583,12 +758,13 @@
       "publishedAt": "2026-08-21T10:09:01.000Z",
       "publisher": "Yahoo!ニュース",
       "via": [
-        "Google ニュース「馬毛島 基地建設」"
+        "Google ニュース「馬毛島 基地建設」",
+        "Google ニュース「鹿児島 自衛隊 施設 建設」"
       ],
       "sourceHint": "南西諸島",
       "sourceHost": "news.yahoo.co.jp",
       "relevance": 9,
-      "pickups": 1,
+      "pickups": 2,
       "hasBody": false,
       "category": "nansei",
       "summary": [
@@ -745,12 +921,13 @@
       "publishedAt": "2026-08-20T19:58:00.000Z",
       "publisher": "沖縄タイムス社",
       "via": [
-        "Google ニュース「辺野古 埋立 地盤改良」"
+        "Google ニュース「辺野古 埋立 地盤改良」",
+        "Google ニュース「沖縄 米軍 施設 工事 埋立」"
       ],
       "sourceHint": "在日米軍",
       "sourceHost": "okinawatimes.co.jp",
       "relevance": 7,
-      "pickups": 1,
+      "pickups": 2,
       "hasBody": false,
       "category": "usfj",
       "summary": [
