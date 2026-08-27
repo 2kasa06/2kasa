@@ -63,12 +63,53 @@ export function articleKey(title, url) {
   return normalizedTitle || `${host}${path}`
 }
 
+/**
+ * 構造化データ（JSON-LD）から本文を取り出す。
+ *
+ * <p> をかき集める方式だと、記事の周りに並ぶ別記事の見出しが混ざる。実データでは
+ * NHK の記事の要約に「【気象予報士解説】大雨特別警報」「ネパールで土石流」が
+ * 紛れ込んだ。articleBody は記事本体そのものなので、あるならこちらが確実。
+ */
+function articleBodyFromJsonLd(html) {
+  const blocks = [...html.matchAll(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)]
+
+  for (const [, raw] of blocks) {
+    let data
+    try {
+      data = JSON.parse(raw.trim())
+    } catch {
+      continue // 壊れた JSON-LD は珍しくない
+    }
+
+    // 単体・配列・@graph のいずれの入れ方もある
+    const nodes = []
+    const walk = (node) => {
+      if (Array.isArray(node)) node.forEach(walk)
+      else if (node && typeof node === 'object') {
+        nodes.push(node)
+        if (node['@graph']) walk(node['@graph'])
+      }
+    }
+    walk(data)
+
+    for (const node of nodes) {
+      if (typeof node.articleBody === 'string' && node.articleBody.trim().length >= 200) {
+        return stripHtml(node.articleBody)
+      }
+    }
+  }
+  return ''
+}
+
 /** 記事ページから本文らしいテキストを取り出す。取れなければ空文字。 */
 export async function fetchArticleText(url) {
   const res = await get(url, { timeoutMs: 20000, retries: 1, accept: 'text/html,*/*' })
   if (!res.ok) return { text: '', error: res.error }
 
   const html = res.body
+
+  const structured = articleBodyFromJsonLd(html)
+  if (structured) return { text: structured.slice(0, 6000), error: null }
   // 記事本体を囲みがちな要素を優先して見る
   const scoped =
     html.match(/<article\b[^>]*>([\s\S]*?)<\/article>/i)?.[1] ||

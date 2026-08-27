@@ -12,7 +12,13 @@ import { fileURLToPath } from 'node:url'
 import { site, sources } from './config.mjs'
 import { collectArticles, enrichArticles } from './lib/collect.mjs'
 import { summarizeArticles, buildDigest } from './lib/summarize.mjs'
-import { readArchive, mergeArchive, writeArchive, selectRetryTargets } from './lib/store.mjs'
+import {
+  readArchive,
+  mergeArchive,
+  writeArchive,
+  selectRetryTargets,
+  normalizeArchive,
+} from './lib/store.mjs'
 import { buildStats } from './lib/stats.mjs'
 import { assignRegions } from './lib/region.mjs'
 import { createResolver } from './lib/resolve.mjs'
@@ -35,8 +41,10 @@ async function main() {
   log(`■ ${site.title} — ${now.toISOString()}`)
 
   // 1. 既存の記事庫を読む
-  const existing = await readArchive(ROOT)
-  log(`  既存アーカイブ: ${existing.length}件`)
+  const stored = await readArchive(ROOT)
+  // 設定を直したときに過去の記事も追随させる（見出しの整形・重複・対象判定）
+  const existing = normalizeArchive(stored)
+  log(`  既存アーカイブ: ${existing.length}件${stored.length !== existing.length ? `（${stored.length - existing.length}件を整理）` : ''}`)
 
   // 2. 情報源を回る
   log(`  ${sources.length}件の情報源を確認中…`)

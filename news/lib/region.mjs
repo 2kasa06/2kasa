@@ -61,10 +61,16 @@ export function detectRegion(article) {
   return null
 }
 
-/** 記事の一覧に地方を付ける。既に付いているものはそのまま。 */
+/**
+ * 記事の一覧に地方を付ける。毎回やり直す。
+ *
+ * 一度付けた値を残すと、後から本文が取れて材料が増えても古い判定のままになる。
+ * 判定条件を直したときも過去の記事に反映されない。実データでは、沖縄県知事選の
+ * 記事が最初の誤判定（中部）のまま残り続けた。判定は安いので毎回引き直す。
+ */
 export function assignRegions(articles) {
   for (const article of articles) {
-    if (article.region === undefined) article.region = detectRegion(article)
+    article.region = detectRegion(article)
   }
   return articles
 }

@@ -3,6 +3,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { site } from '../config.mjs'
+import { articleKey, matchesTheme, stripSourceSuffix } from './collect.mjs'
 
 const ARCHIVE_PATH = 'data/archive.json'
 
@@ -50,6 +51,41 @@ export function mergeArchive(existing, incoming, { now = new Date() } = {}) {
     (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt),
   )
   return { merged, fresh }
+}
+
+/**
+ * 蓄積済みの記事を、今の設定で作り直す。
+ *
+ * 設定を直しても過去の記事が古い判定のまま残ると、同じ記事が見出し違いで
+ * 並び続けたり、対象外にしたはずの記事がいつまでも表示されたりする。
+ * 判定はどれも安く、やり直しても結果は決まるので、読むたびに通す。
+ *
+ * - 見出しの「 - 媒体名」を落とし、キーを取り直す（古い重複がここで畳まれる）
+ * - 今のキーワードで対象外になった記事は落とす
+ */
+export function normalizeArchive(articles) {
+  const byKey = new Map()
+
+  for (const raw of articles) {
+    const title = stripSourceSuffix(raw.title, raw.publisher)
+    const haystack = `${title}\n${(raw.summary || []).join('\n')}`
+    if (!matchesTheme(haystack).matched) continue
+
+    const article = { ...raw, title, key: articleKey(title, raw.link) }
+    const existing = byKey.get(article.key)
+    if (!existing) {
+      byKey.set(article.key, article)
+      continue
+    }
+
+    // 重複したら情報の濃い方を残し、出典は足し合わせる
+    const keep = existing.hasBody && !article.hasBody ? existing : article
+    keep.via = [...new Set([...(existing.via || []), ...(article.via || [])])]
+    keep.pickups = Math.max(existing.pickups || 1, article.pickups || 1)
+    byKey.set(article.key, keep)
+  }
+
+  return [...byKey.values()]
 }
 
 /**

@@ -16,7 +16,7 @@ import {
 } from './lib/collect.mjs'
 import { summarizeArticles } from './lib/summarize.mjs'
 import { renderIndex, renderDay, renderArchiveIndex, dayKey } from './lib/render.mjs'
-import { mergeArchive, selectRetryTargets } from './lib/store.mjs'
+import { mergeArchive, selectRetryTargets, normalizeArchive } from './lib/store.mjs'
 import { buildStats } from './lib/stats.mjs'
 import { parseFeed, stripHtml } from './lib/feed.mjs'
 import { detectRegion, assignRegions } from './lib/region.mjs'
@@ -339,10 +339,11 @@ await withServer(async (port) => {
     // 「浜松」と「舞鶴」がどちらも重み3で並ぶ
     assert.equal(detectRegion({ title: '浜松と舞鶴で同時に工事', summary: [] }), null)
   })
-  await check('既に地方が付いている記事は上書きしない', () => {
-    const kept = [{ title: '馬毛島の工事', region: null }]
-    assignRegions(kept)
-    assert.equal(kept[0].region, null)
+  await check('地方は毎回引き直す', () => {
+    // 後から本文が取れたり、判定条件を直したときに古い値が残らないこと
+    const stale = [{ title: '馬毛島の工事', summary: [], region: 'kanto' }]
+    assignRegions(stale)
+    assert.equal(stale[0].region, 'kyushu')
   })
 
   console.log('\n地図データ')
@@ -362,6 +363,27 @@ await withServer(async (port) => {
       assert.ok(x >= region.box.x && x <= region.box.x + region.box.w, `${region.label} のピンX`)
       assert.ok(y >= region.box.y && y <= region.box.y + region.box.h, `${region.label} のピンY`)
     }
+  })
+
+  console.log('\n蓄積の作り直し')
+  await check('古い見出しの「 - 媒体名」が落ち、重複が畳まれる', () => {
+    const stored = [
+      { key: 'old1', title: '馬毛島の基地建設が進む - 47NEWS', publisher: '47NEWS', link: 'https://a.jp/1', summary: [], via: ['A'], pickups: 1, hasBody: false },
+      { key: 'old2', title: '馬毛島の基地建設が進む', publisher: 'jcp.or.jp', link: 'https://b.jp/2', summary: [], via: ['B'], pickups: 1, hasBody: true },
+    ]
+    const out = normalizeArchive(stored)
+    assert.equal(out.length, 1, '重複が畳まれていない')
+    assert.equal(out[0].title, '馬毛島の基地建設が進む')
+    assert.equal(out[0].hasBody, true, '情報の濃い方が残っていない')
+    assert.deepEqual(out[0].via.sort(), ['A', 'B'])
+  })
+  await check('今の基準で対象外になった記事は落ちる', () => {
+    const stored = [
+      { key: 'x', title: '陸自駐屯地オスプレイが飛行訓練', publisher: 'X', link: 'https://a.jp/1', summary: [] },
+      { key: 'y', title: '馬毛島の造成工事が進む', publisher: 'Y', link: 'https://a.jp/2', summary: [] },
+    ]
+    // キーは見出しから作り直されるので、残ったかどうかは見出しで見る
+    assert.deepEqual(normalizeArchive(stored).map((a) => a.title), ['馬毛島の造成工事が進む'])
   })
 
   console.log('\n本文の取り直し')
