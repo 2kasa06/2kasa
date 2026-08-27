@@ -11,9 +11,15 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
  */
 export async function get(url, { timeoutMs = 20000, retries = 2, accept } = {}) {
   let lastError = 'unknown'
+  // 混雑・制限（429/503）は間を空けないと意味がない。実データでは Google ニュースの
+  // 15クエリが揃って 503 を返し、0.5秒間隔の再試行では抜けられなかった。
+  let backoff = 600
 
   for (let attempt = 0; attempt <= retries; attempt++) {
-    if (attempt > 0) await sleep(500 * 2 ** (attempt - 1))
+    if (attempt > 0) {
+      await sleep(backoff)
+      backoff *= 3
+    }
 
     const controller = new AbortController()
     const timer = setTimeout(() => controller.abort(), timeoutMs)
@@ -34,6 +40,8 @@ export async function get(url, { timeoutMs = 20000, retries = 2, accept } = {}) 
         if (res.status >= 400 && res.status < 500 && res.status !== 429) {
           return { ok: false, status: res.status, url: res.url, body: '', error: lastError }
         }
+        // 制限に当たったときは、次の待ちを長めに取る
+        if (res.status === 429 || res.status === 503) backoff = Math.max(backoff, 4000)
         continue
       }
       return { ok: true, status: res.status, url: res.url, body }

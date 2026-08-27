@@ -68,7 +68,9 @@ export function normalizeArchive(articles) {
 
   for (const raw of articles) {
     const title = stripSourceSuffix(raw.title, raw.publisher)
-    const haystack = `${title}\n${(raw.summary || []).join('\n')}`
+    // 収集時に採否を決めた材料が残っていればそれを使う。要約で判定すると、
+    // 収集時には見ていなかった本文の語で通ってしまい、基準が食い違う。
+    const haystack = raw.matchText ?? `${title}\n${(raw.summary || []).join('\n')}`
     if (!matchesTheme(haystack).matched) continue
 
     const article = { ...raw, title, key: articleKey(title, raw.link) }

@@ -377,6 +377,29 @@ await withServer(async (port) => {
     assert.equal(out[0].hasBody, true, '情報の濃い方が残っていない')
     assert.deepEqual(out[0].via.sort(), ['A', 'B'])
   })
+  await check('採否は収集時と同じ材料で見直す', () => {
+    // 要約で見直すと、収集時には見ていなかった本文の語で通ってしまう
+    const stored = [{
+      key: 'k',
+      title: '駐屯地でオスプレイが飛行訓練',
+      publisher: 'X',
+      link: 'https://a.jp/1',
+      matchText: '駐屯地でオスプレイが飛行訓練',
+      summary: ['九州各地の自衛隊施設で飛行訓練をしています'],
+    }]
+    assert.equal(normalizeArchive(stored).length, 0, '要約の語で通ってしまっている')
+  })
+  await check('防衛と無関係な公共工事は通さない', () => {
+    // 「萩山小複合施設整備事業」が topic の「施設整備」に当たっていた
+    const stored = [{
+      key: 'k',
+      title: '9月補正で債務負担80億/萩山小複合施設整備事業/東村山市',
+      publisher: 'X',
+      link: 'https://a.jp/1',
+      summary: [],
+    }]
+    assert.equal(normalizeArchive(stored).length, 0)
+  })
   await check('今の基準で対象外になった記事は落ちる', () => {
     const stored = [
       { key: 'x', title: '陸自駐屯地オスプレイが飛行訓練', publisher: 'X', link: 'https://a.jp/1', summary: [] },

@@ -33,7 +33,9 @@ const NULL_RESOLVER = {
 /**
  * @returns {Promise<{available: boolean, reason?: string, resolve: (url: string) => Promise<string|null>, close: () => Promise<void>}>}
  */
-export async function createResolver({ timeoutMs = 20000 } = {}) {
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+
+export async function createResolver({ timeoutMs = 20000, spacingMs = 700 } = {}) {
   let chromium
   try {
     ;({ chromium } = await import('playwright'))
@@ -59,6 +61,9 @@ export async function createResolver({ timeoutMs = 20000 } = {}) {
   return {
     available: true,
     async resolve(url) {
+      // 連続して叩くと Google 側の制限に当たる。実データでは、31件を一気に
+      // 解決した直後の実行で検索フィードが揃って 503 を返した。
+      await sleep(spacingMs)
       const page = await context.newPage()
       try {
         // goto は「遷移中に別の遷移が始まった」で ERR_ABORTED を投げることがある。

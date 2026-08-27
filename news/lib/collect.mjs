@@ -233,6 +233,9 @@ export async function collectArticles(sources, { now = new Date() } = {}) {
           : '',
         relevance: theme.score,
         pickups: 1,
+        // 採否を決めた材料をそのまま残す。設定を締め直したときに、
+        // 収集時とまったく同じ根拠で過去の記事を見直せる。
+        matchText: `${title}\n${description}`.slice(0, 600),
       })
       picked++
     }
