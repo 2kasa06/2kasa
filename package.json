@@ -12,7 +12,8 @@
     "build:preview": "vite build --config vite.preview.config.ts && node scripts/build-preview.mjs",
     "news:build": "node news/build.mjs",
     "news:dry": "node news/build.mjs --dry-run",
-    "news:test": "node news/selftest.mjs"
+    "news:test": "node news/selftest.mjs",
+    "news:preview": "node news/preview.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",

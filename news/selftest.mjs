@@ -11,6 +11,7 @@ import { collectArticles, enrichArticles, matchesTheme } from './lib/collect.mjs
 import { summarizeArticles } from './lib/summarize.mjs'
 import { renderIndex, renderDay, renderArchiveIndex, dayKey } from './lib/render.mjs'
 import { mergeArchive } from './lib/store.mjs'
+import { buildStats } from './lib/stats.mjs'
 import { parseFeed, stripHtml } from './lib/feed.mjs'
 
 const iso = (offsetHours) => new Date(Date.now() - offsetHours * 3600_000).toISOString()
@@ -219,7 +220,8 @@ await withServer(async (port) => {
 
   console.log('\nHTML生成')
   const meta = { updatedAt: new Date().toISOString(), engine, sourcesOk: 2, sourcesTotal: 3, status }
-  const html = renderIndex({ articles: summarized, digest: ['要点テスト'], status, meta })
+  const stats = buildStats({ recent: summarized, archived: summarized, status, freshCount: 2 })
+  const html = renderIndex({ articles: summarized, digest: ['要点テスト'], status, meta, stats })
   check('記事がカードとして出力される', () => {
     assert.equal((html.match(/<article class="card/g) || []).length, summarized.length)
   })
@@ -231,15 +233,19 @@ await withServer(async (port) => {
       why: "</a><svg onload=alert(2)>",
       publisher: '<b>媒体</b>',
     }]
-    const out = renderIndex({ articles: evil, digest: [], status: [], meta })
+    const out = renderIndex({ articles: evil, digest: [], status: [], meta, stats })
     const page = out.slice(out.indexOf('<body>'))
-    // 生のタグが本文側に出ていないこと
-    assert.doesNotMatch(page, /<img\b/i, '<img> が素通し')
-    assert.doesNotMatch(page, /<svg\b/i, '<svg> が素通し')
-    assert.doesNotMatch(page, /<script>bad/i, '<script> が素通し')
+    // 注入した文字列が「生のタグ」として出ていないこと。
+    // HUD 自体が <svg> を含み、無害化済みのテキストにも onerror= という
+    // 文字列は現れるので、タグ名やイベント属性の総当たりでは判定できない。
+    // 注入した当の文字列が raw で出ていないかを直接見る。
+    for (const raw of ['<img src=x', '<svg onload', '<script>bad', '</a><svg', '<b>媒体']) {
+      assert.ok(!page.includes(raw), `${raw} が素通し`)
+    }
     // 中身自体は表示されること
     assert.ok(page.includes('&lt;img src=x onerror=alert(1)&gt;'), 'タイトルが消えている')
     assert.ok(page.includes('&lt;script&gt;bad()&lt;/script&gt;'), '要約が消えている')
+    assert.ok(page.includes('&lt;svg onload=alert(2)&gt;'), 'why が消えている')
     // 属性値を閉じて抜け出せないこと
     assert.doesNotMatch(page, /data-text="[^"]*"[^>]*onerror/i, '属性から抜け出せている')
   })
@@ -247,20 +253,20 @@ await withServer(async (port) => {
   check('日別ページとアーカイブ一覧が組める', () => {
     const day = dayKey(mage.publishedAt)
     assert.match(day, /^\d{4}-\d{2}-\d{2}$/)
-    assert.ok(renderDay({ day, articles: summarized, meta }).includes('<!DOCTYPE html>'))
-    assert.ok(renderArchiveIndex({ days: [{ day, count: 3 }] }).includes(`${day}.html`))
+    assert.ok(renderDay({ day, articles: summarized, meta, stats }).includes('<!DOCTYPE html>'))
+    assert.ok(renderArchiveIndex({ days: [{ day, count: 3 }], meta, stats }).includes(`${day}.html`))
   })
   check('カテゴリが欠けた記事も落とさず表示する', () => {
     const orphan = [{ ...mage, category: undefined, summary: ['a', 'b', 'c'], why: '' },
                     { ...mage, key: 'x2', category: '存在しないID', summary: ['a', 'b', 'c'], why: '' }]
-    const out = renderIndex({ articles: orphan, digest: [], status: [], meta })
+    const out = renderIndex({ articles: orphan, digest: [], status: [], meta, stats })
     assert.equal((out.match(/<article class="card/g) || []).length, 2)
     assert.doesNotMatch(out, /data-cat="undefined"/)
     assert.doesNotMatch(out, /data-cat="存在しないID"/)
   })
 
   check('記事0件でも壊れない', () => {
-    const out = renderIndex({ articles: [], digest: [], status: [], meta })
+    const out = renderIndex({ articles: [], digest: [], status: [], meta, stats })
     assert.ok(out.includes('該当する記事はありませんでした'))
   })
 })

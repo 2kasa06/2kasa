@@ -13,6 +13,7 @@ import { site, sources } from './config.mjs'
 import { collectArticles, enrichArticles } from './lib/collect.mjs'
 import { summarizeArticles, buildDigest } from './lib/summarize.mjs'
 import { readArchive, mergeArchive, writeArchive } from './lib/store.mjs'
+import { buildStats } from './lib/stats.mjs'
 import { renderIndex, renderDay, renderArchiveIndex, dayKey } from './lib/render.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -84,6 +85,14 @@ async function main() {
   const digest = recent.length > 0 ? await buildDigest(recent) : []
   if (digest.length > 0) log(`  本日の要点: ${digest.length}点`)
 
+  const stats = buildStats({
+    recent,
+    archived: merged,
+    status,
+    freshCount: fresh.length,
+    now,
+  })
+
   const meta = {
     updatedAt: now.toISOString(),
     engine,
@@ -107,7 +116,7 @@ async function main() {
   await fs.mkdir(path.join(DOCS, 'archive'), { recursive: true })
   await fs.writeFile(
     path.join(DOCS, 'index.html'),
-    renderIndex({ articles: recent, digest, status, meta }),
+    renderIndex({ articles: recent, digest, status, meta, stats }),
     'utf8',
   )
 
@@ -121,13 +130,17 @@ async function main() {
   for (const [day, items] of days) {
     await fs.writeFile(
       path.join(DOCS, 'archive', `${day}.html`),
-      renderDay({ day, articles: items, meta }),
+      renderDay({ day, articles: items, meta, stats }),
       'utf8',
     )
   }
   await fs.writeFile(
     path.join(DOCS, 'archive.html'),
-    renderArchiveIndex({ days: days.map(([day, items]) => ({ day, count: items.length })) }),
+    renderArchiveIndex({
+      days: days.map(([day, items]) => ({ day, count: items.length })),
+      meta,
+      stats,
+    }),
     'utf8',
   )
   // Pages が _ 始まりのパスを Jekyll 扱いしないようにする
