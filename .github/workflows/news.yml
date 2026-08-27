@@ -1,0 +1,96 @@
+name: 防衛施設ウォッチ 更新
+
+on:
+  schedule:
+    # cron は UTC。日本時間の 07:00 / 12:00 / 19:00 に走らせる。
+    - cron: '0 22 * * *'   # JST 07:00（前日UTC）
+    - cron: '0 3 * * *'    # JST 12:00
+    - cron: '0 10 * * *'   # JST 19:00
+  workflow_dispatch:
+
+# 実行が重なるとアーカイブの書き戻しが衝突するので、1本ずつ流す。
+concurrency:
+  group: news-update
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # 外部ネットワークを使わない自己テスト。壊れた状態で本番を走らせない。
+      - name: 自己テスト
+        run: npm run news:test
+
+      - name: 収集・要約・サイト生成
+        id: build
+        # 情報源が全滅しても、生成済みのページは残したいので後段へ進める。
+        # 失敗は最後のステップで拾って赤くする。
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: npm run news:build
+
+      - name: 結果をコミット
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # 生成が途中で落ちた場合でも git add がエラーにならないようにする
+          mkdir -p docs data
+          git add docs data
+          if git diff --staged --quiet; then
+            echo "更新なし"
+            exit 0
+          fi
+          git commit -m "ニュース更新: $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M')"
+          # 押せるまで数回試す。他の実行と重なった場合は取り込み直してから再送する。
+          for attempt in 1 2 3 4; do
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              exit 0
+            fi
+            echo "push に失敗（${attempt}回目）。取り込み直して再試行します。"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            sleep $((2 ** attempt))
+          done
+          echo "::error::結果をブランチに push できませんでした。"
+          exit 1
+
+      - name: GitHub Pages 用に docs/ を渡す
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: 情報源が全滅していたら失敗にする
+        if: steps.build.outcome == 'failure'
+        run: |
+          echo "::error::どの情報源からも記事を取得できませんでした。実行サマリの一覧を確認してください。"
+          exit 1
+
+  # Pages の公開元を「GitHub Actions」に設定しているときだけ意味を持つジョブ。
+  # 「ブランチの /docs」で公開する設定なら、上の update ジョブのコミットだけで足りる。
+  deploy:
+    needs: update
+    if: always() && needs.update.result != 'cancelled'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # Pages の公開元が「GitHub Actions」でない場合はここが失敗する。
+      # サイト自体はブランチにコミット済みなので、その失敗で全体を赤くしない。
+      - id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
