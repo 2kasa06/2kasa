@@ -52,6 +52,32 @@ export function mergeArchive(existing, incoming, { now = new Date() } = {}) {
   return { merged, fresh }
 }
 
+/**
+ * 本文が取れていない蓄積済みの記事から、取り直す対象を選ぶ。
+ *
+ * 元URLの解決は失敗することがある（Google 側の一時的な事情、遷移の遅さなど）。
+ * 新着のときに一度失敗しただけで永久に見出しのみになるのは惜しいので、
+ * 表示期間内の記事は回数を区切って取り直す。
+ *
+ * 区切らないと、恒久的に解決できない記事を毎回叩き続けることになる。
+ */
+export function selectRetryTargets(articles, { skipKeys, limit, maxAttempts = 3, now = new Date() } = {}) {
+  if (!limit || limit <= 0) return []
+  const cutoff = now.getTime() - site.windowDays * 24 * 60 * 60 * 1000
+
+  return articles
+    .filter(
+      (article) =>
+        !skipKeys?.has(article.key) &&
+        !article.hasBody &&
+        (article.enrichAttempts ?? 0) < maxAttempts &&
+        new Date(article.publishedAt).getTime() >= cutoff,
+    )
+    // 試行回数が少ないものから。全部が上限に達するまで均等に機会を回す。
+    .sort((a, b) => (a.enrichAttempts ?? 0) - (b.enrichAttempts ?? 0))
+    .slice(0, limit)
+}
+
 export async function writeArchive(root, articles, meta) {
   const target = path.join(root, ARCHIVE_PATH)
   await fs.mkdir(path.dirname(target), { recursive: true })

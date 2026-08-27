@@ -16,7 +16,7 @@ import {
 } from './lib/collect.mjs'
 import { summarizeArticles } from './lib/summarize.mjs'
 import { renderIndex, renderDay, renderArchiveIndex, dayKey } from './lib/render.mjs'
-import { mergeArchive } from './lib/store.mjs'
+import { mergeArchive, selectRetryTargets } from './lib/store.mjs'
 import { buildStats } from './lib/stats.mjs'
 import { parseFeed, stripHtml } from './lib/feed.mjs'
 import { detectRegion, assignRegions } from './lib/region.mjs'
@@ -362,6 +362,41 @@ await withServer(async (port) => {
       assert.ok(x >= region.box.x && x <= region.box.x + region.box.w, `${region.label} のピンX`)
       assert.ok(y >= region.box.y && y <= region.box.y + region.box.h, `${region.label} のピンY`)
     }
+  })
+
+  console.log('\n本文の取り直し')
+  await check('本文が無い蓄積記事だけを、回数を区切って取り直す', () => {
+    const now = new Date()
+    const ago = (days) => new Date(now.getTime() - days * 864e5).toISOString()
+    const pool = [
+      { key: 'nobody', hasBody: false, enrichAttempts: 0, publishedAt: ago(1) },
+      { key: 'hasbody', hasBody: true, enrichAttempts: 0, publishedAt: ago(1) },
+      { key: 'exhausted', hasBody: false, enrichAttempts: 3, publishedAt: ago(1) },
+      { key: 'old', hasBody: false, enrichAttempts: 0, publishedAt: ago(60) },
+      { key: 'isfresh', hasBody: false, enrichAttempts: 0, publishedAt: ago(1) },
+    ]
+    const picked = selectRetryTargets(pool, {
+      skipKeys: new Set(['isfresh']),
+      limit: 10,
+      now,
+    }).map((a) => a.key)
+    assert.deepEqual(picked, ['nobody'])
+  })
+  await check('試行回数の少ない記事から順に枠を使う', () => {
+    const now = new Date()
+    const ago = (days) => new Date(now.getTime() - days * 864e5).toISOString()
+    const pool = [
+      { key: 'twice', hasBody: false, enrichAttempts: 2, publishedAt: ago(1) },
+      { key: 'never', hasBody: false, enrichAttempts: 0, publishedAt: ago(1) },
+    ]
+    assert.deepEqual(
+      selectRetryTargets(pool, { skipKeys: new Set(), limit: 1, now }).map((a) => a.key),
+      ['never'],
+    )
+  })
+  await check('枠が無ければ取り直さない', () => {
+    const pool = [{ key: 'x', hasBody: false, enrichAttempts: 0, publishedAt: new Date().toISOString() }]
+    assert.deepEqual(selectRetryTargets(pool, { skipKeys: new Set(), limit: 0 }), [])
   })
 
   console.log('\nHTML生成')

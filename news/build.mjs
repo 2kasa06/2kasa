@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url'
 import { site, sources } from './config.mjs'
 import { collectArticles, enrichArticles } from './lib/collect.mjs'
 import { summarizeArticles, buildDigest } from './lib/summarize.mjs'
-import { readArchive, mergeArchive, writeArchive } from './lib/store.mjs'
+import { readArchive, mergeArchive, writeArchive, selectRetryTargets } from './lib/store.mjs'
 import { buildStats } from './lib/stats.mjs'
 import { assignRegions } from './lib/region.mjs'
 import { createResolver } from './lib/resolve.mjs'
@@ -64,32 +64,47 @@ async function main() {
     log(`  ${overflow.length}件は上限超過のため本文取得を省略し、簡易要約で登録します`)
   }
 
-  if (primary.length > 0) {
+  // 前回までに本文が取れなかった記事も、回数を区切って取り直す。
+  // 新着が無い回でも、見出しのみの記事を救い上げられる。
+  const retry = selectRetryTargets(merged, {
+    skipKeys: new Set(fresh.map((a) => a.key)),
+    limit: site.maxArticlesPerRun - primary.length,
+    now,
+  })
+  if (retry.length > 0) log(`  本文が無い蓄積記事の取り直し: ${retry.length}件`)
+
+  const toEnrich = [...primary, ...retry]
+  let rescued = []
+
+  if (toEnrich.length > 0) {
     // Google ニュースのリンクは JavaScript でしか飛ばないので、
     // 元記事に辿るにはブラウザが要る。詳しくは news/lib/resolve.mjs のコメント。
     const resolver = await createResolver()
-    log(`  ${primary.length}件の本文を取得中…（元URLの解決: ${resolver.available ? '有効' : '無効'}）`)
+    log(`  ${toEnrich.length}件の本文を取得中…（元URLの解決: ${resolver.available ? '有効' : '無効'}）`)
     if (!resolver.available) log(`    ! ${resolver.reason}`)
 
-    const googleLinks = primary.filter((a) => a.isGoogleLink).length
+    for (const article of toEnrich) article.enrichAttempts = (article.enrichAttempts ?? 0) + 1
+    const googleLinks = toEnrich.filter((a) => a.isGoogleLink).length
+
     try {
-      await enrichArticles(primary, { resolver })
+      await enrichArticles(toEnrich, { resolver })
     } finally {
       await resolver.close()
     }
+
     if (googleLinks > 0) {
-      const resolved = googleLinks - primary.filter((a) => a.isGoogleLink).length
+      const resolved = googleLinks - toEnrich.filter((a) => a.isGoogleLink).length
       log(`    元URLを解決: ${resolved}/${googleLinks}件`)
     }
+    log(`    本文が取れた記事: ${toEnrich.filter((a) => a.hasBody).length}/${toEnrich.length}`)
 
-    const withBody = primary.filter((a) => a.hasBody).length
-    const stillRedirect = primary.filter((a) => a.isGoogleLink).length
-    log(`    本文が取れた記事: ${withBody}/${primary.length}`)
-    if (stillRedirect > 0) log(`    元URLに辿れなかった記事: ${stillRedirect}件（見出しのみ）`)
+    // 取り直しで本文が取れた記事は、見出しだけで作った要約を作り直す
+    rescued = retry.filter((a) => a.hasBody)
+    if (rescued.length > 0) log(`    取り直しで本文が取れ、要約を作り直す記事: ${rescued.length}件`)
   }
 
   // 5. 要約
-  const toSummarize = [...primary, ...overflow]
+  const toSummarize = [...primary, ...overflow, ...rescued]
   let engine = 'none'
   if (toSummarize.length > 0) {
     log(`  ${toSummarize.length}件を要約中…`)
