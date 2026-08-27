@@ -1,0 +1,659 @@
+{
+  "updatedAt": "2026-08-27T08:36:58.979Z",
+  "meta": {
+    "updatedAt": "2026-08-27T08:36:58.979Z",
+    "engine": "extractive",
+    "sourcesOk": 14,
+    "sourcesTotal": 22,
+    "totalArticles": 18,
+    "recentArticles": 18,
+    "freshArticles": 18,
+    "status": [
+      {
+        "id": "mod",
+        "name": "防衛省・自衛隊 報道発表",
+        "ok": true,
+        "picked": 0,
+        "note": "https://www.mod.go.jp/j/rss/news.xml"
+      },
+      {
+        "id": "j-defense",
+        "name": "Jディフェンスニュース",
+        "ok": false,
+        "picked": 0,
+        "note": "https://j-defense.ikaros.jp/index.rdf → HTTP 404 / https://j-defense.ikaros.jp/feed → HTTP 404 / https://j-defense.ikaros.jp/rss.xml → HTTP 404"
+      },
+      {
+        "id": "kensetsunews",
+        "name": "建設通信新聞",
+        "ok": true,
+        "picked": 0,
+        "note": "https://www.kensetsunews.com/feed"
+      },
+      {
+        "id": "decn",
+        "name": "日刊建設工業新聞",
+        "ok": true,
+        "picked": 0,
+        "note": "https://www.decn.co.jp/feed"
+      },
+      {
+        "id": "kensetsu-plaza",
+        "name": "けんせつPlaza",
+        "ok": false,
+        "picked": 0,
+        "note": "https://www.kensetsu-plaza.com/kiji/feed → HTTP 404 / https://www.kensetsu-plaza.com/feed → HTTP 404"
+      },
+      {
+        "id": "okinawatimes",
+        "name": "沖縄タイムス",
+        "ok": false,
+        "picked": 0,
+        "note": "https://www.okinawatimes.co.jp/feed → HTTP 404 / https://www.okinawatimes.co.jp/rss/news.xml → HTTP 404"
+      },
+      {
+        "id": "ryukyushimpo",
+        "name": "琉球新報",
+        "ok": false,
+        "picked": 0,
+        "note": "https://ryukyushimpo.jp/feed/ → フィードとして読めない応答 / https://ryukyushimpo.jp/rss/ → フィードとして読めない応答"
+      },
+      {
+        "id": "373news",
+        "name": "南日本新聞",
+        "ok": false,
+        "picked": 0,
+        "note": "https://373news.com/feed/ → HTTP 404 / https://373news.com/_rss/news.xml → HTTP 404"
+      },
+      {
+        "id": "nhk-main",
+        "name": "NHK 主要ニュース",
+        "ok": true,
+        "picked": 1,
+        "note": "https://www.nhk.or.jp/rss/news/cat0.xml"
+      },
+      {
+        "id": "nhk-politics",
+        "name": "NHK 政治",
+        "ok": true,
+        "picked": 1,
+        "note": "https://www.nhk.or.jp/rss/news/cat4.xml"
+      },
+      {
+        "id": "gnews:馬毛島 基地建設",
+        "name": "Google ニュース「馬毛島 基地建設」",
+        "ok": true,
+        "picked": 6,
+        "note": "https://news.google.com/rss/search?q=%E9%A6%AC%E6%AF%9B%E5%B3%B6%20%E5%9F%BA%E5%9C%B0%E5%BB%BA%E8%A8%AD%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
+      },
+      {
+        "id": "gnews:辺野古 埋立 地盤改良",
+        "name": "Google ニュース「辺野古 埋立 地盤改良」",
+        "ok": true,
+        "picked": 1,
+        "note": "https://news.google.com/rss/search?q=%E8%BE%BA%E9%87%8E%E5%8F%A4%20%E5%9F%8B%E7%AB%8B%20%E5%9C%B0%E7%9B%A4%E6%94%B9%E8%89%AF%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
+      },
+      {
+        "id": "gnews:自衛隊 駐屯地 新設 整備",
+        "name": "Google ニュース「自衛隊 駐屯地 新設 整備」",
+        "ok": true,
+        "picked": 0,
+        "note": "https://news.google.com/rss/search?q=%E8%87%AA%E8%A1%9B%E9%9A%8A%20%E9%A7%90%E5%B1%AF%E5%9C%B0%20%E6%96%B0%E8%A8%AD%20%E6%95%B4%E5%82%99%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
+      },
+      {
+        "id": "gnews:防衛省 施設整備 強靱化",
+        "name": "Google ニュース「防衛省 施設整備 強靱化」",
+        "ok": true,
+        "picked": 0,
+        "note": "https://news.google.com/rss/search?q=%E9%98%B2%E8%A1%9B%E7%9C%81%20%E6%96%BD%E8%A8%AD%E6%95%B4%E5%82%99%20%E5%BC%B7%E9%9D%B1%E5%8C%96%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
+      },
+      {
+        "id": "gnews:防衛省 火薬庫 弾薬庫 整備",
+        "name": "Google ニュース「防衛省 火薬庫 弾薬庫 整備」",
+        "ok": true,
+        "picked": 0,
+        "note": "https://news.google.com/rss/search?q=%E9%98%B2%E8%A1%9B%E7%9C%81%20%E7%81%AB%E8%96%AC%E5%BA%AB%20%E5%BC%BE%E8%96%AC%E5%BA%AB%20%E6%95%B4%E5%82%99%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
+      },
+      {
+        "id": "gnews:防衛局 工事 入札 落札",
+        "name": "Google ニュース「防衛局 工事 入札 落札」",
+        "ok": false,
+        "picked": 0,
+        "note": "https://news.google.com/rss/search?q=%E9%98%B2%E8%A1%9B%E5%B1%80%20%E5%B7%A5%E4%BA%8B%20%E5%85%A5%E6%9C%AD%20%E8%90%BD%E6%9C%AD%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja → 項目が0件"
+      },
+      {
+        "id": "gnews:自衛隊 施設 建設工事 受注",
+        "name": "Google ニュース「自衛隊 施設 建設工事 受注」",
+        "ok": false,
+        "picked": 0,
+        "note": "https://news.google.com/rss/search?q=%E8%87%AA%E8%A1%9B%E9%9A%8A%20%E6%96%BD%E8%A8%AD%20%E5%BB%BA%E8%A8%AD%E5%B7%A5%E4%BA%8B%20%E5%8F%97%E6%B3%A8%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja → 項目が0件"
+      },
+      {
+        "id": "gnews:南西諸島 石垣 宮古島 与那国 自衛隊 施設",
+        "name": "Google ニュース「南西諸島 石垣 宮古島 与那国 自衛隊 施設」",
+        "ok": true,
+        "picked": 0,
+        "note": "https://news.google.com/rss/search?q=%E5%8D%97%E8%A5%BF%E8%AB%B8%E5%B3%B6%20%E7%9F%B3%E5%9E%A3%20%E5%AE%AE%E5%8F%A4%E5%B3%B6%20%E4%B8%8E%E9%82%A3%E5%9B%BD%20%E8%87%AA%E8%A1%9B%E9%9A%8A%20%E6%96%BD%E8%A8%AD%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
+      },
+      {
+        "id": "gnews:司令部 地下化 自衛隊",
+        "name": "Google ニュース「司令部 地下化 自衛隊」",
+        "ok": false,
+        "picked": 0,
+        "note": "https://news.google.com/rss/search?q=%E5%8F%B8%E4%BB%A4%E9%83%A8%20%E5%9C%B0%E4%B8%8B%E5%8C%96%20%E8%87%AA%E8%A1%9B%E9%9A%8A%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja → 項目が0件"
+      },
+      {
+        "id": "gnews:特定利用空港 特定利用港湾 整備",
+        "name": "Google ニュース「特定利用空港 特定利用港湾 整備」",
+        "ok": true,
+        "picked": 1,
+        "note": "https://news.google.com/rss/search?q=%E7%89%B9%E5%AE%9A%E5%88%A9%E7%94%A8%E7%A9%BA%E6%B8%AF%20%E7%89%B9%E5%AE%9A%E5%88%A9%E7%94%A8%E6%B8%AF%E6%B9%BE%20%E6%95%B4%E5%82%99%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
+      },
+      {
+        "id": "gnews:防衛予算 施設 概算要求",
+        "name": "Google ニュース「防衛予算 施設 概算要求」",
+        "ok": true,
+        "picked": 7,
+        "note": "https://news.google.com/rss/search?q=%E9%98%B2%E8%A1%9B%E4%BA%88%E7%AE%97%20%E6%96%BD%E8%A8%AD%20%E6%A6%82%E7%AE%97%E8%A6%81%E6%B1%82%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
+      },
+      {
+        "id": "gnews:米軍再編 施設 返還 工事",
+        "name": "Google ニュース「米軍再編 施設 返還 工事」",
+        "ok": true,
+        "picked": 1,
+        "note": "https://news.google.com/rss/search?q=%E7%B1%B3%E8%BB%8D%E5%86%8D%E7%B7%A8%20%E6%96%BD%E8%A8%AD%20%E8%BF%94%E9%82%84%20%E5%B7%A5%E4%BA%8B%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
+      }
+    ]
+  },
+  "articles": [
+    {
+      "key": "沖縄県知事選6人が立候補基地負担や経済振興で論戦へ",
+      "title": "沖縄県知事選6人が立候補 基地負担や経済振興で論戦へ",
+      "link": "https://news.web.nhk/newsweb/na/nd-20260827de46747",
+      "isGoogleLink": false,
+      "description": "沖縄県知事選挙が、27日告示され、3期目を目指す現職と、新人5人のあわせて6人が立候補しました。沖縄の基地負担軽減や経済の振興などを争点に論戦が交わされる見通しで、国の安全保障政策などへの影響も予想さ…",
+      "publishedAt": "2026-08-27T08:26:04.000Z",
+      "publisher": "NHK 主要ニュース",
+      "via": [
+        "NHK 主要ニュース",
+        "NHK 政治"
+      ],
+      "sourceHint": "総合",
+      "sourceHost": "",
+      "relevance": 3,
+      "pickups": 2,
+      "body": "沖縄県知事選挙が、27日告示され、3期目を目指す現職と、新人5人のあわせて6人が立候補しました。沖縄の基地負担軽減や経済の振興などを争点に論戦が交わされる見通しで、国の安全保障政策などへの影響も予想さ…\n石川 富山の大雨特別警報を切り替え 土砂災害などに厳重警戒を\n【動画】大雨 石川県・富山県・福井県 各地の状況は\n【気象予報士解説】大雨特別警報 石川県・富山県(15:00)\nネパール・中国の国境地帯で土石流“日本人5人と連絡取れず”\n芸術家 草間彌生さん死去 97歳 水玉モチーフの作品で知られる\n中部電力 浜岡原発廃炉めぐり報告書を不正に改ざん\n米メタ SNS依存大型訴訟 約180億ドル支払いで和解 対策義務化\n息子はなぜ… 母親が問い続ける“事故の真相”\n息子はなぜ… 母親が問い続ける“事故の真相”\n国民民主党はどこへ向かう？ 党代表選挙 9月6日投開票\nAI時代に必要なのは？未来を読む叡智 オードリー・タンの言葉\nNFLに恋した素人キッカー からっぽだった僕の8年の歩み\n前例のない原発の地震データめぐる不正 見えてきた深層\n“AIインフラを止めろ” トランプ支持層に広がる反発\n変革期の甲子園 選手が“いい顔”を続けられるように\nオーバードーズ それでも、なぜ 依存・死亡のリスクも",
+      "hasBody": true,
+      "category": "seisaku",
+      "summary": [
+        "沖縄県知事選挙が、27日告示され、3期目を目指す現職と、新人5人のあわせて6人が立候補しました。",
+        "【気象予報士解説】大雨特別警報 石川県・富山県(15:00)",
+        "沖縄の基地負担軽減や経済の振興などを争点に論戦が交わされる見通しで、国の安全保障政策などへの影響も予想さ…"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "normal",
+      "generatedBy": "extractive",
+      "region": "chubu"
+    },
+    {
+      "key": "普天間基地固定化へ300億円超も/補修事業が拡大デニー知事勝利で止めるしんぶん赤旗jcp.or.jp",
+      "title": "普天間基地 固定化へ３００億円超も/「補修事業」が拡大 デニー知事勝利で止める | しんぶん赤旗 - jcp.or.jp",
+      "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE11TU9MRjlJd1p5endsOEtuTVQtOV9pa0llQzZ2TkN1TTZtZ1Z5VFBFYnFZaVBDWmNteXk1SllCTGZZMDBDbFVvNnAteG9vVU9MbHlzWjAtb1VzaUdsdXRHcmVGTEFEcFRaRG90THA4cC1xNDB2?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-27T01:01:38.000Z",
+      "publisher": "jcp.or.jp",
+      "via": [
+        "Google ニュース「米軍再編 施設 返還 工事」"
+      ],
+      "sourceHint": "在日米軍",
+      "sourceHost": "jcp.or.jp",
+      "relevance": 3,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "usfj",
+      "summary": [
+        "普天間基地 固定化へ３００億円超も/「補修事業」が拡大 デニー知事勝利で止める | しんぶん赤旗 - jcp.or.jp",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "normal",
+      "generatedBy": "extractive",
+      "region": "okinawa"
+    },
+    {
+      "key": "沖縄県知事選挙きょう告示基地負担や経済など論戦へ",
+      "title": "沖縄県知事選挙きょう告示 基地負担や経済など論戦へ",
+      "link": "https://news.web.nhk/newsweb/na/nd-20260826de46552",
+      "isGoogleLink": false,
+      "description": "沖縄県知事選挙が27日告示され、3期目を目指す現職に複数の新人が挑む構図で、沖縄の基地負担軽減や経済の振興などを争点に論戦が交わされる見通しです。国の安全保障政策などへの影響も予想されることから、与野…",
+      "publishedAt": "2026-08-26T20:33:54.000Z",
+      "publisher": "NHK 政治",
+      "via": [
+        "NHK 政治"
+      ],
+      "sourceHint": "総合",
+      "sourceHost": "",
+      "relevance": 3,
+      "pickups": 1,
+      "body": "沖縄県知事選挙が27日告示され、3期目を目指す現職に複数の新人が挑む構図で、沖縄の基地負担軽減や経済の振興などを争点に論戦が交わされる見通しです。国の安全保障政策などへの影響も予想されることから、与野…\n中部電力 浜岡原発の廃炉作業めぐり新たな不適切事案判明\n福岡県で40度以上の「酷暑日」に 広い範囲で大気不安定\nネパール・中国の国境地帯で土石流 両国で98人死亡740人余不明\nトランプ政権から制裁のICC赤根所長“日本政府の役割に期待”\n自民 税調 消費税減税で議論 政府“農家 漁業者に給付金検討”\n赤字続く郵便事業 持続可能なサービスのあり方検討【Q＆Aも】\n高市首相“防災庁設置踏まえ災害対応強化”熊本地震の提言受け\n相模原 男子高校生は頭部に強い衝撃で死亡か\n高市首相“ホルムズ海峡は自由で安全な航行確保が重要”\n高級時計窃盗事件 事件の40分前 JR中野駅前に2人組の姿\n息子はなぜ… 母親が問い続ける“事故の真相”\n国民民主党はどこへ向かう？ 党代表選挙 9月6日投開票\nAI時代に必要なのは？未来を読む叡智 オードリー・タンの言葉\nNFLに恋した素人キッカー からっぽだった僕の8年の歩み\n前例のない原発の地震データめぐる不正 見えてきた深層\n“AIインフラを止めろ” トランプ支持層に広がる反発\n変革期の甲子園 選手が“いい顔”を続けられるように\nオーバードーズ それでも、なぜ 依存・死亡のリスクも",
+      "hasBody": true,
+      "category": "seisaku",
+      "summary": [
+        "沖縄県知事選挙が27日告示され、3期目を目指す現職に複数の新人が挑む構図で、沖縄の基地負担軽減や経済の振興などを争点に論戦が交わされる見通しです。",
+        "ネパール・中国の国境地帯で土石流 両国で98人死亡740人余不明",
+        "高級時計窃盗事件 事件の40分前 JR中野駅前に2人組の姿"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "normal",
+      "generatedBy": "extractive",
+      "region": "kyushu"
+    },
+    {
+      "key": "東奔西走>馬毛島の基地建設やめよ/たいら県議が政府交渉しんぶん赤旗jcp.or.jp",
+      "title": "東奔西走＞馬毛島の基地建設やめよ/たいら県議が政府交渉 | しんぶん赤旗 - jcp.or.jp",
+      "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1hSnpsOU1BZUFVbzJ0M1pwUmFYNkxWVG5hT3dZclo2T0V4UzhDcUJLWmxzTkhpUXRQVVJJZllzemVlRE5ZeG5KREVOM3MzZ3ZTWkVzcXQ0MnMtT1hrZDRNUTNDNzdWYlBjekZsZTN4Skg2aGdmdXRuVQ?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-26T06:24:20.000Z",
+      "publisher": "jcp.or.jp",
+      "via": [
+        "Google ニュース「馬毛島 基地建設」"
+      ],
+      "sourceHint": "南西諸島",
+      "sourceHost": "jcp.or.jp",
+      "relevance": 7,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "nansei",
+      "summary": [
+        "東奔西走＞馬毛島の基地建設やめよ/たいら県議が政府交渉 | しんぶん赤旗 - jcp.or.jp",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "high",
+      "generatedBy": "extractive",
+      "region": "kyushu"
+    },
+    {
+      "key": "恒例種子島鉄砲まつり担い手不足で基地建設従事者も参加nhkニュース",
+      "title": "恒例「種子島鉄砲まつり」 担い手不足で基地建設従事者も参加 - NHKニュース",
+      "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBXcDdBb25HaUdQQUttUTA0U1Y5QWVHSkZXN25rQm9LYUMzcTk0bHJfMldMdFVwbWZVdU9rSFZKdzFxNmtBSWhLa1Z0V0ZwdzZJbS1YeTV0emQ?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-24T09:31:00.000Z",
+      "publisher": "NHKニュース",
+      "via": [
+        "Google ニュース「馬毛島 基地建設」"
+      ],
+      "sourceHint": "南西諸島",
+      "sourceHost": "news.web.nhk",
+      "relevance": 4,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "kyoujinka",
+      "summary": [
+        "恒例「種子島鉄砲まつり」 担い手不足で基地建設従事者も参加 - NHKニュース",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "normal",
+      "generatedBy": "extractive",
+      "region": "kyushu"
+    },
+    {
+      "key": "退職隊員庁110人規模防衛省外局新設を要求山陰中央新報デジタル",
+      "title": "退職隊員庁１１０人規模 防衛省、外局新設を要求 - 山陰中央新報デジタル",
+      "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE0xSW5MLVpKX042X1B2NlNSZ283RE9Ma3FSOHBhUkhtam13RlY3MXBoY0YyUUg2OGF2YzR3UHUyX2NsajJGVWJFeFZRMzRLaFVlckV4eE80SVFVa0E?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-23T19:00:00.000Z",
+      "publisher": "山陰中央新報デジタル",
+      "via": [
+        "Google ニュース「防衛予算 施設 概算要求」"
+      ],
+      "sourceHint": "予算",
+      "sourceHost": "sanin-chuo.co.jp",
+      "relevance": 3,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "kyoujinka",
+      "summary": [
+        "退職隊員庁１１０人規模 防衛省、外局新設を要求 - 山陰中央新報デジタル",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "normal",
+      "generatedBy": "extractive",
+      "region": "chugoku"
+    },
+    {
+      "key": "宿は常に満室木造アパート8万円...馬毛島の自衛隊基地工事に沸く種子島ホテル不動産バブルが起きていた47news",
+      "title": "宿は常に満室、木造アパート8万円…馬毛島の自衛隊基地工事に沸く種子島、ホテル・不動産バブルが起きていた - 47NEWS",
+      "link": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE1KUHVFMUdha2l1THZja3lyamlTVF9Lb056T3pkVjVNQUs3bkl0dHFRYm9kMkVyem9HZlZVUlRySWxSMFA1eWNHcGtR?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-23T07:00:00.000Z",
+      "publisher": "47NEWS",
+      "via": [
+        "Google ニュース「馬毛島 基地建設」"
+      ],
+      "sourceHint": "南西諸島",
+      "sourceHost": "47news.jp",
+      "relevance": 6,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "nansei",
+      "summary": [
+        "宿は常に満室、木造アパート8万円…馬毛島の自衛隊基地工事に沸く種子島、ホテル・不動産バブルが起きていた - 47NEWS",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "high",
+      "generatedBy": "extractive",
+      "region": "kyushu"
+    },
+    {
+      "key": "退職隊員庁110人規模に防衛省外局新設を要求47news",
+      "title": "退職隊員庁、110人規模に 防衛省、外局新設を要求 - 47NEWS",
+      "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5kS2V0blNyTDcxU3VCVXcxakctVEVTTlk4aW5GQVdnTnBQUS1JbnhRUXJVSm9maGNIeVJnRFZqR000Mk0zUU1LV0Uzbw?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-23T06:19:00.000Z",
+      "publisher": "47NEWS",
+      "via": [
+        "Google ニュース「防衛予算 施設 概算要求」"
+      ],
+      "sourceHint": "予算",
+      "sourceHost": "47news.jp",
+      "relevance": 3,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "kyoujinka",
+      "summary": [
+        "退職隊員庁、110人規模に 防衛省、外局新設を要求 - 47NEWS",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "normal",
+      "generatedBy": "extractive",
+      "region": null
+    },
+    {
+      "key": "退職隊員庁110人規模に防衛省外局新設を要求exciteエキサイト",
+      "title": "退職隊員庁、110人規模に 防衛省、外局新設を要求 - Excite エキサイト",
+      "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE4zcDVDQUlLbjJBRkdoWF9tVzloUTNweFNJTmV4QnhITUt4UVgzOVlhVG9sVnNqT3Q1MElEYzkzeGRtNFJLZU1VcF9qUzI1VXJZTEE5ZVJmNlJPcUpwcWlaOW5CUkxqRzM2WE9NNENxYm4?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-23T06:08:00.000Z",
+      "publisher": "Excite エキサイト",
+      "via": [
+        "Google ニュース「防衛予算 施設 概算要求」"
+      ],
+      "sourceHint": "予算",
+      "sourceHost": "excite.co.jp",
+      "relevance": 3,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "kyoujinka",
+      "summary": [
+        "退職隊員庁、110人規模に 防衛省、外局新設を要求 - Excite エキサイト",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "normal",
+      "generatedBy": "extractive",
+      "region": null
+    },
+    {
+      "key": "退職隊員庁110人規模に防衛省外局新設を要求西日本新聞me",
+      "title": "退職隊員庁、110人規模に 防衛省、外局新設を要求 - 西日本新聞me",
+      "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5ubFBjTTNqVGN6aFRkRjNYa3BmWVNPenhmTnBTWjg5bjJZSVdXYlhlc3Fwb1NVYlRZdnlGaHo0bHo5LWNONXFUYms3dmI3Tk1yM21VV0hB?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-23T06:07:43.000Z",
+      "publisher": "西日本新聞me",
+      "via": [
+        "Google ニュース「防衛予算 施設 概算要求」"
+      ],
+      "sourceHint": "予算",
+      "sourceHost": "nishinippon.co.jp",
+      "relevance": 3,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "kyoujinka",
+      "summary": [
+        "退職隊員庁、110人規模に 防衛省、外局新設を要求 - 西日本新聞me",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "normal",
+      "generatedBy": "extractive",
+      "region": null
+    },
+    {
+      "key": "防衛省ai指揮統制へ政府クラウド導入27年度概算要求日本経済新聞",
+      "title": "防衛省、AI指揮統制へ政府クラウド導入 27年度概算要求 - 日本経済新聞",
+      "link": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5WeTFDRDRobWFWalktZTlfenhHQkwxeUFPNG4yT3A2UlBCS19MSlpHWlpIRHVwSWFUZF9KY3pmR0NfWVJfb1EycERFdENiSTYxZWx5Y0NJMXBSX1FlOXFpdWJmYTA2VEFnYlEzMw?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-21T13:00:00.000Z",
+      "publisher": "日本経済新聞",
+      "via": [
+        "Google ニュース「防衛予算 施設 概算要求」"
+      ],
+      "sourceHint": "予算",
+      "sourceHost": "nikkei.com",
+      "relevance": 3,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "seisaku",
+      "summary": [
+        "防衛省、AI指揮統制へ政府クラウド導入 27年度概算要求 - 日本経済新聞",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "normal",
+      "generatedBy": "extractive",
+      "region": null
+    },
+    {
+      "key": "判明馬毛島整備に絡む自衛隊宿舎建設予定地市がゴミ処理費負担西之表市が防衛省と覚書yahoo!ニュース",
+      "title": "【判明】馬毛島整備に絡む自衛隊宿舎建設予定地 「市がゴミ処理費負担」西之表市が防衛省と覚書 - Yahoo!ニュース",
+      "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1vaGFhcjJzSExKV3J5T1VEbWVvOWRacGg5ek9NUnlpc2dGRXRxNnFnOExwalpWazgzNnFJeGtST014aFY1ZXhydmVEcmF2U1RGSE9NaDl6dDlrS3hOSnJObmtrYmh3eDBvLVdUcFotRlB3UnBOTklkSFY2aWg0WTg?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-21T10:09:01.000Z",
+      "publisher": "Yahoo!ニュース",
+      "via": [
+        "Google ニュース「馬毛島 基地建設」"
+      ],
+      "sourceHint": "南西諸島",
+      "sourceHost": "news.yahoo.co.jp",
+      "relevance": 10,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "nansei",
+      "summary": [
+        "【判明】馬毛島整備に絡む自衛隊宿舎建設予定地 「市がゴミ処理費負担」西之表市が防衛省と覚書 - Yahoo!ニュース",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "high",
+      "generatedBy": "extractive",
+      "region": "kyushu"
+    },
+    {
+      "key": "馬毛島自衛隊員の宿舎建設中断問題市が費用負担する覚書締結土地売却の責任とるものではない鹿児島西之表市exciteエキサイト",
+      "title": "馬毛島自衛隊員の宿舎建設中断問題 市が費用負担する覚書締結「土地売却の責任とるものではない」鹿児島・西之表市 - Excite エキサイト",
+      "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5UN0ttZDB5bVMtc2tGQm5XY3JQMmpyUnFneHN2a3JzWVFIQTFPRkFqTlhSb29lUGhKUHhpSFRhcU8xcnl3cXBtNWJBWHBoNkNvc3V3Vkh3eTRPWkxKTTN1aDJlVzlQQU14X0hPY1JlSkJZTWxCNjVGOEFn?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-21T03:19:00.000Z",
+      "publisher": "Excite エキサイト",
+      "via": [
+        "Google ニュース「馬毛島 基地建設」"
+      ],
+      "sourceHint": "南西諸島",
+      "sourceHost": "excite.co.jp",
+      "relevance": 7,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "nansei",
+      "summary": [
+        "馬毛島自衛隊員の宿舎建設中断問題 市が費用負担する覚書締結「土地売却の責任とるものではない」鹿児島・西之表市 - Excite エキサイト",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "high",
+      "generatedBy": "extractive",
+      "region": "kyushu"
+    },
+    {
+      "key": "馬毛島自衛隊員の宿舎建設中断問題市が費用負担する覚書締結土地売却の責任とるものではない鹿児島西之表市tbsnewsdig",
+      "title": "馬毛島自衛隊員の宿舎建設中断問題 市が費用負担する覚書締結「土地売却の責任とるものではない」鹿児島・西之表市 - TBS NEWS DIG",
+      "link": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE8xMUxXWi1sa2FFMENoNDB6c0d5SFJ3RXVTS3hhdmZHN0FMeVBESkw0VjlCQXBiTU5JbE1MSnlwQnJmY0JKT3RTZ3o0elZWdGdNbnlWdG8zaw?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-21T03:03:00.000Z",
+      "publisher": "TBS NEWS DIG",
+      "via": [
+        "Google ニュース「馬毛島 基地建設」"
+      ],
+      "sourceHint": "南西諸島",
+      "sourceHost": "newsdig.tbs.co.jp",
+      "relevance": 7,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "nansei",
+      "summary": [
+        "馬毛島自衛隊員の宿舎建設中断問題 市が費用負担する覚書締結「土地売却の責任とるものではない」鹿児島・西之表市 - TBS NEWS DIG",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "high",
+      "generatedBy": "extractive",
+      "region": "kyushu"
+    },
+    {
+      "key": "防衛事業を再編する企業に国が出資継戦能力確保へ業界効率化や生産体制拡充図る...防衛省読売新聞",
+      "title": "防衛事業を再編する企業に国が出資、「継戦能力」確保へ業界効率化や生産体制拡充図る…防衛省 - 読売新聞",
+      "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBFbzVJdnJtQUt0TjZ4aDktOVM1RW1JT1dHWDVpTjlkeF9ta0lLRGY1UXlDREM3YUE3dWlPc21Nc0t3b0l2QnlWRTE2ZVZJbU4yejRCQk9UdnhKb1RTZC1vQXhEdlQtZw?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-20T20:00:00.000Z",
+      "publisher": "読売新聞",
+      "via": [
+        "Google ニュース「防衛予算 施設 概算要求」"
+      ],
+      "sourceHint": "予算",
+      "sourceHost": "yomiuri.co.jp",
+      "relevance": 3,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "kyoujinka",
+      "summary": [
+        "防衛事業を再編する企業に国が出資、「継戦能力」確保へ業界効率化や生産体制拡充図る…防衛省 - 読売新聞",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "normal",
+      "generatedBy": "extractive",
+      "region": null
+    },
+    {
+      "key": "普天間のヘリパッド訓練を辺野古へ先行移転維新古謝玄太氏との政策協定に明記自民と協議進める沖縄タイムス社",
+      "title": "普天間のヘリパッド訓練を辺野古へ先行移転 維新、古謝玄太氏との政策協定に明記 「自民と協議進める」 - 沖縄タイムス社",
+      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9YR2FGeDIzZ0NzVFlrNHVWRkxHcXRWckczTzJLM3luNEkzY21xZGtyaWw5S2dYV1gtVm9aZXlrdjFPSEszUUpjSkpUU2Y3dVhvTUVYbXZSQ0Fja2MzWGc?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-20T19:58:00.000Z",
+      "publisher": "沖縄タイムス社",
+      "via": [
+        "Google ニュース「辺野古 埋立 地盤改良」"
+      ],
+      "sourceHint": "在日米軍",
+      "sourceHost": "okinawatimes.co.jp",
+      "relevance": 7,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "usfj",
+      "summary": [
+        "普天間のヘリパッド訓練を辺野古へ先行移転 維新、古謝玄太氏との政策協定に明記 「自民と協議進める」 - 沖縄タイムス社",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "high",
+      "generatedBy": "extractive",
+      "region": "okinawa"
+    },
+    {
+      "key": "戦争の危険にさらしたくない市民団体が反対文書提出...政府の特定利用空港港湾指定に対し山形fnnプライムオンライン",
+      "title": "「戦争の危険にさらしたくない」市民団体が反対文書提出…政府の「特定利用空港・港湾」指定に対し 山形 - FNNプライムオンライン",
+      "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE9WdVFkS1k1ZC1VME4zaVBpa3ZqeFNDVGQyR1d4Y1FjNXBJRlg2ZWdlb19hMTBxS3djbU44YmpITkN1X1Fhbmlkb1F5bi1YQQ?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-20T10:11:00.000Z",
+      "publisher": "FNNプライムオンライン",
+      "via": [
+        "Google ニュース「特定利用空港 特定利用港湾 整備」"
+      ],
+      "sourceHint": "インフラ",
+      "sourceHost": "fnn.jp",
+      "relevance": 3,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "chiiki",
+      "summary": [
+        "「戦争の危険にさらしたくない」市民団体が反対文書提出…政府の「特定利用空港・港湾」指定に対し 山形 - FNNプライムオンライン",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "normal",
+      "generatedBy": "extractive",
+      "region": "tohoku"
+    },
+    {
+      "key": "過去最大の約8兆9000億円計上へ防衛省の概算要求新しい戦い方への対応など重要項目にライブドアニュース",
+      "title": "過去最大の約8兆9000億円計上へ 防衛省の概算要求 「新しい戦い方」への対応など重要項目に - ライブドアニュース",
+      "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1va3BsZHFHMUEtRnZQcjBIbUQ2RVd1dDlfeEVvaXg1ZnBCdHROM19pSnZVdEZyTGYxdUNrbzU0YUJpRHRJOTE2R3RZUUFiS2JiRzdZTl8yaHpDVE1fVGJZ?oc=5",
+      "isGoogleLink": true,
+      "description": "",
+      "publishedAt": "2026-08-20T09:34:00.000Z",
+      "publisher": "ライブドアニュース",
+      "via": [
+        "Google ニュース「防衛予算 施設 概算要求」"
+      ],
+      "sourceHint": "予算",
+      "sourceHost": "news.livedoor.com",
+      "relevance": 3,
+      "pickups": 1,
+      "hasBody": false,
+      "category": "seisaku",
+      "summary": [
+        "過去最大の約8兆9000億円計上へ 防衛省の概算要求 「新しい戦い方」への対応など重要項目に - ライブドアニュース",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "normal",
+      "generatedBy": "extractive",
+      "region": null
+    }
+  ]
+}
