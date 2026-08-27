@@ -1,6 +1,18 @@
 name: 防衛施設ウォッチ 更新
 
 on:
+  # このワークフローはまだ既定ブランチに無いので、Actions画面の手動実行ボタンからは
+  # 呼べない（GitHub は既定ブランチにあるワークフローしか dispatch 対象にしない）。
+  # 開発中はこのブランチへの push で走らせる。
+  #
+  # docs/ と data/ を除いているのは、下の「結果をコミット」が押し戻す変更で
+  # 自分自身を再実行させないため。
+  push:
+    branches:
+      - claude/personal-news-site-m7eu0k
+    paths-ignore:
+      - 'docs/**'
+      - 'data/**'
   schedule:
     # cron は UTC。日本時間の 07:00 / 12:00 / 19:00 に走らせる。
     - cron: '0 22 * * *'   # JST 07:00（前日UTC）
