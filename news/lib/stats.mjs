@@ -3,6 +3,7 @@
 
 import { categories, keywords, site } from '../config.mjs'
 import { dayKeyOf } from './daykey.mjs'
+import { regions as mapRegions } from './japan-map.mjs'
 
 /** 直近 days 日分の、日ごとの件数。記事が無い日も 0 として並べる。 */
 function buildDaily(articles, days, now) {
@@ -41,6 +42,40 @@ function buildTags(articles, limit) {
 }
 
 /**
+ * 地方ごとの件数。地図のピンはここから立てる。
+ * region が null の記事は「全国・地域不明」としてまとめる。
+ */
+function buildRegions(articles) {
+  const latestFirst = [...articles].sort(
+    (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt),
+  )
+
+  const list = mapRegions.map((region) => {
+    const items = latestFirst.filter((a) => a.region === region.id)
+    const key = items.filter((a) => a.importance === 'high')
+    return {
+      id: region.id,
+      label: region.label,
+      pin: region.pin,
+      count: items.length,
+      keyCount: key.length,
+      // ピンに添える見出しは、要注目があればそれを優先する
+      headline: (key[0] || items[0])?.title ?? '',
+    }
+  })
+
+  const nationwide = latestFirst.filter((a) => !a.region)
+  return {
+    list,
+    nationwide: {
+      count: nationwide.length,
+      keyCount: nationwide.filter((a) => a.importance === 'high').length,
+      headline: nationwide[0]?.title ?? '',
+    },
+  }
+}
+
+/**
  * @param recent   表示対象（直近 windowDays 日）の記事
  * @param archived 蓄積されている全記事
  * @param status   情報源ごとの取得結果
@@ -68,6 +103,7 @@ export function buildStats({ recent, archived, status, freshCount, now = new Dat
     // 直近14日。表示窓(7日)より長く取って、増減の流れが見えるようにする。
     daily: buildDaily(archived, 14, now),
     tags: buildTags(recent, 12),
+    regions: buildRegions(recent),
     sources: {
       ok: sourcesOk,
       total: status.length,

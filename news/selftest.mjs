@@ -13,6 +13,9 @@ import { renderIndex, renderDay, renderArchiveIndex, dayKey } from './lib/render
 import { mergeArchive } from './lib/store.mjs'
 import { buildStats } from './lib/stats.mjs'
 import { parseFeed, stripHtml } from './lib/feed.mjs'
+import { detectRegion, assignRegions } from './lib/region.mjs'
+import { regions as mapRegions } from './lib/japan-map.mjs'
+import { regionKeywords } from './config.mjs'
 
 const iso = (offsetHours) => new Date(Date.now() - offsetHours * 3600_000).toISOString()
 
@@ -218,6 +221,61 @@ await withServer(async (port) => {
     assert.equal(fresh.length, 0)
   })
 
+  console.log('\n地方の判定')
+  check('施設名から地方を当てる', () => {
+    const cases = [
+      ['馬毛島の基地建設、九州防衛局が工事予定を公表', 'kyushu'],
+      ['岩国基地の滑走路改修が完了', 'chugoku'],
+      ['善通寺駐屯地の隊舎建て替え', 'shikoku'],
+      ['舞鶴の岸壁を延伸', 'kinki'],
+      ['三沢基地の格納庫を新設', 'tohoku'],
+      ['千歳基地の誘導路を改修', 'hokkaido'],
+      ['市ヶ谷の庁舎を改修', 'kanto'],
+      ['浜松基地の格納庫を更新', 'chubu'],
+    ]
+    for (const [title, expected] of cases) {
+      assert.equal(detectRegion({ title, summary: [] }), expected, title)
+    }
+  })
+  check('防衛省の所在地として東京が出るだけでは関東にしない', () => {
+    // 「辺野古」（施設名・重み3）が「東京」（地名・重み1）に勝つ
+    assert.equal(
+      detectRegion({ title: '辺野古の地盤改良、防衛省が東京で会見', summary: ['沖縄防衛局が説明'] }),
+      'okinawa',
+    )
+  })
+  check('全国の話は地方を決めない', () => {
+    assert.equal(detectRegion({ title: '防衛省、施設整備費を12%増で概算要求', summary: [] }), null)
+  })
+  check('決め手が同点なら地方を決めない', () => {
+    // 「浜松」と「舞鶴」がどちらも重み3で並ぶ
+    assert.equal(detectRegion({ title: '浜松と舞鶴で同時に工事', summary: [] }), null)
+  })
+  check('既に地方が付いている記事は上書きしない', () => {
+    const kept = [{ title: '馬毛島の工事', region: null }]
+    assignRegions(kept)
+    assert.equal(kept[0].region, null)
+  })
+
+  console.log('\n地図データ')
+  check('地図の地方IDと判定キーワードのIDが一致する', () => {
+    assert.deepEqual(mapRegions.map((r) => r.id).sort(), Object.keys(regionKeywords).sort())
+  })
+  check('パスが絶対座標になっている', () => {
+    // 相対パスのまま連結すると2県目以降がずれる。生成時に絶対化している。
+    for (const region of mapRegions) {
+      assert.doesNotMatch(region.d, /[mlhvcsqtaz]/, `${region.label} に相対コマンドが残っている`)
+      assert.match(region.d, /^M/, `${region.label} が M で始まっていない`)
+    }
+  })
+  check('ピンが地方の外接矩形の中に収まる', () => {
+    for (const region of mapRegions) {
+      const [x, y] = region.pin
+      assert.ok(x >= region.box.x && x <= region.box.x + region.box.w, `${region.label} のピンX`)
+      assert.ok(y >= region.box.y && y <= region.box.y + region.box.h, `${region.label} のピンY`)
+    }
+  })
+
   console.log('\nHTML生成')
   const meta = { updatedAt: new Date().toISOString(), engine, sourcesOk: 2, sourcesTotal: 3, status }
   const stats = buildStats({ recent: summarized, archived: summarized, status, freshCount: 2 })
@@ -255,6 +313,25 @@ await withServer(async (port) => {
     assert.match(day, /^\d{4}-\d{2}-\d{2}$/)
     assert.ok(renderDay({ day, articles: summarized, meta, stats }).includes('<!DOCTYPE html>'))
     assert.ok(renderArchiveIndex({ days: [{ day, count: 3 }], meta, stats }).includes(`${day}.html`))
+  })
+  check('記事のある地方にだけピンが立つ', () => {
+    const withRegions = summarized.map((a, i) => ({
+      ...a,
+      region: ['kyushu', 'okinawa', null][i % 3],
+    }))
+    const s = buildStats({ recent: withRegions, archived: withRegions, status, freshCount: 1 })
+    const out = renderIndex({ articles: withRegions, digest: [], status, meta, stats: s })
+    const pinned = new Set(
+      [...out.matchAll(/class="pin[^"]*"[^>]*data-region="([^"]+)"/g)].map((m) => m[1]),
+    )
+    const expected = new Set(s.regions.list.filter((r) => r.count > 0).map((r) => r.id))
+    assert.deepEqual([...pinned].sort(), [...expected].sort())
+    assert.ok(!pinned.has('none'), '地方不明にピンが立っている')
+  })
+  check('記事カードに地方が入る', () => {
+    const withRegion = [{ ...mage, region: 'kyushu', summary: ['a', 'b', 'c'], why: '' }]
+    const out = renderIndex({ articles: withRegion, digest: [], status, meta, stats })
+    assert.match(out, /data-region="kyushu"/)
   })
   check('カテゴリが欠けた記事も落とさず表示する', () => {
     const orphan = [{ ...mage, category: undefined, summary: ['a', 'b', 'c'], why: '' },

@@ -13,7 +13,8 @@
     "news:build": "node news/build.mjs",
     "news:dry": "node news/build.mjs --dry-run",
     "news:test": "node news/selftest.mjs",
-    "news:preview": "node news/preview.mjs"
+    "news:preview": "node news/preview.mjs",
+    "news:map": "node news/tools/build-map.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",
@@ -24,6 +25,7 @@
     "wouter": "^3.3.5"
   },
   "devDependencies": {
+    "@svg-maps/japan": "^2.0.0",
     "@tailwindcss/vite": "^4.0.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",

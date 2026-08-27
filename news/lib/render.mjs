@@ -6,6 +6,7 @@
 
 import { categories, site } from '../config.mjs'
 import { dayKeyOf } from './daykey.mjs'
+import { viewBox as mapViewBox, regions as mapRegions, attribution as mapAttribution } from './japan-map.mjs'
 
 export { dayKeyOf as dayKey } from './daykey.mjs'
 
@@ -200,6 +201,62 @@ ul.digest { margin: 0; padding: 0; }
 .catbar .ct { font-family: var(--mono); text-align: right; color: var(--text); }
 .catbar.zero .nm, .catbar.zero .ct { color: var(--text-faint); }
 
+/* ---- 日本地図 ---- */
+.mapgrid { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 780px) { .mapgrid { grid-template-columns: 1fr; } }
+.mapbox { position: relative; }
+.mapbox svg { width: 100%; height: auto; display: block; }
+.mapbox .land { fill: #10222d; stroke: var(--line); stroke-width: .6; transition: fill .25s; }
+.mapbox .land.has { fill: #17394b; }
+.mapbox .land.on { fill: #1d5468; stroke: var(--cyan); }
+.pin { cursor: pointer; }
+.pin:focus { outline: none; }
+.pin:focus .pin-head, .pin:hover .pin-head { stroke-width: 2.4; }
+.pin-stalk { stroke: var(--cyan); stroke-width: 1.2; }
+.pin-head { fill: #04141c; stroke: var(--cyan); stroke-width: 1.4; }
+.pin-n { fill: var(--cyan); font-family: var(--mono); font-size: 11px; font-weight: 700;
+         text-anchor: middle; dominant-baseline: central; }
+/* ラベルを出しっぱなしにすると、近い地方どうしで隣のピンに重なる。
+   地方名は右の一覧と吹き出しで読めるので、地図上では触れたときだけ出す。 */
+.pin-label { fill: var(--text); font-family: var(--mono); font-size: 9.5px; text-anchor: middle;
+             opacity: 0; transition: opacity .15s; }
+.pin:hover .pin-label, .pin:focus .pin-label { opacity: 1; }
+.pin-label-bg { fill: var(--bg); opacity: 0; transition: opacity .15s; }
+.pin:hover .pin-label-bg, .pin:focus .pin-label-bg { opacity: .85; }
+.inset-frame { fill: none; stroke: var(--line); stroke-width: .8; stroke-dasharray: 4 3; }
+.inset-label { fill: var(--text-faint); font-family: var(--mono); font-size: 9px; }
+.pin-base { fill: var(--cyan); }
+.pin.key .pin-stalk, .pin.key .pin-head { stroke: var(--amber); }
+.pin.key .pin-n { fill: var(--amber); }
+.pin.key .pin-base { fill: var(--amber); }
+.pin-ring { fill: none; stroke: var(--amber); stroke-width: 1.2; transform-origin: center;
+            transform-box: fill-box; animation: ping 2.4s ease-out infinite; }
+.pin-drop { animation: drop .5s cubic-bezier(.2,1.4,.4,1) both; animation-delay: var(--pd, 0ms); }
+
+.rgn { display: flex; flex-direction: column; gap: 3px; }
+.rgn button { display: grid; grid-template-columns: 6em 2.8em 1fr; align-items: center; gap: 10px;
+              width: 100%; text-align: left; cursor: pointer; font-family: inherit; font-size: .78rem;
+              color: var(--text-dim); background: transparent; border: 1px solid transparent;
+              border-bottom-color: var(--line-soft); padding: 6px 8px; }
+.rgn button:hover { background: rgba(95,224,255,.06); color: var(--text); }
+.rgn button[aria-pressed="true"] { border-color: var(--cyan); background: rgba(95,224,255,.1);
+                                   color: var(--text); }
+.rgn .rn { font-family: var(--mono); text-align: right; color: var(--text); }
+.rgn .rn .k { color: var(--amber); }
+.rgn .rh { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text-faint);
+           font-size: .74rem; }
+.rgn button.empty { color: var(--text-faint); cursor: default; }
+.rgn button.empty:hover { background: transparent; }
+.mapnote { margin: 12px 0 0; font-size: .68rem; color: var(--text-faint); font-family: var(--mono); }
+.mapnote a { color: var(--text-faint); }
+.filterbar { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding: 7px 11px;
+             border: 1px solid var(--cyan); background: rgba(95,224,255,.08);
+             font-family: var(--mono); font-size: .74rem; color: var(--cyan); }
+.filterbar[hidden] { display: none; }
+.filterbar button { margin-left: auto; font-family: inherit; font-size: .72rem; cursor: pointer;
+                    background: transparent; border: 1px solid var(--cyan-dim); color: var(--cyan);
+                    padding: 2px 9px; }
+
 /* ---- 頻出タグ ---- */
 .tags { display: flex; flex-wrap: wrap; gap: 7px; }
 .tag { font-family: var(--mono); font-size: .72rem; padding: 3px 9px;
@@ -291,13 +348,17 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
 @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes sweep { 0% { transform: translateY(-100%); opacity: 0; }
                    12% { opacity: 1; } 100% { transform: translateY(1400%); opacity: 0; } }
+@keyframes drop { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+@keyframes ping { 0% { transform: scale(.6); opacity: .9; }
+                  70% { transform: scale(2.1); opacity: 0; } 100% { opacity: 0; } }
 .rise { animation: rise .5s cubic-bezier(.2,.8,.2,1) both; animation-delay: var(--d, 0ms); }
 .scan { position: fixed; left: 0; right: 0; top: 0; height: 2px; z-index: 2; pointer-events: none;
         background: linear-gradient(90deg, transparent, rgba(95,224,255,.55), transparent);
         animation: sweep 7s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  .rise, .ticker-track, .pulse, .scan { animation: none !important; }
+  .rise, .ticker-track, .pulse, .scan, .pin-drop { animation: none !important; }
+  .pin-ring { display: none; }
   .scan { display: none; }
   .arc-val, .chart .bar, .catbar .fill { transition: none !important; }
 }
@@ -373,19 +434,27 @@ const SCRIPT = `
     el.addEventListener('blur', hideTip);
   });
 
-  /* --- 絞り込み --- */
+  /* --- 絞り込み（カテゴリ × 地方 × キーワード） --- */
   var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
   var search = document.getElementById('q');
   var cards = Array.prototype.slice.call(document.querySelectorAll('article.card'));
   var groups = Array.prototype.slice.call(document.querySelectorAll('.cat-group'));
   var noresult = document.getElementById('noresult');
+  var regionButtons = Array.prototype.slice.call(document.querySelectorAll('.rgn button'));
+  var pins = Array.prototype.slice.call(document.querySelectorAll('.pin'));
+  var lands = Array.prototype.slice.call(document.querySelectorAll('.land'));
+  var bar = document.getElementById('rfilter');
+  var barLabel = document.getElementById('rfilter-label');
+  var barClear = document.getElementById('rfilter-clear');
   var active = 'all';
+  var activeRegion = null;
 
   function apply() {
     var needle = ((search && search.value) || '').trim().toLowerCase();
     var shown = 0;
     cards.forEach(function (card) {
       var visible = (active === 'all' || card.dataset.cat === active) &&
+                    (!activeRegion || card.dataset.region === activeRegion) &&
                     (!needle || card.dataset.text.indexOf(needle) !== -1);
       card.hidden = !visible;
       if (visible) shown++;
@@ -394,7 +463,44 @@ const SCRIPT = `
       group.hidden = !group.querySelector('article.card:not([hidden])');
     });
     if (noresult) noresult.style.display = shown === 0 ? 'block' : 'none';
+
+    regionButtons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.region === activeRegion));
+    });
+    lands.forEach(function (l) {
+      l.classList.toggle('on', l.dataset.region === activeRegion);
+    });
+    if (bar) {
+      bar.hidden = !activeRegion;
+      if (activeRegion && barLabel) {
+        var hit = regionButtons.filter(function (b) { return b.dataset.region === activeRegion; })[0];
+        var name = hit ? hit.firstElementChild.textContent : activeRegion;
+        barLabel.textContent = '地方で絞り込み中: ' + name + ' — ' + shown + '件';
+      }
+    }
   }
+
+  /* 同じ地方をもう一度押したら解除。地図をいじって戻れなくなると困る。 */
+  function selectRegion(id) {
+    activeRegion = activeRegion === id ? null : id;
+    apply();
+    if (activeRegion) {
+      var list = document.querySelector('.cat-group:not([hidden])');
+      if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  regionButtons.forEach(function (b) {
+    if (b.disabled) return;
+    b.addEventListener('click', function () { selectRegion(b.dataset.region); });
+  });
+  pins.forEach(function (pin) {
+    pin.addEventListener('click', function () { selectRegion(pin.dataset.region); });
+    pin.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectRegion(pin.dataset.region); }
+    });
+  });
+  if (barClear) barClear.addEventListener('click', function () { activeRegion = null; apply(); });
 
   chips.forEach(function (chip) {
     chip.addEventListener('click', function () {
@@ -529,6 +635,105 @@ function sourceGauge(sources) {
 </div>`
 }
 
+/**
+ * 日本地図。記事のある地方にピンを立てる。
+ *
+ * ピンは色と形だけで意味を運ばないよう、件数の数字と地方名を必ず添える。
+ * 右の一覧は同じ内容をボタンで並べたもので、こちらがキーボード操作の本筋。
+ */
+function japanMap(regionStats) {
+  const byId = new Map(regionStats.list.map((r) => [r.id, r]))
+  const maxCount = Math.max(1, ...regionStats.list.map((r) => r.count))
+
+  const lands = mapRegions
+    .map((region) => {
+      const stat = byId.get(region.id)
+      const has = stat && stat.count > 0
+      return `<path class="land${has ? ' has' : ''}" data-region="${escapeHtml(region.id)}" d="${region.d}"></path>`
+    })
+    .join('\n      ')
+
+  let pinIndex = 0
+  const pins = mapRegions
+    .map((region) => {
+      const stat = byId.get(region.id)
+      if (!stat || stat.count === 0) return ''
+      const [x, y] = region.pin
+      const isKey = stat.keyCount > 0
+      // ピンの頭は錨点の上に浮かせ、足元に接地点を打つ
+      const headY = y - 17
+      const tip = `${region.label} ${stat.count}件${isKey ? `（要注目 ${stat.keyCount}件）` : ''} — ${stat.headline}`
+      const delay = 260 + pinIndex++ * 110
+
+      return `
+      <g class="pin pin-drop${isKey ? ' key' : ''}" style="--pd:${delay}ms"
+         data-region="${escapeHtml(region.id)}" data-tip="${escapeHtml(tip)}"
+         role="button" tabindex="0" aria-label="${escapeHtml(tip)}">
+        <circle class="pin-base" cx="${x}" cy="${y}" r="2"></circle>
+        <line class="pin-stalk" x1="${x}" y1="${y}" x2="${x}" y2="${headY + 9}"></line>
+        ${isKey ? `<circle class="pin-ring" cx="${x}" cy="${headY}" r="9"></circle>` : ''}
+        <circle class="pin-head" cx="${x}" cy="${headY}" r="9"></circle>
+        <text class="pin-n" x="${x}" y="${headY}">${stat.count}</text>
+        <rect class="pin-label-bg" x="${x - 20}" y="${y + 5}" width="40" height="12"></rect>
+        <text class="pin-label" x="${x}" y="${y + 14}">${escapeHtml(region.label)}</text>
+      </g>`
+    })
+    .join('')
+
+  const row = (id, label, stat) => {
+    const disabled = stat.count === 0
+    return `    <button type="button" data-region="${escapeHtml(id)}" aria-pressed="false"${
+      disabled ? ' class="empty" disabled' : ''
+    }>
+      <span>${escapeHtml(label)}</span>
+      <span class="rn">${stat.count}${stat.keyCount > 0 ? `<span class="k"> ●${stat.keyCount}</span>` : ''}</span>
+      <span class="rh">${escapeHtml(stat.headline || '—')}</span>
+    </button>`
+  }
+
+  const rows = [
+    ...regionStats.list.map((stat) => row(stat.id, stat.label, stat)),
+    row('none', '全国・不明', regionStats.nationwide),
+  ].join('\n')
+
+  // 本土から離れた別枠（沖縄）は、囲みを付けないと同じ縮尺で並んでいると誤解される。
+  // 枠は viewBox の外にはみ出すと切れるので、内側に収める。
+  const [, , vbW, vbH] = mapViewBox.split(/\s+/).map(Number)
+  const insets = mapRegions
+    .filter((region) => region.inset)
+    .map((region) => {
+      const pad = 6
+      const { x, y, w, h } = region.box
+      const left = Math.max(1, x - pad)
+      const top = Math.max(11, y - pad) // ラベルの高さぶん上を空ける
+      const right = Math.min(vbW - 1, x + w + pad)
+      const bottom = Math.min(vbH - 1, y + h + pad)
+      return `<rect class="inset-frame" x="${left}" y="${top}" width="${(right - left).toFixed(1)}" height="${(bottom - top).toFixed(1)}"></rect>
+      <text class="inset-label" x="${left + 3}" y="${top - 4}">${escapeHtml(region.label)}（別枠・縮尺は同じ）</text>`
+    })
+    .join('\n      ')
+
+  return `<div class="mapgrid">
+  <div class="mapbox">
+    <svg viewBox="${mapViewBox}" role="img" aria-label="日本地図。記事のある地方にピンが立つ。件数と地方名は右の一覧でも読める。">
+      ${insets}
+      ${lands}
+      ${pins}
+    </svg>
+  </div>
+  <div>
+    <div class="rgn">
+${rows}
+    </div>
+    <p class="mapnote"><a href="${escapeHtml(mapAttribution.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(mapAttribution.text)}</a></p>
+  </div>
+</div>
+<div class="filterbar" id="rfilter" hidden>
+  <span id="rfilter-label"></span>
+  <button type="button" id="rfilter-clear">解除</button>
+</div>`
+}
+
 function tagCloud(tags) {
   if (tags.length === 0) return '<p class="empty">まだ傾向を出せるだけの記事がありません。</p>'
   return `<div class="tags">
@@ -553,7 +758,7 @@ function renderCard(article, categoryId) {
   const searchText = [article.title, article.publisher, ...summary].join(' ').toLowerCase()
 
   return `
-      <article class="card${isKey ? ' is-key' : ''}" data-cat="${escapeHtml(categoryId)}" data-text="${escapeHtml(searchText)}" style="border-left-color:${seriesOf(categoryId)}">
+      <article class="card${isKey ? ' is-key' : ''}" data-cat="${escapeHtml(categoryId)}" data-region="${escapeHtml(article.region || 'none')}" data-text="${escapeHtml(searchText)}" style="border-left-color:${seriesOf(categoryId)}">
         <h3><a href="${escapeHtml(article.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a></h3>
         <div class="meta">
           ${isKey ? '<span class="badge key">要注目</span>' : ''}
@@ -669,6 +874,13 @@ ${
     ? `<div class="ticker" aria-hidden="true"><div class="ticker-track">${headlines}${headlines}</div></div>`
     : ''
 }
+
+${panel({
+  code: 'SEC-00',
+  en: 'Nationwide',
+  jp: '全国の動き',
+  body: japanMap(stats.regions),
+})}
 
 <div class="grid tiles">
 ${tile({ en: 'In Window', jp: `直近${stats.windowDays}日`, value: stats.totals.recent, unit: '件' })}

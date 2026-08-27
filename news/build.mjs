@@ -14,6 +14,7 @@ import { collectArticles, enrichArticles } from './lib/collect.mjs'
 import { summarizeArticles, buildDigest } from './lib/summarize.mjs'
 import { readArchive, mergeArchive, writeArchive } from './lib/store.mjs'
 import { buildStats } from './lib/stats.mjs'
+import { assignRegions } from './lib/region.mjs'
 import { renderIndex, renderDay, renderArchiveIndex, dayKey } from './lib/render.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -84,6 +85,10 @@ async function main() {
 
   const digest = recent.length > 0 ? await buildDigest(recent) : []
   if (digest.length > 0) log(`  本日の要点: ${digest.length}点`)
+
+  // 地図にピンを立てるため、記事に地方を付ける。
+  // 見出しと要約から判定するので、蓄積済みの記事にも後から付けられる。
+  assignRegions(merged)
 
   const stats = buildStats({
     recent,

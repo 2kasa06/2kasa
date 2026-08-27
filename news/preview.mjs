@@ -20,6 +20,7 @@ const DEMO_ARTICLES = [
   {
     title: '［ダミー］南方の飛行場整備、滑走路2本の造成が第2工区へ',
     category: 'nansei', importance: 'high', publisher: 'サンプル通信', pickups: 3, hasBody: true,
+    region: 'kyushu',
     summary: [
       '地方防衛局が、飛行場の造成工事を第2工区に進めると公表した。',
       '総事業費は約4800億円、うち今年度分は約620億円を計上している。',
@@ -30,6 +31,7 @@ const DEMO_ARTICLES = [
   {
     title: '［ダミー］代替施設の地盤改良、追加ボーリング調査の結果を公表',
     category: 'usfj', importance: 'high', publisher: 'サンプル新報', pickups: 2, hasBody: true,
+    region: 'okinawa',
     summary: [
       '軟弱地盤の層厚について、従来想定より深い地点が複数確認された。',
       '改良杭の本数は約7万7000本から増える可能性があるとしている。',
@@ -40,6 +42,7 @@ const DEMO_ARTICLES = [
   {
     title: '［ダミー］火薬庫の整備、5か年で130棟の新設計画を提示',
     category: 'kyoujinka', importance: 'normal', publisher: 'サンプル防衛ニュース', pickups: 1, hasBody: true,
+    region: 'hokkaido',
     summary: [
       '弾薬の取得量に連動し、火薬庫を段階的に増設する計画が示された。',
       '離隔距離の確保のため、既存施設の再配置と集約も併せて行う。',
@@ -50,6 +53,7 @@ const DEMO_ARTICLES = [
   {
     title: '［ダミー］庁舎新築工事、一般競争入札で共同企業体が落札',
     category: 'chotatsu', importance: 'normal', publisher: 'サンプル建設新聞', pickups: 1, hasBody: true,
+    region: 'kanto',
     summary: [
       '予定価格約38億円に対し、落札率は94.2%だった。',
       '構造は鉄筋コンクリート造4階建て、延床面積は約9200平方メートル。',
@@ -60,6 +64,7 @@ const DEMO_ARTICLES = [
   {
     title: '［ダミー］駐屯地の用地取得、地権者との交渉が最終段階に',
     category: 'chiiki', importance: 'normal', publisher: 'サンプル日報', pickups: 2, hasBody: false,
+    region: 'chugoku',
     summary: [
       '取得予定面積は約23ヘクタールで、うち9割で合意に達したとしている。',
       '残る区画については代替地の提示を含めて協議を続ける。',
@@ -70,6 +75,7 @@ const DEMO_ARTICLES = [
   {
     title: '［ダミー］来年度概算要求、施設整備費は前年度比12%増',
     category: 'seisaku', importance: 'normal', publisher: 'サンプル経済紙', pickups: 4, hasBody: true,
+    region: null,
     summary: [
       '施設の強靱化に係る経費として過去最大の要求額が示された。',
       '老朽更新と司令部機能の防護に配分の重心を置く。',
@@ -80,6 +86,7 @@ const DEMO_ARTICLES = [
   {
     title: '［ダミー］特定重要拠点の港湾、岸壁延伸の基本設計に着手',
     category: 'nansei', importance: 'normal', publisher: 'サンプル通信', pickups: 1, hasBody: true,
+    region: 'okinawa',
     summary: [
       '大型船舶の接岸に対応するため、既存岸壁を延伸する設計に入った。',
       '民生利用との併用を前提とした施設配置を検討している。',
@@ -90,12 +97,35 @@ const DEMO_ARTICLES = [
   {
     title: '［ダミー］隊舎の老朽更新、木造化を試行する方針',
     category: 'kyoujinka', importance: 'normal', publisher: 'サンプル建設新聞', pickups: 1, hasBody: true,
+    region: 'tohoku',
     summary: [
       '中層の隊舎について、耐火木造での建て替えを試行する。',
       '工期短縮と資材調達の分散が狙いだとしている。',
       '初弾は2棟で、結果を踏まえて適用範囲を判断する。',
     ],
     why: '発注仕様の変化は、参入できる施工者の顔ぶれを変える。',
+  },
+  {
+    title: '［ダミー］港湾の岸壁改修、地元漁協との調整が続く',
+    category: 'chiiki', importance: 'normal', publisher: 'サンプル日報', pickups: 1, hasBody: true,
+    region: 'kinki',
+    summary: [
+      '岸壁の改修工事について、操業への影響を抑える工程が協議されている。',
+      '工事期間中の代替係留地の確保が論点になっている。',
+      '合意が得られ次第、年度内に着工する見通し。',
+    ],
+    why: '港湾工事は地元調整が工程を左右するため、着工時期の目安になる。',
+  },
+  {
+    title: '［ダミー］駐屯地の給水施設を更新、災害対応を強化',
+    category: 'kyoujinka', importance: 'normal', publisher: 'サンプル防衛ニュース', pickups: 1, hasBody: true,
+    region: 'shikoku',
+    summary: [
+      '老朽化した給水施設を更新し、断水時の自立運用日数を延ばす。',
+      '受水槽の増設と非常用発電の更新を同時に行う。',
+      '同種の更新は他の駐屯地でも順次進める方針。',
+    ],
+    why: '災害対応系の更新は全国に横展開されるため、後続案件を読む材料になる。',
   },
 ]
 
