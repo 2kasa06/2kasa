@@ -73,6 +73,11 @@ const CATEGORY_GUIDE = categories
   .map((c) => `- ${c.id}: ${c.label}（${c.blurb}）`)
   .join('\n')
 
+/** Claude を呼べる状態か。要約を作り直すかどうかの判断に使う。 */
+export function claudeAvailable() {
+  return Boolean(process.env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_AUTH_TOKEN)
+}
+
 function getClient() {
   if (!process.env.ANTHROPIC_API_KEY && !process.env.ANTHROPIC_AUTH_TOKEN) return null
   return import('@anthropic-ai/sdk')

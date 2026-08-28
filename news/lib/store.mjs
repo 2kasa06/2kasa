@@ -116,6 +116,29 @@ export function selectRetryTargets(articles, { skipKeys, limit, maxAttempts = 3,
     .slice(0, limit)
 }
 
+/**
+ * 抽出型で作った要約を、Claude で作り直す対象を選ぶ。
+ *
+ * APIキーを後から設定した場合、既に蓄積された記事は「要約済み」として
+ * 扱われるため、そのままでは一生作り直されない。本文が取れていて、
+ * まだ Claude が書いていない記事を、表示期間内にかぎって拾い直す。
+ */
+export function selectResummaryTargets(articles, { skipKeys, limit, now = new Date() } = {}) {
+  if (!limit || limit <= 0) return []
+  const cutoff = now.getTime() - site.windowDays * 24 * 60 * 60 * 1000
+
+  return articles
+    .filter(
+      (article) =>
+        !skipKeys?.has(article.key) &&
+        article.hasBody &&
+        article.generatedBy !== 'claude' &&
+        new Date(article.publishedAt).getTime() >= cutoff,
+    )
+    .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
+    .slice(0, limit)
+}
+
 export async function writeArchive(root, articles, meta) {
   const target = path.join(root, ARCHIVE_PATH)
   await fs.mkdir(path.dirname(target), { recursive: true })

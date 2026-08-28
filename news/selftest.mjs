@@ -16,7 +16,12 @@ import {
 } from './lib/collect.mjs'
 import { summarizeArticles } from './lib/summarize.mjs'
 import { renderIndex, renderDay, renderArchiveIndex, dayKey } from './lib/render.mjs'
-import { mergeArchive, selectRetryTargets, normalizeArchive } from './lib/store.mjs'
+import {
+  mergeArchive,
+  selectRetryTargets,
+  selectResummaryTargets,
+  normalizeArchive,
+} from './lib/store.mjs'
 import { buildStats } from './lib/stats.mjs'
 import { parseFeed, stripHtml } from './lib/feed.mjs'
 import { detectRegion, assignRegions } from './lib/region.mjs'
@@ -442,6 +447,29 @@ await withServer(async (port) => {
   await check('枠が無ければ取り直さない', () => {
     const pool = [{ key: 'x', hasBody: false, enrichAttempts: 0, publishedAt: new Date().toISOString() }]
     assert.deepEqual(selectRetryTargets(pool, { skipKeys: new Set(), limit: 0 }), [])
+  })
+
+  console.log('\n要約の作り直し')
+  await check('抽出型で作った要約だけを作り直す', () => {
+    const now = new Date()
+    const ago = (d) => new Date(now.getTime() - d * 864e5).toISOString()
+    const pool = [
+      { key: 'stale', hasBody: true, generatedBy: 'extractive', publishedAt: ago(1) },
+      { key: 'done', hasBody: true, generatedBy: 'claude', publishedAt: ago(1) },
+      { key: 'nobody', hasBody: false, generatedBy: 'extractive', publishedAt: ago(1) },
+      { key: 'old', hasBody: true, generatedBy: 'extractive', publishedAt: ago(60) },
+      { key: 'fresh', hasBody: true, generatedBy: 'extractive', publishedAt: ago(1) },
+    ]
+    const picked = selectResummaryTargets(pool, {
+      skipKeys: new Set(['fresh']),
+      limit: 10,
+      now,
+    }).map((a) => a.key)
+    assert.deepEqual(picked, ['stale'])
+  })
+  await check('枠が無ければ作り直さない', () => {
+    const pool = [{ key: 'x', hasBody: true, generatedBy: 'extractive', publishedAt: new Date().toISOString() }]
+    assert.deepEqual(selectResummaryTargets(pool, { skipKeys: new Set(), limit: 0 }), [])
   })
 
   console.log('\nHTML生成')

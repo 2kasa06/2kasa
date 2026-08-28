@@ -11,12 +11,13 @@ import { fileURLToPath } from 'node:url'
 
 import { site, sources } from './config.mjs'
 import { collectArticles, enrichArticles } from './lib/collect.mjs'
-import { summarizeArticles, buildDigest } from './lib/summarize.mjs'
+import { summarizeArticles, buildDigest, claudeAvailable } from './lib/summarize.mjs'
 import {
   readArchive,
   mergeArchive,
   writeArchive,
   selectRetryTargets,
+  selectResummaryTargets,
   normalizeArchive,
 } from './lib/store.mjs'
 import { buildStats } from './lib/stats.mjs'
@@ -112,7 +113,18 @@ async function main() {
   }
 
   // 5. 要約
-  const toSummarize = [...primary, ...overflow, ...rescued]
+  // APIキーを後から設定したときに、抽出型で作った要約を書き直す。
+  // これが無いと、蓄積済みの記事は一生そのままになる。
+  const stale = claudeAvailable()
+    ? selectResummaryTargets(merged, {
+        skipKeys: new Set([...primary, ...overflow, ...rescued].map((a) => a.key)),
+        limit: site.maxArticlesPerRun - primary.length - overflow.length - rescued.length,
+        now,
+      })
+    : []
+  if (stale.length > 0) log(`  抽出型で作った要約を Claude で書き直す: ${stale.length}件`)
+
+  const toSummarize = [...primary, ...overflow, ...rescued, ...stale]
   let engine = 'none'
   if (toSummarize.length > 0) {
     log(`  ${toSummarize.length}件を要約中…`)
