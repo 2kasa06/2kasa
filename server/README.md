@@ -8,7 +8,7 @@
 ```
 朝7時 / 更新ボタン
   → GitHub Actions が収集・要約・HTML生成
-  → FTPS で さくら の site/ に配信
+  → さくら が GitHub から生成物を取りに行く
   → 社員がブラウザで見る（ログイン必須）
 ```
 
@@ -40,8 +40,9 @@
   api/refresh.php  更新ボタンの受け口
   api/status.php   進み具合
   lib/             設定と共通処理（.htaccess で外から読めない）
+  tools/pull.php   cron から呼ぶ取り込みの入口（.htaccess で外から読めない）
   state/           ログイン試行の記録（.htaccess で外から読めない）
-  site/            生成された HTML。GitHub Actions が FTPS で置く
+  site/            生成された HTML。さくらが GitHub から取りに行く
   assets/          ログイン画面の背景に使う日本地図
   .htaccess
   robots.txt
@@ -86,7 +87,8 @@ return [
 ```
 
 トークンは fine-grained personal access token で、対象リポジトリに対して
-**Actions: Read and write** だけあればよい。これ以上の権限は要らない。
+**Actions: Read and write**（実行を起こす）と **Contents: Read**（生成物を取りに行く）
+の2つがあればよい。これ以上の権限は要らない。
 
 **注意**: GitHub は既定ブランチにあるワークフローしか起動できない。
 `.github/workflows/news.yml` を既定ブランチに入れておくこと。入っていないと
@@ -95,28 +97,40 @@ return [
 トークンを空のままにしても画面は動く。その場合、更新ボタンはローディングを
 見せて最新の内容を読み込み直すだけになる（収集はしない）。
 
-### 3. 配信をつなぐ
+### 3. 取り込みをつなぐ
 
-GitHub リポジトリの Settings → Secrets and variables → Actions に登録する。
+**押し込むのではなく、取りに行く。**
 
-| 名前 | 中身 |
+さくらの「国外IPアドレスフィルタ」は初期状態で有効で、海外からの FTP・SSH・
+コントロールパネルへの接続を遮断する。GitHub Actions のランナーは海外にあるため、
+そこから押し込むことはできない（接続は張れるが、挨拶の直後に切られる）。
+
+フィルタが止めるのは入ってくる接続だけで、さくらから外へ出ていく通信は通る。
+だから向きを逆にする。守りを一段外さずに済み、FTP のパスワードを GitHub に
+預ける必要もなくなる。
+
+```
+✕ GitHub ──押し込む──▶ さくら   フィルタに阻まれる
+○ GitHub ◀──取りに行く── さくら  フィルタは無関係
+```
+
+取り込みは、更新ボタンと cron の二本立て。
+
+- **更新ボタン** … `api/status.php` が実行の完了を見たら、その場で取りに行く
+- **毎朝** … さくらの cron が `tools/pull.php` を呼ぶ
+
+さくらのコントロールパネル → スクリプト設定 → cron設定 に登録する。
+
+| | |
 |---|---|
-| `SAKURA_FTP_HOST` | `n-higuchi.sakura.ne.jp` |
-| `SAKURA_FTP_USER` | `n-higuchi` |
-| `SAKURA_FTP_PASS` | さくらの FTP パスワード |
-| `SAKURA_FTP_PATH` | `/home/n-higuchi/www/news` |
+| 実行コマンド | `cd /home/n-higuchi/www/news && php tools/pull.php` |
+| 時刻 | 毎日 7時20分（Actions は 7時に走る。生成の時間を見込んで20分ずらす） |
 
-`SAKURA_FTP_HOST` が空のあいだ、配信の手順は丸ごと飛ばされる。
+同じ版が入っていれば何も落とさずに終わるので、何度呼んでも害はない。
+`--force` を付けると版に関係なく取り直す。
 
-接続は FTPS（明示的 TLS）で、証明書も検証する。平文 FTP は使わない。
-パスワードは lftp へ標準入力から渡すので、`ps` にもログにも出ない。
-
-PHP 一式の設置は `ログイン機構をさくらへ設置`（`.github/workflows/deploy-server.yml`）が
-受け持つ。Actions の画面から手で実行する。設置後に外から見て、ログイン画面が出ることと
-`lib/` `state/` `site/` が遮断されていることを確かめ、駄目なら失敗で止まる。
-
-配信されるのは生成物（`docs/`）だけで、PHP 一式は同期しない。
-`lib/config.php` に鍵が入っているため、上書きされないようにしてある。
+取り込みには `lib/config.php` の GitHub トークンを使う。更新ボタンと同じもので、
+**Contents: Read** と **Actions: Read and write** があればよい。
 
 ### 4. HTTPS にする
 
@@ -144,6 +158,7 @@ PHP 一式の設置は `ログイン機構をさくらへ設置`（`.github/work
   一度動かすか、`docs/` の中身を手で置く。
 - **更新ボタンが「始められませんでした」** … トークンか、ワークフローが既定
   ブランチに無い。`state/refresh-error.log` に理由が残る。
-- **更新が終わっても内容が変わらない** … 配信の秘密が未設定。Actions の
-  「さくらインターネットへ配信」の手順が飛ばされていないか確認する。
+- **更新が終わっても内容が変わらない** … 取り込みが動いていない。
+  `cd /home/n-higuchi/www/news && php tools/pull.php --force` を手で叩いて、
+  出てくる理由を読む。トークンの **Contents: Read** が抜けていることが多い。
 - **ログインできなくなった** … `state/login-attempts.json` を消せば制限は解ける。

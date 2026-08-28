@@ -1,0 +1,8 @@
+# cron から php で直接呼ぶだけの場所。ウェブからは触らせない。
+<IfModule mod_authz_core.c>
+  Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+  Order allow,deny
+  Deny from all
+</IfModule>

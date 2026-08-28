@@ -9,8 +9,8 @@
 
 RewriteEngine On
 
-# site/ と lib/ と state/ への直接アクセスを止める
-RewriteRule ^(site|lib|state)/ - [F,L]
+# site/ lib/ state/ tools/ への直接アクセスを止める
+RewriteRule ^(site|lib|state|tools)/ - [F,L]
 
 # 生成された HTML への要求は、ログインを確かめる入口に回す
 RewriteRule ^archive\.html$ gate.php?f=archive.html [L,QSA]
