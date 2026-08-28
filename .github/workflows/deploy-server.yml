@@ -38,6 +38,32 @@ jobs:
           fi
           echo "4つとも登録されています。"
 
+      - name: さくらに届くか調べる
+        env:
+          SAKURA_FTP_HOST: ${{ secrets.SAKURA_FTP_HOST }}
+          SITE_URL: ${{ inputs.site_url }}
+        run: |
+          set -uo pipefail
+          echo "### 到達性の確認" >> "$GITHUB_STEP_SUMMARY"
+
+          probe() {  # 名前 ポート
+            if timeout 10 bash -c "exec 3<>/dev/tcp/$SAKURA_FTP_HOST/$2" 2>/dev/null; then
+              echo "- $1 (ポート $2): 届く" >> "$GITHUB_STEP_SUMMARY"
+              return 0
+            fi
+            echo "- $1 (ポート $2): **届かない**" >> "$GITHUB_STEP_SUMMARY"
+            return 1
+          }
+
+          probe FTP 21 || true
+          probe SSH 22 || true
+
+          # web が見えて FTP が見えないなら、経路ではなくポート単位の遮断。
+          code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 15 "$SITE_URL" || echo 000)
+          echo "- Web (ポート 80): 応答 $code" >> "$GITHUB_STEP_SUMMARY"
+
+          echo "- このランナーの所在: $(curl -sS --max-time 10 https://ipinfo.io/country || echo 不明)" >> "$GITHUB_STEP_SUMMARY"
+
       - name: PHP の書き方を確かめる
         run: |
           set -euo pipefail
@@ -63,11 +89,13 @@ jobs:
           # --delete は付けない。付けると site/ の中身まで消える。
           # .htaccess のような隠しファイルも mirror は既定で運ぶ。
           cat > "$script" <<LFTP
+          debug 3
           set ftp:ssl-force true
           set ftp:ssl-protect-data true
           set ssl:verify-certificate true
-          set net:max-retries 3
-          set net:timeout 20
+          set net:max-retries 1
+          set net:timeout 15
+          set net:reconnect-interval-base 5
           open -u "$SAKURA_FTP_USER","$SAKURA_FTP_PASS" "$SAKURA_FTP_HOST"
           mirror --reverse --verbose --parallel=4 --exclude-glob .gitkeep server/public/ "$SAKURA_FTP_PATH/"
           mkdir -p -f "$SAKURA_FTP_PATH/site"
@@ -76,7 +104,9 @@ jobs:
           bye
           LFTP
 
-          lftp -f "$script"
+          # debug を上げたので、万一の取りこぼしに備えて伏字にしてから出す。
+          # （GitHub も Secrets を伏字にするが、二重にかけておく。）
+          lftp -f "$script" 2>&1 | sed -E 's/(PASS|pass|password)[[:space:]]+.*/\1 [伏字]/'
           echo "設置しました: $SAKURA_FTP_PATH/"
 
       - name: 外から見て確かめる
