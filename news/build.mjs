@@ -40,6 +40,9 @@ const log = (...parts) => console.log(...parts)
 async function main() {
   const now = new Date()
   log(`■ ${site.title} — ${now.toISOString()}`)
+  // キーが届いているかは、鍵そのものを出さずにここで分かるようにする。
+  // 届いていないと黙って抽出型に落ちるため、原因の切り分けに時間がかかった。
+  log(`  Claude の要約: ${claudeAvailable() ? '利用可（APIキーあり）' : '利用不可（APIキーが渡っていません）'}`)
 
   // 1. 既存の記事庫を読む
   const stored = await readArchive(ROOT)
