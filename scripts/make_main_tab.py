@@ -21,27 +21,40 @@ ALPHA_THRESHOLD = 10
 MIN_GAP = 1          # 文字とイラストを分ける帯の最小の高さ(px)
 SPARSE_RATIO = 0.05  # 幅のこの割合以下しか埋まっていない行は「帯」とみなす
 SEARCH_RATIO = 0.45  # 上から何割の範囲で帯を探すか
+FALLBACK_RATIO = 0.15  # 空の帯で見つからないときに使うゆるい閾値
 
 
-def illustration(image):
-    """セリフを除いたイラスト部分を返す（帯が見つからなければ全体）。
+def band_cut(density, width, ratio):
+    """埋まり具合が閾値以下の行が続く帯のうち、一番下のものの終わりを返す。
 
-    セリフとイラストの間には、装飾（ハートや効果線）がわずかに掛かるだけの
-    ほぼ空の行が並ぶ。その帯のうち一番下のもので切る。セリフが2行に
-    分かれている場合に行間で切ってしまわないようにするため。
+    セリフが2行に分かれている場合に行間で切ってしまわないよう、一番下を採る。
+    画像の先頭から続く帯（セリフの上の余白）は境目ではないので除く。
     """
-    filled = np.array(image)[:, :, 3] > ALPHA_THRESHOLD
-    rows = filled.sum(axis=1) <= image.width * SPARSE_RATIO
-    limit = int(len(rows) * SEARCH_RATIO)
-
+    thin = density <= width * ratio
     cut, start = None, None
-    for y in range(limit):
-        if rows[y] and start is None:
+    for y in range(len(thin)):
+        if thin[y] and start is None:
             start = y
-        elif not rows[y] and start is not None:
+        elif not thin[y] and start is not None:
             if start > 0 and y - start >= MIN_GAP:
                 cut = y
             start = None
+    return cut
+
+
+def illustration(image):
+    """セリフを除いたイラスト部分を返す（境目が見つからなければ全体）。
+
+    セリフとイラストの間には、装飾（ハートや効果線）がわずかに掛かるだけの
+    薄い行が並ぶ。まず完全に近い空白で探し、装飾が濃く掛かっていて
+    見つからない場合はゆるい閾値でもう一度探す。
+    """
+    density = (np.array(image)[:, :, 3] > ALPHA_THRESHOLD).sum(axis=1)
+    band = density[: int(len(density) * SEARCH_RATIO)]
+
+    cut = band_cut(band, image.width, SPARSE_RATIO)
+    if cut is None:
+        cut = band_cut(band, image.width, FALLBACK_RATIO)
     return image.crop((0, cut, image.width, image.height)) if cut else image
 
 
