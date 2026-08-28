@@ -25,8 +25,15 @@ if (!$allowed) {
 
 $path = __DIR__ . '/site/' . $requested;
 if (!is_file($path)) {
-    http_response_code(404);
-    exit('まだ生成されていません。');
+    // まだ一度も収集していないとき、入口だけは焼いておいた0件の画面を返す。
+    // ここで諦めると更新ボタンごと無い画面になり、最初の一回を始められない。
+    $bootstrap = __DIR__ . '/bootstrap.html';
+    if ($requested === 'index.html' && is_file($bootstrap)) {
+        $path = $bootstrap;
+    } else {
+        http_response_code(404);
+        exit('まだ生成されていません。');
+    }
 }
 
 $html = (string)file_get_contents($path);

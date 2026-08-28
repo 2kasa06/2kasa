@@ -74,13 +74,17 @@ jobs:
           ANTHROPIC_WORKSPACE_ID: ${{ secrets.ANTHROPIC_WORKSPACE_ID }}
         run: npm run news:build
 
+      # 中身がまだ無いときに見せる画面。描画の変更に置いていかれないよう毎回焼く。
+      - name: 0件の画面を焼き直す
+        run: node news/tools/build-bootstrap.mjs
+
       - name: 結果をコミット
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # 生成が途中で落ちた場合でも git add がエラーにならないようにする
           mkdir -p docs data
-          git add docs data
+          git add docs data server/public/bootstrap.html
           if git diff --staged --quiet; then
             echo "更新なし"
             exit 0
@@ -102,7 +106,7 @@ jobs:
             git fetch origin "${GITHUB_REF_NAME}"
             # コミットは取り消すが、生成物は index に残る
             git reset --soft "origin/${GITHUB_REF_NAME}"
-            git add docs data
+            git add docs data server/public/bootstrap.html
             if git diff --staged --quiet; then
               echo "最新と同じ内容でした"
               exit 0
