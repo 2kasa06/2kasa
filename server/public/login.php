@@ -75,6 +75,15 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   background:linear-gradient(rgba(23,56,74,.30) 1px,transparent 1px) 0 0/100% 44px,
              linear-gradient(90deg,rgba(23,56,74,.30) 1px,transparent 1px) 0 0/44px 100%;
   mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 20%,transparent 75%)}
+/* 社内には別のポータルがある。どちらに入ろうとしているのか一目で分かるよう、
+   このサイトでしか出てこない日本地図を背景に敷く。 */
+.map{position:fixed;inset:0;z-index:0;pointer-events:none;display:grid;place-items:center;
+  opacity:.18}
+/* 中央に置くとカードの裏に本州が隠れ、北海道と沖縄だけが浮いて見える。
+   列島の全体が見えるよう、カードの脇に寄せる。 */
+.map img{height:min(72vh,620px);width:auto;transform:translateX(-34%);
+  filter:drop-shadow(0 0 26px rgba(95,224,255,.3))}
+@media (max-width:900px){.map{opacity:.09}.map img{transform:none;height:min(80vh,680px)}}
 .box{position:relative;z-index:1;width:min(400px,100%);background:linear-gradient(160deg,var(--panel),#0e1f2a);
   border:1px solid var(--line);padding:30px 28px}
 .box::before,.box::after{content:"";position:absolute;width:13px;height:13px;border-color:var(--cyan);border-style:solid;border-width:0}
@@ -83,7 +92,9 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 h1{margin:0;font-size:1.2rem;letter-spacing:.1em;text-shadow:0 0 16px rgba(95,224,255,.45)}
 h1 span{color:var(--cyan)}
 .sub{font-family:var(--mono);font-size:.64rem;letter-spacing:.3em;color:var(--cyan-dim);
-  text-transform:uppercase;margin:6px 0 22px}
+  text-transform:uppercase;margin:6px 0 12px}
+.lead{font-size:.8rem;line-height:1.7;color:var(--text-dim);margin:0 0 22px;
+  padding-bottom:18px;border-bottom:1px solid var(--line-soft)}
 label{display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;
   color:var(--text-faint);text-transform:uppercase;margin-bottom:5px}
 input{width:100%;padding:10px 12px;margin-bottom:16px;font-family:var(--mono);font-size:.9rem;
@@ -99,9 +110,11 @@ button:disabled{opacity:.4;cursor:default}
 </style>
 </head>
 <body>
+<div class="map" aria-hidden="true"><img src="assets/japan.svg" alt=""></div>
 <div class="box">
   <h1><span>◤</span> <?= $h($config['site_name']) ?></h1>
-  <p class="sub">Restricted — Authorized Users Only</p>
+  <p class="sub">Defense Facility Watch</p>
+  <p class="lead">自衛隊基地・防衛施設の整備と、<br>防衛に関わる建築土木を追うページです。</p>
 
   <?php if ($error !== ''): ?>
     <p class="error" role="alert"><?= $h($error) ?></p>
@@ -121,7 +134,7 @@ button:disabled{opacity:.4;cursor:default}
     <button type="submit" <?= $lockedUntil > 0 ? 'disabled' : '' ?>>ログイン</button>
   </form>
 
-  <p class="note">社内限定の閲覧ページです。</p>
+  <p class="note">社内限定 / 社内ポータルとは別のIDです</p>
 </div>
 </body>
 </html>
