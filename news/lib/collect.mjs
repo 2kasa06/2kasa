@@ -4,6 +4,10 @@ import { get, mapLimit } from './http.mjs'
 import { parseFeed, stripHtml } from './feed.mjs'
 import { keywords, site } from '../config.mjs'
 
+// 採否を判断する文字列の長さ。見出しと説明文の頭だけを見る。
+// これより長く見ると、1項目に複数記事を詰めるフィードで無関係な記事を拾う。
+const THEME_TEXT_LIMIT = 600
+
 /**
  * テーマに合う記事か判定する。
  *
@@ -191,7 +195,15 @@ export async function collectArticles(sources, { now = new Date() } = {}) {
 
       const title = isGoogle ? stripSourceSuffix(item.title, item.sourceName) : item.title
 
-      const theme = matchesTheme(`${title}\n${description}`)
+      // 採否の判定と、あとで見直すために残す文字列は同じものを使う。
+      //
+      // 以前は判定を説明文の全文で行い、保存は先頭600字だけにしていた。
+      // 日刊建設工業新聞のように1項目へ複数記事の紹介を詰めるフィードでは、
+      // 遠くにある別記事の防衛語で通ってしまい、実際に防衛と無関係な
+      // 川崎の冷凍倉庫の記事が入った。見出しと説明文の頭だけで判断する。
+      const themeText = `${title}\n${description}`.slice(0, THEME_TEXT_LIMIT)
+
+      const theme = matchesTheme(themeText)
       if (!theme.matched) continue
 
       const key = articleKey(title, item.link)
@@ -235,7 +247,7 @@ export async function collectArticles(sources, { now = new Date() } = {}) {
         pickups: 1,
         // 採否を決めた材料をそのまま残す。設定を締め直したときに、
         // 収集時とまったく同じ根拠で過去の記事を見直せる。
-        matchText: `${title}\n${description}`.slice(0, 600),
+        matchText: themeText,
       })
       picked++
     }

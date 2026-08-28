@@ -302,6 +302,18 @@ await withServer(async (port) => {
     }
   })
 
+  await check('説明文の遠くにある語では通さない', () => {
+    // 1項目に複数記事を詰めるフィードで、別記事の防衛語に引っ張られていた。
+    // 実際に川崎の冷凍倉庫の記事が入った。
+    const head =
+      '日本ＧＬＰ／扇島に冷凍冷蔵倉庫群／総延べ３７万平米、投資額３０００億円\n' +
+      'ＪＦＥの高炉跡地に大規模物流施設群を段階整備する。保管能力は約55万トン。'.repeat(20)
+    assert.ok(head.length > 600, 'この検査には600字を超える材料が要る')
+    const withFarAway = `${head}\n沖縄防衛局が隊舎の建設工事を発注`
+    assert.equal(matchesTheme(withFarAway.slice(0, 600)).matched, false, '頭600字で通ってしまっている')
+    assert.equal(matchesTheme(withFarAway).matched, true, '全文なら通るはずの材料になっていない')
+  })
+
   console.log('\n地方の判定')
   await check('施設名から地方を当てる', () => {
     const cases = [
