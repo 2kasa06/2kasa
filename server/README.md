@@ -8,7 +8,7 @@
 ```
 朝7時 / 更新ボタン
   → GitHub Actions が収集・要約・HTML生成
-  → rsync で さくら の site/ に配信
+  → FTPS で さくら の site/ に配信
   → 社員がブラウザで見る（ログイン必須）
 ```
 
@@ -41,7 +41,7 @@
   api/status.php   進み具合
   lib/             設定と共通処理（.htaccess で外から読めない）
   state/           ログイン試行の記録（.htaccess で外から読めない）
-  site/            生成された HTML。GitHub Actions が rsync で置く
+  site/            生成された HTML。GitHub Actions が FTPS で置く
   assets/          ログイン画面の背景に使う日本地図
   .htaccess
   robots.txt
@@ -101,15 +101,19 @@ GitHub リポジトリの Settings → Secrets and variables → Actions に登�
 
 | 名前 | 中身 |
 |---|---|
-| `SAKURA_HOST` | `n-higuchi.sakura.ne.jp` |
-| `SAKURA_USER` | `n-higuchi` |
-| `SAKURA_PATH` | `/home/n-higuchi/www/news` |
-| `SAKURA_SSH_KEY` | 配信用の秘密鍵（パスフレーズ無し） |
-| `SAKURA_PORT` | 省略可。既定は 22 |
-| `SAKURA_KNOWN_HOSTS` | 省略可。設定すると接続先を確実に確かめられる |
+| `SAKURA_FTP_HOST` | `n-higuchi.sakura.ne.jp` |
+| `SAKURA_FTP_USER` | `n-higuchi` |
+| `SAKURA_FTP_PASS` | さくらの FTP パスワード |
+| `SAKURA_FTP_PATH` | `/home/n-higuchi/www/news` |
 
-鍵はさくらのコントロールパネルで公開鍵を登録し、秘密鍵を上に入れる。
-`SAKURA_HOST` が空のあいだ、配信の手順は丸ごと飛ばされる。
+`SAKURA_FTP_HOST` が空のあいだ、配信の手順は丸ごと飛ばされる。
+
+接続は FTPS（明示的 TLS）で、証明書も検証する。平文 FTP は使わない。
+パスワードは lftp へ標準入力から渡すので、`ps` にもログにも出ない。
+
+PHP 一式の設置は `ログイン機構をさくらへ設置`（`.github/workflows/deploy-server.yml`）が
+受け持つ。Actions の画面から手で実行する。設置後に外から見て、ログイン画面が出ることと
+`lib/` `state/` `site/` が遮断されていることを確かめ、駄目なら失敗で止まる。
 
 配信されるのは生成物（`docs/`）だけで、PHP 一式は同期しない。
 `lib/config.php` に鍵が入っているため、上書きされないようにしてある。
