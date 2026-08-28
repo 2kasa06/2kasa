@@ -72,6 +72,9 @@ jobs:
         continue-on-error: true
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # 「リンクされたアカウント」で作ったキーを使う場合だけ必要。
+          # ワークスペースを指定して作ったキーでは空のままでよい。
+          ANTHROPIC_WORKSPACE_ID: ${{ secrets.ANTHROPIC_WORKSPACE_ID }}
         run: npm run news:build
 
       - name: 結果をコミット

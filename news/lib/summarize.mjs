@@ -79,9 +79,20 @@ export function claudeAvailable() {
 }
 
 function getClient() {
-  if (!process.env.ANTHROPIC_API_KEY && !process.env.ANTHROPIC_AUTH_TOKEN) return null
+  if (!claudeAvailable()) return null
+
+  // 「リンクされたアカウント」で作ったキーは、どのワークスペースとして
+  // 動くのかを毎回のリクエストで指定しないと 400 を返す。
+  //   anthropic-workspace-id is required when authenticating with
+  //   an identity-linked API key
+  // ワークスペースを指定して作ったキーでは不要なので、あるときだけ付ける。
+  const workspaceId = process.env.ANTHROPIC_WORKSPACE_ID?.trim()
+  const options = workspaceId
+    ? { defaultHeaders: { 'anthropic-workspace-id': workspaceId } }
+    : {}
+
   return import('@anthropic-ai/sdk')
-    .then(({ default: Anthropic }) => new Anthropic())
+    .then(({ default: Anthropic }) => new Anthropic(options))
     .catch(() => null)
 }
 
