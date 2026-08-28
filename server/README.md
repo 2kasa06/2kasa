@@ -12,13 +12,27 @@
   → 社員がブラウザで見る（ログイン必須）
 ```
 
+## この設置での値
+
+さくらのコントロールパネルで確認した、実際の設置先。
+
+| | |
+|---|---|
+| 公開URL | `https://news.n-higuchi.jp/` |
+| サーバのホスト名 | `n-higuchi.sakura.ne.jp` |
+| アカウント | `n-higuchi` |
+| 公開フォルダ | `/home/n-higuchi/www/news` |
+
+同じサーバに社内ポータル（`portal.n-higuchi.jp`）が同居している。
+ログイン画面はどちらに入ろうとしているのか分かるよう、背景に日本地図を敷き、
+「社内ポータルとは別のID」と明記してある。
+
 ## 置くもの
 
-`server/public/` の中身を、ドメインの公開ディレクトリに置く。例えば
-`https://example.co.jp/news/` で見せるなら `~/www/news/` に入れる。
+`server/public/` の中身を、公開フォルダ（`/home/n-higuchi/www/news`）に置く。
 
 ```
-www/news/
+/home/n-higuchi/www/news/
   index.php        入口
   gate.php         ログインを確かめて HTML を返す
   login.php        ログイン画面
@@ -28,6 +42,7 @@ www/news/
   lib/             設定と共通処理（.htaccess で外から読めない）
   state/           ログイン試行の記録（.htaccess で外から読めない）
   site/            生成された HTML。GitHub Actions が rsync で置く
+  assets/          ログイン画面の背景に使う日本地図
   .htaccess
   robots.txt
 ```
@@ -86,9 +101,9 @@ GitHub リポジトリの Settings → Secrets and variables → Actions に登�
 
 | 名前 | 中身 |
 |---|---|
-| `SAKURA_HOST` | 例: `example.sakura.ne.jp` |
-| `SAKURA_USER` | さくらの初期ドメインのアカウント名 |
-| `SAKURA_PATH` | 例: `/home/example/www/news` |
+| `SAKURA_HOST` | `n-higuchi.sakura.ne.jp` |
+| `SAKURA_USER` | `n-higuchi` |
+| `SAKURA_PATH` | `/home/n-higuchi/www/news` |
 | `SAKURA_SSH_KEY` | 配信用の秘密鍵（パスフレーズ無し） |
 | `SAKURA_PORT` | 省略可。既定は 22 |
 | `SAKURA_KNOWN_HOSTS` | 省略可。設定すると接続先を確実に確かめられる |
