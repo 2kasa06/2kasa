@@ -5,6 +5,7 @@ declare(strict_types=1);
 define('NEWS_APP', true);
 require __DIR__ . '/../lib/auth.php';
 require __DIR__ . '/../lib/github.php';
+require __DIR__ . '/../lib/pull.php';
 
 if (!news_is_logged_in()) {
     news_json(['state' => 'failed', 'label' => 'ログインが切れています'], 401);
@@ -52,6 +53,16 @@ $conclusion = (string)($run['conclusion'] ?? '');
 
 if ($status === 'completed') {
     if ($conclusion === 'success') {
+        // 生成が終わっているので、ここで取りに行く。
+        // 押し込まれるのではなく取りに行くから、国外IPフィルタに触れない。
+        $pull = news_pull_if_needed();
+        if (!$pull['ok']) {
+            news_json([
+                'state' => 'failed',
+                'percent' => 100,
+                'label' => '受け取れませんでした（' . $pull['error'] . '）',
+            ]);
+        }
         news_json(['state' => 'done', 'percent' => 100, 'label' => '更新できました']);
     }
     news_json([

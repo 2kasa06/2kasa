@@ -35,9 +35,6 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
-    # 配信の要否をステップの if で判断するため、ジョブの env に上げておく
-    env:
-      SAKURA_FTP_HOST: ${{ secrets.SAKURA_FTP_HOST }}
     steps:
       - uses: actions/checkout@v4
 
@@ -114,41 +111,6 @@ jobs:
           done
           echo "::error::結果をブランチに push できませんでした。"
           exit 1
-
-      # さくらインターネットへ配信する。秘密が入っていなければ何もしない。
-      # PHP 一式（server/public/）は設定ファイルに鍵が入るので同期しない。
-      # 生成物だけを site/ に置く。設置は deploy-server.yml が受け持つ。
-      - name: さくらインターネットへ配信
-        if: env.SAKURA_FTP_HOST != ''
-        env:
-          SAKURA_FTP_HOST: ${{ secrets.SAKURA_FTP_HOST }}
-          SAKURA_FTP_USER: ${{ secrets.SAKURA_FTP_USER }}
-          SAKURA_FTP_PASS: ${{ secrets.SAKURA_FTP_PASS }}
-          SAKURA_FTP_PATH: ${{ secrets.SAKURA_FTP_PATH }}
-        run: |
-          set -euo pipefail
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq lftp
-
-          # パスワードを引数に置くと ps から見える。標準入力から渡す。
-          umask 077
-          script="$RUNNER_TEMP/lftp-deploy.txt"
-          trap 'rm -f "$script"' EXIT
-
-          # 平文 FTP は使わない。TLS を強制し、証明書も検証する。
-          cat > "$script" <<LFTP
-          set ftp:ssl-force true
-          set ftp:ssl-protect-data true
-          set ssl:verify-certificate true
-          set net:max-retries 3
-          set net:timeout 20
-          open -u "$SAKURA_FTP_USER","$SAKURA_FTP_PASS" "$SAKURA_FTP_HOST"
-          mirror --reverse --delete --parallel=4 docs/ "$SAKURA_FTP_PATH/site/"
-          bye
-          LFTP
-
-          lftp -f "$script"
-          echo "配信しました: $SAKURA_FTP_PATH/site/"
 
       - name: GitHub Pages 用に docs/ を渡す
         uses: actions/upload-pages-artifact@v3
