@@ -88,14 +88,28 @@ jobs:
             echo "更新なし"
             exit 0
           fi
-          git commit -m "ニュース更新: $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M')"
-          # 押せるまで数回試す。他の実行と重なった場合は取り込み直してから再送する。
+          # 押せるまで数回試す。
+          #
+          # rebase では解決できない。docs/ と data/ は毎回まるごと作り直されるため、
+          # 取り込もうとすると必ず全ファイルが競合する。すると rebase が途中で
+          # 止まったまま次の push が「Everything up-to-date」を返して成功扱いになり、
+          # 生成した結果が黙って消える（実際に起きた）。
+          # 生成物はこちらの内容が常に正しいので、最新の上に載せ直す。競合は起きない。
           for attempt in 1 2 3 4; do
+            git commit -q -m "ニュース更新: $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M')"
             if git push origin "HEAD:${GITHUB_REF_NAME}"; then
               exit 0
             fi
-            echo "push に失敗（${attempt}回目）。取り込み直して再試行します。"
-            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+
+            echo "push に失敗（${attempt}回目）。最新を取り込んで載せ直します。"
+            git fetch origin "${GITHUB_REF_NAME}"
+            # コミットは取り消すが、生成物は index に残る
+            git reset --soft "origin/${GITHUB_REF_NAME}"
+            git add docs data
+            if git diff --staged --quiet; then
+              echo "最新と同じ内容でした"
+              exit 0
+            fi
             sleep $((2 ** attempt))
           done
           echo "::error::結果をブランチに push できませんでした。"

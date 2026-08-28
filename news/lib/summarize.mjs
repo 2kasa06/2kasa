@@ -22,9 +22,10 @@ const SUMMARY_SCHEMA = {
           summary: {
             type: 'array',
             items: { type: 'string' },
-            minItems: 3,
-            maxItems: 3,
-            description: '日本語3行の要約。各行60字以内。',
+            // minItems / maxItems は 0 か 1 しか受け付けられない
+            // （For 'array' type, 'minItems' values other than 0 or 1 are not supported）。
+            // 行数は説明で伝え、受け取ったあとコード側で3行に整える。
+            description: 'ちょうど3行。各行60字以内の日本語。',
           },
           why: { type: 'string', description: 'なぜこの記事が押さえる価値があるか。1文。' },
           importance: { type: 'string', enum: ['high', 'normal', 'low'] },
@@ -44,9 +45,7 @@ const DIGEST_SCHEMA = {
     points: {
       type: 'array',
       items: { type: 'string' },
-      minItems: 1,
-      maxItems: 5,
-      description: '本日の要点。各行80字以内。',
+      description: '本日の要点。1〜5行。各行80字以内。',
     },
   },
   required: ['points'],
@@ -142,6 +141,14 @@ async function summarizeBatch(client, batch, offset) {
     .map((block) => block.text)
     .join('')
   return JSON.parse(text).results
+}
+
+/** 3行に揃える。多ければ削り、足りなければ埋める。 */
+function toThreeLines(lines) {
+  const cleaned = (Array.isArray(lines) ? lines : []).map((s) => String(s).trim()).filter(Boolean)
+  const three = cleaned.slice(0, 3)
+  while (three.length < 3) three.push('（この記事はここまでしか要点がありません）')
+  return three
 }
 
 // --- Claude が使えないときの代替 ---------------------------------------
@@ -250,7 +257,7 @@ export async function summarizeArticles(articles) {
     if (result && Array.isArray(result.summary) && result.summary.length > 0) {
       Object.assign(article, {
         category: categoryIds.includes(result.category) ? result.category : guessCategory(article.title),
-        summary: result.summary,
+        summary: toThreeLines(result.summary),
         why: result.why || '',
         importance: result.importance || 'normal',
         generatedBy: 'claude',
