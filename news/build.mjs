@@ -194,6 +194,25 @@ async function main() {
   // Pages が _ 始まりのパスを Jekyll 扱いしないようにする
   await fs.writeFile(path.join(DOCS, '.nojekyll'), '', 'utf8')
 
+  // さくらインターネットに配信したとき、生成物を直接読ませないための設定。
+  // 中身は PHP のログイン確認を通してから返す。ここに置いておかないと
+  // rsync --delete で消えてしまう。GitHub Pages はこのファイルを無視する。
+  await fs.writeFile(
+    path.join(DOCS, '.htaccess'),
+    [
+      '# 生成物。PHP のログイン確認を通してのみ配信する。',
+      '<IfModule mod_authz_core.c>',
+      '  Require all denied',
+      '</IfModule>',
+      '<IfModule !mod_authz_core.c>',
+      '  Order allow,deny',
+      '  Deny from all',
+      '</IfModule>',
+      '',
+    ].join('\n'),
+    'utf8',
+  )
+
   log(`  書き出し完了: docs/index.html（${recent.length}件）、日別 ${days.length}ページ`)
   await writeStepSummary(meta, digest)
 

@@ -207,6 +207,7 @@ ul.digest { margin: 0; padding: 0; }
 .mapbox { position: relative; }
 .mapbox svg { width: 100%; height: auto; display: block; }
 .mapbox .land { fill: #10222d; stroke: var(--line); stroke-width: .6; transition: fill .25s; }
+.mapbox use { cursor: default; }
 .mapbox .land.has { fill: #17394b; }
 .mapbox .land.on { fill: #1d5468; stroke: var(--cyan); }
 .pin { cursor: pointer; }
@@ -336,6 +337,58 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
              background: rgba(255,179,71,.09); color: var(--amber);
              font-family: var(--mono); font-size: .72rem; letter-spacing: .04em; }
 
+/* ---- 更新ボタン ---- */
+.refresh { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; cursor: pointer;
+           border: 1px solid var(--cyan-dim); background: rgba(95,224,255,.07); color: var(--cyan);
+           padding: 3px 12px; line-height: 1.6; }
+.refresh:hover { background: var(--cyan); color: #04222c; }
+.refresh:disabled { opacity: .45; cursor: default; }
+.refresh::before { content: "⟳"; margin-right: 6px; }
+
+/* ---- ローディング画面 ---- */
+/* 収集には時間がかかる。待たせている間、何を探しているのかが見えるようにする。 */
+.loading { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center;
+           background: rgba(4,10,14,.94); backdrop-filter: blur(3px); }
+.loading[hidden] { display: none; }
+.loading-inner { width: min(560px, 92vw); text-align: center; }
+.loading-head { font-family: var(--mono); font-size: .74rem; letter-spacing: .22em;
+                color: var(--cyan); text-transform: uppercase; margin-bottom: 4px; }
+.loading-sub { color: var(--text-dim); font-size: .8rem; margin: 0 0 14px; }
+.loading-map { position: relative; margin: 0 auto 16px; width: min(300px, 62vw); }
+.loading-map svg { width: 100%; height: auto; display: block; overflow: visible; }
+/* 地方がひとつずつ浮かび上がる */
+.loading-map .lland { fill: #15303e; stroke: var(--cyan-dim); stroke-width: .5;
+                      opacity: 0; animation: landIn .9s ease-out both; }
+.lens-ring { fill: rgba(95,224,255,.10); stroke: var(--cyan); stroke-width: 2; }
+.lens-glint { fill: none; stroke: rgba(255,255,255,.75); stroke-width: 1.2; stroke-linecap: round; }
+.lens-grip { stroke: var(--cyan); stroke-width: 3.4; stroke-linecap: round; }
+.lens-sweep { fill: none; stroke: var(--cyan); stroke-width: 1; opacity: .5;
+              animation: ping 1.8s ease-out infinite; transform-origin: center; transform-box: fill-box; }
+
+.loading-status { font-family: var(--mono); font-size: .8rem; color: var(--text);
+                  margin: 0 0 10px; min-height: 1.5em; }
+.loading-status::after { content: "▌"; color: var(--cyan); animation: blink 1s step-end infinite; }
+.loading-bar { height: 6px; background: var(--line-soft); border: 1px solid var(--line);
+               overflow: hidden; }
+.loading-fill { display: block; height: 100%; width: 0; background: var(--cyan);
+                box-shadow: 0 0 12px var(--cyan); transition: width .5s ease-out; }
+.loading-meta { display: flex; justify-content: space-between; margin-top: 7px;
+                font-family: var(--mono); font-size: .72rem; color: var(--text-faint); }
+.loading-meta b { color: var(--cyan); font-weight: 600; }
+.loading-log { list-style: none; margin: 16px 0 0; padding: 0; text-align: left;
+               font-family: var(--mono); font-size: .72rem; color: var(--text-faint);
+               max-height: 6.4em; overflow: hidden; }
+.loading-log li { animation: rise .3s ease-out both; }
+.loading-log li::before { content: "› "; color: var(--cyan-dim); }
+.loading-note { margin-top: 14px; font-size: .72rem; color: var(--text-faint); }
+.loading-note button { font-family: var(--mono); font-size: .72rem; cursor: pointer;
+                       background: none; border: 0; color: var(--cyan); text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-map .lland { animation: none; opacity: 1; }
+  .lens-sweep { display: none; }
+}
+
 /* ---- 吹き出し ---- */
 #tip { position: fixed; z-index: 9; pointer-events: none; opacity: 0;
        background: #04141c; border: 1px solid var(--cyan-dim); padding: 5px 10px;
@@ -351,6 +404,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
 @keyframes drop { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
 @keyframes ping { 0% { transform: scale(.6); opacity: .9; }
                   70% { transform: scale(2.1); opacity: 0; } 100% { opacity: 0; } }
+@keyframes landIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .rise { animation: rise .5s cubic-bezier(.2,.8,.2,1) both; animation-delay: var(--d, 0ms); }
 .scan { position: fixed; left: 0; right: 0; top: 0; height: 2px; z-index: 2; pointer-events: none;
         background: linear-gradient(90deg, transparent, rgba(95,224,255,.55), transparent);
@@ -432,6 +486,203 @@ const SCRIPT = `
       showTip({ clientX: r.left + r.width / 2, clientY: r.top }, el.dataset.tip);
     });
     el.addEventListener('blur', hideTip);
+  });
+
+  /* --- ローディング画面 ---
+     虫眼鏡を経路に沿って動かす。CSS の offset-path でも書けるが、
+     速度や折り返しを細かく制御したいので getPointAtLength で動かす。 */
+  var lens = document.getElementById('lens');
+  var track = document.getElementById('lens-track');
+  var lensTimer = null;
+
+  function startLens() {
+    if (!lens || !track || reduce || lensTimer) return;
+    var total = track.getTotalLength();
+    var started = null;
+    var cycle = 11000; // 1往復にかける時間
+    function step(now) {
+      if (started === null) started = now;
+      var p = ((now - started) % cycle) / cycle;
+      var point = track.getPointAtLength(p * total);
+      lens.setAttribute('transform', 'translate(' + point.x.toFixed(1) + ',' + point.y.toFixed(1) + ')');
+      lensTimer = requestAnimationFrame(step);
+    }
+    lensTimer = requestAnimationFrame(step);
+  }
+  function stopLens() {
+    if (lensTimer) cancelAnimationFrame(lensTimer);
+    lensTimer = null;
+  }
+
+  var overlay = document.getElementById('loading');
+  var elStatus = document.getElementById('loading-status');
+  var elFill = document.getElementById('loading-fill');
+  var elPct = document.getElementById('loading-pct');
+  var elStage = document.getElementById('loading-stage');
+  var elLog = document.getElementById('loading-log');
+  var elNote = document.getElementById('loading-note');
+  var btn = document.getElementById('refresh');
+
+  /* 収集の流れ。実際の進捗が取れないときはこの目安で進める。 */
+  var STAGES = [
+    { at: 4, stage: '接続', text: '情報源に接続しています' },
+    { at: 18, stage: '収集', text: '記事を集めています' },
+    { at: 38, stage: '照合', text: '同じ記事をまとめています' },
+    { at: 55, stage: '追跡', text: '元記事のページを開いています' },
+    { at: 72, stage: '読解', text: '本文を読み込んでいます' },
+    { at: 86, stage: '要約', text: '要点をまとめています' },
+    { at: 96, stage: '描画', text: '画面を組み立てています' }
+  ];
+  var lastStage = -1;
+  var floorPct = 0;
+
+  function setProgress(pct, label) {
+    pct = Math.max(0, Math.min(100, Math.round(pct)));
+    /* 一度進んだ割合は戻さない。実際の進捗と目安が行き来すると不安になる。 */
+    if (pct < floorPct) pct = floorPct;
+    floorPct = pct;
+    if (elFill) elFill.style.width = pct + '%';
+    if (elPct) elPct.textContent = String(pct);
+
+    var index = -1;
+    for (var i = 0; i < STAGES.length; i++) if (pct >= STAGES[i].at) index = i;
+    if (index > lastStage) {
+      lastStage = index;
+      var s = STAGES[index];
+      if (elStatus) elStatus.textContent = label || s.text;
+      if (elStage) elStage.textContent = s.stage;
+      if (elLog) {
+        var li = document.createElement('li');
+        li.textContent = s.text;
+        elLog.appendChild(li);
+        while (elLog.children.length > 5) elLog.removeChild(elLog.firstChild);
+      }
+    } else if (label && elStatus) {
+      elStatus.textContent = label;
+    }
+  }
+
+  function openLoading() {
+    if (!overlay) return;
+    lastStage = -1;
+    floorPct = 0;
+    if (elLog) elLog.innerHTML = '';
+    if (elNote) elNote.hidden = true;
+    overlay.hidden = false;
+    startLens();
+    setProgress(2);
+  }
+  function closeLoading() {
+    if (!overlay) return;
+    overlay.hidden = true;
+    stopLens();
+  }
+
+  /* --- 更新 ---
+     収集そのものは GitHub Actions が行う。配信サーバに受け口（refresh.php）が
+     置かれていればそれを叩き、進み具合を status.php から聞く。
+     受け口が無い静的配信では、動きだけ見せて読み込み直す。 */
+  var API = window.NEWS_API || null;
+
+  /* 配信サーバ経由のときだけ、誰で入っているかとログアウトを出す */
+  if (API && API.logout) {
+    var readout = document.querySelector('.readout');
+    if (readout) {
+      var span = document.createElement('span');
+      span.innerHTML = '<b></b> <a href="">ログアウト</a>';
+      span.querySelector('b').textContent = API.user || '';
+      var link = span.querySelector('a');
+      link.href = API.logout;
+      readout.appendChild(span);
+    }
+  }
+  var MIN_MS = 4200; // 一瞬で終わってもローディングが読めるだけは見せる
+
+  function simulate(startedAt, done) {
+    var timer = setInterval(function () {
+      var elapsed = Date.now() - startedAt;
+      var pct = Math.min(97, (elapsed / 7000) * 100);
+      setProgress(pct);
+      if (elapsed > 7400) { clearInterval(timer); done(); }
+    }, 220);
+  }
+
+  function poll(startedAt) {
+    var slowNoticeAt = startedAt + 90000;
+    var timer = setInterval(function () {
+      if (elNote && Date.now() > slowNoticeAt) elNote.hidden = false;
+      fetch(API.status, { credentials: 'same-origin', cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (data) {
+          if (!data) return;
+          if (typeof data.percent === 'number') setProgress(data.percent, data.label);
+          if (data.state === 'done') {
+            clearInterval(timer);
+            setProgress(100, '更新できました');
+            setTimeout(function () { location.reload(); }, 700);
+          } else if (data.state === 'failed') {
+            clearInterval(timer);
+            if (elStatus) elStatus.textContent = data.label || '更新に失敗しました';
+            if (elNote) elNote.hidden = false;
+            if (btn) btn.disabled = false;
+          }
+        })
+        .catch(function () { /* 一度の失敗では止めない */ });
+    }, 3000);
+  }
+
+  if (btn) {
+    btn.addEventListener('click', function () {
+      btn.disabled = true;
+      var startedAt = Date.now();
+      openLoading();
+
+      if (!API || !API.refresh) {
+        // 受け口が無い配信では、動きを見せてから読み込み直す
+        simulate(startedAt, function () {
+          setProgress(100, '最新の内容を読み込みます');
+          setTimeout(function () { location.reload(); }, 600);
+        });
+        return;
+      }
+
+      fetch(API.refresh, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ token: API.csrf || '' })
+      })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+        .then(function (res) {
+          if (!res.ok) {
+            setProgress(0, res.data && res.data.message ? res.data.message : '更新を始められませんでした');
+            if (elNote) elNote.hidden = false;
+            btn.disabled = false;
+            return;
+          }
+          setProgress(6, '収集を始めました');
+          /* 問い合わせを始めるまで割合が止まって見えないよう、
+             その間だけ目安で進めておく。 */
+          var warmup = setInterval(function () {
+            setProgress(6 + ((Date.now() - startedAt) / MIN_MS) * 16);
+          }, 200);
+          setTimeout(function () {
+            clearInterval(warmup);
+            poll(startedAt);
+          }, Math.max(0, MIN_MS - (Date.now() - startedAt)));
+        })
+        .catch(function () {
+          setProgress(0, '更新を始められませんでした');
+          if (elNote) elNote.hidden = false;
+          btn.disabled = false;
+        });
+    });
+  }
+
+  var cancel = document.getElementById('loading-cancel');
+  if (cancel) cancel.addEventListener('click', function () {
+    closeLoading();
+    if (btn) btn.disabled = false;
   });
 
   /* --- 絞り込み（カテゴリ × 地方 × キーワード） --- */
@@ -645,11 +896,13 @@ function japanMap(regionStats) {
   const byId = new Map(regionStats.list.map((r) => [r.id, r]))
   const maxCount = Math.max(1, ...regionStats.list.map((r) => r.count))
 
+  // 形そのものは layout() の <defs> に一度だけ置き、ここでは参照する。
+  // 同じ地図をローディング画面でも使うので、二重に持たない。
   const lands = mapRegions
     .map((region) => {
       const stat = byId.get(region.id)
       const has = stat && stat.count > 0
-      return `<path class="land${has ? ' has' : ''}" data-region="${escapeHtml(region.id)}" d="${region.d}"></path>`
+      return `<use class="land${has ? ' has' : ''}" data-region="${escapeHtml(region.id)}" href="#jp-${escapeHtml(region.id)}"></use>`
     })
     .join('\n      ')
 
@@ -814,6 +1067,75 @@ ${items.map((article) => renderCard(article, category.id)).join('\n')}
     .join('\n')
 }
 
+/** 虫眼鏡が日本の上をなぞる経路。北海道から南西諸島へ下り、また戻る。 */
+const LENS_PATH =
+  'M370,58 Q352,95 336,132 Q318,175 300,212 Q286,238 262,240 Q236,246 214,268 ' +
+  'Q190,290 168,296 Q146,308 128,330 Q108,352 92,392 Q76,432 66,462 ' +
+  'Q100,430 118,380 Q140,340 168,318 Q200,296 232,272 Q268,250 300,228 ' +
+  'Q334,196 356,140 Q368,100 372,62'
+
+/**
+ * ローディング画面。
+ *
+ * 収集は数分かかることがある。ただ待たせるのではなく、日本地図が順に浮かび上がり、
+ * 虫眼鏡が列島の上を探して回る。進み具合はバーと割合で示す。
+ *
+ * 地図の形は下の <defs> に一度だけ置き、地図パネルと共有する。
+ */
+function loadingScreen() {
+  const defs = mapRegions
+    .map((region) => `<path id="jp-${escapeHtml(region.id)}" d="${region.d}"></path>`)
+    .join('\n      ')
+
+  const lands = mapRegions
+    .map(
+      (region, i) =>
+        `<use class="lland" href="#jp-${escapeHtml(region.id)}" style="animation-delay:${i * 160}ms"></use>`,
+    )
+    .join('\n        ')
+
+  return `
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+      ${defs}
+  </defs>
+</svg>
+
+<div class="loading" id="loading" hidden role="dialog" aria-modal="true" aria-labelledby="loading-head">
+  <div class="loading-inner">
+    <div class="loading-head" id="loading-head">Scanning</div>
+    <p class="loading-sub">全国の情報源をあたっています</p>
+
+    <div class="loading-map">
+      <svg viewBox="${mapViewBox}" role="img" aria-label="日本地図の上を虫眼鏡が移動しています">
+        <g>
+        ${lands}
+        </g>
+        <path id="lens-track" d="${LENS_PATH}" fill="none" stroke="none"></path>
+        <g id="lens">
+          <circle class="lens-sweep" cx="0" cy="0" r="14"></circle>
+          <line class="lens-grip" x1="9" y1="9" x2="19" y2="19"></line>
+          <circle class="lens-ring" cx="0" cy="0" r="13"></circle>
+          <path class="lens-glint" d="M-6,-6 A9,9 0 0 1 1,-9"></path>
+        </g>
+      </svg>
+    </div>
+
+    <p class="loading-status" id="loading-status">情報源に接続しています</p>
+    <div class="loading-bar"><span class="loading-fill" id="loading-fill"></span></div>
+    <div class="loading-meta">
+      <span id="loading-stage">準備中</span>
+      <span><b id="loading-pct">0</b>%</span>
+    </div>
+
+    <ul class="loading-log" id="loading-log"></ul>
+    <p class="loading-note" id="loading-note" hidden>
+      時間がかかっています。<button type="button" id="loading-cancel">閉じる</button>
+    </p>
+  </div>
+</div>`
+}
+
 function layout({ title, body, description }) {
   riseIndex = 0
   return `<!DOCTYPE html>
@@ -830,9 +1152,11 @@ function layout({ title, body, description }) {
 <body>
 <div class="scan" aria-hidden="true"></div>
 <div id="tip" role="status" aria-live="polite"></div>
+${loadingScreen()}
 <div class="wrap">
 ${body}
 </div>
+<!--NEWS_API-->
 <script>${SCRIPT}</script>
 </body>
 </html>
@@ -856,6 +1180,7 @@ function pageHeader({ meta, stats, extra = '' }) {
     <span><span class="pulse ${escapeHtml(stats.sources.level)}" aria-hidden="true"></span> 系統 <b>${stats.sources.ok}/${stats.sources.total}</b></span>
     <span>現在 <b id="clock" class="mono">--:--:--</b> JST</span>
     <span>最終更新 <b>${escapeHtml(stampFormat.format(new Date(meta.updatedAt)))}</b></span>
+    <span><button class="refresh" type="button" id="refresh">更新</button></span>
     ${extra}
   </div>
 </header>`

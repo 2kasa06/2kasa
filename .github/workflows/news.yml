@@ -14,10 +14,12 @@ on:
       - 'docs/**'
       - 'data/**'
   schedule:
-    # cron は UTC。日本時間の 07:00 / 12:00 / 19:00 に走らせる。
+    # cron は UTC。日本時間の 07:00 に走らせる。
     - cron: '0 22 * * *'   # JST 07:00（前日UTC）
-    - cron: '0 3 * * *'    # JST 12:00
-    - cron: '0 10 * * *'   # JST 19:00
+
+  # 画面の更新ボタンはこれを叩く。手動実行にも使う。
+  # 注意: GitHub は既定ブランチにあるワークフローしか dispatch の対象にしないので、
+  # ボタンを効かせるにはこのファイルが既定ブランチに入っている必要がある。
   workflow_dispatch:
 
 # 実行が重なるとアーカイブの書き戻しが衝突するので、1本ずつ流す。
@@ -33,6 +35,9 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    # 配信の要否をステップの if で判断するため、ジョブの env に上げておく
+    env:
+      SAKURA_HOST: ${{ secrets.SAKURA_HOST }}
     steps:
       - uses: actions/checkout@v4
 
@@ -92,6 +97,38 @@ jobs:
           done
           echo "::error::結果をブランチに push できませんでした。"
           exit 1
+
+      # さくらインターネットへ配信する。秘密が入っていなければ何もしない。
+      # PHP 一式（server/public/）は設定ファイルに鍵が入るので同期しない。
+      # 生成物だけを site/ に置く。
+      - name: さくらインターネットへ配信
+        if: env.SAKURA_HOST != ''
+        env:
+          SAKURA_HOST: ${{ secrets.SAKURA_HOST }}
+          SAKURA_USER: ${{ secrets.SAKURA_USER }}
+          SAKURA_PATH: ${{ secrets.SAKURA_PATH }}
+          SAKURA_PORT: ${{ secrets.SAKURA_PORT || '22' }}
+          SAKURA_KEY: ${{ secrets.SAKURA_SSH_KEY }}
+          SAKURA_KNOWN_HOSTS: ${{ secrets.SAKURA_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$SAKURA_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          if [ -n "${SAKURA_KNOWN_HOSTS:-}" ]; then
+            printf '%s\n' "$SAKURA_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          else
+            # 事前に鍵を登録していない場合は取得する。
+            # 中間者を確実に防ぐなら SAKURA_KNOWN_HOSTS を設定すること。
+            ssh-keyscan -p "$SAKURA_PORT" "$SAKURA_HOST" > ~/.ssh/known_hosts 2>/dev/null
+          fi
+          chmod 600 ~/.ssh/known_hosts
+
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p $SAKURA_PORT -o StrictHostKeyChecking=yes" \
+            docs/ "$SAKURA_USER@$SAKURA_HOST:$SAKURA_PATH/site/"
+          echo "配信しました: $SAKURA_PATH/site/"
 
       - name: GitHub Pages 用に docs/ を渡す
         uses: actions/upload-pages-artifact@v3

@@ -1,0 +1,24 @@
+# さくらインターネットの公開ディレクトリに置く設定。
+
+# 生成物と設定は直接読ませない。中身は PHP 経由でだけ返す。
+<IfModule mod_authz_core.c>
+  <FilesMatch "\.(json|mjs)$">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+
+RewriteEngine On
+
+# site/ と lib/ と state/ への直接アクセスを止める
+RewriteRule ^(site|lib|state)/ - [F,L]
+
+# 生成された HTML への要求は、ログインを確かめる入口に回す
+RewriteRule ^archive\.html$ gate.php?f=archive.html [L,QSA]
+RewriteRule ^archive/([0-9]{4}-[0-9]{2}-[0-9]{2})\.html$ gate.php?f=archive/$1.html [L,QSA]
+
+DirectoryIndex index.php
+
+# 検索避け
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow"
+</IfModule>

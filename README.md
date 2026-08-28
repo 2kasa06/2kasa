@@ -18,7 +18,8 @@
 自衛隊基地・防衛施設の整備と、防衛に関わる建築土木だけを自動で集めて要約し、`docs/` に
 静的サイトとして書き出します。更新は GitHub Actions が1日3回行います。
 
-設定と使い方は [`news/README.md`](news/README.md) を参照してください。
+設定と使い方は [`news/README.md`](news/README.md)、社内向けに公開する手順は
+[`server/README.md`](server/README.md) を参照してください。
 公式サイト側のビルド（`npm run build`）とは経路が分かれており、互いに影響しません。
 
 ---
