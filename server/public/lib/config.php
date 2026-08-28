@@ -14,8 +14,11 @@ if (!defined('NEWS_APP')) {
 }
 
 return [
-    // ---- 更新ボタンから GitHub Actions を起動するための設定 ----
-    // 権限は「Actions: read and write」だけの fine-grained トークンで足りる。
+    // ---- GitHub とやりとりするための設定 ----
+    // 更新ボタンで収集を起こし、出来た生成物を取りに行くのに使う。
+    // fine-grained トークンで、権限は次の2つだけあればよい。
+    //   Actions:  Read and write  … 収集を起こす
+    //   Contents: Read            … 生成物を取りに行く
     // 空のままだと更新ボタンは動きを見せて読み込み直すだけになる。
     'github' => [
         'token' => '',                 // 例: github_pat_xxxxxxxx
