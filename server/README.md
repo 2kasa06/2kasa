@@ -8,7 +8,7 @@
 ```
 朝7時 / 更新ボタン
   → GitHub Actions が収集・要約・HTML生成
-  → rsync で さくら の site/ に配信
+  → FTPS で さくら の site/ に配信
   → 社員がブラウザで見る（ログイン必須）
 ```
 
@@ -41,7 +41,7 @@
   api/status.php   進み具合
   lib/             設定と共通処理（.htaccess で外から読めない）
   state/           ログイン試行の記録（.htaccess で外から読めない）
-  site/            生成された HTML。GitHub Actions が rsync で置く
+  site/            生成された HTML。GitHub Actions が FTPS で置く
   assets/          ログイン画面の背景に使う日本地図
   .htaccess
   robots.txt
@@ -106,7 +106,6 @@ GitHub リポジトリの Settings → Secrets and variables → Actions に登�
 | `SAKURA_FTP_PASS` | さくらの FTP パスワード |
 | `SAKURA_FTP_PATH` | `/home/n-higuchi/www/news` |
 
-鍵はさくらのコントロールパネルで公開鍵を登録し、秘密鍵を上に入れる。
 `SAKURA_FTP_HOST` が空のあいだ、配信の手順は丸ごと飛ばされる。
 
 接続は FTPS（明示的 TLS）で、証明書も検証する。平文 FTP は使わない。
