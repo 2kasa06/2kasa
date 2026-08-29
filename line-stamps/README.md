@@ -17,19 +17,32 @@
 
 ## LINE Creators Market の規定
 
+**スタンプ**（1パッケージ 8〜40個 / 連番は2桁）
+
 | 画像 | サイズ |
 | --- | --- |
 | スタンプ画像 | 横 80〜370px / 縦 80〜320px |
 | main.png | 240 × 240px |
 | tab.png | 96 × 74px |
 
-いずれも縦横とも**偶数ピクセル**の透過 PNG。全ファイルこの規定を満たしている。
+**絵文字**（1パッケージ 8〜40個 / 連番は**3桁** `001.png`〜）
+
+| 画像 | サイズ |
+| --- | --- |
+| 絵文字画像 | 180 × 180px 固定（余白をつけず画像いっぱいに） |
+| main.png | 240 × 240px |
+| tab.png | 96 × 74px |
+
+いずれも縦横とも**偶数ピクセル**の透過 PNG。ZIP は 20MB 以下。
 
 ## スクリプト
 
 ```sh
-# 1枚絵を16分割する
+# 1枚絵を16分割する（スタンプ / 4x4）
 python3 scripts/split_line_stamps.py "<1枚絵.png>" "<出力ディレクトリ>"
+
+# 1枚絵を40分割する（絵文字 / 8x5・180x180）
+python3 scripts/split_line_stamps.py "<1枚絵.png>" "<出力ディレクトリ>" --grid 8x5 --emoji
 
 # 既存の画像を規定サイズ・偶数pxに揃える
 python3 scripts/normalize_line_stamps.py line-stamps/タコスシリーズ/*/
@@ -37,7 +50,7 @@ python3 scripts/normalize_line_stamps.py line-stamps/タコスシリーズ/*/
 # main.png / tab.png を作る（元にするスタンプを指定）
 python3 scripts/make_main_tab.py line-stamps/タコスシリーズ/4/14.png
 
-# 「ZIPファイル アップロード」用の ZIP を作る
+# 「ZIPファイル アップロード」用の ZIP を作る（絵文字は --emoji）
 python3 scripts/pack_line_stamps.py line-stamps/upload line-stamps/*/*/
 ```
 

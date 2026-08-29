@@ -4,8 +4,11 @@
 main はセリフ込みの全体、tab は 96x74 と小さくて文字が潰れるため、
 文字とイラストの間の透過帯を検出してイラスト部分だけを使う。
 
+絵文字はセリフが入らないので、--no-caption を付けると切り出しをせず
+画像全体から作る。
+
 使い方:
-    python3 scripts/make_main_tab.py <スタンプ画像> [<出力ディレクトリ>]
+    python3 scripts/make_main_tab.py <元にする画像> [<出力ディレクトリ>] [--no-caption]
 """
 import sys
 from pathlib import Path
@@ -71,15 +74,17 @@ def contain(image, size, margin):
 
 
 def main():
-    if not 2 <= len(sys.argv) <= 3:
+    args = [a for a in sys.argv[1:] if a != "--no-caption"]
+    captioned = "--no-caption" not in sys.argv[1:]
+    if not 1 <= len(args) <= 2:
         raise SystemExit(__doc__)
-    source = Path(sys.argv[1])
-    out_dir = Path(sys.argv[2]) if len(sys.argv) == 3 else source.parent
+    source = Path(args[0])
+    out_dir = Path(args[1]) if len(args) == 2 else source.parent
     out_dir.mkdir(parents=True, exist_ok=True)
 
     image = Image.open(source).convert("RGBA")
     contain(image, MAIN_SIZE, MAIN_MARGIN).save(out_dir / "main.png")
-    contain(illustration(image), TAB_SIZE, TAB_MARGIN).save(out_dir / "tab.png")
+    contain(illustration(image) if captioned else image, TAB_SIZE, TAB_MARGIN).save(out_dir / "tab.png")
     print(f"{out_dir}/main.png\t240x240")
     print(f"{out_dir}/tab.png\t96x74")
 
