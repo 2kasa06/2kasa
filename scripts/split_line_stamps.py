@@ -26,8 +26,10 @@ MIN_W, MIN_H = 80, 80
 EMOJI_SIZE = 180
 EMOJI_MARGIN = 2       # 輪郭が縁で切れないための最小限の余白(px)
 # 区切りを探すときの「ほぼ空」の閾値。完全な空白で足りなければ順に緩める
-GAP_RATIOS = (0, 0.01, 0.02, 0.03, 0.05, 0.08)
+GAP_RATIOS = (0, 0.01, 0.02, 0.03, 0.05, 0.08, 0.12, 0.18)
 MIN_GAP_RATIO = 0.03   # コマ1つ分の何割以上の幅があれば区切りとみなすか
+MIN_SPAN, MAX_SPAN = 0.6, 1.6  # コマ1つ分に対して許すコマ幅の範囲
+REASSIGN_FACTOR = 2    # 隣のキャラクターがこの倍率より近いときだけ持ち主を移す
 
 
 def thin_runs(occupancy, threshold):
@@ -47,31 +49,70 @@ def thin_runs(occupancy, threshold):
 def grid_cuts(mask, axis, divisions):
     """格子の区切り位置（divisions-1 本）を求める。
 
-    軸方向に投影して空白区間を洗い出し、幅の広い順に必要な本数だけ採用する。
-    隣のコマの効果線が触れていて完全な空白にならないことがあるので、
-    足りなければ閾値を少しずつ緩めて探し直す。
+    軸方向に投影して空白に近い区間を洗い出し、その中からコマ幅が揃う
+    組み合わせを選ぶ。隣のコマの効果線が触れていて完全な空白にならない
+    ことがあるので、足りなければ閾値を少しずつ緩めて探し直す。
     """
     occupancy = mask.sum(axis=axis)
     length = len(occupancy)
-    depth = mask.shape[1 - axis]
+    depth = mask.shape[axis]  # 投影した方向の画素数 = 占有量の最大値
 
+    cell = length / divisions
     # コマ1つ分に対して極端に細い帯は、絵の隙間であって区切りではない
-    min_width = max(2, length / divisions * MIN_GAP_RATIO)
+    min_width = max(2, cell * MIN_GAP_RATIO)
 
     for ratio in GAP_RATIOS:
-        inner = [
-            r
+        midpoints = sorted(
+            (r[0] + r[1]) // 2
             for r in thin_runs(occupancy, depth * ratio)
             if r[0] > 0 and r[1] < length and r[1] - r[0] >= min_width
-        ]
-        if len(inner) >= divisions - 1:
-            widest = sorted(inner, key=lambda r: r[1] - r[0], reverse=True)[: divisions - 1]
-            return sorted((r[0] + r[1]) // 2 for r in widest)
+        )
+        cuts = choose_cuts(midpoints, length, divisions)
+        if cuts is not None:
+            return cuts
 
-    raise SystemExit(
-        f"格子の区切りを検出できませんでした (axis={axis}, "
-        f"必要 {divisions - 1} 本 / 検出 {len(inner)} 本)"
-    )
+    raise SystemExit(f"格子の区切りを検出できませんでした (axis={axis}, {divisions}分割)")
+
+
+def choose_cuts(midpoints, length, divisions):
+    """帯の候補から、コマ幅が揃う組み合わせを選ぶ。選べなければ None。
+
+    絵の中の隙間が候補に混ざるので、幅の広い順に採ると誤った位置で切ってしまう。
+    コマ幅が均等に近くなる組み合わせを動的計画法で選び、それでも極端に
+    広い／狭いコマが残る場合は候補が足りていないとみなす。
+    """
+    cell = length / divisions
+    points = [0, *midpoints, length]
+    infinity = float("inf")
+
+    # best[j][c] = points[j] までを c コマで区切ったときの (最小コスト, 直前の点)
+    best = [[(infinity, None)] * (divisions + 1) for _ in points]
+    best[0][0] = (0.0, None)
+    for j in range(1, len(points)):
+        for c in range(1, divisions + 1):
+            for i in range(j):
+                previous = best[i][c - 1][0]
+                if previous == infinity:
+                    continue
+                cost = previous + (points[j] - points[i] - cell) ** 2
+                if cost < best[j][c][0]:
+                    best[j][c] = (cost, i)
+
+    if best[-1][divisions][0] == infinity:
+        return None
+
+    chosen, j, c = [], len(points) - 1, divisions
+    while c:
+        j = best[j][c][1]
+        c -= 1
+        chosen.append(points[j])
+    chosen = sorted(chosen)[1:]  # 先頭の 0 は区切りではない
+
+    edges = [0, *chosen, length]
+    spans = [b - a for a, b in zip(edges[:-1], edges[1:])]
+    if min(spans) < cell * MIN_SPAN or max(spans) > cell * MAX_SPAN:
+        return None
+    return chosen
 
 
 def label_components(mask):
@@ -122,9 +163,25 @@ def label_components(mask):
     return labels
 
 
-def centroid(mask):
-    ys, xs = np.nonzero(mask)
-    return xs.mean(), ys.mean()
+def boxes_of(labels, count):
+    """ラベルごとの外接矩形 (x0, y0, x1, y1) をまとめて求める。"""
+    ys, xs = np.nonzero(labels)
+    order = np.argsort(labels[ys, xs], kind="stable")
+    ys, xs = ys[order], xs[order]
+    edges = np.searchsorted(labels[ys, xs], np.arange(count + 1))
+    boxes = {}
+    for label in range(1, count):
+        lo, hi = edges[label], edges[label + 1]
+        if lo < hi:
+            boxes[label] = (xs[lo:hi].min(), ys[lo:hi].min(), xs[lo:hi].max(), ys[lo:hi].max())
+    return boxes
+
+
+def box_gap(a, b):
+    """2つの外接矩形の隙間の距離。重なっていれば 0。"""
+    dx = max(0, a[0] - b[2], b[0] - a[2])
+    dy = max(0, a[1] - b[3], b[1] - a[3])
+    return np.hypot(dx, dy)
 
 
 def grid_cells(mask, cols, rows):
@@ -143,44 +200,46 @@ def grid_cells(mask, cols, rows):
 def owners(mask, cells):
     """各画素が「どのセルのものか」を表す配列を返す。
 
-    単純に矩形で切ると、コマの間に置かれた音符やキラキラが隣のコマに
-    混ざる。連結成分ごとに持ち主を決め、区切り線をまたぐものは一番近い
-    キャラクター（またがずに収まっている最大の成分）のセットに渡す。
+    基本はコマの矩形どおりに割り当てる。ただしコマの間に置かれた音符や
+    キラキラは、区切り位置のわずかな違いで隣のコマに移ってしまう。
+    自分のコマのキャラクターより隣のキャラクターのほうがはっきり近い
+    成分だけ、そちらに渡す。渡すのは同じ行の中だけ。スタンプのセリフは
+    上下の行のキャラクターに近いことがあり、行をまたいで動かすと文字が
+    隣のコマに移ってしまうため。
     """
     labels = label_components(mask)
+    count = labels.max() + 1
     cell_of_pixel = np.full(mask.shape, -1, np.int32)
     for index, (row, col) in enumerate(cells):
         cell_of_pixel[row[0]:row[1], col[0]:col[1]] = index
 
     inside = mask & (cell_of_pixel >= 0)
-    counts = np.bincount(
+    sizes = np.bincount(
         labels[inside] * len(cells) + cell_of_pixel[inside],
-        minlength=(labels.max() + 1) * len(cells),
-    ).reshape(-1, len(cells))
+        minlength=count * len(cells),
+    ).reshape(count, len(cells))
 
-    owner_of_label = counts.argmax(axis=1)
-    straddling = [
-        label for label in np.flatnonzero(counts.sum(axis=1)) if (counts[label] > 0).sum() > 1
-    ]
+    owner_of_label = sizes.argmax(axis=1)
+    boxes = boxes_of(labels, count)
 
-    # 各セルの「キャラクター」= またがずに収まっている最大の成分
+    # 各コマのキャラクター = そのコマに最も多くの画素を置いている成分
     bodies = {}
-    for label in np.flatnonzero(counts.sum(axis=1)):
-        if label in straddling:
-            continue
+    for label in boxes:
         cell = owner_of_label[label]
-        if counts[label, cell] > counts[bodies.get(cell, label), cell] or cell not in bodies:
+        if cell not in bodies or sizes[label, cell] > sizes[bodies[cell], cell]:
             bodies[cell] = label
 
-    for label in straddling:
-        candidates = [c for c in np.flatnonzero(counts[label]) if c in bodies]
-        if len(candidates) < 2:
+    for label in boxes:
+        cell = owner_of_label[label]
+        if bodies.get(cell) == label or cell not in bodies:
             continue
-        x, y = centroid(labels == label)
-        owner_of_label[label] = min(
-            candidates,
-            key=lambda c: np.hypot(*np.subtract(centroid(labels == bodies[c]), (x, y))),
-        )
+        same_row = [c for c in bodies if cells[c][0] == cells[cell][0]]
+        nearest = min(same_row, key=lambda c: box_gap(boxes[label], boxes[bodies[c]]))
+        if nearest == cell:
+            continue
+        own = box_gap(boxes[label], boxes[bodies[cell]])
+        if box_gap(boxes[label], boxes[bodies[nearest]]) * REASSIGN_FACTOR < own:
+            owner_of_label[label] = nearest
 
     return np.where(mask, owner_of_label[labels], -1)
 
