@@ -24,6 +24,20 @@
 
 ---
 
+## 同居しているもの: 施工管理会社サイト（`construction/`）
+
+建築の施工管理会社向けに作った、スクロール連動アニメーション中心のコーポレートサイトです。
+ビルド不要・依存ライブラリなしの素の HTML / CSS / JS だけで動きます。
+
+```bash
+python3 -m http.server 8000   # → http://localhost:8000/construction/
+```
+
+内容はサンプルなので、公開前に会社名・連絡先・実績の差し替えが必要です。
+詳細は [`construction/README.md`](construction/README.md) を参照してください。
+
+---
+
 ## ページ構成
 
 **トップ**

@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>株式会社ミライ建設マネジメント｜施工管理・現場のすべてを、見届ける。</title>
+<meta name="description" content="工程・品質・原価・安全。四つの管理で現場を支える施工管理会社、株式会社ミライ建設マネジメント。新築・改修・大規模プロジェクトの施工管理、施工図・BIM/CIM、現場DXまで一貫して伴走します。" />
+<meta property="og:title" content="株式会社ミライ建設マネジメント｜施工管理" />
+<meta property="og:description" content="つくるを、見届ける。四つの管理で現場を支える施工管理会社。" />
+<meta property="og:type" content="website" />
+<meta name="theme-color" content="#0b0c0e" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+<body>
+
+<!-- ============ ローディング ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <div class="loader__label">MIRAI CONSTRUCTION MANAGEMENT</div>
+    <div class="loader__count"><span id="loaderNum">0</span><i>%</i></div>
+    <div class="loader__bar"><span id="loaderBar"></span></div>
+  </div>
+  <div class="loader__curtain"></div>
+</div>
+
+<!-- ============ 固定オーバーレイ ============ -->
+<div class="grid-overlay" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+<div class="scan" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"></span></div>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- ============ ヘッダー ============ -->
+<header class="header" id="header">
+  <a class="brand" href="#top" data-cursor="link">
+    <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true">
+      <path d="M4 34 L20 6 L36 34 Z" fill="none" stroke="currentColor" stroke-width="2.4"/>
+      <path d="M12 34 L20 20 L28 34" fill="none" stroke="currentColor" stroke-width="2.4"/>
+    </svg>
+    <span class="brand__text">
+      <b>MIRAI</b>
+      <i>建設マネジメント</i>
+    </span>
+  </a>
+
+  <nav class="nav" aria-label="メインナビゲーション">
+    <a href="#about" data-cursor="link"><span>ABOUT</span><em>私たちについて</em></a>
+    <a href="#service" data-cursor="link"><span>SERVICE</span><em>事業内容</em></a>
+    <a href="#works" data-cursor="link"><span>WORKS</span><em>施工実績</em></a>
+    <a href="#flow" data-cursor="link"><span>FLOW</span><em>ご依頼の流れ</em></a>
+    <a href="#recruit" data-cursor="link"><span>RECRUIT</span><em>採用情報</em></a>
+  </nav>
+
+  <a class="header__cta" href="#contact" data-cursor="link" data-magnetic>
+    <span>お問い合わせ</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+  </a>
+
+  <button class="burger" id="burger" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="menu">
+    <span></span><span></span>
+  </button>
+</header>
+
+<!-- ============ フルスクリーンメニュー ============ -->
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu__bg"></div>
+  <div class="menu__body">
+    <ul class="menu__list">
+      <li><a href="#about"><b>01</b><span>ABOUT</span><em>私たちについて</em></a></li>
+      <li><a href="#service"><b>02</b><span>SERVICE</span><em>事業内容</em></a></li>
+      <li><a href="#works"><b>03</b><span>WORKS</span><em>施工実績</em></a></li>
+      <li><a href="#flow"><b>04</b><span>FLOW</span><em>ご依頼の流れ</em></a></li>
+      <li><a href="#recruit"><b>05</b><span>RECRUIT</span><em>採用情報</em></a></li>
+      <li><a href="#contact"><b>06</b><span>CONTACT</span><em>お問い合わせ</em></a></li>
+    </ul>
+    <div class="menu__foot">
+      <p>〒000-0000 東京都〇〇区〇〇 1-2-3 ミライビル 8F</p>
+      <p><a href="tel:0300000000">03-0000-0000</a>／<a href="mailto:info@example.com">info@example.com</a></p>
+    </div>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- ============ ヒーロー ============ -->
+  <section class="hero" id="hero">
+    <div class="hero__stage" aria-hidden="true">
+      <div class="hero__sky" data-parallax="0.12"></div>
+      <div class="hero__glow" data-parallax="0.24"></div>
+      <svg class="hero__city hero__city--far" data-parallax="0.06" viewBox="0 0 1600 500" preserveAspectRatio="xMidYMax slice">
+        <g fill="#15171b">
+          <rect x="40" y="180" width="120" height="320"/><rect x="190" y="240" width="90" height="260"/>
+          <rect x="310" y="120" width="140" height="380"/><rect x="480" y="260" width="110" height="240"/>
+          <rect x="620" y="90" width="130" height="410"/><rect x="780" y="200" width="100" height="300"/>
+          <rect x="910" y="150" width="150" height="350"/><rect x="1090" y="250" width="95" height="250"/>
+          <rect x="1215" y="130" width="135" height="370"/><rect x="1380" y="210" width="120" height="290"/>
+        </g>
+      </svg>
+      <svg class="hero__city hero__city--near" data-parallax="0.16" viewBox="0 0 1600 420" preserveAspectRatio="xMidYMax slice">
+        <g fill="#0d0e11">
+          <rect x="0" y="200" width="180" height="220"/><rect x="210" y="150" width="140" height="270"/>
+          <rect x="390" y="230" width="200" height="190"/><rect x="630" y="120" width="160" height="300"/>
+          <rect x="830" y="220" width="180" height="200"/><rect x="1050" y="160" width="150" height="260"/>
+          <rect x="1240" y="240" width="190" height="180"/><rect x="1460" y="180" width="140" height="240"/>
+        </g>
+      </svg>
+      <div class="hero__crane" data-parallax="0.3">
+        <svg viewBox="0 0 420 320" aria-hidden="true">
+          <g stroke="#f5c518" stroke-width="3" fill="none" stroke-linecap="square">
+            <path d="M120 320 V60"/><path d="M108 320 V60"/>
+            <path d="M108 90 H120 M108 130 H120 M108 170 H120 M108 210 H120 M108 250 H120 M108 290 H120"/>
+            <path d="M40 60 H400"/><path d="M40 74 H400"/>
+            <path d="M40 60 L114 20 L400 60"/>
+            <path class="crane-hook" d="M330 74 V150"/>
+          </g>
+          <rect class="crane-load" x="308" y="150" width="44" height="26" fill="none" stroke="#f5c518" stroke-width="3"/>
+        </svg>
+      </div>
+      <div class="hero__scanline"></div>
+    </div>
+
+    <div class="hero__content">
+      <p class="hero__eyebrow" data-reveal><span>CONSTRUCTION MANAGEMENT</span> ／ SINCE 1987</p>
+      <h1 class="hero__title">
+        <span class="line" data-split>つくるを、</span>
+        <span class="line line--accent" data-split>見届ける。</span>
+      </h1>
+      <p class="hero__lead" data-reveal data-reveal-delay="200">
+        工程・品質・原価・安全。<br />
+        四つの管理で、図面の一本の線が街の骨格になるまでを見届ける。<br />
+        それが、私たち施工管理という仕事です。
+      </p>
+      <div class="hero__actions" data-reveal data-reveal-delay="360">
+        <a class="btn btn--fill" href="#works" data-cursor="link" data-magnetic><span>施工実績を見る</span></a>
+        <a class="btn btn--ghost" href="#contact" data-cursor="link" data-magnetic><span>ご相談はこちら</span></a>
+      </div>
+    </div>
+
+    <div class="hero__side" aria-hidden="true">
+      <span class="hero__vertical">現場を、止めない。</span>
+    </div>
+
+    <a class="hero__scroll" href="#about" data-cursor="link">
+      <span>SCROLL</span>
+      <i></i>
+    </a>
+
+    <ul class="hero__ticker" aria-hidden="true">
+      <li><b>稼働現場</b><span id="tickerSites">42</span> 現場</li>
+      <li><b>有資格者</b>86 名</li>
+      <li><b>本日</b><span id="clock">--:--:--</span> JST</li>
+    </ul>
+  </section>
+
+  <!-- ============ 流れる帯 ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track" id="marqueeTrack">
+      <span>施工管理</span><i>◆</i><span>PROCESS</span><i>◆</i><span>品質管理</span><i>◆</i><span>QUALITY</span><i>◆</i>
+      <span>原価管理</span><i>◆</i><span>COST</span><i>◆</i><span>安全管理</span><i>◆</i><span>SAFETY</span><i>◆</i>
+    </div>
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section about" id="about">
+    <div class="section__head">
+      <p class="section__num">01</p>
+      <h2 class="section__title"><span data-split>ABOUT</span></h2>
+      <p class="section__jp" data-reveal>私たちについて</p>
+    </div>
+
+    <div class="about__body">
+      <p class="about__lead" data-split-words>
+        建物は、図面のままでは建たない。
+        何百人もの職人と、何千枚もの図面と、天候と、予算と、締切。
+        そのすべてを一本の線に束ねて、現場を前に進める。
+        私たちは、その仕事を三十八年続けてきました。
+      </p>
+      <div class="about__cols">
+        <div class="about__col" data-reveal>
+          <h3>現場に、必ず人がいる。</h3>
+          <p>すべての案件に有資格の施工管理技士が常駐します。日報・写真・是正指示までを当日中に共有し、「聞いていない」をなくします。</p>
+        </div>
+        <div class="about__col" data-reveal data-reveal-delay="120">
+          <h3>紙もクラウドも、両方で。</h3>
+          <p>BIM/CIM と遠隔臨場を標準運用しつつ、現場で本当に使われる紙の工程表も用意する。道具は現場に合わせて選びます。</p>
+        </div>
+        <div class="about__col" data-reveal data-reveal-delay="240">
+          <h3>引渡しの後も、続く。</h3>
+          <p>竣工検査から一年点検、その先の改修相談まで。建てて終わりではなく、建物が使われ続ける時間に付き合います。</p>
+        </div>
+      </div>
+    </div>
+
+    <ul class="stats" id="stats">
+      <li><b data-count="1280" data-suffix="">0</b><i>件</i><span>施工管理実績（累計）</span></li>
+      <li><b data-count="86">0</b><i>名</i><span>1級・2級 施工管理技士</span></li>
+      <li><b data-count="42">0</b><i>現場</i><span>同時稼働プロジェクト</span></li>
+      <li><b data-count="38">0</b><i>年</i><span>創業からの歩み</span></li>
+    </ul>
+  </section>
+
+  <!-- ============ SERVICE ============ -->
+  <section class="section service" id="service">
+    <div class="section__head">
+      <p class="section__num">02</p>
+      <h2 class="section__title"><span data-split>SERVICE</span></h2>
+      <p class="section__jp" data-reveal>事業内容</p>
+    </div>
+
+    <ul class="service__list">
+      <li class="service__item" data-reveal>
+        <span class="service__no">S-01</span>
+        <h3 class="service__name">施工管理<em>Construction Management</em></h3>
+        <p class="service__desc">工程・品質・原価・安全の四大管理を軸に、着工から引渡しまで現場を統括。定例会議の運営、協力会社の調整、検査対応まで一貫して担当します。</p>
+        <span class="service__arrow" aria-hidden="true">→</span>
+      </li>
+      <li class="service__item" data-reveal>
+        <span class="service__no">S-02</span>
+        <h3 class="service__name">施工図・BIM/CIM<em>Drawing &amp; Modeling</em></h3>
+        <p class="service__desc">意匠・構造・設備を三次元で統合し、着工前に干渉を潰す。手戻りの原因を図面の段階で消すことが、いちばん確実な工期短縮です。</p>
+        <span class="service__arrow" aria-hidden="true">→</span>
+      </li>
+      <li class="service__item" data-reveal>
+        <span class="service__no">S-03</span>
+        <h3 class="service__name">現場DX・遠隔臨場<em>Site DX</em></h3>
+        <p class="service__desc">ウェアラブルカメラと点群計測で、離れた現場の今を共有。移動時間を検査と是正の時間に振り替え、管理できる現場の数を増やします。</p>
+        <span class="service__arrow" aria-hidden="true">→</span>
+      </li>
+      <li class="service__item" data-reveal>
+        <span class="service__no">S-04</span>
+        <h3 class="service__name">技術者支援・常駐<em>Engineer Dispatch</em></h3>
+        <p class="service__desc">繁忙期の増員から、長期プロジェクトの常駐まで。現場代理人・主任技術者クラスの人員を、必要な期間だけ配置します。</p>
+        <span class="service__arrow" aria-hidden="true">→</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ WORKS（横スクロール） ============ -->
+  <section class="works" id="works">
+    <div class="works__sticky" id="worksSticky">
+      <div class="works__head">
+        <p class="section__num">03</p>
+        <h2 class="section__title works__title"><span data-split>WORKS</span></h2>
+        <p class="section__jp">施工実績</p>
+        <p class="works__hint" aria-hidden="true">SCROLL →</p>
+      </div>
+      <div class="works__track" id="worksTrack">
+        <article class="work work--1">
+          <div class="work__visual"><span class="work__grid"></span><span class="work__id">01</span></div>
+          <div class="work__meta">
+            <h3>都市型複合オフィス 新築工事</h3>
+            <dl><dt>所在</dt><dd>東京都</dd><dt>規模</dt><dd>S造 地上18階／延床 32,400㎡</dd><dt>竣工</dt><dd>2025</dd></dl>
+          </div>
+        </article>
+        <article class="work work--2">
+          <div class="work__visual"><span class="work__grid"></span><span class="work__id">02</span></div>
+          <div class="work__meta">
+            <h3>大規模物流倉庫 建設工事</h3>
+            <dl><dt>所在</dt><dd>千葉県</dd><dt>規模</dt><dd>S造 地上4階／延床 42,000㎡</dd><dt>竣工</dt><dd>2024</dd></dl>
+          </div>
+        </article>
+        <article class="work work--3">
+          <div class="work__visual"><span class="work__grid"></span><span class="work__id">03</span></div>
+          <div class="work__meta">
+            <h3>公立学校 校舎耐震改修</h3>
+            <dl><dt>所在</dt><dd>神奈川県</dd><dt>規模</dt><dd>RC造 4棟／在校中施工</dd><dt>竣工</dt><dd>2024</dd></dl>
+          </div>
+        </article>
+        <article class="work work--4">
+          <div class="work__visual"><span class="work__grid"></span><span class="work__id">04</span></div>
+          <div class="work__meta">
+            <h3>タワーレジデンス 新築工事</h3>
+            <dl><dt>所在</dt><dd>埼玉県</dd><dt>規模</dt><dd>RC造 地上24階／198戸</dd><dt>竣工</dt><dd>2023</dd></dl>
+          </div>
+        </article>
+        <article class="work work--5">
+          <div class="work__visual"><span class="work__grid"></span><span class="work__id">05</span></div>
+          <div class="work__meta">
+            <h3>商業施設 リニューアル工事</h3>
+            <dl><dt>所在</dt><dd>愛知県</dd><dt>規模</dt><dd>営業中フロア／夜間施工</dd><dt>竣工</dt><dd>2023</dd></dl>
+          </div>
+        </article>
+        <article class="work work--6">
+          <div class="work__visual"><span class="work__grid"></span><span class="work__id">06</span></div>
+          <div class="work__meta">
+            <h3>データセンター 新設工事</h3>
+            <dl><dt>所在</dt><dd>大阪府</dd><dt>規模</dt><dd>S造 地上3階／高負荷設備</dd><dt>竣工</dt><dd>2025</dd></dl>
+          </div>
+        </article>
+        <div class="works__end">
+          <p>ほかにも<br />年間 <b>60</b> 件超の<br />現場を管理しています。</p>
+          <a class="btn btn--fill" href="#contact" data-cursor="link" data-magnetic><span>実績資料を請求する</span></a>
+        </div>
+      </div>
+      <div class="works__bar" aria-hidden="true"><span id="worksBar"></span></div>
+    </div>
+  </section>
+
+  <!-- ============ FLOW ============ -->
+  <section class="section flow" id="flow">
+    <div class="section__head">
+      <p class="section__num">04</p>
+      <h2 class="section__title"><span data-split>FLOW</span></h2>
+      <p class="section__jp" data-reveal>ご依頼の流れ</p>
+    </div>
+
+    <ol class="flow__list" id="flowList">
+      <li class="flow__step" data-reveal>
+        <span class="flow__no">01</span>
+        <h3>ご相談・ヒアリング</h3>
+        <p>図面がまだ無い段階でも構いません。用途・規模・希望時期をうかがい、進め方の選択肢をお出しします。</p>
+      </li>
+      <li class="flow__step" data-reveal>
+        <span class="flow__no">02</span>
+        <h3>現地調査・体制構築</h3>
+        <p>現地条件と近隣状況を確認し、必要な資格者・人数・常駐期間を含めた管理体制をご提案します。</p>
+      </li>
+      <li class="flow__step" data-reveal>
+        <span class="flow__no">03</span>
+        <h3>施工計画・工程作成</h3>
+        <p>総合工程表、仮設計画、安全計画を作成。BIM/CIM で干渉を洗い出し、着工前に手戻りを潰します。</p>
+      </li>
+      <li class="flow__step" data-reveal>
+        <span class="flow__no">04</span>
+        <h3>現場管理・定例報告</h3>
+        <p>常駐管理と週次の定例報告。写真・出来高・是正状況をクラウドで共有し、遅れの兆候を早く出します。</p>
+      </li>
+      <li class="flow__step" data-reveal>
+        <span class="flow__no">05</span>
+        <h3>竣工・引渡し・アフター</h3>
+        <p>検査対応、是正、書類一式の整理まで。引渡し後も一年点検と改修のご相談を継続して承ります。</p>
+      </li>
+      <span class="flow__line" aria-hidden="true"><i id="flowLine"></i></span>
+    </ol>
+  </section>
+
+  <!-- ============ RECRUIT ============ -->
+  <section class="recruit" id="recruit">
+    <div class="recruit__bg" data-parallax="0.1" aria-hidden="true"></div>
+    <div class="recruit__inner">
+      <p class="section__num">05</p>
+      <h2 class="recruit__title"><span data-split>一緒に、</span><span data-split>街の骨格をつくる。</span></h2>
+      <p class="recruit__lead" data-reveal>
+        未経験からの入社が半数。資格取得の費用は全額会社負担、月平均残業は18.4時間、週休二日を現場単位で運用しています。<br />
+        「現場は厳しい」を、仕組みで変えていく仲間を探しています。
+      </p>
+      <ul class="recruit__points">
+        <li data-reveal><b>01</b>資格取得支援<span>受験費用・講習費・報奨金まで全額支給</span></li>
+        <li data-reveal data-reveal-delay="120"><b>02</b>働き方<span>四週八閉所・遠隔臨場で移動を削減</span></li>
+        <li data-reveal data-reveal-delay="240"><b>03</b>キャリア<span>入社3年で現場代理人を任せる育成計画</span></li>
+      </ul>
+      <a class="btn btn--fill btn--lg" href="#contact" data-cursor="link" data-magnetic><span>採用について問い合わせる</span></a>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section contact" id="contact">
+    <div class="section__head">
+      <p class="section__num">06</p>
+      <h2 class="section__title"><span data-split>CONTACT</span></h2>
+      <p class="section__jp" data-reveal>お問い合わせ</p>
+    </div>
+
+    <div class="contact__grid">
+      <div class="contact__info" data-reveal>
+        <p class="contact__lead">図面が一枚でも、構想だけでも。<br />まずは現場の状況をお聞かせください。</p>
+        <dl class="contact__dl">
+          <dt>電話</dt><dd><a href="tel:0300000000" data-cursor="link">03-0000-0000</a><small>平日 9:00–18:00</small></dd>
+          <dt>メール</dt><dd><a href="mailto:info@example.com" data-cursor="link">info@example.com</a></dd>
+          <dt>所在地</dt><dd>〒000-0000<br />東京都〇〇区〇〇 1-2-3 ミライビル 8F</dd>
+        </dl>
+      </div>
+
+      <form class="contact__form" id="contactForm" novalidate data-reveal data-reveal-delay="140">
+        <div class="field">
+          <input type="text" id="cf-name" name="name" required autocomplete="name" placeholder=" " />
+          <label for="cf-name">お名前<span>必須</span></label>
+        </div>
+        <div class="field">
+          <input type="text" id="cf-company" name="company" autocomplete="organization" placeholder=" " />
+          <label for="cf-company">会社名</label>
+        </div>
+        <div class="field">
+          <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder=" " />
+          <label for="cf-email">メールアドレス<span>必須</span></label>
+        </div>
+        <div class="field">
+          <select id="cf-type" name="type">
+            <option value="施工管理のご相談">施工管理のご相談</option>
+            <option value="施工図・BIM/CIM">施工図・BIM/CIM</option>
+            <option value="技術者の常駐・支援">技術者の常駐・支援</option>
+            <option value="採用について">採用について</option>
+            <option value="その他">その他</option>
+          </select>
+          <label for="cf-type" class="label--static">ご用件</label>
+        </div>
+        <div class="field field--wide">
+          <textarea id="cf-body" name="body" rows="5" required placeholder=" "></textarea>
+          <label for="cf-body">お問い合わせ内容<span>必須</span></label>
+        </div>
+        <button class="btn btn--fill btn--lg" type="submit" data-cursor="link" data-magnetic><span>送信する</span></button>
+        <p class="contact__note" id="formNote" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- ============ フッター ============ -->
+<footer class="footer">
+  <div class="footer__marquee" aria-hidden="true">
+    <div class="footer__track">
+      <span>MIRAI CONSTRUCTION MANAGEMENT</span><i>●</i><span>MIRAI CONSTRUCTION MANAGEMENT</span><i>●</i>
+    </div>
+  </div>
+  <div class="footer__body">
+    <div class="footer__brand">
+      <b>株式会社ミライ建設マネジメント</b>
+      <span>MIRAI CONSTRUCTION MANAGEMENT CO., LTD.</span>
+    </div>
+    <ul class="footer__nav">
+      <li><a href="#about" data-cursor="link">私たちについて</a></li>
+      <li><a href="#service" data-cursor="link">事業内容</a></li>
+      <li><a href="#works" data-cursor="link">施工実績</a></li>
+      <li><a href="#flow" data-cursor="link">ご依頼の流れ</a></li>
+      <li><a href="#recruit" data-cursor="link">採用情報</a></li>
+      <li><a href="#contact" data-cursor="link">お問い合わせ</a></li>
+    </ul>
+    <p class="footer__copy">© <span id="year">2026</span> MIRAI CONSTRUCTION MANAGEMENT CO., LTD.</p>
+  </div>
+  <button class="totop" id="totop" type="button" aria-label="ページ上部へ戻る" data-cursor="link">↑</button>
+</footer>
+
+<script src="./assets/js/main.js" defer></script>
+</body>
+</html>
