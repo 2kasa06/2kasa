@@ -127,6 +127,19 @@ def centroid(mask):
     return xs.mean(), ys.mean()
 
 
+def grid_cells(mask, cols, rows):
+    """各コマの矩形 (行の範囲, 列の範囲) を並べて返す。
+
+    列の区切りは行ごとに検出する。1枚絵によっては行ごとに横位置が
+    少しずつずれていて、全体で投影すると区切りが埋まってしまうため。
+    """
+    cells = []
+    for row in bounds(grid_cuts(mask, 1, rows), mask.shape[0]):
+        band = mask[row[0]:row[1]]
+        cells.extend((row, col) for col in bounds(grid_cuts(band, 0, cols), mask.shape[1]))
+    return cells
+
+
 def owners(mask, cells):
     """各画素が「どのセルのものか」を表す配列を返す。
 
@@ -216,9 +229,7 @@ def split(src_path, out_dir, grid, emoji):
     image = Image.open(src_path).convert("RGBA")
     mask = np.array(image)[:, :, 3] > ALPHA_THRESHOLD
 
-    row_bounds = bounds(grid_cuts(mask, 1, rows), image.height)
-    col_bounds = bounds(grid_cuts(mask, 0, cols), image.width)
-    cells = [(r, c) for r in row_bounds for c in col_bounds]
+    cells = grid_cells(mask, cols, rows)
     owner = owners(mask, cells)
 
     out_dir.mkdir(parents=True, exist_ok=True)
