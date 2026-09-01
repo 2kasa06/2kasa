@@ -132,7 +132,57 @@ const googleNews = (query, opts = {}) => ({
  * 記事は載るので、入口で例外を作らない。
  */
 export const sources = [
+  // --- 一次情報（有料の壁が無く、施設・工事の話では新聞より濃い） ---
+  //
+  // 官公庁と自治体の RSS は 2026 年時点でほぼ全滅していて（防衛省の調達情報、
+  // 沖縄県・鹿児島県・西之表市・名護市などは軒並み 404）、代わりに使えたのが
+  // 国会会議録の API と、国土交通省・日経クロステックのフィードだった。
+  // 診断は `node news/tools/probe.mjs`（GitHub Actions の「情報源の診断」）で回せる。
+  {
+    id: 'kokkai:防衛施設',
+    name: '国会会議録「防衛施設」',
+    kind: 'kokkai',
+    hint: '一次情報',
+    query: '防衛施設',
+  },
+  {
+    id: 'kokkai:駐屯地',
+    name: '国会会議録「駐屯地」',
+    kind: 'kokkai',
+    hint: '一次情報',
+    query: '駐屯地',
+  },
+  {
+    id: 'kokkai:辺野古',
+    name: '国会会議録「辺野古」',
+    kind: 'kokkai',
+    hint: '一次情報',
+    query: '辺野古',
+  },
+  {
+    id: 'kokkai:馬毛島',
+    name: '国会会議録「馬毛島」',
+    kind: 'kokkai',
+    hint: '一次情報',
+    query: '馬毛島',
+  },
+  {
+    id: 'mlit',
+    name: '国土交通省 報道発表',
+    kind: 'rss',
+    hint: '一次情報',
+    // EUC-JP で配信されている。http.mjs が文字コードを見て読む。
+    urls: ['https://www.mlit.go.jp/index.rdf'],
+  },
+
   // --- 専門媒体・一次情報 ---
+  {
+    id: 'xtech',
+    name: '日経クロステック',
+    kind: 'rss',
+    hint: '建設専門',
+    urls: ['https://xtech.nikkei.com/rss/index.rdf'],
+  },
   {
     id: 'mod',
     name: '防衛省・自衛隊 報道発表',

@@ -9,6 +9,36 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
  * @returns {Promise<{ok: boolean, status: number, url: string, body: string, error?: string}>}
  * 例外は投げない。呼び出し側が1件の失敗で止まらないようにするため。
  */
+/**
+ * 応答を文字コードに合わせて読む。
+ *
+ * res.text() は中身が何であれ UTF-8 として読む。官公庁のフィードには
+ * まだ Shift_JIS や EUC-JP が残っていて、そのままだと丸ごと化ける。
+ * Content-Type の charset を見て、無ければ XML 宣言から拾う。
+ */
+async function readBody(res) {
+  const buf = new Uint8Array(await res.arrayBuffer())
+
+  const fromHeader = /charset=["']?([\w-]+)/i.exec(res.headers.get('content-type') || '')
+  let label = fromHeader ? fromHeader[1] : ''
+
+  if (!label) {
+    // 宣言は先頭にあり、ASCII 互換なので、そこだけ仮に読んで探す。
+    const head = new TextDecoder('utf-8').decode(buf.subarray(0, 512))
+    const fromXml = /encoding=["']([\w-]+)["']/i.exec(head)
+    if (fromXml) label = fromXml[1]
+  }
+
+  if (!label || /^utf-?8$/i.test(label)) return new TextDecoder('utf-8').decode(buf)
+
+  try {
+    return new TextDecoder(label).decode(buf)
+  } catch {
+    // 知らない名前だったときは、化けても落とさず UTF-8 として返す。
+    return new TextDecoder('utf-8').decode(buf)
+  }
+}
+
 export async function get(url, { timeoutMs = 20000, retries = 2, accept } = {}) {
   let lastError = 'unknown'
   // 混雑・制限（429/503）は間を空けないと意味がない。実データでは Google ニュースの
@@ -33,7 +63,7 @@ export async function get(url, { timeoutMs = 20000, retries = 2, accept } = {}) 
           ...(accept ? { accept } : {}),
         },
       })
-      const body = await res.text()
+      const body = await readBody(res)
       if (!res.ok) {
         lastError = `HTTP ${res.status}`
         // 4xx は何度やっても同じなので、429 以外は即あきらめる

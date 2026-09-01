@@ -139,7 +139,66 @@ export async function fetchArticleText(url) {
 }
 
 /** 情報源1件を読む。候補URLを上から試し、最初に読めたものを採用する。 */
+/**
+ * 国会会議録検索システムから、防衛施設に触れた発言を拾う。
+ *
+ * 官公庁も自治体も RSS をやめてしまったが、ここは JSON で答える。
+ * 有料の壁が無く、発言の全文が取れるので、施設や工事の話では新聞より濃い。
+ * 発言は長いので、検索語の周りを切り出して渡す。頭から600字では
+ * 前置きの挨拶しか入らず、主題の判定に引っかからない。
+ */
+async function readKokkai(source) {
+  const attempts = []
+  const query = source.query
+  const from = new Date(Date.now() - site.windowDays * 24 * 60 * 60 * 1000)
+  // 試験では差し替えられるようにしておく。外に出られない環境でも検証したい。
+  const endpoint = source.endpoint || 'https://kokkai.ndl.go.jp/api/speech'
+  const url =
+    endpoint + '?' +
+    new URLSearchParams({
+      any: query,
+      from: from.toISOString().slice(0, 10),
+      recordPacking: 'json',
+      maximumRecords: '20',
+    })
+
+  const res = await get(url, { timeoutMs: 20000, retries: 1, accept: 'application/json' })
+  if (!res.ok) return { ok: false, url: null, items: [], attempts: [`${url} → ${res.error}`] }
+
+  let json = null
+  try {
+    json = JSON.parse(res.body)
+  } catch (err) {
+    return { ok: false, url: null, items: [], attempts: [`${url} → JSONとして読めない`] }
+  }
+  if (!Array.isArray(json.speechRecord)) {
+    return { ok: false, url: null, items: [], attempts: [`${url} → 応答の形が想定と違う`] }
+  }
+
+  const items = json.speechRecord
+    .filter((r) => r && r.speech && r.speechURL)
+    .map((r) => {
+      const text = String(r.speech).replace(/\s+/g, ' ').trim()
+      const at = text.indexOf(query)
+      const start = at >= 0 ? Math.max(0, at - 150) : 0
+      const excerpt = (start > 0 ? '…' : '') + text.slice(start, start + 1800)
+      const who = [r.speaker, r.speakerPosition || r.speakerGroup].filter(Boolean).join('・')
+      return {
+        title: `${r.nameOfHouse || ''}${r.nameOfMeeting || ''}　${who}（${r.date || ''}）`,
+        link: String(r.speechURL),
+        description: excerpt,
+        publishedAt: r.date ? `${r.date}T09:00:00+09:00` : null,
+        sourceName: '国会会議録',
+        sourceUrl: 'https://kokkai.ndl.go.jp',
+      }
+    })
+
+  return { ok: true, url, items, attempts }
+}
+
 async function readSource(source) {
+  if (source.kind === 'kokkai') return readKokkai(source)
+
   const attempts = []
   for (const url of source.urls) {
     const res = await get(url, { timeoutMs: 20000, retries: 1, accept: 'application/rss+xml, application/xml, text/xml, */*' })

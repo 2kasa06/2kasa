@@ -243,6 +243,16 @@ ul.digest { margin: 0; padding: 0; }
 .chip:hover { border-color: var(--cyan-dim); color: var(--text); }
 .chip[aria-pressed="true"] { background: var(--cyan); border-color: var(--cyan); color: #04222c;
                              font-weight: 700; box-shadow: 0 0 14px rgba(95,224,255,.35); }
+.sortsel { margin-left: auto; display: flex; gap: 0; }
+.sortbtn { font-family: var(--mono); font-size: .72rem; letter-spacing: .05em; cursor: pointer;
+  padding: 6px 13px; background: transparent; color: var(--text-faint);
+  border: 1px solid var(--line); }
+.sortbtn + .sortbtn { border-left: 0; }
+.sortbtn:hover { color: var(--text); border-color: var(--cyan-dim); }
+.sortbtn[aria-pressed="true"] { background: var(--line-soft); color: var(--cyan); border-color: var(--cyan-dim); }
+.chart .hit { cursor: pointer; }
+.chart .hit:focus { outline: 1px solid var(--cyan); outline-offset: -1px; }
+.chart .hit[aria-pressed="true"] + .bar { opacity: 1; filter: brightness(1.6); }
 .chip .dot { display: inline-block; width: 7px; height: 7px; margin-right: 7px;
              vertical-align: middle; }
 .search { width: 100%; margin-bottom: 26px; padding: 11px 14px; font-family: var(--mono);
@@ -464,7 +474,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
   <div class="readout">
     <span><span class="pulse good" aria-hidden="true"></span> 系統 <b>23/23</b></span>
     <span>現在 <b id="clock" class="mono">--:--:--</b> JST</span>
-    <span>最終更新 <b>2026/09/01 9:20</b></span>
+    <span>最終更新 <b>2026/09/01 9:25</b></span>
     <span><button class="refresh" type="button" id="refresh">更新</button></span>
     <span><a href="./archive.html">過去の記事 ▸</a></span>
   </div>
@@ -604,7 +614,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
 </div>
 <div class="panel tile" class="rise" style="--d:90ms">
   <div class="k">New<span class="jp">今回の新着</span></div>
-  <div class="v"><span class="mono" data-value="14">14</span><small>件</small></div>
+  <div class="v"><span class="mono" data-value="0">0</span><small>件</small></div>
 </div>
 <div class="panel tile amber" class="rise" style="--d:135ms">
   <div class="k">Priority<span class="jp">要注目</span></div>
@@ -623,7 +633,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
 <div class="grid cols">
   <section class="panel " class="rise" style="--d:270ms">
   <div class="ph"><span>Briefing</span><span class="jp">本日の要点</span><span class="code">SEC-01</span></div>
-  <div class="body"><ul class="digest"><li>防衛省27年度概算要求（過去最大8兆8908億円）の地域別内訳が一斉に判明。沖縄関係経費は歳出ベース2201億5200万円で過去最高、米軍再編経費は事項要求。</li><li>沖縄は自衛隊施設整備約1350億円。沖縄訓練場（沖縄市）内に「九州補給処沖縄支処（仮称）」を新設し27年度から本格着工、久米島に次期レーダー、那覇病院機能強化、北大東に庁舎。</li><li>鹿児島は施設整備533億円。馬毛島でF-35B用艦艇模擬施設、鹿屋基地関連243億円（弾薬庫2棟・送信所撤去）、瀬戸内分屯地弾薬庫3棟29億円、古仁屋港須手地区の港湾112億円、奄美駐屯地22億円。鹿屋の大型無人機は31年度めど10機体制。</li><li>弾薬庫整備が全国で具体化。京都関係415億円で陸自祝園分屯地に新棟、府北部にも2棟新設。佐賀は3施設約10億円（目達原の自動化倉庫、鳥栖の隊庁舎設計、背振山の火薬庫建て替え）で佐賀駐屯地は要求ゼロ、体育館等は28年度以降。</li><li>呉市では防衛省が日本製鉄跡地を取得（日鉄と売買契約締結）、火薬庫・無人機製造施設・企業誘致エリアの複合防衛拠点へ。呉市は27日に呉港の特定利用港湾指定に同意する方針で中国地方3例目。</li></ul></div>
+  <div class="body"><ul class="digest"><li>防衛省27年度概算要求（過去最大8兆8908億円）で全国の施設整備が判明。沖縄関係経費は歳出2201億5200万円で過去最高、県内自衛隊施設整備は約1350億円。</li><li>沖縄は沖縄市の沖縄訓練場内に「九州補給処沖縄支処（仮称）」を新設し27年度から本格着工、久米島に次期レーダー、那覇病院機能強化、北大東に庁舎。米軍再編経費は事項要求。</li><li>鹿児島関連は施設整備533億円。馬毛島F-35B用艦艇模擬施設、鹿屋基地243億円（弾薬庫2棟・送信所撤去）、瀬戸内分屯地弾薬庫3棟29億円、奄美駐屯地22億円、古仁屋港須手地区の港湾112億円。鹿屋の大型無人機は31年度めど10機体制。</li><li>弾薬庫整備が各地で拡大。京都関係415億円で祝園分屯地に新棟、府北部に2棟新設。佐賀は3施設約10億円で佐賀駐屯地はゼロ（体育館・倉庫・火薬庫は28年度以降）。</li><li>防衛省が呉市の日本製鉄跡地を取得し火薬庫・無人機製造施設・企業誘致エリアの複合拠点へ。呉市は特定利用港湾への同意方針（中国地方3例目）。普天間は補修事業が24施設に拡大、26年度38億円計上で総額300億円超の見込み。</li></ul></div>
 </section>
   <section class="panel " class="rise" style="--d:315ms">
   <div class="ph"><span>Feed Status</span><span class="jp">情報源の稼働</span><span class="code">SEC-02</span></div>
@@ -649,85 +659,113 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
     
     <g>
       <rect class="hit" x="0" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/19 0件" data-tip="8/19 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-19"
+            aria-label="8/19 0件。押すとこの日の記事だけを表示"
+            data-tip="8/19 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="40" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/20 1件" data-tip="8/20 1件"></rect>
+            tabindex="0" role="button" data-day="2026-08-20"
+            aria-label="8/20 1件。押すとこの日の記事だけを表示"
+            data-tip="8/20 1件"></rect>
       <path class="bar" d="M43,108V97.57142857142857a3,3 0 0 1 3,-3h28a3,3 0 0 1 3,3V108Z" fill="var(--cyan)" opacity=".62" style="transform:scaleY(0)"></path>
       
     </g>
     <g>
       <rect class="hit" x="80" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/21 4件" data-tip="8/21 4件"></rect>
+            tabindex="0" role="button" data-day="2026-08-21"
+            aria-label="8/21 4件。押すとこの日の記事だけを表示"
+            data-tip="8/21 4件"></rect>
       <path class="bar" d="M83,108V57.285714285714285a3,3 0 0 1 3,-3h28a3,3 0 0 1 3,3V108Z" fill="var(--cyan)" opacity=".62" style="transform:scaleY(0)"></path>
       
     </g>
     <g>
       <rect class="hit" x="120" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/22 1件" data-tip="8/22 1件"></rect>
+            tabindex="0" role="button" data-day="2026-08-22"
+            aria-label="8/22 1件。押すとこの日の記事だけを表示"
+            data-tip="8/22 1件"></rect>
       <path class="bar" d="M123,108V97.57142857142857a3,3 0 0 1 3,-3h28a3,3 0 0 1 3,3V108Z" fill="var(--cyan)" opacity=".62" style="transform:scaleY(0)"></path>
       
     </g>
     <g>
       <rect class="hit" x="160" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/23 1件" data-tip="8/23 1件"></rect>
+            tabindex="0" role="button" data-day="2026-08-23"
+            aria-label="8/23 1件。押すとこの日の記事だけを表示"
+            data-tip="8/23 1件"></rect>
       <path class="bar" d="M163,108V97.57142857142857a3,3 0 0 1 3,-3h28a3,3 0 0 1 3,3V108Z" fill="var(--cyan)" opacity=".62" style="transform:scaleY(0)"></path>
       
     </g>
     <g>
       <rect class="hit" x="200" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/24 3件" data-tip="8/24 3件"></rect>
+            tabindex="0" role="button" data-day="2026-08-24"
+            aria-label="8/24 3件。押すとこの日の記事だけを表示"
+            data-tip="8/24 3件"></rect>
       <path class="bar" d="M203,108V70.71428571428572a3,3 0 0 1 3,-3h28a3,3 0 0 1 3,3V108Z" fill="var(--cyan)" opacity=".62" style="transform:scaleY(0)"></path>
       
     </g>
     <g>
       <rect class="hit" x="240" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/25 1件" data-tip="8/25 1件"></rect>
+            tabindex="0" role="button" data-day="2026-08-25"
+            aria-label="8/25 1件。押すとこの日の記事だけを表示"
+            data-tip="8/25 1件"></rect>
       <path class="bar" d="M243,108V97.57142857142857a3,3 0 0 1 3,-3h28a3,3 0 0 1 3,3V108Z" fill="var(--cyan)" opacity=".62" style="transform:scaleY(0)"></path>
       
     </g>
     <g>
       <rect class="hit" x="280" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/26 1件" data-tip="8/26 1件"></rect>
+            tabindex="0" role="button" data-day="2026-08-26"
+            aria-label="8/26 1件。押すとこの日の記事だけを表示"
+            data-tip="8/26 1件"></rect>
       <path class="bar" d="M283,108V97.57142857142857a3,3 0 0 1 3,-3h28a3,3 0 0 1 3,3V108Z" fill="var(--cyan)" opacity=".62" style="transform:scaleY(0)"></path>
       
     </g>
     <g>
       <rect class="hit" x="320" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/27 2件" data-tip="8/27 2件"></rect>
+            tabindex="0" role="button" data-day="2026-08-27"
+            aria-label="8/27 2件。押すとこの日の記事だけを表示"
+            data-tip="8/27 2件"></rect>
       <path class="bar" d="M323,108V84.14285714285714a3,3 0 0 1 3,-3h28a3,3 0 0 1 3,3V108Z" fill="var(--cyan)" opacity=".62" style="transform:scaleY(0)"></path>
       
     </g>
     <g>
       <rect class="hit" x="360" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/28 0件" data-tip="8/28 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-28"
+            aria-label="8/28 0件。押すとこの日の記事だけを表示"
+            data-tip="8/28 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="400" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/29 1件" data-tip="8/29 1件"></rect>
+            tabindex="0" role="button" data-day="2026-08-29"
+            aria-label="8/29 1件。押すとこの日の記事だけを表示"
+            data-tip="8/29 1件"></rect>
       <path class="bar" d="M403,108V97.57142857142857a3,3 0 0 1 3,-3h28a3,3 0 0 1 3,3V108Z" fill="var(--cyan)" opacity=".62" style="transform:scaleY(0)"></path>
       
     </g>
     <g>
       <rect class="hit" x="440" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/30 0件" data-tip="8/30 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-30"
+            aria-label="8/30 0件。押すとこの日の記事だけを表示"
+            data-tip="8/30 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="480" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/31 4件" data-tip="8/31 4件"></rect>
+            tabindex="0" role="button" data-day="2026-08-31"
+            aria-label="8/31 4件。押すとこの日の記事だけを表示"
+            data-tip="8/31 4件"></rect>
       <path class="bar" d="M483,108V57.285714285714285a3,3 0 0 1 3,-3h28a3,3 0 0 1 3,3V108Z" fill="var(--cyan)" opacity=".62" style="transform:scaleY(0)"></path>
       
     </g>
     <g>
       <rect class="hit" x="520" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="9/1 7件" data-tip="9/1 7件"></rect>
+            tabindex="0" role="button" data-day="2026-09-01"
+            aria-label="9/1 7件。押すとこの日の記事だけを表示"
+            data-tip="9/1 7件"></rect>
       <path class="bar" d="M523,108V17a3,3 0 0 1 3,-3h28a3,3 0 0 1 3,3V108Z" fill="var(--cyan)" opacity="1" style="transform:scaleY(0)"></path>
       <text class="peak" x="540" y="9" text-anchor="middle">7</text>
     </g><text class="tick" x="60" y="122" text-anchor="middle">8/20</text><text class="tick" x="140" y="122" text-anchor="middle">8/22</text><text class="tick" x="220" y="122" text-anchor="middle">8/24</text><text class="tick" x="300" y="122" text-anchor="middle">8/26</text><text class="tick" x="380" y="122" text-anchor="middle">8/28</text><text class="tick" x="460" y="122" text-anchor="middle">8/30</text><text class="tick" x="540" y="122" text-anchor="middle">9/1</text>
@@ -799,6 +837,10 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
   <button class="chip" type="button" data-cat="chotatsu" aria-pressed="false"><span class="dot" style="background:#c98500"></span>発注・入札・受注</button>
   <button class="chip" type="button" data-cat="chiiki" aria-pressed="false"><span class="dot" style="background:#d55181"></span>駐屯地と地元</button>
   <button class="chip" type="button" data-cat="seisaku" aria-pressed="false"><span class="dot" style="background:#008300"></span>予算・政策</button>
+  <div class="sortsel" role="group" aria-label="並び順">
+    <button class="sortbtn" type="button" data-sort="cat" aria-pressed="true">分類順</button>
+    <button class="sortbtn" type="button" data-sort="new" aria-pressed="false">新着順</button>
+  </div>
 </div>
 <input class="search" id="q" type="search" placeholder="&gt; キーワードで絞り込む（施設名・地名・企業名など）" autocomplete="off">
 
@@ -811,7 +853,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="blurb">馬毛島基地、石垣・宮古島・与那国の駐屯地、南西シフトに伴う施設整備</p>
       </div>
 
-      <article class="card is-key" data-cat="nansei" data-region="okinawa" data-text="陸自補給拠点、建設着手へ 沖縄市訓練場内 概算要求に計上 琉球新報デジタル 防衛省は沖縄訓練場（沖縄市）内に「九州補給処沖縄支処（仮称）」を新設し、27年度から本格的な建設に着手する。 南西地域で活動する自衛隊の補給拠点として位置づけ、27年度概算要求に施設費を計上。 詳細は有料記事のため不明。" style="border-left-color:#3987e5">
+      <article class="card is-key" data-cat="nansei" data-region="okinawa" data-day="2026-09-01" data-time="1788206400000" data-text="陸自補給拠点、建設着手へ 沖縄市訓練場内 概算要求に計上 琉球新報デジタル 防衛省は沖縄訓練場（沖縄市）内に「九州補給処沖縄支処（仮称）」を新設し、27年度から本格的な建設に着手する。 南西地域で活動する自衛隊の補給拠点として位置づけ、27年度概算要求に施設費を計上。 詳細は有料記事のため不明。" style="border-left-color:#3987e5">
         <h3><a href="https://ryukyushimpo.jp/politics/entry-5492938.html" target="_blank" rel="noopener noreferrer">陸自補給拠点、建設着手へ 沖縄市訓練場内 概算要求に計上</a></h3>
         <div class="meta">
           <span class="badge key">要注目</span>
@@ -828,7 +870,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="why">南西シフトを支える補給拠点の着工時期が示された。</p>
       </article>
 
-      <article class="card is-key" data-cat="nansei" data-region="kyushu" data-text="過去最大8.9兆円の防衛費要求 鹿児島関連は馬毛島f-35b訓練施設、弾薬庫、港湾施設整備など（mbc南日本放送） yahoo!ニュース 27年度概算要求は過去最大8兆8908億円、鹿児島関連が明らかに。 馬毛島でf-35b用の艦艇模擬施設工事費、鹿屋基地関連243億円（弾薬庫2棟・送信所撤去）。 奄美駐屯地22億円、瀬戸内分屯地弾薬庫3棟29億円、古仁屋港須手地区の港湾施設112億円。" style="border-left-color:#3987e5">
+      <article class="card is-key" data-cat="nansei" data-region="kyushu" data-day="2026-08-31" data-time="1788178934000" data-text="過去最大8.9兆円の防衛費要求 鹿児島関連は馬毛島f-35b訓練施設、弾薬庫、港湾施設整備など（mbc南日本放送） yahoo!ニュース 27年度概算要求は過去最大8兆8908億円、鹿児島関連が明らかに。 馬毛島でf-35b用の艦艇模擬施設工事費、鹿屋基地関連243億円（弾薬庫2棟・送信所撤去）。 奄美駐屯地22億円、瀬戸内分屯地弾薬庫3棟29億円、古仁屋港須手地区の港湾施設112億円。" style="border-left-color:#3987e5">
         <h3><a href="https://news.yahoo.co.jp/articles/548c792cd81e9101156c8e2238821fc5577b7b0e" target="_blank" rel="noopener noreferrer">過去最大8.9兆円の防衛費要求 鹿児島関連は馬毛島F-35B訓練施設、弾薬庫、港湾施設整備など（MBC南日本放送）</a></h3>
         <div class="meta">
           <span class="badge key">要注目</span>
@@ -845,7 +887,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="why">馬毛島・奄美の施設整備の具体事業と金額が示された南西シフトの要点だから。</p>
       </article>
 
-      <article class="card" data-cat="nansei" data-region="kyushu" data-text="過去最大8.9兆円の防衛費要求 鹿児島関連は馬毛島f-35b訓練施設、弾薬庫、港湾施設整備など tbs news dig 防衛費概算要求8兆8908億円のうち鹿児島関連を報道。 馬毛島のf-35b訓練施設、弾薬庫、港湾施設整備などを計上。 鹿屋基地の無人機シーガーディアンは2031年度ごろ10機体制へ。" style="border-left-color:#3987e5">
+      <article class="card" data-cat="nansei" data-region="kyushu" data-day="2026-08-31" data-time="1788178500000" data-text="過去最大8.9兆円の防衛費要求 鹿児島関連は馬毛島f-35b訓練施設、弾薬庫、港湾施設整備など tbs news dig 防衛費概算要求8兆8908億円のうち鹿児島関連を報道。 馬毛島のf-35b訓練施設、弾薬庫、港湾施設整備などを計上。 鹿屋基地の無人機シーガーディアンは2031年度ごろ10機体制へ。" style="border-left-color:#3987e5">
         <h3><a href="https://newsdig.tbs.co.jp/articles/mbc/2910270" target="_blank" rel="noopener noreferrer">過去最大8.9兆円の防衛費要求 鹿児島関連は馬毛島F-35B訓練施設、弾薬庫、港湾施設整備など</a></h3>
         <div class="meta">
           
@@ -862,7 +904,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="why">南西方面の施設整備と装備配備の全体像を示す速報のため。</p>
       </article>
 
-      <article class="card" data-cat="nansei" data-region="kyushu" data-text="東奔西走＞馬毛島の基地建設やめよ/たいら県議が政府交渉 | しんぶん赤旗 jcp.or.jp 共産党鹿児島県委員会が防衛省など8省庁に21項目の要望書を提出し交渉。 県議が総事業費非提示のまま進む馬毛島基地建設の中止を要求、工事事故や種子島経済への影響を指摘。 鹿屋基地へのタイフォン一時展開、奄美の特定利用空港・港湾指定への懸念も表明。" style="border-left-color:#3987e5">
+      <article class="card" data-cat="nansei" data-region="kyushu" data-day="2026-08-26" data-time="1787725460000" data-text="東奔西走＞馬毛島の基地建設やめよ/たいら県議が政府交渉 | しんぶん赤旗 jcp.or.jp 共産党鹿児島県委員会が防衛省など8省庁に21項目の要望書を提出し交渉。 県議が総事業費非提示のまま進む馬毛島基地建設の中止を要求、工事事故や種子島経済への影響を指摘。 鹿屋基地へのタイフォン一時展開、奄美の特定利用空港・港湾指定への懸念も表明。" style="border-left-color:#3987e5">
         <h3><a href="https://www.jcp.or.jp/akahata/aik26/2026-08-25/ftp2026082541_03_0.php" target="_blank" rel="noopener noreferrer">東奔西走＞馬毛島の基地建設やめよ/たいら県議が政府交渉 | しんぶん赤旗</a></h3>
         <div class="meta">
           
@@ -888,7 +930,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="blurb">普天間代替施設、埋立・地盤改良、米軍施設の返還と再編</p>
       </div>
 
-      <article class="card is-key" data-cat="usfj" data-region="okinawa" data-text="沖縄関係経費、過去最高の2201億円 防衛省の概算要求 米軍再編経費は事項要求【表あり】 okinawatimes.co.jp 防衛省概算要求の沖縄関係経費は歳出ベース2201億5200万円で過去最高。 契約ベースは2241億8400万円、26年度比6.0%増。米軍再編経費は事項要求。 北大東に庁舎整備を盛り込む。詳細は有料部分。" style="border-left-color:#d95926">
+      <article class="card is-key" data-cat="usfj" data-region="okinawa" data-day="2026-09-01" data-time="1788211020000" data-text="沖縄関係経費、過去最高の2201億円 防衛省の概算要求 米軍再編経費は事項要求【表あり】 okinawatimes.co.jp 防衛省概算要求の沖縄関係経費は歳出ベース2201億5200万円で過去最高。 契約ベースは2241億8400万円、26年度比6.0%増。米軍再編経費は事項要求。 北大東に庁舎整備を盛り込む。詳細は有料部分。" style="border-left-color:#d95926">
         <h3><a href="https://www.okinawatimes.co.jp/articles/-/1914163" target="_blank" rel="noopener noreferrer">沖縄関係経費、過去最高の2201億円 防衛省の概算要求 米軍再編経費は事項要求【表あり】</a></h3>
         <div class="meta">
           <span class="badge key">要注目</span>
@@ -905,7 +947,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="why">沖縄の基地関連予算が過去最高となり、米軍再編経費の扱いも示されたため。</p>
       </article>
 
-      <article class="card is-key" data-cat="usfj" data-region="okinawa" data-text="普天間基地 固定化へ３００億円超も/「補修事業」が拡大 デニー知事勝利で止める | しんぶん赤旗 jcp.or.jp 普天間返還合意30年、基地の「補修事業」が拡大していると赤旗が報道。 対象は24施設に拡大、13〜23年度に18施設192億円を契約、発注総額217億円。26年度は38億円計上、全施設実施なら300億円超の見込み。 米側は27会計年度に燃料供給施設3790万ドルを計上、10月以降に滑走路大規模補修（milcon）着工の計画。" style="border-left-color:#d95926">
+      <article class="card is-key" data-cat="usfj" data-region="okinawa" data-day="2026-08-27" data-time="1787792498000" data-text="普天間基地 固定化へ３００億円超も/「補修事業」が拡大 デニー知事勝利で止める | しんぶん赤旗 jcp.or.jp 普天間返還合意30年、基地の「補修事業」が拡大していると赤旗が報道。 対象は24施設に拡大、13〜23年度に18施設192億円を契約、発注総額217億円。26年度は38億円計上、全施設実施なら300億円超の見込み。 米側は27会計年度に燃料供給施設3790万ドルを計上、10月以降に滑走路大規模補修（milcon）着工の計画。" style="border-left-color:#d95926">
         <h3><a href="https://www.jcp.or.jp/akahata/aik26/2026-08-27/2026082704_01_0.php" target="_blank" rel="noopener noreferrer">普天間基地 固定化へ３００億円超も/「補修事業」が拡大 デニー知事勝利で止める | しんぶん赤旗</a></h3>
         <div class="meta">
           <span class="badge key">要注目</span>
@@ -922,7 +964,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="why">辺野古移設が長期化する中で普天間側の施設投資規模が具体的数字で示されている。</p>
       </article>
 
-      <article class="card" data-cat="usfj" data-region="okinawa" data-text="［社説］［9・13 知事選］普天間・新基地 合意の履行 政府に迫れ ｄメニューニュース 9月13日の沖縄県知事選は、辺野古訴訟の県敗訴確定と国の代執行後で初の選挙。 古謝玄太氏は普天間の危険性除去を理由に容認、玉城デニー氏は反対と即時運用停止・三者協議設置を主張。 政府は完成時期を「36年以降」とするが、専門家は「37年以降」との見方で不確定要素が大きい。" style="border-left-color:#d95926">
+      <article class="card" data-cat="usfj" data-region="okinawa" data-day="2026-08-31" data-time="1788116400000" data-text="［社説］［9・13 知事選］普天間・新基地 合意の履行 政府に迫れ ｄメニューニュース 9月13日の沖縄県知事選は、辺野古訴訟の県敗訴確定と国の代執行後で初の選挙。 古謝玄太氏は普天間の危険性除去を理由に容認、玉城デニー氏は反対と即時運用停止・三者協議設置を主張。 政府は完成時期を「36年以降」とするが、専門家は「37年以降」との見方で不確定要素が大きい。" style="border-left-color:#d95926">
         <h3><a href="https://topics.smt.docomo.ne.jp/amp/article/okinawa/region/okinawa-20260831040100" target="_blank" rel="noopener noreferrer">［社説］［9・13 知事選］普天間・新基地 合意の履行 政府に迫れ</a></h3>
         <div class="meta">
           
@@ -939,7 +981,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="why">辺野古工事の工期見通しと知事選の争点構図が整理されている。</p>
       </article>
 
-      <article class="card" data-cat="usfj" data-region="okinawa" data-text="「反対の民意は行き場を失っている」理解されない葛藤、辺野古の住民が抱く割り切れない思いとは 米軍普天間飛行場の返還合意から３０年、止まらぬ工事と広がるあきらめ 山陽新聞 普天間飛行場返還合意30年に合わせ、辺野古住民の受け止めを伝える記事。 本文は有料部分（残り約3073文字）で詳細は非公開。 移設工事が続く中での地元の反対の民意と諦めの広がりを扱う。" style="border-left-color:#d95926">
+      <article class="card" data-cat="usfj" data-region="okinawa" data-day="2026-08-25" data-time="1787641200000" data-text="「反対の民意は行き場を失っている」理解されない葛藤、辺野古の住民が抱く割り切れない思いとは 米軍普天間飛行場の返還合意から３０年、止まらぬ工事と広がるあきらめ 山陽新聞 普天間飛行場返還合意30年に合わせ、辺野古住民の受け止めを伝える記事。 本文は有料部分（残り約3073文字）で詳細は非公開。 移設工事が続く中での地元の反対の民意と諦めの広がりを扱う。" style="border-left-color:#d95926">
         <h3><a href="https://www.sanyonews.jp/article/1894409" target="_blank" rel="noopener noreferrer">「反対の民意は行き場を失っている」理解されない葛藤、辺野古の住民が抱く割り切れない思いとは 米軍普天間飛行場の返還合意から３０年、止まらぬ工事と広がるあきらめ</a></h3>
         <div class="meta">
           
@@ -965,7 +1007,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="blurb">司令部地下化、火薬庫、老朽更新、防衛力整備計画の施設分</p>
       </div>
 
-      <article class="card is-key" data-cat="kyoujinka" data-region="kinki" data-text="京都府南部の陸自弾薬庫に新棟を建設へ 防衛省、府北部にも2棟新設 京都新聞デジタル 防衛省が27年度概算要求で京都関係分415億円を計上。 陸自祝園分屯地（精華町・京田辺市）の弾薬庫に新棟、府北部にも2棟新設。 舞鶴市など府内各地の弾薬庫整備が今後具体化する。" style="border-left-color:#199e70">
+      <article class="card is-key" data-cat="kyoujinka" data-region="kinki" data-day="2026-09-01" data-time="1788209040000" data-text="京都府南部の陸自弾薬庫に新棟を建設へ 防衛省、府北部にも2棟新設 京都新聞デジタル 防衛省が27年度概算要求で京都関係分415億円を計上。 陸自祝園分屯地（精華町・京田辺市）の弾薬庫に新棟、府北部にも2棟新設。 舞鶴市など府内各地の弾薬庫整備が今後具体化する。" style="border-left-color:#199e70">
         <h3><a href="https://www.kyoto-np.co.jp/articles/-/1781905" target="_blank" rel="noopener noreferrer">京都府南部の陸自弾薬庫に新棟を建設へ 防衛省、府北部にも2棟新設</a></h3>
         <div class="meta">
           <span class="badge key">要注目</span>
@@ -982,7 +1024,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="why">弾薬庫増設という強靱化の中核事業の地域別の内訳が判明するため。</p>
       </article>
 
-      <article class="card is-key" data-cat="kyoujinka" data-region="chugoku" data-text="防衛省、呉市の日本製鉄跡地を取得 火薬庫や無人機製造施設を整備「安全保障上極めて重要な地域」 広島 ｄメニューニュース 防衛省が呉市の日本製鉄跡地について日鉄と土地売買契約を締結。 火薬庫、無人機製造施設、防衛産業関連の民間企業誘致エリアを備える多機能な複合防衛拠点を整備する計画。 装備品製造や研究開発を担う企業を広く募集し、地元経済への貢献も考慮して選定する。" style="border-left-color:#199e70">
+      <article class="card is-key" data-cat="kyoujinka" data-region="chugoku" data-day="2026-08-29" data-time="1787961273000" data-text="防衛省、呉市の日本製鉄跡地を取得 火薬庫や無人機製造施設を整備「安全保障上極めて重要な地域」 広島 ｄメニューニュース 防衛省が呉市の日本製鉄跡地について日鉄と土地売買契約を締結。 火薬庫、無人機製造施設、防衛産業関連の民間企業誘致エリアを備える多機能な複合防衛拠点を整備する計画。 装備品製造や研究開発を担う企業を広く募集し、地元経済への貢献も考慮して選定する。" style="border-left-color:#199e70">
         <h3><a href="https://topics.smt.docomo.ne.jp/article/tss/region/tss-35298?redirect=1" target="_blank" rel="noopener noreferrer">防衛省、呉市の日本製鉄跡地を取得 火薬庫や無人機製造施設を整備「安全保障上極めて重要な地域」 広島</a></h3>
         <div class="meta">
           <span class="badge key">要注目</span>
@@ -1008,7 +1050,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="blurb">新設・移転・用地取得、自治体との協議、住民説明会、環境影響評価</p>
       </div>
 
-      <article class="card is-key" data-cat="chiiki" data-region="chugoku" data-text="国の特定利用港湾に呉市が同意方針 指定されれば中国地方で3例目 47news 呉市が国の「特定利用空港・港湾」候補の呉港について、27日に同意する方針を示した。 自衛隊と海上保安庁の利用に備えた指定で、実現すれば中国地方で3例目。 今後、国による指定手続きに進む見通し。" style="border-left-color:#d55181">
+      <article class="card is-key" data-cat="chiiki" data-region="chugoku" data-day="2026-08-27" data-time="1787807078000" data-text="国の特定利用港湾に呉市が同意方針 指定されれば中国地方で3例目 47news 呉市が国の「特定利用空港・港湾」候補の呉港について、27日に同意する方針を示した。 自衛隊と海上保安庁の利用に備えた指定で、実現すれば中国地方で3例目。 今後、国による指定手続きに進む見通し。" style="border-left-color:#d55181">
         <h3><a href="https://www.47news.jp/14853202.html" target="_blank" rel="noopener noreferrer">国の特定利用港湾に呉市が同意方針 指定されれば中国地方で3例目</a></h3>
         <div class="meta">
           <span class="badge key">要注目</span>
@@ -1034,7 +1076,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="blurb">防衛予算の施設関連費、制度改正、技術基準、業界動向</p>
       </div>
 
-      <article class="card is-key" data-cat="seisaku" data-region="okinawa" data-text="来年度概算要求 自衛隊施設整備１３５０億円 県内 久米島に次期レーダー 琉球新報デジタル 防衛省は27年度概算要求で沖縄県内の自衛隊施設整備費に約1350億円を計上。 「九州補給処沖縄支処（仮称）」新設経費を含み、久米島には次期レーダー、自衛隊那覇病院は病床など機能強化。 県内施設整備の具体は今後の予算編成で確定する。" style="border-left-color:#008300">
+      <article class="card is-key" data-cat="seisaku" data-region="okinawa" data-day="2026-09-01" data-time="1788206400000" data-text="来年度概算要求 自衛隊施設整備１３５０億円 県内 久米島に次期レーダー 琉球新報デジタル 防衛省は27年度概算要求で沖縄県内の自衛隊施設整備費に約1350億円を計上。 「九州補給処沖縄支処（仮称）」新設経費を含み、久米島には次期レーダー、自衛隊那覇病院は病床など機能強化。 県内施設整備の具体は今後の予算編成で確定する。" style="border-left-color:#008300">
         <h3><a href="https://ryukyushimpo.jp/politics/entry-5492840.html" target="_blank" rel="noopener noreferrer">来年度概算要求 自衛隊施設整備１３５０億円 県内 久米島に次期レーダー</a></h3>
         <div class="meta">
           <span class="badge key">要注目</span>
@@ -1051,7 +1093,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="why">沖縄の自衛隊施設整備の総額と新規案件が示された概算要求の要点。</p>
       </article>
 
-      <article class="card" data-cat="seisaku" data-region="kyushu" data-text="防衛省2027年度予算の概算要求 佐賀県内3施設で整備費10億円 佐賀駐屯地の工事はゼロ | 行政・社会 | 佐賀県のニュース saga-s.co.jp 防衛省は27年度概算要求で佐賀県内3施設の整備費に約10億円を計上、佐賀駐屯地は要求ゼロ。 目達原駐屯地は自動化倉庫、鳥栖分屯地は隊庁舎建て替え設計費、背振山分屯基地は管路整備と火薬庫建て替えで計約5億円。 佐賀駐屯地の事業費は26年度までで総額2356億円、体育館・倉庫・火薬庫は28年度以降の見通し。" style="border-left-color:#008300">
+      <article class="card" data-cat="seisaku" data-region="kyushu" data-day="2026-09-01" data-time="1788219000000" data-text="防衛省2027年度予算の概算要求 佐賀県内3施設で整備費10億円 佐賀駐屯地の工事はゼロ | 行政・社会 | 佐賀県のニュース saga-s.co.jp 防衛省は27年度概算要求で佐賀県内3施設の整備費に約10億円を計上、佐賀駐屯地は要求ゼロ。 目達原駐屯地は自動化倉庫、鳥栖分屯地は隊庁舎建て替え設計費、背振山分屯基地は管路整備と火薬庫建て替えで計約5億円。 佐賀駐屯地の事業費は26年度までで総額2356億円、体育館・倉庫・火薬庫は28年度以降の見通し。" style="border-left-color:#008300">
         <h3><a href="https://www.saga-s.co.jp/articles/-/1782459" target="_blank" rel="noopener noreferrer">防衛省2027年度予算の概算要求 佐賀県内3施設で整備費10億円 佐賀駐屯地の工事はゼロ | 行政・社会 | 佐賀県のニュース</a></h3>
         <div class="meta">
           
@@ -1069,7 +1111,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
       </article>
     </section>
 
-      <article class="card" data-cat="seisaku" data-region="none" data-text="【新着】jalやanaは災害時に自衛隊基地を使えないのか 片翼飛行の「特定利用空港」 新潮que 特定利用空港をめぐる論考記事の見出しのみ。 民間航空会社が災害時に自衛隊基地を使えるかを論点とする。 本文は取得できず詳細不明。" style="border-left-color:#008300">
+      <article class="card" data-cat="seisaku" data-region="none" data-day="2026-09-01" data-time="1788210000000" data-text="【新着】jalやanaは災害時に自衛隊基地を使えないのか 片翼飛行の「特定利用空港」 新潮que 特定利用空港をめぐる論考記事の見出しのみ。 民間航空会社が災害時に自衛隊基地を使えるかを論点とする。 本文は取得できず詳細不明。" style="border-left-color:#008300">
         <h3><a href="https://que.dailyshincho.jp/node/19662/" target="_blank" rel="noopener noreferrer">【新着】JALやANAは災害時に自衛隊基地を使えないのか 片翼飛行の「特定利用空港」</a></h3>
         <div class="meta">
           
@@ -1086,7 +1128,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="why">特定利用空港・港湾の官民共用という施設政策の論点に触れるため。</p>
       </article>
 
-      <article class="card" data-cat="seisaku" data-region="kyushu" data-text="鹿屋配備予定の大型無人機 31年度めどに10機体制――鹿児島県内施設整備533億円…防衛省概算要求 南日本新聞 防衛省27年度概算要求で鹿児島県内の施設整備費に533億円を計上。 鹿屋基地に配備予定の大型無人機は31年度をめどに10機体制とする。 本文は会員向けで詳細は非公開。" style="border-left-color:#008300">
+      <article class="card" data-cat="seisaku" data-region="kyushu" data-day="2026-09-01" data-time="1788210000000" data-text="鹿屋配備予定の大型無人機 31年度めどに10機体制――鹿児島県内施設整備533億円…防衛省概算要求 南日本新聞 防衛省27年度概算要求で鹿児島県内の施設整備費に533億円を計上。 鹿屋基地に配備予定の大型無人機は31年度をめどに10機体制とする。 本文は会員向けで詳細は非公開。" style="border-left-color:#008300">
         <h3><a href="https://373news.com/news/local/detail/238867" target="_blank" rel="noopener noreferrer">鹿屋配備予定の大型無人機 31年度めどに10機体制――鹿児島県内施設整備533億円…防衛省概算要求</a></h3>
         <div class="meta">
           
@@ -1103,7 +1145,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="why">鹿屋の無人機部隊整備と県内施設整備費の規模が示された。</p>
       </article>
 
-      <article class="card" data-cat="seisaku" data-region="none" data-text="米軍がイランの軍事施設を攻撃 7月下旬以来 約1カ月ぶり abema 米軍がイランの軍事施設を攻撃したと報じられた。 攻撃は7月下旬以来、約1カ月ぶりとされる。 本文情報がなく、詳細は不明。" style="border-left-color:#008300">
+      <article class="card" data-cat="seisaku" data-region="none" data-day="2026-08-31" data-time="1788154733000" data-text="米軍がイランの軍事施設を攻撃 7月下旬以来 約1カ月ぶり abema 米軍がイランの軍事施設を攻撃したと報じられた。 攻撃は7月下旬以来、約1カ月ぶりとされる。 本文情報がなく、詳細は不明。" style="border-left-color:#008300">
         <h3><a href="https://abema.tv/video/episode/89-93_s10_p59956" target="_blank" rel="noopener noreferrer">米軍がイランの軍事施設を攻撃 7月下旬以来 約1カ月ぶり</a></h3>
         <div class="meta">
           
@@ -1120,6 +1162,14 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
         <p class="why">中東情勢の緊迫は米軍運用や在日米軍の動向の背景となるため。</p>
       </article>
     </section>
+<section class="cat-group" id="flatlist" hidden>
+  <div class="cat-head">
+    <span class="mark" style="background:var(--cyan)"></span>
+    <h2>新着順</h2>
+    <span class="n" id="flatcount">0 件</span>
+    <p class="blurb">分類をまたいで、新しいものから並べています。</p>
+  </div>
+</section>
 <p class="empty" id="noresult">条件に合う記事はありません。</p>
 
 <footer class="bottom">
@@ -1151,7 +1201,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
   <li><span class="st ok" aria-hidden="true">✓</span><span class="nm">Google ニュース「防衛省 庁舎 隊舎 建設 発注」<br><span class="no">https://news.google.com/rss/search?q=%E9%98%B2%E8%A1%9B%E7%9C%81%20%E5%BA%81%E8%88%8E%20%E9%9A%8A%E8%88%8E%20%E5%BB%BA%E8%A8%AD%20%E7%99%BA%E6%B3%A8%20when%3A14d&amp;hl=ja&amp;gl=JP&amp;ceid=JP:ja</span></span><span class="ct">0件</span></li>
 </ul>
     <p>✕ が続く情報源は <code>news/config.mjs</code> の <code>urls</code> を書き換えるか、行ごと消してください。</p></details>
-    <p style="margin-bottom:0">要約はClaude が自動生成しています。必ず原文で確認してください。</p></div>
+    <p style="margin-bottom:0">要約は本文から機械的に抜き出しています。必ず原文で確認してください。</p></div>
 </section>
 </footer>
 </div>
@@ -1430,8 +1480,23 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
   var bar = document.getElementById('rfilter');
   var barLabel = document.getElementById('rfilter-label');
   var barClear = document.getElementById('rfilter-clear');
+  var sortButtons = Array.prototype.slice.call(document.querySelectorAll('.sortbtn'));
+  var chartHits = Array.prototype.slice.call(document.querySelectorAll('.chart .hit'));
+  var flat = document.getElementById('flatlist');
+  var flatCount = document.getElementById('flatcount');
   var active = 'all';
   var activeRegion = null;
+  var activeDay = null;
+  var sortMode = 'cat';
+
+  /* 新着順にするときカードを移すので、元の居場所を覚えておく。 */
+  cards.forEach(function (card) { card.__home = card.parentNode; });
+
+  /* 正規表現は使わない。この文字列はテンプレート越しに出るので \d が消える。 */
+  function dayLabel(day) {
+    var ymd = String(day || '').split('-');
+    return ymd.length === 3 ? Number(ymd[1]) + '月' + Number(ymd[2]) + '日' : day;
+  }
 
   function apply() {
     var needle = ((search && search.value) || '').trim().toLowerCase();
@@ -1439,6 +1504,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
     cards.forEach(function (card) {
       var visible = (active === 'all' || card.dataset.cat === active) &&
                     (!activeRegion || card.dataset.region === activeRegion) &&
+                    (!activeDay || card.dataset.day === activeDay) &&
                     (!needle || card.dataset.text.indexOf(needle) !== -1);
       card.hidden = !visible;
       if (visible) shown++;
@@ -1454,24 +1520,61 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
     lands.forEach(function (l) {
       l.classList.toggle('on', l.dataset.region === activeRegion);
     });
+    chartHits.forEach(function (h) {
+      h.setAttribute('aria-pressed', String(h.dataset.day === activeDay));
+    });
+    if (flatCount) flatCount.textContent = shown + ' 件';
+
     if (bar) {
-      bar.hidden = !activeRegion;
-      if (activeRegion && barLabel) {
+      var parts = [];
+      if (activeRegion) {
         var hit = regionButtons.filter(function (b) { return b.dataset.region === activeRegion; })[0];
-        var name = hit ? hit.firstElementChild.textContent : activeRegion;
-        barLabel.textContent = '地方で絞り込み中: ' + name + ' — ' + shown + '件';
+        parts.push('地方: ' + (hit ? hit.firstElementChild.textContent : activeRegion));
+      }
+      if (activeDay) parts.push('日付: ' + dayLabel(activeDay));
+      bar.hidden = parts.length === 0;
+      if (parts.length && barLabel) {
+        barLabel.textContent = '絞り込み中 — ' + parts.join(' / ') + ' — ' + shown + '件';
       }
     }
+  }
+
+  /* 一覧の先頭へ寄せる。絞り込んだのに画面が動かないと、効いたのか分からない。 */
+  function scrollToList() {
+    var list = document.querySelector('.cat-group:not([hidden])');
+    if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* 同じ日をもう一度押したら解除。地方の選び方と揃えてある。 */
+  function selectDay(day) {
+    activeDay = activeDay === day ? null : day;
+    apply();
+    if (activeDay) scrollToList();
+  }
+
+  function setSort(mode) {
+    if (mode === sortMode) return;
+    sortMode = mode;
+    if (mode === 'new') {
+      cards
+        .slice()
+        .sort(function (a, b) { return (Number(b.dataset.time) || 0) - (Number(a.dataset.time) || 0); })
+        .forEach(function (card) { flat.appendChild(card); });
+    } else {
+      /* 元の並びで戻す。cards は文書順なので、順に足せば分類ごとの順序も戻る。 */
+      cards.forEach(function (card) { card.__home.appendChild(card); });
+    }
+    sortButtons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.sort === mode));
+    });
+    apply();
   }
 
   /* 同じ地方をもう一度押したら解除。地図をいじって戻れなくなると困る。 */
   function selectRegion(id) {
     activeRegion = activeRegion === id ? null : id;
     apply();
-    if (activeRegion) {
-      var list = document.querySelector('.cat-group:not([hidden])');
-      if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (activeRegion) scrollToList();
   }
 
   regionButtons.forEach(function (b) {
@@ -1484,7 +1587,25 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectRegion(pin.dataset.region); }
     });
   });
-  if (barClear) barClear.addEventListener('click', function () { activeRegion = null; apply(); });
+  if (barClear) {
+    barClear.addEventListener('click', function () {
+      activeRegion = null;
+      activeDay = null;
+      apply();
+    });
+  }
+
+  chartHits.forEach(function (h) {
+    if (!h.dataset.day) return;
+    h.addEventListener('click', function () { selectDay(h.dataset.day); });
+    h.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectDay(h.dataset.day); }
+    });
+  });
+
+  sortButtons.forEach(function (b) {
+    b.addEventListener('click', function () { setSort(b.dataset.sort); });
+  });
 
   chips.forEach(function (chip) {
     chip.addEventListener('click', function () {
