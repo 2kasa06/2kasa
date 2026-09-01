@@ -1,0 +1,36 @@
+# Netlify 設定
+# React版（Vite）を配信します。WordPressテーマ版は Netlify では動作しません。
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# SPA フォールバック
+# wouter が履歴APIでルーティングするため、/teens などに直接アクセスされたときや
+# 再読み込みされたときに index.html を返す必要があります。
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# ハッシュ付きのビルド成果物は長期キャッシュ
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# 画像は1日キャッシュ（差し替え時に反映されるよう控えめに）
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
