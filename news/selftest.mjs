@@ -107,6 +107,15 @@ function makeFeeds() {
   return { rss, atom }
 }
 
+/**
+ * EUC-JP で書かれたフィードの実バイト列。
+ *
+ * Node には EUC-JP の符号化器が無いので、あらかじめ変換したものを置く。
+ * 中身は「駐屯地の庁舎建設工事を発注」という項目ひとつ。
+ */
+const EUCJP_FEED_B64 =
+  'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iRVVDLUpQIj8+PHJzcyB2ZXJzaW9uPSIyLjAiPjxjaGFubmVsPjx0aXRsZT60scSjPC90aXRsZT48aXRlbT48dGl0bGU+w/PG1sPPpM7Eo7zLt/rA37mpu/ak8sivw+08L3RpdGxlPjxsaW5rPmh0dHA6Ly8xMjcuMC4wLjE6UE9SVC9hcnRpY2xlL2V1Y2pwPC9saW5rPjxkZXNjcmlwdGlvbj7LybHSu9zA36TOwLDI96TLtNikuaTrxv67pbj4ufA8L2Rlc2NyaXB0aW9uPjwvaXRlbT48L2NoYW5uZWw+PC9yc3M+'
+
 async function withServer(run) {
   const { rss, atom } = makeFeeds()
   const server = http.createServer((req, res) => {
@@ -119,6 +128,31 @@ async function withServer(run) {
     if (req.url === '/feed/atom') return send(200, 'application/atom+xml', atom.replaceAll('PORT', port))
     if (req.url === '/feed/broken') return send(200, 'text/html', '<html>フィードではない</html>')
     if (req.url === '/feed/404') return send(404, 'text/plain', 'nope')
+
+    // EUC-JP のフィード。官公庁にはまだ残っていて、UTF-8 として読むと化ける。
+    if (req.url === '/feed/eucjp') {
+      const bytes = Buffer.from(EUCJP_FEED_B64, 'base64')
+      // charset を名乗らない配信もあるので、XML宣言だけを頼りに読めることを確かめる。
+      res.writeHead(200, { 'content-type': 'application/rss+xml' })
+      return res.end(Buffer.from(bytes.toString('binary').replaceAll('PORT', String(port)), 'binary'))
+    }
+
+    // 国会会議録の API を模す。発言は長く、検索語は途中に出てくる。
+    if (req.url.startsWith('/kokkai')) {
+      const filler = 'まず冒頭に御礼を申し上げます。'.repeat(40)
+      return send(200, 'application/json', JSON.stringify({
+        numberOfRecords: 1,
+        speechRecord: [{
+          nameOfHouse: '参議院',
+          nameOfMeeting: '外交防衛委員会',
+          date: new Date().toISOString().slice(0, 10),
+          speaker: '山田太郎',
+          speakerPosition: '防衛大臣',
+          speech: filler + '馬毛島における飛行場の施設整備について、造成工事の進捗を申し上げます。' + filler,
+          speechURL: `http://127.0.0.1:${port}/article/kokkai`,
+        }],
+      }))
+    }
     if (req.url.startsWith('/article/')) {
       const slug = req.url.split('/')[2].split('?')[0]
       const paragraphs = ARTICLE_BODIES[slug]
@@ -154,6 +188,15 @@ await withServer(async (port) => {
     { id: 'pro', name: '専門紙', kind: 'rss', hint: '専門', urls: [`${base}/feed/404`, `${base}/feed/rss`] },
     { id: 'gen', name: '総合紙', kind: 'rss', hint: '総合', urls: [`${base}/feed/atom`] },
     { id: 'dead', name: '死んでいる情報源', kind: 'rss', hint: '', urls: [`${base}/feed/broken`] },
+    { id: 'eucjp', name: '官庁フィード', kind: 'rss', hint: '一次情報', urls: [`${base}/feed/eucjp`] },
+    {
+      id: 'kokkai:馬毛島',
+      name: '国会会議録「馬毛島」',
+      kind: 'kokkai',
+      hint: '一次情報',
+      query: '馬毛島',
+      endpoint: `${base}/kokkai`,
+    },
   ]
 
   console.log('\nフィード解析')
@@ -177,6 +220,27 @@ await withServer(async (port) => {
   await check('候補URLの1つ目が404でも2つ目で拾える', () => {
     assert.equal(status.find((s) => s.id === 'pro').ok, true)
   })
+  await check('EUC-JPのフィードが化けずに読める', () => {
+    // res.text() は中身を問わず UTF-8 として読む。官公庁にはまだ EUC-JP が残る。
+    const hit = titles.find((t) => t.indexOf('駐屯地の庁舎建設工事') !== -1)
+    assert.ok(hit, `化けている: ${JSON.stringify(titles)}`)
+  })
+
+  await check('国会会議録から発言を拾える', () => {
+    assert.equal(status.find((s) => s.id === 'kokkai:馬毛島').ok, true)
+    const hit = articles.find((a) => a.publisher === '国会会議録')
+    assert.ok(hit, '国会会議録の記事が入っていない')
+    assert.match(hit.title, /外交防衛委員会/)
+  })
+
+  await check('長い発言でも検索語の周りが渡る', () => {
+    // 頭から600字では前置きの挨拶しか入らず、主題の判定に引っかからない。
+    const hit = articles.find((a) => a.publisher === '国会会議録')
+    assert.match(hit.description, /馬毛島/)
+    assert.ok(hit.description.startsWith('…'), '切り出しの印が無い')
+    assert.ok(hit.matchText.indexOf('馬毛島') !== -1, '判定に使う文字列に検索語が入っていない')
+  })
+
   await check('フィードでない情報源は失敗として記録される', () => {
     const dead = status.find((s) => s.id === 'dead')
     assert.equal(dead.ok, false)
