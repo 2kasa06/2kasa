@@ -10,49 +10,103 @@ import { get, mapLimit } from '../lib/http.mjs'
 import { parseFeed } from '../lib/feed.mjs'
 
 // 落ちている情報源の代わりを探す。上から試して最初に読めたものを config に採る。
+// 追加したい情報源の候補。読めたものだけを config.mjs に採る。
+// 一次情報（官公庁・議事録）は有料の壁が無く、防衛施設の話では新聞より中身が濃い。
 const FEED_CANDIDATES = {
-  '沖縄タイムス': [
-    'https://www.okinawatimes.co.jp/feed/rss/',
-    'https://www.okinawatimes.co.jp/rss/',
-    'https://www.okinawatimes.co.jp/rss.xml',
-    'https://www.okinawatimes.co.jp/feed.xml',
-    'https://www.okinawatimes.co.jp/?feed=rss2',
+  // --- 防衛省・自衛隊の一次情報 ---
+  '防衛省 調達・入札': [
+    'https://www.mod.go.jp/j/rss/procurement.xml',
+    'https://www.mod.go.jp/j/rss/chotatsu.xml',
+    'https://www.mod.go.jp/j/rss/nyusatsu.xml',
+    'https://www.mod.go.jp/j/procurement/rss.xml',
   ],
-  '琉球新報': [
-    'https://ryukyushimpo.jp/feed/rss2/',
-    'https://ryukyushimpo.jp/?feed=rss2',
-    'https://ryukyushimpo.jp/rss.xml',
-    'https://ryukyushimpo.jp/feed/atom/',
+  '防衛装備庁': [
+    'https://www.mod.go.jp/atla/rss/news.xml',
+    'https://www.mod.go.jp/atla/rss/press.xml',
+    'https://www.mod.go.jp/atla/rss/chotatsu.xml',
+    'https://www.mod.go.jp/atla/rss.xml',
   ],
-  '南日本新聞': [
-    'https://373news.com/_rss/rss.xml',
-    'https://373news.com/rss/',
-    'https://373news.com/?feed=rss2',
-    'https://373news.com/feed/rss/',
+  '沖縄防衛局': [
+    'https://www.mod.go.jp/rdb/okinawa/rss.xml',
+    'https://www.mod.go.jp/rdb/okinawa/rss/news.xml',
+    'https://www.mod.go.jp/rdb/okinawa/index.xml',
   ],
-  'Jディフェンスニュース': [
-    'https://j-defense.ikaros.jp/atom.xml',
-    'https://j-defense.ikaros.jp/index.xml',
-    'https://j-defense.ikaros.jp/rss/',
-    'https://j-defense.ikaros.jp/?feed=rss2',
+  '九州防衛局': [
+    'https://www.mod.go.jp/rdb/kyusyu/rss.xml',
+    'https://www.mod.go.jp/rdb/kyusyu/rss/news.xml',
+  ],
+  '防衛省 政策・計画': [
+    'https://www.mod.go.jp/j/rss/policy.xml',
+    'https://www.mod.go.jp/j/rss/approach.xml',
+    'https://www.mod.go.jp/j/rss/publication.xml',
+  ],
+
+  // --- 自治体（基地を抱える県の報道発表） ---
+  '沖縄県': [
+    'https://www.pref.okinawa.jp/rss/news.xml',
+    'https://www.pref.okinawa.jp/index.rdf',
+    'https://www.pref.okinawa.jp/rss.xml',
+    'https://www.pref.okinawa.jp/site/rss/press.xml',
+  ],
+  '鹿児島県': [
+    'https://www.pref.kagoshima.jp/rss/news.xml',
+    'https://www.pref.kagoshima.jp/index.rdf',
+    'https://www.pref.kagoshima.jp/rss.xml',
+  ],
+  '長崎県': ['https://www.pref.nagasaki.jp/rss/news.xml', 'https://www.pref.nagasaki.jp/index.rdf'],
+  '山口県': ['https://www.pref.yamaguchi.lg.jp/rss/news.xml', 'https://www.pref.yamaguchi.lg.jp/index.rdf'],
+  '青森県': ['https://www.pref.aomori.lg.jp/rss/news.xml', 'https://www.pref.aomori.lg.jp/index.rdf'],
+  '西之表市（馬毛島）': [
+    'https://www.city.nishinoomote.lg.jp/rss.xml',
+    'https://www.city.nishinoomote.lg.jp/index.rdf',
+    'https://www.city.nishinoomote.lg.jp/rss/news.xml',
+  ],
+  '名護市（辺野古）': [
+    'https://www.city.nago.okinawa.jp/rss.xml',
+    'https://www.city.nago.okinawa.jp/index.rdf',
+  ],
+  '石垣市': ['https://www.city.ishigaki.okinawa.jp/rss.xml', 'https://www.city.ishigaki.okinawa.jp/index.rdf'],
+
+  // --- 建設系の専門紙（無料公開分） ---
+  '建通新聞': [
+    'https://www.kentsu.co.jp/feed',
+    'https://www.kentsu.co.jp/rss',
+    'https://www.kentsu.co.jp/?feed=rss2',
+    'https://www.kentsu.co.jp/webnews/rss.xml',
   ],
   'けんせつPlaza': [
     'https://www.kensetsu-plaza.com/kiji/rss',
     'https://www.kensetsu-plaza.com/?feed=rss2',
     'https://www.kensetsu-plaza.com/kiji/feed/',
   ],
-  '47NEWS': ['https://www.47news.jp/rss/index.rdf', 'https://www.47news.jp/feed', 'https://www.47news.jp/rss.xml'],
-  '西日本新聞': ['https://www.nishinippon.co.jp/feed/', 'https://www.nishinippon.co.jp/rss/', 'https://www.nishinippon.co.jp/rss/news.rdf'],
-  '山陰中央新報': ['https://www.sanin-chuo.co.jp/feed', 'https://www.sanin-chuo.co.jp/rss/', 'https://www.sanin-chuo.co.jp/?feed=rss2'],
-  '中国新聞': ['https://www.chugoku-np.co.jp/rss/', 'https://www.chugoku-np.co.jp/feed'],
-  '長崎新聞': ['https://nordot.app/-/rss/nagasaki', 'https://www.nagasaki-np.co.jp/feed'],
-  '佐賀新聞': ['https://www.saga-s.co.jp/rss/', 'https://www.saga-s.co.jp/feed'],
-  '北海道新聞': ['https://www.hokkaido-np.co.jp/rss/', 'https://www.hokkaido-np.co.jp/feed'],
-  '東奥日報': ['https://www.toonippo.co.jp/feed', 'https://www.toonippo.co.jp/rss/'],
-  '神戸新聞': ['https://www.kobe-np.co.jp/rss/flash.xml', 'https://www.kobe-np.co.jp/feed'],
-  '静岡新聞': ['https://www.at-s.com/rss/news.xml', 'https://www.at-s.com/feed'],
-  'Yahoo!ニュース 国内': ['https://news.yahoo.co.jp/rss/topics/domestic.xml'],
-  '時事通信': ['https://www.jiji.com/rss/ranking.rdf', 'https://www.jiji.com/rss/'],
+  '日経クロステック 建設': [
+    'https://xtech.nikkei.com/rss/xtech-const.rdf',
+    'https://xtech.nikkei.com/rss/index.rdf',
+  ],
+  '日刊建設産業新聞': [
+    'https://www.kensetsusangyo.com/feed',
+    'https://www.kensetsusangyo.com/?feed=rss2',
+  ],
+  '国土交通省': [
+    'https://www.mlit.go.jp/press.rdf',
+    'https://www.mlit.go.jp/rss/press.xml',
+    'https://www.mlit.go.jp/index.rdf',
+  ],
+}
+
+// RSS ではなく JSON で答える一次情報。読めたら専用の取り込みを書く。
+const JSON_CANDIDATES = {
+  '国会会議録検索システム': {
+    url:
+      'https://kokkai.ndl.go.jp/api/speech?any=' +
+      encodeURIComponent('防衛施設') +
+      '&recordPacking=json&maximumRecords=3',
+    // 期待する形。ここが崩れていたら取り込みを書いても無駄になる。
+    expect: (json) => Array.isArray(json?.speechRecord),
+    describe: (json) =>
+      `${json?.numberOfRecords ?? '?'}件中${json?.speechRecord?.length ?? 0}件 / 例: ` +
+      `${(json?.speechRecord?.[0]?.speech ?? '').slice(0, 50)}`,
+  },
 }
 
 const GNEWS =
@@ -175,3 +229,29 @@ if (resolver.available && gres.ok) {
 await resolver.close()
 
 section('診断おわり')
+
+// ---- 4) JSON で答える一次情報 ---------------------------------------------
+
+section('4. JSON の一次情報が使えるか')
+
+for (const [name, spec] of Object.entries(JSON_CANDIDATES)) {
+  const res = await get(spec.url, { timeoutMs: 20000, retries: 1 })
+  if (!res.ok) {
+    console.log(`× ${name}: ${res.error}`)
+    continue
+  }
+  let json = null
+  try {
+    json = JSON.parse(res.body)
+  } catch (e) {
+    console.log(`× ${name}: JSON として読めない（${String(e).slice(0, 60)}）`)
+    continue
+  }
+  if (!spec.expect(json)) {
+    console.log(`× ${name}: 応答の形が想定と違う → ${Object.keys(json).slice(0, 6).join(', ')}`)
+    continue
+  }
+  console.log(`✓ ${name}: ${spec.describe(json)}`)
+}
+
+section('診断おわり（4節）')
