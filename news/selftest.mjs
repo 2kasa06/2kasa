@@ -550,6 +550,30 @@ await withServer(async (port) => {
     assert.doesNotMatch(out, /data-cat="存在しないID"/)
   })
 
+  await check('棒グラフの各日と各記事に日付が入る', () => {
+    const out = renderIndex({ articles: summarized, digest: [], status, meta, stats })
+    // 棒を押して日を絞るので、両側に同じ形の日付が要る。
+    const bars = out.match(/class="hit"[^>]*data-day="(\d{4}-\d{2}-\d{2})"/g) || []
+    assert.ok(bars.length >= 14, `棒に日付が足りない: ${bars.length}`)
+    const cards = out.match(/<article class="card[^>]*data-day="(\d{4}-\d{2}-\d{2})"/g) || []
+    assert.equal(cards.length, summarized.length)
+    // 新着順に並べ替えるので、比較できる時刻も要る。
+    assert.ok(/data-time="\d{6,}"/.test(out), '記事に時刻が入っていない')
+  })
+
+  await check('並び替えの受け皿と操作が出る', () => {
+    const out = renderIndex({ articles: summarized, digest: [], status, meta, stats })
+    assert.match(out, /data-sort="cat"/)
+    assert.match(out, /data-sort="new"/)
+    assert.match(out, /id="flatlist"/)
+  })
+
+  await check('日付ラベルが正規表現に頼っていない', () => {
+    const out = renderIndex({ articles: summarized, digest: [], status, meta, stats })
+    // テンプレート越しに出るとバックスラッシュが落ちる。壊れた正規表現を残さない。
+    assert.doesNotMatch(out, /\/\^\(d\{4\}\)/, 'エスケープが落ちた正規表現が混ざっている')
+  })
+
   await check('記事0件でも壊れない', () => {
     const out = renderIndex({ articles: [], digest: [], status: [], meta, stats })
     assert.ok(out.includes('該当する記事はありませんでした'))

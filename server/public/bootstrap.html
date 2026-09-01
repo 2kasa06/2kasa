@@ -243,6 +243,16 @@ ul.digest { margin: 0; padding: 0; }
 .chip:hover { border-color: var(--cyan-dim); color: var(--text); }
 .chip[aria-pressed="true"] { background: var(--cyan); border-color: var(--cyan); color: #04222c;
                              font-weight: 700; box-shadow: 0 0 14px rgba(95,224,255,.35); }
+.sortsel { margin-left: auto; display: flex; gap: 0; }
+.sortbtn { font-family: var(--mono); font-size: .72rem; letter-spacing: .05em; cursor: pointer;
+  padding: 6px 13px; background: transparent; color: var(--text-faint);
+  border: 1px solid var(--line); }
+.sortbtn + .sortbtn { border-left: 0; }
+.sortbtn:hover { color: var(--text); border-color: var(--cyan-dim); }
+.sortbtn[aria-pressed="true"] { background: var(--line-soft); color: var(--cyan); border-color: var(--cyan-dim); }
+.chart .hit { cursor: pointer; }
+.chart .hit:focus { outline: 1px solid var(--cyan); outline-offset: -1px; }
+.chart .hit[aria-pressed="true"] + .bar { opacity: 1; filter: brightness(1.6); }
 .chip .dot { display: inline-block; width: 7px; height: 7px; margin-right: 7px;
              vertical-align: middle; }
 .search { width: 100%; margin-bottom: 26px; padding: 11px 14px; font-family: var(--mono);
@@ -605,91 +615,119 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
     
     <g>
       <rect class="hit" x="0" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/15 0件" data-tip="8/15 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-19"
+            aria-label="8/19 0件。押すとこの日の記事だけを表示"
+            data-tip="8/19 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="40" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/16 0件" data-tip="8/16 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-20"
+            aria-label="8/20 0件。押すとこの日の記事だけを表示"
+            data-tip="8/20 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="80" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/17 0件" data-tip="8/17 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-21"
+            aria-label="8/21 0件。押すとこの日の記事だけを表示"
+            data-tip="8/21 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="120" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/18 0件" data-tip="8/18 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-22"
+            aria-label="8/22 0件。押すとこの日の記事だけを表示"
+            data-tip="8/22 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="160" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/19 0件" data-tip="8/19 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-23"
+            aria-label="8/23 0件。押すとこの日の記事だけを表示"
+            data-tip="8/23 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="200" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/20 0件" data-tip="8/20 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-24"
+            aria-label="8/24 0件。押すとこの日の記事だけを表示"
+            data-tip="8/24 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="240" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/21 0件" data-tip="8/21 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-25"
+            aria-label="8/25 0件。押すとこの日の記事だけを表示"
+            data-tip="8/25 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="280" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/22 0件" data-tip="8/22 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-26"
+            aria-label="8/26 0件。押すとこの日の記事だけを表示"
+            data-tip="8/26 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="320" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/23 0件" data-tip="8/23 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-27"
+            aria-label="8/27 0件。押すとこの日の記事だけを表示"
+            data-tip="8/27 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="360" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/24 0件" data-tip="8/24 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-28"
+            aria-label="8/28 0件。押すとこの日の記事だけを表示"
+            data-tip="8/28 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="400" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/25 0件" data-tip="8/25 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-29"
+            aria-label="8/29 0件。押すとこの日の記事だけを表示"
+            data-tip="8/29 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="440" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/26 0件" data-tip="8/26 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-30"
+            aria-label="8/30 0件。押すとこの日の記事だけを表示"
+            data-tip="8/30 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="480" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/27 0件" data-tip="8/27 0件"></rect>
+            tabindex="0" role="button" data-day="2026-08-31"
+            aria-label="8/31 0件。押すとこの日の記事だけを表示"
+            data-tip="8/31 0件"></rect>
       
       
     </g>
     <g>
       <rect class="hit" x="520" y="0" width="40" height="108"
-            tabindex="0" role="img" aria-label="8/28 0件" data-tip="8/28 0件"></rect>
+            tabindex="0" role="button" data-day="2026-09-01"
+            aria-label="9/1 0件。押すとこの日の記事だけを表示"
+            data-tip="9/1 0件"></rect>
       
       
-    </g><text class="tick" x="60" y="122" text-anchor="middle">8/16</text><text class="tick" x="140" y="122" text-anchor="middle">8/18</text><text class="tick" x="220" y="122" text-anchor="middle">8/20</text><text class="tick" x="300" y="122" text-anchor="middle">8/22</text><text class="tick" x="380" y="122" text-anchor="middle">8/24</text><text class="tick" x="460" y="122" text-anchor="middle">8/26</text><text class="tick" x="540" y="122" text-anchor="middle">8/28</text>
+    </g><text class="tick" x="60" y="122" text-anchor="middle">8/20</text><text class="tick" x="140" y="122" text-anchor="middle">8/22</text><text class="tick" x="220" y="122" text-anchor="middle">8/24</text><text class="tick" x="300" y="122" text-anchor="middle">8/26</text><text class="tick" x="380" y="122" text-anchor="middle">8/28</text><text class="tick" x="460" y="122" text-anchor="middle">8/30</text><text class="tick" x="540" y="122" text-anchor="middle">9/1</text>
   </svg>
 </div><details><summary>数値で見る</summary>
-    <table class="data"><thead><tr><th>日付</th><th>8/15</th><th>8/16</th><th>8/17</th><th>8/18</th><th>8/19</th><th>8/20</th><th>8/21</th><th>8/22</th><th>8/23</th><th>8/24</th><th>8/25</th><th>8/26</th><th>8/27</th><th>8/28</th></tr></thead>
+    <table class="data"><thead><tr><th>日付</th><th>8/19</th><th>8/20</th><th>8/21</th><th>8/22</th><th>8/23</th><th>8/24</th><th>8/25</th><th>8/26</th><th>8/27</th><th>8/28</th><th>8/29</th><th>8/30</th><th>8/31</th><th>9/1</th></tr></thead>
     <tbody><tr><th>件数</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></details></div>
 </section>
   <section class="panel " class="rise" style="--d:405ms">
@@ -742,10 +780,22 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
   <button class="chip" type="button" data-cat="chotatsu" aria-pressed="false"><span class="dot" style="background:#c98500"></span>発注・入札・受注</button>
   <button class="chip" type="button" data-cat="chiiki" aria-pressed="false"><span class="dot" style="background:#d55181"></span>駐屯地と地元</button>
   <button class="chip" type="button" data-cat="seisaku" aria-pressed="false"><span class="dot" style="background:#008300"></span>予算・政策</button>
+  <div class="sortsel" role="group" aria-label="並び順">
+    <button class="sortbtn" type="button" data-sort="cat" aria-pressed="true">分類順</button>
+    <button class="sortbtn" type="button" data-sort="new" aria-pressed="false">新着順</button>
+  </div>
 </div>
 <input class="search" id="q" type="search" placeholder="&gt; キーワードで絞り込む（施設名・地名・企業名など）" autocomplete="off">
 
 <p class="empty">この期間に該当する記事はありませんでした。</p>
+<section class="cat-group" id="flatlist" hidden>
+  <div class="cat-head">
+    <span class="mark" style="background:var(--cyan)"></span>
+    <h2>新着順</h2>
+    <span class="n" id="flatcount">0 件</span>
+    <p class="blurb">分類をまたいで、新しいものから並べています。</p>
+  </div>
+</section>
 <p class="empty" id="noresult">条件に合う記事はありません。</p>
 
 <footer class="bottom">
@@ -1032,8 +1082,23 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
   var bar = document.getElementById('rfilter');
   var barLabel = document.getElementById('rfilter-label');
   var barClear = document.getElementById('rfilter-clear');
+  var sortButtons = Array.prototype.slice.call(document.querySelectorAll('.sortbtn'));
+  var chartHits = Array.prototype.slice.call(document.querySelectorAll('.chart .hit'));
+  var flat = document.getElementById('flatlist');
+  var flatCount = document.getElementById('flatcount');
   var active = 'all';
   var activeRegion = null;
+  var activeDay = null;
+  var sortMode = 'cat';
+
+  /* 新着順にするときカードを移すので、元の居場所を覚えておく。 */
+  cards.forEach(function (card) { card.__home = card.parentNode; });
+
+  /* 正規表現は使わない。この文字列はテンプレート越しに出るので \d が消える。 */
+  function dayLabel(day) {
+    var ymd = String(day || '').split('-');
+    return ymd.length === 3 ? Number(ymd[1]) + '月' + Number(ymd[2]) + '日' : day;
+  }
 
   function apply() {
     var needle = ((search && search.value) || '').trim().toLowerCase();
@@ -1041,6 +1106,7 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
     cards.forEach(function (card) {
       var visible = (active === 'all' || card.dataset.cat === active) &&
                     (!activeRegion || card.dataset.region === activeRegion) &&
+                    (!activeDay || card.dataset.day === activeDay) &&
                     (!needle || card.dataset.text.indexOf(needle) !== -1);
       card.hidden = !visible;
       if (visible) shown++;
@@ -1056,24 +1122,61 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
     lands.forEach(function (l) {
       l.classList.toggle('on', l.dataset.region === activeRegion);
     });
+    chartHits.forEach(function (h) {
+      h.setAttribute('aria-pressed', String(h.dataset.day === activeDay));
+    });
+    if (flatCount) flatCount.textContent = shown + ' 件';
+
     if (bar) {
-      bar.hidden = !activeRegion;
-      if (activeRegion && barLabel) {
+      var parts = [];
+      if (activeRegion) {
         var hit = regionButtons.filter(function (b) { return b.dataset.region === activeRegion; })[0];
-        var name = hit ? hit.firstElementChild.textContent : activeRegion;
-        barLabel.textContent = '地方で絞り込み中: ' + name + ' — ' + shown + '件';
+        parts.push('地方: ' + (hit ? hit.firstElementChild.textContent : activeRegion));
+      }
+      if (activeDay) parts.push('日付: ' + dayLabel(activeDay));
+      bar.hidden = parts.length === 0;
+      if (parts.length && barLabel) {
+        barLabel.textContent = '絞り込み中 — ' + parts.join(' / ') + ' — ' + shown + '件';
       }
     }
+  }
+
+  /* 一覧の先頭へ寄せる。絞り込んだのに画面が動かないと、効いたのか分からない。 */
+  function scrollToList() {
+    var list = document.querySelector('.cat-group:not([hidden])');
+    if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* 同じ日をもう一度押したら解除。地方の選び方と揃えてある。 */
+  function selectDay(day) {
+    activeDay = activeDay === day ? null : day;
+    apply();
+    if (activeDay) scrollToList();
+  }
+
+  function setSort(mode) {
+    if (mode === sortMode) return;
+    sortMode = mode;
+    if (mode === 'new') {
+      cards
+        .slice()
+        .sort(function (a, b) { return (Number(b.dataset.time) || 0) - (Number(a.dataset.time) || 0); })
+        .forEach(function (card) { flat.appendChild(card); });
+    } else {
+      /* 元の並びで戻す。cards は文書順なので、順に足せば分類ごとの順序も戻る。 */
+      cards.forEach(function (card) { card.__home.appendChild(card); });
+    }
+    sortButtons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.sort === mode));
+    });
+    apply();
   }
 
   /* 同じ地方をもう一度押したら解除。地図をいじって戻れなくなると困る。 */
   function selectRegion(id) {
     activeRegion = activeRegion === id ? null : id;
     apply();
-    if (activeRegion) {
-      var list = document.querySelector('.cat-group:not([hidden])');
-      if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (activeRegion) scrollToList();
   }
 
   regionButtons.forEach(function (b) {
@@ -1086,7 +1189,25 @@ footer.bottom { margin-top: 34px; color: var(--text-faint); font-size: .76rem; }
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectRegion(pin.dataset.region); }
     });
   });
-  if (barClear) barClear.addEventListener('click', function () { activeRegion = null; apply(); });
+  if (barClear) {
+    barClear.addEventListener('click', function () {
+      activeRegion = null;
+      activeDay = null;
+      apply();
+    });
+  }
+
+  chartHits.forEach(function (h) {
+    if (!h.dataset.day) return;
+    h.addEventListener('click', function () { selectDay(h.dataset.day); });
+    h.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectDay(h.dataset.day); }
+    });
+  });
+
+  sortButtons.forEach(function (b) {
+    b.addEventListener('click', function () { setSort(b.dataset.sort); });
+  });
 
   chips.forEach(function (chip) {
     chip.addEventListener('click', function () {

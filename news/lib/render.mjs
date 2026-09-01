@@ -272,6 +272,16 @@ ul.digest { margin: 0; padding: 0; }
 .chip:hover { border-color: var(--cyan-dim); color: var(--text); }
 .chip[aria-pressed="true"] { background: var(--cyan); border-color: var(--cyan); color: #04222c;
                              font-weight: 700; box-shadow: 0 0 14px rgba(95,224,255,.35); }
+.sortsel { margin-left: auto; display: flex; gap: 0; }
+.sortbtn { font-family: var(--mono); font-size: .72rem; letter-spacing: .05em; cursor: pointer;
+  padding: 6px 13px; background: transparent; color: var(--text-faint);
+  border: 1px solid var(--line); }
+.sortbtn + .sortbtn { border-left: 0; }
+.sortbtn:hover { color: var(--text); border-color: var(--cyan-dim); }
+.sortbtn[aria-pressed="true"] { background: var(--line-soft); color: var(--cyan); border-color: var(--cyan-dim); }
+.chart .hit { cursor: pointer; }
+.chart .hit:focus { outline: 1px solid var(--cyan); outline-offset: -1px; }
+.chart .hit[aria-pressed="true"] + .bar { opacity: 1; filter: brightness(1.6); }
 .chip .dot { display: inline-block; width: 7px; height: 7px; margin-right: 7px;
              vertical-align: middle; }
 .search { width: 100%; margin-bottom: 26px; padding: 11px 14px; font-family: var(--mono);
@@ -697,8 +707,23 @@ const SCRIPT = `
   var bar = document.getElementById('rfilter');
   var barLabel = document.getElementById('rfilter-label');
   var barClear = document.getElementById('rfilter-clear');
+  var sortButtons = Array.prototype.slice.call(document.querySelectorAll('.sortbtn'));
+  var chartHits = Array.prototype.slice.call(document.querySelectorAll('.chart .hit'));
+  var flat = document.getElementById('flatlist');
+  var flatCount = document.getElementById('flatcount');
   var active = 'all';
   var activeRegion = null;
+  var activeDay = null;
+  var sortMode = 'cat';
+
+  /* 新着順にするときカードを移すので、元の居場所を覚えておく。 */
+  cards.forEach(function (card) { card.__home = card.parentNode; });
+
+  /* 正規表現は使わない。この文字列はテンプレート越しに出るので \\d が消える。 */
+  function dayLabel(day) {
+    var ymd = String(day || '').split('-');
+    return ymd.length === 3 ? Number(ymd[1]) + '月' + Number(ymd[2]) + '日' : day;
+  }
 
   function apply() {
     var needle = ((search && search.value) || '').trim().toLowerCase();
@@ -706,6 +731,7 @@ const SCRIPT = `
     cards.forEach(function (card) {
       var visible = (active === 'all' || card.dataset.cat === active) &&
                     (!activeRegion || card.dataset.region === activeRegion) &&
+                    (!activeDay || card.dataset.day === activeDay) &&
                     (!needle || card.dataset.text.indexOf(needle) !== -1);
       card.hidden = !visible;
       if (visible) shown++;
@@ -721,24 +747,61 @@ const SCRIPT = `
     lands.forEach(function (l) {
       l.classList.toggle('on', l.dataset.region === activeRegion);
     });
+    chartHits.forEach(function (h) {
+      h.setAttribute('aria-pressed', String(h.dataset.day === activeDay));
+    });
+    if (flatCount) flatCount.textContent = shown + ' 件';
+
     if (bar) {
-      bar.hidden = !activeRegion;
-      if (activeRegion && barLabel) {
+      var parts = [];
+      if (activeRegion) {
         var hit = regionButtons.filter(function (b) { return b.dataset.region === activeRegion; })[0];
-        var name = hit ? hit.firstElementChild.textContent : activeRegion;
-        barLabel.textContent = '地方で絞り込み中: ' + name + ' — ' + shown + '件';
+        parts.push('地方: ' + (hit ? hit.firstElementChild.textContent : activeRegion));
+      }
+      if (activeDay) parts.push('日付: ' + dayLabel(activeDay));
+      bar.hidden = parts.length === 0;
+      if (parts.length && barLabel) {
+        barLabel.textContent = '絞り込み中 — ' + parts.join(' / ') + ' — ' + shown + '件';
       }
     }
+  }
+
+  /* 一覧の先頭へ寄せる。絞り込んだのに画面が動かないと、効いたのか分からない。 */
+  function scrollToList() {
+    var list = document.querySelector('.cat-group:not([hidden])');
+    if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* 同じ日をもう一度押したら解除。地方の選び方と揃えてある。 */
+  function selectDay(day) {
+    activeDay = activeDay === day ? null : day;
+    apply();
+    if (activeDay) scrollToList();
+  }
+
+  function setSort(mode) {
+    if (mode === sortMode) return;
+    sortMode = mode;
+    if (mode === 'new') {
+      cards
+        .slice()
+        .sort(function (a, b) { return (Number(b.dataset.time) || 0) - (Number(a.dataset.time) || 0); })
+        .forEach(function (card) { flat.appendChild(card); });
+    } else {
+      /* 元の並びで戻す。cards は文書順なので、順に足せば分類ごとの順序も戻る。 */
+      cards.forEach(function (card) { card.__home.appendChild(card); });
+    }
+    sortButtons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.sort === mode));
+    });
+    apply();
   }
 
   /* 同じ地方をもう一度押したら解除。地図をいじって戻れなくなると困る。 */
   function selectRegion(id) {
     activeRegion = activeRegion === id ? null : id;
     apply();
-    if (activeRegion) {
-      var list = document.querySelector('.cat-group:not([hidden])');
-      if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (activeRegion) scrollToList();
   }
 
   regionButtons.forEach(function (b) {
@@ -751,7 +814,25 @@ const SCRIPT = `
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectRegion(pin.dataset.region); }
     });
   });
-  if (barClear) barClear.addEventListener('click', function () { activeRegion = null; apply(); });
+  if (barClear) {
+    barClear.addEventListener('click', function () {
+      activeRegion = null;
+      activeDay = null;
+      apply();
+    });
+  }
+
+  chartHits.forEach(function (h) {
+    if (!h.dataset.day) return;
+    h.addEventListener('click', function () { selectDay(h.dataset.day); });
+    h.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectDay(h.dataset.day); }
+    });
+  });
+
+  sortButtons.forEach(function (b) {
+    b.addEventListener('click', function () { setSort(b.dataset.sort); });
+  });
 
   chips.forEach(function (chip) {
     chip.addEventListener('click', function () {
@@ -810,7 +891,9 @@ function dailyChart(daily) {
       return `
     <g>
       <rect class="hit" x="${i * slot}" y="0" width="${slot}" height="${H - padBottom}"
-            tabindex="0" role="img" aria-label="${escapeHtml(label)}" data-tip="${escapeHtml(label)}"></rect>
+            tabindex="0" role="button" data-day="${escapeHtml(point.day)}"
+            aria-label="${escapeHtml(label)}。押すとこの日の記事だけを表示"
+            data-tip="${escapeHtml(label)}"></rect>
       ${h > 0 ? `<path class="bar" d="${barPath(x, y, barW, h, 3)}" fill="var(--cyan)" opacity="${isPeak ? '1' : '.62'}" style="transform:scaleY(0)"></path>` : ''}
       ${isPeak ? `<text class="peak" x="${x + barW / 2}" y="${y - 5}" text-anchor="middle">${point.count}</text>` : ''}
     </g>`
@@ -1011,7 +1094,7 @@ function renderCard(article, categoryId) {
   const searchText = [article.title, article.publisher, ...summary].join(' ').toLowerCase()
 
   return `
-      <article class="card${isKey ? ' is-key' : ''}" data-cat="${escapeHtml(categoryId)}" data-region="${escapeHtml(article.region || 'none')}" data-text="${escapeHtml(searchText)}" style="border-left-color:${seriesOf(categoryId)}">
+      <article class="card${isKey ? ' is-key' : ''}" data-cat="${escapeHtml(categoryId)}" data-region="${escapeHtml(article.region || 'none')}" data-day="${escapeHtml(dayKeyOf(article.publishedAt))}" data-time="${Number(new Date(article.publishedAt)) || 0}" data-text="${escapeHtml(searchText)}" style="border-left-color:${seriesOf(categoryId)}">
         <h3><a href="${escapeHtml(article.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a></h3>
         <div class="meta">
           ${isKey ? '<span class="badge key">要注目</span>' : ''}
@@ -1244,10 +1327,22 @@ ${chips
       }${escapeHtml(chip.label)}</button>`,
   )
   .join('\n')}
+  <div class="sortsel" role="group" aria-label="並び順">
+    <button class="sortbtn" type="button" data-sort="cat" aria-pressed="true">分類順</button>
+    <button class="sortbtn" type="button" data-sort="new" aria-pressed="false">新着順</button>
+  </div>
 </div>
 <input class="search" id="q" type="search" placeholder="&gt; キーワードで絞り込む（施設名・地名・企業名など）" autocomplete="off">
 
 ${renderGroups(articles)}
+<section class="cat-group" id="flatlist" hidden>
+  <div class="cat-head">
+    <span class="mark" style="background:var(--cyan)"></span>
+    <h2>新着順</h2>
+    <span class="n" id="flatcount">0 件</span>
+    <p class="blurb">分類をまたいで、新しいものから並べています。</p>
+  </div>
+</section>
 <p class="empty" id="noresult">条件に合う記事はありません。</p>
 
 <footer class="bottom">
