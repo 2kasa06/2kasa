@@ -35,11 +35,13 @@ flow = "".join(
     f'<div class="step__t">{t}</div><div class="step__d">{d}</div></div>'
     for n, t, d in FLOW)
 
-prices = "".join(
-    f'<div class="price"><div><div class="price__n">{n}</div>'
-    f'<div class="price__s">{note}</div></div>'
-    f'<div class="price__v num">{v}<span>{suf}</span></div></div>'
-    for n, v, suf, note in PRICES)
+prices = (
+    '<div class="pcard">'
+    f'<div class="pcard__n">{PRICE_NAME}</div>'
+    f'<div class="pcard__v">{PRICE_VAL}</div>'
+    f'<div class="pcard__s">{PRICE_SUB}</div>'
+    f'<div class="pcard__note">{PRICE_NOTE}</div>'
+    '</div>')
 
 voices = "".join(
     f'<div class="voice"><div class="voice__t">「{t}」</div>'
