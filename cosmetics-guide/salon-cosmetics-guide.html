@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>サロン施術用化粧品のつくり方</title>
+<style>
+  @page { size: A4 landscape; margin: 0; }
+  :root{
+    --rose: hsl(8,40%,65%);
+    --rose-deep: hsl(8,42%,48%);
+    --pale: hsl(8,50%,92%);
+    --pale-2: hsl(8,50%,96%);
+    --ivory: hsl(42,40%,95%);
+    --warm-white: hsl(40,30%,98%);
+    --greige: hsl(38,20%,86%);
+    --brown: hsl(30,25%,22%);
+    --mid: hsl(30,14%,44%);
+    --soft: hsl(30,12%,60%);
+    --gold: hsl(45,55%,55%);
+    --ok: hsl(152,32%,40%);
+    --ng: hsl(5,58%,53%);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body{
+    font-family:"Liberation Sans","IPAPGothic","IPAGothic",sans-serif;
+    color:var(--brown);
+    background:#fff;
+    font-size:10pt;
+    line-height:1.7;
+  }
+  .page{
+    position:relative;
+    width:297mm; height:210mm;
+    padding:15mm 16mm 13mm;
+    background:var(--warm-white);
+    page-break-after:always;
+    overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .page:last-child{ page-break-after:auto; }
+
+  /* ---- running head ---- */
+  .rh{ display:flex; align-items:baseline; gap:10px; margin-bottom:7mm; }
+  .rh .num{
+    font-size:9pt; letter-spacing:.14em; color:var(--rose);
+    border:1px solid var(--pale); background:var(--pale-2);
+    border-radius:99px; padding:1.5px 10px;
+  }
+  .rh h2{ font-size:16pt; font-weight:700; letter-spacing:.02em; }
+  .rh .sub{ font-size:9pt; color:var(--mid); margin-left:auto; letter-spacing:.04em; }
+  .rule{ height:1px; background:var(--greige); margin:0 0 6mm; }
+
+  .foot{
+    position:absolute; left:16mm; right:16mm; bottom:7mm;
+    display:flex; align-items:center; gap:8px;
+    font-size:7.5pt; color:var(--soft); letter-spacing:.06em;
+    border-top:1px solid var(--greige); padding-top:2.5mm;
+  }
+  .foot .pg{ margin-left:auto; color:var(--rose); }
+
+  .body{ flex:1; min-height:0; }
+
+  /* ---- cover ---- */
+  .cover{ background:linear-gradient(160deg, var(--ivory) 0%, var(--warm-white) 45%, var(--pale-2) 100%); }
+  .cover .mark{ font-size:8.5pt; letter-spacing:.34em; color:var(--rose); }
+  .cover h1{ font-size:33pt; font-weight:700; line-height:1.28; letter-spacing:.01em; margin-top:5mm; }
+  .cover h1 em{ font-style:normal; color:var(--rose-deep); }
+  .cover .lead{ font-size:11pt; color:var(--mid); margin-top:5mm; max-width:150mm; line-height:1.85; }
+  .cover .blob{ position:absolute; border-radius:50%; }
+  .b1{ width:150mm; height:150mm; right:-45mm; top:-50mm; background:radial-gradient(circle at 35% 35%, hsla(8,50%,88%,.75), hsla(8,50%,92%,0) 68%); }
+  .b2{ width:95mm; height:95mm; right:22mm; bottom:-28mm; background:radial-gradient(circle at 40% 40%, hsla(45,55%,86%,.6), hsla(45,55%,86%,0) 70%); }
+
+  .keys{ display:grid; grid-template-columns:repeat(3,1fr); gap:6mm; margin-top:9mm; }
+  .key{ background:#fff; border:1px solid var(--greige); border-top:2.5px solid var(--rose); border-radius:3px; padding:5mm 5.5mm; }
+  .key .k{ font-size:7.5pt; letter-spacing:.18em; color:var(--rose); }
+  .key .t{ font-size:11.5pt; font-weight:700; margin-top:2.5mm; line-height:1.5; }
+  .key .d{ font-size:8.5pt; color:var(--mid); margin-top:2.5mm; line-height:1.7; }
+
+  .toc{ display:flex; gap:0; margin-top:9mm; border-top:1px solid var(--greige); padding-top:4mm; }
+  .toc div{ flex:1; font-size:8.5pt; color:var(--mid); }
+  .toc div span{ color:var(--rose); letter-spacing:.1em; margin-right:6px; }
+
+  /* ---- generic ---- */
+  h3.sec{ font-size:10.5pt; font-weight:700; letter-spacing:.04em; margin-bottom:3mm;
+          padding-left:7px; border-left:3px solid var(--rose); line-height:1.35; }
+  p.note{ font-size:8pt; color:var(--soft); line-height:1.7; }
+
+  table.t{ width:100%; border-collapse:collapse; font-size:9pt; }
+  table.t th{
+    background:var(--ivory); color:var(--mid); font-weight:700;
+    text-align:left; padding:2.6mm 3.5mm; font-size:8.5pt; letter-spacing:.05em;
+    border-bottom:1px solid var(--greige);
+  }
+  table.t td{ padding:2.6mm 3.5mm; border-bottom:1px solid var(--greige); vertical-align:middle; }
+  table.t tr:last-child td{ border-bottom:none; }
+  .badge{ display:inline-block; font-size:8pt; padding:1px 8px; border-radius:99px; white-space:nowrap; }
+  .b-ok{ background:hsl(152,30%,94%); color:var(--ok); border:1px solid hsl(152,25%,82%); }
+  .b-ng{ background:hsl(5,55%,96%); color:var(--ng); border:1px solid hsl(5,45%,86%); }
+  .b-gy{ background:hsl(45,45%,94%); color:hsl(38,45%,38%); border:1px solid hsl(45,40%,84%); }
+
+  .card{ background:#fff; border:1px solid var(--greige); border-radius:3px; padding:5mm; }
+  .callout{ background:var(--pale-2); border:1px solid var(--pale); border-radius:3px; padding:4mm 5mm; font-size:9pt; line-height:1.75; }
+  .callout b{ color:var(--rose-deep); }
+
+  svg{ display:block; }
+  .svgtext{ font-family:"Liberation Sans","IPAPGothic",sans-serif; }
+</style>
+</head>
+<body>
+
+<!-- ==================== PAGE 1 : COVER ==================== -->
+<section class="page cover">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="body" style="position:relative">
+    <div class="mark">BEAUTY PRODUCE</div>
+    <h1>サロン施術用化粧品の<br><em>つくり方</em>と完成までの工程</h1>
+    <p class="lead">
+      店販用のブランドを立ち上げるのではなく、「自分のサロンの施術で使う化粧品」を用意するための手引きです。
+      薬機法の線引き、3つのルート、実際の工程、そして向き・不向きを整理しています。
+    </p>
+
+    <div class="keys">
+      <div class="key">
+        <div class="k">POINT 01</div>
+        <div class="t">施術で使い切る分には<br>許可は要らない</div>
+        <div class="d">薬機法が規制するのは販売と授与。店内で使い切る限り製造販売業許可の対象外と整理されます。</div>
+      </div>
+      <div class="key">
+        <div class="k">POINT 02</div>
+        <div class="t">渡した瞬間に<br>アウトになる</div>
+        <div class="d">持ち帰り、無償サンプル、店販。無償でも「授与」に当たり、許可なしでは行えません。</div>
+      </div>
+      <div class="key">
+        <div class="k">POINT 03</div>
+        <div class="t">法律より先に<br>防腐と保険が効く</div>
+        <div class="d">作り置きは数日で菌が増えます。自家調製品は賠償責任保険の免責対象になっていることも多い。</div>
+      </div>
+    </div>
+
+    <div class="toc">
+      <div><span>P2</span>薬機法の線引き</div>
+      <div><span>P3</span>3つのルートと選び方</div>
+      <div><span>P4</span>完成までの工程</div>
+      <div><span>P5</span>メリット・デメリット</div>
+      <div><span>P6</span>費用の目安と着手チェック</div>
+    </div>
+  </div>
+  <div class="foot"><span>サロン施術用化粧品のつくり方</span><span class="pg">01</span></div>
+</section>
+
+<!-- ==================== PAGE 2 : LEGAL LINE ==================== -->
+<section class="page">
+  <div class="rh"><span class="num">01</span><h2>まず押さえる線引き — サロンの中か、外か</h2>
+    <span class="sub">薬機法（医薬品医療機器等法）</span></div>
+  <div class="rule"></div>
+  <div class="body">
+
+  <svg viewBox="0 0 1180 300" width="100%" height="67mm" class="svgtext">
+    <defs>
+      <marker id="ar" markerWidth="9" markerHeight="9" refX="7.5" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="hsl(8,40%,65%)"/>
+      </marker>
+      <marker id="arg" markerWidth="9" markerHeight="9" refX="7.5" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="hsl(30,14%,58%)"/>
+      </marker>
+    </defs>
+
+    <!-- SAFE ZONE -->
+    <rect x="6" y="34" width="700" height="248" rx="10" fill="hsl(42,40%,95%)" stroke="hsl(38,20%,86%)"/>
+    <text x="26" y="20" font-size="14" letter-spacing="2" fill="hsl(152,32%,40%)">サロンの中 ／ 役務の提供</text>
+    <text x="26" y="60" font-size="12.5" fill="hsl(30,14%,44%)">つくって、その場で使い切る。市場に出荷していないので許可は不要。</text>
+
+    <g>
+      <rect x="26" y="86" width="146" height="86" rx="6" fill="#fff" stroke="hsl(38,20%,86%)"/>
+      <text x="99" y="118" font-size="14" text-anchor="middle" fill="hsl(30,25%,22%)">ベース剤を</text>
+      <text x="99" y="140" font-size="14" text-anchor="middle" fill="hsl(30,25%,22%)">仕入れる</text>
+      <text x="99" y="160" font-size="10.5" text-anchor="middle" fill="hsl(30,12%,60%)">届出済みの化粧品</text>
+      <line x1="180" y1="129" x2="212" y2="129" stroke="hsl(8,40%,65%)" stroke-width="1.6" marker-end="url(#ar)"/>
+
+      <rect x="220" y="86" width="146" height="86" rx="6" fill="#fff" stroke="hsl(38,20%,86%)"/>
+      <text x="293" y="118" font-size="14" text-anchor="middle" fill="hsl(30,25%,22%)">施術の直前に</text>
+      <text x="293" y="140" font-size="14" text-anchor="middle" fill="hsl(30,25%,22%)">調合する</text>
+      <text x="293" y="160" font-size="10.5" text-anchor="middle" fill="hsl(30,12%,60%)">作り置きをしない</text>
+      <line x1="374" y1="129" x2="406" y2="129" stroke="hsl(8,40%,65%)" stroke-width="1.6" marker-end="url(#ar)"/>
+
+      <rect x="414" y="86" width="146" height="86" rx="6" fill="#fff" stroke="hsl(38,20%,86%)"/>
+      <text x="487" y="118" font-size="14" text-anchor="middle" fill="hsl(30,25%,22%)">施術で使う</text>
+      <text x="487" y="140" font-size="14" text-anchor="middle" fill="hsl(30,25%,22%)">（お客様の肌へ）</text>
+      <text x="487" y="160" font-size="10.5" text-anchor="middle" fill="hsl(30,12%,60%)">パッチテストと記録</text>
+      <line x1="568" y1="129" x2="600" y2="129" stroke="hsl(8,40%,65%)" stroke-width="1.6" marker-end="url(#ar)"/>
+
+      <rect x="596" y="86" width="92" height="86" rx="6" fill="hsl(152,30%,94%)" stroke="hsl(152,25%,80%)"/>
+      <text x="642" y="122" font-size="14" text-anchor="middle" fill="hsl(152,32%,36%)">使い切る</text>
+      <text x="642" y="146" font-size="21" text-anchor="middle" fill="hsl(152,32%,40%)">&#9711;</text>
+    </g>
+    <text x="26" y="210" font-size="12" fill="hsl(30,14%,44%)">残った分は廃棄する。ここまでが「施術というサービス」の範囲です。</text>
+    <rect x="26" y="226" width="662" height="42" rx="4" fill="#fff" stroke="hsl(152,25%,82%)"/>
+    <text x="42" y="252" font-size="12" fill="hsl(152,32%,36%)">運用ルール：作り置きしない／店内から出さない／誰に何をどの比率で使ったかを残す</text>
+
+    <!-- BOUNDARY -->
+    <line x1="726" y1="0" x2="726" y2="300" stroke="hsl(8,42%,48%)" stroke-width="2" stroke-dasharray="7 6"/>
+    <text x="726" y="296" font-size="12.5" text-anchor="middle" fill="hsl(8,42%,48%)">この線を越えたら、化粧品製造販売業＋製造業の許可が必要</text>
+
+    <!-- NG ZONE -->
+    <rect x="746" y="34" width="428" height="248" rx="10" fill="hsl(5,55%,97%)" stroke="hsl(5,45%,88%)"/>
+    <text x="766" y="20" font-size="14" letter-spacing="2" fill="hsl(5,58%,50%)">サロンの外 ／ 販売・授与</text>
+    <text x="766" y="60" font-size="12.5" fill="hsl(30,14%,44%)">お客様の手に「モノ」が渡った時点で規制対象。</text>
+
+    <g font-size="13" fill="hsl(30,25%,22%)">
+      <rect x="766" y="80" width="388" height="42" rx="5" fill="#fff" stroke="hsl(5,45%,88%)"/>
+      <text x="806" y="106">余った分を持ち帰ってもらう</text>
+      <text x="1128" y="108" font-size="17" text-anchor="middle" fill="hsl(5,58%,53%)">&#10005;</text>
+
+      <rect x="766" y="130" width="388" height="42" rx="5" fill="#fff" stroke="hsl(5,45%,88%)"/>
+      <text x="806" y="156">小分けして無償でサンプル配布</text>
+      <text x="1128" y="158" font-size="17" text-anchor="middle" fill="hsl(5,58%,53%)">&#10005;</text>
+
+      <rect x="766" y="180" width="388" height="42" rx="5" fill="#fff" stroke="hsl(5,45%,88%)"/>
+      <text x="806" y="206">店販として売る</text>
+      <text x="1128" y="208" font-size="17" text-anchor="middle" fill="hsl(5,58%,53%)">&#10005;</text>
+    </g>
+    <rect x="766" y="234" width="388" height="34" rx="4" fill="hsl(5,55%,96%)" stroke="hsl(5,45%,88%)"/>
+    <text x="782" y="256" font-size="11.5" fill="hsl(5,58%,45%)">無償でも「授与」に当たります。ここが一番の落とし穴。</text>
+  </svg>
+
+  <div style="display:grid; grid-template-columns:1.35fr 1fr; gap:7mm; margin-top:5mm;">
+    <div>
+      <h3 class="sec">ケース別の判定</h3>
+      <table class="t">
+        <tr><th style="width:62%">やること</th><th>判定</th><th>根拠</th></tr>
+        <tr><td>施術中に調合し、その場で使い切る</td><td><span class="badge b-ok">可</span></td><td>役務提供</td></tr>
+        <tr><td>2〜3日分をまとめて作り、店内で使う</td><td><span class="badge b-gy">要注意</span></td><td>防腐の問題</td></tr>
+        <tr><td>余りをお客様に持ち帰ってもらう</td><td><span class="badge b-ng">不可</span></td><td>授与</td></tr>
+        <tr><td>無償のサンプルとして配る</td><td><span class="badge b-ng">不可</span></td><td>授与</td></tr>
+        <tr><td>店販する</td><td><span class="badge b-ng">不可</span></td><td>販売</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3 class="sec">始める前に必ず</h3>
+      <div class="callout">
+        解釈には<b>自治体差</b>があります。着手前に管轄の<b>都道府県薬務課</b>へ一本電話を。
+        「施術で使い切る自家調製品」という言い方で通じます。<br>
+        あわせて、加入中の賠償責任保険の<b>免責条項</b>を確認してください。自家調製品による事故を
+        免責としている契約が少なくありません。
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <div class="foot"><span>サロン施術用化粧品のつくり方</span><span class="pg">02</span></div>
+</section>
+
+<!-- ==================== PAGE 3 : ROUTES ==================== -->
+<section class="page">
+  <div class="rh"><span class="num">02</span><h2>3つのルートと、選び方</h2>
+    <span class="sub">目的から逆算して決める</span></div>
+  <div class="rule"></div>
+  <div class="body">
+
+  <svg viewBox="0 0 1180 250" width="100%" height="56mm" class="svgtext">
+    <defs>
+      <marker id="ar2" markerWidth="9" markerHeight="9" refX="7.5" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="hsl(8,40%,65%)"/>
+      </marker>
+    </defs>
+
+    <!-- gate -->
+    <rect x="4" y="8" width="250" height="52" rx="6" fill="hsl(5,55%,97%)" stroke="hsl(5,45%,88%)"/>
+    <text x="20" y="30" font-size="12.5" fill="hsl(5,58%,48%)">前提の確認：店販もしたい？</text>
+    <text x="20" y="50" font-size="11.5" fill="hsl(30,14%,44%)">はい → 許可取得が必要。本資料の対象外。</text>
+
+    <!-- start -->
+    <rect x="4" y="88" width="250" height="76" rx="6" fill="hsl(8,50%,92%)" stroke="hsl(8,40%,78%)"/>
+    <text x="129" y="118" font-size="15" text-anchor="middle" fill="hsl(8,42%,40%)">なぜ、自分で</text>
+    <text x="129" y="140" font-size="15" text-anchor="middle" fill="hsl(8,42%,40%)">作りたいのか？</text>
+    <text x="129" y="186" font-size="11" text-anchor="middle" fill="hsl(30,12%,60%)">ここを言語化しないと</text>
+    <text x="129" y="204" font-size="11" text-anchor="middle" fill="hsl(30,12%,60%)">ルートは選べません</text>
+
+    <!-- connectors -->
+    <path d="M254,126 H300 V44 H360" fill="none" stroke="hsl(8,40%,65%)" stroke-width="1.6" marker-end="url(#ar2)"/>
+    <path d="M254,126 H330 H360" fill="none" stroke="hsl(8,40%,65%)" stroke-width="1.6" marker-end="url(#ar2)"/>
+    <path d="M254,126 H300 V208 H360" fill="none" stroke="hsl(8,40%,65%)" stroke-width="1.6" marker-end="url(#ar2)"/>
+
+    <!-- reasons -->
+    <g font-size="13" fill="hsl(30,25%,22%)">
+      <rect x="366" y="20" width="212" height="48" rx="5" fill="#fff" stroke="hsl(38,20%,86%)"/>
+      <text x="386" y="50">材料コストを下げたい</text>
+      <rect x="366" y="102" width="212" height="48" rx="5" fill="#fff" stroke="hsl(38,20%,86%)"/>
+      <text x="386" y="132">体験価値・他店との差別化</text>
+      <rect x="366" y="184" width="212" height="48" rx="5" fill="#fff" stroke="hsl(38,20%,86%)"/>
+      <text x="386" y="214">処方を自分で決めたい</text>
+    </g>
+
+    <line x1="578" y1="44"  x2="626" y2="44"  stroke="hsl(8,40%,65%)" stroke-width="1.6" marker-end="url(#ar2)"/>
+    <line x1="578" y1="126" x2="626" y2="126" stroke="hsl(8,40%,65%)" stroke-width="1.6" marker-end="url(#ar2)"/>
+    <line x1="578" y1="208" x2="626" y2="208" stroke="hsl(8,40%,65%)" stroke-width="1.6" marker-end="url(#ar2)"/>
+
+    <!-- routes -->
+    <g>
+      <rect x="632" y="14" width="542" height="60" rx="6" fill="hsl(42,40%,95%)" stroke="hsl(38,20%,80%)"/>
+      <circle cx="666" cy="44" r="17" fill="hsl(38,20%,72%)"/>
+      <text x="666" y="50" font-size="17" text-anchor="middle" fill="#fff">C</text>
+      <text x="698" y="38" font-size="14.5" fill="hsl(30,25%,22%)">業務用の既製品を使う</text>
+      <text x="698" y="60" font-size="11.5" fill="hsl(30,14%,44%)">原料を小口で買うより安いことが多い。作らないのが最適解の場合。</text>
+
+      <rect x="632" y="96" width="542" height="60" rx="6" fill="hsl(8,50%,94%)" stroke="hsl(8,40%,76%)"/>
+      <circle cx="666" cy="126" r="17" fill="hsl(8,42%,52%)"/>
+      <text x="666" y="132" font-size="17" text-anchor="middle" fill="#fff">A</text>
+      <text x="698" y="120" font-size="14.5" fill="hsl(8,42%,38%)">その場ブレンド　　推奨</text>
+      <text x="698" y="142" font-size="11.5" fill="hsl(30,14%,44%)">届出済みのベース剤に、施術直前で添加素材を混ぜる。防腐の問題が消える。</text>
+
+      <rect x="632" y="178" width="542" height="60" rx="6" fill="hsl(45,45%,94%)" stroke="hsl(45,40%,78%)"/>
+      <circle cx="666" cy="208" r="17" fill="hsl(45,55%,50%)"/>
+      <text x="666" y="214" font-size="17" text-anchor="middle" fill="#fff">B</text>
+      <text x="698" y="202" font-size="14.5" fill="hsl(38,45%,32%)">業務用の小ロットOEM</text>
+      <text x="698" y="224" font-size="11.5" fill="hsl(30,14%,44%)">処方も容器も選べる。防腐・安定性のリスクを丸ごと外注できる。</text>
+    </g>
+  </svg>
+
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:6mm; margin-top:8mm;">
+    <div class="card" style="border-top:2.5px solid hsl(8,42%,52%); padding:6mm">
+      <div style="font-size:8pt;letter-spacing:.16em;color:var(--rose)">ROUTE A</div>
+      <div style="font-size:12.5pt;font-weight:700;margin:2.5mm 0 3.5mm">その場ブレンド</div>
+      <p style="font-size:9pt;color:var(--mid);line-height:1.95">
+        業務用ベース（化粧水・美容液・キャリアオイル）に、精油や美容液を施術ごとに配合。
+        作り置きがないため微生物リスクがほぼ消え、法的にも「調製」でなく施術のカスタマイズとして
+        整理しやすい。「私のために調合してくれた」という体験価値が最大の見返り。
+      </p>
+    </div>
+    <div class="card" style="border-top:2.5px solid hsl(45,55%,50%); padding:6mm">
+      <div style="font-size:8pt;letter-spacing:.16em;color:var(--gold)">ROUTE B</div>
+      <div style="font-size:12.5pt;font-weight:700;margin:2.5mm 0 3.5mm">業務用の小ロットOEM</div>
+      <p style="font-size:9pt;color:var(--mid);line-height:1.95">
+        施術専用なので、ブランド名も化粧箱も不要。無地の業務用ボトルでよく、店販用より
+        格段に安く・少なく作れます。レディメイド処方を選べば処方開発費と安定性試験が省け、
+        1品目20〜50万円台が視野に入ります。
+      </p>
+    </div>
+    <div class="card" style="border-top:2.5px solid hsl(38,20%,72%); padding:6mm">
+      <div style="font-size:8pt;letter-spacing:.16em;color:var(--soft)">ROUTE C</div>
+      <div style="font-size:12.5pt;font-weight:700;margin:2.5mm 0 3.5mm">業務用の既製品</div>
+      <p style="font-size:9pt;color:var(--mid);line-height:1.95">
+        動機がコスト削減なら、実はこれが最安です。手作りは原料を小口で買う分、単価が跳ね上がる。
+        「作らない」という結論も、選択肢として最初にテーブルへ載せておいてください。
+      </p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:5mm">
+    <b>迷ったら A から。</b>Aで3か月ほど記録を取り、実際に選ばれたレシピが見えてから、その1本だけをBへ。この順番なら在庫を抱える前に答え合わせが済みます。
+  </div>
+
+  </div>
+  <div class="foot"><span>サロン施術用化粧品のつくり方</span><span class="pg">03</span></div>
+</section>
+
+<!-- ==================== PAGE 4 : PROCESS ==================== -->
+<section class="page">
+  <div class="rh"><span class="num">03</span><h2>完成までの工程</h2>
+    <span class="sub">ルートA：2〜4週間 ／ ルートB：3〜4か月</span></div>
+  <div class="rule"></div>
+  <div class="body">
+
+  <h3 class="sec">ルートA — その場ブレンド（所要 2〜4週間）</h3>
+  <svg viewBox="0 0 1180 128" width="100%" height="29mm" class="svgtext">
+    <defs>
+      <marker id="ar3" markerWidth="8" markerHeight="8" refX="6.8" refY="3.6" orient="auto">
+        <path d="M0,0 L7,3.6 L0,7.2 z" fill="hsl(8,40%,72%)"/>
+      </marker>
+    </defs>
+    <line x1="20" y1="34" x2="1160" y2="34" stroke="hsl(8,50%,90%)" stroke-width="2"/>
+    <g font-size="11.5">
+      <!-- 6 steps -->
+      <g>
+        <circle cx="82" cy="34" r="15" fill="hsl(8,42%,52%)"/><text x="82" y="39" font-size="13" text-anchor="middle" fill="#fff">1</text>
+        <text x="82" y="70" text-anchor="middle" font-size="12.5" fill="hsl(30,25%,22%)">目的の言語化</text>
+        <text x="82" y="90" text-anchor="middle" fill="hsl(30,12%,60%)">どの悩みに効かせるか</text>
+        <text x="82" y="107" text-anchor="middle" fill="hsl(30,12%,60%)">年代別の導線に紐づけ</text>
+      </g>
+      <g>
+        <circle cx="262" cy="34" r="15" fill="hsl(8,42%,52%)"/><text x="262" y="39" font-size="13" text-anchor="middle" fill="#fff">2</text>
+        <text x="262" y="70" text-anchor="middle" font-size="12.5" fill="hsl(30,25%,22%)">ベース剤の選定</text>
+        <text x="262" y="90" text-anchor="middle" fill="hsl(30,12%,60%)">届出済みの業務用のみ</text>
+        <text x="262" y="107" text-anchor="middle" fill="hsl(30,12%,60%)">全成分表を保管する</text>
+      </g>
+      <g>
+        <circle cx="442" cy="34" r="15" fill="hsl(8,42%,52%)"/><text x="442" y="39" font-size="13" text-anchor="middle" fill="#fff">3</text>
+        <text x="442" y="70" text-anchor="middle" font-size="12.5" fill="hsl(30,25%,22%)">添加素材と配合比</text>
+        <text x="442" y="90" text-anchor="middle" fill="hsl(30,12%,60%)">精油は上限濃度を厳守</text>
+        <text x="442" y="107" text-anchor="middle" fill="hsl(30,12%,60%)">レシピを3〜5本に固定</text>
+      </g>
+      <g>
+        <circle cx="622" cy="34" r="15" fill="hsl(8,42%,52%)"/><text x="622" y="39" font-size="13" text-anchor="middle" fill="#fff">4</text>
+        <text x="622" y="70" text-anchor="middle" font-size="12.5" fill="hsl(30,25%,22%)">スタッフ内テスト</text>
+        <text x="622" y="90" text-anchor="middle" fill="hsl(30,12%,60%)">2週間、自分たちの肌で</text>
+        <text x="622" y="107" text-anchor="middle" fill="hsl(30,12%,60%)">刺激・使用感を記録</text>
+      </g>
+      <g>
+        <circle cx="802" cy="34" r="15" fill="hsl(8,42%,52%)"/><text x="802" y="39" font-size="13" text-anchor="middle" fill="#fff">5</text>
+        <text x="802" y="70" text-anchor="middle" font-size="12.5" fill="hsl(30,25%,22%)">運用の型をつくる</text>
+        <text x="802" y="90" text-anchor="middle" fill="hsl(30,12%,60%)">パッチテスト・同意・記録</text>
+        <text x="802" y="107" text-anchor="middle" fill="hsl(30,12%,60%)">保険と薬務課の確認</text>
+      </g>
+      <g>
+        <circle cx="982" cy="34" r="15" fill="hsl(8,42%,52%)"/><text x="982" y="39" font-size="13" text-anchor="middle" fill="#fff">6</text>
+        <text x="982" y="70" text-anchor="middle" font-size="12.5" fill="hsl(30,25%,22%)">メニュー化・価格設定</text>
+        <text x="982" y="90" text-anchor="middle" fill="hsl(30,12%,60%)">カウンセリングとセット</text>
+        <text x="982" y="107" text-anchor="middle" fill="hsl(30,12%,60%)">施術単価に織り込む</text>
+      </g>
+      <g>
+        <circle cx="1132" cy="34" r="15" fill="hsl(152,32%,40%)"/><text x="1132" y="40" font-size="13" text-anchor="middle" fill="#fff">&#9711;</text>
+        <text x="1132" y="70" text-anchor="middle" font-size="12.5" fill="hsl(152,32%,36%)">運用開始</text>
+        <text x="1132" y="90" text-anchor="middle" fill="hsl(30,12%,60%)">記録を見て</text>
+        <text x="1132" y="107" text-anchor="middle" fill="hsl(30,12%,60%)">レシピを絞り込む</text>
+      </g>
+    </g>
+    <g stroke="hsl(8,40%,72%)" stroke-width="1.4" marker-end="url(#ar3)">
+      <line x1="102" y1="34" x2="240" y2="34"/><line x1="282" y1="34" x2="420" y2="34"/>
+      <line x1="462" y1="34" x2="600" y2="34"/><line x1="642" y1="34" x2="780" y2="34"/>
+      <line x1="822" y1="34" x2="960" y2="34"/><line x1="1004" y1="34" x2="1110" y2="34"/>
+    </g>
+  </svg>
+
+  <h3 class="sec" style="margin-top:9mm">ルートB — 業務用の小ロットOEM（所要 3〜4か月）</h3>
+  <svg viewBox="0 0 1180 250" width="100%" height="56mm" class="svgtext">
+    <!-- axis -->
+    <g font-size="11" fill="hsl(30,12%,60%)">
+      <text x="0" y="16" font-size="11" fill="hsl(30,14%,44%)">工程</text>
+      <text x="300" y="16">0週</text><text x="440" y="16">4週</text><text x="580" y="16">8週</text>
+      <text x="720" y="16">12週</text><text x="860" y="16">16週</text><text x="1000" y="16">20週</text>
+    </g>
+    <g stroke="hsl(38,20%,88%)" stroke-width="1">
+      <line x1="300" y1="26" x2="300" y2="238"/><line x1="440" y1="26" x2="440" y2="238"/>
+      <line x1="580" y1="26" x2="580" y2="238"/><line x1="720" y1="26" x2="720" y2="238"/>
+      <line x1="860" y1="26" x2="860" y2="238"/><line x1="1000" y1="26" x2="1000" y2="238"/>
+    </g>
+    <line x1="300" y1="26" x2="300" y2="238" stroke="hsl(8,40%,70%)" stroke-width="1.6"/>
+
+    <!-- rows: y start 34, step 29, bar h 18 -->
+    <g font-size="12.5" fill="hsl(30,25%,22%)">
+      <text x="0" y="47">1. OEM 3社に相見積り</text>
+      <rect x="300" y="34" width="105" height="18" rx="4" fill="hsl(8,42%,52%)"/>
+      <text x="415" y="47" font-size="11" fill="hsl(30,12%,60%)">最低ロット・剤型・単価を並べる</text>
+
+      <text x="0" y="76">2. レディメイド処方の選定</text>
+      <rect x="335" y="63" width="140" height="18" rx="4" fill="hsl(8,42%,58%)"/>
+      <text x="485" y="76" font-size="11" fill="hsl(30,12%,60%)">既存処方から選ぶと開発費が消える</text>
+
+      <text x="0" y="105">3. サンプル取り寄せ・試用</text>
+      <rect x="405" y="92" width="175" height="18" rx="4" fill="hsl(8,40%,65%)"/>
+      <text x="590" y="105" font-size="11" fill="hsl(30,12%,60%)">スタッフ、次にモニターの順で2周</text>
+
+      <text x="0" y="134">4. 容器・ラベルの決定</text>
+      <rect x="510" y="121" width="140" height="18" rx="4" fill="hsl(45,55%,55%)"/>
+      <text x="660" y="134" font-size="11" fill="hsl(30,12%,60%)">業務用は無地・既製容器で十分</text>
+
+      <text x="0" y="163">5. 発注・製造</text>
+      <rect x="650" y="150" width="140" height="18" rx="4" fill="hsl(45,50%,48%)"/>
+      <text x="800" y="163" font-size="11" fill="hsl(30,12%,60%)">充填・検査・出荷判定</text>
+
+      <text x="0" y="192">6. 納品・スタッフ研修</text>
+      <rect x="790" y="179" width="70" height="18" rx="4" fill="hsl(38,20%,66%)"/>
+      <text x="870" y="192" font-size="11" fill="hsl(30,12%,60%)">使い方・禁忌・記録方法の共有</text>
+
+      <text x="0" y="221">7. 施術への導入</text>
+      <rect x="860" y="208" width="180" height="18" rx="4" fill="hsl(152,32%,45%)"/>
+      <text x="1050" y="221" font-size="11" fill="hsl(30,12%,60%)">運用開始</text>
+    </g>
+  </svg>
+
+  <div class="callout" style="margin-top:8mm; display:flex; gap:8mm; padding:6mm 6mm;">
+    <div style="flex:1"><b>どちらのルートでも必須の3点。</b>
+      施術前のパッチテストと同意の取得／誰に・何を・どの比率で使ったかの記録／店内から出さない運用。
+      この3つが、法規制より先にあなたのサロンを守ります。</div>
+    <div style="flex:0 0 62mm; border-left:1px solid var(--pale); padding-left:6mm; font-size:8.5pt; color:var(--mid)">
+      ※ 期間は目安です。剤型（化粧水は短く、乳化系・チューブ充填は長い）とOEMの繁忙期で前後します。
+    </div>
+  </div>
+
+  </div>
+  <div class="foot"><span>サロン施術用化粧品のつくり方</span><span class="pg">04</span></div>
+</section>
+
+<!-- ==================== PAGE 5 : PROS & CONS ==================== -->
+<section class="page">
+  <div class="rh"><span class="num">04</span><h2>メリット・デメリット</h2>
+    <span class="sub">3つのルートの向き・不向き</span></div>
+  <div class="rule"></div>
+  <div class="body">
+
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:6mm;">
+    <!-- A -->
+    <div class="card" style="border-top:3px solid hsl(8,42%,52%); padding:4.5mm 5mm;">
+      <div style="display:flex; align-items:center; gap:3mm">
+        <div style="width:8mm;height:8mm;border-radius:50%;background:hsl(8,42%,52%);color:#fff;font-size:11pt;display:flex;align-items:center;justify-content:center">A</div>
+        <div><div style="font-size:11.5pt;font-weight:700;line-height:1.3">その場ブレンド</div>
+        <div style="font-size:8pt;color:var(--soft)">初期 5〜15万円 ／ 2〜4週間</div></div>
+      </div>
+      <div style="font-size:8pt;letter-spacing:.14em;color:var(--ok);margin:4mm 0 2mm">MERIT</div>
+      <ul style="list-style:none;font-size:8.6pt;line-height:1.62;color:var(--mid)">
+        <li style="margin-bottom:1.8mm">— 作り置きがなく、<b style="color:var(--brown)">微生物リスクがほぼ消える</b></li>
+        <li style="margin-bottom:1.8mm">— 法的にも「施術のカスタマイズ」として整理しやすい</li>
+        <li style="margin-bottom:1.8mm">— 初期投資が小さく、<b style="color:var(--brown)">失敗しても傷が浅い</b></li>
+        <li style="margin-bottom:1.8mm">— 「私のために調合してくれた」体験価値が出る</li>
+        <li style="margin-bottom:1.8mm">— 肌質・季節・年代で即座に出し分けできる</li>
+      </ul>
+      <div style="font-size:8pt;letter-spacing:.14em;color:var(--ng);margin:3.5mm 0 2mm">DEMERIT</div>
+      <ul style="list-style:none;font-size:8.6pt;line-height:1.62;color:var(--mid)">
+        <li style="margin-bottom:1.8mm">— 品質が<b style="color:var(--brown)">施術者の腕に依存</b>する。属人化しやすい</li>
+        <li style="margin-bottom:1.8mm">— 毎回の手間が施術時間を圧迫する</li>
+        <li style="margin-bottom:1.8mm">— 記録の運用を怠ると、事故時に何も追えない</li>
+        <li style="margin-bottom:1.8mm">— 保険が効かない前提で組む必要がある</li>
+      </ul>
+    </div>
+    <!-- B -->
+    <div class="card" style="border-top:3px solid hsl(45,55%,50%); padding:4.5mm 5mm;">
+      <div style="display:flex; align-items:center; gap:3mm">
+        <div style="width:8mm;height:8mm;border-radius:50%;background:hsl(45,55%,50%);color:#fff;font-size:11pt;display:flex;align-items:center;justify-content:center">B</div>
+        <div><div style="font-size:11.5pt;font-weight:700;line-height:1.3">小ロットOEM</div>
+        <div style="font-size:8pt;color:var(--soft)">初期 30〜60万円 ／ 3〜4か月</div></div>
+      </div>
+      <div style="font-size:8pt;letter-spacing:.14em;color:var(--ok);margin:4mm 0 2mm">MERIT</div>
+      <ul style="list-style:none;font-size:8.6pt;line-height:1.62;color:var(--mid)">
+        <li style="margin-bottom:1.8mm">— 防腐・安定性のリスクを<b style="color:var(--brown)">丸ごと外注できる</b></li>
+        <li style="margin-bottom:1.8mm">— 誰が施術しても品質が揃う。<b style="color:var(--brown)">属人化しない</b></li>
+        <li style="margin-bottom:1.8mm">— 処方をコントロールでき、敏感肌対応も設計できる</li>
+        <li style="margin-bottom:1.8mm">— 業務用なので容器・箱が不要。店販用より格段に安い</li>
+        <li style="margin-bottom:1.8mm">— 将来、店販へ移行する土台になる</li>
+      </ul>
+      <div style="font-size:8pt;letter-spacing:.14em;color:var(--ng);margin:3.5mm 0 2mm">DEMERIT</div>
+      <ul style="list-style:none;font-size:8.6pt;line-height:1.62;color:var(--mid)">
+        <li style="margin-bottom:1.8mm">— <b style="color:var(--brown)">在庫を抱える</b>。使用期限との戦いになる</li>
+        <li style="margin-bottom:1.8mm">— 立ち上げに3〜4か月。思いついてすぐは無理</li>
+        <li style="margin-bottom:1.8mm">— 剤型によって最低ロットが跳ね上がる</li>
+        <li style="margin-bottom:1.8mm">— 一度決めた処方は簡単には変えられない</li>
+      </ul>
+    </div>
+    <!-- C -->
+    <div class="card" style="border-top:3px solid hsl(38,20%,70%); padding:4.5mm 5mm;">
+      <div style="display:flex; align-items:center; gap:3mm">
+        <div style="width:8mm;height:8mm;border-radius:50%;background:hsl(38,20%,70%);color:#fff;font-size:11pt;display:flex;align-items:center;justify-content:center">C</div>
+        <div><div style="font-size:11.5pt;font-weight:700;line-height:1.3">業務用の既製品</div>
+        <div style="font-size:8pt;color:var(--soft)">初期 0〜3万円 ／ 即日〜1週間</div></div>
+      </div>
+      <div style="font-size:8pt;letter-spacing:.14em;color:var(--ok);margin:4mm 0 2mm">MERIT</div>
+      <ul style="list-style:none;font-size:8.6pt;line-height:1.62;color:var(--mid)">
+        <li style="margin-bottom:1.8mm">— <b style="color:var(--brown)">1回あたりの材料費が最も安い</b>ことが多い</li>
+        <li style="margin-bottom:1.8mm">— 事故時の責任が製造者にも分散する</li>
+        <li style="margin-bottom:1.8mm">— 保険が正常に効く</li>
+        <li style="margin-bottom:1.8mm">— 明日から始められる。撤退も自由</li>
+      </ul>
+      <div style="font-size:8pt;letter-spacing:.14em;color:var(--ng);margin:3.5mm 0 2mm">DEMERIT</div>
+      <ul style="list-style:none;font-size:8.6pt;line-height:1.62;color:var(--mid)">
+        <li style="margin-bottom:1.8mm">— <b style="color:var(--brown)">差別化にならない</b>。他店と同じものを使う</li>
+        <li style="margin-bottom:1.8mm">— 処方をコントロールできない</li>
+        <li style="margin-bottom:1.8mm">— 廃番・仕様変更に振り回される</li>
+        <li style="margin-bottom:1.8mm">— 価格の根拠を施術の腕だけで説明することになる</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sec" style="margin-top:6mm">4つの軸で比べる<span style="font-weight:400;font-size:8.5pt;color:var(--soft);margin-left:6px">相対評価（5段階）</span></h3>
+  <svg viewBox="0 0 1180 168" width="100%" height="38mm" class="svgtext">
+    <!-- legend -->
+    <g font-size="11">
+      <rect x="880" y="0" width="11" height="11" rx="2" fill="hsl(8,42%,52%)"/><text x="898" y="10" fill="hsl(30,14%,44%)">A その場ブレンド</text>
+      <rect x="1000" y="0" width="11" height="11" rx="2" fill="hsl(45,55%,50%)"/><text x="1018" y="10" fill="hsl(30,14%,44%)">B OEM</text>
+      <rect x="1080" y="0" width="11" height="11" rx="2" fill="hsl(38,20%,70%)"/><text x="1098" y="10" fill="hsl(30,14%,44%)">C 既製品</text>
+    </g>
+    <!-- grid: bars start x=190, full width 620 for score 5 -->
+    <g stroke="hsl(38,20%,90%)" stroke-width="1">
+      <line x1="190" y1="20" x2="190" y2="160"/><line x1="314" y1="20" x2="314" y2="160"/>
+      <line x1="438" y1="20" x2="438" y2="160"/><line x1="562" y1="20" x2="562" y2="160"/>
+      <line x1="686" y1="20" x2="686" y2="160"/><line x1="810" y1="20" x2="810" y2="160"/>
+    </g>
+    <g font-size="12.5" fill="hsl(30,25%,22%)">
+      <!-- row1 -->
+      <text x="0" y="34">処方の自由度</text>
+      <rect x="190" y="24" width="372" height="7" rx="3.5" fill="hsl(8,42%,52%)"/>
+      <rect x="190" y="33" width="620" height="7" rx="3.5" fill="hsl(45,55%,50%)"/>
+      <rect x="190" y="42" width="124" height="7" rx="3.5" fill="hsl(38,20%,70%)"/>
+      <!-- row2 -->
+      <text x="0" y="70">体験価値・差別化</text>
+      <rect x="190" y="60" width="620" height="7" rx="3.5" fill="hsl(8,42%,52%)"/>
+      <rect x="190" y="69" width="496" height="7" rx="3.5" fill="hsl(45,55%,50%)"/>
+      <rect x="190" y="78" width="124" height="7" rx="3.5" fill="hsl(38,20%,70%)"/>
+      <!-- row3 -->
+      <text x="0" y="106">初期費用の軽さ</text>
+      <rect x="190" y="96" width="496" height="7" rx="3.5" fill="hsl(8,42%,52%)"/>
+      <rect x="190" y="105" width="248" height="7" rx="3.5" fill="hsl(45,55%,50%)"/>
+      <rect x="190" y="114" width="620" height="7" rx="3.5" fill="hsl(38,20%,70%)"/>
+      <!-- row4 -->
+      <text x="0" y="142">リスクの低さ</text>
+      <rect x="190" y="132" width="372" height="7" rx="3.5" fill="hsl(8,42%,52%)"/>
+      <rect x="190" y="141" width="496" height="7" rx="3.5" fill="hsl(45,55%,50%)"/>
+      <rect x="190" y="150" width="620" height="7" rx="3.5" fill="hsl(38,20%,70%)"/>
+    </g>
+    <g font-size="10.5" fill="hsl(30,12%,60%)">
+      <text x="186" y="16">1</text><text x="310" y="16">2</text><text x="434" y="16">3</text>
+      <text x="558" y="16">4</text><text x="682" y="16">5</text>
+    </g>
+    <text x="880" y="60" font-size="11.5" fill="hsl(30,14%,44%)">読み方：Aは体験価値、Bは自由度と品質の安定、</text>
+    <text x="880" y="80" font-size="11.5" fill="hsl(30,14%,44%)">Cは軽さとリスクの低さで勝つ。全部は取れません。</text>
+    <text x="880" y="108" font-size="11.5" fill="hsl(8,42%,48%)">おすすめは A で始めて、需要が読めたら B へ。</text>
+  </svg>
+
+  </div>
+  <div class="foot"><span>サロン施術用化粧品のつくり方</span><span class="pg">05</span></div>
+</section>
+
+<!-- ==================== PAGE 6 : COST & CHECKLIST ==================== -->
+<section class="page">
+  <div class="rh"><span class="num">05</span><h2>費用の目安と、着手前チェック</h2>
+    <span class="sub">数値はすべて目安</span></div>
+  <div class="rule"></div>
+  <div class="body">
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:9mm;">
+    <div>
+      <h3 class="sec">初期費用の目安（1品目）</h3>
+      <svg viewBox="0 0 560 150" width="100%" height="34mm" class="svgtext">
+        <g stroke="hsl(38,20%,90%)" stroke-width="1">
+          <line x1="120" y1="14" x2="120" y2="128"/><line x1="230" y1="14" x2="230" y2="128"/>
+          <line x1="340" y1="14" x2="340" y2="128"/><line x1="450" y1="14" x2="450" y2="128"/>
+          <line x1="560" y1="14" x2="560" y2="128"/>
+        </g>
+        <g font-size="11" fill="hsl(30,12%,60%)">
+          <text x="112" y="146">0</text><text x="216" y="146">15万</text><text x="326" y="146">30万</text>
+          <text x="436" y="146">45万</text><text x="558" y="146" text-anchor="end">60万</text>
+        </g>
+        <g font-size="13" fill="hsl(30,25%,22%)">
+          <text x="0" y="38">A ブレンド</text>
+          <rect x="157" y="26" width="74" height="16" rx="4" fill="hsl(8,42%,52%)"/>
+          <text x="242" y="38" font-size="11.5" fill="hsl(30,14%,44%)">5〜15万円</text>
+
+          <text x="0" y="78">B OEM</text>
+          <rect x="340" y="66" width="220" height="16" rx="4" fill="hsl(45,55%,50%)"/>
+          <text x="242" y="78" font-size="11.5" fill="hsl(30,14%,44%)">30〜60万円</text>
+
+          <text x="0" y="118">C 既製品</text>
+          <rect x="120" y="106" width="22" height="16" rx="4" fill="hsl(38,20%,70%)"/>
+          <text x="152" y="118" font-size="11.5" fill="hsl(30,14%,44%)">0〜3万円</text>
+        </g>
+      </svg>
+      <p class="note" style="margin-top:2mm">Aは業務用ベース剤・添加素材・計量器具の初回仕入れ。Bはレディメイド処方＋既製容器・最小ロット前提。</p>
+    </div>
+
+    <div>
+      <h3 class="sec">施術1回あたりの材料費の目安</h3>
+      <svg viewBox="0 0 560 150" width="100%" height="34mm" class="svgtext">
+        <g stroke="hsl(38,20%,90%)" stroke-width="1">
+          <line x1="120" y1="14" x2="120" y2="128"/><line x1="230" y1="14" x2="230" y2="128"/>
+          <line x1="340" y1="14" x2="340" y2="128"/><line x1="450" y1="14" x2="450" y2="128"/>
+          <line x1="560" y1="14" x2="560" y2="128"/>
+        </g>
+        <g font-size="11" fill="hsl(30,12%,60%)">
+          <text x="112" y="146">0</text><text x="214" y="146">100円</text><text x="324" y="146">200円</text>
+          <text x="434" y="146">300円</text><text x="558" y="146" text-anchor="end">400円</text>
+        </g>
+        <g font-size="13" fill="hsl(30,25%,22%)">
+          <text x="0" y="38">A ブレンド</text>
+          <rect x="340" y="26" width="220" height="16" rx="4" fill="hsl(8,42%,52%)"/>
+          <text x="332" y="38" font-size="11.5" text-anchor="end" fill="hsl(30,14%,44%)">200〜400円</text>
+
+          <text x="0" y="78">B OEM</text>
+          <rect x="285" y="66" width="165" height="16" rx="4" fill="hsl(45,55%,50%)"/>
+          <text x="277" y="78" font-size="11.5" text-anchor="end" fill="hsl(30,14%,44%)">150〜300円</text>
+
+          <text x="0" y="118">C 既製品</text>
+          <rect x="230" y="106" width="110" height="16" rx="4" fill="hsl(38,20%,70%)"/>
+          <text x="222" y="118" font-size="11.5" text-anchor="end" fill="hsl(30,14%,44%)">100〜200円</text>
+        </g>
+      </svg>
+      <p class="note" style="margin-top:2mm">フェイシャル1回の使用量から算出した概算。剤型・使用量・仕入先で倍近く動きます。</p>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1.25fr 1fr; gap:9mm; margin-top:7mm;">
+    <div>
+      <h3 class="sec">着手前チェックリスト</h3>
+      <table class="t">
+        <tr><th style="width:8%"></th><th>確認すること</th><th style="width:26%">相手・場所</th></tr>
+        <tr><td style="font-size:12pt;color:var(--rose)">&#9633;</td><td>「施術で使い切る自家調製品」の扱いを確認した</td><td>都道府県 薬務課</td></tr>
+        <tr><td style="font-size:12pt;color:var(--rose)">&#9633;</td><td>自家調製品による事故が免責になっていないか確認した</td><td>賠償責任保険の証券</td></tr>
+        <tr><td style="font-size:12pt;color:var(--rose)">&#9633;</td><td>使うベース剤が化粧品として届出済みか確認した</td><td>仕入先・全成分表</td></tr>
+        <tr><td style="font-size:12pt;color:var(--rose)">&#9633;</td><td>パッチテストと同意取得の運用を決めた</td><td>サロン内</td></tr>
+        <tr><td style="font-size:12pt;color:var(--rose)">&#9633;</td><td>「誰に・何を・どの比率で」の記録様式を用意した</td><td>カルテ／台帳</td></tr>
+        <tr><td style="font-size:12pt;color:var(--rose)">&#9633;</td><td>店内から持ち出さないルールをスタッフに共有した</td><td>スタッフ全員</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3 class="sec">最初の一手</h3>
+      <div class="callout" style="line-height:1.8">
+        まず<b>ルートAを1メニューだけ</b>で始めてください。初期投資が小さく、法的にも技術的にも
+        いちばん安全な入口です。3か月ほど記録を取れば「どのレシピが実際に選ばれるか」が見えます。<br><br>
+        そこで需要のあった<b>1本だけを、ルートBでOEM化する</b>。この順番なら、在庫リスクを負う前に
+        答え合わせが終わっています。
+      </div>
+      <p class="note" style="margin-top:4mm">
+        ※ 本資料の金額・期間はすべて一般的な目安であり、実際の見積りではありません。法令の解釈と運用は
+        自治体および時期によって異なります。最終判断の前に、管轄の薬務課および専門家にご確認ください。
+      </p>
+    </div>
+  </div>
+
+  </div>
+  <div class="foot"><span>サロン施術用化粧品のつくり方</span><span class="pg">06</span></div>
+</section>
+
+</body>
+</html>
