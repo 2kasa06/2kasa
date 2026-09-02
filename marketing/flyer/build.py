@@ -74,7 +74,8 @@ body = f"""
   <section class="sec stages">
     <div class="sec__h">
       <div class="label label--c">Your Life Stage</div>
-      <h2>あなたのステージを選んでください</h2>
+      <h2>ライフステージ別プロデュース</h2>
+      <p>人生のどのステージにいても、あなたらしい美しさを見つける旅は始められます。</p>
     </div>
     <div class="stage__grid">{stages}</div>
   </section>

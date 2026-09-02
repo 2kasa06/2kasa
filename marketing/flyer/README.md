@@ -16,7 +16,7 @@
 | --- | --- |
 | キャッチコピー・リード文 | `Home.tsx` ヒーロー |
 | ブランドメッセージ | `Home.tsx` `BrandMessageSection` |
-| ライフステージ 4区分 | `Home.tsx` `AGE_CARDS` |
+| ライフステージ 4区分 | `Home.tsx` `AGE_CARDS`（見出しはサイトの「あなたのステージを選んでください」＝クリック前提の文言のため、紙面用に「ライフステージ別プロデュース」へ変更） |
 | 提供サービス 8項目 | `Home.tsx` `SERVICES` |
 | ご利用の流れ 5ステップ | `CommonSections.tsx` `flowSteps`（紙面用に説明文を短縮） |
 | お客様の声 2件 | `CommonSections.tsx` `testimonials` |

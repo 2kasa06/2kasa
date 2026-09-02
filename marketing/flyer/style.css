@@ -53,12 +53,12 @@ h1 em{ color:var(--rose); }
 .sec{ padding:2.6mm 12mm; }
 .sec__h{ text-align:center; margin-bottom:2mm; }
 .sec__h h2{ font-size:10.5pt; font-weight:500; letter-spacing:.09em; color:var(--ink); }
-.sec__h p{ font-size:6.6pt; letter-spacing:.03em; color:var(--ink-3); margin-top:.9mm; }
+.sec__h p{ font-size:6.6pt; letter-spacing:.03em; color:var(--ink-3); margin-top:.7mm; }
 
 /* ── ステージ ───────────────────────────── */
 .stages{ background:hsl(42,35%,96%); }
 .stage__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:2.8mm; }
-.stage{ position:relative; border-radius:2.4mm; overflow:hidden; aspect-ratio:5/4;
+.stage{ position:relative; border-radius:2.4mm; overflow:hidden; aspect-ratio:27/20;
   background:var(--pale); box-shadow:0 .8mm 2.4mm rgba(120,90,80,.10); }
 .stage img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 32%; }
 .stage__ov{ position:absolute; inset:0;
@@ -72,7 +72,7 @@ h1 em{ color:var(--rose); }
 /* ── サービス ───────────────────────────── */
 .svc__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:2.2mm; }
 .svc{ background:#fff; border:1px solid var(--line); border-radius:2.4mm;
-  padding:1.9mm 1.8mm; text-align:center; box-shadow:0 .5mm 1.6mm rgba(190,150,140,.07); }
+  padding:1.7mm 1.7mm; text-align:center; box-shadow:0 .5mm 1.6mm rgba(190,150,140,.07); }
 .svc__i{ width:6mm; height:6mm; border-radius:1.8mm; margin:0 auto 1mm;
   background:rgba(190,130,120,.09); color:var(--rose-dp); display:flex; align-items:center; justify-content:center; font-size:8.6pt; }
 .svc__t{ font-size:7pt; font-weight:500; letter-spacing:-.01em; color:var(--ink); margin-bottom:.7mm; }
@@ -89,7 +89,7 @@ h1 em{ color:var(--rose); }
   font-family:'Cormorant',serif; font-variant-numeric:lining-nums;
   font-size:8pt; color:var(--rose-dp); position:relative; z-index:2; }
 .step__t{ font-size:6.8pt; font-weight:500; letter-spacing:-.01em; margin-bottom:.7mm; }
-.step__d{ font-size:5.7pt; line-height:1.4; color:var(--ink-2); letter-spacing:-.02em; }
+.step__d{ font-size:5.7pt; line-height:1.35; color:var(--ink-2); letter-spacing:-.02em; }
 
 /* ── 料金・お客様の声 ───────────────────── */
 .two{ display:grid; grid-template-columns:.88fr 1.12fr; gap:5mm; align-items:start; }
@@ -98,7 +98,7 @@ h1 em{ color:var(--rose); }
 .blk__h::after{ content:""; flex:1; height:1px; background:var(--line); }
 
 .pcard{ background:linear-gradient(135deg,rgba(244,222,216,.55) 0%,rgba(247,241,232,.75) 100%);
-  border:1px solid var(--line); border-radius:2.4mm; padding:2.2mm 3mm 2.4mm; text-align:center; }
+  border:1px solid var(--line); border-radius:2.4mm; padding:2mm 3mm 2.2mm; text-align:center; }
 .pcard__n{ font-size:7.4pt; font-weight:500; letter-spacing:.02em; color:var(--ink); }
 .pcard__v{ font-family:'Cormorant',serif; font-variant-numeric:lining-nums tabular-nums;
   font-size:19.5pt; line-height:1.1; color:var(--rose-dp); margin:1.2mm 0 1.3mm; letter-spacing:.01em; }
@@ -140,6 +140,6 @@ h1 em{ color:var(--rose); }
   color:rgba(255,255,255,.72); white-space:nowrap; }
 .ct__v{ font-family:'Cormorant',serif; font-size:10pt; letter-spacing:.02em;
   font-variant-numeric:lining-nums tabular-nums; white-space:nowrap; }
-.notes{ position:relative; z-index:2; margin-top:2mm; padding-top:1.6mm;
+.notes{ position:relative; z-index:2; margin-top:1.6mm; padding-top:1.4mm;
   border-top:1px solid rgba(255,255,255,.18); font-size:5.6pt; line-height:1.6;
   color:rgba(255,255,255,.74); letter-spacing:.02em; }
