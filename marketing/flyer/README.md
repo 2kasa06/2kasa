@@ -18,7 +18,7 @@
 | ブランドメッセージ | `Home.tsx` `BrandMessageSection` |
 | ライフステージ 4区分 | `Home.tsx` `AGE_CARDS`（見出しはサイトの「あなたのステージを選んでください」＝クリック前提の文言のため、紙面用に「ライフステージ別プロデュース」へ変更） |
 | 提供サービス 8項目 | `Home.tsx` `SERVICES` |
-| ご利用の流れ 5ステップ | `CommonSections.tsx` `flowSteps`（紙面用に説明文を短縮） |
+| ご利用の流れ 5ステップ | `CommonSections.tsx` `flowSteps`（紙面用に説明文を短縮／STEP01 は「無料」を外して「カウンセリング」） |
 | お客様の声 2件 | `CommonSections.tsx` `testimonials` |
 | 料金（トータルプロデュース ¥33,000） | 別途指定。サイト側 FAQ の「¥50,000〜」とは不一致 |
 
@@ -27,6 +27,16 @@
 実績が確定したら `content.py` に追記してください。
 
 連絡先（TEL / MAIL / INSTA / WEB）は仮の値です。`content.py` の `CONTACT_*` を差し替えてください。
+
+カウンセリングは有料のため、チラシからは「無料」表記をすべて外しています。
+一方でサイト側にはまだ「無料カウンセリング」が残っているので、表記を合わせる場合は次を修正してください。
+
+- `src/pages/Home.tsx:168`（ヒーローのボタン）
+- `src/pages/AgePageTemplate.tsx:183`（各世代ページのボタン）
+- `src/components/CommonSections.tsx:311`（ご利用の流れ STEP01）
+- `src/components/CommonSections.tsx:427`（FAQ「初めてでも大丈夫ですか？」の回答）
+- `src/components/CommonSections.tsx:586`（予約セクションの見出し）
+- `src/components/CommonSections.tsx:665, 700`（予約フォームの選択肢と注記）
 
 ## 作り直し方
 

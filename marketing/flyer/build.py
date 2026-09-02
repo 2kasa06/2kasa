@@ -117,7 +117,6 @@ body = f"""
         <div class="cta__t">{CTA_TITLE}</div>
         <div class="cta__s">{CTA_SUB}</div>
       </div>
-      <div class="freebox"><small>{FREE_K}</small><strong>{FREE_V}</strong></div>
     </div>
     <div class="ctbar">
       <div class="ct"><span class="ct__k">TEL</span><span class="ct__v">{CONTACT_TEL}</span></div>
