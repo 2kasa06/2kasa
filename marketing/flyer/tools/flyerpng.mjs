@@ -1,0 +1,10 @@
+import { chromium } from 'playwright'
+const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' })
+const p = await b.newPage({ viewport: { width: 794, height: 1123 }, deviceScaleFactor: 3.125 })
+await p.goto('file://' + process.argv[2], { waitUntil: 'load' })
+await p.emulateMedia({ media: 'print' })
+await p.waitForTimeout(900)
+await p.locator('.sheet').screenshot({ path: process.argv[3] })
+const box = await p.locator('.sheet').boundingBox()
+console.log('css px:', box.width, 'x', box.height)
+await b.close()
