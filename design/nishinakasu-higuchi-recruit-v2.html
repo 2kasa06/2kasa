@@ -1,0 +1,434 @@
+<title>西中洲樋口建設 採用第二弾</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&family=Oswald:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ink:#070E18;
+    --ink-2:#0C1727;
+    --navy:#132A4A;
+    --steel:#2C4E7C;
+    --line:#1E3352;
+    --silver:#C7CED6;
+    --slate:#7C8899;
+    --paper:#E9EDF1;
+    --hazard:#E8A317;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    font-size:15px;
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-family:"Oswald",sans-serif;
+    font-weight:500;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--slate);
+    font-size:11px;
+    line-height:1.6;
+  }
+  .eyebrow .mark{color:var(--hazard);}
+  h1,h2,h3{font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;font-weight:900;text-wrap:balance;margin:0;}
+
+  /* ---------- board header ---------- */
+  .board-head{
+    border-bottom:1px solid var(--line);
+    padding:56px 0 40px;
+    background:
+      repeating-linear-gradient(115deg,rgba(44,78,124,.16) 0 2px,transparent 2px 9px),
+      radial-gradient(120% 90% at 8% 0%,#12233A 0%,var(--ink) 62%);
+  }
+  .board-head h1{
+    font-size:clamp(30px,5.2vw,52px);
+    line-height:1.24;
+    letter-spacing:.01em;
+    margin:18px 0 14px;
+  }
+  .board-head h1 .thin{
+    display:block;
+    font-family:"Noto Sans JP",sans-serif;
+    font-weight:500;
+    font-size:clamp(13px,1.8vw,17px);
+    letter-spacing:.14em;
+    color:var(--silver);
+    line-height:1.8;
+    margin-top:16px;
+  }
+  .board-head p{max-width:60ch;color:var(--slate);margin:0;font-size:14px;}
+  .rule-hazard{width:52px;height:3px;background:var(--hazard);}
+
+  /* ---------- tone & manner ---------- */
+  .tone{padding:44px 0 8px;display:grid;gap:34px;grid-template-columns:1fr;}
+  @media (min-width:860px){.tone{grid-template-columns:1.15fr 1fr;gap:56px;}}
+  .tone h2{font-size:17px;letter-spacing:.06em;margin-bottom:14px;}
+  .swatches{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px;padding:0;list-style:none;}
+  .swatches li{width:96px;}
+  .chip{height:52px;border:1px solid var(--line);}
+  .chip-name{font-family:"Oswald",sans-serif;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--silver);margin-top:6px;display:block;}
+  .chip-hex{font-family:"Oswald",sans-serif;font-size:10.5px;color:var(--slate);letter-spacing:.06em;}
+  .compare{border-top:1px solid var(--line);}
+  .compare div{
+    display:grid;grid-template-columns:74px 1fr;gap:16px;
+    padding:13px 0;border-bottom:1px solid var(--line);align-items:baseline;
+  }
+  .compare span:first-child{font-family:"Oswald",sans-serif;font-size:11px;letter-spacing:.14em;color:var(--slate);text-transform:uppercase;}
+  .compare span:last-child{font-size:13.5px;line-height:1.75;}
+  .compare .now span:last-child{color:var(--paper);font-weight:500;}
+  .compare .prev span:last-child{color:var(--slate);}
+
+  /* ---------- mock column ---------- */
+  .stage{
+    margin:64px 0 0;
+    padding:52px 0 64px;
+    border-top:1px solid var(--line);
+    background:linear-gradient(180deg,#0A1421 0%,var(--ink) 40%);
+  }
+  .stage-lead{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:baseline;margin-bottom:34px;}
+  .stage-lead h2{font-size:20px;}
+  .stage-lead .note{font-size:12.5px;color:var(--slate);}
+  .mock{
+    width:360px;max-width:100%;margin:0 auto;
+    background:var(--ink-2);
+    border:1px solid var(--line);
+    overflow:hidden;
+    font-size:13px;
+  }
+  .cut{position:relative;}
+  .cut + .cut{border-top:1px solid rgba(44,78,124,.5);}
+  .tag{
+    position:absolute;top:0;left:0;z-index:3;
+    font-family:"Oswald",sans-serif;font-size:10px;letter-spacing:.18em;
+    background:var(--hazard);color:#0A1421;padding:2px 8px 1px;font-weight:600;
+  }
+  .shot{
+    position:relative;
+    background:
+      repeating-linear-gradient(45deg,rgba(44,78,124,.22) 0 1px,transparent 1px 8px),
+      linear-gradient(165deg,#183050 0%,#0B1728 100%);
+    border-bottom:1px solid rgba(44,78,124,.55);
+    display:flex;align-items:center;justify-content:center;
+    padding:22px 20px;
+    text-align:center;
+  }
+  .shot-inner{max-width:250px;}
+  .shot .kind{
+    font-family:"Oswald",sans-serif;font-size:10px;letter-spacing:.2em;
+    color:var(--hazard);display:block;margin-bottom:8px;
+  }
+  .shot .desc{font-size:11.5px;line-height:1.8;color:var(--silver);}
+  .shot::before,.shot::after{
+    content:"";position:absolute;width:14px;height:14px;border:1px solid rgba(199,206,214,.45);
+  }
+  .shot::before{top:10px;left:10px;border-right:0;border-bottom:0;}
+  .shot::after{bottom:10px;right:10px;border-left:0;border-top:0;}
+  .h-hero{height:430px;}
+  .h-tall{height:230px;}
+  .h-mid{height:190px;}
+  .h-wide{height:150px;}
+
+  .copy{padding:26px 22px 30px;}
+  .copy .lede{
+    font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;
+    font-size:23px;line-height:1.45;letter-spacing:.005em;margin:0 0 12px;
+  }
+  .copy .lede em{font-style:normal;color:var(--hazard);}
+  .copy .sub{font-size:12px;color:var(--slate);line-height:1.85;margin:0;}
+  .copy .body{font-size:12px;line-height:2.05;color:var(--silver);margin:12px 0 0;}
+  .cut-hero{background:linear-gradient(180deg,#0D1B2E,#0A1523);}
+  .cut-hero .logo-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:12px 16px;border-bottom:1px solid rgba(44,78,124,.5);
+  }
+  .cut-hero .logo-row .co{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.16em;color:var(--paper);}
+  .cut-hero .logo-row .yr{font-family:"Oswald",sans-serif;font-size:10px;letter-spacing:.2em;color:var(--slate);}
+  .cut-hero .copy{padding:28px 22px 34px;}
+  .cut-hero .lede{font-size:31px;line-height:1.34;}
+  .slash{
+    height:26px;
+    background:repeating-linear-gradient(-45deg,var(--hazard) 0 9px,#0A1421 9px 18px);
+    opacity:.85;
+  }
+  .cut-close{
+    background:linear-gradient(180deg,var(--navy),#0C1B31);
+    padding:34px 22px 30px;text-align:center;
+  }
+  .cut-close h3{font-size:20px;line-height:1.55;margin-bottom:10px;}
+  .cut-close .kicker{font-family:"Oswald",sans-serif;font-size:10px;letter-spacing:.2em;color:var(--hazard);display:block;margin-bottom:14px;}
+  .cut-close .cond{font-size:11px;color:var(--slate);line-height:1.95;margin:14px 0 0;}
+  .band{
+    background:var(--hazard);color:#0A1421;text-align:center;
+    font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;
+    font-size:14px;letter-spacing:.08em;padding:11px 12px;
+  }
+
+  /* ---------- shot list ---------- */
+  .list{padding:70px 0 90px;border-top:1px solid var(--line);}
+  .list h2{font-size:20px;margin-bottom:8px;}
+  .list .lead{color:var(--slate);font-size:13.5px;margin:0 0 34px;max-width:62ch;}
+  .cards{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media (min-width:760px){.cards{grid-template-columns:repeat(2,1fr);}}
+  @media (min-width:1060px){.cards{grid-template-columns:repeat(3,1fr);}}
+  .card{background:var(--ink-2);padding:24px 22px 26px;display:flex;flex-direction:column;gap:10px;}
+  .card .no{font-family:"Oswald",sans-serif;font-size:11px;letter-spacing:.18em;color:var(--hazard);}
+  .card h3{font-size:15.5px;line-height:1.6;}
+  .card dl{margin:0;display:grid;grid-template-columns:56px 1fr;gap:6px 12px;font-size:12.5px;line-height:1.8;}
+  .card dt{font-family:"Oswald",sans-serif;font-size:10px;letter-spacing:.14em;color:var(--slate);text-transform:uppercase;padding-top:4px;}
+  .card dd{margin:0;color:var(--silver);}
+
+  .notes{margin-top:56px;display:grid;gap:28px;grid-template-columns:1fr;}
+  @media (min-width:860px){.notes{grid-template-columns:1fr 1fr;}}
+  .notes h3{font-size:15px;margin-bottom:12px;}
+  .notes ul{margin:0;padding-left:1.1em;color:var(--silver);font-size:13px;line-height:2.05;}
+  .notes li::marker{color:var(--steel);}
+  footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--slate);font-size:11.5px;}
+</style>
+
+<header class="board-head">
+  <div class="wrap">
+    <div class="rule-hazard"></div>
+    <p class="eyebrow" style="margin:14px 0 0;">株式会社西中洲樋口建設 <span class="mark">/</span> マイナビ転職 掲載クリエイティブ 第二弾 <span class="mark">/</span> デザイン案</p>
+    <h1>泥くさい。だから、かっこいい。
+      <span class="thin">前回の「丸い職場」から、今回は「現場に立つ大人の顔」へ。</span>
+    </h1>
+    <p>紺と鉄色を基調に、直線と斜めの断ちで構成した硬派なトーン。写真は全カット現場で撮り、笑顔よりも真顔・手元・段取りを主役にします。トップは新作業服＋法被の全社員集合カットで、会社の"体温"ではなく"体格"を見せる構成です。</p>
+  </div>
+</header>
+
+<section class="wrap tone">
+  <div>
+    <h2>カラー</h2>
+    <ul class="swatches">
+      <li><div class="chip" style="background:#070E18;"></div><span class="chip-name">Ink</span><span class="chip-hex">#070E18</span></li>
+      <li><div class="chip" style="background:#132A4A;"></div><span class="chip-name">Navy</span><span class="chip-hex">#132A4A</span></li>
+      <li><div class="chip" style="background:#2C4E7C;"></div><span class="chip-name">Steel</span><span class="chip-hex">#2C4E7C</span></li>
+      <li><div class="chip" style="background:#C7CED6;"></div><span class="chip-name">Silver</span><span class="chip-hex">#C7CED6</span></li>
+      <li><div class="chip" style="background:#E8A317;"></div><span class="chip-name">Hazard</span><span class="chip-hex">#E8A317</span></li>
+    </ul>
+    <p style="font-size:13px;color:var(--slate);margin:0 0 10px;">紺とシルバーは新しい作業服そのものの配色。差し色の黄は現場の安全色（保安帯・区画表示）から一点だけ拝借し、見出しの記号と締めの帯にしか使いません。</p>
+    <h2 style="margin-top:26px;">書体</h2>
+    <p style="font-size:13px;color:var(--slate);margin:0;">見出し＝Zen Kaku Gothic New 900（角の立った極太ゴシック）／本文＝Noto Sans JP 400・行間広め／英字ラベル＝Oswald（現場看板のような縦長コンデンス）。前回の細い明朝＋中央揃えは使いません。</p>
+  </div>
+  <div>
+    <h2>第一弾との違い</h2>
+    <div class="compare">
+      <div class="prev"><span>前回</span><span>白ベース／余白多め／写真は斜めに散らす／細明朝・縦組み</span></div>
+      <div class="now"><span>今回</span><span>紺〜黒ベース／写真は画面いっぱいの断ち落とし／極太ゴシック・横組み左揃え</span></div>
+      <div class="prev"><span>前回</span><span>「教わる・丸くなる」＝関係性の話</span></div>
+      <div class="now"><span>今回</span><span>「段取り・任せる」＝仕事そのものの話</span></div>
+      <div class="prev"><span>前回</span><span>笑顔・引きの構図</span></div>
+      <div class="now"><span>今回</span><span>真顔・ローアングル・寄り／夕方の斜光でコントラストを強く</span></div>
+      <div class="prev"><span>前回</span><span>ITで働き方が変わった、という報告</span></div>
+      <div class="now"><span>今回</span><span>ITは道具のひとつ。持っているのはドローンと墨壺、という見せ方</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="stage">
+  <div class="wrap">
+    <div class="stage-lead">
+      <h2>完成イメージ（縦スクロール1枚）</h2>
+      <span class="note">グレーの枠＝写真が入る位置。文字は実際に載せる文言のままです。</span>
+    </div>
+
+    <div class="mock">
+
+      <!-- 01 HERO -->
+      <div class="cut cut-hero">
+        <span class="tag">CUT 01</span>
+        <div class="logo-row">
+          <span class="co">西中洲樋口建設</span>
+          <span class="yr">2026 RECRUIT</span>
+        </div>
+        <div class="shot h-hero">
+          <div class="shot-inner">
+            <span class="kind">Main Visual</span>
+            <span class="desc">建方中の鉄骨・足場を背に、社員約30名が新作業服＋法被で横一列。ローアングル広角、全員正面・真顔。夕方の斜光で顔に陰影を作る。</span>
+          </div>
+        </div>
+        <div class="copy">
+          <p class="lede">泥くさい。<br>だから、かっこいい。</p>
+          <p class="sub">この面構えで、街の骨組みをつくっています。<br>西中洲樋口建設、全員集合。</p>
+        </div>
+        <div class="slash"></div>
+      </div>
+
+      <!-- 02 -->
+      <div class="cut">
+        <span class="tag">CUT 02</span>
+        <div class="shot h-tall">
+          <div class="shot-inner">
+            <span class="kind">Photo</span>
+            <span class="desc">現場の一角で職員2〜3名が図面とiPadを囲んで打ち合わせ。指を差す手元にピント、顔は少し外す。</span>
+          </div>
+        </div>
+        <div class="copy">
+          <p class="lede">答えは、<em>いつも</em>現場にある。</p>
+          <p class="body">図面の上では正しくても、現場では通らないことがある。だからうちは、机の前で結論を出さない。測るのも、話すのも、決めるのも、全部現場で。年次も役職も関係なく、根拠を持っている人間の意見が通る職場です。</p>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="cut">
+        <span class="tag">CUT 03</span>
+        <div class="shot h-mid">
+          <div class="shot-inner">
+            <span class="kind">Photo</span>
+            <span class="desc">職員が協力業者の職人に指示を出す場面。逆光ぎみのシルエット、ヘルメットと安全帯が分かる引き。</span>
+          </div>
+        </div>
+        <div class="copy">
+          <p class="lede">動かすのは、<br>重機じゃない。人だ。</p>
+          <p class="body">施工管理の仕事は、自分で建てることではありません。何十人という職人の段取りを組み、材料を待たせず、危険を先回りして潰す。「段取り八分」——ここが決まれば現場は勝手に進みます。一番おもしろくて、一番しんどいところです。</p>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="cut">
+        <span class="tag">CUT 04</span>
+        <div class="shot h-mid">
+          <div class="shot-inner">
+            <span class="kind">Photo</span>
+            <span class="desc">左：ヘルメット姿でiPadの工事管理アプリを操作する手元。右：ドローンを飛ばす職員。2カットを縦に分割配置。</span>
+          </div>
+        </div>
+        <div class="copy">
+          <p class="lede">ハイテクも、泥くささも。</p>
+          <p class="body">連絡はiPhone、写真も日報も出来形もクラウド型の工事管理アプリ、点検と測量はドローン。DXは去年から本気で進めています。ただし、道具が新しくなっても現場は現場。汗をかく人間がいて、はじめて建物は建つ。両方できる会社を目指しています。</p>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="cut">
+        <span class="tag">CUT 05</span>
+        <div class="shot h-wide">
+          <div class="shot-inner">
+            <span class="kind">Portrait</span>
+            <span class="desc">20〜30代の若手職員の胸から上。汗と土埃、真顔でカメラを見る。背景は施工中の躯体をぼかす。</span>
+          </div>
+        </div>
+        <div class="copy">
+          <p class="lede">三年後、<br>この現場は君が回す。</p>
+          <p class="body">未経験からでも、まずは先輩と2人1組で現場に入ります。施工管理技士もドローン操縦士も、受験費用と講習費は会社負担。資格を取るまでを"仕事のうち"として扱うのが、うちのやり方です。</p>
+        </div>
+      </div>
+
+      <!-- 06 CLOSE -->
+      <div class="cut cut-close">
+        <span class="tag">CUT 06</span>
+        <span class="kicker">Recruit Project — Chapter 2</span>
+        <h3>若手技術者を育てるための<br>採用プロジェクト、第二章。</h3>
+        <p class="cond">施工管理職／未経験・経験者ともに歓迎<br>資格取得支援あり（施工管理技士・ドローン操縦士 ほか）</p>
+      </div>
+      <div class="band">現場で会いましょう。</div>
+
+    </div>
+  </div>
+</section>
+
+<section class="wrap list">
+  <h2>撮影カット指示</h2>
+  <p class="lead">撮影は1日で回せる構成にしています。全カット同じ現場・同じ日の夕方（15:00〜18:00）に撮ると、光と土埃のトーンが揃って1枚の広告として繋がります。</p>
+
+  <div class="cards">
+    <article class="card">
+      <span class="no">CUT 01</span>
+      <h3>全社員集合カット</h3>
+      <dl>
+        <dt>人数</dt><dd>約30名（全員・欠員が出ないよう朝礼後に確保）</dd>
+        <dt>服装</dt><dd>新作業服（紺×シルバー）＋法被。ヘルメット着用、あご紐まで締める</dd>
+        <dt>構図</dt><dd>横一列〜二列。ローアングル広角で見上げる。中央に社長・両脇にベテランと若手を混ぜる</dd>
+        <dt>注意</dt><dd>笑顔の号令はかけない。「これから乗り込む」顔で</dd>
+      </dl>
+    </article>
+
+    <article class="card">
+      <span class="no">CUT 02</span>
+      <h3>現場での打ち合わせ</h3>
+      <dl>
+        <dt>人数</dt><dd>職員2〜3名（年代を混ぜる）</dd>
+        <dt>小物</dt><dd>図面、iPad、レーザー距離計、指差し</dd>
+        <dt>構図</dt><dd>手元アップ寄りの中景。会話の途中を止めずに撮る</dd>
+        <dt>注意</dt><dd>カメラ目線なし。やらせに見せない</dd>
+      </dl>
+    </article>
+
+    <article class="card">
+      <span class="no">CUT 03</span>
+      <h3>職人への指示</h3>
+      <dl>
+        <dt>人数</dt><dd>職員1名＋協力業者2名以上</dd>
+        <dt>小物</dt><dd>安全帯、無線・スマホ、指差し確認</dd>
+        <dt>構図</dt><dd>逆光ぎみの引き。足場や鉄骨のラインを画面に入れる</dd>
+        <dt>注意</dt><dd>協力業者の方に事前に撮影許可を取る</dd>
+      </dl>
+    </article>
+
+    <article class="card">
+      <span class="no">CUT 04</span>
+      <h3>IT・ドローン</h3>
+      <dl>
+        <dt>人数</dt><dd>職員1〜2名</dd>
+        <dt>小物</dt><dd>iPad（工事管理アプリの画面）、iPhone、ドローンとプロポ</dd>
+        <dt>構図</dt><dd>縦2分割。上＝手元アップ、下＝ドローンを見上げる</dd>
+        <dt>注意</dt><dd>アプリ画面に取引先名・個人情報が写らないこと</dd>
+      </dl>
+    </article>
+
+    <article class="card">
+      <span class="no">CUT 05</span>
+      <h3>若手ポートレート</h3>
+      <dl>
+        <dt>人数</dt><dd>20〜30代1名（入社3年目前後が理想）</dd>
+        <dt>服装</dt><dd>新作業服。汚れは落とさず、そのまま</dd>
+        <dt>構図</dt><dd>胸から上、斜光で顔の半分に影が落ちるように。背景の躯体はぼかす</dd>
+        <dt>注意</dt><dd>本人にコメントを一言もらい、予備の文言として確保</dd>
+      </dl>
+    </article>
+
+    <article class="card">
+      <span class="no">CUT 06</span>
+      <h3>締めのメッセージ面</h3>
+      <dl>
+        <dt>写真</dt><dd>なし（紺ベタ＋文字のみ）</dd>
+        <dt>内容</dt><dd>募集職種・資格取得支援・第二章というコピー</dd>
+        <dt>構図</dt><dd>最下部に黄色の帯を1本。ここだけ色を強くして着地させる</dd>
+        <dt>注意</dt><dd>ロゴは前回と同じ位置・同じ大きさで統一</dd>
+      </dl>
+    </article>
+  </div>
+
+  <div class="notes">
+    <div>
+      <h3>撮影当日の持ち物・段取り</h3>
+      <ul>
+        <li>新作業服は全員分をクリーニング済みで用意、法被はサイズ確認を前日までに</li>
+        <li>ヘルメット・安全帯は正しい着用状態で（広告に不備が写ると逆効果）</li>
+        <li>集合カットは足場の解体前など、鉄骨が見えている工程に合わせて日程を決める</li>
+        <li>雨天予備日を1日確保。曇天なら集合カットは順光側で撮り直し</li>
+        <li>発注者・近隣への撮影連絡と、写り込む協力業者への許諾</li>
+      </ul>
+    </div>
+    <div>
+      <h3>マイナビ掲載時の調整</h3>
+      <ul>
+        <li>縦1枚の画像として書き出し。文字は最小12pt相当（スマホで読める大きさ）を死守</li>
+        <li>先頭2〜3スクロールで「泥くさい。だから、かっこいい。」と社名が必ず見えること</li>
+        <li>第一弾の掲載も残す場合は、同じロゴ位置・同じ書体で並べてシリーズに見せる</li>
+        <li>コピーは会社としての言い切りにしてあるので、社長・役員の確認を先に取る</li>
+        <li>差し色の黄は面積を増やさない。増やすと"安全標識"に見えて品位が落ちる</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">株式会社西中洲樋口建設 ／ マイナビ転職 掲載クリエイティブ 第二弾 デザイン案 ／ 写真枠はすべて撮影前のラフです。</div>
+</footer>
