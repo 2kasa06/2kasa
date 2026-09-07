@@ -13,6 +13,10 @@ OWNER = [
      "現在は「Beauty Produce」。変えるならドメイン名やロゴにも影響します。"),
     ("サイトにロゴが必要かどうか",
      "今は仮のロゴマークが入っています。新しく作るか、文字だけにするか。"),
+    ("診断アプリが必要かどうか",
+     "紙の診断シートはもう完成しています。Web上で回答できる形にもしますか。"),
+    ("診断アプリの結果用紙が必要かどうか",
+     "アプリを作る場合、回答から結果シートを作って印刷し、その場でお渡しできます。"),
 ]
 
 STUDIO = [
@@ -48,7 +52,7 @@ body = f"""
   <section class="sec">
     <h2 class="sec__t sec__t--alt">制作側</h2>
     <p class="sec__n">こちらで進めます。ご対応は不要です。</p>
-    <div class="rows">{rows(STUDIO, 6)}</div>
+    <div class="rows">{rows(STUDIO, 8)}</div>
   </section>
 
   <footer class="foot">
