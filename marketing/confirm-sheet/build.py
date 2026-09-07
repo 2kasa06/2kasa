@@ -13,10 +13,8 @@ OWNER = [
      "現在は「Beauty Produce」。変えるならドメイン名やロゴにも影響します。"),
     ("サイトにロゴが必要かどうか",
      "今は仮のロゴマークが入っています。新しく作るか、文字だけにするか。"),
-    ("診断アプリが必要かどうか",
-     "紙の診断シートはもう完成しています。Web上で回答できる形にもしますか。"),
-    ("診断アプリの結果用紙が必要かどうか",
-     "アプリを作る場合、回答から結果シートを作って印刷し、その場でお渡しできます。"),
+    ("診断アプリが必要かどうか", ""),
+    ("診断アプリの結果用紙が必要かどうか", ""),
 ]
 
 STUDIO = [
@@ -32,7 +30,9 @@ def rows(items, start):
         out.append(
             f'<div class="item"><span class="box"></span>'
             f'<span class="no">{i:02d}</span>'
-            f'<div><div class="t">{t}</div><div class="d">{d}</div></div></div>')
+            f'<div><div class="t">{t}</div>'
+            + (f'<div class="d">{d}</div>' if d else '')
+            + '</div></div>')
     return "".join(out)
 
 body = f"""
