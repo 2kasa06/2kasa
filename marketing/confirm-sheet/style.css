@@ -1,0 +1,93 @@
+:root{
+  --ink:#211C1A;
+  --ink-2:#4E443F;
+  --muted:#8A7C76;
+  --rule:#DBD1CC;
+  --rule-2:#EDE6E2;
+  --accent:#A5645A;
+  --accent-2:#C08578;
+  --fill:#FAF5F3;
+  --paper:#FFFFFF;
+}
+@page{ size:A4; margin:0; }
+*{ box-sizing:border-box; margin:0; padding:0; }
+html,body{ background:#fff; }
+body{
+  font-family:'ZenKaku','Hiragino Kaku Gothic ProN',sans-serif;
+  color:var(--ink); -webkit-font-smoothing:antialiased; text-rendering:geometricPrecision;
+}
+.mono{ font-family:'PlexMono',monospace; font-variant-numeric:lining-nums tabular-nums; }
+
+.sheet{
+  width:210mm; height:297mm; padding:11mm 13mm 9mm;
+  position:relative; overflow:hidden; background:var(--paper);
+  display:flex; flex-direction:column;
+}
+
+/* ── ヘッダー ───────────────────────────── */
+.head{ display:flex; align-items:flex-end; gap:8mm; padding-bottom:2.8mm; border-bottom:1.4pt solid var(--ink); }
+.head__l{ flex:1; }
+.head__brand{
+  font-family:'PlexMono',monospace; font-size:6.6pt; letter-spacing:.22em;
+  color:var(--accent); text-transform:uppercase; margin-bottom:2mm;
+}
+h1{ font-size:16pt; font-weight:700; letter-spacing:.04em; line-height:1.25; }
+.head__sub{ font-size:7.4pt; color:var(--ink-2); margin-top:1.4mm; letter-spacing:.02em; }
+.head__r{ flex:0 0 58mm; }
+.fld{ display:flex; align-items:flex-end; gap:2mm; margin-bottom:2mm; }
+.fld:last-child{ margin-bottom:0; }
+.fld__k{ flex:0 0 15mm; font-size:7pt; color:var(--muted); letter-spacing:.06em; }
+.fld__v{ flex:1; border-bottom:.6pt solid var(--rule); height:4.8mm; }
+
+/* ── セクション ─────────────────────────── */
+.sec{ margin-top:4mm; }
+.sec__h{ display:flex; align-items:center; gap:2.4mm; margin-bottom:2.2mm; }
+.sec__tag{
+  font-family:'PlexMono',monospace; font-size:6.4pt; letter-spacing:.14em;
+  color:#fff; background:var(--accent); padding:.9mm 2.2mm; border-radius:1mm;
+}
+.sec__t{ font-size:9.6pt; font-weight:700; letter-spacing:.05em; }
+.sec__n{ margin-left:auto; font-family:'PlexMono',monospace; font-size:7pt; color:var(--muted); }
+
+/* ── 項目 ───────────────────────────────── */
+.item{
+  display:grid; grid-template-columns:8.5mm 1fr; gap:0 2.4mm;
+  padding:2.4mm 0 2.6mm; border-bottom:.5pt solid var(--rule-2);
+}
+.item:last-child{ border-bottom:0; }
+.item__no{
+  font-family:'PlexMono',monospace; font-size:8.6pt; font-weight:500;
+  color:var(--accent); padding-top:.3mm; letter-spacing:.02em;
+}
+.item__t{ font-size:8.8pt; font-weight:700; letter-spacing:.01em; line-height:1.4; }
+.item__t em{ font-style:normal; font-size:6.4pt; font-weight:500; letter-spacing:.08em;
+  color:var(--accent); border:.5pt solid var(--accent-2); border-radius:1mm;
+  padding:.5mm 1.4mm; margin-left:2mm; vertical-align:.6mm; white-space:nowrap; }
+.item__d{ font-size:7pt; color:var(--ink-2); line-height:1.52; margin-top:.9mm; letter-spacing:.01em; }
+.item__d b{ font-weight:500; color:var(--ink); }
+.warn{ color:var(--accent); font-weight:500; }
+
+.ans{ margin-top:1.4mm; background:var(--fill); border-radius:1.4mm; padding:1.6mm 2mm 1.8mm; }
+.opts{ display:flex; flex-wrap:wrap; align-items:center; gap:1.2mm 4.4mm; font-size:7.2pt; }
+.opt{ display:inline-flex; align-items:center; gap:1.6mm; letter-spacing:.02em; }
+.opt i{ width:3.2mm; height:3.2mm; border:.8pt solid var(--accent-2); border-radius:.6mm;
+  background:#fff; display:inline-block; flex:0 0 auto; }
+.line{ display:flex; align-items:flex-end; gap:2mm; margin-top:1.5mm; font-size:7pt; color:var(--muted); }
+.line__k{ flex:0 0 auto; letter-spacing:.02em; }
+.line__v{ flex:1; border-bottom:.5pt dotted var(--muted); height:4mm; }
+.line--half .line__v{ flex:0 1 auto; width:26mm; }
+
+/* ── 制作側 ─────────────────────────────── */
+.made{ background:var(--fill); border:.6pt solid var(--rule); border-radius:2mm; padding:2.4mm 2.8mm 2.6mm; }
+.made .item{ padding:0; border:0; }
+.st{ display:grid; grid-template-columns:15mm 1fr; gap:1mm 2.4mm; margin-top:1.8mm; font-size:7pt; }
+.st__k{ font-family:'PlexMono',monospace; font-size:6.4pt; letter-spacing:.1em;
+  color:var(--muted); padding-top:.5mm; }
+.st__v{ color:var(--ink-2); line-height:1.55; }
+.st__v b{ font-weight:500; color:var(--ink); }
+
+/* ── フッター ───────────────────────────── */
+.foot{ margin-top:auto; padding-top:2.6mm; border-top:.8pt solid var(--ink); display:flex; gap:8mm; align-items:flex-end; }
+.foot__l{ flex:1; font-size:6.6pt; color:var(--muted); line-height:1.55; }
+.foot__r{ flex:0 0 70mm; display:flex; gap:4mm; }
+.foot__r .fld{ flex:1; margin:0; }
