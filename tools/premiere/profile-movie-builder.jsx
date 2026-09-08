@@ -43,6 +43,12 @@ var CONFIG = {
     videoTrack: 1,         // 写真（前面）を置くトラック。0 = V1、1 = V2 …
     startAtPlayhead: false,// true なら再生ヘッド位置から。false なら startSeconds から
 
+    // --- 文字とエフェクト ----------------------------------------------------
+    // make_overlays.py が書き出した「文字とエフェクト」フォルダを読み込み、
+    // 写真の上のトラックに重ねます。実行時にフォルダを聞かれます。
+    // 中身は透過PNG（連番はPNG連番として1クリップで読み込まれます）。
+    overlays: true,
+
     // --- 背景ぼかし --------------------------------------------------------
     // 16:9 でない写真（4:3・縦位置など）は、そのまま置くと黒帯が出ます。
     // これを ON にすると同じ写真をもう1枚下のトラックに敷き、大きく拡大して
@@ -111,6 +117,37 @@ var EDIT_LIST = [
 
 
 // ===========================================================================
+//  文字とエフェクトの配置表
+//
+//  file  : 「文字とエフェクト」フォルダからの相対パス。
+//          末尾が / のものは PNG 連番（1クリップとして読み込まれます）。
+//  at    : 出す時刻（秒）。null なら cut で指定したカットの頭に合わせます。
+//  sec   : 出しておく長さ。null ならそのカットの尺いっぱい。
+//  track : videoTrack から数えて何本上か（1 = 写真のすぐ上）。
+//  fade  : 頭と尻のフェード秒数。0 でフェードなし。
+//  opacity: 最大不透明度（%）。
+// ===========================================================================
+var OVERLAY_PLAN = [
+    { file: "05_オープニングワイプ/", at: 0.0,  sec: 2.0, track: 3, fade: 0.0,  opacity: 100, label: "オープニングワイプ" },
+
+    { file: "00_白スクリム/白スクリム.png", at: 2.6, sec: 6.0, track: 1, fade: 0.6, opacity: 92, label: "タイトルの白ベール" },
+    { file: "01_タイトル/タイトル.png",     at: 2.6, sec: 6.0, track: 2, fade: 0.6, opacity: 100, label: "タイトル" },
+
+    { file: "04_白フラッシュ/白フラッシュ.png", at: 14.8, sec: 0.45, track: 3, fade: 0.22, opacity: 85, label: "白フラッシュ Aメロ頭" },
+    { file: "04_白フラッシュ/白フラッシュ.png", at: 42.8, sec: 0.45, track: 3, fade: 0.22, opacity: 85, label: "白フラッシュ 大サビ頭" },
+    { file: "04_白フラッシュ/白フラッシュ.png", at: 73.8, sec: 0.45, track: 3, fade: 0.22, opacity: 85, label: "白フラッシュ クライマックス" },
+
+    { file: "06_カラーフレーム/", at: 74.0, sec: 5.0, track: 2, fade: 0.0, opacity: 100, label: "カラーフレーム" },
+    { file: "03_エンドカード/エンドカード.png", at: 79.0, sec: 7.0, track: 2, fade: 0.6, opacity: 100, label: "エンドカード" }
+];
+
+// キャプションは各カットの頭に合わせて自動で置く（ファイル名の cutNN と対応）。
+var CAPTION_DIR   = "02_キャプション";
+var CAPTION_TRACK = 1;
+var CAPTION_FADE  = 0.4;
+
+
+// ===========================================================================
 //  以下は通常さわらなくて大丈夫です
 // ===========================================================================
 
@@ -119,6 +156,7 @@ var NAMES = {
     motion:   ["モーション", "Motion"],
     scale:    ["スケール", "Scale"],
     position: ["位置", "Position"],
+    opacity:  ["不透明度", "Opacity"],
     blur:     ["ブラー", "Blurriness", "ぼかし"],
     repeatEdge: ["エッジピクセルを繰り返す", "Repeat Edge Pixels"]
 };
@@ -157,6 +195,13 @@ function main() {
     // ---- 必要なトラックを確認 ----
     var needTop = CONFIG.videoTrack;
     if (CONFIG.useEditList && hasSplit()) { needTop = CONFIG.videoTrack + 1; }
+    if (CONFIG.overlays) {
+        var top = CAPTION_TRACK;
+        for (var ov = 0; ov < OVERLAY_PLAN.length; ov++) {
+            if (OVERLAY_PLAN[ov].track > top) { top = OVERLAY_PLAN[ov].track; }
+        }
+        if (CONFIG.videoTrack + 1 + top > needTop) { needTop = CONFIG.videoTrack + 1 + top; }
+    }
     if (CONFIG.backgroundFill && CONFIG.videoTrack < 1) {
         alert("backgroundFill が ON のときは videoTrack を 1 以上にしてください。\n" +
               "背景はそのすぐ下のトラックに入ります。");
@@ -191,6 +236,8 @@ function main() {
 
     var stats = placePlan(seq, plan.steps);
     if (stats.error) { alert(stats.error); return; }
+
+    if (CONFIG.overlays) { stats.overlay = placeOverlays(seq, plan.steps); }
 
     alert(buildReport(plan, stats));
 }
@@ -424,6 +471,124 @@ function setClipEnd(clip, endSeconds) {
 
 
 // ---------------------------------------------------------------------------
+//  文字とエフェクトを重ねる
+//
+//  透過PNGを写真の上のトラックに置き、不透明度でフェードさせる。
+//  連番フォルダは「PNG連番」として1クリップで読み込む。
+// ---------------------------------------------------------------------------
+
+function placeOverlays(seq, steps) {
+    var res = { placed: 0, captions: 0, missing: [], skipped: false };
+
+    var dir = Folder.selectDialog("「文字とエフェクト」フォルダを選んでください（不要ならキャンセル）");
+    if (!dir) { res.skipped = true; return res; }
+
+    var bin = findOrCreateBin("文字とエフェクト");
+
+    // --- 配置表のぶん ---
+    for (var i = 0; i < OVERLAY_PLAN.length; i++) {
+        var row = OVERLAY_PLAN[i];
+        var item = importOverlay(dir, bin, row.file);
+        if (!item) { res.missing.push(row.file); continue; }
+        if (putOverlay(seq, item, row.at, row.sec, CONFIG.videoTrack + 1 + row.track,
+                       row.fade, row.opacity)) { res.placed++; }
+    }
+
+    // --- キャプション（カットの頭に合わせる） ---
+    for (var s2 = 0; s2 < steps.length; s2++) {
+        var name = steps[s2].main.name;
+        var num = parseInt(name, 10);
+        if (isNaN(num)) { continue; }
+        var capName = CAPTION_DIR + "/cut" + (num < 10 ? "0" + num : num) + ".png";
+        var cap = importOverlay(dir, bin, capName, true);
+        if (!cap) { continue; }
+        if (putOverlay(seq, cap, steps[s2].at, steps[s2].sec,
+                       CONFIG.videoTrack + 1 + CAPTION_TRACK, CAPTION_FADE, 100)) {
+            res.captions++;
+        }
+    }
+    return res;
+}
+
+// 既に読み込み済みならそれを使い、無ければ読み込む
+function importOverlay(dir, bin, relPath, quiet) {
+    var isSeq = relPath.charAt(relPath.length - 1) === "/";
+    var key = relPath;
+
+    for (var i = 0; i < bin.children.numItems; i++) {
+        if (bin.children[i].name === overlayItemName(key)) { return bin.children[i]; }
+    }
+
+    var path = dir.fsName + separator() + relPath.replace(/\//g, separator());
+    var target;
+    if (isSeq) {
+        var folder = new Folder(path);
+        if (!folder.exists) { return null; }
+        var pngs = folder.getFiles("*.png");
+        if (!pngs || pngs.length === 0) { return null; }
+        pngs.sort(function (a, b) { return cmpNatural(a.name, b.name); });
+        target = pngs[0].fsName;
+    } else {
+        var f = new File(path);
+        if (!f.exists) { return null; }
+        target = f.fsName;
+    }
+
+    var before = bin.children.numItems;
+    // 連番フォルダは importAsNumberedStills = true で1クリップにまとめる
+    app.project.importFiles([target], true, bin, isSeq);
+    if (bin.children.numItems === before) { return null; }
+    return bin.children[bin.children.numItems - 1];
+}
+
+function overlayItemName(relPath) {
+    var parts = relPath.split("/");
+    var last = parts[parts.length - 1];
+    if (last === "") { last = parts[parts.length - 2]; }
+    return last;
+}
+
+function separator() {
+    return (Folder.fs === "Windows") ? "\\" : "/";
+}
+
+function putOverlay(seq, item, at, sec, trackIndex, fade, opacity) {
+    var track = seq.videoTracks[trackIndex];
+    if (!track) { return false; }
+    if (!overwriteAt(track, item, at)) { return false; }
+    var clip = findClipAt(track, at);
+    if (!clip) { return false; }
+    setClipEnd(clip, at + sec);
+    applyOpacity(clip, at, sec, fade, opacity);
+    return true;
+}
+
+// 不透明度でフェードイン／フェードアウトさせる
+function applyOpacity(clip, at, sec, fade, maxPct) {
+    var comp = findComponent(clip, NAMES.opacity);
+    if (!comp) { return false; }
+    var prop = findProperty(comp, NAMES.opacity);
+    if (!prop) { return false; }
+
+    var t0 = clip.inPoint.seconds;
+    var t1 = t0 + (clip.end.seconds - clip.start.seconds);
+    try {
+        prop.setTimeVarying(true);
+        if (fade > 0 && fade * 2 < sec) {
+            prop.addKey(t0);              prop.setValueAtKey(t0, 0, true);
+            prop.addKey(t0 + fade);       prop.setValueAtKey(t0 + fade, maxPct, true);
+            prop.addKey(t1 - fade);       prop.setValueAtKey(t1 - fade, maxPct, true);
+            prop.addKey(t1);              prop.setValueAtKey(t1, 0, true);
+        } else {
+            prop.addKey(t0);              prop.setValueAtKey(t0, maxPct, true);
+            prop.addKey(t1);              prop.setValueAtKey(t1, maxPct, true);
+        }
+        return true;
+    } catch (e) { return false; }
+}
+
+
+// ---------------------------------------------------------------------------
 //  完了レポート
 // ---------------------------------------------------------------------------
 
@@ -433,6 +598,17 @@ function buildReport(plan, stats) {
               "配置範囲   : " + formatTC(stats.start) + " 〜 " + formatTC(stats.end) + "\n" +
               "モーション : " + stats.motion + " カットに適用\n";
 
+    if (CONFIG.overlays && stats.overlay) {
+        if (stats.overlay.skipped) {
+            msg += "文字      : スキップ（フォルダ未選択）\n";
+        } else {
+            msg += "文字      : " + stats.overlay.placed + " 点 ＋ キャプション " +
+                   stats.overlay.captions + " 点\n";
+            if (stats.overlay.missing.length > 0) {
+                msg += "  ※ 見つからず : " + stats.overlay.missing.join(", ") + "\n";
+            }
+        }
+    }
     if (CONFIG.backgroundFill) {
         msg += "背景ぼかし : " + stats.bg + " カット（V" + CONFIG.videoTrack + "）\n";
         if (stats.blurred < stats.bg) {

@@ -43,7 +43,8 @@ function run(opts) {
       displayName: "モーション",
       properties: indexable([makeProp("位置"), makeProp("スケール"), makeProp("回転")], "numItems")
     };
-    const comps = [{ displayName: "不透明度", properties: indexable([], "numItems") }, motion];
+    const comps = [{ displayName: "不透明度",
+                     properties: indexable([makeProp("不透明度")], "numItems") }, motion];
     return {
       name, scaledToFrame: false,
       start: { seconds: at }, _limit: at + DEFAULT_STILL, inPoint: { seconds: 0 },
@@ -82,9 +83,21 @@ function run(opts) {
   const tracks = indexable([...Array(nTracks)].map(() => makeTrack()), "numTracks");
   const photos = opts.names.map(n => ({ name: n, type: 1 }));
 
+  // オーバーレイ用のプロジェクトビン
+  const overlayBin = { name: "文字とエフェクト", type: 2,
+                       children: indexable([], "numItems") };
+  const imported = [];
+
   const app = {
     project: {
-      activeSequence: { videoTracks: tracks, getPlayerPosition: () => ({ seconds: 0 }) }
+      activeSequence: { videoTracks: tracks, getPlayerPosition: () => ({ seconds: 0 }) },
+      rootItem: { children: indexable([overlayBin], "numItems"), createBin: () => overlayBin },
+      importFiles: (paths, suppress, bin, asStills) => {
+        if (opts.missingOverlays && opts.missingOverlays.some(m => paths[0].includes(m))) return;
+        const nm = paths[0].split(/[\\/]/).pop();
+        const item = { name: nm, type: 1, asStills: !!asStills };
+        bin.children.push(item); imported.push(item);
+      }
     },
     getCurrentProjectViewSelection: () => photos,
     enableQE() { if (!opts.qe) throw new Error("QE unavailable"); }
@@ -116,18 +129,42 @@ function run(opts) {
     }
   };
 
+  const OVERLAY_FILES = [
+    "00_白スクリム/白スクリム.png", "01_タイトル/タイトル.png",
+    "03_エンドカード/エンドカード.png", "04_白フラッシュ/白フラッシュ.png",
+  ].concat([3,5,7,8,9,10,11,12,13,14,15,16,17,19].map(n =>
+    "02_キャプション/cut" + String(n).padStart(2, "0") + ".png"));
+  const OVERLAY_SEQS = ["05_オープニングワイプ/", "06_カラーフレーム/"];
+  const missing = opts.missingOverlays || [];
+  const norm = (p) => p.replace(/\\/g, "/").replace(/^.*文字とエフェクト\//, "").replace(/\/+$/, "");
+
+  function MockFolder(path) {
+    this.fsName = path;
+    const rel = norm(path) + "/";
+    this.exists = OVERLAY_SEQS.includes(rel) && !missing.includes(rel);
+    this.getFiles = () => this.exists
+      ? [{ name: "0000.png", fsName: path + "/0000.png" }, { name: "0001.png", fsName: path + "/0001.png" }]
+      : [];
+  }
+  MockFolder.fs = "Macintosh";
+  MockFolder.selectDialog = () => (opts.cancelOverlayDialog ? null : new MockFolder("/x/文字とエフェクト"));
+  function MockFile(path) {
+    this.fsName = path;
+    this.exists = OVERLAY_FILES.includes(norm(path)) && !missing.includes(norm(path));
+  }
+
   let src = fs.readFileSync(SCRIPT, "utf8").replace('source: "folder"', 'source: "selection"');
   for (const [k, v] of Object.entries(opts.config || {})) {
     const re = new RegExp(k + ": [^,]+,");
     src = src.replace(re, k + ": " + JSON.stringify(v) + ",");
   }
 
-  const fn = new Function("alert", "Time", "ProjectItemType", "app", "qe",
+  const fn = new Function("alert", "Time", "ProjectItemType", "app", "qe", "Folder", "File",
     src + "\n//# sourceURL=profile-movie-builder.jsx");
   fn((m) => alerts.push(m), function Time() { this.seconds = 0; },
-     { CLIP: 1, BIN: 2, FILE: 4 }, app, qe);
+     { CLIP: 1, BIN: 2, FILE: 4 }, app, qe, MockFolder, MockFile);
 
-  return { tracks, alerts };
+  return { tracks, alerts, imported };
 }
 
 let fail = 0;
@@ -226,11 +263,72 @@ console.log("\n=== ケース5: トラック不足だが自動追加もできな�
   const { tracks, alerts } = run({ defaultStillSeconds: 10, qe: true, names: REAL,
                                    trackCount: 2, canAddTracks: false });
   ok(/ビデオトラックが足りません/.test(alerts[0] || ""), "不足を指摘して中断する");
-  ok(/V1〜V3/.test(alerts[0] || ""), "必要なトラック数を具体的に示す");
+  ok(/V1〜V6/.test(alerts[0] || ""), "必要なトラック数を具体的に示す（文字レイヤーぶんを含む）");
   ok(tracks[0].clips.length === 0 && tracks[1].clips.length === 0, "何も配置せずに止まる");
 }
 
-console.log("\n=== ケース6: QE が使えない古い環境 ===\n");
+console.log("\n=== ケース6: 文字とエフェクトの重ね方 ===\n");
+{
+  const { tracks, alerts, imported } = run({ defaultStillSeconds: 10, qe: true, names: REAL });
+  const at = (tr, s) => tracks[tr].clips.find(c => Math.abs(c.start.seconds - s) < 0.01);
+  const op = c => c.components[0].properties[0];
+
+  console.log("■ トラックの積み方");
+  ok(tracks.length >= 6, "文字レイヤーぶんまでトラックが用意される → V" + tracks.length);
+  ok(at(4, 2.6) && at(4, 2.6).name === "タイトル.png", "タイトルは写真の2つ上（V5）");
+  ok(at(3, 2.6) && at(3, 2.6).name === "白スクリム.png", "白ベールはタイトルの下（V4）");
+  ok(at(5, 0.0) && at(5, 0.0).name === "0000.png", "オープニングワイプは最上段（V6）");
+
+  console.log("■ 尺と時刻");
+  const title = at(4, 2.6);
+  ok(Math.abs(title.end.seconds - 8.6) < 0.01, "タイトルは 2.6〜8.6 秒（キービジュアルの上）");
+  const end = at(4, 79.0);
+  ok(end && Math.abs(end.end.seconds - 86.0) < 0.01, "エンドカードは 1:19.0〜1:26.0");
+  const frame = at(4, 74.0);
+  ok(frame && frame.name === "0000.png", "カラーフレームはクライマックス 1:14.0 から");
+  ok([14.8, 42.8, 73.8].every(s => at(5, s)), "白フラッシュが Aメロ頭・大サビ頭・クライマックスの3か所");
+
+  console.log("■ 連番の扱い");
+  ok(imported.filter(i => i.asStills).length === 2,
+     "ワイプとカラーフレームはPNG連番として1クリップで読み込む → " +
+     imported.filter(i => i.asStills).length);
+  ok(imported.filter(i => i.name.indexOf("cut") === 0).length === 14,
+     "キャプションは写真のある14カットぶん → " + imported.filter(i => i.name.indexOf("cut") === 0).length);
+
+  console.log("■ フェード（不透明度キーフレーム）");
+  ok(op(title).keys.length === 4, "タイトルは4点キーフレームでフェードイン／アウト");
+  ok(op(title).keys[0].v === 0 && op(title).keys[1].v === 100 &&
+     op(title).keys[3].v === 0, "0 → 100 → 100 → 0 で出入りする");
+  ok(op(at(3, 2.6)).keys[1].v === 92, "白ベールの最大不透明度は 92%");
+  const flash = at(5, 14.8);
+  ok(op(flash).keys[1].v === 85, "白フラッシュの最大不透明度は 85%");
+  const cap = tracks[3].clips.find(c => c.name.indexOf("cut") === 0);
+  ok(cap && op(cap).keys.length === 4, "キャプションもフェードする");
+
+  console.log("■ レポート");
+  ok(/文字/.test(alerts[0]) && /キャプション/.test(alerts[0]), "配置数を報告する");
+}
+
+console.log("\n=== ケース7: 文字フォルダを選ばずキャンセル ===\n");
+{
+  const { tracks, alerts } = run({ defaultStillSeconds: 10, qe: true, names: REAL,
+                                   cancelOverlayDialog: true });
+  ok(tracks[1].clips.length === 19, "写真の配置はそのまま完了する");
+  ok(tracks[4].clips.length === 0, "文字レイヤーは1つも置かれない");
+  ok(/スキップ/.test(alerts[0] || ""), "スキップしたことを報告する");
+}
+
+console.log("\n=== ケース8: 文字ファイルが一部足りない ===\n");
+{
+  const { tracks, alerts } = run({ defaultStillSeconds: 10, qe: true, names: REAL,
+                                   missingOverlays: ["01_タイトル/タイトル.png"] });
+  ok(tracks[1].clips.length === 19, "写真の配置は完了する");
+  ok(/見つからず/.test(alerts[0] || "") && /タイトル/.test(alerts[0] || ""),
+     "足りないファイル名を挙げる（無言で欠落させない）");
+  ok(tracks[3].clips.some(c => c.name === "白スクリム.png"), "残りの文字は置かれる");
+}
+
+console.log("\n=== ケース9: QE が使えない古い環境 ===\n");
 {
   const { tracks, alerts } = run({ defaultStillSeconds: 10, qe: false, names: REAL });
   ok(tracks[1].clips.length === 19, "配置は成功する");
@@ -240,7 +338,7 @@ console.log("\n=== ケース6: QE が使えない古い環境 ===\n");
      "ぼかしだけ手作業に回す案内が出る（無言で欠落させない）");
 }
 
-console.log("\n=== ケース7: 編集リストを使わず等分（useEditList: false）===\n");
+console.log("\n=== ケース10: 編集リストを使わず等分（useEditList: false）===\n");
 {
   const { tracks } = run({
     defaultStillSeconds: 10, qe: true, names: ["10.jpg", "2.jpg", "1.jpg"],
