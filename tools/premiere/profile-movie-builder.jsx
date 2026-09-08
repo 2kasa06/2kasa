@@ -3,9 +3,12 @@
  * ---------------------------------------------------------------------------
  * 結婚式プロフィールムービー用 Premiere Pro スクリプト。
  *
- * 写真を選んで実行すると、アクティブなシーケンスの V1 に等間隔で並べ、
+ * 写真を選んで実行すると、アクティブなシーケンスに等間隔で並べ、
  * 1枚ずつに Ken Burns（ゆっくりズーム＋パン）のキーフレームを付けます。
  * ズームイン／ズームアウトは1枚おきに自動で入れ替わります。
+ *
+ * 16:9 でない写真（4:3・縦位置など）は、同じ写真を下のトラックに敷いて
+ * 大きくぼかし、黒帯を埋めます（backgroundFill）。
  *
  * 実行方法:
  *   Premiere Pro >  ファイル > スクリプト > スクリプトファイルを実行...
@@ -33,8 +36,17 @@ var CONFIG = {
 
     // --- 尺 -----------------------------------------------------------------
     clipSeconds: 3.5,      // 写真1枚あたりの秒数
-    videoTrack: 0,         // 0 = V1、1 = V2 …
+    videoTrack: 1,         // 写真（前面）を置くトラック。0 = V1、1 = V2 …
     startAtPlayhead: true, // false ならシーケンスの先頭から並べる
+
+    // --- 背景ぼかし --------------------------------------------------------
+    // 16:9 でない写真（4:3・縦位置など）は、そのまま置くと黒帯が出ます。
+    // これを ON にすると同じ写真をもう1枚下のトラックに敷き、大きく拡大して
+    // ぼかし、黒帯を埋めます。前面の写真は拡大せずに済むので画質が落ちません。
+    // ON のときは videoTrack を 1 以上にしてください（背景はその1つ下に入ります）。
+    backgroundFill: true,
+    backgroundScale: 250,  // 背景の拡大率。ぼかすので大きめで構いません
+    blurAmount: 60,        // ぼかしの強さ
 
     // --- Ken Burns ----------------------------------------------------------
     kenBurns: true,
@@ -57,8 +69,13 @@ var CONFIG = {
 var NAMES = {
     motion:   ["モーション", "Motion"],
     scale:    ["スケール", "Scale"],
-    position: ["位置", "Position"]
+    position: ["位置", "Position"],
+    blur:     ["ブラー", "Blurriness", "ぼかし"],
+    repeatEdge: ["エッジピクセルを繰り返す", "Repeat Edge Pixels"]
 };
+
+// ガウスブラーの表示名（Premiere のバージョン・言語で揺れる）
+var BLUR_EFFECTS = ["ガウス（ブラー）", "Gaussian Blur", "ブラー（ガウス）", "ガウスブラー"];
 
 var IMAGE_EXT = /\.(jpe?g|png|tiff?|bmp|psd|gif|heic|webp)$/i;
 
@@ -81,14 +98,25 @@ function main() {
     }
 
     if (CONFIG.mode === "motion") {
-        var existing = collectTrackItems(seq);
+        var existing = collectTrackItems(seq, CONFIG.videoTrack);
         if (existing.length === 0) {
             alert("V" + (CONFIG.videoTrack + 1) + " にクリップがありません。");
             return;
         }
-        var n = applyMotionToAll(existing);
+        var n = applyMotionToAll(existing, CONFIG.videoTrack);
         alert("モーションを付け直しました。\n\n対象クリップ: " + existing.length + " 個\n" +
               "モーション適用: " + n + " 個");
+        return;
+    }
+
+    if (CONFIG.backgroundFill && CONFIG.videoTrack < 1) {
+        alert("backgroundFill が ON のときは videoTrack を 1 以上にしてください。\n" +
+              "背景はそのすぐ下のトラックに入ります。");
+        return;
+    }
+    if (seq.videoTracks.numTracks <= CONFIG.videoTrack) {
+        alert("V" + (CONFIG.videoTrack + 1) + " が存在しません。\n" +
+              "トラックを追加してから実行してください。");
         return;
     }
 
@@ -100,7 +128,7 @@ function main() {
         return;
     }
 
-    var placed = placeClips(seq, items);
+    var placed = placeClips(seq, items, CONFIG.videoTrack);
     if (placed.length === 0) {
         alert("クリップを配置できませんでした。\n" +
               "V" + (CONFIG.videoTrack + 1) + " がロックされていないか確認してください。");
@@ -126,18 +154,40 @@ function main() {
         return;
     }
 
-    var motionCount = applyMotionToAll(placed);
+    var motionCount = applyMotionToAll(placed, CONFIG.videoTrack);
+
+    // 背景ぼかし: 同じ写真をもう一度、1つ下のトラックに敷く
+    var bgResult = { placed: 0, blurred: 0 };
+    if (CONFIG.backgroundFill) {
+        bgResult = buildBackground(seq, items);
+    }
+
     var totalSec = placed.length * CONFIG.clipSeconds;
 
-    alert("完成しました。\n\n" +
-          "配置した写真 : " + placed.length + " 枚\n" +
-          "1枚あたり    : " + CONFIG.clipSeconds + " 秒\n" +
-          "合計         : " + formatTC(totalSec) + "\n" +
-          "モーション   : " + motionCount + " 枚に適用\n\n" +
-          "このあとは手作業です:\n" +
-          "  V2 に調整レイヤー → Lumetri で全体のトーンを統一\n" +
-          "  V3 に装飾フレーム / V4 にテキスト\n" +
-          "  A1 に BGM を置き、区切りに合わせて尺を微調整");
+    var msg = "完成しました。\n\n" +
+              "配置した写真 : " + placed.length + " 枚（V" + (CONFIG.videoTrack + 1) + "）\n" +
+              "1枚あたり    : " + CONFIG.clipSeconds + " 秒\n" +
+              "合計         : " + formatTC(totalSec) + "\n" +
+              "モーション   : " + motionCount + " 枚に適用\n";
+
+    if (CONFIG.backgroundFill) {
+        msg += "背景ぼかし   : " + bgResult.placed + " 枚（V" + CONFIG.videoTrack + "）";
+        if (bgResult.blurred < bgResult.placed) {
+            msg += "\n\n【要手作業】ぼかしを自動で付けられませんでした（" +
+                   (bgResult.placed - bgResult.blurred) + " 枚）。\n" +
+                   "V" + CONFIG.videoTrack + " のクリップを全選択して、\n" +
+                   "エフェクト「ガウス（ブラー）」をドラッグしてください。\n" +
+                   "ぼかし " + CONFIG.blurAmount + " / 「エッジピクセルを繰り返す」に\n" +
+                   "チェックを入れると綺麗になります。";
+        }
+        msg += "\n";
+    }
+
+    msg += "\nこのあとは手作業です:\n" +
+           "  V" + (CONFIG.videoTrack + 2) + " に調整レイヤー → Lumetri で全体のトーンを統一\n" +
+           "  その上に装飾フレーム / テキスト\n" +
+           "  A1 に BGM を置き、区切りに合わせて尺を微調整";
+    alert(msg);
 }
 
 
@@ -221,10 +271,10 @@ function findOrCreateBin(name) {
 //  配置
 // ---------------------------------------------------------------------------
 
-function placeClips(seq, items) {
-    var track = seq.videoTracks[CONFIG.videoTrack];
+function placeClips(seq, items, trackIndex) {
+    var track = seq.videoTracks[trackIndex];
     if (!track) {
-        alert("V" + (CONFIG.videoTrack + 1) + " が存在しません。トラックを追加してください。");
+        alert("V" + (trackIndex + 1) + " が存在しません。トラックを追加してください。");
         return [];
     }
 
@@ -277,8 +327,8 @@ function placeClips(seq, items) {
     return placed;
 }
 
-function collectTrackItems(seq) {
-    var track = seq.videoTracks[CONFIG.videoTrack];
+function collectTrackItems(seq, trackIndex) {
+    var track = seq.videoTracks[trackIndex];
     var out = [];
     if (!track) { return out; }
     for (var i = 0; i < track.clips.numTracks; i++) { out.push(track.clips[i]); }
@@ -290,10 +340,10 @@ function collectTrackItems(seq) {
 //  Ken Burns
 // ---------------------------------------------------------------------------
 
-function applyMotionToAll(clips) {
+function applyMotionToAll(clips, trackIndex) {
     var applied = 0;
     for (var i = 0; i < clips.length; i++) {
-        if (CONFIG.scaleToFrameSize) { trySetScaleToFrameSize(clips[i]); }
+        if (CONFIG.scaleToFrameSize) { trySetScaleToFrameSize(clips[i], trackIndex); }
         if (!CONFIG.kenBurns) { continue; }
         // alternate: 偶数枚目はズームイン、奇数枚目はズームアウト
         var zoomIn = CONFIG.alternate ? (i % 2 === 0) : true;
@@ -353,22 +403,109 @@ function setKeys(prop, t0, v0, t1, v1) {
     } catch (e) { /* このプロパティはスキップ */ }
 }
 
-function trySetScaleToFrameSize(clip) {
+function trySetScaleToFrameSize(clip, trackIndex) {
+    var qItem = findQEItem(clip, trackIndex);
+    if (!qItem) { return false; }
+    try {
+        qItem.setScaleToFrameSize();
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+// QE DOM 側で同じクリップを開始位置から探す（QE が使えなければ null）
+function findQEItem(clip, trackIndex) {
     try {
         app.enableQE();
         var qSeq = qe.project.getActiveSequence();
-        var qTrack = qSeq.getVideoTrackAt(CONFIG.videoTrack);
+        var qTrack = qSeq.getVideoTrackAt(trackIndex);
         for (var i = 0; i < qTrack.numItems; i++) {
-            var qItem = qTrack.getItemAt(i);
-            if (Math.abs(qItem.start.secs - clip.start.seconds) < 0.001) {
-                qItem.setScaleToFrameSize();
-                return true;
-            }
+            var q = qTrack.getItemAt(i);
+            if (Math.abs(q.start.secs - clip.start.seconds) < 0.001) { return q; }
         }
     } catch (e) {
-        // QE DOM が使えないバージョン。手動で「フレームサイズに設定」してもらう。
+        // QE DOM が使えないバージョン
     }
-    return false;
+    return null;
+}
+
+
+// ---------------------------------------------------------------------------
+//  背景ぼかし
+//
+//  16:9 でない写真をそのまま置くと黒帯が出る。同じ写真を1つ下のトラックに敷き、
+//  大きく拡大してぼかすことで帯を埋める。前面の写真は拡大しないので、
+//  元の解像度以上に引き伸ばされることがなく、画質が保たれる。
+//
+//  背景は必要な拡大率を写真ごとに計算せず、一律で大きめ（既定 250%）にする。
+//  どうせ強くぼかすため、はみ出しても問題にならない。
+// ---------------------------------------------------------------------------
+
+function buildBackground(seq, items) {
+    var bgTrack = CONFIG.videoTrack - 1;
+    var result = { placed: 0, blurred: 0 };
+
+    var clips = placeClips(seq, items, bgTrack);
+    result.placed = clips.length;
+
+    for (var i = 0; i < clips.length; i++) {
+        var clip = clips[i];
+
+        // まずフレームに収めてから、一律で拡大して画面を覆う
+        trySetScaleToFrameSize(clip, bgTrack);
+
+        var motion = findComponent(clip, NAMES.motion);
+        if (motion) {
+            var scale = findProperty(motion, NAMES.scale);
+            if (scale) {
+                try { scale.setValue(CONFIG.backgroundScale, true); } catch (e) { /* skip */ }
+            }
+        }
+
+        if (addBlur(clip, bgTrack)) { result.blurred++; }
+    }
+    return result;
+}
+
+function addBlur(clip, trackIndex) {
+    var qItem = findQEItem(clip, trackIndex);
+    if (!qItem) { return false; }
+
+    var added = false;
+    for (var i = 0; i < BLUR_EFFECTS.length && !added; i++) {
+        try {
+            var fx = qe.project.getVideoEffectByName(BLUR_EFFECTS[i]);
+            if (fx) {
+                qItem.addVideoEffect(fx);
+                added = true;
+            }
+        } catch (e) { /* 次の名前を試す */ }
+    }
+    if (!added) { return false; }
+
+    // ぼかし量と「エッジピクセルを繰り返す」を設定する。
+    // 失敗してもエフェクト自体は乗っているので、既定値のまま残る。
+    var blurComp = null;
+    try {
+        var comps = clip.components;
+        for (var c = comps.numItems - 1; c >= 0; c--) {
+            var nm = "";
+            try { nm = comps[c].displayName; } catch (e2) { nm = ""; }
+            for (var b = 0; b < BLUR_EFFECTS.length; b++) {
+                if (nm === BLUR_EFFECTS[b]) { blurComp = comps[c]; break; }
+            }
+            if (blurComp) { break; }
+        }
+    } catch (e3) { /* skip */ }
+
+    if (blurComp) {
+        var amount = findProperty(blurComp, NAMES.blur);
+        if (amount) { try { amount.setValue(CONFIG.blurAmount, true); } catch (e4) {} }
+        var edge = findProperty(blurComp, NAMES.repeatEdge);
+        if (edge) { try { edge.setValue(true, true); } catch (e5) {} }
+    }
+    return true;
 }
 
 
