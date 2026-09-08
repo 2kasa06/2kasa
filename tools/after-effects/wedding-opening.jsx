@@ -68,7 +68,7 @@ var C = {
 var SCENES = [
     { type: "opening",   start:  0.0, dur:  2.0 },
 
-    { type: "photo", file: "1.jpg",  start:  2.0, dur: 7.0 },
+    { type: "photo", file: "0.jpg",  start:  2.0, dur: 7.0 },   // キービジュアル
     { type: "photo", file: "2.jpg",  start:  9.0, dur: 5.0 },
 
     { type: "welcome",   file: "3.jpg",  start: 14.0, dur: 5.0 },
@@ -93,7 +93,7 @@ var SCENES = [
     { type: "photo", file: "17.jpg", start: 67.0, dur: 2.4 },
     { type: "split", files: ["19.jpg", "20.jpg"], start: 69.4, dur: 4.6 },
 
-    { type: "climax", file: "1.jpg", start: 74.0, dur: 5.0 },
+    { type: "climax", file: "0.jpg", start: 74.0, dur: 5.0 },   // 冒頭に戻す
     { type: "endcard", start: 79.0, dur: 7.0 }
 ];
 
