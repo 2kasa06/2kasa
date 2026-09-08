@@ -34,7 +34,7 @@ var CONFIG = {
     // 新郎・新婦が逆なら、この2行を入れ替えるだけでよい。
     groom: { romaji: "HIGUCHI TSUKASA",  kanji: "樋口 司",   label: "Groom" },
     bride: { romaji: "YAMAMOTO NODOKA", kanji: "山本 和界", label: "Bride" },
-    date: "2026.00.00",   // ← 挙式日。ここだけまだ仮です
+    date: "2027.11.20",
 
     welcome:  ["Welcome to", "our", "wedding reception"],
     journey:  "We begin our journey together",
@@ -652,7 +652,8 @@ function buildReport() {
             "写真レイヤー   : " + report.photos + "\n" +
             "テキストレイヤー: " + report.texts + "\n" +
             "シェイプレイヤー: " + report.shapes + "\n" +
-            "尺             : " + TOTAL + " 秒\n\n";
+            "尺             : " + TOTAL + " 秒\n" +
+            "挙式日         : " + CONFIG.date + "\n\n";
     if (report.missing.length > 0) {
         m += "【見つからない写真】\n  " + report.missing.join(", ") + "\n\n";
     }

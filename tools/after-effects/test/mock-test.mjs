@@ -237,6 +237,10 @@ console.log("=== ケース1: 標準構成 ===\n");
                       .property("ADBE Vectors Group").property("ADBE Vector Graphic - Stroke")
                       .property("ADBE Vector Stroke Color");
   ok(strokeCol.numKeys === 3, "枠の色が3点で変化する（オレンジ→マゼンタ→紫）");
+  const dateL = named(/挙式日/)[0];
+  ok(dateL && dateL.textValue === "2027.11.20", "挙式日 2027.11.20 が入る → " + (dateL && dateL.textValue));
+  ok(dateL && dateL.property("ADBE Text Properties").property("ADBE Text Document").value.tracking === 200,
+     "挙式日は字間を広く取る");
   const blk = named(/黒フェード/)[0];
   ok(blk && Math.abs(blk.outPoint - 86.0) < 1e-9, "最後は黒へ落ちて 86.0 秒で終わる");
 
