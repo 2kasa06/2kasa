@@ -106,7 +106,7 @@ function run(opts = {}) {
     endUndoGroup: () => {}
   };
 
-  const PHOTOS = ["0.jpg","1.jpg","2.jpg","3.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg",
+  const PHOTOS = ["0.jpg","1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg",
                   "11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","19.jpg","20.jpg"]
                  .filter(f => !(opts.missing || []).includes(f));
 
@@ -170,11 +170,11 @@ console.log("=== ケース1: 標準構成 ===\n");
   const wt = wipes.map(w => w.property("ADBE Transform Group").property("ADBE Position").keys[0].t);
   ok(new Set(wt).size === 4, "4枚とも発火タイミングがずれている（同時に動かない）");
 
-  console.log("■ Welcome 0:14");
+  console.log("■ Welcome 0:09");
   const wel = named(/^Welcome/);
   ok(wel.length === 3, "3行に分かれている → " + wel.length);
   ok(wel.every(l => l.textValue), "本物のテキストレイヤー（AE上で打ち直せる）");
-  ok(wel.every(l => Math.abs(l.inPoint - 14.0) < 1e-9), "14.0 秒から出る");
+  ok(wel.every(l => Math.abs(l.inPoint - 9.0) < 1e-9), "9.0 秒から出る（キービジュアルの次）");
   const anim = wel[0].property("ADBE Text Properties").property("ADBE Text Animators")
                      .property("ADBE Text Animator");
   ok(!!anim, "テキストアニメーターが付く");
@@ -230,13 +230,38 @@ console.log("=== ケース1: 標準構成 ===\n");
   ok(sp.every(l => l.property("ADBE Transform Group").property("ADBE Position").numKeys === 2),
      "外側から滑り込む");
 
+  console.log("■ 成長の見せ方（幼少期 → 今）");
+  const at = (nm) => comp.layers.find(l => l.name === nm);
+  const g0 = at("写真 2.jpg"), g1 = at("写真 4.jpg");
+  const b0 = at("写真 1.jpg"), b1 = at("写真 3.jpg");
+  ok(g0 && g1 && Math.abs(g0.outPoint - g1.inPoint) < 1e-9,
+     "新郎 2.jpg（幼少期）の直後に 4.jpg（今）が続く");
+  ok(b0 && b1 && Math.abs(b0.outPoint - b1.inPoint) < 1e-9,
+     "新婦 1.jpg（幼少期）の直後に 3.jpg（今）が続く");
+  ok(g0 && Math.abs(g0.inPoint - 14.0) < 1e-9 && Math.abs(g1.inPoint - 17.0) < 1e-9,
+     "新郎パートは 0:14 幼少期 → 0:17 今＋お名前");
+  ok(b0 && Math.abs(b0.inPoint - 34.0) < 1e-9 && Math.abs(b1.inPoint - 37.0) < 1e-9,
+     "新婦パートは 0:34 幼少期 → 0:37 今＋お名前");
+  const labels = comp.layers.filter(l => /^ラベル/.test(l.name));
+  ok(labels.length === 2, "幼少期の2枚だけに小さな名前が乗る → " + labels.length);
+  ok(labels.map(l => l.textValue).sort().join(",") === "NODOKA,TSUKASA",
+     "ラベルは下の名前 → " + labels.map(l => l.textValue).join(" / "));
+  ok(labels.every(l => l.property("ADBE Text Properties").property("ADBE Text Animators")
+                        .property("ADBE Text Animator")), "ラベルも1字ずつ出る");
+
+  console.log("■ 全写真を使い切っているか");
+  const used = new Set(comp.layers.filter(l => l.source).map(l => l.source.name));
+  const want = [...Array(18)].map((_, i) => i + ".jpg").concat(["19.jpg", "20.jpg"]);
+  const unused = want.filter(f => !used.has(f));
+  ok(unused.length === 0, "手元の20枚をすべて使う → 未使用 " + (unused.join(",") || "なし"));
+
   console.log("■ キービジュアル（冒頭とクライマックスで同じ写真を使う）");
   const key = comp.layers.filter(l => l.name === "写真 0.jpg");
   ok(key.length === 2, "0.jpg が2回登場する → " + key.length);
   const ins = key.map(l => l.inPoint).sort((a, b) => a - b);
   ok(Math.abs(ins[0] - 2.0) < 1e-9, "1回目は 0:02.0（キービジュアル）");
   ok(Math.abs(ins[1] - 74.0) < 1e-9, "2回目は 1:14.0（冒頭に戻す）");
-  ok(!comp.layers.some(l => l.name === "写真 1.jpg"), "差し替え前の 1.jpg はもう使われていない");
+  ok(comp.layers.some(l => l.name === "写真 1.jpg"), "1.jpg は新婦の幼少期として復帰している");
 
   console.log("■ クライマックスとエンドカード");
   const cf = named(/カラーフレーム/)[0];
@@ -295,8 +320,8 @@ console.log("\n=== ケース5: 古い AE（app.fonts が無い / 一部プロパ
   const { comps, alerts } = run({ noFontApi: true, rejectProps: ["ADBE Black&White"] });
   ok(comps.length === 1, "コンポは作られる");
   ok(/組み立てました/.test(alerts[0] || ""), "モノクロ効果が使えなくても完走する");
-  const mono = comps[0].layers.filter(l => /^写真 (5|11)\.jpg/.test(l.name));
-  ok(mono.length === 2, "モノクロ対象の写真レイヤー自体は置かれる");
+  const mono = comps[0].layers.filter(l => /^写真 (1|2)\.jpg/.test(l.name));
+  ok(mono.length === 2, "モノクロ対象（幼少期の2枚）の写真レイヤー自体は置かれる");
 }
 
 console.log("\n" + (fail === 0 ? "✅ すべて通過" : "❌ " + fail + " 件 失敗"));

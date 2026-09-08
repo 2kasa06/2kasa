@@ -32,8 +32,8 @@ var CONFIG = {
     // お名前（漢字の姓名が中盤の主役になる）
     // kanji の空白は姓と名の間隔として扱われる（レイヤーは作られない）。
     // 新郎・新婦が逆なら、この2行を入れ替えるだけでよい。
-    groom: { romaji: "HIGUCHI TSUKASA",  kanji: "樋口 司",   label: "Groom" },
-    bride: { romaji: "YAMAMOTO NODOKA", kanji: "山本 和界", label: "Bride" },
+    groom: { romaji: "HIGUCHI TSUKASA",  kanji: "樋口 司",   label: "Groom", given: "TSUKASA" },
+    bride: { romaji: "YAMAMOTO NODOKA", kanji: "山本 和界", label: "Bride", given: "NODOKA" },
     date: "2027.11.20",
 
     welcome:  ["Welcome to", "our", "wedding reception"],
@@ -68,32 +68,40 @@ var C = {
 var SCENES = [
     { type: "opening",   start:  0.0, dur:  2.0 },
 
-    { type: "photo", file: "0.jpg",  start:  2.0, dur: 7.0 },   // キービジュアル
-    { type: "photo", file: "2.jpg",  start:  9.0, dur: 5.0 },
+    { type: "photo", file: "0.jpg",  start:  2.0, dur: 7.0 },              // キービジュアル
+    { type: "welcome",   file: "6.jpg",  start:  9.0, dur: 5.0 },
 
-    { type: "welcome",   file: "3.jpg",  start: 14.0, dur: 5.0 },
+    // ---- 新郎：小さい頃 → 今 -------------------------------------------
+    { type: "photo", file: "2.jpg",  start: 14.0, dur: 3.0,
+      label: CONFIG.groom.given, mono: true },                             // 幼少期はモノクロで
+    { type: "nameblock", who: "groom", file: "4.jpg", start: 17.0, dur: 5.0,
+      side: "right", mono: false },                                        // 今はカラーで受ける
 
-    { type: "nameblock", who: "groom", file: "5.jpg", start: 19.0, dur: 5.0, side: "right" },
+    { type: "photo", file: "5.jpg",  start: 22.0, dur: 3.0 },
+    { type: "photo", file: "7.jpg",  start: 25.0, dur: 3.0 },
+    { type: "photo", file: "8.jpg",  start: 28.0, dur: 3.0 },
+    { type: "photo", file: "9.jpg",  start: 31.0, dur: 3.0 },
 
-    { type: "photo", file: "6.jpg",  start: 24.0, dur: 3.6 },
-    { type: "photo", file: "7.jpg",  start: 27.6, dur: 3.6 },
-    { type: "photo", file: "8.jpg",  start: 31.2, dur: 3.6 },
-    { type: "photo", file: "9.jpg",  start: 34.8, dur: 3.6 },
-    { type: "photo", file: "10.jpg", start: 38.4, dur: 4.6 },
+    // ---- 新婦：小さい頃 → 今 -------------------------------------------
+    { type: "photo", file: "1.jpg",  start: 34.0, dur: 3.0,
+      label: CONFIG.bride.given, mono: true },
+    { type: "nameblock", who: "bride", file: "3.jpg", start: 37.0, dur: 5.0,
+      side: "left", mono: false },
 
-    { type: "nameblock", who: "bride", file: "11.jpg", start: 43.0, dur: 5.0, side: "left" },
-
-    { type: "photo", file: "12.jpg", start: 48.0, dur: 3.3 },
-    { type: "photo", file: "13.jpg", start: 51.3, dur: 3.3 },
-    { type: "photo", file: "14.jpg", start: 54.6, dur: 3.3 },
-    { type: "photo", file: "15.jpg", start: 57.9, dur: 3.3 },
+    // ---- 大サビ ----------------------------------------------------------
+    { type: "photo", file: "10.jpg", start: 42.0, dur: 3.2 },
+    { type: "photo", file: "11.jpg", start: 45.2, dur: 3.2 },
+    { type: "photo", file: "12.jpg", start: 48.4, dur: 3.2 },
+    { type: "photo", file: "13.jpg", start: 51.6, dur: 3.2 },
+    { type: "photo", file: "14.jpg", start: 54.8, dur: 3.2 },
+    { type: "photo", file: "15.jpg", start: 58.0, dur: 3.2 },
 
     { type: "tiles", file: "16.jpg", start: 61.2, dur: 5.8 },
 
     { type: "photo", file: "17.jpg", start: 67.0, dur: 2.4 },
     { type: "split", files: ["19.jpg", "20.jpg"], start: 69.4, dur: 4.6 },
 
-    { type: "climax", file: "0.jpg", start: 74.0, dur: 5.0 },   // 冒頭に戻す
+    { type: "climax", file: "0.jpg", start: 74.0, dur: 5.0 },              // 冒頭に戻す
     { type: "endcard", start: 79.0, dur: 7.0 }
 ];
 
@@ -170,7 +178,8 @@ function buildScenes(comp, footage) {
         var s = SCENES[i];
         switch (s.type) {
             case "opening":   buildOpening(comp, s); break;
-            case "photo":     buildPhoto(comp, footage, s, photoIndex++); break;
+            case "photo":     buildPhoto(comp, footage, s, photoIndex++,
+                                          { mono: s.mono, label: s.label }); break;
             case "welcome":   buildWelcome(comp, footage, s); break;
             case "nameblock": buildNameBlock(comp, footage, s); break;
             case "tiles":     buildTiles(comp, footage, s); break;
@@ -204,6 +213,7 @@ function buildPhoto(comp, footage, s, idx, opts) {
 
     if (opts.mono) { addEffect(L, ["ADBE Black&White", "ADBE Tint"]); }
     if (opts.wash) { washOut(comp, L, s, opts.wash); }
+    if (opts.label) { addPhotoLabel(comp, s, opts.label); }
 
     report.photos++;
     return L;
@@ -221,6 +231,19 @@ function layoutKanji(str) {
         x += STEP;
     }
     return out;
+}
+
+// 幼少期の写真に小さく名前を添える。
+// このあとの姓名の場面と対にすることで「この子が育って今この人」と読ませる。
+function addPhotoLabel(comp, s, text) {
+    var t = makeText(comp, text, {
+        font: CONFIG.fontRound, size: 40, color: C.white, tracking: 420, justify: "left"
+    });
+    t.name = "ラベル " + text;
+    t.startTime = s.start; t.inPoint = s.start; t.outPoint = s.start + s.dur;
+    t.property("ADBE Transform Group").property("ADBE Position").setValue([W * 0.09, H * 0.86]);
+    kineticIn(t, s.start + 0.25, 0.7);
+    return t;
 }
 
 // 写真を画面いっぱいに覆う倍率（％）
@@ -276,7 +299,8 @@ function buildWelcome(comp, footage, s) {
 // --- 0:19 / 0:43 面で割る＋漢字の姓名 --------------------------------------
 function buildNameBlock(comp, footage, s) {
     var who = CONFIG[s.who];
-    buildPhoto(comp, footage, s, 0, { mono: CONFIG.monoSections });
+    var wantMono = (s.mono === undefined) ? CONFIG.monoSections : s.mono;
+    buildPhoto(comp, footage, s, 0, { mono: wantMono });
 
     var right = (s.side === "right");
     var bx = right ? W * 0.40 : 0;
