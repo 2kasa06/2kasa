@@ -163,11 +163,17 @@ function main() {
         return;
     }
     if (seq.videoTracks.numTracks <= needTop) {
-        alert("ビデオトラックが足りません。\n\n" +
-              "必要 : V1〜V" + (needTop + 1) + "\n" +
-              "現在 : V1〜V" + seq.videoTracks.numTracks + "\n\n" +
-              "トラックヘッダを右クリック > トラックを追加 で増やしてください。");
-        return;
+        // 足りないぶんは自動で足す。できなければ手順を案内して止まる。
+        if (!addVideoTracks(seq, needTop + 1 - seq.videoTracks.numTracks) ||
+            seq.videoTracks.numTracks <= needTop) {
+            alert("ビデオトラックが足りません。\n\n" +
+                  "必要 : V1〜V" + (needTop + 1) + "\n" +
+                  "現在 : V1〜V" + seq.videoTracks.numTracks + "\n\n" +
+                  "自動追加できなかったので、トラックヘッダを右クリック >\n" +
+                  "トラックを追加 で V" + (needTop + 1) + " まで増やしてから、\n" +
+                  "もう一度実行してください。");
+            return;
+        }
     }
 
     var items = gatherProjectItems();
@@ -187,6 +193,23 @@ function main() {
     if (stats.error) { alert(stats.error); return; }
 
     alert(buildReport(plan, stats));
+}
+
+// 足りないビデオトラックを追加する（QE DOM 経由。使えない環境では false）
+function addVideoTracks(seq, count) {
+    if (count <= 0) { return true; }
+    try {
+        app.enableQE();
+        qe.project.getActiveSequence().addTracks(count, seq.videoTracks.numTracks, 0, 0);
+        return true;
+    } catch (e) {
+        try {
+            qe.project.getActiveSequence().addTracks(count);
+            return true;
+        } catch (e2) {
+            return false;
+        }
+    }
 }
 
 function hasSplit() {

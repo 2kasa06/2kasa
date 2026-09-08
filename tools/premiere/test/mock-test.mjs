@@ -94,6 +94,10 @@ function run(opts) {
   const qe = {
     project: {
       getActiveSequence: () => ({
+        addTracks: (count) => {
+          if (opts.canAddTracks === false) throw new Error("addTracks unavailable");
+          for (let i = 0; i < count; i++) tracks.push(makeTrack());
+        },
         getVideoTrackAt: (i) => {
           const src = tracks[i].clips;
           const items = [];
@@ -208,15 +212,25 @@ console.log("\n=== ケース3: 静止画のデフォルトデュレーション�
   ok(tracks[0].clips.length === 0, "背景も作らずに中断する");
 }
 
-console.log("\n=== ケース4: トラック不足 ===\n");
+console.log("\n=== ケース4: トラック不足 → 自動で追加する ===\n");
 {
   const { tracks, alerts } = run({ defaultStillSeconds: 10, qe: true, names: REAL, trackCount: 2 });
-  ok(/ビデオトラックが足りません/.test(alerts[0] || ""), "実行前に不足を指摘する");
-  ok(/V1〜V3/.test(alerts[0] || ""), "必要なトラック数を具体的に示す");
-  ok(tracks[0].clips.length === 0 && tracks[1].clips.length === 0, "何も配置せずに中断する");
+  ok(tracks.length >= 3, "足りないトラックを自動で追加する → V" + tracks.length + " まで");
+  ok(tracks[1].clips.length === 19, "そのまま最後まで配置される");
+  ok(tracks[2].clips.length === 1, "追加した V3 に2分割の右側が入る");
+  ok(/完成しました/.test(alerts[0] || ""), "エラーにならず完走する");
 }
 
-console.log("\n=== ケース5: QE が使えない古い環境 ===\n");
+console.log("\n=== ケース5: トラック不足だが自動追加もできない ===\n");
+{
+  const { tracks, alerts } = run({ defaultStillSeconds: 10, qe: true, names: REAL,
+                                   trackCount: 2, canAddTracks: false });
+  ok(/ビデオトラックが足りません/.test(alerts[0] || ""), "不足を指摘して中断する");
+  ok(/V1〜V3/.test(alerts[0] || ""), "必要なトラック数を具体的に示す");
+  ok(tracks[0].clips.length === 0 && tracks[1].clips.length === 0, "何も配置せずに止まる");
+}
+
+console.log("\n=== ケース6: QE が使えない古い環境 ===\n");
 {
   const { tracks, alerts } = run({ defaultStillSeconds: 10, qe: false, names: REAL });
   ok(tracks[1].clips.length === 19, "配置は成功する");
@@ -226,7 +240,7 @@ console.log("\n=== ケース5: QE が使えない古い環境 ===\n");
      "ぼかしだけ手作業に回す案内が出る（無言で欠落させない）");
 }
 
-console.log("\n=== ケース6: 編集リストを使わず等分（useEditList: false）===\n");
+console.log("\n=== ケース7: 編集リストを使わず等分（useEditList: false）===\n");
 {
   const { tracks } = run({
     defaultStillSeconds: 10, qe: true, names: ["10.jpg", "2.jpg", "1.jpg"],
