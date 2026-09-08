@@ -48,8 +48,27 @@ var CONFIG = {
 
     gridOpacity: 30,      // 全編に乗るグリッド線の濃さ
     kenBurns: 8,          // 写真のズーム量（%）
-    monoSections: true    // 中盤の写真をモノクロにする
+    monoSections: true,   // 中盤の写真をモノクロにする
+
+    // 写真のカットごとに動きを変える。同じズームの繰り返しだと飽きるため。
+    // 下の MOTION_CYCLE の順に自動で切り替わる。
+    varyMotion: true,
+
+    // カットの切り替わりに入れる演出。TRANS_CYCLE の順に回る。
+    transitions: true,
+
+    // ベタ面が画面を覆う割合の目安（写真が見えなくならないように）
+    blockCoverage: 0.36
 };
+
+// 写真の動きの型。順に切り替えて単調さを避ける。
+//   zoomIn  寄る / zoomOut  引く / slideL 横に流す / slideU 縦に流す
+//   punch   勢いよく入って着地 / tilt わずかに傾けながら寄る
+var MOTION_CYCLE = ["zoomIn", "slideL", "zoomOut", "punch", "slideU", "tilt"];
+
+// カットの切り替わりに入れる演出。
+//   flash 白フラッシュ / blockWipe 色面が横切る / lineSweep 線が走る / none 素直に切る
+var TRANS_CYCLE = ["blockWipe", "flash", "lineSweep", "blockWipe", "none", "flash"];
 
 // スクショから拾った色（0〜1）
 var C = {
@@ -113,7 +132,7 @@ var TOTAL = 86.0;
 // ===========================================================================
 
 var W = CONFIG.width, H = CONFIG.height;
-var report = { photos: 0, texts: 0, shapes: 0, missing: [] };
+var report = { photos: 0, texts: 0, shapes: 0, transitions: 0, missing: [] };
 
 
 function main() {
@@ -128,6 +147,7 @@ function main() {
         var comp = makeComp();
 
         buildScenes(comp, footage);
+        report.transitions = buildTransitions(comp, SCENES);
         buildGridOverlay(comp);          // グリッドは全編、いちばん上
 
         comp.openInViewer();
@@ -203,13 +223,9 @@ function buildPhoto(comp, footage, s, idx, opts) {
     L.outPoint = s.start + s.dur;
 
     var base = fillScale(item);            // 画面いっぱいに覆う倍率
-    var zoomIn = (idx % 2 === 0);
-    var lo = base, hi = base * (1 + CONFIG.kenBurns / 100);
-    var sc = L.property("ADBE Transform Group").property("ADBE Scale");
-    setEased(sc, s.start,          zoomIn ? [lo, lo] : [hi, hi]);
-    setEased(sc, s.start + s.dur,  zoomIn ? [hi, hi] : [lo, lo]);
-
-    L.property("ADBE Transform Group").property("ADBE Position").setValue([W / 2, H / 2]);
+    var variant = opts.motion ||
+                  (CONFIG.varyMotion ? MOTION_CYCLE[idx % MOTION_CYCLE.length] : "zoomIn");
+    applyPhotoMotion(L, s, variant, base, idx);
 
     if (opts.mono) { addEffect(L, ["ADBE Black&White", "ADBE Tint"]); }
     if (opts.wash) { washOut(comp, L, s, opts.wash); }
@@ -231,6 +247,66 @@ function layoutKanji(str) {
         x += STEP;
     }
     return out;
+}
+
+// カットごとに動きを変える。
+// ずっと同じ寄り引きだと見ている側が飽きるので、6種類を順に回す。
+// どの型でも「止まって見える瞬間」を作らないのが狙い。
+function applyPhotoMotion(L, s, variant, base, idx) {
+    var tr = L.property("ADBE Transform Group");
+    var sc = tr.property("ADBE Scale");
+    var po = tr.property("ADBE Position");
+    var t0 = s.start, t1 = s.start + s.dur;
+    var z = CONFIG.kenBurns / 100;
+    var dir = (idx % 2 === 0) ? 1 : -1;     // 1カットおきに向きを反転
+    var cx = W / 2, cy = H / 2;
+
+    switch (variant) {
+
+        case "slideL":   // 拡大したまま横に流す。寄り引きより動きが分かりやすい
+            sc.setValue([base * (1 + z), base * (1 + z)]);
+            setEased(po, t0, [cx + W * 0.045 * dir, cy]);
+            setEased(po, t1, [cx - W * 0.045 * dir, cy]);
+            break;
+
+        case "slideU":   // 縦に流す
+            sc.setValue([base * (1 + z), base * (1 + z)]);
+            setEased(po, t0, [cx, cy + H * 0.05 * dir]);
+            setEased(po, t1, [cx, cy - H * 0.05 * dir]);
+            break;
+
+        case "punch":    // 勢いよく入ってすぐ着地。カット頭に力が出る
+            po.setValue([cx, cy]);
+            sc.setValueAtTime(t0, [base * (1 + z * 1.9), base * (1 + z * 1.9)]);
+            sc.setValueAtTime(t0 + 0.45, [base * (1 + z * 0.35), base * (1 + z * 0.35)]);
+            sc.setValueAtTime(t1, [base * (1 + z * 0.6), base * (1 + z * 0.6)]);
+            easeKeys(sc);
+            break;
+
+        case "tilt":     // わずかに傾けながら寄る
+            setEased(sc, t0, [base, base]);
+            setEased(sc, t1, [base * (1 + z * 1.2), base * (1 + z * 1.2)]);
+            po.setValue([cx, cy]);
+            var rot = tr.property("ADBE Rotate Z");
+            setEased(rot, t0, -0.9 * dir);
+            setEased(rot, t1,  0.9 * dir);
+            break;
+
+        case "zoomOut":
+            setEased(sc, t0, [base * (1 + z), base * (1 + z)]);
+            setEased(sc, t1, [base, base]);
+            setEased(po, t0, [cx - W * 0.012 * dir, cy]);
+            setEased(po, t1, [cx + W * 0.012 * dir, cy]);
+            break;
+
+        default:         // zoomIn
+            setEased(sc, t0, [base, base]);
+            setEased(sc, t1, [base * (1 + z), base * (1 + z)]);
+            setEased(po, t0, [cx + W * 0.012 * dir, cy]);
+            setEased(po, t1, [cx - W * 0.012 * dir, cy]);
+            break;
+    }
+    return variant;
 }
 
 // 幼少期の写真に小さく名前を添える。
@@ -306,18 +382,24 @@ function buildNameBlock(comp, footage, s) {
     var bx = right ? W * 0.40 : 0;
 
     // 階段状のベタ面。時間差で滑り込ませる。
-    var blocks = [
-        { w: W * 0.60, h: H * 0.65, x: bx + W * 0.30, y: H * 0.325, col: C.purple,  d: 0.00 },
-        { w: W * 0.42, h: H * 0.29, x: bx + W * 0.42, y: H * 0.79,  col: C.purple,  d: 0.10 },
-        { w: W * 0.40, h: H * 0.44, x: right ? W * 0.20 : W * 0.80, y: H * 0.22, col: C.coral, d: 0.18 },
-        { w: W * 0.16, h: H * 0.36, x: right ? W * 0.08 : W * 0.92, y: H * 0.62, col: C.magenta, d: 0.26 }
+    // 画面の 1/3 強しか覆わない。写真の主役が隠れると何の場面か分からなくなるため。
+    var blocks = right ? [
+        { w: W * 0.34, h: H * 0.62, x: W * 0.83, y: H * 0.31, col: C.purple,  d: 0.00 },
+        { w: W * 0.20, h: H * 0.22, x: W * 0.90, y: H * 0.73, col: C.purple,  d: 0.10 },
+        { w: W * 0.26, h: H * 0.30, x: W * 0.13, y: H * 0.15, col: C.coral,   d: 0.18 },
+        { w: W * 0.11, h: H * 0.24, x: W * 0.055,y: H * 0.42, col: C.magenta, d: 0.26 }
+    ] : [
+        { w: W * 0.34, h: H * 0.62, x: W * 0.17, y: H * 0.31, col: C.purple,  d: 0.00 },
+        { w: W * 0.20, h: H * 0.22, x: W * 0.10, y: H * 0.73, col: C.purple,  d: 0.10 },
+        { w: W * 0.26, h: H * 0.30, x: W * 0.87, y: H * 0.15, col: C.coral,   d: 0.18 },
+        { w: W * 0.11, h: H * 0.24, x: W * 0.945,y: H * 0.42, col: C.magenta, d: 0.26 }
     ];
     for (var i = 0; i < blocks.length; i++) {
         var b = blocks[i];
         var L = makeRect(comp, b.w, b.h, b.col, "面 " + (i + 1));
         L.startTime = s.start; L.inPoint = s.start; L.outPoint = s.start + s.dur;
         var pos = L.property("ADBE Transform Group").property("ADBE Position");
-        var from = right ? [b.x + W * 0.7, b.y] : [b.x - W * 0.7, b.y];
+        var from = (b.x > W / 2) ? [b.x + W * 0.75, b.y] : [b.x - W * 0.75, b.y];
         setEased(pos, s.start + b.d,        from);
         setEased(pos, s.start + b.d + 0.55, [b.x, b.y]);
     }
@@ -329,14 +411,15 @@ function buildNameBlock(comp, footage, s) {
     rt.name = "ローマ字 " + s.who;
     rt.startTime = s.start; rt.inPoint = s.start; rt.outPoint = s.start + s.dur;
     rt.property("ADBE Transform Group").property("ADBE Position")
-      .setValue([right ? W * 0.08 : W * 0.46, H * 0.30]);
+      .setValue([right ? W * 0.07 : W * 0.42, H * 0.60]);
+    addShadow(rt);
     kineticIn(rt, s.start + 0.35, 0.8);
 
     // 漢字を1字ずつ散らして置く。
     // 空白は姓と名の間隔として使い、その位置にレイヤーは作らない。
     var glyphs = layoutKanji(who.kanji);
     var span = glyphs.length ? glyphs[glyphs.length - 1].dx : 0;
-    var baseX = (right ? W * 0.10 : W * 0.90 - span);   // 面のない側に寄せる
+    var baseX = (right ? W * 0.09 : W * 0.91 - span);   // 面のない側に寄せる
     for (var k = 0; k < glyphs.length; k++) {
         var jt = makeText(comp, glyphs[k].ch, {
             font: CONFIG.fontJP, size: 210, color: C.white, tracking: 0, justify: "center"
@@ -344,8 +427,9 @@ function buildNameBlock(comp, footage, s) {
         jt.name = "漢字 " + glyphs[k].ch;
         jt.startTime = s.start; jt.inPoint = s.start; jt.outPoint = s.start + s.dur;
         var jx = baseX + glyphs[k].dx;
-        var jy = H * 0.52 + ((k % 2 === 0) ? -60 : 70);       // 上下に振ってリズムを出す
+        var jy = H * 0.76 + ((k % 2 === 0) ? -46 : 46);       // 上下に振ってリズムを出す
         jt.property("ADBE Transform Group").property("ADBE Position").setValue([jx, jy]);
+        addShadow(jt);                                        // 写真の上でも読めるように
         fadeSlide(jt, s.start + 0.45 + k * 0.09, 0.5, [jx, jy + 60], [jx, jy]);
     }
 }
@@ -483,6 +567,93 @@ function buildEndcard(comp, s) {
     var op = blk.property("ADBE Transform Group").property("ADBE Opacity");
     op.setValueAtTime(s.start + s.dur - 1.2, 0);
     op.setValueAtTime(s.start + s.dur, 100);
+}
+
+
+// ---------------------------------------------------------------------------
+//  カットの切り替わりに入れる演出
+//
+//  写真が切り替わるだけだと単調なので、繋ぎ目に何かを通す。
+//  切り替わりを隠す役目もあるので、カット点をまたぐように配置する。
+// ---------------------------------------------------------------------------
+
+function buildTransitions(comp, steps) {
+    if (!CONFIG.transitions) { return 0; }
+    var n = 0, k = 0;
+    for (var i = 1; i < steps.length; i++) {
+        var prev = steps[i - 1], cur = steps[i];
+        // 場面の頭（Welcome / 姓名 / タイル / 2分割 / クライマックス）は
+        // それ自体が演出なので、繋ぎは入れない
+        if (cur.type !== "photo" && cur.type !== "welcome") { continue; }
+        if (prev.type === "opening") { continue; }
+
+        var kind = TRANS_CYCLE[k % TRANS_CYCLE.length];
+        k++;
+        if (kind === "none") { continue; }
+        if (buildTransition(comp, cur.start, kind, k)) { n++; }
+    }
+    return n;
+}
+
+function buildTransition(comp, at, kind, seed) {
+    switch (kind) {
+        case "flash":     return transFlash(comp, at);
+        case "blockWipe": return transBlockWipe(comp, at, seed);
+        case "lineSweep": return transLineSweep(comp, at);
+    }
+    return false;
+}
+
+// 白フラッシュ。カット点を中心に山なりで抜ける。
+function transFlash(comp, at) {
+    var d = 0.36;
+    var L = comp.layers.addSolid(C.white, "繋ぎ 白フラッシュ", W, H, 1.0);
+    L.startTime = at - d / 2; L.inPoint = at - d / 2; L.outPoint = at + d / 2;
+    var op = L.property("ADBE Transform Group").property("ADBE Opacity");
+    op.setValueAtTime(at - d / 2, 0);
+    op.setValueAtTime(at, 88);
+    op.setValueAtTime(at + d / 2, 0);
+    easeKeys(op);
+    report.shapes++;
+    return true;
+}
+
+// 色面が3枚、時間差で画面を横切る。この作品でいちばん効く繋ぎ。
+function transBlockWipe(comp, at, seed) {
+    var cols = [C.magenta, C.purple, C.coral];
+    var d = 0.52;
+    var fromRight = (seed % 2 === 0);
+    for (var i = 0; i < 3; i++) {
+        var bandH = H / 3 + 4;
+        var L = makeRect(comp, W * 1.25, bandH, cols[(seed + i) % 3], "繋ぎ 色面 " + (i + 1));
+        L.startTime = at - d / 2; L.inPoint = at - d / 2; L.outPoint = at + d / 2 + 0.2;
+        var y = bandH * (i + 0.5) - 2;
+        var pos = L.property("ADBE Transform Group").property("ADBE Position");
+        var offL = -W * 0.75, offR = W * 1.75;
+        var lag = i * 0.05;
+        setEased(pos, at - d / 2 + lag,      [fromRight ? offR : offL, y]);
+        setEased(pos, at + lag,              [W / 2, y]);
+        setEased(pos, at + d / 2 + lag + 0.1,[fromRight ? offL : offR, y]);
+    }
+    return true;
+}
+
+// 細い白線が数本、横に走る。軽い繋ぎ。
+function transLineSweep(comp, at) {
+    var d = 0.42;
+    for (var i = 0; i < 4; i++) {
+        var L = makeRect(comp, W * 0.42, 3, C.white, "繋ぎ 線 " + (i + 1));
+        L.startTime = at - d / 2; L.inPoint = at - d / 2; L.outPoint = at + d / 2 + 0.15;
+        var y = H * (0.18 + i * 0.22);
+        var pos = L.property("ADBE Transform Group").property("ADBE Position");
+        setEased(pos, at - d / 2 + i * 0.045, [-W * 0.3, y]);
+        setEased(pos, at + d / 2 + i * 0.045, [W * 1.3, y]);
+        var op = L.property("ADBE Transform Group").property("ADBE Opacity");
+        op.setValueAtTime(at - d / 2 + i * 0.045, 0);
+        op.setValueAtTime(at + i * 0.045, 90);
+        op.setValueAtTime(at + d / 2 + i * 0.045, 0);
+    }
+    return true;
 }
 
 
@@ -636,6 +807,18 @@ function rectMask(layer, x0, y0, x1, y1) {
     return m;
 }
 
+// 写真の上に出す文字に、うっすら影を落として沈まないようにする
+function addShadow(layer) {
+    var fx = addEffect(layer, ["ADBE Drop Shadow"]);
+    if (!fx) { return false; }
+    try {
+        fx.property("ADBE Drop Shadow-0002").setValue(150);   // 不透明度
+        fx.property("ADBE Drop Shadow-0004").setValue(6);     // 距離
+        fx.property("ADBE Drop Shadow-0005").setValue(28);    // やわらかさ
+    } catch (e) { /* 既定値のままでも影は出る */ }
+    return true;
+}
+
 function addEffect(layer, matchNames) {
     for (var i = 0; i < matchNames.length; i++) {
         try { return layer.property("ADBE Effect Parade").addProperty(matchNames[i]); }
@@ -676,6 +859,7 @@ function buildReport() {
             "写真レイヤー   : " + report.photos + "\n" +
             "テキストレイヤー: " + report.texts + "\n" +
             "シェイプレイヤー: " + report.shapes + "\n" +
+            "カットの繋ぎ  : " + report.transitions + " 箇所\n" +
             "尺             : " + TOTAL + " 秒\n" +
             "挙式日         : " + CONFIG.date + "\n\n";
     if (report.missing.length > 0) {

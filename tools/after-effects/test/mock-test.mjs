@@ -193,6 +193,14 @@ console.log("=== ケース1: 標準構成 ===\n");
   console.log("■ 面で割る＋漢字（0:19 新郎 / 0:43 新婦）");
   const blocks = named(/^面 /);
   ok(blocks.length === 8, "ベタ面が2場面ぶんで8枚 → " + blocks.length);
+  // 写真が隠れすぎないこと。1場面ぶん4枚の面積が画面の半分未満であること。
+  const area = blocks.slice(0, 4).reduce((a, b) => {
+      const rc = b.property("ADBE Root Vectors Group").property("ADBE Vector Group")
+                  .property("ADBE Vectors Group").property("ADBE Vector Shape - Rect")
+                  .property("ADBE Vector Rect Size").value;
+      return a + (rc[0] * rc[1]);
+  }, 0) / (1920 * 1080);
+  ok(area < 0.45, "ベタ面が画面を覆う割合は45%未満 → " + Math.round(area * 100) + "%");
   ok(blocks.every(b => b.property("ADBE Transform Group").property("ADBE Position").numKeys === 2),
      "画面外から滑り込むキーフレームが入る");
   const kanji = named(/^漢字/);
@@ -277,13 +285,48 @@ console.log("=== ケース1: 標準構成 ===\n");
   const blk = named(/黒フェード/)[0];
   ok(blk && Math.abs(blk.outPoint - 86.0) < 1e-9, "最後は黒へ落ちて 86.0 秒で終わる");
 
+  console.log("■ カットごとに動きが違うか（単調さの回避）");
+  const photos2 = comp.layers.filter(l => /^写真 /.test(l.name));
+  const sig = l => {
+    const tr = l.property("ADBE Transform Group");
+    return [tr.property("ADBE Scale").numKeys,
+            tr.property("ADBE Position").numKeys,
+            tr.property("ADBE Rotate Z").numKeys].join("/");
+  };
+  const sigs = photos2.map(sig);
+  ok(new Set(sigs).size >= 3, "動きの型が3種類以上ある → " + new Set(sigs).size + " 種類");
+  const slides = photos2.filter(l => l.property("ADBE Transform Group").property("ADBE Scale").numKeys === 0);
+  ok(slides.length >= 2, "拡大したまま流すカットがある（寄り引きだけにしない）→ " + slides.length);
+  const punches = photos2.filter(l => l.property("ADBE Transform Group").property("ADBE Scale").numKeys === 3);
+  ok(punches.length >= 1, "勢いよく入って着地するカットがある → " + punches.length);
+  const tilts = photos2.filter(l => l.property("ADBE Transform Group").property("ADBE Rotate Z").numKeys > 0);
+  ok(tilts.length >= 1, "傾きながら動くカットがある → " + tilts.length);
+  ok(photos2.every(l => {
+      const tr = l.property("ADBE Transform Group");
+      return tr.property("ADBE Scale").numKeys > 0 || tr.property("ADBE Position").numKeys > 0;
+  }), "止まったままのカットが1つもない");
+
+  console.log("■ カットの繋ぎ");
+  const tflash = named(/^繋ぎ 白フラッシュ/);
+  const tblock = named(/^繋ぎ 色面/);
+  const tline  = named(/^繋ぎ 線/);
+  ok(tflash.length >= 2, "白フラッシュの繋ぎがある → " + tflash.length);
+  ok(tblock.length >= 6, "色面が横切る繋ぎがある（1箇所につき3枚）→ " + tblock.length);
+  ok(tline.length >= 4, "線が走る繋ぎがある（1箇所につき4本）→ " + tline.length);
+  ok(tblock.every(l => l.property("ADBE Transform Group").property("ADBE Position").numKeys === 3),
+     "色面は 画面外 → 画面中央 → 反対の画面外 と通り抜ける");
+  const anyT = tflash.concat(tblock, tline);
+  ok(anyT.every(l => l.inPoint < l.outPoint && l.outPoint - l.inPoint < 1.0),
+     "繋ぎはすべて1秒未満（間延びさせない）");
+  ok(/カットの繋ぎ/.test(alerts[0]), "繋ぎの数をレポートする");
+
   console.log("■ 時間のつながり");
   const photos = comp.layers.filter(l => /^写真 /.test(l.name));
   ok(photos.every(l => l.outPoint > l.inPoint), "全写真レイヤーの尺が正");
-  ok(photos.every(l => l.property("ADBE Transform Group").property("ADBE Scale").numKeys === 2),
-     "全写真にズームのキーフレームが入る");
-  ok(photos.every(l => l.property("ADBE Transform Group").property("ADBE Scale").eased > 0),
-     "キーフレームにイーズが掛かる（等速にならない）");
+  ok(photos.every(l => {
+      const tr = l.property("ADBE Transform Group");
+      return tr.property("ADBE Scale").eased > 0 || tr.property("ADBE Position").eased > 0;
+  }), "キーフレームにイーズが掛かる（等速にならない）");
 
   console.log("■ 完了レポート");
   ok(alerts.length === 1 && /組み立てました/.test(alerts[0]), "完了ダイアログが出る");
