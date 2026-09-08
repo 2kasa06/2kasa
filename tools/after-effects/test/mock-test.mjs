@@ -196,13 +196,23 @@ console.log("=== ケース1: 標準構成 ===\n");
   ok(blocks.every(b => b.property("ADBE Transform Group").property("ADBE Position").numKeys === 2),
      "画面外から滑り込むキーフレームが入る");
   const kanji = named(/^漢字/);
-  ok(kanji.length === 4, "漢字が1字ずつ独立したレイヤー → " + kanji.length);
+  ok(kanji.length === 7, "漢字が1字ずつ独立したレイヤー（樋口司3＋山本和界4）→ " + kanji.length);
+  ok(!kanji.some(k => /^漢字\s*$/.test(k.name)), "空白のレイヤーは作らない");
+  ok(kanji.some(k => k.name === "漢字 司") && kanji.some(k => k.name === "漢字 界"),
+     "両家の名前が入っている");
   const ys = kanji.slice(0, 2).map(k => k.property("ADBE Transform Group").property("ADBE Position").keys[1].v[1]);
   ok(ys[0] !== ys[1], "上下に振って配置される（一列に並べない）");
+  // 姓と名の間だけ広く空く（樋口 / 司）
+  const tsu = named(/^漢字 (樋|口|司)$/).map(k =>
+      k.property("ADBE Transform Group").property("ADBE Position").keys[1].v[0]).sort((a,b)=>a-b);
+  ok(Math.abs((tsu[1]-tsu[0]) - 190) < 1 && (tsu[2]-tsu[1]) > 250,
+     "姓の中は等間隔、姓と名の間は広く空く → " + (tsu[1]-tsu[0]) + " / " + (tsu[2]-tsu[1]));
   const romaji = named(/^ローマ字/);
   ok(romaji.length === 2, "ローマ字も2場面ぶん");
   ok(romaji.every(r => r.property("ADBE Text Properties").property("ADBE Text Document").value.tracking === 320),
      "ローマ字は字間を大きく取る（320）");
+  ok(romaji.map(r => r.textValue).sort().join("|") === "HIGUCHI TSUKASA|YAMAMOTO NODOKA",
+     "ローマ字は大文字のフルネーム → " + romaji.map(r => r.textValue).join(" / "));
 
   console.log("■ タイル分割 1:01");
   const tiles = named(/^タイル/);

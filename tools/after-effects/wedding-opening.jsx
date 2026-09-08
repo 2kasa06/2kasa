@@ -30,9 +30,11 @@ var CONFIG = {
     fps: 30,
 
     // お名前（漢字の姓名が中盤の主役になる）
-    groom: { romaji: "NAME NAME", kanji: "新郎", label: "Groom" },
-    bride: { romaji: "NAME NAME", kanji: "新婦", label: "Bride" },
-    date: "2026.00.00",
+    // kanji の空白は姓と名の間隔として扱われる（レイヤーは作られない）。
+    // 新郎・新婦が逆なら、この2行を入れ替えるだけでよい。
+    groom: { romaji: "HIGUCHI TSUKASA",  kanji: "樋口 司",   label: "Groom" },
+    bride: { romaji: "YAMAMOTO NODOKA", kanji: "山本 和界", label: "Bride" },
+    date: "2026.00.00",   // ← 挙式日。ここだけまだ仮です
 
     welcome:  ["Welcome to", "our", "wedding reception"],
     journey:  "We begin our journey together",
@@ -207,6 +209,20 @@ function buildPhoto(comp, footage, s, idx, opts) {
     return L;
 }
 
+// 漢字を1字ずつに分解し、それぞれの横位置を決める。
+// 半角・全角どちらの空白も、姓と名を離すための間隔として扱う。
+function layoutKanji(str) {
+    var STEP = 190, GAP = 100;
+    var out = [], x = 0;
+    for (var i = 0; i < str.length; i++) {
+        var ch = str.charAt(i);
+        if (ch === " " || ch === "\u3000" || ch === "\t") { x += GAP; continue; }
+        out.push({ ch: ch, dx: x });
+        x += STEP;
+    }
+    return out;
+}
+
 // 写真を画面いっぱいに覆う倍率（％）
 function fillScale(item) {
     return Math.max(W / item.width, H / item.height) * 100;
@@ -292,15 +308,18 @@ function buildNameBlock(comp, footage, s) {
       .setValue([right ? W * 0.08 : W * 0.46, H * 0.30]);
     kineticIn(rt, s.start + 0.35, 0.8);
 
-    // 漢字を1字ずつ散らして置く
-    var chars = who.kanji.split("");
-    for (var k = 0; k < chars.length; k++) {
-        var jt = makeText(comp, chars[k], {
+    // 漢字を1字ずつ散らして置く。
+    // 空白は姓と名の間隔として使い、その位置にレイヤーは作らない。
+    var glyphs = layoutKanji(who.kanji);
+    var span = glyphs.length ? glyphs[glyphs.length - 1].dx : 0;
+    var baseX = (right ? W * 0.10 : W * 0.90 - span);   // 面のない側に寄せる
+    for (var k = 0; k < glyphs.length; k++) {
+        var jt = makeText(comp, glyphs[k].ch, {
             font: CONFIG.fontJP, size: 210, color: C.white, tracking: 0, justify: "center"
         });
-        jt.name = "漢字 " + chars[k];
+        jt.name = "漢字 " + glyphs[k].ch;
         jt.startTime = s.start; jt.inPoint = s.start; jt.outPoint = s.start + s.dur;
-        var jx = (right ? W * 0.11 : W * 0.50) + k * 190;
+        var jx = baseX + glyphs[k].dx;
         var jy = H * 0.52 + ((k % 2 === 0) ? -60 : 70);       // 上下に振ってリズムを出す
         jt.property("ADBE Transform Group").property("ADBE Position").setValue([jx, jy]);
         fadeSlide(jt, s.start + 0.45 + k * 0.09, 0.5, [jx, jy + 60], [jx, jy]);
