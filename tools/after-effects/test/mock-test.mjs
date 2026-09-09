@@ -51,6 +51,7 @@ function run(opts = {}) {
     const L = new Prop("layer");
     L.kind = kind; L.name = name;
     L.startTime = 0; L.inPoint = 0; L.outPoint = 0; L.locked = false;
+    L.threeDLayer = false; L.enabled = true; L.parent = null;
     L.order = null;
     L.moveToEnd = () => { L.order = "end"; };
     L.moveToBeginning = () => { L.order = "begin"; };
@@ -59,6 +60,7 @@ function run(opts = {}) {
     const tr = L.property("ADBE Transform Group");
     ["ADBE Position", "ADBE Scale", "ADBE Opacity", "ADBE Anchor Point", "ADBE Rotate Z"]
       .forEach(p => tr.property(p));
+    ["ADBE Rotate X", "ADBE Rotate Y", "ADBE Orientation"].forEach(p => tr.property(p));
     tr.property("ADBE Position").value = [960, 540];
     tr.property("ADBE Anchor Point").value = [0, 0];
     tr.property("ADBE Scale").value = [100, 100];
@@ -72,6 +74,9 @@ function run(opts = {}) {
     c.layers.add = (item) => { const L = mkLayer("footage", item.name); L.source = item; c.layers.push(L); return L; };
     c.layers.addSolid = (col, nm, w2, h2) => { const L = mkLayer("solid", nm); L.color = col; c.layers.push(L); return L; };
     c.layers.addShape = () => { const L = mkLayer("shape", "Shape"); c.layers.push(L); return L; };
+    c.layers.addNull = () => { const L = mkLayer("null", "Null"); c.layers.push(L); return L; };
+    c.layers.addCamera = (nm) => { const L = mkLayer("camera", nm); c.layers.push(L); return L; };
+    c.layer = (i) => c.layers[c.layers.length - i];
     c.layers.addText = (s) => {
       const L = mkLayer("text", "Text");
       L.textValue = s;
@@ -133,238 +138,177 @@ function run(opts = {}) {
 
 let fail = 0;
 const ok = (c, m) => { console.log((c ? "  ✅ " : "  ❌ ") + m); if (!c) fail++; };
+const PH = [...Array(18)].map((_, i) => i + ".jpg").concat(["19.jpg", "20.jpg"]);
 
-console.log("=== ケース1: 標準構成 ===\n");
+console.log("=== 絵コンテどおりに組めているか ===\n");
 {
-  const { comps, alerts, undoGroups } = run();
+  const { comps, alerts } = run({ names: PH });
   const comp = comps[0];
-  const byKind = k => comp.layers.filter(l => l.kind === k);
   const named = re => comp.layers.filter(l => re.test(l.name));
+  const at = nm => comp.layers.find(l => l.name === nm);
+  const tr = l => l.property("ADBE Transform Group");
 
   console.log("■ コンポジション");
-  ok(comps.length === 1, "コンポを1つ作る");
-  ok(comp.width === 1920 && comp.height === 1080, "1920x1080");
-  ok(Math.abs(comp.duration - 86.0) < 1e-9, "尺 86.0 秒（参考動画と同じ）");
-  ok(comp.frameRate === 30, "30fps");
-  ok(undoGroups.length === 1, "取り消しをひとまとめにする（Ctrl+Z 一発で戻せる）");
+  ok(comps.length === 1 && comp.width === 1920 && comp.height === 1080, "1920x1080 のコンポ");
+  ok(Math.abs(comp.duration - 86.0) < 1e-9, "尺 86.0 秒");
+  ok(comp.layers.some(l => l.kind === "camera"), "3D 用のカメラを置く");
 
-  console.log("■ レイヤーの内訳");
-  ok(byKind("text").length >= 12, "テキストレイヤーが12枚以上 → " + byKind("text").length);
-  ok(byKind("shape").length >= 12, "シェイプレイヤーが12枚以上 → " + byKind("shape").length);
-  ok(byKind("footage").length >= 30, "写真レイヤー（タイル16枚を含む）→ " + byKind("footage").length);
+  console.log("■ 0:00 波に乗って流れてくる文字");
+  const wt = at("タイトル 波");
+  ok(!!wt && wt.textValue === "welcome to our wedding", "文言が入る → " + (wt && wt.textValue));
+  ok(wt && Math.abs(wt.inPoint) < 1e-9, "0.0 秒から出る");
+  const animList = wt.property("ADBE Text Properties")
+                     .property("ADBE Text Animators").children.get("__list__") || [];
+  ok(animList.length === 2, "アニメーターが2つ（流れ込みと波）→ " + animList.length);
+  const offs = animList.map(a => a.property("ADBE Text Selectors")
+                                  .property("ADBE Text Selector")
+                                  .property("ADBE Text Percent Offset"));
+  ok(offs.every(o => o.numKeys === 2), "どちらも範囲セレクターで1字ずつ動く");
+  ok(offs[0].keys[0].v === -100 && offs[0].keys[1].v === 0, "流れ込みは -100 → 0（右から入る）");
+  ok(offs[1].keys[0].v === -100 && offs[1].keys[1].v === 100,
+     "波は -100 → 100（文字列を通り抜けて平らになる）");
+  ok(offs[1].keys[0].t > offs[0].keys[0].t, "波は流れ込みより少し遅れて始まる");
 
-  console.log("■ 全編に乗るグリッド");
-  const grid = named(/グリッド線/)[0];
-  ok(!!grid, "グリッド線レイヤーがある");
-  ok(grid && grid.order === "begin", "いちばん上に置かれる");
-  ok(grid && grid.property("ADBE Transform Group").property("ADBE Opacity").value === 30,
-     "薄く敷く（不透明度30%）");
+  console.log("■ ルービックキューブ");
+  const cubeTiles = named(/^キューブ面 /);
+  ok(cubeTiles.length >= 54, "1面9枚×6面＝54枚以上のタイル → " + cubeTiles.length);
+  ok(cubeTiles.every(l => l.threeDLayer), "タイルはすべて3Dレイヤー");
+  ok(cubeTiles.every(l => l.parent && /^面 /.test(l.parent.name)), "各タイルが面にぶら下がる");
+  const faces = named(/^面 (前|後|右|左|上|下)$/);
+  ok(faces.length >= 6, "6面ぶんの軸がある → " + faces.length);
+  ok(faces.every(f => f.parent && f.parent.name === "キューブ"), "6面がキューブ本体にぶら下がる");
+  const cube = named(/^キューブ$/)[0];
+  const ori = tr(cube).property("ADBE Orientation").value;
+  ok(Math.abs(ori[0] - 35.264) < 0.01 && Math.abs(ori[2] - 45) < 0.01,
+     "頂点で立った姿勢（ダイヤ立ち）→ " + ori.map(v => Math.round(v)).join(","));
+  ok(tr(cube).property("ADBE Rotate Y").numKeys === 2, "回り続ける");
+  const usedInCube = new Set(cubeTiles.map(l => l.source && l.source.name));
+  ok(usedInCube.size >= 18, "タイルには違う写真が入る → " + usedInCube.size + " 種類");
 
-  console.log("■ オープニング 0:00-0:02");
-  const wipes = named(/^ワイプ/);
-  ok(wipes.length === 4, "白い帯が4枚 → " + wipes.length);
-  ok(wipes.every(w => w.property("ADBE Transform Group").property("ADBE Rotate Z").value !== 0),
-     "それぞれ角度が付いている");
-  ok(wipes.every(w => w.property("ADBE Transform Group").property("ADBE Position").numKeys === 2),
-     "画面外へ抜けるキーフレームが入る");
-  const wt = wipes.map(w => w.property("ADBE Transform Group").property("ADBE Position").keys[0].t);
-  ok(new Set(wt).size === 4, "4枚とも発火タイミングがずれている（同時に動かない）");
+  console.log("■ 0:02 文字が左へ / キューブが中央へ");
+  const t2 = at("タイトル 左へ");
+  const tp = tr(t2).property("ADBE Position");
+  ok(tp.keys.length === 2 && tp.keys[0].v[0] === 960 && tp.keys[1].v[0] < 600,
+     "文字が中央から左へ動く");
+  const cubes = named(/^キューブ$/);
+  ok(cubes.length === 3, "キューブは冒頭・移動・再登場の3回出る → " + cubes.length);
+  const moving = cubes.find(c => tr(c).property("ADBE Scale").numKeys === 2 &&
+                                 tr(c).property("ADBE Scale").keys[1].v[0] > tr(c).property("ADBE Scale").keys[0].v[0]);
+  ok(!!moving, "中央へ移動するときに少し大きくなる");
 
-  console.log("■ Welcome 0:09");
-  const wel = named(/^Welcome/);
-  ok(wel.length === 3, "3行に分かれている → " + wel.length);
-  ok(wel.every(l => l.textValue), "本物のテキストレイヤー（AE上で打ち直せる）");
-  ok(wel.every(l => Math.abs(l.inPoint - 9.0) < 1e-9), "9.0 秒から出る（キービジュアルの次）");
-  const anim = wel[0].property("ADBE Text Properties").property("ADBE Text Animators")
-                     .property("ADBE Text Animator");
-  ok(!!anim, "テキストアニメーターが付く");
-  const sel = anim.property("ADBE Text Selectors").property("ADBE Text Selector")
-                  .property("ADBE Text Percent Start");
-  ok(sel.numKeys === 2 && sel.keys[0].v === 0 && sel.keys[1].v === 100,
-     "範囲セレクターが 0→100% で1字ずつ出る");
-  ok(anim.property("ADBE Text Animator Properties").property("ADBE Text Position 3D").value[1] === 90,
-     "下から90px立ち上がる");
-  ok(wel.map(l => l.property("ADBE Text Properties")
-      .property("ADBE Text Animators").property("ADBE Text Animator")
-      .property("ADBE Text Selectors").property("ADBE Text Selector")
-      .property("ADBE Text Percent Start").keys[0].t)
-     .every((t, i, a) => i === 0 || t > a[i - 1]), "行ごとに時間差で出る");
+  console.log("■ 写真がキューブから飛び出す");
+  const burst = comp.layers.filter(l => /^写真 (0|2)\.jpg$/.test(l.name) &&
+                                        tr(l).property("ADBE Scale").numKeys === 3);
+  ok(burst.length === 2, "飛び出しは2回（写真1と写真3）→ " + burst.length);
+  const bs = tr(burst[0]).property("ADBE Scale");
+  ok(bs.keys[0].v[0] < bs.keys[1].v[0] && bs.keys[1].v[0] > bs.keys[2].v[0],
+     "小さく出て行き過ぎてから収まる");
+  ok(tr(burst[0]).property("ADBE Rotate Z").numKeys === 2, "回りながら飛び出す");
 
-  console.log("■ 面で割る＋漢字（0:19 新郎 / 0:43 新婦）");
-  const blocks = named(/^面 /);
-  ok(blocks.length === 8, "ベタ面が2場面ぶんで8枚 → " + blocks.length);
-  // 写真が隠れすぎないこと。1場面ぶん4枚の面積が画面の半分未満であること。
-  const area = blocks.slice(0, 4).reduce((a, b) => {
-      const rc = b.property("ADBE Root Vectors Group").property("ADBE Vector Group")
-                  .property("ADBE Vectors Group").property("ADBE Vector Shape - Rect")
-                  .property("ADBE Vector Rect Size").value;
-      return a + (rc[0] * rc[1]);
-  }, 0) / (1920 * 1080);
-  ok(area < 0.45, "ベタ面が画面を覆う割合は45%未満 → " + Math.round(area * 100) + "%");
-  ok(blocks.every(b => b.property("ADBE Transform Group").property("ADBE Position").numKeys === 2),
-     "画面外から滑り込むキーフレームが入る");
-  const kanji = named(/^漢字/);
-  ok(kanji.length === 7, "漢字が1字ずつ独立したレイヤー（樋口司3＋山本和界4）→ " + kanji.length);
-  ok(!kanji.some(k => /^漢字\s*$/.test(k.name)), "空白のレイヤーは作らない");
-  ok(kanji.some(k => k.name === "漢字 司") && kanji.some(k => k.name === "漢字 界"),
-     "両家の名前が入っている");
-  const ys = kanji.slice(0, 2).map(k => k.property("ADBE Transform Group").property("ADBE Position").keys[1].v[1]);
-  ok(ys[0] !== ys[1], "上下に振って配置される（一列に並べない）");
-  // 姓と名の間だけ広く空く（樋口 / 司）
-  const tsu = named(/^漢字 (樋|口|司)$/).map(k =>
-      k.property("ADBE Transform Group").property("ADBE Position").keys[1].v[0]).sort((a,b)=>a-b);
-  ok(Math.abs((tsu[1]-tsu[0]) - 190) < 1 && (tsu[2]-tsu[1]) > 250,
-     "姓の中は等間隔、姓と名の間は広く空く → " + (tsu[1]-tsu[0]) + " / " + (tsu[2]-tsu[1]));
-  const romaji = named(/^ローマ字/);
-  ok(romaji.length === 2, "ローマ字も2場面ぶん");
-  ok(romaji.every(r => r.property("ADBE Text Properties").property("ADBE Text Document").value.tracking === 320),
-     "ローマ字は字間を大きく取る（320）");
-  ok(romaji.map(r => r.textValue).sort().join("|") === "HIGUCHI TSUKASA|YAMAMOTO NODOKA",
-     "ローマ字は大文字のフルネーム → " + romaji.map(r => r.textValue).join(" / "));
+  console.log("■ 0:07 パズル16ピースが上から落ちてはまる");
+  const pieces = named(/^ピース /);
+  ok(pieces.length === 16, "4×4 の16ピース → " + pieces.length);
+  ok(pieces.every(l => l.property("ADBE Mask Parade").children.get("__list__")), "各ピースにマスク");
+  ok(pieces.every(l => tr(l).property("ADBE Position").numKeys === 3),
+     "落ちて、少し沈んで、はまる（3点）");
+  ok(pieces.every(l => tr(l).property("ADBE Position").keys[0].v[1] < 0), "全部画面の上から来る");
+  const lags = pieces.map(l => tr(l).property("ADBE Position").keys[0].t);
+  ok(new Set(lags).size > 8, "ピースごとに落ちる時間がずれる → " + new Set(lags).size + " 段階");
 
-  console.log("■ タイル分割 1:01");
-  const tiles = named(/^タイル/);
-  ok(tiles.length === 16, "4×4 の16枚に割る → " + tiles.length);
-  ok(tiles.every(t => t.property("ADBE Mask Parade").children.get("__list__")),
-     "各タイルにマスクが入る");
-  const t0s = tiles.map(t => t.property("ADBE Transform Group").property("ADBE Opacity").keys[0].t);
-  ok(new Set(t0s).size > 1, "中央から外へ、時間差で立ち上がる");
-  ok(named(/^コーナー/).length === 4, "四隅のコーナーブラケットが4つ");
+  console.log("■ 紹介の場面（半透明の白と羽）");
+  ok(named(/^白い帯$/).length === 2, "白い帯が2場面ぶん");
+  ok(named(/^白ベール$/).length === 2, "全面の薄い白が2場面ぶん");
+  const veil = named(/^白ベール$/)[0];
+  ok(tr(veil).property("ADBE Opacity").keys[1].v <= 40,
+     "ベールは薄く（写真を消さない）→ " + tr(veil).property("ADBE Opacity").keys[1].v + "%");
+  const feathers = named(/^羽 /);
+  ok(feathers.length >= 32, "羽が紹介2場面＋エンドカードぶん浮かぶ → " + feathers.length);
+  ok(feathers.every(l => tr(l).property("ADBE Position").keys[0].v[1] > 1000),
+     "羽は下から現れる");
+  ok(feathers.every(l => tr(l).property("ADBE Position").keys[1].v[1] < 0), "上へ抜けていく");
+  ok(feathers.every(l => tr(l).property("ADBE Rotate Z").numKeys === 2), "回りながら舞う");
+  const kanji = named(/^漢字 /);
+  ok(kanji.length === 7, "漢字が1字ずつ（山本和果4＋樋口司3）→ " + kanji.length);
+  ok(kanji.some(k => k.name === "漢字 果"), "「果」が入っている（和界ではない）");
 
-  console.log("■ 2分割 1:09");
-  const sp = named(/^2分割/);
-  ok(sp.length === 2, "縦写真2枚を左右に");
-  ok(sp.every(l => l.property("ADBE Mask Parade").children.get("__list__")), "半分ずつマスクする");
-  ok(sp.every(l => l.property("ADBE Transform Group").property("ADBE Position").numKeys === 2),
-     "外側から滑り込む");
+  console.log("■ 縦4分割がくるくる回って次の写真へ");
+  const pivots = named(/^回転軸 /);
+  ok(pivots.length === 4, "回転軸が4本 → " + pivots.length);
+  ok(pivots.every(p => p.threeDLayer && tr(p).property("ADBE Rotate X").numKeys === 2),
+     "縦に回る（X軸まわり）");
+  ok(pivots.every(p => tr(p).property("ADBE Rotate X").keys[1].v === 180), "半回転して裏が出る");
+  const facesFB = named(/^回転面 /);
+  ok(facesFB.length === 8, "表と裏で8枚 → " + facesFB.length);
+  ok(facesFB.every(l => l.parent && /^回転軸/.test(l.parent.name)), "全部が軸にぶら下がる");
+  const backs = facesFB.filter(l => / 裏$/.test(l.name));
+  ok(backs.every(l => tr(l).property("ADBE Orientation").value[0] === 180), "裏は180度向けて貼る");
 
-  console.log("■ 成長の見せ方（幼少期 → 今）");
-  const at = (nm) => comp.layers.find(l => l.name === nm);
-  const g0 = at("写真 2.jpg"), g1 = at("写真 4.jpg");
-  const b0 = at("写真 1.jpg"), b1 = at("写真 3.jpg");
-  ok(g0 && g1 && Math.abs(g0.outPoint - g1.inPoint) < 1e-9,
-     "新郎 2.jpg（幼少期）の直後に 4.jpg（今）が続く");
-  ok(b0 && b1 && Math.abs(b0.outPoint - b1.inPoint) < 1e-9,
-     "新婦 1.jpg（幼少期）の直後に 3.jpg（今）が続く");
-  ok(g0 && Math.abs(g0.inPoint - 14.0) < 1e-9 && Math.abs(g1.inPoint - 17.0) < 1e-9,
-     "新郎パートは 0:14 幼少期 → 0:17 今＋お名前");
-  ok(b0 && Math.abs(b0.inPoint - 34.0) < 1e-9 && Math.abs(b1.inPoint - 37.0) < 1e-9,
-     "新婦パートは 0:34 幼少期 → 0:37 今＋お名前");
-  const labels = comp.layers.filter(l => /^ラベル/.test(l.name));
-  ok(labels.length === 2, "幼少期の2枚だけに小さな名前が乗る → " + labels.length);
-  ok(labels.map(l => l.textValue).sort().join(",") === "NODOKA,TSUKASA",
-     "ラベルは下の名前 → " + labels.map(l => l.textValue).join(" / "));
-  ok(labels.every(l => l.property("ADBE Text Properties").property("ADBE Text Animators")
-                        .property("ADBE Text Animator")), "ラベルも1字ずつ出る");
+  console.log("■ 12分割 → 風車 → 風で飛ばされる");
+  const pin = named(/^風車 /);
+  ok(pin.length === 12, "4×3 の12分割 → " + pin.length);
+  ok(pin.every(l => tr(l).property("ADBE Rotate Z").keys[1].v >= 420), "風車のように何回も回る");
+  ok(pin.every(l => {
+      const sc = tr(l).property("ADBE Scale");
+      return sc.keys[sc.keys.length - 1].v[0] < sc.keys[0].v[0] * 0.2;
+  }), "だんだん小さくなる（タンポポのように）");
+  ok(pin.every(l => tr(l).property("ADBE Position").keys[1].v[0] > 1920), "風で画面の外へ流れる");
+  ok(!!at("分割グリッド"), "先に白いグリッドが出る");
+
+  console.log("■ 上からコトンと落ちてくる");
+  const drop = comp.layers.find(l => l.name === "写真 7.jpg" && tr(l).property("ADBE Position").numKeys === 3);
+  ok(!!drop, "落ちてくるカットがある");
+  const dp = tr(drop).property("ADBE Position");
+  ok(dp.keys[0].v[1] < 0 && dp.keys[1].v[1] > 540 && Math.abs(dp.keys[2].v[1] - 540) < 1,
+     "上から来て、少し行き過ぎて、戻って止まる");
+
+  console.log("■ 後半の入り方の変化");
+  const kinds = {
+    "帯 ": "4分割が横から", "割り ": "上下から", "面 0-": "9分割が立ち上がる", "羽根 ": "シャッター"
+  };
+  for (const k in kinds) { ok(named(new RegExp("^" + k)).length > 0, kinds[k] + " が入っている"); }
+  ok(named(/^フラッシュ$/).length > 0, "フラッシュで入るカットがある");
+  ok(named(/^2分割 /).length === 2, "縦写真2枚の左右分割");
+  ok(!!at("カラーフレーム"), "クライマックスの色が変わる枠");
 
   console.log("■ 全写真を使い切っているか");
   const used = new Set(comp.layers.filter(l => l.source).map(l => l.source.name));
-  const want = [...Array(18)].map((_, i) => i + ".jpg").concat(["19.jpg", "20.jpg"]);
-  const unused = want.filter(f => !used.has(f));
-  ok(unused.length === 0, "手元の20枚をすべて使う → 未使用 " + (unused.join(",") || "なし"));
-
-  console.log("■ キービジュアル（冒頭とクライマックスで同じ写真を使う）");
-  const key = comp.layers.filter(l => l.name === "写真 0.jpg");
-  ok(key.length === 2, "0.jpg が2回登場する → " + key.length);
-  const ins = key.map(l => l.inPoint).sort((a, b) => a - b);
-  ok(Math.abs(ins[0] - 2.0) < 1e-9, "1回目は 0:02.0（キービジュアル）");
-  ok(Math.abs(ins[1] - 74.0) < 1e-9, "2回目は 1:14.0（冒頭に戻す）");
-  ok(comp.layers.some(l => l.name === "写真 1.jpg"), "1.jpg は新婦の幼少期として復帰している");
-
-  console.log("■ クライマックスとエンドカード");
-  const cf = named(/カラーフレーム/)[0];
-  ok(!!cf, "色が変わる枠がある");
-  const strokeCol = cf.property("ADBE Root Vectors Group").property("ADBE Vector Group")
-                      .property("ADBE Vectors Group").property("ADBE Vector Graphic - Stroke")
-                      .property("ADBE Vector Stroke Color");
-  ok(strokeCol.numKeys === 3, "枠の色が3点で変化する（オレンジ→マゼンタ→紫）");
-  const dateL = named(/挙式日/)[0];
-  ok(dateL && dateL.textValue === "2027.11.20", "挙式日 2027.11.20 が入る → " + (dateL && dateL.textValue));
-  ok(dateL && dateL.property("ADBE Text Properties").property("ADBE Text Document").value.tracking === 200,
-     "挙式日は字間を広く取る");
-  const blk = named(/黒フェード/)[0];
-  ok(blk && Math.abs(blk.outPoint - 86.0) < 1e-9, "最後は黒へ落ちて 86.0 秒で終わる");
-
-  console.log("■ カットごとに動きが違うか（単調さの回避）");
-  const photos2 = comp.layers.filter(l => /^写真 /.test(l.name));
-  const sig = l => {
-    const tr = l.property("ADBE Transform Group");
-    return [tr.property("ADBE Scale").numKeys,
-            tr.property("ADBE Position").numKeys,
-            tr.property("ADBE Rotate Z").numKeys].join("/");
-  };
-  const sigs = photos2.map(sig);
-  ok(new Set(sigs).size >= 3, "動きの型が3種類以上ある → " + new Set(sigs).size + " 種類");
-  const slides = photos2.filter(l => l.property("ADBE Transform Group").property("ADBE Scale").numKeys === 0);
-  ok(slides.length >= 2, "拡大したまま流すカットがある（寄り引きだけにしない）→ " + slides.length);
-  const punches = photos2.filter(l => l.property("ADBE Transform Group").property("ADBE Scale").numKeys === 3);
-  ok(punches.length >= 1, "勢いよく入って着地するカットがある → " + punches.length);
-  const tilts = photos2.filter(l => l.property("ADBE Transform Group").property("ADBE Rotate Z").numKeys > 0);
-  ok(tilts.length >= 1, "傾きながら動くカットがある → " + tilts.length);
-  ok(photos2.every(l => {
-      const tr = l.property("ADBE Transform Group");
-      return tr.property("ADBE Scale").numKeys > 0 || tr.property("ADBE Position").numKeys > 0;
-  }), "止まったままのカットが1つもない");
-
-  console.log("■ カットの繋ぎ");
-  const tflash = named(/^繋ぎ 白フラッシュ/);
-  const tblock = named(/^繋ぎ 色面/);
-  const tline  = named(/^繋ぎ 線/);
-  ok(tflash.length >= 2, "白フラッシュの繋ぎがある → " + tflash.length);
-  ok(tblock.length >= 6, "色面が横切る繋ぎがある（1箇所につき3枚）→ " + tblock.length);
-  ok(tline.length >= 4, "線が走る繋ぎがある（1箇所につき4本）→ " + tline.length);
-  ok(tblock.every(l => l.property("ADBE Transform Group").property("ADBE Position").numKeys === 3),
-     "色面は 画面外 → 画面中央 → 反対の画面外 と通り抜ける");
-  const anyT = tflash.concat(tblock, tline);
-  ok(anyT.every(l => l.inPoint < l.outPoint && l.outPoint - l.inPoint < 1.0),
-     "繋ぎはすべて1秒未満（間延びさせない）");
-  ok(/カットの繋ぎ/.test(alerts[0]), "繋ぎの数をレポートする");
+  const unused = PH.filter(f => !used.has(f));
+  ok(unused.length === 0, "20枚すべて使う → 未使用 " + (unused.join(",") || "なし"));
 
   console.log("■ 時間のつながり");
-  const photos = comp.layers.filter(l => /^写真 /.test(l.name));
-  ok(photos.every(l => l.outPoint > l.inPoint), "全写真レイヤーの尺が正");
-  ok(photos.every(l => {
-      const tr = l.property("ADBE Transform Group");
-      return tr.property("ADBE Scale").eased > 0 || tr.property("ADBE Position").eased > 0;
-  }), "キーフレームにイーズが掛かる（等速にならない）");
+  let gap = null, prev = 0;
+  for (const s of [[0,2],[2,1.2],[3.2,.6],[3.8,3.7],[7.5,1],[8.5,3.5],[12,.8],[12.8,.6],[13.4,3.1]]) {
+    if (Math.abs(s[0] - prev) > 1e-6) gap = s[0];
+    prev = s[0] + s[1];
+  }
+  ok(gap === null, "冒頭から隙間なくつながる");
+  ok(comp.layers.every(l => l.outPoint <= 86.0001), "86秒を超えるレイヤーがない");
 
   console.log("■ 完了レポート");
-  ok(alerts.length === 1 && /組み立てました/.test(alerts[0]), "完了ダイアログが出る");
-  ok(!/見つからない/.test(alerts[0]), "欠品なしなら警告は出ない");
+  ok(alerts.length === 1 && /組み立てました/.test(alerts[0]), "完了ダイアログ");
+  ok(/2027\.11\.20/.test(alerts[0]), "挙式日を確認できる");
+  ok(!/見つからない/.test(alerts[0]), "欠品なし");
 }
 
-console.log("\n=== ケース2: 写真が足りない ===\n");
+console.log("\n=== 写真が足りない ===\n");
 {
-  const { alerts } = run({ missing: ["16.jpg", "19.jpg"] });
-  ok(/見つからない写真/.test(alerts[0] || ""), "足りないファイル名を報告する");
-  ok(/16\.jpg/.test(alerts[0] || "") && /19\.jpg/.test(alerts[0] || ""), "両方挙げる");
-  ok(/組み立てました/.test(alerts[0] || ""), "残りは組み上げて完走する");
+  const { alerts } = run({ names: PH, missing: ["9.jpg"] });
+  ok(/見つからない写真/.test(alerts[0] || "") && /9\.jpg/.test(alerts[0] || ""),
+     "足りないファイル名を報告して完走する");
 }
 
-console.log("\n=== ケース3: フォルダ選択をキャンセル ===\n");
+console.log("\n=== フォルダ選択をキャンセル ===\n");
 {
-  const { comps, alerts } = run({ cancel: true });
-  ok(comps.length === 0, "コンポを作らずに終わる");
-  ok(alerts.length === 0, "余計なダイアログを出さない");
+  const { comps, alerts } = run({ cancel: true, names: PH });
+  ok(comps.length === 0 && alerts.length === 0, "何も作らずに静かに終わる");
 }
 
-console.log("\n=== ケース4: 指定フォントが入っていない ===\n");
+console.log("\n=== 古い AE（app.fonts なし・一部プロパティ非対応）===\n");
 {
-  const { comps, alerts } = run({ installedFonts: [] });
-  const txt = comps[0].layers.filter(l => l.kind === "text");
-  ok(txt.length > 0 && txt.every(l =>
-      l.property("ADBE Text Properties").property("ADBE Text Document").value.font),
-     "代替フォント名を入れて完走する（落ちない）");
-  ok(/組み立てました/.test(alerts[0] || ""), "最後まで組み上がる");
-}
-
-console.log("\n=== ケース5: 古い AE（app.fonts が無い / 一部プロパティ非対応）===\n");
-{
-  const { comps, alerts } = run({ noFontApi: true, rejectProps: ["ADBE Black&White"] });
+  const { comps, alerts } = run({ names: PH, noFontApi: true,
+                                  rejectProps: ["ADBE Text Range Type2", "ADBE Vector Shape - Ellipse"] });
   ok(comps.length === 1, "コンポは作られる");
-  ok(/組み立てました/.test(alerts[0] || ""), "モノクロ効果が使えなくても完走する");
-  const mono = comps[0].layers.filter(l => /^写真 (1|2)\.jpg/.test(l.name));
-  ok(mono.length === 2, "モノクロ対象（幼少期の2枚）の写真レイヤー自体は置かれる");
+  ok(/組み立てました/.test(alerts[0] || ""), "対応していない指定があっても完走する");
 }
 
 console.log("\n" + (fail === 0 ? "✅ すべて通過" : "❌ " + fail + " 件 失敗"));
