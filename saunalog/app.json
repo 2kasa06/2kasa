@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "サウナログ",
+    "slug": "saunalog",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "saunalog",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "info.nhct.saunalog",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "現在地の近くにあるサウナを探すために位置情報を使用します。",
+        "CFBundleLocalizations": ["ja", "en"],
+        "CFBundleDevelopmentRegion": "ja"
+      }
+    },
+    "android": {
+      "package": "info.nhct.saunalog",
+      "adaptiveIcon": {
+        "backgroundColor": "#0E2A38",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"],
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "現在地の近くにあるサウナを探すために位置情報を使用します。"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": false
+    }
+  }
+}
