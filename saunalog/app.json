@@ -14,7 +14,10 @@
       "buildNumber": "1",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "現在地の近くにあるサウナを探すために位置情報を使用します。",
-        "CFBundleLocalizations": ["ja", "en"],
+        "CFBundleLocalizations": [
+          "ja",
+          "en"
+        ],
         "CFBundleDevelopmentRegion": "ja"
       }
     },
@@ -26,7 +29,6 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"],
       "predictiveBackGestureEnabled": false
     },
     "web": {
@@ -39,6 +41,15 @@
         "expo-location",
         {
           "locationWhenInUsePermission": "現在地の近くにあるサウナを探すために位置情報を使用します。"
+        }
+      ],
+      "expo-maps",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "18.0"
+          }
         }
       ]
     ],

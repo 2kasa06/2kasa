@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { categorize } from './category.ts';
-import { formatDistance, haversineMeters } from './geo.ts';
+import { formatDistance, haversineMeters, zoomForRadius } from './geo.ts';
 import {
   applyFilters,
   countActiveFilters,
@@ -124,4 +124,14 @@ test('距離の計算と表示', () => {
   assert.equal(formatDistance(340), '340m');
   assert.equal(formatDistance(1234), '1.2km');
   assert.equal(formatDistance(null), null);
+});
+
+test('検索半径が広いほど地図のズームは小さくなる', () => {
+  const lat = 35.68;
+  const near = zoomForRadius(1000, lat);
+  const far = zoomForRadius(10000, lat);
+  assert.ok(near > far, `近距離のほうが寄るはず: ${near} vs ${far}`);
+  assert.ok(near > 13 && near < 15, `1km のズームが想定外: ${near}`);
+  assert.equal(zoomForRadius(0, lat), 12);
+  assert.ok(zoomForRadius(5_000_000, lat) >= 3);
 });

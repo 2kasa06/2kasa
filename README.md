@@ -16,6 +16,7 @@
 
 食べログの使い勝手をサウナに持ち込んだ iOS アプリ（Expo + React Native + TypeScript）です。
 Google Places API (New) で施設を検索し、距離・評価・営業状況・施設タイプ・価格帯で絞り込めます。
+検索結果は一覧と地図（iOS は Apple Maps）のどちらでも見られます。
 公式サイトのビルドとは完全に独立しており、`saunalog/` の中だけで完結します。
 
 セットアップと App Store へのリリース手順は [`saunalog/README.md`](saunalog/README.md) を参照してください。
