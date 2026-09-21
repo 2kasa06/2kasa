@@ -1,0 +1,10 @@
+import { chromium } from 'playwright'
+const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' })
+const p = await b.newPage({ viewport: { width: 794, height: 1123 }, deviceScaleFactor: 2 })
+await p.goto('file://' + process.argv[2], { waitUntil: 'load' })
+await p.emulateMedia({ media: 'print' })
+await p.waitForTimeout(900)
+const pages = await p.$$('.page')
+for (let i = 0; i < pages.length; i++) await pages[i].screenshot({ path: `${process.argv[3]}-${i + 1}.png` })
+console.log('pages:', pages.length)
+await b.close()

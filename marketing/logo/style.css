@@ -1,0 +1,117 @@
+:root{
+  --ink:#463229; --ink-2:#6E5D55; --muted:#9A8A82;
+  --rule:#E4DAD5; --rule-2:#F1EAE6;
+  --rose:#C08578; --rose-dp:#A5645A; --gold:#C9A96A;
+  --cream:#FBF6F2; --ivory:#FDFAF6;
+}
+@page{ size:A4; margin:0; }
+*{ box-sizing:border-box; margin:0; padding:0; }
+html,body{ background:#fff; }
+body{
+  font-family:'ZenKaku','Hiragino Kaku Gothic ProN',sans-serif;
+  color:var(--ink); -webkit-font-smoothing:antialiased; text-rendering:geometricPrecision;
+}
+.mono{ font-family:'Jost',sans-serif; font-variant-numeric:lining-nums tabular-nums; }
+
+.page{
+  width:210mm; height:297mm; padding:15mm 16mm 12mm;
+  display:flex; flex-direction:column; background:#fff;
+  page-break-after:always; overflow:hidden;
+}
+.page:last-child{ page-break-after:auto; }
+
+/* ── ヘッダー ───────────────────────────── */
+.head{ padding-bottom:4mm; border-bottom:1.2pt solid var(--ink); }
+.head__k{
+  font-family:'Jost',sans-serif; font-weight:400; font-size:7pt;
+  letter-spacing:.3em; color:var(--rose); text-transform:uppercase; margin-bottom:2.6mm;
+}
+h1{ font-size:17pt; font-weight:700; letter-spacing:.05em; line-height:1.3; }
+.head__s{ font-size:8.2pt; color:var(--ink-2); margin-top:2.2mm; letter-spacing:.02em; }
+.head__n{ font-size:7.4pt; color:var(--muted); margin-top:1.4mm; letter-spacing:.02em; }
+
+/* ── 案カード ───────────────────────────── */
+.grid{ display:grid; grid-template-columns:1fr 1fr; gap:5.5mm; margin-top:7mm; }
+.card{ border:.6pt solid var(--rule); border-radius:2mm; overflow:hidden; display:flex; flex-direction:column; }
+.card__stage{
+  background:var(--ivory); height:73mm;
+  display:flex; align-items:center; justify-content:center; padding:4mm;
+  border-bottom:.6pt solid var(--rule-2);
+}
+.card__b{ padding:3mm 3.4mm 3.4mm; }
+.card__tag{
+  display:inline-block; font-family:'Jost',sans-serif; font-size:6.4pt; font-weight:500;
+  letter-spacing:.16em; color:#fff; background:var(--rose-dp);
+  padding:.7mm 2mm; border-radius:1mm; margin-bottom:1.8mm;
+}
+.card__tag--rec{ background:var(--gold); }
+.card__t{ font-size:9.4pt; font-weight:700; letter-spacing:.03em; }
+.card__f{ font-family:'Jost',sans-serif; font-size:6.8pt; letter-spacing:.08em;
+  color:var(--rose-dp); margin-top:1.2mm; }
+.card__d{ font-size:7.2pt; color:var(--ink-2); line-height:1.6; margin-top:1.6mm; }
+
+/* ── ロゴ組み ───────────────────────────── */
+.lock{ text-align:center; line-height:1; }
+.lock svg{ display:block; margin:0 auto; }
+.lk-mark{ margin-bottom:3.4mm; }
+.lk-name{ color:var(--ink); }
+.lk-name--cor{ font-family:'Cormorant',serif; font-weight:300; font-size:35pt; letter-spacing:.06em; }
+.lk-name--cori{ font-family:'Cormorant',serif; font-weight:300; font-style:italic; font-size:38pt; letter-spacing:.03em; }
+.lk-name--ita{ font-family:'Italiana',serif; font-size:30pt; letter-spacing:.28em; text-indent:.28em; }
+.lk-name--jost{ font-family:'Jost',sans-serif; font-weight:300; font-size:26pt; letter-spacing:.34em; text-indent:.34em; }
+.lk-sub{
+  font-family:'Jost',sans-serif; font-weight:300; font-size:7.4pt;
+  letter-spacing:.34em; text-indent:.34em; color:var(--rose-dp); margin-top:3mm;
+}
+.lk-sub--ink{ color:var(--ink-2); }
+.lk-jp{ font-size:5.8pt; letter-spacing:.16em; color:var(--muted); margin-top:2mm; }
+.lk-hr{ width:40mm; height:.6pt; background:var(--rose); opacity:.5; margin:3mm auto 0; }
+.lk-hr--wide{ width:60mm; }
+
+/* ── 比較表 ─────────────────────────────── */
+.sec{ margin-top:6.2mm; }
+.sec__t{ font-size:10pt; font-weight:700; letter-spacing:.08em; color:var(--rose-dp);
+  display:flex; align-items:center; gap:3mm; }
+.sec__t::after{ content:""; flex:1; height:.6pt; background:var(--rule); }
+.sec__n{ font-size:7.4pt; color:var(--muted); margin-top:1.6mm; line-height:1.6; }
+
+.cases{ margin-top:3.4mm; display:flex; flex-direction:column; }
+.case{
+  display:grid; grid-template-columns:62mm 1fr; align-items:center; gap:0 5mm;
+  padding:3.5mm 0; border-bottom:.5pt solid var(--rule-2);
+}
+.case:last-child{ border-bottom:0; }
+.case__s{ text-align:center; }
+.case__s .w{ font-family:'Cormorant',serif; font-weight:300; font-size:23pt; color:var(--ink); }
+.case__s .s{ font-family:'Jost',sans-serif; font-weight:300; font-size:5.8pt;
+  letter-spacing:.3em; text-indent:.3em; color:var(--rose-dp); margin-top:2.2mm; }
+.case__t{ font-size:8.4pt; font-weight:700; letter-spacing:.02em; }
+.case__t em{ font-style:normal; font-family:'Jost',sans-serif; font-size:6.2pt; font-weight:500;
+  letter-spacing:.12em; color:#fff; background:var(--gold); padding:.6mm 1.8mm;
+  border-radius:1mm; margin-left:2mm; vertical-align:.5mm; }
+.case__d{ font-size:7.2pt; color:var(--ink-2); line-height:1.65; margin-top:1.4mm; }
+
+/* ── 展開 ───────────────────────────────── */
+.vars{ display:grid; grid-template-columns:repeat(3,1fr); gap:4mm; margin-top:3.4mm; }
+.var{ border:.6pt solid var(--rule); border-radius:2mm; overflow:hidden; }
+.var__s{ height:32mm; display:flex; align-items:center; justify-content:center; padding:3mm; }
+.var__s--l{ background:var(--ivory); }
+.var__s--m{ background:#fff; }
+.var__s--d{ background:var(--rose-dp); }
+.var__c{ padding:2.4mm 2.8mm 2.8mm; border-top:.6pt solid var(--rule-2); }
+.var__t{ font-size:7.6pt; font-weight:500; }
+.var__d{ font-size:6.6pt; color:var(--muted); margin-top:1mm; line-height:1.55; }
+
+/* ── パレット ───────────────────────────── */
+.pal{ display:grid; grid-template-columns:repeat(5,1fr); gap:3.4mm; margin-top:3.4mm; }
+.sw__c{ height:15mm; border-radius:1.6mm; border:.5pt solid rgba(70,50,41,.12); }
+.sw__n{ font-size:7pt; font-weight:500; margin-top:1.6mm; }
+.sw__h{ font-family:'Jost',sans-serif; font-size:6.6pt; color:var(--muted); margin-top:.5mm;
+  letter-spacing:.06em; }
+
+/* ── 注記・フッター ─────────────────────── */
+.notes{ display:grid; grid-template-columns:1fr 1fr; gap:3mm 6mm; margin-top:3.4mm; }
+.note{ font-size:7pt; color:var(--ink-2); line-height:1.65; }
+.note b{ font-weight:700; color:var(--ink); display:block; margin-bottom:.8mm; font-size:7.4pt; }
+.foot{ margin-top:auto; padding-top:3.4mm; border-top:.6pt solid var(--rule);
+  font-size:6.8pt; color:var(--muted); letter-spacing:.02em; line-height:1.6; }
