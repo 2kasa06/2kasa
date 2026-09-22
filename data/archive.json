@@ -1,41 +1,41 @@
 {
-  "updatedAt": "2026-09-21T00:05:35.502Z",
+  "updatedAt": "2026-09-22T00:41:48.972Z",
   "meta": {
-    "updatedAt": "2026-09-21T00:05:35.502Z",
+    "updatedAt": "2026-09-22T00:41:48.972Z",
     "engine": "claude",
     "sourcesOk": 25,
     "sourcesTotal": 29,
-    "totalArticles": 147,
-    "recentArticles": 27,
-    "freshArticles": 5,
+    "totalArticles": 149,
+    "recentArticles": 23,
+    "freshArticles": 2,
     "status": [
       {
         "id": "kokkai:防衛施設",
         "name": "国会会議録「防衛施設」",
         "ok": false,
         "picked": 0,
-        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%98%B2%E8%A1%9B%E6%96%BD%E8%A8%AD&from=2026-09-14&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
+        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%98%B2%E8%A1%9B%E6%96%BD%E8%A8%AD&from=2026-09-15&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
       },
       {
         "id": "kokkai:駐屯地",
         "name": "国会会議録「駐屯地」",
         "ok": false,
         "picked": 0,
-        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%A7%90%E5%B1%AF%E5%9C%B0&from=2026-09-14&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
+        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%A7%90%E5%B1%AF%E5%9C%B0&from=2026-09-15&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
       },
       {
         "id": "kokkai:辺野古",
         "name": "国会会議録「辺野古」",
         "ok": false,
         "picked": 0,
-        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E8%BE%BA%E9%87%8E%E5%8F%A4&from=2026-09-14&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
+        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E8%BE%BA%E9%87%8E%E5%8F%A4&from=2026-09-15&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
       },
       {
         "id": "kokkai:馬毛島",
         "name": "国会会議録「馬毛島」",
         "ok": false,
         "picked": 0,
-        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%A6%AC%E6%AF%9B%E5%B3%B6&from=2026-09-14&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
+        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%A6%AC%E6%AF%9B%E5%B3%B6&from=2026-09-15&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
       },
       {
         "id": "mlit",
@@ -90,7 +90,7 @@
         "id": "yahoo-domestic",
         "name": "Yahoo!ニュース 国内",
         "ok": true,
-        "picked": 1,
+        "picked": 0,
         "note": "https://news.yahoo.co.jp/rss/topics/domestic.xml"
       },
       {
@@ -125,7 +125,7 @@
         "id": "gnews:自衛隊 駐屯地 新設 整備",
         "name": "Google ニュース「自衛隊 駐屯地 新設 整備」",
         "ok": true,
-        "picked": 1,
+        "picked": 2,
         "note": "https://news.google.com/rss/search?q=%E8%87%AA%E8%A1%9B%E9%9A%8A%20%E9%A7%90%E5%B1%AF%E5%9C%B0%20%E6%96%B0%E8%A8%AD%20%E6%95%B4%E5%82%99%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
@@ -174,7 +174,7 @@
         "id": "gnews:特定利用空港 特定利用港湾 整備",
         "name": "Google ニュース「特定利用空港 特定利用港湾 整備」",
         "ok": true,
-        "picked": 6,
+        "picked": 5,
         "note": "https://news.google.com/rss/search?q=%E7%89%B9%E5%AE%9A%E5%88%A9%E7%94%A8%E7%A9%BA%E6%B8%AF%20%E7%89%B9%E5%AE%9A%E5%88%A9%E7%94%A8%E6%B8%AF%E6%B9%BE%20%E6%95%B4%E5%82%99%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
@@ -195,7 +195,7 @@
         "id": "gnews:沖縄 米軍 施設 工事 埋立",
         "name": "Google ニュース「沖縄 米軍 施設 工事 埋立」",
         "ok": true,
-        "picked": 4,
+        "picked": 3,
         "note": "https://news.google.com/rss/search?q=%E6%B2%96%E7%B8%84%20%E7%B1%B3%E8%BB%8D%20%E6%96%BD%E8%A8%AD%20%E5%B7%A5%E4%BA%8B%20%E5%9F%8B%E7%AB%8B%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
@@ -215,6 +215,37 @@
     ]
   },
   "articles": [
+    {
+      "key": "弾薬庫新設43棟に工事費/27年度概算要求各地住民が反対懸念しんぶん赤旗",
+      "title": "弾薬庫新設 ４３棟に工事費/２７年度概算要求 各地住民が反対・懸念 | しんぶん赤旗",
+      "link": "https://www.jcp.or.jp/akahata/aik26/2026-09-21/2026092101_01_0.php",
+      "isGoogleLink": false,
+      "description": "",
+      "publishedAt": "2026-09-21T00:14:34.000Z",
+      "publisher": "jcp.or.jp",
+      "via": [
+        "Google ニュース「自衛隊 駐屯地 新設 整備」",
+        "Google ニュース「防衛省 火薬庫 弾薬庫 整備」"
+      ],
+      "sourceHint": "駐屯地",
+      "sourceHost": "jcp.or.jp",
+      "relevance": 5,
+      "pickups": 2,
+      "matchText": "弾薬庫新設 ４３棟に工事費/２７年度概算要求 各地住民が反対・懸念 | しんぶん赤旗\n",
+      "enrichAttempts": 1,
+      "body": "防衛省が進める弾薬庫の新設を巡り、２０２７年度予算の概算要求に、北海道や九州、京都など計４３棟に工事費などを盛り込んでいます。これまで調査・設計をしていた海上自衛隊鹿屋基地（鹿児島県鹿屋市）や陸上自衛隊沼田分屯地、日高分屯地（いずれも北海道）で初めて工事費を計上しました。\n同省は保管する弾薬の種類を明らかにしていませんが、敵基地攻撃能力を持つ長射程ミサイルとみられます。３月には健軍駐屯地（熊本市）と富士駐屯地（静岡県小山町）に長射程ミサイルを配備。以降も全国で配備を加速させます。\n今回の概算要求は、弾薬庫の整備費として１４０１億円（２６年度比約２・１倍）を要求。金額を示さない「事項要求」も含まれるため、年末の予算編成でさらに金額が膨らみます。呉地方総監部（広島県呉市）の１棟分の調査費以外は全て工事費でした。\n祝園（ほうその）分屯地（京都府精華町）で９棟、沖縄訓練場（沖縄県沖縄市）で５棟、大湊地区総監部（青森県むつ市）で４棟を計上。瀬戸内分屯地（鹿児島県瀬戸内町）で３棟、大分分屯地（大分市）と舞鶴地方総監部（京都府舞鶴市）、鹿屋基地で各２棟を盛り込みました。北海道各地の陸上自衛隊基地に計１５棟分の工事費を計上しました。\n同省は大型弾薬庫を「２７年度までに７０棟措置し、３２年度までに６０棟を整備する」方針です。本紙の集計では、現時点で調査費を含む予算が計上されているのは計６４棟で、「２７年度までに７０棟措置」には届いていません。実際に完成した大型弾薬庫は、大分分屯地での１棟目だけです。しかも、当初は昨年１２月末に完成する予定でしたが、設備の仕様変更を理由に完成が今年８月までずれ込みました。このペースでは、３２年度までに必要な棟数を整備するのは不可能です。\n大型弾薬庫の建設予定地は住宅地に近いものが少なくなく、各地で住民の反対運動や懸念の声があがっています。また、火薬取締法に基づく保安距離を取る必要があるため、建設可能な場所が制約されるなど、矛盾を抱えています。",
+      "hasBody": true,
+      "category": "kyoujinka",
+      "summary": [
+        "防衛省の27年度概算要求に弾薬庫43棟の工事費等を計上。",
+        "整備費1401億円（26年度比約2.1倍）、事項要求含む。祝園9棟、沖縄訓練場5棟、大湊4棟、北海道計15棟など。海自鹿屋基地や沼田・日高分屯地は初の工事費。",
+        "大型弾薬庫は27年度までに70棟措置方針だが予算計上は64棟、完成は大分分屯地の1棟のみ。"
+      ],
+      "why": "長射程ミサイル配備を支える弾薬庫整備の全国的な工事段階入りと進捗遅れが具体的に示されている。",
+      "importance": "high",
+      "generatedBy": "claude",
+      "region": "kyushu"
+    },
     {
       "key": "自衛隊施設の強靱化8,862億円地方20基地の10km圏客室は102〜6,824室長期業務需要の受け皿",
       "title": "自衛隊施設の強靱化8,862億円 — 地方20基地の10km圏客室は102〜6,824室、長期業務需要の受け皿",
@@ -351,7 +382,7 @@
       "sourceHint": "インフラ",
       "sourceHost": "47news.jp",
       "relevance": 3,
-      "pickups": 1,
+      "pickups": 2,
       "matchText": "「特定利用空港」見送り要請を…長崎県平和運動センターなど、対馬市に求める\n",
       "enrichAttempts": 1,
       "body": "防衛力強化の一環として 自衛隊 や 海上保安庁 による有事の際の利用に備えて国が整備する「特定利用空港・港湾」に、対馬空港（ 対馬市 ）の追加指定が検討されていることを受け、県平和運動センターなどは１７日、指定 ...\n長崎新聞のニュースサイトです。長崎の社会、経済、スポーツ、文化などのニュースを掲載しています。\n \n https://www.nagasaki-np.co.jp/ \n \n\n \n \n 自衛隊のニュース・速報 ＞",
@@ -664,6 +695,35 @@
         "本文はなく、抗議行動が続いている状況を伝えるのみ。"
       ],
       "why": "辺野古埋立を巡る現地の反対行動が継続していることを示す。",
+      "importance": "low",
+      "generatedBy": "claude",
+      "region": "okinawa"
+    },
+    {
+      "key": "沖縄県宜野湾市の米軍普天間飛行場=8月沖縄県知事選国と対立疲れ変革託す基地負担残るマグマ写真画像3/9",
+      "title": "沖縄県宜野湾市の米軍普天間飛行場＝8月 - 【沖縄県知事選】国と対立疲れ、変革託す 基地負担、残るマグマ - 写真・画像(3/9)",
+      "link": "https://www.nishinippon.co.jp/image/1082310/",
+      "isGoogleLink": false,
+      "description": "",
+      "publishedAt": "2026-09-15T23:10:41.000Z",
+      "publisher": "西日本新聞me",
+      "via": [
+        "Google ニュース「沖縄 米軍 施設 工事 埋立」"
+      ],
+      "sourceHint": "在日米軍",
+      "sourceHost": "nishinippon.co.jp",
+      "relevance": 9,
+      "pickups": 1,
+      "matchText": "沖縄県宜野湾市の米軍普天間飛行場＝8月 - 【沖縄県知事選】国と対立疲れ、変革託す 基地負担、残るマグマ - 写真・画像(3/9)\n",
+      "enrichAttempts": 1,
+      "hasBody": false,
+      "category": "usfj",
+      "summary": [
+        "西日本新聞が沖縄県知事選に関する写真特集を掲載。",
+        "掲載写真は8月撮影の宜野湾市・米軍普天間飛行場。",
+        "本文は取得できず、見出し以上の情報は不明。"
+      ],
+      "why": "普天間飛行場と沖縄県知事選の関係を示す関連記事だが、内容は写真見出しのみ。",
       "importance": "low",
       "generatedBy": "claude",
       "region": "okinawa"
