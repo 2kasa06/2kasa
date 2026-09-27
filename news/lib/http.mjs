@@ -39,7 +39,8 @@ async function readBody(res) {
   }
 }
 
-export async function get(url, { timeoutMs = 20000, retries = 2, accept } = {}) {
+// userAgent … 相手によっては bot らしい UA を弾く（Yahoo Finance は 429 を返す）。そのときだけ差し替える。
+export async function get(url, { timeoutMs = 20000, retries = 2, accept, userAgent } = {}) {
   let lastError = 'unknown'
   // 混雑・制限（429/503）は間を空けないと意味がない。実データでは Google ニュースの
   // 15クエリが揃って 503 を返し、0.5秒間隔の再試行では抜けられなかった。
@@ -58,7 +59,7 @@ export async function get(url, { timeoutMs = 20000, retries = 2, accept } = {}) 
         redirect: 'follow',
         signal: controller.signal,
         headers: {
-          'user-agent': UA,
+          'user-agent': userAgent || UA,
           'accept-language': 'ja,en;q=0.8',
           ...(accept ? { accept } : {}),
         },

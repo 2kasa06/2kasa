@@ -1,0 +1,121 @@
+name: 投資情報ウォッチ 更新
+
+on:
+  # 既定ブランチに入るまでは schedule と手動実行が効かないので、
+  # 開発中はこのブランチへの push で走らせる。
+  # docs/ と data/ を除いているのは、下の「結果をコミット」の push で自分自身を再実行させないため。
+  push:
+    branches:
+      - claude/investment-info-site-l3op44
+    paths-ignore:
+      - 'docs/**'
+      - 'data/**'
+  schedule:
+    # cron は UTC。平日の2回。
+    - cron: '40 22 * * 0-4'   # JST 07:40（火〜土）… 米国市場の引け後
+    - cron: '50 6 * * 1-5'    # JST 15:50（月〜金）… 東京市場の引け後
+  workflow_dispatch:
+
+# 防衛施設ウォッチと同じ group にして、2つの更新が同時にブランチへ push しないようにする。
+concurrency:
+  group: news-update
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # Google ニュースのリンクを元記事に辿るのにブラウザを使う（news/lib/resolve.mjs）
+      - name: Chromium をキャッシュ
+        id: chromium-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Chromium を用意
+        if: steps.chromium-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: 自己テスト
+        run: npm run invest:test
+
+      - name: 取得・要約・サイト生成
+        id: build
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_WORKSPACE_ID: ${{ secrets.ANTHROPIC_WORKSPACE_ID }}
+        run: npm run invest:build
+
+      - name: 結果をコミット
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p docs/invest data
+          paths="docs/invest data/invest-archive.json data/invest-market.json"
+          git add $paths 2>/dev/null || git add docs/invest
+          if git diff --staged --quiet; then
+            echo "更新なし"
+            exit 0
+          fi
+          # 押せなければ最新を取り込んで載せ直す。
+          # reset は --soft ではなく既定（mixed）にする。--soft だと index に残った古い
+          # docs/ まで載ってしまい、同じブランチに書く防衛施設ウォッチの更新を巻き戻す。
+          # 自分の生成物（docs/invest と data/invest-*）だけを足し直せば競合は起きない。
+          for attempt in 1 2 3 4; do
+            git commit -q -m "投資情報更新: $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M')"
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              exit 0
+            fi
+            echo "push に失敗（${attempt}回目）。最新を取り込んで載せ直します。"
+            git fetch origin "${GITHUB_REF_NAME}"
+            git reset -q "origin/${GITHUB_REF_NAME}"
+            git add $paths 2>/dev/null || git add docs/invest
+            if git diff --staged --quiet; then
+              echo "最新と同じ内容でした"
+              exit 0
+            fi
+            sleep $((2 ** attempt))
+          done
+          echo "::error::結果をブランチに push できませんでした。"
+          exit 1
+
+      - name: GitHub Pages 用に docs/ を渡す
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: 値動きもニュースも全滅していたら失敗にする
+        if: steps.build.outcome == 'failure'
+        run: |
+          echo "::error::値動きもニュースも取得できませんでした。実行サマリを確認してください。"
+          exit 1
+
+  # Pages の公開元を「GitHub Actions」にしているときだけ意味を持つ。
+  # 「ブランチの /docs」で公開しているなら、上のコミットだけで docs/invest/ に出る。
+  deploy:
+    needs: update
+    if: always() && needs.update.result != 'cancelled'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@v4

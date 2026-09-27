@@ -16,6 +16,11 @@ RewriteRule ^(site|lib|state|tools)/ - [F,L]
 RewriteRule ^archive\.html$ gate.php?f=archive.html [L,QSA]
 RewriteRule ^archive/([0-9]{4}-[0-9]{2}-[0-9]{2})\.html$ gate.php?f=archive/$1.html [L,QSA]
 
+# 投資情報ウォッチ（docs/invest/）
+RewriteRule ^invest/?$ gate.php?f=invest/index.html [L,QSA]
+RewriteRule ^invest/(index|archive)\.html$ gate.php?f=invest/$1.html [L,QSA]
+RewriteRule ^invest/archive/([0-9]{4}-[0-9]{2}-[0-9]{2})\.html$ gate.php?f=invest/archive/$1.html [L,QSA]
+
 DirectoryIndex index.php
 
 # 検索避け
