@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+/* ダークモードは html の .dark で切り替える（OS 設定を初期値にし、手動切替を優先） */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: light;
+  --background: #f7f7f5;
+  --foreground: #121316;
+  --card: #ffffff;
+  --card-foreground: #121316;
+  --muted: #f0efeb;
+  --muted-foreground: #62615c;
+  --border: #e3e2dc;
+  --input: #d9d8d1;
+  --primary: #2a64d6;
+  --primary-foreground: #ffffff;
+  --accent: #eef3fd;
+  --ring: #2a64d6;
+  /* 値動きの色。上昇=緑・下落=赤。色だけでなく ▲▼ と符号も必ず付ける */
+  --up: #0f8a4f;
+  --down: #d23a3a;
+  --neutral: #a36a00;
+  --warn-bg: #fff6df;
+  --warn-fg: #7a4d00;
+  --ai: #7045d8;
+  --chart-grid: #ecebe6;
+}
+
+:root.dark {
+  color-scheme: dark;
+  --background: #0d0f13;
+  --foreground: #e9eaee;
+  --card: #151820;
+  --card-foreground: #e9eaee;
+  --muted: #1c2029;
+  --muted-foreground: #9a9faa;
+  --border: #262b36;
+  --input: #2f3542;
+  --primary: #5b8ff0;
+  --primary-foreground: #0d0f13;
+  --accent: #1a2438;
+  --ring: #5b8ff0;
+  --up: #2fbf78;
+  --down: #f06464;
+  --neutral: #e0a534;
+  --warn-bg: #2d2413;
+  --warn-fg: #f1c97a;
+  --ai: #a88bf5;
+  --chart-grid: #1e222b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-ring: var(--ring);
+  --color-up: var(--up);
+  --color-down: var(--down);
+  --color-neutral: var(--neutral);
+  --color-warn-bg: var(--warn-bg);
+  --color-warn-fg: var(--warn-fg);
+  --color-ai: var(--ai);
+  --font-sans: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", Meiryo, sans-serif;
+  --radius-lg: 0.75rem;
+  --radius-md: 0.5rem;
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ページ内リンクで固定ヘッダーの下に隠れないように */
+section[id] {
+  scroll-margin-top: 5rem;
+}
