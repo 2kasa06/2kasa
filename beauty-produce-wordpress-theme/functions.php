@@ -1,6 +1,6 @@
 <?php
 /**
- * Beauty Produce テーマの機能定義。
+ * TotalBeautySchool Evea テーマの機能定義。
  *
  * @package BeautyProduce
  */
@@ -280,12 +280,12 @@ add_action( 'save_post', 'bp_save_meta' );
    ============================================================ */
 
 function bp_customize_register( $wp_customize ) {
-	$wp_customize->add_section( 'bp_basic', array( 'title' => __( 'Beauty Produce：基本情報', 'beauty-produce' ), 'priority' => 20 ) );
+	$wp_customize->add_section( 'bp_basic', array( 'title' => __( 'TotalBeautySchool Evea：基本情報', 'beauty-produce' ), 'priority' => 20 ) );
 
 	$settings = array(
-		'bp_brand_name'  => array( 'label' => 'ブランド名 1行目', 'default' => 'Beauty' ),
-		'bp_brand_sub'   => array( 'label' => 'ブランド名 2行目', 'default' => 'Produce' ),
-		'bp_eyebrow'     => array( 'label' => 'トップの小見出し', 'default' => 'Beauty Produce' ),
+		'bp_brand_name'  => array( 'label' => 'ブランド名 1行目', 'default' => 'Evea' ),
+		'bp_brand_sub'   => array( 'label' => 'ブランド名 2行目', 'default' => 'TOTAL BEAUTY SCHOOL' ),
+		'bp_eyebrow'     => array( 'label' => 'トップの小見出し', 'default' => 'Total Beauty School Evea' ),
 		'bp_hero_title'  => array( 'label' => 'トップの大見出し', 'default' => "あなたらしい美しさを、\nもっと自由に。", 'type' => 'textarea', 'description' => '2行目は自動で色が変わります。改行で分けてください。' ),
 		'bp_hero_lead'   => array( 'label' => 'トップのメッセージ', 'default' => '人生のステージごとに変化する美しさ・自信・魅力に寄り添う、あなただけの美容プロデュースサービス。', 'type' => 'textarea' ),
 		'bp_stat1_num'   => array( 'label' => '実績① 数値', 'default' => '1,200+' ),

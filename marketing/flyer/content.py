@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """ホームページ（src/pages/Home.tsx / src/components/CommonSections.tsx）から抽出した本文"""
 
-BRAND      = "Beauty Produce"
+BRAND      = "Evea"
 CATCH_1    = "あなたらしい美しさを、"
 CATCH_2    = "もっと自由に。"
 LEAD       = ("人生のステージごとに変化する美しさ・自信・魅力に寄り添う、<br>"
@@ -55,8 +55,8 @@ CTA_TITLE = "まずはカウンセリングから。"
 CTA_SUB   = "あなたの物語を、一緒に始めましょう。"
 
 CONTACT_TEL   = "090-0000-0000"
-CONTACT_MAIL  = "info@beauty-produce.jp"
-CONTACT_INSTA = "@beauty.produce"
-CONTACT_WEB   = "beauty-produce.jp"
+CONTACT_MAIL  = "info@evea.jp"
+CONTACT_INSTA = "@evea.school"
+CONTACT_WEB   = "evea.jp"
 
 NOTES = "※ 診断はすべて完全予約制です。オンラインでのカウンセリングも承ります。表示価格は税込です。"

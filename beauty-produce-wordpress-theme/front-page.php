@@ -41,7 +41,7 @@ $bp_stats = array(
 
 	<div class="container bp-hero__inner">
 		<div class="bp-hero__body">
-			<p class="section-label bp-eyebrow reveal-left"><?php echo esc_html( bp_option( 'bp_eyebrow', 'Beauty Produce' ) ); ?></p>
+			<p class="section-label bp-eyebrow reveal-left"><?php echo esc_html( bp_option( 'bp_eyebrow', 'Total Beauty School Evea' ) ); ?></p>
 
 			<h1 class="bp-hero__title reveal-left" style="transition-delay:120ms;">
 				<?php echo esc_html( $bp_title['first'] ); ?>

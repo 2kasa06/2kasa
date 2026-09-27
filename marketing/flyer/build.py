@@ -60,7 +60,7 @@ body = f"""
       <div class="brand">
         <img class="brand__mark" src="{img('logo-mark.webp')}" alt="">
         <div class="brand__tx"><div class="n">{BRAND}</div>
-        <div class="s">BEAUTY&nbsp;&amp;&nbsp;LIFE&nbsp;PRODUCE</div></div>
+        <div class="s">TOTAL&nbsp;BEAUTY&nbsp;SCHOOL</div></div>
       </div>
       <div class="label">Your Story Begins Here</div>
       <h1>{CATCH_1}<br><em>{CATCH_2}</em></h1>
@@ -137,7 +137,7 @@ fonts_css = fonts.read_text(encoding="utf-8") if fonts.exists() else ""
 style = pathlib.Path("style.css").read_text(encoding="utf-8")
 
 html = f"""<!doctype html><html lang="ja"><head><meta charset="utf-8">
-<title>Beauty Produce チラシ</title>
+<title>TotalBeautySchool Evea チラシ</title>
 <style>{fonts_css}</style>
 <style>{style}</style>
 </head><body>{body}</body></html>"""

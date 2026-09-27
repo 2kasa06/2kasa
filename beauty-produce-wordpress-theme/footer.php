@@ -31,7 +31,7 @@ $bp_menu_links = array(
 		<div class="bp-footer__inner">
 			<div>
 				<a class="bp-logo" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-					<img src="<?php echo esc_url( bp_asset_image( 'logo-mark.webp' ) ); ?>" alt="Beauty Produce" width="44" height="44" />
+					<img src="<?php echo esc_url( bp_asset_image( 'logo-mark.webp' ) ); ?>" alt="TotalBeautySchool Evea" width="44" height="44" />
 					<span>
 						<b><?php echo esc_html( bp_option( 'bp_brand_name', 'Beauty' ) ); ?></b>
 						<i><?php echo esc_html( bp_option( 'bp_brand_sub', 'Produce' ) ); ?></i>
@@ -98,7 +98,7 @@ $bp_menu_links = array(
 		</div>
 
 		<div class="bp-footer__bottom">
-			<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> Beauty Produce. All rights reserved.</p>
+			<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> TotalBeautySchool Evea. All rights reserved.</p>
 			<p><?php echo esc_html( bp_option( 'bp_ornament', 'Your Story Begins Here' ) ); ?></p>
 		</div>
 	</div>

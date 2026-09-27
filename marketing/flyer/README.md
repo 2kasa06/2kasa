@@ -1,4 +1,4 @@
-# A4 チラシ（Beauty Produce）
+# A4 チラシ（TotalBeautySchool Evea）
 
 公式サイト（`src/pages/Home.tsx` / `src/components/CommonSections.tsx`）の内容をそのまま
 使って組んだ、A4 片面 1 枚のチラシです。
@@ -7,8 +7,8 @@
 
 | ファイル | 用途 |
 | --- | --- |
-| `チラシ_BeautyProduce_A4.pdf` | 入稿・印刷用（A4 / 210×297mm / 1ページ / 塗り足しなし） |
-| `チラシ_BeautyProduce_A4.png` | SNS・LINE 共有用（約 300dpi） |
+| `チラシ_Evea_A4.pdf` | 入稿・印刷用（A4 / 210×297mm / 1ページ / 塗り足しなし） |
+| `チラシ_Evea_A4.png` | SNS・LINE 共有用（約 300dpi） |
 
 ## 掲載内容と出典
 
@@ -47,8 +47,8 @@ node tools/resize.mjs img     # public/images/*.webp を印刷解像度の JPEG 
 python3 fonts.py              # 使用文字だけ Google Fonts からサブセット取得 → fonts.css
 python3 build.py              # content.py + style.css → flyer.html
 node tools/flyercheck.mjs "$PWD/flyer.html"                       # A4 1枚に収まるか検証（over が負なら OK）
-node tools/topdf.mjs "$PWD/flyer.html" "$PWD/チラシ_BeautyProduce_A4.pdf"
-node tools/flyerpng.mjs "$PWD/flyer.html" "$PWD/チラシ_BeautyProduce_A4.png"
+node tools/topdf.mjs "$PWD/flyer.html" "$PWD/チラシ_Evea_A4.pdf"
+node tools/flyerpng.mjs "$PWD/flyer.html" "$PWD/チラシ_Evea_A4.png"
 ```
 
 文言・価格・連絡先の変更は `content.py`、体裁の変更は `style.css` だけを触れば済みます。

@@ -50,29 +50,28 @@ export default function Navigation() {
             <Link href="/" className="flex items-center gap-2.5 group">
               <img
                 src={LOGO_URL}
-                alt="Beauty Produce Logo"
+                alt="TotalBeautySchool Evea ロゴ"
                 className="w-9 h-9 object-contain transition-transform duration-300 group-hover:scale-105"
               />
-              <div className="flex flex-col leading-none">
+              <div className="flex flex-col leading-none gap-1">
                 <span
-                  className="font-serif text-base tracking-widest"
+                  className="font-serif text-xl"
                   style={{
                     fontFamily: "'Cormorant Garamond', serif",
                     color: "var(--warm-brown)",
-                    letterSpacing: "0.2em",
+                    letterSpacing: "0.14em",
                   }}
                 >
-                  Beauty
+                  Evea
                 </span>
                 <span
-                  className="font-serif text-base tracking-widest"
+                  className="text-[0.5rem] sm:text-[0.55rem]"
                   style={{
-                    fontFamily: "'Cormorant Garamond', serif",
                     color: "var(--rose-beige)",
-                    letterSpacing: "0.2em",
+                    letterSpacing: "0.28em",
                   }}
                 >
-                  Produce
+                  TOTAL BEAUTY SCHOOL
                 </span>
               </div>
             </Link>

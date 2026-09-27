@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 /* ============================================================
-   Beauty Produce — Scroll Animation Hooks
+   TotalBeautySchool Evea — Scroll Animation Hooks
    ============================================================ */
 
 const prefersReducedMotion = () =>

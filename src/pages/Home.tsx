@@ -14,7 +14,7 @@ import {
 import { useScrollReveal, useStaggerReveal } from "@/hooks/useScrollAnimation";
 
 /* ============================================================
-   Beauty Produce — Home Page
+   TotalBeautySchool Evea — Home Page
    Design: Soft Luminism — 光の拡散・有機的な動き・余白の呼吸
    iOS Safari 互換: oklch → hsl
    ============================================================ */
@@ -125,7 +125,7 @@ export default function Home() {
                   className="inline-block w-8 h-px"
                   style={{ background: "var(--rose-beige)" }}
                 />
-                Beauty Produce
+                Total Beauty School Evea
               </p>
             </motion.div>
 

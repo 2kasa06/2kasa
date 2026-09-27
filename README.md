@@ -1,6 +1,6 @@
-# Beauty Produce 公式サイト
+# TotalBeautySchool Evea 公式サイト
 
-美容プロデュースサービス「Beauty Produce」の公式サイトを、**React版**と**WordPressテーマ版**の2通りで実装したリポジトリです。
+「TotalBeautySchool Evea」の公式サイトを、**React版**と**WordPressテーマ版**の2通りで実装したリポジトリです。
 どちらも同じデザインシステム（Soft Luminism）・同じ構成・同じ文章で揃えてあります。
 
 | | React版 | WordPressテーマ版 |

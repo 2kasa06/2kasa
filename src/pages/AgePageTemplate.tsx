@@ -14,7 +14,7 @@ import {
 import { useScrollReveal, useStaggerReveal } from "@/hooks/useScrollAnimation";
 
 /* ============================================================
-   Beauty Produce — Age Page Template
+   TotalBeautySchool Evea — Age Page Template
    iOS Safari 互換: oklch → hsl
    ============================================================ */
 

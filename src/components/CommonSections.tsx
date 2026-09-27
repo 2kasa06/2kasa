@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useScrollReveal, useStaggerReveal } from "@/hooks/useScrollAnimation";
 
 /* ============================================================
-   Beauty Produce — Common Sections
+   TotalBeautySchool Evea — Common Sections
    iOS Safari 互換: oklch → hsl
    ============================================================ */
 

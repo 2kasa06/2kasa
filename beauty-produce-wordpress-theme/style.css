@@ -1,8 +1,8 @@
 /*
-Theme Name: Beauty Produce
+Theme Name: TotalBeautySchool Evea
 Theme URI: https://github.com/2kasa06/2kasa
-Author: Beauty Produce
-Description: 美容プロデュースサービス「Beauty Produce」公式サイトのオリジナルテーマです。トップページ、年代別（ライフステージ別）ページ、サービス、ビフォーアフター、お客様の声、FAQ、予約フォームに対応します。
+Author: TotalBeautySchool Evea
+Description: 「TotalBeautySchool Evea」公式サイトのオリジナルテーマです。トップページ、年代別（ライフステージ別）ページ、サービス、ビフォーアフター、お客様の声、FAQ、予約フォームに対応します。
 Version: 2.0.0
 Requires at least: 6.4
 Tested up to: 6.7
@@ -259,19 +259,18 @@ em { font-style: italic; }
 .bp-logo { display: flex; align-items: center; gap: .625rem; }
 .bp-logo img { width: 2.25rem; height: 2.25rem; object-fit: contain; transition: transform 300ms var(--ease-out-soft); }
 .bp-logo:hover img { transform: scale(1.05); }
-.bp-logo span { display: flex; flex-direction: column; line-height: 1; }
+.bp-logo span { display: flex; flex-direction: column; gap: .25rem; line-height: 1; }
 .bp-logo b {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 400;
-  letter-spacing: .2em;
+  letter-spacing: .14em;
   color: var(--warm-brown);
 }
 .bp-logo i {
-  font-family: 'Cormorant Garamond', serif;
   font-style: normal;
-  font-size: 1rem;
-  letter-spacing: .2em;
+  font-size: .55rem;
+  letter-spacing: .28em;
   color: var(--rose-beige);
 }
 
@@ -845,7 +844,8 @@ body.bp-menu-open { overflow: hidden; }
 @media (min-width: 1024px) { .bp-footer__inner { grid-template-columns: 2fr 1fr 1fr; } }
 .bp-footer .bp-logo { margin-bottom: 1.25rem; }
 .bp-footer .bp-logo img { width: 2.75rem; height: 2.75rem; }
-.bp-footer .bp-logo b, .bp-footer .bp-logo i { font-size: 1.125rem; }
+.bp-footer .bp-logo b { font-size: 1.5rem; }
+.bp-footer .bp-logo i { font-size: .6rem; }
 .bp-footer__lead { max-width: 24rem; margin-bottom: 1.5rem; font-size: .875rem; line-height: 2; letter-spacing: .06em; color: var(--medium-brown); }
 .bp-footer ul { display: flex; flex-direction: column; gap: .625rem; }
 .bp-footer li, .bp-footer a { font-size: .875rem; color: var(--medium-brown); transition: color 200ms var(--ease-out-soft); }

@@ -38,11 +38,11 @@ $bp_nav_items[] = array( 'お客様の声', home_url( '/#testimonials' ) );
 				<?php if ( has_custom_logo() ) : ?>
 					<?php the_custom_logo(); ?>
 				<?php else : ?>
-					<img src="<?php echo esc_url( bp_asset_image( 'logo-mark.webp' ) ); ?>" alt="Beauty Produce" width="36" height="36" />
+					<img src="<?php echo esc_url( bp_asset_image( 'logo-mark.webp' ) ); ?>" alt="TotalBeautySchool Evea" width="36" height="36" />
 				<?php endif; ?>
 				<span>
-					<b><?php echo esc_html( bp_option( 'bp_brand_name', 'Beauty' ) ); ?></b>
-					<i><?php echo esc_html( bp_option( 'bp_brand_sub', 'Produce' ) ); ?></i>
+					<b><?php echo esc_html( bp_option( 'bp_brand_name', 'Evea' ) ); ?></b>
+					<i><?php echo esc_html( bp_option( 'bp_brand_sub', 'TOTAL BEAUTY SCHOOL' ) ); ?></i>
 				</span>
 			</a>
 

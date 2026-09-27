@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Instagram, Mail, Phone } from "lucide-react";
 
 /* ============================================================
-   Beauty Produce — Footer
+   TotalBeautySchool Evea — Footer
    ============================================================ */
 
 const LOGO_URL = "/images/logo-mark.webp";
@@ -39,27 +39,26 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="inline-flex items-center gap-2.5 mb-5">
-              <img src={LOGO_URL} alt="Beauty Produce" className="w-11 h-11 object-contain" />
-              <span className="flex flex-col leading-none">
+              <img src={LOGO_URL} alt="TotalBeautySchool Evea" className="w-11 h-11 object-contain" />
+              <span className="flex flex-col leading-none gap-1.5">
                 <span
-                  className="text-lg"
+                  className="text-2xl"
                   style={{
                     fontFamily: "'Cormorant Garamond', serif",
                     color: "var(--warm-brown)",
-                    letterSpacing: "0.2em",
+                    letterSpacing: "0.14em",
                   }}
                 >
-                  Beauty
+                  Evea
                 </span>
                 <span
-                  className="text-lg"
+                  className="text-[0.55rem]"
                   style={{
-                    fontFamily: "'Cormorant Garamond', serif",
                     color: "var(--rose-beige)",
-                    letterSpacing: "0.2em",
+                    letterSpacing: "0.28em",
                   }}
                 >
-                  Produce
+                  TOTAL BEAUTY SCHOOL
                 </span>
               </span>
             </Link>
@@ -153,7 +152,7 @@ export default function Footer() {
             className="text-xs tracking-widest"
             style={{ fontFamily: "'Cormorant Garamond', serif", color: "var(--light-brown)" }}
           >
-            © {new Date().getFullYear()} Beauty Produce. All rights reserved.
+            © {new Date().getFullYear()} TotalBeautySchool Evea. All rights reserved.
           </p>
           <p
             className="text-xs tracking-widest"
