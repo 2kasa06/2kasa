@@ -63,11 +63,15 @@ export interface SearchQuote {
   type: string
 }
 
+// 米国の主要市場と東証だけを出す（ロンドンやドイツ、店頭市場の同名銘柄は外す）
+const EXCHANGES = new Set(['NMS', 'NGM', 'NCM', 'NYQ', 'ASE', 'PCX', 'BTS', 'NAS', 'NYS', 'JPX'])
+
 export function parseSearch(json: unknown): SearchQuote[] {
   const quotes = (json as { quotes?: Array<Record<string, unknown>> })?.quotes
   if (!Array.isArray(quotes)) return []
   return quotes
     .filter((q) => typeof q.symbol === 'string' && (q.quoteType === 'EQUITY' || q.quoteType === 'ETF'))
+    .filter((q) => !q.exchange || EXCHANGES.has(String(q.exchange)))
     .map((q) => ({
       symbol: String(q.symbol),
       name: String(q.longname ?? q.shortname ?? q.symbol),

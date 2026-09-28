@@ -29,6 +29,12 @@ async function main() {
     const r = await market.searchStocks(query, 5)
     check(`検索「${query}」`, r.status === 'ok' && r.data.length > 0, r.status === 'ok' ? r.data.map((s) => `${s.code} ${s.name}`).join(' / ') : r.status)
   }
+  // 検索の生の応答（件数が0のときの原因調べ用）
+  const raw = await fetch('https://query1.finance.yahoo.com/v1/finance/search?q=apple&quotesCount=10&newsCount=0', {
+    headers: { 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/128.0 Safari/537.36' },
+  })
+  const text = await raw.text()
+  console.log(`  生の検索応答 apple: HTTP ${raw.status} ${text.slice(0, 400)}`)
   const idx = await market.getIndices()
   check('指数', idx.status === 'ok' && idx.data.length >= 10, idx.status === 'ok' ? idx.data.map((x) => `${x.name} ${x.value.toFixed(2)}`).join(' / ') : idx.status)
   if (failures) process.exitCode = 1

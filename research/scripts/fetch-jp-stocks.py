@@ -10,19 +10,41 @@ import datetime
 import io
 import json
 import pathlib
+import re
 import sys
+import urllib.parse
 import urllib.request
 
 import xlrd
 
-URL = "https://www.jpx.co.jp/markets/statistics-equities/misc/tvdivq0000001vg2-att/data_j.xls"
+# ファイルの場所は時々変わるので、案内ページからリンクを探す。見つからなければ旧来の場所を試す
+PAGE = "https://www.jpx.co.jp/markets/statistics-equities/misc/01.html"
+FALLBACK = "https://www.jpx.co.jp/markets/statistics-equities/misc/tvdivq0000001vg2-att/data_j.xls"
+UA = {"User-Agent": "Mozilla/5.0 (research-dashboard)"}
 OUT = pathlib.Path(__file__).resolve().parent.parent / "src" / "data" / "jp-stocks.json"
 
 
+def fetch(url: str) -> bytes:
+    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60) as res:
+        return res.read()
+
+
+def find_xls_url() -> str:
+    try:
+        html = fetch(PAGE).decode("utf-8", "replace")
+        m = re.search(r'href="([^"]*data_j\.xls)"', html)
+        if m:
+            return urllib.parse.urljoin(PAGE, m.group(1))
+        print("案内ページに data_j.xls のリンクが見つかりません", file=sys.stderr)
+    except Exception as e:  # noqa: BLE001
+        print(f"案内ページを読めません: {e}", file=sys.stderr)
+    return FALLBACK
+
+
 def main() -> int:
-    req = urllib.request.Request(URL, headers={"User-Agent": "Mozilla/5.0 (research-dashboard)"})
-    with urllib.request.urlopen(req, timeout=60) as res:
-        book = xlrd.open_workbook(file_contents=res.read())
+    url = find_xls_url()
+    print(f"取得元: {url}")
+    book = xlrd.open_workbook(file_contents=fetch(url))
     sheet = book.sheet_by_index(0)
     header = [str(c).strip() for c in sheet.row_values(0)]
     col = {name: header.index(name) for name in ("日付", "コード", "銘柄名", "市場・商品区分", "33業種区分")}

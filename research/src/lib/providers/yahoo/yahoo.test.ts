@@ -50,7 +50,8 @@ describe('Yahoo 検索', () => {
   it('株式と ETF だけを返す', () => {
     const r = parseSearch({
       quotes: [
-        { symbol: 'AAPL', quoteType: 'EQUITY', longname: 'Apple Inc.', exchDisp: 'NASDAQ' },
+        { symbol: 'AAPL', quoteType: 'EQUITY', longname: 'Apple Inc.', exchDisp: 'NASDAQ', exchange: 'NMS' },
+        { symbol: 'APC.DE', quoteType: 'EQUITY', longname: 'Apple Inc.', exchange: 'GER' },
         { symbol: 'AAPL250117C00100000', quoteType: 'OPTION' },
         { symbol: '1306.T', quoteType: 'ETF', shortname: 'NEXT FUNDS TOPIX', exchange: 'JPX' },
       ],
