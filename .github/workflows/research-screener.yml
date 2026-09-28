@@ -15,8 +15,10 @@ on:
     - cron: '40 7 * * 1-5'
   workflow_dispatch:
 
+# 他の更新とは別の枠で走らせる（同じ枠だと、後から来た更新に待ち行列から押し出されて取り消される）。
+# コミットするのは自分のファイルだけで、push が衝突したら取り込み直すので重なっても壊れない。
 concurrency:
-  group: news-update
+  group: research-screener
   cancel-in-progress: false
 
 permissions:
