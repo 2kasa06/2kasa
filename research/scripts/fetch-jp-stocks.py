@@ -32,29 +32,40 @@ def fetch(url: str) -> bytes:
 def find_xls_url() -> str:
     try:
         html = fetch(PAGE).decode("utf-8", "replace")
-        m = re.search(r'href="([^"]*data_j\.xls)"', html)
-        if m:
-            return urllib.parse.urljoin(PAGE, m.group(1))
-        print("案内ページに data_j.xls のリンクが見つかりません", file=sys.stderr)
+        links = re.findall(r"""href=["']([^"']+\.(?:xlsx?|csv))["']""", html, flags=re.I)
+        for link in links:
+            if "data_j" in link.lower():
+                return urllib.parse.urljoin(PAGE, link)
+        # 見つからないときは原因を追えるよう、ページにある表計算ファイルのリンクを出す
+        print("案内ページに data_j のリンクが見つかりません。候補:", links[:20], file=sys.stderr)
     except Exception as e:  # noqa: BLE001
         print(f"案内ページを読めません: {e}", file=sys.stderr)
     return FALLBACK
 
 
+def read_rows(url: str, body: bytes) -> list[list]:
+    """表の全行を返す（.xls は xlrd、.xlsx は openpyxl）"""
+    if url.lower().endswith(".xlsx"):
+        import openpyxl
+
+        ws = openpyxl.load_workbook(io.BytesIO(body), read_only=True).worksheets[0]
+        return [list(r) for r in ws.iter_rows(values_only=True)]
+    sheet = xlrd.open_workbook(file_contents=body).sheet_by_index(0)
+    return [sheet.row_values(r) for r in range(sheet.nrows)]
+
+
 def main() -> int:
     url = find_xls_url()
     print(f"取得元: {url}")
-    book = xlrd.open_workbook(file_contents=fetch(url))
-    sheet = book.sheet_by_index(0)
-    header = [str(c).strip() for c in sheet.row_values(0)]
+    table = read_rows(url, fetch(url))
+    header = [str(c).strip() for c in table[0]]
     col = {name: header.index(name) for name in ("日付", "コード", "銘柄名", "市場・商品区分", "33業種区分")}
 
     rows = []
     as_of = None
-    for r in range(1, sheet.nrows):
-        v = sheet.row_values(r)
+    for v in table[1:]:
         code = v[col["コード"]]
-        code = str(int(code)) if isinstance(code, float) else str(code).strip()
+        code = str(int(code)) if isinstance(code, (int, float)) else str(code).strip()
         market = str(v[col["市場・商品区分"]]).strip()
         # 株式・ETF・REIT だけを残す（PRO Market や出資証券は外す）
         if "株式" in market:
@@ -66,7 +77,7 @@ def main() -> int:
         else:
             continue
         sector = str(v[col["33業種区分"]]).strip()
-        rows.append([code, str(v[col["銘柄名"]]).strip(), market, "" if sector in ("-", "") else sector])
+        rows.append([code, str(v[col["銘柄名"]]).strip(), market, "" if sector in ("-", "", "None") else sector])
         as_of = as_of or str(v[col["日付"]]).split(".")[0]
 
     if len(rows) < 3000:
