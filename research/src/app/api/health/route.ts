@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { dataSource } from '@/lib/data-source'
 import { getDb } from '@/lib/db'
 import { logger } from '@/lib/logger'
 
@@ -19,7 +20,7 @@ export async function GET() {
   }
   const status = database === 'error' ? 503 : 200
   return NextResponse.json(
-    { status: status === 200 ? 'ok' : 'degraded', dataSource: process.env.DATA_SOURCE ?? 'mock', database, time: new Date().toISOString() },
+    { status: status === 200 ? 'ok' : 'degraded', dataSource: dataSource(), database, time: new Date().toISOString() },
     { status, headers: { 'Cache-Control': 'no-store' } },
   )
 }

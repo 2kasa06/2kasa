@@ -37,7 +37,7 @@ export function rateLimited(req: NextRequest): boolean {
 export const codeSchema = z
   .string()
   .trim()
-  .regex(/^[0-9A-Za-z.]{1,12}$/, '銘柄コードの形式が正しくありません')
+  .regex(/^[0-9A-Za-z.\-]{1,12}$/, '銘柄コードの形式が正しくありません')
   .transform((s) => s.toUpperCase())
 
 // --- 応答 -------------------------------------------------------------

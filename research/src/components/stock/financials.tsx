@@ -126,7 +126,7 @@ function growth(cur?: number, prev?: number) {
   return ((cur - prev) / Math.abs(prev)) * 100
 }
 
-export function Financials({ data, currency, sharesOutstanding }: { data: FinancialStatement[]; currency: 'JPY' | 'USD'; sharesOutstanding: number }) {
+export function Financials({ data, currency, sharesOutstanding }: { data: FinancialStatement[]; currency: 'JPY' | 'USD'; sharesOutstanding: number | null }) {
   const [mode, setMode] = useState<'FY' | 'Q'>('FY')
   const [span, setSpan] = useState<'short' | 'long'>('long')
   const [metricId, setMetricId] = useState<Metric>('revenue')
@@ -160,7 +160,7 @@ export function Financials({ data, currency, sharesOutstanding }: { data: Financ
     {
       group: '株主還元',
       label: '総還元性向',
-      value: (f) => fmtPct(f.netIncome > 0 ? (((f.dividendPerShare * sharesOutstanding) / 1e6 + f.buyback) / f.netIncome) * 100 : null, 1, false),
+      value: (f) => fmtPct(f.netIncome > 0 && sharesOutstanding ? (((f.dividendPerShare * sharesOutstanding) / 1e6 + f.buyback) / f.netIncome) * 100 : null, 1, false),
     },
   ]
 

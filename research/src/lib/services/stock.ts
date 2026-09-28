@@ -146,7 +146,7 @@ function valuationOf(stock: Stock, quote: DataResult<Quote>, fin: DataResult<Fin
   const price = quote.status === 'ok' ? quote.data.price : null
   const empty: Valuation = { marketCap: null, epsTtm: null, per: null, pbr: null, bps: null, dividendYield: null, dividendPerShare: null }
   if (price === null) return empty
-  const marketCap = (price * stock.sharesOutstanding) / 1e6
+  const marketCap = stock.sharesOutstanding ? (price * stock.sharesOutstanding) / 1e6 : null
   if (fin.status !== 'ok') return { ...empty, marketCap }
   const quarters = fin.data.filter((f) => f.period !== 'FY')
   const lastFour = quarters.slice(-4)
@@ -237,8 +237,16 @@ function buildSummary(
       })
     }
   }
+  // 取れなかった欄は「無い」ではなく「取れていない」と分かるようにする
+  const unavailable = (r: DataResult<unknown>): SummaryItem[] =>
+    r.status === 'error' ? [{ label: 'データ取得失敗' }] : r.status === 'empty' && r.message ? [{ label: '未接続', detail: r.message }] : []
   logger.debug('summary.built', { code, technical: technical.length })
-  return { technical, ir: irItems, news: newsItems, earnings: earningsItems }
+  return {
+    technical,
+    ir: ir.status === 'ok' ? irItems : unavailable(ir),
+    news: news.status === 'ok' ? newsItems : unavailable(news),
+    earnings: earnings.status === 'ok' ? earningsItems : unavailable(earnings),
+  }
 }
 
 /** 取得処理そのものが例外を投げたときも、その欄だけを「取得失敗」にする */

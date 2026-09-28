@@ -3,6 +3,7 @@
 import type { Stock } from '@/lib/types'
 
 export interface MockStockSpec extends Stock {
+  sharesOutstanding: number
   /** 最新終値の目安 */
   targetPrice: number
   /** 年率ボラティリティ */

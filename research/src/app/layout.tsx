@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { SiteHeader } from '@/components/site-header'
+import { dataSource } from '@/lib/data-source'
 import { IS_STATIC } from '@/lib/static-mode'
 import './globals.css'
 
@@ -22,7 +23,7 @@ export const viewport: Viewport = {
 // 描画前に明暗を決める。保存された選択 → OS の設定の順
 const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',d)}catch(e){}})()`
 
-const isMock = (process.env.DATA_SOURCE ?? 'mock') === 'mock'
+const isMock = dataSource() === 'mock'
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

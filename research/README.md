@@ -15,6 +15,22 @@ npm run dev          # http://localhost:3000
 ```
 
 API キーも DB も無しで、モックデータ（画面上に「サンプルデータ」と表示）で一通り動く。
+
+### 実データで動かす（全銘柄を検索できる版）
+
+`DATA_SOURCE=yahoo` で、株価と指数を Yahoo Finance から取得する（遅延あり）。
+日本株は東証の全上場銘柄（`src/data/jp-stocks.json`、JPX の一覧から GitHub Actions が月1回更新）を
+日本語名・コードで検索でき、米国株などは英字・ティッカーで Yahoo の検索から見つかる。
+IR・ニュース・財務・予定は提供元が未接続のため「未接続」と表示する（作り物は出さない）。
+
+Vercel に置くと、`DATA_SOURCE` を設定しなくても自動で実データになる。
+
+1. vercel.com に GitHub アカウントでログインし「Add New → Project」
+2. `2kasa06/2kasa` を Import
+3. 「Root Directory」を `research` にして Deploy
+
+Yahoo Finance の公開エンドポイントは公式に保証された API ではない。個人の閲覧用にとどめ、
+データを再配布しないこと。本格運用ではライセンスのある提供元（J-Quants など）に差し替える。
 例: http://localhost:3000/stocks/7203
 
 | コマンド | 内容 |

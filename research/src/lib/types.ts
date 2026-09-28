@@ -22,7 +22,8 @@ export type DataResult<T> =
   | { status: 'empty'; source?: SourceInfo; message?: string }
   | { status: 'error'; message: string }
 
-export type Market = '東証プライム' | '東証スタンダード' | '東証グロース' | 'NYSE' | 'NASDAQ'
+/** 東証プライム / 東証スタンダード / 東証グロース / NASDAQ など。提供元の表記をそのまま持つ */
+export type Market = string
 
 export interface Stock {
   code: string
@@ -33,7 +34,8 @@ export interface Stock {
   sector: string
   industry: string
   currency: 'JPY' | 'USD'
-  sharesOutstanding: number
+  /** 発行済株式数。取得できない提供元では null（時価総額も出さない） */
+  sharesOutstanding: number | null
   /** 同業他社のコード */
   peers: string[]
 }
