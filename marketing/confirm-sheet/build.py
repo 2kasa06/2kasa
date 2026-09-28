@@ -9,8 +9,6 @@ OWNER = [
      "※ 紙には書かず、メッセージなどで直接お送りください。"),
     ("サンプル協力者様のビフォーアフター写真",
      "今サイトに入っているのは仮の素材です。実際の写真に差し替える必要があります。"),
-    ("サイト名の表記を最終確認",
-     "「TotalBeautySchool Evea」で進めます。school の s は大文字で合っていますか。"),
     ("ロゴ案A〜Dから1つお選びください",
      "別紙のご提案をご覧ください。大文字・小文字は Evea を推奨しています。"),
     ("診断アプリが必要かどうか", ""),
@@ -39,7 +37,7 @@ body = f"""
 <div class="sheet">
 
   <header class="head">
-    <div class="brand">TotalBeautySchool Evea</div>
+    <div class="brand">Total Beauty School Evea</div>
     <h1>サイト公開までにやること</h1>
     <p class="sub">オーナー様に決めていただきたいこと・ご用意いただきたいことと、制作側で進めることの一覧です。</p>
   </header>
@@ -52,7 +50,7 @@ body = f"""
   <section class="sec">
     <h2 class="sec__t sec__t--alt">制作側</h2>
     <p class="sec__n">こちらで進めます。ご対応は不要です。</p>
-    <div class="rows">{rows(STUDIO, 8)}</div>
+    <div class="rows">{rows(STUDIO, len(OWNER) + 1)}</div>
   </section>
 
   <footer class="foot">
