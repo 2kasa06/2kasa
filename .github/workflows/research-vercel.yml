@@ -1,0 +1,62 @@
+name: 投資リサーチ Vercel へ公開
+
+# Vercel のプロジェクトを Git 連携なしで、このリポジトリの main から直接公開する。
+# Vercel 側の設定（Root Directory = research、Framework = Next.js）はプロジェクトに保存されたものを使う。
+#
+# 必要なもの: リポジトリの Secrets に VERCEL_TOKEN（Vercel の Account Settings → Tokens で作ったもの）
+# 無ければ公開を飛ばして知らせるだけにする。
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'research/**'
+      - '!research/src/data/screener.json'
+      - '.github/workflows/research-vercel.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: research-vercel
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # Vercel のチーム（スコープ）とプロジェクトの名前
+  VERCEL_SCOPE: 2kasa-s-projects
+  VERCEL_PROJECT: 2kasa
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: トークンの確認
+        id: token
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "::warning::Secrets に VERCEL_TOKEN が無いので、Vercel への公開を飛ばしました"
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.token.outputs.ok == 'true'
+        with:
+          node-version: '22'
+
+      # ビルドは Vercel 側で行う（プロジェクトの Root Directory 設定に従って research を組み立てる）
+      - name: Vercel に公開
+        if: steps.token.outputs.ok == 'true'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          npx --yes vercel@latest link --yes --project "$VERCEL_PROJECT" --scope "$VERCEL_SCOPE" --token "$VERCEL_TOKEN"
+          npx --yes vercel@latest deploy --prod --yes --scope "$VERCEL_SCOPE" --token "$VERCEL_TOKEN"
