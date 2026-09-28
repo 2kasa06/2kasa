@@ -22,6 +22,19 @@
 [`server/README.md`](server/README.md) を参照してください。
 公式サイト側のビルド（`npm run build`）とは経路が分かれており、互いに影響しません。
 
+## 同居しているもの: 投資リサーチ・ダッシュボード（`research/`）
+
+銘柄コードを入れると、株価・チャート・テクニカル条件・IR・ニュース・決算・財務を1画面で確認できる
+Next.js アプリ（独立した package.json を持つ）。現在はモックデータで動く。
+使い方は [`research/README.md`](research/README.md)、設計は [`research/docs/PLAN.md`](research/docs/PLAN.md)。
+
+## 同居しているもの: 投資情報ウォッチ（`invest/`）
+
+主要マーケットの値動きと、投資判断に関わるニュースを1枚にまとめる個人用サイト。
+値動きの取得・ニュース収集・要約を GitHub Actions が平日2回行い、`docs/invest/` に書き出します。
+防衛施設ウォッチのフィード解析・本文取得の部品を共用しています。
+設定と使い方は [`invest/README.md`](invest/README.md) を参照してください。
+
 ---
 
 ## ページ構成

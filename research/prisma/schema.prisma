@@ -1,0 +1,410 @@
+// 投資リサーチ・ダッシュボードのデータベース定義（PostgreSQL）。
+//
+// 方針:
+// - データ行には必ず source（提供元）と fetchedAt（取得時刻）を持たせ、画面に出所と時点を出せるようにする
+// - 取得できなかった値は NULL のまま保存する。0 で埋めない
+// - AI が作った内容（要約・分類・分析）は aiGenerated / model を持たせ、事実と区別する
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---- 利用者 --------------------------------------------------------------
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  watchlists    Watchlist[]
+  notifications Notification[]
+
+  @@map("users")
+}
+
+// ---- 銘柄と株価 ----------------------------------------------------------
+
+model Stock {
+  id                String   @id @default(cuid())
+  code              String   @unique // 7203 / AAPL
+  name              String
+  nameEn            String?
+  ticker            String?
+  market            String // 東証プライム / NASDAQ など
+  sector            String?
+  industry          String?
+  currency          String   @default("JPY")
+  sharesOutstanding BigInt?
+  /// 同業他社のコード
+  peers             String[]
+  source            String
+  updatedAt         DateTime @updatedAt
+
+  prices           StockPrice[]
+  indicators       TechnicalIndicator[]
+  signals          TechnicalSignal[]
+  financials       Financial[]
+  earnings         Earning[]
+  irDocuments      IrDocument[]
+  newsRelations    NewsStockRelation[]
+  watchlistEntries WatchlistStock[]
+  events           Event[]
+  aiAnalyses       AiAnalysis[]
+  backtestResults  BacktestResult[]
+
+  @@index([name])
+  @@index([ticker])
+  @@map("stocks")
+}
+
+enum PriceInterval {
+  MIN5
+  MIN15
+  DAY
+}
+
+model StockPrice {
+  id        BigInt        @id @default(autoincrement())
+  stockId   String
+  stock     Stock         @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  interval  PriceInterval @default(DAY)
+  /// 日足は取引日の 00:00 UTC、日中足は足の開始時刻
+  time      DateTime
+  open      Decimal       @db.Decimal(18, 4)
+  high      Decimal       @db.Decimal(18, 4)
+  low       Decimal       @db.Decimal(18, 4)
+  close     Decimal       @db.Decimal(18, 4)
+  volume    BigInt
+  source    String
+  fetchedAt DateTime      @default(now())
+
+  @@unique([stockId, interval, time])
+  @@index([stockId, interval, time(sort: Desc)])
+  @@map("stock_prices")
+}
+
+/// 日次で計算した指標の値（SMA25 など）。params に期間などを JSON で持つ
+model TechnicalIndicator {
+  id         BigInt   @id @default(autoincrement())
+  stockId    String
+  stock      Stock    @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  date       DateTime @db.Date
+  name       String // SMA / EMA / RSI / MACD / BB ...
+  params     Json
+  value      Float?
+  /// MACD のシグナル線・ボリンジャーの上下バンドなど、複数の値を持つ指標用
+  extra      Json?
+  computedAt DateTime @default(now())
+
+  @@unique([stockId, date, name, params])
+  @@index([stockId, name, date(sort: Desc)])
+  @@map("technical_indicators")
+}
+
+enum SignalTone {
+  UP
+  DOWN
+  NEUTRAL
+}
+
+enum SignalStrength {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+model TechnicalSignal {
+  id         String         @id @default(cuid())
+  stockId    String
+  stock      Stock          @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  type       String // ma_gc_25_75 / rsi_below_30 ...
+  kind       String // event / state
+  label      String
+  date       DateTime       @db.Date
+  tone       SignalTone
+  strength   SignalStrength
+  condition  String
+  /// 発生時の数値
+  values     Json
+  active     Boolean
+  detectedAt DateTime       @default(now())
+
+  @@unique([stockId, type, date])
+  @@index([stockId, date(sort: Desc)])
+  @@index([type, date(sort: Desc)])
+  @@map("technical_signals")
+}
+
+// ---- 財務・決算・IR ------------------------------------------------------
+
+enum FiscalPeriod {
+  FY
+  Q1
+  Q2
+  Q3
+  Q4
+}
+
+/// 金額は百万円（USD 銘柄は百万ドル）
+model Financial {
+  id                  String       @id @default(cuid())
+  stockId             String
+  stock               Stock        @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  fiscalYear          Int
+  period              FiscalPeriod
+  periodEnd           DateTime     @db.Date
+  revenue             Float?
+  operatingIncome     Float?
+  ordinaryIncome      Float?
+  netIncome           Float?
+  eps                 Float?
+  bps                 Float?
+  totalAssets         Float?
+  equity              Float?
+  interestBearingDebt Float?
+  cash                Float?
+  operatingCashFlow   Float?
+  investingCashFlow   Float?
+  dividendPerShare    Float?
+  buyback             Float?
+  source              String
+  fetchedAt           DateTime     @default(now())
+
+  @@unique([stockId, fiscalYear, period])
+  @@map("financials")
+}
+
+model Earning {
+  id              String       @id @default(cuid())
+  stockId         String
+  stock           Stock        @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  fiscalYear      Int
+  period          FiscalPeriod
+  announcedAt     DateTime?
+  /// 予定日（未発表の決算）
+  scheduledAt     DateTime?    @db.Date
+  actual          Json? // { revenue, operatingIncome, netIncome, eps }
+  companyForecast Json?
+  /// 市場予想。取得できない場合は NULL
+  consensus       Json?
+  consensusSource String?
+  source          String
+  fetchedAt       DateTime     @default(now())
+
+  @@unique([stockId, fiscalYear, period])
+  @@index([scheduledAt])
+  @@map("earnings")
+}
+
+enum IrImportance {
+  CRITICAL
+  IMPORTANT
+  NORMAL
+}
+
+model IrDocument {
+  id               String       @id @default(cuid())
+  stockId          String
+  stock            Stock        @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  type             String // 決算短信 / 適時開示 / 自社株買い ...
+  title            String
+  publishedAt      DateTime
+  importance       IrImportance @default(NORMAL)
+  importanceReason String
+  aiClassified     Boolean      @default(false)
+  /// 3行要約。AI 生成の場合は summaryModel を入れる
+  summary          String[]
+  summaryModel     String?
+  /// 原文。必須（出所の分からない開示は保存しない）
+  sourceUrl        String
+  sourceName       String
+  fetchedAt        DateTime     @default(now())
+
+  @@unique([stockId, sourceUrl])
+  @@index([stockId, publishedAt(sort: Desc)])
+  @@map("ir_documents")
+}
+
+// ---- ニュース ------------------------------------------------------------
+
+enum Sentiment {
+  POSITIVE
+  NEUTRAL
+  NEGATIVE
+  REVIEW // 中立/要確認
+}
+
+model News {
+  id           String              @id @default(cuid())
+  title        String
+  url          String              @unique
+  media        String
+  publishedAt  DateTime
+  summary      String?
+  category     String
+  /// 同じ出来事を報じた記事の束。代表記事のキーを入れる
+  groupKey     String?
+  sentiment    Sentiment?
+  /// sentiment が AI 分類なら true
+  aiClassified Boolean             @default(false)
+  fetchedAt    DateTime            @default(now())
+  stocks       NewsStockRelation[]
+
+  @@index([publishedAt(sort: Desc)])
+  @@index([groupKey])
+  @@map("news")
+}
+
+model NewsStockRelation {
+  newsId  String
+  news    News   @relation(fields: [newsId], references: [id], onDelete: Cascade)
+  stockId String
+  stock   Stock  @relation(fields: [stockId], references: [id], onDelete: Cascade)
+
+  @@id([newsId, stockId])
+  @@index([stockId])
+  @@map("news_stock_relations")
+}
+
+// ---- ウォッチリスト・通知 ------------------------------------------------
+
+model Watchlist {
+  id        String           @id @default(cuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  createdAt DateTime         @default(now())
+  stocks    WatchlistStock[]
+
+  @@index([userId])
+  @@map("watchlists")
+}
+
+model WatchlistStock {
+  watchlistId String
+  watchlist   Watchlist @relation(fields: [watchlistId], references: [id], onDelete: Cascade)
+  stockId     String
+  stock       Stock     @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  addedAt     DateTime  @default(now())
+  /// 通知する条件（シグナル種別の配列など）
+  alertRules  Json?
+
+  @@id([watchlistId, stockId])
+  @@map("watchlist_stocks")
+}
+
+enum NotificationChannel {
+  IN_APP
+  EMAIL
+  WEB_PUSH
+}
+
+model Notification {
+  id        String              @id @default(cuid())
+  userId    String
+  user      User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  channel   NotificationChannel @default(IN_APP)
+  kind      String // golden_cross / earnings / ir_revision / surge ...
+  stockCode String?
+  title     String
+  body      String
+  /// 通知の根拠（シグナルID・IR の URL など）
+  refs      Json?
+  createdAt DateTime            @default(now())
+  sentAt    DateTime?
+  readAt    DateTime?
+
+  @@index([userId, createdAt(sort: Desc)])
+  @@map("notifications")
+}
+
+// ---- 市場・マクロ・予定 --------------------------------------------------
+
+model MarketIndex {
+  id            BigInt   @id @default(autoincrement())
+  indexId       String // n225 / topix / spx ...
+  name          String
+  time          DateTime
+  value         Float
+  previousClose Float?
+  source        String
+  fetchedAt     DateTime @default(now())
+
+  @@unique([indexId, time])
+  @@map("market_indices")
+}
+
+model MacroData {
+  id         BigInt   @id @default(autoincrement())
+  seriesId   String // boj_rate / us_cpi / us_nfp ...
+  name       String
+  /// 対象期間（例: 2026-08 の CPI）
+  period     String
+  value      Float?
+  previous   Float?
+  unit       String?
+  releasedAt DateTime
+  source     String
+  fetchedAt  DateTime @default(now())
+
+  @@unique([seriesId, period])
+  @@index([seriesId, releasedAt(sort: Desc)])
+  @@map("macro_data")
+}
+
+model Event {
+  id      String   @id @default(cuid())
+  date    DateTime @db.Date
+  title   String
+  kind    String // 決算 / 権利確定 / 金融政策 / 経済指標 / SQ / IPO / IR
+  stockId String?
+  stock   Stock?   @relation(fields: [stockId], references: [id], onDelete: SetNull)
+  source  String
+
+  @@index([date])
+  @@map("events")
+}
+
+// ---- AI・検証 ------------------------------------------------------------
+
+model AiAnalysis {
+  id        String   @id @default(cuid())
+  stockId   String?
+  stock     Stock?   @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  kind      String // stock_research / market_summary / ir_summary
+  model     String
+  /// 出力（見出しごとの文章）
+  output    Json
+  /// 材料にした情報源（媒体名・URL・日時）。出典の無い AI 出力は表示しない
+  sources   Json
+  createdAt DateTime @default(now())
+
+  @@index([stockId, kind, createdAt(sort: Desc)])
+  @@map("ai_analysis")
+}
+
+model BacktestResult {
+  id         String   @id @default(cuid())
+  stockId    String
+  stock      Stock    @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  signalType String
+  horizon    Int // 営業日
+  samples    Int
+  mean       Float?
+  median     Float?
+  max        Float?
+  min        Float?
+  upRatio    Float?
+  periodFrom DateTime @db.Date
+  periodTo   DateTime @db.Date
+  computedAt DateTime @default(now())
+
+  @@unique([stockId, signalType, horizon])
+  @@map("backtest_results")
+}

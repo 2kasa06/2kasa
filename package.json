@@ -16,7 +16,11 @@
     "news:preview": "node news/preview.mjs",
     "news:map": "node news/tools/build-map.mjs",
     "news:probe": "node news/tools/probe.mjs",
-    "news:login-map": "node news/tools/build-login-map.mjs"
+    "news:login-map": "node news/tools/build-login-map.mjs",
+    "invest:build": "node invest/build.mjs",
+    "invest:dry": "node invest/build.mjs --dry-run",
+    "invest:test": "node invest/selftest.mjs",
+    "invest:preview": "node invest/preview.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",

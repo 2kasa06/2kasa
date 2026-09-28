@@ -16,7 +16,11 @@ $requested = (string)($_GET['f'] ?? 'index.html');
 // 最初から想定した形以外は受け付けない。これで上位ディレクトリへは辿れない。
 $allowed = $requested === 'index.html'
     || $requested === 'archive.html'
-    || (bool)preg_match('#^archive/\d{4}-\d{2}-\d{2}\.html$#', $requested);
+    || (bool)preg_match('#^archive/\d{4}-\d{2}-\d{2}\.html$#', $requested)
+    // 投資情報ウォッチ（docs/invest/）
+    || $requested === 'invest/index.html'
+    || $requested === 'invest/archive.html'
+    || (bool)preg_match('#^invest/archive/\d{4}-\d{2}-\d{2}\.html$#', $requested);
 
 if (!$allowed) {
     http_response_code(404);
