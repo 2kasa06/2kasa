@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Bar } from './types'
-import { screenStock, sortScreener } from './screener'
+import { decodeScreener, encodeScreener, screenStock, sortScreener } from './screener'
 
 const bars = (closes: number[]): Bar[] =>
   closes.map((c, i) => ({ time: new Date(Date.UTC(2024, 0, 1 + i)).toISOString().slice(0, 10), open: c, high: c + 1, low: c - 1, close: c, volume: 1000 }))
@@ -22,5 +22,10 @@ describe('スクリーナー', () => {
   })
   it('足が足りなければ null', () => {
     expect(screenStock(meta, bars([1, 2, 3]))).toBeNull()
+  })
+  it('詰めた形に保存して戻すと元に戻る', () => {
+    const item = screenStock(meta, bars(Array.from({ length: 260 }, (_, i) => 100 + i * 0.5)))!
+    const data = { generatedAt: '2026-09-28T00:00:00Z', source: 'テスト', scanned: 1, failed: 0, items: [item] }
+    expect(decodeScreener(JSON.parse(JSON.stringify(encodeScreener(data))))).toEqual(data)
   })
 })

@@ -89,6 +89,58 @@ export function screenStock(meta: { code: string; name: string; market: string; 
   }
 }
 
+/**
+ * 保存用の詰めた形。約3,700銘柄を素直に JSON にすると 4MB を超え、Next.js のデータキャッシュ（2MB まで）に
+ * 載らず、毎日のコミットでリポジトリも膨らむ。シグナルの名前を辞書にまとめ、各行を配列にして 1MB 未満にする。
+ */
+export interface ScreenerFile {
+  generatedAt: string | null
+  source: string
+  scanned: number
+  failed: number
+  /** [type, label, tone, strength] */
+  dict: Array<[string, string, SignalTone, SignalStrength]>
+  /** [code, name, market, sector, close, asOf, changePct, up, down, neutral, score, rsi, volumeRatio, turnover, [[dictIndex, date]...]] */
+  rows: Array<[string, string, string, string, number, string, number | null, number, number, number, number, number | null, number | null, number | null, Array<[number, string]>]>
+}
+
+export function encodeScreener(data: ScreenerData): ScreenerFile {
+  const dict: ScreenerFile['dict'] = []
+  const index = new Map<string, number>()
+  const rows = data.items.map((x): ScreenerFile['rows'][number] => {
+    const sig = x.signals.map((s): [number, string] => {
+      const k = `${s.type}|${s.label}|${s.tone}|${s.strength}`
+      let i = index.get(k)
+      if (i === undefined) {
+        i = dict.length
+        index.set(k, i)
+        dict.push([s.type, s.label, s.tone, s.strength])
+      }
+      return [i, s.date]
+    })
+    return [x.code, x.name, x.market, x.sector, x.close, x.asOf, x.changePct, x.up, x.down, x.neutral, x.score, x.rsi, x.volumeRatio, x.turnover, sig]
+  })
+  return { generatedAt: data.generatedAt, source: data.source, scanned: data.scanned, failed: data.failed, dict, rows }
+}
+
+export function decodeScreener(file: ScreenerFile): ScreenerData {
+  return {
+    generatedAt: file.generatedAt,
+    source: file.source,
+    scanned: file.scanned,
+    failed: file.failed,
+    items: (file.rows ?? []).map(([code, name, market, sector, close, asOf, changePct, up, down, neutral, score, rsi, vr, turnover, sig]) => ({
+      code, name, market, sector, close, asOf, changePct, up, down, neutral, score, rsi, volumeRatio: vr, turnover,
+      signals: sig
+        .filter(([i]) => file.dict[i])
+        .map(([i, date]) => {
+          const [type, label, tone, strength] = file.dict[i]
+          return { type, label, tone, strength, date }
+        }),
+    })),
+  }
+}
+
 /** 並べ替え: 重み付きスコア → 上昇方向の数 → 下落方向の少なさ */
 export function sortScreener(items: ScreenerItem[]): ScreenerItem[] {
   return [...items].sort((a, b) => b.score - a.score || b.up - a.up || a.down - b.down)

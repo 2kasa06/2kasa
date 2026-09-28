@@ -10,7 +10,7 @@ import { dataSource } from '@/lib/data-source'
 import { logger } from '@/lib/logger'
 import { generateDailyBars } from '@/lib/providers/mock/prices'
 import { MOCK_STOCKS } from '@/lib/providers/mock/stocks'
-import { screenStock, sortScreener, type ScreenerData } from '@/lib/screener'
+import { decodeScreener, screenStock, sortScreener, type ScreenerData, type ScreenerFile } from '@/lib/screener'
 
 const REMOTE =
   process.env.SCREENER_DATA_URL ?? 'https://raw.githubusercontent.com/2kasa06/2kasa/main/research/src/data/screener.json'
@@ -26,13 +26,13 @@ export async function getScreenerData(): Promise<ScreenerData> {
   try {
     const res = await fetch(REMOTE, { next: { revalidate: 1800 } } as RequestInit)
     if (res.ok) {
-      const data = (await res.json()) as ScreenerData
-      if (Array.isArray(data.items) && (data.generatedAt ?? '') >= (bundled.generatedAt ?? '')) return data
+      const file = (await res.json()) as ScreenerFile
+      if (Array.isArray(file.rows) && (file.generatedAt ?? '') >= (bundled.generatedAt ?? '')) return decodeScreener(file)
     } else {
       logger.warn('screener.remote_failed', { status: res.status })
     }
   } catch (err) {
     logger.warn('screener.remote_failed', { err })
   }
-  return bundled as ScreenerData
+  return decodeScreener(bundled as unknown as ScreenerFile)
 }

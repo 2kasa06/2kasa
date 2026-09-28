@@ -5,7 +5,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import jpStocks from '../src/data/jp-stocks.json'
 import { fetchChart } from '../src/lib/providers/yahoo/client'
-import { screenStock, sortScreener, type ScreenerData, type ScreenerItem } from '../src/lib/screener'
+import { encodeScreener, screenStock, sortScreener, type ScreenerData, type ScreenerItem } from '../src/lib/screener'
 
 const OUT = path.resolve(import.meta.dirname, '../src/data/screener.json')
 
@@ -66,8 +66,9 @@ async function main() {
     failed,
     items: sortScreener(items),
   }
-  await fs.writeFile(OUT, JSON.stringify(data))
-  console.log(`書き出し完了: ${items.length}銘柄（失敗 ${failed}）`)
+  const body = JSON.stringify(encodeScreener(data))
+  await fs.writeFile(OUT, body)
+  console.log(`書き出し完了: ${items.length}銘柄（失敗 ${failed}）${(body.length / 1024 / 1024).toFixed(2)}MB`)
 }
 
 main().catch((err) => {
