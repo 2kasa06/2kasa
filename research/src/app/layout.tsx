@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { SiteHeader } from '@/components/site-header'
+import { IS_STATIC } from '@/lib/static-mode'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="min-h-dvh">
         {isMock && (
           <div className="border-b border-warn-fg/20 bg-warn-bg px-4 py-1.5 text-center text-xs text-warn-fg">
+            {IS_STATIC && 'デモ版（サーバ無しの静的ページ）です。'}
             サンプルデータで表示しています。株価・ニュース・IR・財務はすべて開発用の作り物で、実在企業の実際の数値ではありません。
           </div>
         )}

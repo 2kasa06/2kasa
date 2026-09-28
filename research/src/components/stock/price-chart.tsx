@@ -17,6 +17,7 @@ import {
 } from 'lightweight-charts'
 import { Loader2, X } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { loadChart } from '@/lib/chart-client'
 import { RANGES, type ChartMarker, type ChartPayload, type Point, type Study } from '@/lib/chart-types'
 import { fmtDate, fmtNumber, fmtValues } from '@/lib/format'
 import { STRENGTH_LABEL } from '@/lib/technical/signals'
@@ -94,13 +95,11 @@ export function PriceChart({ code, currency, initialRange = '6m' }: Props) {
 
   useEffect(() => {
     const ctrl = new AbortController()
-    fetch(`/api/stocks/${encodeURIComponent(code)}/prices?range=${range}&studies=${studiesKey}`, { signal: ctrl.signal })
-      .then(async (res) => {
-        const json = await res.json()
-        if (res.status === 404) return setState('empty')
-        if (!res.ok) return setState('error')
-        setPayload(json.data)
-        setSource(json.source)
+    loadChart(code, range, studiesKey ? (studiesKey.split(',') as Study[]) : [], ctrl.signal)
+      .then((result) => {
+        if (result.status !== 'ok') return setState(result.status)
+        setPayload(result.data)
+        setSource(result.source)
         setState('ok')
       })
       .catch((err) => {

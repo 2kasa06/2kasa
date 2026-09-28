@@ -3,8 +3,20 @@
 import { Search } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useId, useRef, useState } from 'react'
+import { searchStocks } from '@/lib/search'
+import { IS_STATIC, staticDataUrl } from '@/lib/static-mode'
 import { Input } from './ui/input'
 import { cn } from './ui/utils'
+
+let staticStocks: Promise<Hit[]> | null = null
+function loadStaticStocks(): Promise<Hit[]> {
+  staticStocks ??= fetch(staticDataUrl('stocks.json')).then((res) => {
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    return res.json()
+  })
+  staticStocks.catch(() => (staticStocks = null))
+  return staticStocks
+}
 
 interface Hit {
   code: string
@@ -31,6 +43,14 @@ export function StockSearch({ className }: { className?: string }) {
     const ctrl = new AbortController()
     const t = setTimeout(async () => {
       try {
+        if (IS_STATIC) {
+          // 静的版は銘柄一覧を一度だけ読み、ブラウザで絞り込む
+          const list = await loadStaticStocks()
+          setHits(searchStocks(list, query, 8))
+          setFailed(false)
+          setActive(0)
+          return
+        }
         const res = await fetch(`/api/stocks/search?q=${encodeURIComponent(query)}`, { signal: ctrl.signal })
         const json = await res.json()
         setHits(res.ok ? json.data : [])

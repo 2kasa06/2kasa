@@ -25,6 +25,15 @@ API キーも DB も無しで、モックデータ（画面上に「サンプル
 | `npm run db:migrate` | マイグレーション（`DATABASE_URL` が必要） |
 | `npm run db:seed` | モックデータを DB に投入（何度流しても重複しない） |
 
+### サーバ無しの静的版（GitHub Pages）
+
+```bash
+npm run build:static   # docs/research/ に書き出す（配信パス /2kasa/research/）
+```
+
+API を使わず、ビルド時に書き出した株価の JSON からチャートの指標とシグナルをブラウザで計算する。
+公開先: https://2kasa06.github.io/2kasa/research/ 。データはビルドした日の時点で固定される。
+
 ### DB を使う場合
 
 ```bash

@@ -18,12 +18,20 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/components/ui/utils'
 import { getProviders } from '@/lib/providers'
 import { getStockPageData } from '@/lib/services/stock'
+import { IS_STATIC } from '@/lib/static-mode'
 import type { SourceInfo } from '@/lib/types'
 
 // 株価は数分、財務は四半期ごとにしか変わらない。ページは5分ごとに作り直す
 export const revalidate = 300
 
 type Props = { params: Promise<{ code: string }> }
+
+// 静的版は全銘柄のページをビルド時に作る。通常版はアクセスされたときに作る
+export async function generateStaticParams() {
+  if (!IS_STATIC) return []
+  const list = await getProviders().market.listStocks()
+  return list.status === 'ok' ? list.data.map((s) => ({ code: s.code })) : []
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { code } = await params

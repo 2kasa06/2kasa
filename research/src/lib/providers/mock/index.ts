@@ -1,6 +1,7 @@
 // モック実装。APIキーが無い段階でも画面を作れるようにするためのもの。
 // 返すデータは source.isMock = true を持ち、UI は必ず「サンプルデータ」と表示する。
 
+import { searchStocks } from '@/lib/search'
 import type { ChartRange, DataResult, SourceInfo, Stock } from '@/lib/types'
 import type { FinancialDataProvider, IRProvider, MacroDataProvider, MarketDataProvider, NewsProvider, Providers } from '../types'
 import { generateEarnings, generateFinancials, generateIrDocuments, generateMarketEvents, generateNews } from './content'
@@ -16,11 +17,6 @@ function source(asOf: string): SourceInfo {
 
 function notFound(code: string): DataResult<never> {
   return { status: 'empty', message: `銘柄 ${code} は見つかりません` }
-}
-
-/** 検索用に表記ゆれを吸収する */
-function normalize(text: string): string {
-  return text.normalize('NFKC').toLowerCase().replace(/[\s・.,]/g, '')
 }
 
 // 日足の全履歴は生成に少し時間がかかるので、最新日ごとに覚えておく
@@ -50,19 +46,8 @@ class MockMarketData implements MarketDataProvider {
   }
 
   async searchStocks(query: string, limit = 10) {
-    const q = normalize(query)
-    if (!q) return { status: 'ok' as const, data: [], source: source(toDateKey(latestSessionDate())) }
-    const scored = MOCK_STOCKS.map((s) => {
-      const fields = [s.code, s.ticker, s.name, s.nameEn].map(normalize)
-      // 前方一致を優先し、部分一致は後ろに回す
-      const score = fields.some((f) => f === q) ? 3 : fields.some((f) => f.startsWith(q)) ? 2 : fields.some((f) => f.includes(q)) ? 1 : 0
-      return { s, score }
-    })
-      .filter((x) => x.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, limit)
-      .map((x) => toStock(x.s))
-    return { status: 'ok' as const, data: scored, source: source(toDateKey(latestSessionDate())) }
+    const hits = searchStocks(MOCK_STOCKS, query, limit).map(toStock)
+    return { status: 'ok' as const, data: hits, source: source(toDateKey(latestSessionDate())) }
   }
 
   async getQuote(code: string) {
