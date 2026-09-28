@@ -15,8 +15,8 @@ export function SiteHeader() {
           <Link href="/" className="hover:text-foreground">
             マーケット
           </Link>
-          <Link href="/stocks/7203" className="hover:text-foreground">
-            銘柄の例
+          <Link href="/screener" className="hover:text-foreground">
+            スクリーナー
           </Link>
         </nav>
         <div className="order-last w-full sm:order-none sm:ml-auto sm:w-96">

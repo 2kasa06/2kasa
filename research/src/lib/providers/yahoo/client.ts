@@ -104,11 +104,13 @@ async function getJson(url: string, revalidateSeconds: number): Promise<unknown 
   return null
 }
 
-export type ChartSpan = 'daily-max' | 'intraday-1d' | 'intraday-5d' | 'meta'
+export type ChartSpan = 'daily-max' | 'daily-2y' | 'intraday-1d' | 'intraday-5d' | 'meta'
 
 const SPAN_PARAMS: Record<ChartSpan, { range: string; interval: string; revalidate: number }> = {
   // 10年分の日足。指標の計算（200日線など）と「全期間」表示に使う
   'daily-max': { range: '10y', interval: '1d', revalidate: 600 },
+  // スクリーナーの一括集計用。200日線とシグナル判定に足りる長さ
+  'daily-2y': { range: '2y', interval: '1d', revalidate: 3600 },
   'intraday-1d': { range: '1d', interval: '5m', revalidate: 120 },
   'intraday-5d': { range: '5d', interval: '15m', revalidate: 300 },
   // 銘柄名や取引所を知りたいだけのとき
@@ -121,7 +123,7 @@ export async function fetchChart(symbol: string, span: ChartSpan): Promise<Chart
     `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}` +
     `?range=${p.range}&interval=${p.interval}&includePrePost=false`
   const json = await getJson(url, p.revalidate)
-  return json ? parseChart(json, span === 'daily-max' || span === 'meta') : null
+  return json ? parseChart(json, span === 'daily-max' || span === 'daily-2y' || span === 'meta') : null
 }
 
 export async function searchYahoo(query: string): Promise<SearchQuote[]> {

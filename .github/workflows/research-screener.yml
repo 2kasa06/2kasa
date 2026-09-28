@@ -1,0 +1,64 @@
+name: 投資リサーチ スクリーナー集計
+
+on:
+  # 集計の仕組みを変えたときに、このブランチへの push で確認する
+  push:
+    branches:
+      - claude/investment-info-site-l3op44
+    paths:
+      - 'research/scripts/screener.ts'
+      - 'research/src/lib/screener.ts'
+      - 'research/src/lib/technical/**'
+      - '.github/workflows/research-screener.yml'
+  schedule:
+    # 平日の東証の取引終了後（UTC 07:40 = JST 16:40）
+    - cron: '40 7 * * 1-5'
+  workflow_dispatch:
+
+# 他の更新とは別の枠で走らせる（同じ枠だと、後から来た更新に待ち行列から押し出されて取り消される）。
+# コミットするのは自分のファイルだけで、push が衝突したら取り込み直すので重なっても壊れない。
+concurrency:
+  group: research-screener
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: research
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: research/package-lock.json
+
+      - run: npm ci
+
+      - name: 全銘柄のシグナルを集計
+        run: npx tsx --tsconfig tsconfig.json scripts/screener.ts
+
+      - name: 結果をコミット
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/screener.json
+          if git diff --staged --quiet; then echo "変更なし"; exit 0; fi
+          for attempt in 1 2 3 4; do
+            git commit -q -m "投資リサーチ: スクリーナー集計 $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M')"
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then exit 0; fi
+            git fetch origin "${GITHUB_REF_NAME}"
+            git reset -q "origin/${GITHUB_REF_NAME}"
+            git add src/data/screener.json
+            if git diff --staged --quiet; then exit 0; fi
+            sleep $((2 ** attempt))
+          done
+          echo "::error::集計結果を push できませんでした"
+          exit 1

@@ -15,9 +15,10 @@ on:
     - cron: '10 21 1 * *'   # 毎月1日 UTC 21:10（JST 2日 06:10）
   workflow_dispatch:
 
-# 同じブランチに書く他の更新と重ならないようにする
+# 他の更新とは別の枠で走らせる（同じ枠だと、後から来た更新に待ち行列から押し出されて取り消される）。
+# コミットするのは自分のファイルだけで、push が衝突したら取り込み直すので重なっても壊れない。
 concurrency:
-  group: news-update
+  group: research-data
   cancel-in-progress: false
 
 permissions:
