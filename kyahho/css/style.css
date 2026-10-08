@@ -167,7 +167,7 @@ button, input, textarea { font: inherit; color: inherit; }
 /* ---------- ヘッダー ---------- */
 .site-header {
   position: sticky;
-  top: 0;
+  top: env(safe-area-inset-top, 0px);
   z-index: 50;
   transition: box-shadow .3s;
 }

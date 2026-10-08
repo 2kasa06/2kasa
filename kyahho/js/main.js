@@ -287,7 +287,7 @@
         '&body=' + encodeURIComponent(lines.join('\n'));
 
       window.location.href = href;
-      status.textContent = 'メールアプリで送信画面を開きました。内容を確認して送信してください。開かない場合は ' + to + ' 宛にご連絡ください。';
+      status.textContent = '入力内容を本文に入れて、メールアプリの送信画面を開きます。内容を確認して送信してください。メールアプリが開かない場合は、' + to + ' 宛に直接ご連絡ください。';
       status.classList.add('is-success');
     });
   }
