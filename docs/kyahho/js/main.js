@@ -17,7 +17,7 @@
     });
   }
 
-  /* ---------- ヘッダー：スクロール時の影と「掃除の進み具合」 ---------- */
+  /* ---------- ヘッダー：スクロール時の影と、読み進めた分の目盛り ---------- */
   var header = document.querySelector('[data-header]');
   var progress = document.querySelector('[data-progress]');
   var ticking = false;
