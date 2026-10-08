@@ -104,6 +104,11 @@
     var chunks = [];
     var current = '';
     segments.forEach(function (part) {
+      // 句読点や閉じかっこは前のまとまりにくっつける（行頭に「。」が来ないように）
+      if (!current && chunks.length && /^[、。！？」）]+$/.test(part)) {
+        chunks[chunks.length - 1] += part;
+        return;
+      }
       current += part;
       var endsWithPunct = /[、。！？」]$/.test(current);
       var isParticle = /^[ぁ-ん]{1,2}$/.test(part) && current.length >= 2;
@@ -146,7 +151,7 @@
     });
     document.querySelectorAll('.reveal').forEach(function (el) { revealTargets.push(el); });
     document.querySelectorAll('[data-shelf] > *').forEach(function (el) { revealTargets.push(el); });
-    document.querySelectorAll('[data-wipe]').forEach(function (el) {
+    document.querySelectorAll('[data-wipe], [data-write]').forEach(function (el) {
       Array.prototype.forEach.call(el.children, function (child, i) { child.style.setProperty('--i', i); });
       revealTargets.push(el);
     });
