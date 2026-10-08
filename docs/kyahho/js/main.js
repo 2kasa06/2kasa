@@ -204,13 +204,15 @@
     }
     var rect = tidyBoard.getBoundingClientRect();
     var vh = window.innerHeight || 800;
-    // ボードの上端が画面の下寄り(90%)から中央寄り(35%)へ動く間に、散らかり→整列
-    var p = (vh * 0.9 - rect.top) / (vh * 0.55);
+    // ボードの上端が画面の下端近く(95%)から中央より少し上(35%)へ動く間に、散らかり→整列。
+    // 散らかった状態をしばらく見せたいので、ゆっくり始まってゆっくり終わる曲線にする
+    var p = (vh * 0.95 - rect.top) / (vh * 0.6);
     p = Math.max(0, Math.min(1, p));
-    var eased = 1 - Math.pow(1 - p, 3);
+    var eased = p * p * (3 - 2 * p);
     var mess = 1 - eased;
     tidyBoard.style.setProperty('--mess', mess.toFixed(3));
-    tidyBoard.classList.toggle('is-tidy', mess < 0.12);
+    // 「ごちゃごちゃした」→「ゆったりした」は、ほぼ整い終わってから切り替える
+    tidyBoard.classList.toggle('is-tidy', mess < 0.06);
   }
 
   /* ---------- よくある質問（アコーディオン） ---------- */
