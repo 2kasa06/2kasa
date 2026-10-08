@@ -12,10 +12,10 @@
 
 ---
 
-## 同居しているもの: きゃっほー 公式サイト（`kyahho/`）
+## 同居しているもの: きゃっほー 公式サイト（`docs/kyahho/`）
 
 日常家事の代行サービス「きゃっほー」の1ページ完結サイト。ビルド不要の静的HTML/CSS/JSで、
-ほかのプロジェクトとは独立しています。使い方と仮置き箇所は [`kyahho/README.md`](kyahho/README.md)。
+ほかのプロジェクトとは独立しています。使い方と仮置き箇所は [`docs/kyahho/README.md`](docs/kyahho/README.md)。GitHub Pages では `/kyahho/` で公開される。
 
 ## 同居しているもの: 防衛施設ウォッチ（`news/`）
 

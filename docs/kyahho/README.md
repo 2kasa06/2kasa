@@ -4,7 +4,7 @@
 リポジトリ直下の美容サイト（Vite + React）とは独立しており、互いに影響しません。
 
 ```
-kyahho/
+docs/kyahho/
 ├── index.html      ページ本体（文言はすべてここ）
 ├── css/style.css   デザイン・アニメーション（色や文字は先頭の :root 変数で調整）
 ├── js/main.js      メニュー / FAQ / 相談フォーム / スクロール演出
@@ -14,12 +14,17 @@ kyahho/
 ## 確認のしかた
 
 ```bash
-cd kyahho
+cd docs/kyahho
 python3 -m http.server 4173   # http://localhost:4173/
 # または: npx serve .
 ```
 
-`index.html` をブラウザで直接開いても表示できます。公開するときは `kyahho/` の中身をそのまま静的ホスティングに置いてください。
+`index.html` をブラウザで直接開いても表示できます。## 公開URL（GitHub Pages）
+
+`docs/` は GitHub Pages で公開しているので、既定ブランチ（main）に入ると
+`https://2kasa06.github.io/2kasa/kyahho/` で見られます。
+公開前のプレビュー中は `noindex` を付けて検索結果に出ないようにしています（本番公開時に外す）。
+ほかの静的ホスティングに置く場合も、このフォルダの中身をそのまま置けば動きます。
 
 ## 「文字にも家事をする」演出
 
