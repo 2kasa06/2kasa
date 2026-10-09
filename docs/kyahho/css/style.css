@@ -2,22 +2,24 @@
    きゃっほー  福岡の料理代行（料理特化・週1回／週2回の月額制）
    Design read: 30〜40代の共働き家庭向けの生活サービスLP。清潔で日常的なトーン。
    Dials: VARIANCE 6 / MOTION 4 / DENSITY 4
-   色: 冷たすぎないオフホワイト＋墨色＋アクセント1色（トマト）。ライト/ダークは端末設定に追従。
+   色: 食卓に合う明るい配色に固定（ダークモードには切り替えない）。
+       文字と線は黒ではなく「深い青菜の緑」、背景はやわらかな白と淡い若草色、アクセントはトマト色1色。
    角丸のルール: ボタン＝全丸、カード・写真＝16px、入力欄＝12px。
    ========================================================= */
 
 :root {
-  --bg: #F7F7F4;
-  --surface: #FFFFFF;
-  --tint: #ECEFEA;
-  --ink: #17191B;
-  --muted: #555B60;
-  --line: #DEE1DC;
-  --accent: #C2441F;        /* 白文字を載せても4.5:1以上 */
-  --accent-ink: #FFFFFF;
-  --accent-soft: #F7E3DC;
+  --bg: #FCFCF8;            /* やわらかな白 */
+  --surface: #FFFFFE;       /* カード・フォーム */
+  --band: #F2F6EC;          /* 交互のセクションに敷く淡い若草色 */
+  --tint: #E6EEDD;          /* チップや写真の下地 */
+  --ink: #24382B;           /* 文字・線：黒ではなく深い青菜の緑 */
+  --muted: #5A6B5F;
+  --line: #D9E2D3;
+  --accent: #C2441F;        /* トマト色。白文字を載せても4.5:1以上 */
+  --accent-ink: #FFFFFE;
+  --accent-soft: #FBE5DA;
   --focus: #C2441F;
-  --shadow: 0 1px 2px rgba(23, 25, 27, .05), 0 12px 32px -18px rgba(23, 25, 27, .18);
+  --shadow: 0 1px 2px rgba(36, 56, 43, .06), 0 12px 32px -18px rgba(36, 56, 43, .22);
 
   --font: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", Meiryo, system-ui, sans-serif;
   --num: "Outfit", "Zen Kaku Gothic New", system-ui, sans-serif;
@@ -28,22 +30,6 @@
   --gutter: 20px;
   --ease: cubic-bezier(.16, 1, .3, 1);
   color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #131514;
-    --surface: #1B1E1C;
-    --tint: #202421;
-    --ink: #ECEEEA;
-    --muted: #A9AEA9;
-    --line: #2E332F;
-    --accent: #F07A55;
-    --accent-ink: #131514;
-    --accent-soft: #3A251E;
-    --focus: #F07A55;
-    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 12px 32px -18px rgba(0, 0, 0, .6);
-    color-scheme: dark;
-  }
 }
 @media (min-width: 1024px) { :root { --gutter: 40px; } }
 
@@ -174,7 +160,7 @@ section { scroll-margin-top: var(--header-h); }
 img.is-broken { visibility: hidden; }
 
 /* ---------- 1回で3日分（週のカレンダー） ---------- */
-.rhythm { padding-block: 88px; background: var(--surface); }
+.rhythm { padding-block: 88px; background: var(--band); }
 .rhythm__switch {
   display: inline-flex; gap: 4px; padding: 4px; margin-top: 32px;
   border-radius: 999px; background: var(--tint);
@@ -235,7 +221,7 @@ img.is-broken { visibility: hidden; }
 .trial__price small { color: var(--muted); font-weight: 500; }
 
 /* ---------- 1回の中身（ベント 5マス） ---------- */
-.inside { padding-block: 96px; background: var(--surface); }
+.inside { padding-block: 96px; background: var(--band); }
 .bento { display: grid; gap: 16px; margin-top: 40px; }
 @media (min-width: 900px) {
   .bento { grid-template-columns: 1.5fr 1fr 1fr; grid-template-rows: auto auto; }
@@ -273,7 +259,7 @@ img.is-broken { visibility: hidden; }
   background: var(--accent); border-radius: 99px; transform-origin: left; transform: scaleX(1);
 }
 
-.trust { padding-block: 96px; background: var(--surface); }
+.trust { padding-block: 96px; background: var(--band); }
 .promises { display: grid; gap: 28px; margin-top: 32px; }
 .promises li { display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start; }
 .promises i {
@@ -294,7 +280,7 @@ img.is-broken { visibility: hidden; }
 .step p { margin-top: 6px; color: var(--muted); font-size: .9375rem; }
 
 /* ---------- FAQ ---------- */
-.faq { padding-block: 96px; background: var(--surface); }
+.faq { padding-block: 96px; background: var(--band); }
 .faq__grid { display: grid; gap: 32px; }
 @media (min-width: 900px) { .faq__grid { grid-template-columns: .7fr 1.3fr; gap: 64px; align-items: start; } }
 .faq__list { display: grid; gap: 8px; }
