@@ -1,0 +1,430 @@
+<title>本社 満空ボード</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
+<style>
+/* 駐車場の満空表示板: 看板の青いP、点灯する「空・混・満」、白線で区切った区画 */
+:root {
+  --bg: #EFEEE9;          /* コンクリート */
+  --surface: #FBFAF7;
+  --ink: #23262B;
+  --muted: #5E636B;
+  --line: #CFCDC5;
+  --sign: #1D4E9E;        /* 駐車場看板の青 */
+  --sign-ink: #FFFFFF;
+  --lamp-bg: #16191D;
+  --asphalt: #DAD8D1;
+  --paint: #FFFFFF;
+  --ok: #1E8A4C;
+  --few: #B97A06;
+  --full: #C3302A;
+  --ok-glow: #39E07F;
+  --few-glow: #FFC23D;
+  --full-glow: #FF5A4E;
+  --shadow: #23262B;
+  --f-display: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  --f-body: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --f-num: "Barlow Condensed", "Arial Narrow", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14171B; --surface: #1D2126; --ink: #E9EAEC; --muted: #9AA0A8; --line: #343A42;
+    --sign: #3F74D6; --sign-ink: #FFFFFF; --lamp-bg: #0A0C0F; --asphalt: #2A2F36; --paint: #8E959E;
+    --ok: #3CC774; --few: #F0B53A; --full: #F06A60; --shadow: #000000; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14171B; --surface: #1D2126; --ink: #E9EAEC; --muted: #9AA0A8; --line: #343A42;
+  --sign: #3F74D6; --sign-ink: #FFFFFF; --lamp-bg: #0A0C0F; --asphalt: #2A2F36; --paint: #8E959E;
+  --ok: #3CC774; --few: #F0B53A; --full: #F06A60; --shadow: #000000; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 15px; line-height: 1.8; letter-spacing: .03em;
+  font-feature-settings: "palt"; word-break: auto-phrase;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 56px; display: grid; gap: 24px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 900; text-wrap: balance; margin: 0; letter-spacing: .02em; line-height: 1.3; }
+.num { font-family: var(--f-num); font-variant-numeric: tabular-nums; letter-spacing: .01em; }
+button { font: inherit; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid var(--sign); outline-offset: 2px; }
+
+/* ヘッダー */
+.top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.pmark {
+  width: 52px; height: 52px; flex: none; border-radius: 8px; background: var(--sign); color: var(--sign-ink);
+  display: grid; place-items: center; font-family: var(--f-num); font-weight: 700; font-size: 38px; line-height: 1;
+  box-shadow: inset 0 0 0 3px var(--sign), inset 0 0 0 5px var(--sign-ink);
+}
+.top h1 { font-size: clamp(22px, 4vw, 30px); }
+.top .sub { color: var(--muted); font-size: 13px; }
+.clock { margin-left: auto; text-align: right; color: var(--muted); font-size: 13px; line-height: 1.4; }
+.clock b { display: block; font-family: var(--f-num); font-size: 26px; color: var(--ink); font-weight: 700; }
+
+/* おすすめ帯と自分の状態 */
+.status-row { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+@media (max-width: 760px) { .status-row { grid-template-columns: 1fr; } }
+.panel { background: var(--surface); border: 2px solid var(--ink); border-radius: 10px; box-shadow: 5px 5px 0 var(--shadow); padding: 16px 18px; min-width: 0; }
+.label { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: .12em; }
+.best h2 { font-size: clamp(20px, 3.4vw, 28px); margin-top: 4px; }
+.best h2 .hl { color: var(--sign); }
+.best p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.me { display: grid; gap: 10px; align-content: start; }
+.me .now { font-family: var(--f-display); font-weight: 700; font-size: 18px; }
+.me .row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.btn {
+  min-height: 44px; padding: 0 18px; border-radius: 999px; border: 2px solid var(--ink);
+  background: var(--surface); color: var(--ink); font-weight: 700; white-space: nowrap;
+  transition: transform .12s ease, background-color .2s ease;
+}
+.btn:hover:not([disabled]) { background: var(--bg); }
+.btn.primary:hover:not([disabled]) { background: color-mix(in srgb, var(--sign) 85%, var(--ink)); }
+.btn:active { transform: scale(.96); }
+.btn.primary { background: var(--sign); border-color: var(--sign); color: var(--sign-ink); }
+.btn.danger { border-color: var(--full); color: var(--full); }
+.btn.small { min-height: 36px; padding: 0 14px; font-size: 13px; }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+
+/* 区画ボード */
+.lots { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 20px; }
+.lot { background: var(--surface); border: 2px solid var(--ink); border-radius: 10px; box-shadow: 5px 5px 0 var(--shadow); overflow: hidden; display: grid; min-width: 0; }
+.lot.mine { outline: 3px solid var(--sign); outline-offset: 3px; }
+.lot-head { display: flex; gap: 12px; align-items: stretch; padding: 14px 14px 12px; }
+.lot-head .pmark { width: 44px; height: 44px; font-size: 30px; }
+.lot-head .name { min-width: 0; flex: 1; }
+.lot-head h3 { font-size: 22px; }
+.lot-head .memo { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.lamp {
+  flex: none; width: 78px; border-radius: 6px; background: var(--lamp-bg);
+  display: grid; place-items: center; font-family: var(--f-display); font-weight: 900; font-size: 44px; line-height: 1;
+  color: #3A3F46; transition: color .4s ease, text-shadow .4s ease;
+}
+.lamp[data-s="ok"]   { color: var(--ok-glow);   text-shadow: 0 0 14px var(--ok-glow); }
+.lamp[data-s="few"]  { color: var(--few-glow);  text-shadow: 0 0 14px var(--few-glow); }
+.lamp[data-s="full"] { color: var(--full-glow); text-shadow: 0 0 14px var(--full-glow); }
+
+.count { display: flex; align-items: baseline; gap: 6px; padding: 0 16px; flex-wrap: wrap; }
+.count .big { font-family: var(--f-num); font-weight: 700; font-size: 52px; line-height: 1; }
+.count .unit { font-weight: 700; }
+.count .of { color: var(--muted); font-size: 14px; }
+.count[data-s="ok"] .big { color: var(--ok); }
+.count[data-s="few"] .big { color: var(--few); }
+.count[data-s="full"] .big { color: var(--full); }
+
+.stalls { margin: 12px 16px 0; padding: 10px; border-radius: 6px; background: var(--asphalt); display: flex; flex-wrap: wrap; gap: 0; }
+.stall { width: 18px; height: 28px; border-left: 2px solid var(--paint); border-bottom: 2px solid var(--paint); position: relative; }
+.stall:last-child { border-right: 2px solid var(--paint); }
+.stall::after { content: ""; position: absolute; inset: 4px 3px; border-radius: 3px; background: transparent; transition: background-color .3s ease; }
+.stall.used::after { background: var(--ink); }
+.stall.me::after { background: var(--sign); }
+.stall.fixed::after { background: repeating-linear-gradient(45deg, var(--muted) 0 3px, transparent 3px 6px); }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--muted); padding: 6px 16px 0; }
+.legend i { display: inline-block; width: 10px; height: 14px; border-radius: 2px; vertical-align: -2px; margin-right: 4px; }
+
+.who { display: flex; align-items: center; gap: 6px; padding: 10px 16px 0; min-height: 34px; flex-wrap: wrap; }
+.who img { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--surface); margin-left: -8px; }
+.who img:first-child { margin-left: 0; }
+.who span { font-size: 12px; color: var(--muted); margin-left: 4px; }
+.report { margin: 10px 16px 0; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 700; color: var(--full); border: 1.5px dashed var(--full); }
+.lot-actions { display: flex; gap: 8px; flex-wrap: wrap; padding: 14px 16px 16px; }
+
+/* 空状態・注意 */
+.empty { text-align: left; padding: 28px 22px; }
+.empty h2 { font-size: 22px; }
+.empty p { margin: 8px 0 0; color: var(--muted); max-width: 60ch; }
+.note { color: var(--muted); font-size: 13px; line-height: 1.7; max-width: 70ch; }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 999px; font-weight: 700; font-size: 14px; max-width: calc(100% - 32px); }
+
+/* 管理 */
+details.admin > summary { cursor: pointer; font-family: var(--f-display); font-weight: 700; font-size: 17px; list-style: none; display: flex; align-items: center; gap: 8px; }
+details.admin > summary::before { content: "▸"; color: var(--sign); transition: transform .2s; }
+details.admin[open] > summary::before { transform: rotate(90deg); }
+.admin-list { display: grid; gap: 12px; margin-top: 14px; }
+.admin-item { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 2.4fr auto; gap: 8px; align-items: end; padding: 12px; border: 1.5px solid var(--line); border-radius: 8px; }
+@media (max-width: 860px) { .admin-item { grid-template-columns: 1fr 1fr; } .admin-item .wide { grid-column: 1 / -1; } }
+.field { display: grid; gap: 2px; min-width: 0; }
+.field label { font-size: 12px; color: var(--muted); font-weight: 700; }
+.field input { width: 100%; min-height: 40px; padding: 6px 10px; border: 1.5px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); font: inherit; }
+.field input:focus-visible { border-color: var(--sign); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--sign) 35%, transparent); }
+.admin-item .acts { display: flex; gap: 6px; flex-wrap: wrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="pmark" aria-hidden="true">P</div>
+    <div>
+      <h1>本社 満空ボード</h1>
+      <div class="sub">社員駐車場の空きを、出発前に。</div>
+    </div>
+    <div class="clock" aria-live="off"><b class="num" id="clock">--:--</b><span id="today"></span></div>
+  </header>
+
+  <section class="status-row">
+    <div class="panel best" id="best" aria-live="polite">
+      <div class="label">いま停めやすい駐車場</div>
+      <h2>読み込んでいます…</h2>
+      <p>各駐車場の台数と、今日の駐車記録を集計しています。</p>
+    </div>
+    <div class="panel me" id="me">
+      <div class="label">あなたの駐車</div>
+      <div class="now">確認しています…</div>
+    </div>
+  </section>
+
+  <section class="lots" id="lots" aria-label="駐車場の一覧"></section>
+
+  <details class="panel admin" id="admin" hidden>
+    <summary>駐車場の設定(管理者のみ)</summary>
+    <p class="note">台数は区画の総数です。「固定」は来客用や社用車など、このボードで記録しない常時使用の台数です。</p>
+    <div class="admin-list" id="adminList"></div>
+    <div style="margin-top:14px"><button class="btn small" id="addLot" type="button">＋ 駐車場を追加</button></div>
+  </details>
+
+  <p class="note">
+    「ここに停めた」を押すと台数に反映されます。帰るときは「出庫した」を押してください。押し忘れても、記録はその日のうちだけ有効で、翌日0時に自動で消えます。
+    行ってみて満車だったときは「満車だった」を押すと、60分間は満車として表示されます。
+  </p>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(() => {
+  const REPORT_MIN = 60;
+  const $ = (id) => document.getElementById(id);
+  const state = { db: null, user: null, uid: null, canWrite: null, canEdit: false,
+                  lots: [], parked: [], reports: {}, loaded: { lots: false, parked: false }, err: null };
+
+  // ---- 時刻(日本時間で「今日」を判定) ----
+  const tz = "Asia/Tokyo";
+  const dayKey = (t = Date.now()) => new Intl.DateTimeFormat("sv-SE", { timeZone: tz }).format(t);
+  const hm = (t) => new Intl.DateTimeFormat("ja-JP", { timeZone: tz, hour: "2-digit", minute: "2-digit" }).format(t);
+  const ago = (t) => { const m = Math.max(0, Math.round((Date.now() - t) / 60000)); return m < 1 ? "たった今" : m < 60 ? m + "分前" : Math.floor(m / 60) + "時間前"; };
+
+  function tickClock() {
+    $("clock").textContent = hm(Date.now());
+    $("today").textContent = new Intl.DateTimeFormat("ja-JP", { timeZone: tz, month: "long", day: "numeric", weekday: "short" }).format(Date.now());
+  }
+
+  // ---- DOM helper ----
+  function h(tag, attrs = {}, ...kids) {
+    const el = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (v == null || v === false) continue;
+      if (k === "class") el.className = v;
+      else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+      else el.setAttribute(k, v === true ? "" : v);
+    }
+    for (const k of kids.flat()) if (k != null && k !== false) el.append(k instanceof Node ? k : String(k));
+    return el;
+  }
+  let toastTimer;
+  function toast(msg) {
+    const t = $("toast"); t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 2600);
+  }
+
+  // ---- 集計 ----
+  function todayParked() { const d = dayKey(); return state.parked.filter(p => p.day === d && p.lot); }
+  function lotStatus(lot) {
+    const cap = Math.max(0, Number(lot.capacity) || 0);
+    const fixed = Math.min(cap, Math.max(0, Number(lot.fixed) || 0));
+    const here = todayParked().filter(p => p.lot === lot.id);
+    const used = Math.min(cap, fixed + here.length);
+    const free = Math.max(0, cap - fixed - here.length);
+    const r = state.reports[lot.id];
+    const reported = r && r.state === "full" && (Date.now() - r.at) < REPORT_MIN * 60000 ? r : null;
+    const fewLine = Math.max(1, Math.ceil(cap * 0.15));
+    const s = (reported || free === 0) ? "full" : free <= fewLine ? "few" : "ok";
+    return { cap, fixed, here, used, free, s, reported };
+  }
+  const LAMP = { ok: "空", few: "混", full: "満" };
+  const WORD = { ok: "空きあり", few: "残りわずか", full: "満車" };
+
+  // ---- 描画 ----
+  async function render() {
+    tickClock();
+    renderBest(); await renderMe(); await renderLots(); renderAdmin();
+  }
+
+  function renderBest() {
+    const box = $("best"); box.replaceChildren(h("div", { class: "label" }, "いま停めやすい駐車場"));
+    if (!state.db) {
+      box.append(h("h2", {}, state.err ? "データに接続できません" : "読み込んでいます…"),
+        h("p", {}, state.err || "各駐車場の台数と、今日の駐車記録を集計しています。"));
+      return;
+    }
+    if (!state.lots.length) { box.append(h("h2", {}, "駐車場がまだ登録されていません"), h("p", {}, "管理者が下の設定から駐車場と台数を登録すると、ここに空き状況が出ます。")); return; }
+    const ranked = state.lots.map(l => ({ l, st: lotStatus(l) })).filter(x => x.st.s !== "full").sort((a, b) => b.st.free - a.st.free);
+    if (!ranked.length) { box.append(h("h2", {}, "すべての駐車場が満車です"), h("p", {}, "出庫の記録が入ると、ここに空いた駐車場が出ます。")); return; }
+    const top = ranked[0];
+    box.append(h("h2", {}, h("span", { class: "hl" }, top.l.name), " が空いています"),
+      h("p", {}, "空き ", h("b", { class: "num" }, top.st.free), " 台", top.l.memo ? "・" + top.l.memo : "",
+        ranked[1] ? `。次は ${ranked[1].l.name}(空き ${ranked[1].st.free}台)` : ""));
+  }
+
+  async function renderMe() {
+    const box = $("me"); box.replaceChildren(h("div", { class: "label" }, "あなたの駐車"));
+    if (!state.db) { box.append(h("div", { class: "now" }, "—")); return; }
+    if (!state.uid) { box.append(h("div", { class: "now" }, "記録するにはサインインが必要です"), h("div", { class: "note" }, "空き状況の確認はこのままできます。")); return; }
+    if (state.canWrite === false) { box.append(h("div", { class: "now" }, "閲覧のみの権限です"), h("div", { class: "note" }, "記録するには、共有設定で「Contributor」以上の権限が必要です。")); return; }
+    const mine = todayParked().find(p => p.id === state.uid);
+    const lot = mine && state.lots.find(l => l.id === mine.lot);
+    if (mine && lot) {
+      box.append(h("div", { class: "now" }, `${lot.name} に駐車中`),
+        h("div", { class: "note" }, `${hm(mine.at)} から`),
+        h("div", { class: "row" }, h("button", { class: "btn primary", type: "button", onclick: leave }, "出庫した")));
+    } else {
+      box.append(h("div", { class: "now" }, "今日はまだ記録がありません"),
+        h("div", { class: "note" }, "停めたら、その駐車場の「ここに停めた」を押してください。"));
+    }
+  }
+
+  async function renderLots() {
+    const wrap = $("lots");
+    if (!state.db || !state.lots.length) { wrap.replaceChildren(); return; }
+    const all = todayParked();
+    let profs = {};
+    if (state.user && all.length) { try { profs = await state.user.profiles(all.map(p => p.id)); } catch {} }
+    const mineLot = (all.find(p => p.id === state.uid) || {}).lot;
+    const canAct = !!state.uid && state.canWrite !== false;
+
+    wrap.replaceChildren(...state.lots.map(lot => {
+      const st = lotStatus(lot);
+      const stalls = [];
+      const mineHere = st.here.some(p => p.id === state.uid);
+      for (let i = 0; i < st.cap; i++) {
+        let cls = "stall";
+        if (i < st.fixed) cls += " fixed";
+        else if (mineHere && i === st.fixed) cls += " me";
+        else if (i < st.used) cls += " used";
+        stalls.push(h("div", { class: cls }));
+      }
+      const faces = st.here.slice(0, 8).map(p => { const pr = profs[p.id]; return pr ? h("img", { src: pr.avatarUrl, width: "24", height: "24", alt: pr.name || "社員", title: (pr.name || "社員") + " " + hm(p.at) }) : null; });
+      const isMine = mineLot === lot.id;
+      return h("article", { class: "lot" + (isMine ? " mine" : ""), "aria-label": `${lot.name} ${WORD[st.s]} 空き${st.free}台` },
+        h("div", { class: "lot-head" },
+          h("div", { class: "pmark", "aria-hidden": "true" }, "P"),
+          h("div", { class: "name" }, h("h3", {}, lot.name), lot.memo ? h("div", { class: "memo" }, lot.memo) : null),
+          h("div", { class: "lamp", "data-s": st.s, role: "img", "aria-label": WORD[st.s] }, LAMP[st.s])),
+        h("div", { class: "count", "data-s": st.s },
+          h("span", {}, "空き"), h("span", { class: "big" }, st.free), h("span", { class: "unit" }, "台"),
+          h("span", { class: "of" }, `/ 全${st.cap}台`, st.fixed ? `(固定${st.fixed})` : "")),
+        st.cap ? h("div", { class: "stalls", "aria-hidden": "true" }, stalls) : null,
+        h("div", { class: "legend", "aria-hidden": "true" },
+          h("span", {}, h("i", { style: "background:var(--ink)" }), "駐車中"),
+          mineHere ? h("span", {}, h("i", { style: "background:var(--sign)" }), "あなた") : null,
+          st.fixed ? h("span", {}, h("i", { style: "background:repeating-linear-gradient(45deg,var(--muted) 0 3px,transparent 3px 6px)" }), "固定") : null),
+        h("div", { class: "who" }, faces, st.here.length ? h("span", {}, `今日 ${st.here.length}人が記録`) : h("span", {}, "今日の記録はまだありません")),
+        st.reported ? h("div", { class: "report" }, `${ago(st.reported.at)}に「満車だった」と報告あり`) : null,
+        canAct ? h("div", { class: "lot-actions" },
+          isMine ? h("button", { class: "btn primary", type: "button", onclick: leave }, "出庫した")
+                 : h("button", { class: "btn primary", type: "button", onclick: () => park(lot) }, "ここに停めた"),
+          st.reported ? h("button", { class: "btn small", type: "button", onclick: () => report(lot, "clear") }, "空いていた")
+                      : h("button", { class: "btn small danger", type: "button", onclick: () => report(lot, "full") }, "満車だった")) : null);
+    }));
+  }
+
+  // ---- 管理(Editor以上) ----
+  let adminBuilt = "";
+  function renderAdmin() {
+    const box = $("admin");
+    box.hidden = !(state.db && state.canEdit);
+    if (box.hidden) return;
+    const sig = JSON.stringify(state.lots);
+    if (sig === adminBuilt) return;           // 入力中のフォームを上書きしない
+    adminBuilt = sig;
+    $("adminList").replaceChildren(...state.lots.map(adminRow));
+  }
+  function adminRow(lot) {
+    const id = lot.id;
+    const f = (key, label, type, value, extra = {}) => h("div", { class: "field" + (extra.wide ? " wide" : "") },
+      h("label", { for: `f-${key}-${id}` }, label),
+      h("input", { id: `f-${key}-${id}`, name: key, type, value: value ?? "", inputmode: type === "number" ? "numeric" : null, min: type === "number" ? "0" : null, autocomplete: "off", ...extra.attrs }));
+    let armed = false;
+    const del = h("button", { class: "btn small danger", type: "button", onclick: async () => {
+      if (!armed) { armed = true; del.textContent = "本当に削除"; setTimeout(() => { armed = false; del.textContent = "削除"; }, 4000); return; }
+      try { await state.db.doc("lots/" + id).delete(); toast(`${lot.name} を削除しました`); } catch (e) { toast(errMsg(e)); }
+    } }, "削除");
+    const row = h("form", { class: "admin-item", onsubmit: async (ev) => {
+      ev.preventDefault();
+      const fd = new FormData(row);
+      const name = String(fd.get("name") || "").trim();
+      if (!name) { toast("名前を入れてください"); return; }
+      const body = { name, capacity: Math.max(0, parseInt(fd.get("capacity"), 10) || 0),
+        fixed: Math.max(0, parseInt(fd.get("fixed"), 10) || 0), order: parseInt(fd.get("order"), 10) || 0,
+        memo: String(fd.get("memo") || "").trim() };
+      try { await state.db.doc("lots/" + id).set(body); toast(`${name} を保存しました`); } catch (e) { toast(errMsg(e)); }
+    } },
+      f("name", "名前", "text", lot.name, { attrs: { required: true, maxlength: "30" } }),
+      f("capacity", "台数", "number", lot.capacity),
+      f("fixed", "固定", "number", lot.fixed || 0),
+      f("order", "並び順", "number", lot.order || 0),
+      f("memo", "メモ(場所など)", "text", lot.memo, { wide: true, attrs: { maxlength: "60" } }),
+      h("div", { class: "acts" }, h("button", { class: "btn small primary", type: "submit" }, "保存"), del));
+    return row;
+  }
+  $("addLot").addEventListener("click", async () => {
+    if (!state.db) return;
+    const n = state.lots.length;
+    try {
+      await state.db.collection("lots").doc().set({ name: `新しい駐車場${n + 1}`, capacity: 10, fixed: 0, order: n + 1, memo: "" });
+      toast("駐車場を追加しました。名前と台数を直してください");
+    } catch (e) { toast(errMsg(e)); }
+  });
+
+  // ---- 書き込み ----
+  function errMsg(e) {
+    if (e && e.code === "invalid_argument") { state.canWrite = false; render(); return "この操作の権限がありません"; }
+    if (e && e.code === "quota_exceeded") return "保存できる量の上限に達しました。管理者に連絡してください";
+    return "保存できませんでした。通信を確認して、もう一度押してください";
+  }
+  let busy = false;
+  async function park(lot) {
+    if (busy || !state.uid) return; busy = true;
+    try { await state.db.doc("parked/" + state.uid).set({ lot: lot.id, at: Date.now(), day: dayKey() }); toast(`${lot.name} に記録しました`); }
+    catch (e) { toast(errMsg(e)); } finally { busy = false; }
+  }
+  async function leave() {
+    if (busy || !state.uid) return; busy = true;
+    try { await state.db.doc("parked/" + state.uid).delete(); toast("出庫を記録しました"); }
+    catch (e) { toast(errMsg(e)); } finally { busy = false; }
+  }
+  async function report(lot, kind) {
+    if (busy) return; busy = true;
+    try {
+      await state.db.doc("reports/" + lot.id).set({ state: kind, at: Date.now(), by: state.uid || "" });
+      toast(kind === "full" ? `${lot.name} を満車として表示します(60分)` : `${lot.name} の満車報告を取り消しました`);
+    } catch (e) { toast(errMsg(e)); } finally { busy = false; }
+  }
+
+  // ---- 起動 ----
+  let pending = false;
+  function schedule() { if (pending) return; pending = true; requestAnimationFrame(() => { pending = false; render(); }); }
+
+  async function start() {
+    tickClock(); render();
+    const [db, user] = await Promise.all([window.claude?.use("db") ?? null, window.claude?.use("user") ?? null]);
+    if (!db) { state.err = "claude.ai にサインインした状態で開くと、空き状況が表示されます。"; render(); return; }
+    state.user = user;
+    if (user) {
+      state.uid = await user.id();
+      state.canEdit = await user.canEdit();
+      state.canWrite = await user.can("data.write");
+    }
+    state.db = db;
+    const fail = (e) => { if (e && e.code !== "unavailable") { state.err = "データの読み込みが止まりました。ページを開き直してください。"; } schedule(); };
+    db.collection("lots").orderBy("order").onSnapshot(s => { state.lots = s.docs.map(d => ({ id: d.id, ...d.data() })); state.loaded.lots = true; schedule(); }, fail);
+    db.collection("parked").onSnapshot(s => { state.parked = s.docs.map(d => ({ id: d.id, ...d.data() })); state.loaded.parked = true; schedule(); }, fail);
+    db.collection("reports").onSnapshot(s => { const r = {}; s.docs.forEach(d => { r[d.id] = d.data(); }); state.reports = r; schedule(); }, fail);
+    setInterval(schedule, 30000);   // 「n分前」と日付の切り替えだけを更新(書き込みはしない)
+  }
+  start();
+})();
+</script>
