@@ -1,41 +1,41 @@
 {
-  "updatedAt": "2026-10-22T00:33:56.322Z",
+  "updatedAt": "2026-10-23T00:30:50.710Z",
   "meta": {
-    "updatedAt": "2026-10-22T00:33:56.322Z",
+    "updatedAt": "2026-10-23T00:30:50.710Z",
     "engine": "extractive",
-    "sourcesOk": 25,
+    "sourcesOk": 23,
     "sourcesTotal": 29,
-    "totalArticles": 298,
-    "recentArticles": 14,
-    "freshArticles": 6,
+    "totalArticles": 299,
+    "recentArticles": 12,
+    "freshArticles": 1,
     "status": [
       {
         "id": "kokkai:防衛施設",
         "name": "国会会議録「防衛施設」",
         "ok": false,
         "picked": 0,
-        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%98%B2%E8%A1%9B%E6%96%BD%E8%A8%AD&from=2026-10-15&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
+        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%98%B2%E8%A1%9B%E6%96%BD%E8%A8%AD&from=2026-10-16&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
       },
       {
         "id": "kokkai:駐屯地",
         "name": "国会会議録「駐屯地」",
         "ok": false,
         "picked": 0,
-        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%A7%90%E5%B1%AF%E5%9C%B0&from=2026-10-15&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
+        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%A7%90%E5%B1%AF%E5%9C%B0&from=2026-10-16&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
       },
       {
         "id": "kokkai:辺野古",
         "name": "国会会議録「辺野古」",
         "ok": false,
         "picked": 0,
-        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E8%BE%BA%E9%87%8E%E5%8F%A4&from=2026-10-15&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
+        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E8%BE%BA%E9%87%8E%E5%8F%A4&from=2026-10-16&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
       },
       {
         "id": "kokkai:馬毛島",
         "name": "国会会議録「馬毛島」",
         "ok": false,
         "picked": 0,
-        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%A6%AC%E6%AF%9B%E5%B3%B6&from=2026-10-15&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
+        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%A6%AC%E6%AF%9B%E5%B3%B6&from=2026-10-16&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
       },
       {
         "id": "mlit",
@@ -61,16 +61,16 @@
       {
         "id": "kensetsunews",
         "name": "建設通信新聞",
-        "ok": true,
-        "picked": 2,
-        "note": "https://www.kensetsunews.com/feed"
+        "ok": false,
+        "picked": 0,
+        "note": "https://www.kensetsunews.com/feed → HTTP 503 / https://www.kensetsunews.com/rss → HTTP 503"
       },
       {
         "id": "decn",
         "name": "日刊建設工業新聞",
-        "ok": true,
+        "ok": false,
         "picked": 0,
-        "note": "https://www.decn.co.jp/feed"
+        "note": "https://www.decn.co.jp/feed → HTTP 503 / https://www.decn.co.jp/?feed=rss2 → HTTP 503"
       },
       {
         "id": "nishinippon",
@@ -132,7 +132,7 @@
         "id": "gnews:防衛省 施設整備 強靱化",
         "name": "Google ニュース「防衛省 施設整備 強靱化」",
         "ok": true,
-        "picked": 0,
+        "picked": 1,
         "note": "https://news.google.com/rss/search?q=%E9%98%B2%E8%A1%9B%E7%9C%81%20%E6%96%BD%E8%A8%AD%E6%95%B4%E5%82%99%20%E5%BC%B7%E9%9D%B1%E5%8C%96%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
@@ -146,14 +146,14 @@
         "id": "gnews:防衛局 工事 入札 落札",
         "name": "Google ニュース「防衛局 工事 入札 落札」",
         "ok": true,
-        "picked": 1,
+        "picked": 0,
         "note": "https://news.google.com/rss/search?q=%E9%98%B2%E8%A1%9B%E5%B1%80%20%E5%B7%A5%E4%BA%8B%20%E5%85%A5%E6%9C%AD%20%E8%90%BD%E6%9C%AD%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
         "id": "gnews:自衛隊 施設 建設工事 受注",
         "name": "Google ニュース「自衛隊 施設 建設工事 受注」",
         "ok": true,
-        "picked": 1,
+        "picked": 0,
         "note": "https://news.google.com/rss/search?q=%E8%87%AA%E8%A1%9B%E9%9A%8A%20%E6%96%BD%E8%A8%AD%20%E5%BB%BA%E8%A8%AD%E5%B7%A5%E4%BA%8B%20%E5%8F%97%E6%B3%A8%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
@@ -195,7 +195,7 @@
         "id": "gnews:沖縄 米軍 施設 工事 埋立",
         "name": "Google ニュース「沖縄 米軍 施設 工事 埋立」",
         "ok": true,
-        "picked": 2,
+        "picked": 0,
         "note": "https://news.google.com/rss/search?q=%E6%B2%96%E7%B8%84%20%E7%B1%B3%E8%BB%8D%20%E6%96%BD%E8%A8%AD%20%E5%B7%A5%E4%BA%8B%20%E5%9F%8B%E7%AB%8B%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
@@ -351,7 +351,7 @@
       "relevance": 4,
       "pickups": 1,
       "matchText": "辺野古くい打ち４カ月中断 軟弱地盤改良、遅れ指摘も\n",
-      "enrichAttempts": 1,
+      "enrichAttempts": 2,
       "hasBody": false,
       "category": "usfj",
       "summary": [
@@ -453,6 +453,35 @@
       "importance": "normal",
       "generatedBy": "extractive",
       "region": "tohoku"
+    },
+    {
+      "key": "総会会員の総力を結集/防衛施設強靱化推進協会近畿中国四国支部",
+      "title": "総会・会員の総力を結集/防衛施設強靱化推進協会近畿中国四国支部",
+      "link": "https://www.kensetsunews.com/archives/1297818",
+      "isGoogleLink": false,
+      "description": "",
+      "publishedAt": "2026-10-18T19:55:00.000Z",
+      "publisher": "建設通信新聞Digital",
+      "via": [
+        "Google ニュース「防衛省 施設整備 強靱化」"
+      ],
+      "sourceHint": "強靱化",
+      "sourceHost": "kensetsunews.com",
+      "relevance": 7,
+      "pickups": 1,
+      "matchText": "総会・会員の総力を結集/防衛施設強靱化推進協会近畿中国四国支部\n",
+      "enrichAttempts": 1,
+      "hasBody": false,
+      "category": "kyoujinka",
+      "summary": [
+        "総会・会員の総力を結集/防衛施設強靱化推進協会近畿中国四国支部",
+        "（自動要約なし。原文を参照してください）",
+        "（自動要約なし。原文を参照してください）"
+      ],
+      "why": "自動抽出による要約です。原文で確認してください。",
+      "importance": "high",
+      "generatedBy": "extractive",
+      "region": null
     },
     {
       "key": "新基地は代替施設に県政転換議会答弁も変化",
