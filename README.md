@@ -17,6 +17,13 @@
 料理に特化した家事代行サービス「きゃっほー」の1ページ完結サイト。ビルド不要の静的HTML/CSS/JSで、
 ほかのプロジェクトとは独立しています。使い方と仮置き箇所は [`docs/kyahho/README.md`](docs/kyahho/README.md)。GitHub Pages では `/kyahho/` で公開される。
 
+## 同居しているもの: 福岡市長選ガイド（`docs/fukuoka-guide/`）
+
+2026年福岡市長選の全13候補の公約・発言・活動場所を、同じ形式で並べる1ページのサイト。ビルド不要の静的HTMLで、
+元は Claude Artifact。Artifact 上では DB の `events` を読み、GitHub Pages など Artifact の外では
+`docs/fukuoka-guide/data/events.json`（`data/e*.json` をまとめたもの）を読む。どちらも無ければページ内の記録を表示する。
+編集ルールは [`docs/fukuoka-guide/CLAUDE.md`](docs/fukuoka-guide/CLAUDE.md)。GitHub Pages では `/fukuoka-guide/` で公開される。
+
 ## 同居しているもの: 防衛施設ウォッチ（`news/`）
 
 このリポジトリには、上記の公式サイトとは独立した個人用ニュースサイトも入っています。

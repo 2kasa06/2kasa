@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>福岡市長選ガイド</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#f4efe3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@500;900&display=swap">
+<style>
+/* Layout concept: 公営掲示板と選挙公報の見立て。紙色の地に墨罫線、朱を1色だけ。13枠の掲示板と、7区の概略地図にピンを立てる。 */
+:root{
+  --paper:#f4efe3; --paper2:#ebe4d3; --ink:#26221c; --ink2:#5b5447; --rule:#26221c;
+  --accent:#c4311e; --accent-ink:#ffffff; --map-fill:#e3dbc7; --map-sea:#d9dfdc;
+  --focus:#1c4fa0;
+  --f-display:"Zen Kaku Gothic New","Noto Sans JP",system-ui,sans-serif;
+  --f-body:"Noto Sans JP",system-ui,sans-serif;
+}
+:root{color-scheme:light}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.95;letter-spacing:.03em;word-break:auto-phrase;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+a{color:var(--ink);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--accent)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;line-height:1.25}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:2px solid var(--rule);padding:14px 0;flex-wrap:wrap}
+.brand{font-family:var(--f-display);font-weight:900;font-size:17px;letter-spacing:.08em}
+nav{display:flex;gap:20px;font-size:13px}
+nav a{text-decoration:none;padding:4px 0;border-bottom:2px solid transparent}
+nav a:hover{border-bottom-color:var(--accent)}
+.hero{padding:56px 0 48px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:40px;align-items:end}
+.hero h1{font-weight:900;font-size:clamp(40px,7vw,84px);letter-spacing:-.01em;line-height:1.05}
+.hero h1 span{color:var(--accent)}
+.hero p{max-width:34em;margin:20px 0 28px;color:var(--ink2)}
+.btn{display:inline-block;font-family:var(--f-display);font-weight:900;font-size:15px;background:var(--accent);color:var(--accent-ink);padding:12px 26px;border:2px solid var(--accent);text-decoration:none;box-shadow:6px 6px 0 var(--ink);white-space:nowrap;transition:transform .15s,box-shadow .15s}
+.btn:hover{color:var(--accent-ink);transform:translate(2px,2px);box-shadow:3px 3px 0 var(--ink)}
+.btn:active{transform:translate(6px,6px);box-shadow:0 0 0 var(--ink)}
+.count{border:2px solid var(--rule);padding:20px 22px;background:var(--paper2)}
+.count dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:baseline}
+.count dt{font-size:13px;color:var(--ink2)}
+.count dd{margin:0;font-family:var(--f-display);font-weight:900;font-size:19px;font-variant-numeric:tabular-nums}
+.count .big{font-size:44px;color:var(--accent);line-height:1}
+section{padding:56px 0;border-top:2px solid var(--rule)}
+section>.wrap>h2{font-size:clamp(26px,4vw,38px);font-weight:900;margin-bottom:10px}
+.lead{color:var(--ink2);max-width:42em;margin:0 0 28px}
+/* map */
+.mapgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;align-items:start}
+.ctrl{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:end;margin-bottom:18px}
+.ctrl label{display:flex;flex-direction:column;font-size:12px;color:var(--ink2);gap:4px}
+.ctrl input[type=date],.ctrl select{font:inherit;font-size:15px;color:var(--ink);background:var(--paper);border:2px solid var(--rule);padding:8px 10px;border-radius:0;min-height:44px}
+.seg{display:inline-flex;border:2px solid var(--rule)}
+.seg button{font:inherit;font-size:14px;background:var(--paper);color:var(--ink);border:0;padding:10px 16px;min-height:44px;cursor:pointer}
+.seg button+button{border-left:2px solid var(--rule)}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.mapbox{border:2px solid var(--rule);background:var(--map-sea);position:relative}
+.mapbox svg{display:block;width:100%;height:auto}
+.ward{fill:var(--map-fill);stroke:var(--rule);stroke-width:1;stroke-linejoin:round;transition:fill .25s,opacity .25s;cursor:pointer;vector-effect:non-scaling-stroke}
+.ward.on{fill:color-mix(in srgb,var(--accent) 14%,var(--map-fill))}
+.ward:hover{fill:color-mix(in srgb,var(--ink) 12%,var(--map-fill))}
+.ward.sel{fill:var(--paper);stroke-width:3}
+.ward.dim{opacity:.5}
+.ward:focus-visible{outline:none;stroke:var(--focus);stroke-width:4}
+.wlabel.dim{opacity:.25}
+.wlabel{font-family:var(--f-display);font-weight:900;font-size:20px;fill:var(--ink);opacity:.6;text-anchor:middle;paint-order:stroke;stroke:var(--map-fill);stroke-width:4px;pointer-events:none}
+.sea{font-family:var(--f-display);font-size:15px;fill:var(--ink2);letter-spacing:.5em;text-anchor:middle}
+.lm circle{fill:var(--ink2)}
+.lm text{font-size:15px;fill:var(--ink2);paint-order:stroke;stroke:var(--map-fill);stroke-width:3px}
+.pin rect{stroke:var(--paper);stroke-width:2}
+.pin .tail{fill:var(--ink);stroke:none}
+.pin .ini{font-family:var(--f-display);font-weight:900;font-size:15px;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.pin .bd{fill:var(--ink);stroke:var(--paper);stroke-width:1.5}
+.pin .bn{fill:var(--paper);font-family:var(--f-display);font-weight:900;font-size:10px;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.route{fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none;stroke-dasharray:7 6}
+.zc{position:absolute;right:10px;top:10px;display:flex;flex-direction:column;gap:6px;z-index:2}
+.zc button{width:44px;height:44px;font:inherit;font-size:22px;font-weight:900;line-height:1;background:var(--paper);color:var(--ink);border:2px solid var(--rule);cursor:pointer;padding:0}
+.zc button:hover{background:var(--ink);color:var(--paper)}
+.zc button.txt{font-size:12px}
+.mapbox svg{touch-action:pan-y pinch-zoom;user-select:none;-webkit-user-select:none}
+.mapbox.pan svg{cursor:grab}
+.cleg{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{font:inherit;font-size:13px;display:inline-flex;align-items:center;gap:6px;background:var(--paper);color:var(--ink);border:2px solid var(--rule);padding:4px 10px 4px 6px;min-height:44px;cursor:pointer}
+.chip i{display:inline-grid;place-items:center;width:24px;height:24px;font-style:normal;font-family:var(--f-display);font-weight:900;font-size:14px}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.chip.zero{opacity:.45}
+.wardbar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:0 0 10px;padding:10px 12px;border:2px solid var(--rule);background:var(--paper2);font-weight:700}
+.wardbar button{font:inherit;font-size:13px;background:var(--paper);color:var(--ink);border:2px solid var(--rule);padding:8px 14px;min-height:44px;cursor:pointer}
+.wardbar button:hover{background:var(--ink);color:var(--paper)}
+.dot{display:inline-grid;place-items:center;width:22px;height:22px;margin-right:8px;vertical-align:1px;font-family:var(--f-display);font-weight:900;font-size:13px;font-style:normal}
+.slot{border-top:10px solid var(--cc,var(--rule))}
+.slot .aff{border-left-color:var(--cc,var(--accent))}
+.plabel{font-family:var(--f-display);font-weight:900;font-size:15px;fill:var(--ink);paint-order:stroke;stroke:var(--paper);stroke-width:5px;stroke-linejoin:round;pointer-events:none}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:var(--ink2);margin-top:10px}
+.legend i{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:6px;border:1px solid var(--rule)}
+.grp{padding:0;border-bottom:0!important}
+.gh{font-family:var(--f-display);font-weight:900;font-size:18px;margin:14px 0 4px;padding-left:10px;border-left:6px solid var(--accent)}
+.gh small{font-weight:500;font-size:12px;color:var(--ink2);margin-left:8px}
+.grp ul{list-style:none;margin:0;padding:0}
+.grp ul li{padding:10px 0;border-bottom:1px solid var(--rule)}
+.grp.flash{animation:flash 1.2s}
+@keyframes flash{0%,60%{background:color-mix(in srgb,var(--accent) 20%,transparent)}100%{background:transparent}}
+.open{font-size:12px;margin-left:8px}
+.pin{cursor:pointer;transition:transform .2s}
+.pin:focus-visible{outline:none}
+.pin:focus-visible rect{stroke:var(--focus);stroke-width:4}
+.skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--paper);padding:10px 16px;z-index:20}
+.skip:focus{left:16px;top:8px}
+section,details.slot{scroll-margin-top:16px}
+a,button,summary,.pin{touch-action:manipulation}
+@media (prefers-reduced-motion:no-preference){.pin.drop{animation:drop .5s cubic-bezier(.2,.9,.3,1.2) both}.pin:hover{transform:translateY(-3px)}}
+@keyframes drop{from{opacity:0;transform:translateY(-22px)}to{opacity:1;transform:none}}
+.mapnote{font-size:12px;color:var(--ink2);margin-top:8px}
+.events{list-style:none;margin:0;padding:0;border-top:2px solid var(--rule)}
+.events li{padding:14px 0;border-bottom:1px solid var(--rule)}
+.events b{font-family:var(--f-display);font-size:17px}
+.events .meta{font-size:13px;color:var(--ink2)}
+.tag{display:inline-block;font-size:12px;border:1px solid var(--rule);padding:0 8px;margin-right:6px}
+.empty{border:2px dashed var(--rule);padding:22px;color:var(--ink2)}
+.empty p{margin:0 0 12px}
+.empty button{font:inherit;font-size:14px;background:var(--paper);color:var(--ink);border:2px solid var(--rule);padding:10px 16px;min-height:44px;cursor:pointer}
+.empty button:hover{background:var(--ink);color:var(--paper)}
+/* candidates */
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:18px}
+.slot{border:2px solid var(--rule);background:var(--paper2);box-shadow:6px 6px 0 var(--rule);align-self:start}
+.slot summary{list-style:none;cursor:pointer;padding:16px 18px;display:block;min-height:44px}
+.slot summary::-webkit-details-marker{display:none}
+.slot summary:hover{background:var(--paper)}
+.slot h3{font-size:24px;font-weight:900}
+.slot .kana{font-size:12px;color:var(--ink2);display:block}
+.slot .role{font-size:13px;color:var(--ink2);margin-top:6px;line-height:1.7}
+.slot .aff{display:inline-block;margin-top:8px;font-size:12px;border-left:4px solid var(--accent);padding-left:8px}
+.slot .more{display:block;margin-top:10px;font-size:12px;color:var(--accent);font-weight:700}
+.slot[open] .more{display:none}
+.slot .body{padding:0 18px 18px;border-top:1px solid var(--rule)}
+.slot h4{font-family:var(--f-display);font-size:14px;margin:16px 0 4px;letter-spacing:.1em}
+.slot ul{margin:0;padding-left:1.2em;line-height:1.8;font-size:14px}
+.slot li{margin-bottom:4px}
+.slot .src{font-size:12px;margin:8px 0 0;color:var(--ink2)}
+.slot .src a{margin-right:12px}
+/* schedule */
+.sched{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:0;border:2px solid var(--rule)}
+.sched div{padding:20px;border-right:2px solid var(--rule)}
+.sched div:last-child{border-right:0}
+.sched b{display:block;font-family:var(--f-display);font-weight:900;font-size:26px}
+.sched span{font-size:13px;color:var(--ink2)}
+footer{border-top:2px solid var(--rule);padding:36px 0 56px;font-size:13px;color:var(--ink2)}
+footer p{max-width:46em;margin:0 0 10px}
+@media (max-width:820px){
+  .hero,.mapgrid{grid-template-columns:minmax(0,1fr)}
+  .hero{padding-top:36px}
+  .sched div{border-right:0;border-bottom:2px solid var(--rule)}
+  .sched div:last-child{border-bottom:0}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#map">本文へ移動</a>
+<div class="wrap">
+<header class="top">
+  <div class="brand" translate="no">福岡市長選ガイド</div>
+  <nav aria-label="ページ内移動"><a href="#map">地図</a><a href="#candidates">候補者</a><a href="#schedule">日程</a><a href="#about">出典</a></nav>
+</header>
+
+<div class="hero">
+  <div>
+    <h1>誰が、何を、<br>どこで<span>話した。</span></h1>
+    <p>11月15日投開票の福岡市長選。名乗りを上げた13人の公約と発言を、同じ形式で並べます。活動場所は地図にピンで残します。</p>
+    <a class="btn" href="#map">地図を見る</a>
+  </div>
+  <div class="count" aria-label="選挙日程の目安">
+    <dl>
+      <dt>告示まで</dt><dd><span class="big" id="daysToGo">7</span> 日</dd>
+      <dt>告示</dt><dd>11月1日(日)</dd>
+      <dt>投開票</dt><dd>11月15日(日)</dd>
+    </dl>
+  </div>
+</div>
+</div>
+
+<main>
+<section id="map"><div class="wrap">
+  <h2>活動エリアの地図</h2>
+  <p class="lead">会見や街頭演説など、報道や本人発信で場所が確認できた活動だけをピンにしています。日付を選ぶと、その日の分だけ表示します。</p>
+  <div class="ctrl">
+    <label for="d">日付<input type="date" id="d" name="date" autocomplete="off"></label>
+    <label for="c">候補者<select id="c" name="candidate" autocomplete="off"><option value="">全員</option></select></label>
+    <div class="seg" role="group" aria-label="表示範囲">
+      <button type="button" id="mDay" aria-pressed="true">選んだ日</button>
+      <button type="button" id="mAll" aria-pressed="false">これまで全部</button>
+    </div>
+  </div>
+  <div class="mapgrid">
+    <div>
+      <div class="mapbox">
+        <svg id="svg" viewBox="0 0 640 744" role="group" aria-label="福岡市7区の地図。区を選ぶと拡大します。活動があった場所には、候補者の頭文字の札を表示">
+          <g id="seas"></g>
+          <g id="wards"></g>
+          <g id="wl"></g>
+          <g id="lms"></g>
+          <g id="routes"></g>
+          <g id="pins"></g>
+        </svg>
+        <div class="zc" role="group" aria-label="地図の拡大と縮小">
+          <button type="button" id="zin" aria-label="拡大">+</button>
+          <button type="button" id="zout" aria-label="縮小">−</button>
+          <button type="button" id="zreset" class="txt" aria-label="全体表示に戻す">全体</button>
+        </div>
+      </div>
+      <div class="cleg" id="cleg" role="group" aria-label="候補者で絞り込み"></div>
+      <p class="mapnote">札の文字は候補者の姓の頭文字、色は候補者ごとの目印です(陣営の公式色とは限りません)。札の右上の数字は、その場所での活動が複数あるときの件数。区を押すと拡大して、その区の活動だけを表示します。「これまで全部」で候補者を選ぶと、日付順に点線で結びます(同じ日の順序は不明)。</p>
+      <p class="mapnote">福岡市域のみ表示。国土数値情報をもとにした簡略化した境界です。</p>
+    </div>
+    <div>
+      <div id="wardbar"></div>
+      <p id="summary" aria-live="polite" style="margin:0 0 10px;font-weight:700"></p>
+      <ul class="events" id="list"></ul>
+      <div id="unpinned"></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="candidates"><div class="wrap">
+  <h2>13人の公約と発言</h2>
+  <p class="lead">五十音順です。並び順に意味はありません。各項目は会見報道や本人サイトの内容を要約したもので、実現済みの事業や確定した予算ではありません。枠を開くと詳細が出ます。</p>
+  <div class="board" id="board"></div>
+</div></section>
+
+<section id="schedule"><div class="wrap">
+  <h2>日程</h2>
+  <p class="lead">福岡市選挙管理委員会の公表日程です。</p>
+  <div class="sched">
+    <div><b>11月1日</b><span>告示。立候補届出を受け付け、正式な候補者が確定します。</span></div>
+    <div><b>11月2日から14日</b><span>期日前投票の期間です。</span></div>
+    <div><b>11月15日</b><span>投開票。即日開票の予定です。</span></div>
+  </div>
+</div></section>
+
+<section id="about"><div class="wrap">
+  <h2>このサイトについて</h2>
+  <p class="lead">2026年10月25日時点の情報です。</p>
+  <p>掲載したのは、西日本新聞が10月20日時点で伝えた立候補予定者13人です。正式な候補者は11月1日の届出で確定します。NPO法人代表の永澤幹太氏は9月に出馬意向を示しましたが、供託金を10月31日までに確保できなければ見送ると本人サイトで説明しており、現時点の扱いを確認できていないため一覧に含めていません。</p>
+  <p>告示前の今は、日々の予定を公表している陣営が限られます。地図に載せているのは、報道と、各候補者の公式サイトの活動欄で日付と場所が確認できたものだけです。Instagramは、公式アカウントの投稿画面で日付と場所が確認できたものを追加しています(確認できたのは一部の候補者のみ)。日付が画面で確認できないものは、その旨を表示しています。</p>
+  <p>候補者の評価や順位づけはしていません。政策の詳細、費用、財源は各陣営の公式発表で確かめてください。</p>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <p>主な出典: 福岡市選挙管理委員会、NetIBニュース(データ・マックス)、共同通信、福岡TNCニュース、KBC、テレQ、西日本新聞、各候補者の公式サイト。各候補の枠に個別のリンクがあります。</p>
+  <p>誤りや更新の連絡は、このページを作成した人に伝えてください。</p>
+</div></footer>
+
+<script>
+/* 地図ピンは確認できた記録のみ。ward は区名、null は区が確認できていないもの。 */
+var CANDS=[
+{id:"abe",n:"阿部 秀樹",k:"あべ ひでき",age:31,role:"医師、前福岡市議",aff:"無所属",
+ pl:["高島市政の路線を引き継ぐ","医療・介護の現場を支える人への投資"],
+ st:["9月17日の会見で、高島市政を引き継ぎつつ医療と介護の担い手を重視すると述べた(報道)","薬院駅で夕方のご挨拶を行った(本人Instagram、日付未確認)","10月22日の記者会見で、医療・介護・保育の従事者や高齢者を含む全世代が生き生きと暮らせるよう投資していく考えを示した(本人Instagram)"],
+ src:[["本人Instagram","https://www.instagram.com/abe.shigikai/"],["KBC 9月17日","https://kbc.co.jp/news/article.php?id=18171215&ymd=2026-09-17"],["本人の政策ページ","https://abehideki.com/policy/"]]},
+{id:"aramaki",n:"荒牧 明楽",k:"あらまき あきら",age:41,role:"教育企業の講師",aff:"こころ党 公認",
+ pl:["福岡を世界の教育首都にする","AI時代に仕事や希望を生む教育","人と人の関係を支える「心のインフラ」"],
+ st:["9月3日の会見で、教育を起点に社会や産業を変える構想を語った(報道)"],
+ src:[["本人Instagram","https://www.instagram.com/aramaki_fukuoka/"],["TNC 9月3日","https://news.tnc.co.jp/news/articles/NID2026090331923/"]]},
+{id:"inatomi",n:"稲富 修二",k:"いなとみ しゅうじ",age:56,role:"前衆議院議員",aff:"無所属(推薦依頼は出さない方針)",
+ pl:["緊急の物価高対策として補正予算案を編成","副首都・福岡の実現","人への投資の拡充"],
+ st:["10月13日の会見で、県議会問題に触れ「福岡の政治を正す戦いでもある」と述べた","詳しい政策は後日の会見で発表するとした","薬院駅で朝のご挨拶を行った(本人Instagram、日付未確認)","10月27日に福岡市役所で政策発表の記者会見を行ったと投稿した(本人Instagram。政策の中身は未確認)"],
+ src:[["本人Instagram","https://www.instagram.com/inatomishuji/"],["NetIB 10月14日","https://data-max.co.jp/article/87382"],["TNC 10月13日","https://news.tnc.co.jp/news/articles/NID2026101332410"]]},
+{id:"inoue",n:"井上 潔",k:"いのうえ きよし",age:56,role:"行政書士、元国土交通省職員",aff:"減税日本 公認",
+ pl:["市民税を5%減税","市長給与を年800万円にする","市長退職金の廃止、議員報酬の削減"],
+ st:["9月14日の会見で市民税5%減税を訴えた","10月25日、香椎駅前で減税日本の河村たかし代表らと街頭演説を行った(本人Instagram)","福岡城の復元的整備を大きな目標に掲げ、歴史資料の収集を進めると投稿した(本人Instagram)"],
+ src:[["本人Instagram","https://www.instagram.com/kiyoshi_inoue_fk/"],["共同通信 9月14日","https://kumanichi.com/articles/2035671"],["デイリー 9月14日","https://www.daily.co.jp/society/politics/2026/09/14/0020818451.shtml"]]},
+{id:"katayama",n:"片山 純子",k:"かたやま じゅんこ",age:70,role:"市民連合ふくおか事務局長",aff:"無所属(共産党の市議が会見に同席)",
+ pl:["Park-PFIの見直し","非正規公務員の処遇改善","家賃補助制度の創設","市交通局によるコミュニティバスの運行"],
+ st:["9月26日の会見で、高島市政からの転換を訴えた(報道)"],
+ src:[["NetIB 9月28日","https://data-max.co.jp/article/87114"]]},
+{id:"jinno",n:"神野 元基",k:"じんの もとき",age:41,role:"学校法人理事長、中学高校の校長",aff:"無所属",
+ pl:["不登校など教育課題への対応","AIで市民の声を集めて政策に反映","都市の成長を市民が実感できるまちづくり"],
+ st:["9月24日の会見で、物価高を念頭に成長の実感を訴えた(報道)","10月18日、天神駅前で朝から夜まで街頭挨拶を行い、100人以上と話したと投稿した(本人Instagram)","10月26日、エルガーラホールで「福岡の未来を語る会」を開いた(本人Instagram)"],
+ src:[["本人Instagram","https://www.instagram.com/jinno_genki/"],["テレQ 9月24日","https://tvq.co.jp/news/news.html?did=2026092400000001"]]},
+{id:"sasaki",n:"佐々木 彩乃",k:"ささき あやの",age:29,role:"一般社団法人代表理事",aff:"無所属",
+ pl:["歴史と文化を受け継ぐ","経済成長による税収で暮らしを豊かにする"],
+ st:["9月18日の会見で、成長の果実を暮らしに回す考えを述べた","10月24日に玄界島のお祭り「界縁祭」に参加した(本人Instagram)","10月26日夕方、吉塚駅で駅立ちを行った。特定の政治団体や利益団体の支援を受けていないと発信している(本人Instagram)","10月25日に予定していた早良区と西区の対話集会は、台風接近のためオンライン開催に変えた(本人Instagram)"],
+ src:[["本人Instagram","https://www.instagram.com/sasaki.ayano.fukuoka/"],["共同通信 9月18日","https://kumanichi.com/articles/2037422"]]},
+{id:"shirabe",n:"調 崇史",k:"しらべ たかし",age:48,role:"福岡市議4期、元テレビ記者",aff:"無所属(自民党市議団が擁立)",
+ pl:["政策の決定過程と成果を市民が追える「令和の自治体経営モデル」","人口減少を見据えた産業構造の転換","地域間格差への対応、高齢の単身女性への支援"],
+ st:["9月11日の会見で、再開発や子育て投資、知名度向上を評価しつつ政治への信頼回復を掲げた","10月4日に後援会事務所開きを行った","10月27日、福岡市医師連盟が推薦を決めたと投稿した(本人Instagram)"],
+ src:[["本人Instagram","https://www.instagram.com/shirabe_takashi/"],["NetIB 9月11日","https://data-max.co.jp/article/86887"],["本人サイト","https://www.t-shirabe.net/blog/4776/"]]},
+{id:"niimura",n:"新村 優",k:"にいむら まさる",age:46,role:"前福岡市議(3期)",aff:"無所属",
+ pl:["再開発や創業支援など成長路線を継承","対話会とLINEで市民の声を集めて政策に反映","政策集「アンサー100」を準備中"],
+ st:["「日本一、市民の声を集める市長に」と語った(9月11日のインタビュー)","10月25日の市政フォーラムはホテルニューオータニ博多で開かれ、約1,500人が参加した(報道)","10月27日の投稿で、家賃や建築費の上昇への支援について、補助は自治体間のダンピング合戦になりかねず慎重になる一方、福岡に住みたい理由をつくる対策を重ねたいと述べた(本人Instagram)","福岡城の天守閣復元は、国指定史跡のため文化庁の判断が前提で、文献を集めている段階と説明した。実現には市民の総意づくりが大事とも述べた(本人Instagram)"],
+ src:[["本人Instagram","https://www.instagram.com/niimuramasaru/"],["NetIB インタビュー","https://data-max.co.jp/article/86888"],["本人サイト","https://niimuramasaru.com/"]]},
+{id:"nishiwaki",n:"西脇 ひろき",k:"にしわき ひろき",age:35,role:"会社員",aff:"無所属(本人表記)",
+ pl:["0〜2歳の保育料無償化を第1子に拡大","AIによる信号調整などの渋滞対策","介護職の待遇改善と定着支援"],
+ st:["8月26日にネット上で出馬を表明した。記者会見は確認できていない"],
+ src:[["本人の発信","https://go2senkyo.com/seijika/200151"]]},
+{id:"mori",n:"森 健太郎",k:"もり けんたろう",age:48,role:"ITエンジニア、IT企業経営",aff:"日本保守党 公認",
+ pl:["腐敗ゼロ(ワンヘルス推進宣言の撤回、市長報酬の見直し)","交通課題ゼロ(自動運転タクシーの早期導入)","移民拡大ゼロ"],
+ st:["9月18日の会見に百田尚樹代表らが同席した","10月10日に博多駅前などで日本保守党の幹部と街頭演説(本人サイト)","10月31日16時から天神の岩田屋本店前で街頭演説、18時から博多区で壮行会を予定している(本人Instagramのストーリーズ)"],
+ src:[["本人Instagram","https://www.instagram.com/moriken0119/"],["NetIB 9月18日","https://data-max.co.jp/article/87051"],["本人の公約ページ","https://moriken3.com/koyaku/"]]},
+{id:"yoshitomi",n:"吉富 景子",k:"よしとみ けいこ",age:37,role:"眼科医",aff:"無所属(参政党 推薦)",
+ pl:["飲食料品の消費税引き下げに伴う飲食店支援","公共事業を地場企業に発注し市内で利益を循環","外国人受け入れ施策の見直しを国に提言","小学校低学年のデジタル教材使用を制限","学校給食の地元農産物を5割以上に"],
+ st:["9月29日の会見後、博多駅前で参政党の神谷宗幣代表らと街頭演説を行った","高島市政の成長は評価しつつ、市民生活が豊かになったか疑問を呈した","本人サイトの活動欄によると、10月21日に姪浜駅、23日に香椎駅で街頭演説を行った","10月26日朝に吉塚駅で駅立ちを行った(本人Instagram)"],
+ src:[["本人Instagram","https://www.instagram.com/yoshitomi_keiko/"],["NetIB 9月29日","https://data-max.co.jp/article/87156"],["本人サイト","https://yoshitomikeiko.jp/"]]},
+{id:"watanabe",n:"渡辺 久也",k:"わたなべ ひさや",age:58,role:"貿易会社経営、元経済産業省職員",aff:"無所属",
+ pl:["ベーシックインカム(所得保障)の充実","道州制への移行","公共交通の不足地域への対策、市営バスの検討","市庁舎の移転と跡地の公園化"],
+ st:["8月26日の会見で、所得保障と道州制を訴えた(報道)"],
+ src:[["本人Instagram","https://www.instagram.com/watanabehisaya.fukuoka/"],["本人「10のこと」","https://watanabehisaya.politics.blog/10issues/"]]}
+];
+var EVENTS0=[
+{d:"2026-09-03",c:"aramaki",ward:"中央区",place:"福岡市役所",kind:"出馬会見",src:"https://news.tnc.co.jp/news/articles/NID2026090331923/"},
+{d:"2026-09-11",c:"shirabe",ward:"中央区",place:"福岡市役所",kind:"出馬会見",src:"https://data-max.co.jp/article/86887"},
+{d:"2026-09-17",c:"abe",ward:"中央区",place:"福岡市役所",kind:"出馬会見",src:"https://kbc.co.jp/news/article.php?id=18171215&ymd=2026-09-17"},
+{d:"2026-09-18",c:"mori",ward:"中央区",place:"福岡市役所",kind:"出馬会見",src:"https://data-max.co.jp/article/87051"},
+{d:"2026-09-29",c:"yoshitomi",ward:"中央区",place:"福岡市役所",kind:"出馬会見",src:"https://data-max.co.jp/article/87156"},
+{d:"2026-09-29",c:"yoshitomi",ward:"博多区",place:"博多駅前",kind:"街頭演説",src:"https://data-max.co.jp/article/87156"},
+{d:"2026-10-04",c:"shirabe",ward:null,place:"福岡市内(区は未確認)",kind:"後援会事務所開き",src:"https://data-max.co.jp/topic/fukuoka-shichousen/"},
+{d:"2026-10-10",c:"mori",ward:"博多区",place:"博多駅前",kind:"街頭演説",n:"JR博多駅 博多口。日本保守党の幹部が登壇",src:"https://moriken3.com/events/fukuoka-daigaisen/"},
+{d:"2026-10-10",c:"mori",ward:"中央区",place:"天神",kind:"街頭演説",n:"警固公園",src:"https://moriken3.com/koyaku/"},
+{d:"2026-10-21",c:"yoshitomi",ward:"西区",place:"姪浜駅",kind:"朝の挨拶と夜の街頭演説",src:"https://yoshitomikeiko.jp/today.html"},
+{d:"2026-10-23",c:"yoshitomi",ward:"東区",place:"香椎駅",kind:"街頭演説",n:"雨の中で実施",src:"https://yoshitomikeiko.jp/today.html"},
+{d:"2026-10-24",c:"yoshitomi",ward:"中央区",place:"天神",kind:"街頭演説(予定として掲載)",n:"音羽公園。参政党の神谷代表が来福",src:"https://yoshitomikeiko.jp/today.html"},
+{d:"2026-10-25",c:"niimura",ward:"中央区",place:"ホテルニューオータニ博多",kind:"市政フォーラム(予定)",n:"17時から。台風の影響で延期かオンライン開催になる可能性があり、12時に判断すると本人が告知。投稿時点では開催予定",src:"https://www.instagram.com/niimuramasaru/"},
+{d:"2026-10-24",c:"sasaki",ward:"西区",place:"玄界島",kind:"地域行事に参加",n:"玄界島のお祭り。本人のInstagramストーリー(投稿から21時間後に確認)",src:null},
+{d:null,dt:"10月23日か24日",c:"inatomi",ward:"中央区",place:"薬院駅",kind:"朝のご挨拶",n:"小雨の中。投稿の「1日前」表示からの推定で、日付は未確認",src:"https://www.instagram.com/inatomishuji/"},
+{d:null,dt:"日付未確認",c:"abe",ward:"中央区",place:"薬院駅",kind:"夕方のご挨拶",n:"雨の中。福岡青年会議所の仲間も応援に駆けつけた",src:"https://www.instagram.com/abe.shigikai/"},
+{d:"2026-10-13",c:"inatomi",ward:"中央区",place:"福岡市役所",kind:"出馬会見",src:"https://data-max.co.jp/article/87382"}
+];
+var EVENTS=EVENTS0.slice();
+var GEO={"paths":{"東区":"M248.2 136.1L246.3 134.2L248.3 136.0L246.5 138.3L248.2 136.1ZM299.0 180.2L298.0 179.6L298.9 179.0L301.5 180.6L299.0 180.2ZM379.6 119.1L365.8 124.2L364.2 127.0L365.5 128.4L362.2 130.1L357.2 136.8L354.3 136.0L350.6 139.9L349.1 149.6L350.4 150.9L349.2 151.5L347.8 157.3L348.1 159.3L348.9 158.8L347.2 166.0L350.4 172.8L353.4 172.0L354.2 173.6L352.1 177.3L343.8 179.5L337.5 177.0L328.0 166.2L319.0 164.4L306.2 157.4L300.4 158.5L293.0 163.9L284.9 150.2L275.7 138.2L263.9 136.2L259.2 133.7L286.2 136.2L315.6 132.6L322.8 130.1L334.4 121.4L349.9 118.3L377.6 106.6L406.4 88.5L435.6 65.2L447.7 49.9L445.3 44.0L449.7 49.4L453.0 45.5L448.0 42.1L444.3 42.9L448.0 41.9L452.8 44.7L459.0 39.9L470.7 25.4L471.8 20.6L470.0 18.6L469.8 15.6L472.5 10.1L473.8 0.7L488.0 4.8L485.4 9.4L486.3 11.1L490.0 9.5L490.5 7.5L493.8 11.3L496.4 7.6L498.1 8.9L497.5 11.4L501.4 11.6L500.2 14.9L505.4 17.0L512.4 25.6L519.2 27.2L519.7 30.6L522.4 30.9L522.4 34.0L524.4 35.9L526.8 33.5L525.1 32.3L525.3 30.2L530.0 32.7L531.0 35.6L538.6 38.6L536.7 42.6L538.4 44.1L539.6 53.3L546.6 64.4L550.3 76.5L553.0 79.3L552.7 82.2L554.4 85.9L565.0 83.6L566.9 80.6L574.8 76.9L577.7 78.5L579.8 84.0L583.9 86.0L580.1 94.1L580.2 101.5L587.3 110.1L588.1 113.7L584.1 117.9L587.7 124.8L593.9 130.9L596.8 138.0L602.6 144.7L603.1 148.5L606.4 149.4L605.9 165.5L608.9 166.1L613.6 164.0L615.7 159.7L619.4 158.8L618.4 163.9L620.9 165.1L623.0 169.4L630.2 163.8L640.0 172.6L636.0 177.5L635.9 181.8L634.1 183.6L637.5 186.8L635.5 197.1L639.3 199.7L639.6 201.5L636.7 202.8L638.5 204.8L639.1 209.4L637.4 210.3L637.3 212.3L632.6 213.0L625.4 217.7L622.1 215.6L620.4 222.2L612.6 219.1L613.3 213.2L609.3 212.0L610.3 209.0L607.3 207.8L606.8 205.6L604.6 204.7L602.6 206.5L598.0 203.9L594.5 197.6L591.0 195.3L588.9 199.8L585.4 199.6L582.4 202.3L581.4 204.4L583.5 205.5L581.5 209.6L579.3 209.8L578.7 211.9L567.3 213.9L562.6 218.9L558.6 228.2L552.1 227.1L546.7 242.7L543.3 241.4L544.0 243.2L524.1 258.7L532.0 268.5L525.9 272.9L526.6 275.0L518.7 275.0L511.4 271.1L508.5 271.2L498.0 262.8L495.8 264.9L498.0 269.1L490.8 271.0L488.7 268.2L489.5 263.0L488.6 262.9L484.5 275.1L476.7 269.4L476.0 270.5L474.0 269.5L469.1 276.2L460.2 269.0L461.4 266.8L452.8 263.5L447.7 266.5L434.8 256.2L437.3 254.2L435.3 252.3L438.4 243.8L445.2 241.4L465.7 247.5L466.6 244.2L464.4 243.6L466.2 242.3L467.7 237.7L465.2 236.8L463.4 243.1L461.4 241.4L462.3 238.5L442.5 231.1L447.3 216.8L453.2 215.3L456.1 206.5L444.4 202.5L452.2 179.3L451.5 181.7L458.0 183.9L459.9 178.4L453.4 176.2L452.5 178.4L453.3 176.0L479.8 184.9L481.6 180.6L482.2 168.3L482.0 170.7L481.4 166.9L477.3 167.1L471.9 164.3L463.5 167.2L449.3 162.5L446.3 156.6L490.5 134.8L505.6 138.9L509.8 130.6L509.0 123.5L506.2 120.2L500.6 117.6L495.6 104.1L490.6 97.0L491.7 94.2L497.8 93.6L506.2 85.9L504.9 83.3L505.8 78.0L503.8 70.7L499.3 65.2L495.7 63.6L494.9 67.9L482.6 66.8L474.6 68.4L473.0 71.4L467.6 74.2L453.1 75.8L444.2 80.8L446.4 85.2L444.2 80.9L441.6 84.3L441.8 88.1L445.4 94.2L448.4 95.3L451.2 93.0L450.7 95.4L440.2 101.0L432.4 107.9L422.0 111.5L379.6 119.1ZM253.4 119.1L258.0 124.2L254.4 120.8L251.6 122.0L252.9 126.4L257.0 125.6L254.0 127.2L257.2 133.1L252.4 132.1L249.8 135.1L252.5 131.6L246.3 130.4L245.9 134.3L240.0 137.1L241.6 138.9L244.1 138.7L243.4 136.9L245.2 139.2L217.0 135.5L214.3 128.7L210.3 126.2L208.4 126.8L206.5 118.2L203.3 118.5L199.6 113.6L200.9 115.1L202.5 113.0L200.3 110.1L199.4 110.8L200.3 110.1L198.8 108.1L197.5 110.5L198.4 104.1L196.0 99.6L196.6 91.0L189.9 86.1L197.9 74.2L198.8 64.5L208.7 65.2L212.3 63.8L212.9 61.0L217.1 61.5L219.1 60.0L222.4 63.9L229.6 65.9L233.7 72.5L236.7 83.3L243.3 91.3L246.1 103.1L249.4 107.3L249.0 113.8L253.4 119.1ZM417.6 236.3L430.2 231.8L440.7 200.7L431.1 184.5L440.8 200.7L430.2 231.9L417.6 236.3ZM444.2 179.7L446.1 173.7L452.4 175.8L446.1 173.8L444.2 179.7ZM494.8 119.1L496.4 124.6L492.8 130.9L473.2 140.8L470.9 136.0L468.6 137.1L470.4 142.2L465.9 132.8L439.1 145.8L438.4 144.7L431.6 148.0L422.6 129.0L424.8 124.5L451.4 109.3L450.2 110.2L451.0 112.4L455.2 110.3L454.0 107.7L452.0 108.9L470.4 96.7L479.8 96.5L483.1 97.9L489.8 106.4L494.8 119.1ZM324.1 119.1L322.9 117.3L323.5 115.4L324.1 119.1Z","博多区":"M468.8 351.4L457.3 336.3L455.5 320.5L438.7 305.4L427.9 278.0L429.4 276.7L434.8 278.8L433.3 281.3L434.6 282.8L439.9 278.5L437.8 275.8L434.9 276.6L437.8 273.2L436.0 273.5L436.0 272.1L435.1 273.1L426.8 265.1L434.8 256.2L447.7 266.5L452.8 263.5L461.4 266.8L460.2 269.0L469.1 276.2L474.0 269.5L476.0 270.5L476.7 269.4L484.5 275.1L488.6 262.9L489.5 263.0L488.7 268.2L490.8 271.0L494.7 269.3L495.4 270.4L498.0 269.1L495.8 264.9L498.0 262.8L508.5 271.2L511.4 271.1L518.7 275.0L525.6 274.3L528.6 277.3L536.3 279.0L540.8 284.0L544.2 284.6L544.4 288.1L548.0 289.5L555.1 301.4L563.2 299.6L572.4 314.3L577.2 317.8L580.7 325.2L584.8 324.8L593.7 333.7L594.8 338.7L597.6 341.1L598.8 347.3L602.6 349.1L606.4 359.2L606.6 362.4L602.8 368.4L602.0 376.3L613.3 375.7L611.3 378.9L611.4 382.3L614.2 387.7L619.6 392.9L619.2 398.9L611.7 402.9L606.0 412.2L599.7 414.8L598.5 412.4L593.6 411.7L588.4 404.1L588.7 400.3L584.8 398.0L578.2 386.9L575.4 385.7L573.9 388.4L566.0 391.8L569.9 393.6L583.4 410.8L588.4 421.4L582.9 426.5L588.7 436.1L585.8 437.4L583.5 441.3L584.9 442.9L583.2 444.8L584.1 447.2L581.9 449.9L584.0 452.1L580.8 453.3L580.2 455.3L577.6 452.7L573.5 457.5L572.1 457.4L566.1 448.5L564.0 448.3L558.0 437.2L553.7 433.6L552.7 429.2L550.5 428.8L551.3 427.8L545.5 420.9L536.7 405.7L523.0 389.2L511.8 380.1L507.2 382.6L503.4 376.1L496.2 370.7L492.4 364.1L486.8 358.6L468.8 351.4Z","中央区":"M381.7 354.8L377.7 345.8L374.2 342.4L361.0 339.0L341.8 300.2L344.4 297.1L342.9 298.0L343.7 300.0L348.1 299.8L351.2 296.4L350.1 294.5L348.6 295.1L350.3 294.3L353.5 297.4L356.4 295.9L355.7 295.0L356.5 295.8L360.2 293.1L358.7 291.1L355.3 294.3L354.5 293.2L364.6 287.3L365.8 289.3L368.9 287.4L372.2 289.5L375.6 289.3L376.4 285.5L375.4 285.0L377.7 285.3L378.7 278.4L387.0 279.5L387.5 276.1L386.6 283.3L395.2 284.5L397.5 292.0L397.5 293.9L396.0 294.4L399.0 294.8L397.7 296.6L399.4 299.9L393.8 300.6L393.0 298.3L390.0 299.1L391.1 301.8L392.6 302.5L394.6 307.4L400.3 306.0L399.2 303.0L400.9 301.7L404.7 306.6L409.4 304.1L407.1 299.6L409.2 298.5L411.6 303.3L420.9 298.5L417.1 291.0L409.6 294.9L402.4 291.4L410.3 287.2L402.6 272.1L413.9 266.2L423.7 285.5L429.0 282.8L434.9 293.9L439.4 306.8L450.7 315.0L455.5 320.5L457.3 336.3L468.8 351.4L456.5 354.9L458.4 357.4L441.5 362.4L432.2 369.0L430.9 373.8L433.7 379.2L427.6 382.6L428.6 384.4L427.6 386.5L429.3 389.7L423.9 392.8L425.8 399.5L422.4 400.1L416.9 399.9L414.0 396.8L404.5 392.2L396.9 392.1L393.1 387.7L385.3 388.6L383.5 383.3L384.2 365.2L381.7 354.8ZM363.7 275.9L363.5 274.9L364.7 275.1L365.0 277.8L363.7 275.9ZM371.4 285.1L373.1 285.1L368.6 287.5L371.4 285.1ZM388.0 272.5L389.9 258.2L396.5 244.7L390.0 258.2L388.0 272.5Z","南区":"M360.6 520.5L359.4 519.0L362.3 514.3L360.9 504.3L367.5 507.2L376.9 507.4L382.2 509.4L381.7 506.9L383.7 506.0L383.5 500.1L386.3 493.4L390.9 491.3L392.3 486.8L399.2 480.9L399.2 478.7L401.7 476.3L403.7 469.5L402.6 458.3L406.3 450.6L409.8 445.9L414.7 450.0L416.9 448.9L415.2 441.0L412.4 438.0L415.0 429.9L408.3 406.0L409.3 395.4L414.0 396.8L416.9 399.9L425.8 399.5L423.8 393.1L429.3 389.7L427.6 386.5L428.6 384.4L427.6 382.6L433.7 379.2L430.9 373.8L431.3 370.2L440.9 362.7L458.4 357.4L456.5 354.9L468.8 351.4L486.8 358.6L492.4 364.1L496.2 370.7L503.4 376.1L507.2 382.6L511.9 380.2L523.7 389.9L536.7 405.7L547.9 423.9L542.7 423.1L540.8 427.9L534.8 426.7L529.8 430.9L528.5 428.4L526.4 429.6L527.0 435.1L520.9 439.1L521.2 443.6L522.6 445.3L520.2 447.4L522.6 449.8L522.4 452.7L527.0 460.6L528.0 465.4L522.5 471.7L519.0 470.8L512.7 475.3L513.8 477.3L512.0 478.8L516.1 485.7L508.9 490.8L505.7 487.4L496.6 491.4L494.0 487.5L495.9 482.7L493.3 471.5L489.6 472.5L487.8 476.5L479.2 478.9L477.4 483.9L471.8 489.3L467.2 486.1L462.8 486.5L458.7 492.5L457.9 491.4L449.2 495.9L447.7 500.5L443.8 502.9L444.6 514.4L438.8 515.1L436.2 519.1L434.4 516.6L431.4 516.4L429.3 520.3L430.0 524.0L427.5 526.9L427.4 531.6L423.0 534.1L416.3 527.8L412.9 529.2L412.1 532.1L405.4 531.6L396.9 535.8L394.3 531.6L386.4 528.9L382.4 533.0L373.6 537.7L369.9 531.7L366.0 529.4L363.4 522.2L360.6 520.5Z","西区":"M40.6 334.9L38.2 328.3L30.3 320.9L29.9 313.5L25.8 306.8L26.7 301.4L20.4 299.5L21.8 294.7L27.1 287.0L27.5 279.6L25.2 273.7L17.5 266.8L20.8 259.4L15.2 254.2L17.8 253.4L17.5 240.0L15.4 232.8L17.1 229.3L16.4 223.7L19.1 217.3L16.0 214.6L15.7 210.4L13.1 209.5L13.4 201.0L10.6 195.9L8.6 193.3L0.0 188.7L7.1 181.5L7.2 178.6L4.9 176.7L6.0 173.9L14.0 174.0L18.8 171.1L20.8 168.0L20.8 165.7L19.0 164.3L19.4 157.9L18.1 156.5L19.5 157.9L19.5 161.1L22.1 161.3L22.1 156.6L23.9 156.9L24.5 153.1L24.1 149.9L22.7 150.0L19.3 154.9L22.4 150.5L20.1 144.5L18.2 126.4L19.2 121.4L20.7 120.8L21.3 118.2L24.2 119.5L26.3 117.1L31.3 120.4L32.0 123.2L36.5 127.6L39.9 127.4L51.1 138.2L66.3 143.9L67.6 147.1L71.9 149.0L75.1 159.3L84.3 164.3L82.7 170.1L84.3 172.5L80.5 175.2L78.3 182.0L72.8 187.5L77.6 182.4L79.2 177.6L76.7 177.0L72.6 182.7L71.1 181.5L70.3 182.9L69.7 181.7L67.4 182.6L66.6 184.0L68.0 184.1L66.3 184.2L71.0 186.4L66.3 184.2L68.3 185.8L66.9 185.2L66.0 187.0L67.3 192.8L64.3 194.8L59.5 195.1L56.2 203.1L64.6 218.4L68.3 218.6L66.5 219.5L68.3 222.2L74.5 219.2L73.8 217.3L75.6 221.1L74.5 219.3L68.3 222.3L69.7 223.0L70.4 221.7L68.2 224.6L67.6 231.3L70.5 235.7L70.8 239.1L74.6 242.9L71.8 244.4L74.4 249.2L86.3 255.8L105.9 261.4L138.4 263.6L149.8 257.8L162.7 261.6L166.4 266.2L163.9 273.0L167.0 279.5L167.0 282.3L165.9 281.3L163.3 283.2L157.6 296.9L157.1 301.5L151.8 301.2L149.8 308.2L148.3 307.6L151.2 300.4L146.9 298.4L146.1 301.8L145.8 296.4L143.5 294.6L143.9 290.0L140.3 284.6L113.9 291.7L115.9 300.2L133.6 313.8L134.0 315.5L135.0 315.5L135.1 307.7L143.0 307.2L144.9 305.6L146.1 311.7L144.4 311.6L144.2 313.9L145.7 314.1L144.5 317.7L145.3 319.9L150.2 327.4L158.9 334.7L169.9 339.4L184.4 341.2L188.1 340.5L189.8 335.8L191.3 335.0L200.6 338.6L204.2 342.9L219.4 338.6L234.5 330.6L238.0 326.4L243.6 323.4L243.4 321.5L245.7 322.7L243.4 310.2L244.7 316.4L247.5 315.7L246.8 310.9L249.8 309.3L246.7 305.3L244.1 307.6L242.3 303.1L245.5 301.7L246.2 298.2L248.6 296.6L273.7 295.0L273.6 297.5L273.6 295.2L270.4 295.4L271.2 307.8L272.9 307.7L273.1 305.0L272.9 307.7L275.3 308.1L276.9 302.3L275.7 306.8L277.3 306.1L279.0 307.9L279.8 304.8L278.0 304.3L279.8 304.7L280.7 301.1L277.1 301.1L279.4 296.0L275.4 294.8L282.7 296.7L285.3 293.0L288.4 294.0L285.3 293.2L284.0 295.0L289.3 298.0L307.3 301.1L307.1 298.9L304.1 298.0L307.2 298.8L307.5 301.1L313.1 302.5L313.8 322.7L312.7 326.1L303.1 340.0L282.0 351.8L278.6 360.1L276.0 394.0L273.6 413.6L270.7 425.6L272.1 447.1L267.7 458.2L267.5 472.2L268.9 480.0L267.5 488.9L269.6 495.7L266.8 498.5L269.6 502.3L264.1 505.3L259.3 510.8L255.4 511.8L253.8 509.5L252.7 510.3L251.5 515.9L247.8 520.0L249.0 531.8L246.7 533.0L242.4 532.2L237.4 535.8L225.2 534.9L218.6 537.0L216.9 534.6L213.7 534.9L210.2 533.0L206.5 528.9L205.2 517.9L202.4 516.4L201.4 509.9L203.4 501.0L200.6 497.0L197.6 496.9L195.0 491.7L191.2 491.4L197.1 468.1L197.0 461.0L194.4 455.8L196.5 452.4L195.6 450.2L191.9 446.4L190.7 448.0L185.2 447.9L171.8 436.2L162.4 431.1L159.2 430.9L157.8 428.2L153.3 426.5L147.8 420.8L149.1 414.2L146.0 407.0L146.1 404.1L144.4 403.0L142.4 404.2L138.1 403.1L129.0 407.3L122.7 400.7L117.0 402.0L112.0 405.2L109.6 401.3L102.1 400.9L96.0 405.1L97.1 411.7L94.9 412.4L93.2 416.0L91.8 416.3L89.8 413.8L88.1 414.4L82.8 406.9L83.6 405.4L82.0 400.7L89.5 397.8L87.0 391.6L88.6 390.2L83.6 378.3L89.4 375.7L88.4 373.6L90.9 372.5L89.2 367.9L93.2 366.4L91.4 361.7L93.1 361.1L85.9 342.1L84.0 339.8L79.4 340.8L79.0 339.3L69.1 342.5L67.7 339.7L63.2 341.4L62.2 339.6L54.8 342.4L53.4 344.7L46.0 341.8L40.6 334.9ZM220.1 272.5L219.0 273.9L215.4 269.1L212.4 260.0L209.2 258.2L209.6 250.7L207.6 247.6L214.9 239.6L218.5 228.7L219.0 222.1L215.7 212.4L216.4 199.5L220.8 194.0L224.0 192.4L230.3 193.3L229.6 193.9L236.9 201.0L236.4 214.2L249.5 232.1L248.5 240.2L250.8 245.2L249.3 247.3L251.0 251.2L246.5 253.2L244.5 256.8L245.4 258.6L243.9 259.6L244.1 262.8L243.8 259.6L239.2 261.2L240.2 264.1L242.8 263.0L239.6 264.4L240.3 266.9L239.3 265.9L238.0 267.7L239.1 269.7L229.6 269.8L225.6 272.7L226.3 274.5L228.4 274.4L227.5 275.0L220.1 272.5ZM58.1 59.0L56.8 53.1L58.4 50.0L61.9 47.8L66.8 46.5L81.4 51.7L85.8 59.3L85.2 73.7L86.9 75.9L86.5 77.8L84.7 78.7L85.0 80.4L84.6 78.8L80.4 81.5L86.4 77.7L85.8 74.7L83.1 76.7L83.5 77.8L82.4 75.5L80.5 76.5L80.7 79.3L79.4 79.3L79.4 77.8L77.4 77.7L77.3 79.1L77.3 77.7L75.3 77.7L76.9 80.9L66.9 68.4L63.4 67.6L58.1 59.0ZM45.4 44.1L45.3 40.9L47.3 41.2L47.5 44.7L45.4 44.1ZM44.2 97.6L42.2 96.6L44.1 97.0L44.1 95.7L45.2 97.2L44.2 97.6ZM46.3 93.2L43.5 92.4L46.1 92.2L44.7 90.0L48.5 91.0L49.0 94.5L46.3 93.2Z","城南区":"M324.1 422.6L330.2 405.8L335.7 405.0L339.6 400.4L342.6 384.0L337.9 383.7L346.0 356.1L355.0 355.6L361.0 339.0L371.0 340.7L377.4 345.3L382.6 356.6L384.4 367.1L383.5 383.3L385.3 388.6L393.1 387.7L396.9 392.1L404.5 392.2L409.3 395.4L408.3 406.0L415.0 429.9L412.4 438.0L415.2 441.0L416.9 448.9L414.7 450.0L409.8 445.9L406.3 450.6L402.6 458.3L403.7 469.5L401.7 476.3L399.2 478.7L399.2 480.9L392.3 486.8L390.9 491.3L386.3 493.4L383.5 500.1L383.7 506.0L381.7 506.9L382.2 509.4L376.9 507.4L367.5 507.2L360.9 504.3L361.7 500.7L364.0 498.8L363.4 491.2L358.2 484.7L358.3 477.4L357.0 475.0L358.7 465.5L349.2 461.1L349.6 457.4L345.0 454.6L348.5 453.5L342.7 447.7L341.1 443.4L341.2 438.6L335.8 439.7L328.0 437.4L325.5 434.5L324.6 431.6L327.1 426.8L324.1 422.6Z","早良区":"M160.0 603.5L163.1 593.7L161.3 580.5L163.8 580.6L165.4 578.2L168.5 577.4L165.0 569.0L160.9 566.1L159.4 562.3L166.0 556.6L166.0 552.2L168.2 551.7L172.5 545.9L175.9 532.9L189.1 531.8L186.3 518.1L190.0 521.3L193.2 521.2L192.8 522.7L196.8 526.7L199.2 518.4L201.8 516.4L205.1 517.7L206.7 529.3L210.2 533.0L213.7 534.9L216.9 534.6L218.6 537.0L225.2 534.9L238.1 535.7L242.4 532.2L246.7 533.0L249.0 531.8L247.8 520.0L251.5 515.9L252.7 510.3L253.8 509.5L255.4 511.8L259.3 510.8L264.1 505.3L269.6 502.3L266.8 498.5L269.6 495.7L267.5 488.9L268.9 480.0L267.5 472.2L267.7 458.2L272.1 447.1L270.7 425.6L273.6 413.6L277.6 365.2L280.2 354.7L284.6 349.6L303.1 340.0L312.7 326.1L313.8 322.7L313.1 302.5L319.6 304.2L320.1 301.5L322.7 301.5L320.2 301.6L319.7 304.2L326.5 304.8L330.1 303.7L329.0 303.2L330.0 301.7L331.4 302.7L330.4 303.7L334.6 304.0L340.2 300.8L339.4 299.2L337.0 299.7L341.8 300.2L361.1 340.0L355.0 355.6L346.0 356.1L337.9 383.7L342.6 384.0L340.4 397.9L338.9 402.2L335.7 405.0L330.2 405.9L323.8 423.3L325.5 423.2L327.1 426.8L324.5 431.7L328.0 437.4L336.4 439.7L341.2 438.6L341.1 443.4L342.7 447.7L348.5 453.5L345.0 454.6L349.6 457.4L349.2 461.1L358.7 465.5L357.0 475.0L358.3 477.4L358.2 484.7L363.4 491.2L364.0 498.8L361.7 500.7L360.7 505.2L362.2 515.1L359.4 519.0L363.4 522.2L366.0 529.4L369.9 531.7L373.8 539.6L383.6 549.0L390.5 559.9L391.0 564.1L389.5 567.7L394.8 579.0L396.4 591.4L395.2 600.8L397.7 604.2L398.7 613.5L401.2 615.9L401.8 620.9L405.3 627.1L405.3 630.6L409.9 637.7L407.0 641.6L405.0 648.1L407.4 651.9L405.4 656.6L408.5 660.5L409.3 666.5L421.3 676.0L433.2 681.1L434.4 685.0L433.1 691.6L434.8 696.6L436.4 697.9L440.5 696.9L441.1 700.1L445.0 703.6L444.8 707.5L442.3 710.2L442.1 712.9L432.8 708.3L430.3 704.8L426.9 704.6L427.4 719.1L430.7 723.8L426.7 725.9L428.1 728.8L430.4 729.5L428.3 735.5L426.5 736.6L426.5 739.1L412.8 741.2L407.2 735.6L401.2 736.9L398.3 740.0L388.6 744.1L388.0 738.8L385.6 736.6L385.1 733.7L372.3 723.0L371.4 718.5L368.3 714.8L364.6 720.7L360.0 720.6L356.7 718.3L346.1 721.9L342.2 719.4L340.3 722.7L332.4 713.5L331.0 708.2L327.0 706.5L318.0 692.2L314.9 693.7L309.0 691.2L305.7 693.3L298.6 691.9L298.0 684.7L295.2 678.1L288.2 675.8L276.0 666.0L269.6 663.7L266.2 658.3L263.2 656.9L249.9 658.6L248.2 651.1L243.9 648.2L237.1 647.3L233.1 644.8L225.4 650.4L223.2 647.9L213.5 646.1L211.1 644.1L209.7 639.7L204.6 636.6L201.3 629.3L194.8 628.6L181.4 616.0L173.9 611.9L174.0 609.8L169.9 604.7L166.2 602.6L160.0 603.5Z"},"p":{"lon0":130.19783861000002,"lat1":33.71274211,"k":0.833221973888798,"S":2585.6358662323423,"W":640.0,"H":744.10191721015}};
+var PR=GEO.p;
+function px(lon,lat){return[(lon-PR.lon0)*PR.k*PR.S,(PR.lat1-lat)*PR.S]}
+var WLAB={"東区":[130.426,33.641],"博多区":[130.445,33.57],"中央区":[130.378,33.560],"南区":[130.41,33.51],"城南区":[130.373,33.55],"早良区":[130.31,33.55],"西区":[130.255,33.575]};
+var LMS=[["福岡空港",130.4507,33.5859,1],["姪浜",130.3226,33.5845,-1],["今宿",130.2765,33.5865,-1],["香椎",130.4426,33.6598,1],["大橋",130.4294,33.5602,1]];
+var PLACES={"福岡市役所":{ll:[130.4018,33.5904],ward:"中央区",area:"天神",side:-1,off:[6,-106]},"天神":{ll:[130.3987,33.5914],ward:"中央区",area:"",side:-1,off:[-143,-59]},"博多駅前":{ll:[130.4207,33.5897],ward:"博多区",area:"",side:1,off:[35,-18]},"ホテルニューオータニ博多":{ll:[130.4045,33.5875],ward:"中央区",area:"渡辺通",side:-1,off:[100,66],lab:"ニューオータニ"},"薬院駅":{ll:[130.4021,33.5820],ward:"中央区",area:"",side:1,off:[-20,95]},"玄界島":{ll:[130.2205,33.6820],ward:"西区",area:"",side:1,off:[0,0]},"姪浜駅":{ll:[130.3226,33.5845],ward:"西区",area:"",side:-1,off:[0,0]},"香椎駅":{ll:[130.4426,33.6598],ward:"東区",area:"",side:1,off:[0,0]},"六本松":{ll:[130.3787,33.5758],ward:"中央区",area:"",side:-1,off:[-40,66]},"大濠公園":{ll:[130.3770,33.5862],ward:"中央区",area:"",side:1,off:[-76,23]},"箱崎駅":{ll:[130.4256,33.6226],ward:"東区",area:"",side:1,off:[0,0]},"吉塚駅":{ll:[130.4225,33.6063],ward:"博多区",area:"",side:1,off:[36,-30]},"南福岡駅":{ll:[130.4408,33.5476],ward:"博多区",area:"",side:1,off:[0,0]},"東比恵駅":{ll:[130.4300,33.5830],ward:"博多区",area:"",side:-1,off:[70,15]},"西新":{ll:[130.3560,33.5826],ward:"早良区",area:"",side:-1,off:[-91,43]},"福岡ドーム":{ll:[130.3622,33.5953],ward:"中央区",area:"",side:-1,off:[-139,-14]},"アクロス福岡":{ll:[130.4033,33.5913],ward:"中央区",area:"天神",side:-1,off:[-93,-89]}};
+var $=function(i){return document.getElementById(i)};
+var byId={};CANDS.forEach(function(c){byId[c.id]=c});
+function todayJST(){var p=new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Tokyo"}).format(new Date());return p}
+function esc(s){return String(s).replace(/[&<>"]/g,function(m){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]})}
+var DF=new Intl.DateTimeFormat("ja-JP",{timeZone:"Asia/Tokyo",month:"long",day:"numeric"});
+function fmt(d){return DF.format(new Date(d+"T12:00:00+09:00"))}
+
+var COL={aramaki:["#178F7A","#fff"],abe:["#2563C9","#fff"],inatomi:["#E3A81C","#26221c"],inoue:["#5B3FA8","#fff"],jinno:["#2F9E44","#fff"],katayama:["#C2306E","#fff"],mori:["#0B7BBF","#fff"],niimura:["#1B2A6B","#fff"],nishiwaki:["#9CB800","#26221c"],sasaki:["#5CC6D6","#26221c"],shirabe:["#D13F28","#fff"],watanabe:["#7A4E32","#fff"],yoshitomi:["#F28C28","#26221c"]};
+function ini(id){return byId[id].n.charAt(0)}
+function sname(id){return byId[id].n.split(" ")[0]}
+var mode="day",selWard="",cur={ev:[],groups:[],base:[]};
+var FULL={x:0,y:0,w:640,h:744},view={x:0,y:0,w:640,h:744},tw=0;
+var REDUCE=window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+function clampView(v){var w=Math.min(640,Math.max(64,v.w)),h=w*744/640;return{x:Math.min(640-w,Math.max(0,v.x)),y:Math.min(744-h,Math.max(0,v.y)),w:w,h:h}}
+function goView(v,anim){
+  v=clampView(v);cancelAnimationFrame(tw);
+  if(!anim||REDUCE){view=v;drawMap(false);return}
+  var a=view,t0=performance.now(),D=320;
+  (function step(now){var t=Math.min(1,(now-t0)/D),e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+    view={x:a.x+(v.x-a.x)*e,y:a.y+(v.y-a.y)*e,w:a.w+(v.w-a.w)*e,h:a.h+(v.h-a.h)*e};drawMap(false);
+    if(t<1)tw=requestAnimationFrame(step)})(t0);
+}
+function zoomBy(f,cx,cy){
+  if(cx==null){cx=view.x+view.w/2;cy=view.y+view.h/2}
+  var nw=Math.min(640,Math.max(64,view.w/f)),r=nw/view.w;
+  goView({x:cx-(cx-view.x)*r,y:cy-(cy-view.y)*r,w:nw,h:nw*744/640},true);
+}
+function wardBox(n){
+  var best=null;GEO.paths[n].split("Z").forEach(function(r){var m=r.match(/-?\d+\.?\d*/g);if(!m||m.length<4)return;
+    var x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;for(var i=0;i+1<m.length;i+=2){var x=+m[i],y=+m[i+1];if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
+    var a=(x1-x0)*(y1-y0);if(!best||a>best.a)best={a:a,x0:x0,y0:y0,x1:x1,y1:y1}});
+  return best;
+}
+function selectWard(n){
+  if(!n||selWard===n){selWard="";render();goView(FULL,true);return}
+  selWard=n;var b=wardBox(n),bw=(b.x1-b.x0)*1.25,bh=(b.y1-b.y0)*1.25;
+  var w=Math.max(bw,bh*640/744,120);
+  render();goView({x:(b.x0+b.x1)/2-w/2,y:(b.y0+b.y1)/2-w*744/640/2,w:w,h:w*744/640},true);
+  var mb=document.querySelector(".mapbox");if(mb&&mb.getBoundingClientRect().top<0)mb.scrollIntoView({behavior:REDUCE?"auto":"smooth",block:"start"});
+}
+(function init(){
+  var t=todayJST();
+  var days=Math.round((new Date("2026-11-01T00:00:00+09:00")-new Date(t+"T00:00:00+09:00"))/864e5);
+  $("daysToGo").textContent=days>0?days:0;
+  var h="";
+  Object.keys(GEO.paths).forEach(function(n){h+='<path class="ward" data-w="'+n+'" tabindex="0" role="button" aria-label="'+n+'を拡大して、この区の活動を表示" d="'+GEO.paths[n]+'"/>'});
+  $("wards").innerHTML=h;
+  var sel=$("c");CANDS.forEach(function(c){var o=document.createElement("option");o.value=c.id;o.textContent=c.n;sel.appendChild(o)});
+  $("d").value=t;
+  var b="";
+  CANDS.forEach(function(c){
+    b+='<details class="slot" id="s-'+c.id+'" style="--cc:'+COL[c.id][0]+'"><summary><h3>'+esc(c.n)+'</h3><span class="kana">'+esc(c.k)+'</span><div class="role">'+c.age+'歳 '+esc(c.role)+'</div><span class="aff">'+esc(c.aff)+'</span><span class="more">公約と発言を開く</span></summary><div class="body"><h4>掲げている主な政策</h4><ul>'+
+      c.pl.map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+'</ul><h4>発言と動き</h4><ul>'+
+      c.st.map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+'</ul><p class="src">出典: '+
+      c.src.map(function(s){return'<a href="'+s[1]+'" target="_blank" rel="noopener">'+esc(s[0])+'</a>'}).join("")+'</p></div></details>'});
+  $("board").innerHTML=b;
+  $("d").addEventListener("change",render);$("c").addEventListener("change",render);
+  $("mDay").addEventListener("click",function(){setMode("day")});
+  $("mAll").addEventListener("click",function(){setMode("all")});
+  $("zin").addEventListener("click",function(){zoomBy(1.8)});
+  $("zout").addEventListener("click",function(){zoomBy(1/1.8)});
+  $("zreset").addEventListener("click",function(){selWard="";render();goView(FULL,true)});
+  var moved=false;
+  $("wards").addEventListener("click",function(e){if(moved){moved=false;return}var w=e.target.closest&&e.target.closest(".ward");if(w)selectWard(w.getAttribute("data-w"))});
+  $("wards").addEventListener("keydown",function(e){if(e.key!=="Enter"&&e.key!==" ")return;var w=e.target.closest&&e.target.closest(".ward");if(w){e.preventDefault();selectWard(w.getAttribute("data-w"))}});
+  $("cleg").addEventListener("click",function(e){var bt=e.target.closest&&e.target.closest(".chip");if(!bt)return;var id=bt.getAttribute("data-c");$("c").value=$("c").value===id?"":id;render()});
+  $("wardbar").addEventListener("click",function(e){if(e.target.closest&&e.target.closest("button")){selWard="";render();goView(FULL,true)}});
+  var svg=$("svg"),mb=document.querySelector(".mapbox"),drag=null;
+  svg.addEventListener("pointerdown",function(e){if(e.pointerType==="touch"||e.button!==0||view.w>=640)return;drag={x:e.clientX,y:e.clientY,v:{x:view.x,y:view.y},m:false}});
+  window.addEventListener("pointermove",function(e){if(!drag)return;var r=svg.getBoundingClientRect(),dx=e.clientX-drag.x,dy=e.clientY-drag.y;
+    if(!drag.m&&Math.abs(dx)+Math.abs(dy)<5)return;drag.m=true;cancelAnimationFrame(tw);
+    view=clampView({x:drag.v.x-dx*view.w/r.width,y:drag.v.y-dy*view.w/r.width,w:view.w,h:view.h});drawMap(false)});
+  window.addEventListener("pointerup",function(){if(drag&&drag.m)moved=true;drag=null;setTimeout(function(){moved=false},0)});
+  svg.addEventListener("wheel",function(e){if(!(e.ctrlKey||e.metaKey))return;e.preventDefault();var r=svg.getBoundingClientRect();
+    zoomBy(e.deltaY<0?1.25:1/1.25,view.x+(e.clientX-r.left)/r.width*view.w,view.y+(e.clientY-r.top)/r.height*view.h)},{passive:false});
+  render();
+})();
+
+var liveEl=document.createElement("p");liveEl.id="live";liveEl.className="mapnote";liveEl.setAttribute("role","status");liveEl.textContent="掲載データ: ページ内の記録を表示中";
+$("summary").parentNode.insertBefore(liveEl,$("list"));
+function fmtAt(t){try{return new Intl.DateTimeFormat("ja-JP",{timeZone:"Asia/Tokyo",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}).format(new Date(t))}catch(x){return""}}
+/* 記録を検証して差し替える。採用0件なら -1、それ以外は最新の at (ms, 無ければ0) */
+function apply(list){
+  var arr=[],last=0;
+  list.forEach(function(v){if(v&&v.c&&byId[v.c]&&v.place){arr.push(v);if(v.at&&Date.parse(v.at)>last)last=Date.parse(v.at)}});
+  if(!arr.length)return -1;
+  arr.sort(function(a,b){return String(a.d||"9")<String(b.d||"9")?-1:1});
+  EVENTS=arr;render();return last;
+}
+/* Artifact の外 (GitHub Pages など) では data/events.json を読む */
+function staticLoad(){
+  fetch("data/events.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(list){
+    var last=apply(list);if(last<0)return;
+    liveEl.textContent="掲載データ: data/events.json の記録を表示中"+(last?"(最新の追加 "+fmtAt(last)+")":"")+"。";
+  }).catch(function(){});
+}
+(async function live(){
+  try{
+    if(typeof claude==="undefined"||!claude.use){staticLoad();return}
+    var db=await claude.use("db");if(!db){staticLoad();return}
+    db.collection("events").onSnapshot(function(snap){
+      var arr=[];
+      snap.docs.forEach(function(x){arr.push(x.data())});
+      var last=apply(arr);
+      if(last<0)return;
+      liveEl.textContent="掲載データ: 自動更新中"+(last?"(最新の追加 "+fmtAt(last)+")":"")+"。1時間ごとに公式サイトと報道を確認して追記します。";
+    },function(){});
+  }catch(x){staticLoad()}
+})();
+function setMode(m){mode=m;$("mDay").setAttribute("aria-pressed",m==="day");$("mAll").setAttribute("aria-pressed",m==="all");render()}
+function render(){
+  var d=$("d").value,c=$("c").value;
+  var base=EVENTS.filter(function(e){return(mode==="all"||(e.d&&e.d===d))&&byId[e.c]});
+  var inW=function(e){return!selWard||e.ward===selWard};
+  var ev=base.filter(function(e){return(!c||e.c===c)&&inW(e)});
+  var groups=[],gi={},loose=[];
+  ev.forEach(function(e){
+    if(PLACES[e.place]){var g=gi[e.place];if(!g){g=gi[e.place]={place:e.place,items:[],im:{}};groups.push(g)}
+      var it=g.im[e.c];if(!it){it=g.im[e.c]={c:e.c,evs:[]};g.items.push(it)}it.evs.push(e)}
+    else loose.push(e)});
+  cur={ev:ev,groups:groups,base:base};
+  var label=mode==="all"?"これまでの記録":(d?fmt(d):"")+"の記録";
+  $("summary").textContent=label+(selWard?"("+selWard+")":"")+": "+ev.length+"件";
+  $("wardbar").innerHTML=selWard?'<div class="wardbar"><span>'+esc(selWard)+'を拡大して表示中</span><button type="button">全体に戻す</button></div>':"";
+  var L=$("list"),U=$("unpinned");
+  if(!ev.length){
+    L.innerHTML="";
+    U.innerHTML='<div class="empty"><p>'+(mode==="all"?"この条件の記録はありません。":fmt(d)+"に確認できた活動はまだ登録がありません。告示前は会見や事務所開きなど限られた記録のみです。")+'</p>'+(mode==="day"?'<button type="button" id="goAll">これまでの記録を全部見る</button>':"")+'</div>';
+    var gb=$("goAll");if(gb)gb.addEventListener("click",function(){setMode("all")});
+  }else{
+    L.innerHTML=groups.map(function(g,i){var p=PLACES[g.place];var evs=[];g.items.forEach(function(it){evs=evs.concat(it.evs)});
+      return'<li class="grp" id="g'+i+'"><h3 class="gh">'+esc(g.place)+'<small>'+esc(p.ward+(p.area?" "+p.area:""))+'</small></h3><ul>'+evs.map(item).join("")+'</ul></li>'}).join("");
+    U.innerHTML=loose.length?'<p class="mapnote" style="margin-top:14px">場所を地図に置けなかった記録</p><ul class="events">'+loose.map(item).join("")+'</ul>':"";
+  }
+  var onW={};base.filter(function(e){return!c||e.c===c}).forEach(function(e){if(e.ward&&PLACES[e.place])onW[e.ward]=1});
+  Array.prototype.forEach.call(document.querySelectorAll(".ward"),function(w){var n=w.getAttribute("data-w");w.classList.toggle("on",!!onW[n]);w.classList.toggle("sel",selWard===n);w.classList.toggle("dim",!!selWard&&selWard!==n)});
+  var cnt={};base.filter(inW).forEach(function(e){cnt[e.c]=(cnt[e.c]||0)+1});
+  $("cleg").innerHTML=CANDS.map(function(x){var k=COL[x.id];return'<button type="button" class="chip'+(cnt[x.id]?"":" zero")+'" data-c="'+x.id+'" aria-pressed="'+(c===x.id)+'"><i style="background:'+k[0]+';color:'+k[1]+'">'+esc(ini(x.id))+'</i>'+esc(sname(x.id))+(cnt[x.id]?" "+cnt[x.id]:"")+'</button>'}).join("");
+  drawMap(true);
+}
+function drawMap(anim){
+  var z=640/view.w,pk=1/z,kl=1/Math.pow(z,.6),c=$("c").value;
+  $("svg").setAttribute("viewBox",view.x.toFixed(1)+" "+view.y.toFixed(1)+" "+view.w.toFixed(1)+" "+view.h.toFixed(1));
+  $("svg").parentNode.classList.toggle("pan",z>1.05);
+  var h="";
+  Object.keys(WLAB).forEach(function(n){var q=px(WLAB[n][0],WLAB[n][1]);h+='<text class="wlabel'+(selWard&&selWard!==n?" dim":"")+'" style="font-size:'+(20*kl).toFixed(1)+'px;stroke-width:'+(4*kl).toFixed(1)+'px" x="'+q[0].toFixed(1)+'" y="'+q[1].toFixed(1)+'">'+n+'</text>'});
+  $("wl").innerHTML=h;
+  var q1=px(130.355,33.69),q2=px(130.268,33.703);
+  $("seas").innerHTML='<text class="sea" style="font-size:'+(15*kl).toFixed(1)+'px" x="'+q1[0]+'" y="'+q1[1]+'">博多湾</text><text class="sea" style="font-size:'+(15*kl).toFixed(1)+'px" x="'+q2[0]+'" y="'+q2[1]+'">玄界灘</text>';
+  var lm="";LMS.forEach(function(l){var q=px(l[1],l[2]);lm+='<g class="lm"><circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(3.5*kl).toFixed(1)+'"/><text style="font-size:'+(15*kl).toFixed(1)+'px;stroke-width:'+(3*kl).toFixed(1)+'px" x="'+(q[0]+l[3]*8*kl).toFixed(1)+'" y="'+(q[1]+4*kl).toFixed(1)+'" text-anchor="'+(l[3]>0?"start":"end")+'">'+l[0]+'</text></g>'});
+  $("lms").innerHTML=lm;
+  /* routes */
+  var R="";
+  if(mode==="all"&&(c||selWard)){
+    var per={};cur.ev.forEach(function(e){if(e.d&&PLACES[e.place]){(per[e.c]=per[e.c]||[]).push(e)}});
+    Object.keys(per).forEach(function(id){var arr=per[id].sort(function(a,b){return a.d<b.d?-1:a.d>b.d?1:0}),pts=[],last="";
+      arr.forEach(function(e){if(e.place!==last){var q=px(PLACES[e.place].ll[0],PLACES[e.place].ll[1]);pts.push(q[0].toFixed(1)+","+q[1].toFixed(1));last=e.place}});
+      if(pts.length>1)R+='<polyline class="route" points="'+pts.join(" ")+'" stroke="'+COL[id][0]+'" style="stroke-width:'+(3.5*pk).toFixed(2)+'px;stroke-dasharray:'+(8*pk).toFixed(1)+' '+(6*pk).toFixed(1)+'"/>'});
+  }
+  $("routes").innerHTML=R;
+  /* pins */
+  var P="";
+  cur.groups.forEach(function(g,gi){
+    var p=PLACES[g.place],q=px(p.ll[0],p.ll[1]),o=p.off||[0,0],k=g.items.length,perRow=6,cw=26*pk,ch=26*pk,gap=2*pk;
+    var bx=q[0]+o[0]*pk,by=q[1]+o[1]*pk;
+    var rows=Math.ceil(k/perRow),w0=Math.min(k,perRow)*(cw+gap)-gap;
+    if(o[0]||o[1])P+='<g><line x1="'+q[0].toFixed(1)+'" y1="'+q[1].toFixed(1)+'" x2="'+bx.toFixed(1)+'" y2="'+by.toFixed(1)+'" stroke="var(--ink)" stroke-width="'+(1.6*pk).toFixed(2)+'"/><circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(3.5*pk).toFixed(2)+'" fill="var(--ink)"/></g>';
+    var names=g.items.map(function(it){return sname(it.c)}).join("、");
+    var tailH=7*pk,top=-(tailH+rows*(ch+gap)-gap);
+    P+='<g transform="translate('+bx.toFixed(1)+' '+by.toFixed(1)+')"><g class="pin'+(anim?" drop":"")+'" data-i="'+gi+'" style="animation-delay:'+(gi*60)+'ms" tabindex="0" role="link" aria-label="'+esc(g.place+" "+names+" の活動")+'"><title>'+esc(g.place+": "+names)+'</title>';
+    P+='<path class="tail" d="M0 0L'+(-6*pk).toFixed(2)+' '+(-tailH).toFixed(2)+'L'+(6*pk).toFixed(2)+' '+(-tailH).toFixed(2)+'Z"/>';
+    g.items.forEach(function(it,j){
+      var r=Math.floor(j/perRow),inRow=Math.min(perRow,k-r*perRow),cI=j%perRow,rw=inRow*(cw+gap)-gap;
+      var x=-rw/2+cI*(cw+gap),y=-(tailH+(r+1)*(ch+gap)-gap),col=COL[it.c];
+      P+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+cw.toFixed(1)+'" height="'+ch.toFixed(1)+'" rx="0" style="fill:'+col[0]+';stroke-width:'+(2*pk).toFixed(2)+'px"/>'+
+        '<text class="ini" style="fill:'+col[1]+';font-size:'+(15*pk).toFixed(1)+'px" x="'+(x+cw/2).toFixed(1)+'" y="'+(y+ch/2+1*pk).toFixed(1)+'">'+esc(ini(it.c))+'</text>';
+      if(it.evs.length>1)P+='<circle class="bd" style="stroke-width:'+(1.5*pk).toFixed(2)+'px" cx="'+(x+cw).toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+(7*pk).toFixed(1)+'"/><text class="bn" style="font-size:'+(10*pk).toFixed(1)+'px" x="'+(x+cw).toFixed(1)+'" y="'+(y+.5*pk).toFixed(1)+'">'+it.evs.length+'</text>';
+    });
+    P+='</g>';
+    var lx=p.side*(Math.min(k,perRow)*(cw+gap)/2+6*pk);
+    P+='<text class="plabel" style="font-size:'+(14*pk).toFixed(1)+'px;stroke-width:'+(5*pk).toFixed(1)+'px" x="'+lx.toFixed(1)+'" y="'+(-(tailH+ch/2)+5*pk).toFixed(1)+'" text-anchor="'+(p.side>0?"start":"end")+'">'+esc(p.lab||g.place)+'</text></g>';
+  });
+  $("pins").innerHTML=P;
+  Array.prototype.forEach.call($("pins").querySelectorAll(".pin"),function(pn){
+    var go=function(){var g=$("g"+pn.getAttribute("data-i"));if(!g)return;g.scrollIntoView({behavior:REDUCE?"auto":"smooth",block:"center"});g.classList.remove("flash");void g.offsetWidth;g.classList.add("flash")};
+    pn.addEventListener("click",go);pn.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
+  });
+}
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a.open");if(!a)return;e.preventDefault();var s=$("s-"+a.getAttribute("data-c"));if(s){s.open=true;s.scrollIntoView({behavior:"smooth",block:"start"})}});
+function item(e){var c=byId[e.c];if(!c)return"";var k=COL[e.c],okSrc=e.src&&/^https?:\/\//.test(e.src);return'<li><b><i class="dot" style="background:'+k[0]+';color:'+k[1]+'">'+esc(ini(e.c))+'</i>'+esc(c.n)+'</b><div class="meta"><span class="tag">'+esc(e.kind)+'</span>'+(e.d?fmt(e.d):esc(e.dt||"日付未確認"))+(PLACES[e.place]?"":" "+esc(e.place)+(e.ward&&e.place.indexOf(e.ward)<0?"("+esc(e.ward)+")":""))+'</div>'+(e.n?'<div class="meta">'+esc(e.n)+'</div>':"")+'<div class="meta">'+(okSrc?'<a href="'+esc(e.src)+'" target="_blank" rel="noopener">出典</a>':'<span>出典: 本人のInstagram</span>')+'<a class="open" href="#s-'+e.c+'" data-c="'+e.c+'">'+esc(c.n.split(" ")[0])+'氏の公約を見る</a></div></li>'}
+</script>
+</body>
+</html>
