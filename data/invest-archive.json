@@ -1,14 +1,14 @@
 {
  "meta": {
-  "updatedAt": "2026-10-28T13:36:09.430Z",
+  "updatedAt": "2026-10-29T01:56:35.665Z",
   "engine": "extractive",
   "sourcesOk": 26,
   "sourcesTotal": 26,
   "quotesOk": 18,
   "quotesTotal": 18,
-  "totalArticles": 9087,
-  "recentArticles": 903,
-  "freshArticles": 173,
+  "totalArticles": 9212,
+  "recentArticles": 909,
+  "freshArticles": 125,
   "status": [
    {
     "id": "boj",
@@ -35,14 +35,14 @@
     "id": "yahoo-business",
     "name": "Yahoo!ニュース 経済",
     "ok": true,
-    "picked": 0,
+    "picked": 1,
     "note": "https://news.yahoo.co.jp/rss/topics/business.xml"
    },
    {
     "id": "toyokeizai",
     "name": "東洋経済オンライン",
     "ok": true,
-    "picked": 6,
+    "picked": 2,
     "note": "https://toyokeizai.net/list/feed/rss"
    },
    {
@@ -56,145 +56,2705 @@
     "id": "itmedia-business",
     "name": "ITmedia ビジネス",
     "ok": true,
-    "picked": 4,
+    "picked": 3,
     "note": "https://rss.itmedia.co.jp/rss/2.0/business.xml"
    },
    {
     "id": "jiji",
     "name": "時事通信",
     "ok": true,
-    "picked": 1,
+    "picked": 2,
     "note": "https://www.jiji.com/rss/ranking.rdf"
    },
    {
     "id": "gnews:日経平均 株価 終値",
     "name": "Google ニュース「日経平均 株価 終値」",
     "ok": true,
-    "picked": 68,
+    "picked": 48,
     "note": "https://news.google.com/rss/search?q=%E6%97%A5%E7%B5%8C%E5%B9%B3%E5%9D%87%20%E6%A0%AA%E4%BE%A1%20%E7%B5%82%E5%80%A4%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:日銀 金融政策 利上げ",
     "name": "Google ニュース「日銀 金融政策 利上げ」",
     "ok": true,
-    "picked": 29,
+    "picked": 34,
     "note": "https://news.google.com/rss/search?q=%E6%97%A5%E9%8A%80%20%E9%87%91%E8%9E%8D%E6%94%BF%E7%AD%96%20%E5%88%A9%E4%B8%8A%E3%81%92%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:FRB FOMC 利下げ",
     "name": "Google ニュース「FRB FOMC 利下げ」",
     "ok": true,
-    "picked": 8,
+    "picked": 15,
     "note": "https://news.google.com/rss/search?q=FRB%20FOMC%20%E5%88%A9%E4%B8%8B%E3%81%92%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:円相場 為替 ドル円",
     "name": "Google ニュース「円相場 為替 ドル円」",
     "ok": true,
-    "picked": 43,
+    "picked": 39,
     "note": "https://news.google.com/rss/search?q=%E5%86%86%E7%9B%B8%E5%A0%B4%20%E7%82%BA%E6%9B%BF%20%E3%83%89%E3%83%AB%E5%86%86%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:決算 上方修正 最高益",
     "name": "Google ニュース「決算 上方修正 最高益」",
     "ok": true,
-    "picked": 47,
+    "picked": 52,
     "note": "https://news.google.com/rss/search?q=%E6%B1%BA%E7%AE%97%20%E4%B8%8A%E6%96%B9%E4%BF%AE%E6%AD%A3%20%E6%9C%80%E9%AB%98%E7%9B%8A%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:TOB 買収 株式",
     "name": "Google ニュース「TOB 買収 株式」",
     "ok": true,
-    "picked": 27,
+    "picked": 26,
     "note": "https://news.google.com/rss/search?q=TOB%20%E8%B2%B7%E5%8F%8E%20%E6%A0%AA%E5%BC%8F%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:米国株 ナスダック S&P500",
     "name": "Google ニュース「米国株 ナスダック S&P500」",
     "ok": true,
-    "picked": 37,
+    "picked": 36,
     "note": "https://news.google.com/rss/search?q=%E7%B1%B3%E5%9B%BD%E6%A0%AA%20%E3%83%8A%E3%82%B9%E3%83%80%E3%83%83%E3%82%AF%20S%26P500%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:長期金利 国債 利回り",
     "name": "Google ニュース「長期金利 国債 利回り」",
     "ok": true,
-    "picked": 25,
+    "picked": 29,
     "note": "https://news.google.com/rss/search?q=%E9%95%B7%E6%9C%9F%E9%87%91%E5%88%A9%20%E5%9B%BD%E5%82%B5%20%E5%88%A9%E5%9B%9E%E3%82%8A%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:新NISA 投資信託",
     "name": "Google ニュース「新NISA 投資信託」",
     "ok": true,
-    "picked": 16,
+    "picked": 3,
     "note": "https://news.google.com/rss/search?q=%E6%96%B0NISA%20%E6%8A%95%E8%B3%87%E4%BF%A1%E8%A8%97%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:原油価格 金価格",
     "name": "Google ニュース「原油価格 金価格」",
     "ok": true,
-    "picked": 68,
+    "picked": 69,
     "note": "https://news.google.com/rss/search?q=%E5%8E%9F%E6%B2%B9%E4%BE%A1%E6%A0%BC%20%E9%87%91%E4%BE%A1%E6%A0%BC%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:ビットコイン 相場",
     "name": "Google ニュース「ビットコイン 相場」",
     "ok": true,
-    "picked": 47,
+    "picked": 55,
     "note": "https://news.google.com/rss/search?q=%E3%83%93%E3%83%83%E3%83%88%E3%82%B3%E3%82%A4%E3%83%B3%20%E7%9B%B8%E5%A0%B4%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:自社株買い 増配",
     "name": "Google ニュース「自社株買い 増配」",
     "ok": true,
-    "picked": 12,
+    "picked": 21,
     "note": "https://news.google.com/rss/search?q=%E8%87%AA%E7%A4%BE%E6%A0%AA%E8%B2%B7%E3%81%84%20%E5%A2%97%E9%85%8D%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:トヨタ自動車 株",
     "name": "Google ニュース「トヨタ自動車 株」",
     "ok": true,
-    "picked": 9,
+    "picked": 19,
     "note": "https://news.google.com/rss/search?q=%E3%83%88%E3%83%A8%E3%82%BF%E8%87%AA%E5%8B%95%E8%BB%8A%20%E6%A0%AA%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:ソニーグループ 株",
     "name": "Google ニュース「ソニーグループ 株」",
     "ok": true,
-    "picked": 35,
+    "picked": 20,
     "note": "https://news.google.com/rss/search?q=%E3%82%BD%E3%83%8B%E3%83%BC%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%20%E6%A0%AA%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:三菱UFJ FG 株",
     "name": "Google ニュース「三菱UFJ FG 株」",
     "ok": true,
-    "picked": 33,
+    "picked": 31,
     "note": "https://news.google.com/rss/search?q=%E4%B8%89%E8%8F%B1UFJ%20FG%20%E6%A0%AA%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:ソフトバンクグループ 株",
     "name": "Google ニュース「ソフトバンクグループ 株」",
     "ok": true,
-    "picked": 25,
+    "picked": 20,
     "note": "https://news.google.com/rss/search?q=%E3%82%BD%E3%83%95%E3%83%88%E3%83%90%E3%83%B3%E3%82%AF%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%20%E6%A0%AA%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:エヌビディア 株",
     "name": "Google ニュース「エヌビディア 株」",
     "ok": true,
-    "picked": 52,
+    "picked": 51,
     "note": "https://news.google.com/rss/search?q=%E3%82%A8%E3%83%8C%E3%83%93%E3%83%87%E3%82%A3%E3%82%A2%20%E6%A0%AA%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    },
    {
     "id": "gnews:アップル 株",
     "name": "Google ニュース「アップル 株」",
     "ok": true,
-    "picked": 39,
+    "picked": 26,
     "note": "https://news.google.com/rss/search?q=%E3%82%A2%E3%83%83%E3%83%97%E3%83%AB%20%E6%A0%AA%20when%3A3d&hl=ja&gl=JP&ceid=JP:ja"
    }
   ]
  },
  "articles": [
+  {
+   "key": "frb政策金利据え置き12月会合で追加利上げ踏み切るかが焦点",
+   "title": "FRB 政策金利据え置き 12月会合で追加利上げ踏み切るかが焦点",
+   "link": "https://news.web.nhk/newsweb/na/nd-20261029de67441",
+   "isGoogleLink": false,
+   "description": "アメリカのFRB＝連邦準備制度理事会は28日まで開いた会合で政策金利を据え置くことを決めました。金融市場では想定どおりだとして次回、12月の会合で追加利上げに踏み切るという見方が多くなっていて、FRB…",
+   "publishedAt": "2026-10-29T01:43:00.000Z",
+   "publisher": "NHK 経済",
+   "via": [
+    "NHK 経済"
+   ],
+   "sourceHint": "総合",
+   "sourceHost": "news.web.nhk",
+   "relevance": 7,
+   "hits": [
+    "利上げ",
+    "市場",
+    "金利",
+    "FRB"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "アメリカのFRB＝連邦準備制度理事会は28日まで開いた会合で政策金利を据え置くことを決めました。",
+    "金融市場では想定どおりだとして次回、12月の会合で追加利上げに踏み切るという見方が多くなっていて、FRB…",
+    "製造業の再建目指す「トランプ関税」"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "原油価格と米国債利回りの下落圧力により世界の金価格は下落した",
+   "title": "原油価格と米国債利回りの下落圧力により、世界の金価格は下落した。",
+   "link": "https://www.vietnam.vn/ja/gia-vang-the-gioi-giam-do-suc-ep-tu-gia-dau-va-loi-suat-trai-phieu-my",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-29T01:34:01.000Z",
+   "publisher": "Vietnam.vn",
+   "via": [
+    "Google ニュース「原油価格 金価格」"
+   ],
+   "sourceHint": "商品",
+   "sourceHost": "vietnam.vn",
+   "relevance": 4,
+   "hits": [
+    "利回り",
+    "国債",
+    "原油",
+    "金価格"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "グリニッジ標準時午後7時12分（ベトナム時間10月29日午前2時12分）時点で、現物金価格は0.5%下落し、1オンスあたり4,039.39ドルとなった。",
+    "米国の2026年12月限金先物価格は0.6%下落し、1オンスあたり4,051.60ドルで取引を終えた。",
+    "連邦準備制度理事会（FRB）の決定を受けて、10年物米国債の利回りは0.0411ポイント上昇し、5.034%となった。"
+   ],
+   "impact": "",
+   "sentiment": "negative",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "速報2910frbが金利を据え置いたことでウォール街は上昇モバイル業界は新記録を樹立",
+   "title": "速報 29-10：FRBが金利を据え置いたことでウォール街は上昇、モバイル業界は新記録を樹立",
+   "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQSkwtZE4yTmJ1VFVJZ2lFdnZQV0lYVEdDTTdJazk4UTVDYjZyemQwTkhabGZqc01abzg0ZUlscjdhOVNZOFRtSnBYLWo3V1pwNmY3ODFnWDRwelRlUXoyN21ncllyVzhQSWEzbkU1Z1BKYWtYZ0JTY1M3UUtlWTZpQVN3LUxESmhRV1hTRUNfdkQ2S3h4ckFIT3huaFMzMmlhdkpTOUZoMXQ1SjdXc0ExV2N4WkpoaVht?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-29T01:14:06.000Z",
+   "publisher": "Vietnam.vn",
+   "via": [
+    "Google ニュース「米国株 ナスダック S&P500」"
+   ],
+   "sourceHint": "米国株",
+   "sourceHost": "vietnam.vn",
+   "relevance": 2,
+   "hits": [
+    "金利",
+    "FRB"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "macro",
+   "summary": [
+    "速報 29-10：FRBが金利を据え置いたことでウォール街は上昇、モバイル業界は新記録を樹立",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "aisanindustryfy2026q2決算説明会愛三工業中間期営業利益18%増で過去最高通期予想を上方修正し純利益138億円へ",
+   "title": "【Aisan Industry FY2026 Q2 決算説明会】愛三工業、中間期営業利益18%増で過去最高 通期予想を上方修正し純利益138億円へ",
+   "link": "https://finance.biggo.jp/news/JP_7283.T_2026-10-28",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-29T01:14:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「決算 上方修正 最高益」"
+   ],
+   "sourceHint": "決算",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 6,
+   "hits": [
+    "上方修正",
+    "決算",
+    "通期予想"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "jpstock",
+   "summary": [
+    "【Aisan Industry FY2026 Q2 決算説明会】愛三工業、中間期営業利益18%増で過去最高 通期予想を上方修正し純利益138億円へ",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "本日10月29日の金価格世界の金価格がわずかに下落したにもかかわらずsjcの金価格は急騰した",
+   "title": "本日（10月29日）の金価格：世界の金価格がわずかに下落したにもかかわらず、SJCの金価格は急騰した。",
+   "link": "https://www.vietnam.vn/ja/gia-vang-hom-nay-29-10-sjc-tang-manh-du-vang-the-gioi-lui-nhe",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-29T01:12:56.000Z",
+   "publisher": "Vietnam.vn",
+   "via": [
+    "Google ニュース「原油価格 金価格」"
+   ],
+   "sourceHint": "商品",
+   "sourceHost": "vietnam.vn",
+   "relevance": 4,
+   "hits": [
+    "急騰",
+    "金価格"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "10月29日午前、国内の金価格は急騰し、SJCは1オンスあたり1億3970万～1億4270万ベトナムドンに達した。",
+    "純度999.9の純金指輪の買値は1オンスあたり60万ベトナムドン下落し、1億3700万ベトナムドンとなったが、売値は1オンスあたり40万ベトナムドン上昇し、1億4100万ベトナムドンとなった。",
+    "10月29日午前、SJC社はホーチミン市と北部で金地金を上場し、買い価格は1オンスあたり1億3970万ベトナムドン、売り価格は1オンスあたり1億4270万ベトナムドンとした。"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "本日10月29日の金価格frb会合後世界の金価格は下落",
+   "title": "本日（10月29日）の金価格：FRB会合後、世界の金価格は下落。",
+   "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPaUdWNFhjTzhKckNCTjA0MXdia1k4WU9LYkQ1ZTB3OHNvdUZwSm9vc0xhZFY1TWhudThqNl9sb0NvODlBNW9sMzUxMWoyUVcxYmQtdWdNNDRxZmxPVmVvek5zNHJWRkh5WUpRdG5QOXdyZ3ozN2hPeTFTLVRwUm01allVbzlUTXVVOVpkcg?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-29T01:12:08.000Z",
+   "publisher": "Vietnam.vn",
+   "via": [
+    "Google ニュース「原油価格 金価格」"
+   ],
+   "sourceHint": "商品",
+   "sourceHost": "vietnam.vn",
+   "relevance": 2,
+   "hits": [
+    "FRB",
+    "金価格"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "macro",
+   "summary": [
+    "本日（10月29日）の金価格：FRB会合後、世界の金価格は下落。",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "negative",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ビットコイン8万ドル台維持でも投資家心理低迷強気相場初期の見方",
+   "title": "ビットコイン8万ドル台維持でも投資家心理低迷 「強気相場初期」の見方",
+   "link": "https://www.digitaltoday.co.kr/jp/view/121166/bitcoin-sentiment-cools-analyst-says-it-may-signal-early-stage-bull-market",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-29T01:10:41.000Z",
+   "publisher": "디지털투데이",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "digitaltoday.co.kr",
+   "relevance": 4,
+   "hits": [
+    "相場",
+    "ドル",
+    "投資家",
+    "ビットコイン"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "commodity",
+   "summary": [
+    "ビットコインが8万ドル（約1200万円）前後を維持する一方で、投資家心理の冷え込みが続いている。",
+    "さらに同氏は、ビットコインが8万6000ドル（約1290万円）から同日の8万1000ドル（約1215万円）水準まで調整した後も、市場の反応が鈍い点に注目した。",
+    "投資家の熱気が乏しいなかでもビットコインが8万ドル近辺を維持していることが、先行きの強気シナリオを読み解く手掛かりになるとしている。"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "jr東海利益配当予想の増額と自社株買いで反発ウエルスアドバイザー",
+   "title": "ＪＲ東海、利益・配当予想の増額と自社株買いで反発(ウエルスアドバイザー)",
+   "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPb0R6TUs1SjR0ajNMS0RPYjlQMUY2MEc2RUVkS2ZGcVJyYWV6RWE3dmQ3emEzOTdDVnoxUlZYN3RCNVZnUE42R2w4cEwwbFBBdi1panpES0ItUk9FdU1nY0tsMUU3ZzZDVXlYNzZwQzhVWTdJNW5wWG1QbllMaUlXUG1xN2RPQjg?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-29T01:08:33.000Z",
+   "publisher": "Yahoo!ファイナンス",
+   "via": [
+    "Google ニュース「自社株買い 増配」"
+   ],
+   "sourceHint": "株主還元",
+   "sourceHost": "finance.yahoo.co.jp",
+   "relevance": 2,
+   "hits": [
+    "配当",
+    "自社株買い"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "ＪＲ東海、利益・配当予想の増額と自社株買いで反発(ウエルスアドバイザー)",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ai半導体市場メガサイクル局面だアドバンテスト好決算ceoが語るcpu光電融合への期待とワクワク",
+   "title": "AI半導体市場「メガサイクル局面だ」 アドバンテスト好決算、CEOが語る「CPU」「光電融合」への期待とワクワク",
+   "link": "https://www.itmedia.co.jp/business/articles/2610/29/news050.html",
+   "isGoogleLink": false,
+   "description": "半導体試験装置メーカー大手のアドバンテストは、AIブームによる半導体需要を追い風に、2026年度の通期業績予想を売上高1兆8630円に上方修正した。「メガサイクル」に突入した半導体市場を支えるものは何か。",
+   "publishedAt": "2026-10-29T01:05:00.000Z",
+   "publisher": "ITmedia ビジネス",
+   "via": [
+    "ITmedia ビジネス"
+   ],
+   "sourceHint": "経済誌",
+   "sourceHost": "itmedia.co.jp",
+   "relevance": 8,
+   "hits": [
+    "上方修正",
+    "市場",
+    "決算",
+    "業績",
+    "半導体"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "jpstock",
+   "summary": [
+    "�@�uAI�����̎s��́A���v�g�傪�����w�X�[�p�[�T�C�N���x�𒴂���w���K�T�C�N���x�Ƃ��Ăׂ鍂�����ǖʂɂ���v�\\�\\�����̎������u���[�J�[���A�A",
+    "�@�������\\����2026�N�x��2�l�������Z�́A���㍂��4777���~�őO�N������81.7�����A�c�Ɨ��v��2668���~�œ�146.0�����ƂȂ�A��������ߋ��ō�",
+    "�@������󂯂�7�����_�̒ʊ��Ɛї\\�z������C�����A�ʊ��̔��㍂��1��8630���~�A�c�Ɨ��v��9670���~�������ށB�����āA2800���~������Ƃ��鎩�Њ���"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "fomc政策金利を3.75〜4.00%で据え置きクック理事ら2人が利上げを主張して反対",
+   "title": "FOMC、政策金利を3.75〜4.00%で据え置き クック理事ら2人が利上げを主張して反対",
+   "link": "https://iolite.net/news/fomc-october-2026-rate-hold-dissent",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-29T01:00:00.000Z",
+   "publisher": "Iolite（アイオライト）",
+   "via": [
+    "Google ニュース「FRB FOMC 利下げ」"
+   ],
+   "sourceHint": "金融政策",
+   "sourceHost": "iolite.net",
+   "relevance": 9,
+   "hits": [
+    "利上げ",
+    "FOMC",
+    "金利"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "macro",
+   "summary": [
+    "FOMC、政策金利を3.75〜4.00%で据え置き クック理事ら2人が利上げを主張して反対",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "どうなる10月日銀会合と展望レポート?!気になるドル円と日本株の動き方",
+   "title": "どうなる10月日銀会合と展望レポート？！ 気になるドル円と日本株の動き方",
+   "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9QRnFzbTlidWd3MmhnQ0EyU0FzWTY2czNRc0JvY3gzSEdFYjdXU0VPWnlMc2ZLZjU2MFVXLUNWQUFsMnRreFNxYkdZLW85RFBXckdxNlVwcVMzUlQtLWJwZ21Idw?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-29T01:00:00.000Z",
+   "publisher": "外為どっとコム",
+   "via": [
+    "Google ニュース「円相場 為替 ドル円」"
+   ],
+   "sourceHint": "為替",
+   "sourceHost": "gaitame.com",
+   "relevance": 2,
+   "hits": [
+    "ドル",
+    "日銀"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "macro",
+   "summary": [
+    "どうなる10月日銀会合と展望レポート？！ 気になるドル円と日本株の動き方",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ドル円反発158円台を回復fx為替ニュース",
+   "title": "ドル・円：反発、158円台を回復｜FX・為替ニュース",
+   "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE10YkRYUGVEN0NOVGNndFd0d09NUFJWeTJlVUNhNHpFdU56eEkzdWUwcjRqYk41RE5PdVdlMWl0WE93b3dkRGt6Sm4tVG5mWUJ1NXc?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-29T00:54:00.000Z",
+   "publisher": "ザイFX！",
+   "via": [
+    "Google ニュース「円相場 為替 ドル円」"
+   ],
+   "sourceHint": "為替",
+   "sourceHost": "zai.diamond.jp",
+   "relevance": 2,
+   "hits": [
+    "為替",
+    "ドル"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "ドル・円：反発、158円台を回復｜FX・為替ニュース",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "アメリカ短期金利の最新動向fomc2026年10月据え置き3.75%4.00%",
+   "title": "アメリカ短期金利の最新動向 FOMC 2026年10月据え置き 3.75% – 4.00%",
+   "link": "https://mikissh.com/diary/ff-rate-oct-2026/",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-29T00:40:20.000Z",
+   "publisher": "mikissh.com",
+   "via": [
+    "Google ニュース「FRB FOMC 利下げ」"
+   ],
+   "sourceHint": "金融政策",
+   "sourceHost": "mikissh.com",
+   "relevance": 5,
+   "hits": [
+    "FOMC",
+    "金利"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "アメリカの政策金利を決定する中央銀行、FRB（米連邦準備制度理事会）による、金融政策を話し合う FOMC（米連邦公開市場委員会）が、10月27日から28日にかけて開催されました。",
+    "ドットプロットを中間値で見ると、2026年は前回の 3.8% から上昇し、4.1% (4.00-4.25%) で、もう1回の利上げ、2027年は、4.00-4.25% のレンジで据え置き、そして 2028年は 3.9% (3.75-4.00",
+    "そして、2024年9月の米連邦公開市場委員会 (FOMC) で、サプライズとなる 0.5% の大幅利下げが行われ、利下げサイクルがスタートしました。"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "東京外為円は157円台後半で小動き日銀会合と米利上げ観測が交錯",
+   "title": "東京外為、円は157円台後半で小動き 日銀会合と米利上げ観測が交錯",
+   "link": "https://finance.biggo.jp/news/04ee9476-dc63-42aa-91d5-f35a9af7a970",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-29T00:36:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「日銀 金融政策 利上げ」"
+   ],
+   "sourceHint": "金融政策",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 5,
+   "hits": [
+    "利上げ",
+    "日銀"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "macro",
+   "summary": [
+    "東京外為、円は157円台後半で小動き 日銀会合と米利上げ観測が交錯",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "東京為替ドル円は反発158円台を回復",
+   "title": "東京為替：ドル・円は反発、158円台を回復",
+   "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9NQTNSMS12TlFMbS1RYkxZejRQNGlLSTNMekxvNWtpR2dNSGxNYkxfUlVhZ01tc3lYQ1NfeTBJQV9lX3JReXNjcGd1Vi05c0c0cUE?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-29T00:32:20.000Z",
+   "publisher": "株探",
+   "via": [
+    "Google ニュース「円相場 為替 ドル円」"
+   ],
+   "sourceHint": "為替",
+   "sourceHost": "s.kabutan.jp",
+   "relevance": 2,
+   "hits": [
+    "為替",
+    "ドル"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "東京為替：ドル・円は反発、158円台を回復",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "日経平均は小幅続伸で寄り付く半導体関連株がしっかりロイター",
+   "title": "日経平均は小幅続伸で寄り付く、半導体関連株がしっかり（ロイター）",
+   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5HbVNiU253MUZiYnJZM0x1SV9pY0ZxZHh1aFJFdVA3dHo0Q1JKcl9nRHlRY1BUekZwTmlLWWZUcVRYYnBNY0VTNlNsRFRidmx3N2ZaMllFelVpMzUwVDlKMmxlc0xLcjhsRDZHbGpYaVpscVBzX1BrQlZfbmxJWG8?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-29T00:18:06.000Z",
+   "publisher": "Yahoo!ニュース",
+   "via": [
+    "Google ニュース「ソフトバンクグループ 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "news.yahoo.co.jp",
+   "relevance": 2,
+   "hits": [
+    "日経平均",
+    "半導体"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "日経平均は小幅続伸で寄り付く、半導体関連株がしっかり（ロイター）",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "日経平均は小幅続伸で寄り付く半導体関連株がしっかり",
+   "title": "日経平均は小幅続伸で寄り付く、半導体関連株がしっかり",
+   "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPS2NYRk1VNzYzdHJBWERaZTNJWUNOOUlXSDVldkUybVZWY1JnRFpjWmpmZjRNUktTd0p3VThQREEweGFmMUwzN056T3NwbC13Y3l0cHZici1wYTdZdmtSaEJWM3pXVWpfR0FSUWk3UzZvMnRvQWZtR2xtWWdXcFQ3TmNPRGc1QQ?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-29T00:18:00.000Z",
+   "publisher": "Reuters",
+   "via": [
+    "Google ニュース「ソニーグループ 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "reuters.com",
+   "relevance": 2,
+   "hits": [
+    "日経平均",
+    "半導体"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "日経平均は小幅続伸で寄り付く、半導体関連株がしっかり",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "米金融政策fomcは金利3.75~4.00%据え置き2委員が利上げ主張12月の追加利上げが焦点",
+   "title": "【米金融政策】ＦＯＭＣは金利３．７５～４．００％据え置き、２委員が利上げ主張、１２月の追加利上げが焦点",
+   "link": "https://kabu-ir.com/article/521887861.html",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-29T00:16:13.000Z",
+   "publisher": "https://kabu-ir.com/",
+   "via": [
+    "Google ニュース「日銀 金融政策 利上げ」",
+    "Google ニュース「ソフトバンクグループ 株」"
+   ],
+   "sourceHint": "金融政策",
+   "sourceHost": "kabu-ir.com",
+   "relevance": 6,
+   "hits": [
+    "利上げ",
+    "金利",
+    "金融政策"
+   ],
+   "tickers": [],
+   "pickups": 2,
+   "hasBody": false,
+   "category": "macro",
+   "summary": [
+    "【米金融政策】ＦＯＭＣは金利３．７５～４．００％据え置き、２委員が利上げ主張、１２月の追加利上げが焦点",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "米frbが政策金利を据え置き",
+   "title": "米FRBが政策金利を据え置き",
+   "link": "https://news.yahoo.co.jp/pickup/6600510?source=rss",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-29T00:13:09.000Z",
+   "publisher": "Yahoo!ニュース 経済",
+   "via": [
+    "Yahoo!ニュース 経済"
+   ],
+   "sourceHint": "総合",
+   "sourceHost": "news.yahoo.co.jp",
+   "relevance": 2,
+   "hits": [
+    "金利",
+    "FRB"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "macro",
+   "summary": [
+    "米FRBが政策金利を据え置き",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "円相場157円83~83銭=29日午前9時現在",
+   "title": "円相場、１５７円８３～８３銭＝２９日午前９時現在",
+   "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5pMlJ4UnlLT0dpN0VkTXBfQTV5eVd1RThLRExPaVg0WnB0Yy1FQ1AyR290TTRqSWlUNGw2WU9wOG1nSkRKVWRhdUJqVXlMZTJuaFhHdA?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-29T00:06:00.000Z",
+   "publisher": "時事通信ニュース",
+   "via": [
+    "Google ニュース「円相場 為替 ドル円」"
+   ],
+   "sourceHint": "為替",
+   "sourceHost": "sp.m.jiji.com",
+   "relevance": 2,
+   "hits": [
+    "相場",
+    "円相場"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "円相場、１５７円８３～８３銭＝２９日午前９時現在",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ビットコインfomc通過でボラティリティ縮小焦点オプション市場に警戒感",
+   "title": "ビットコイン、FOMC通過でボラティリティ縮小焦点 オプション市場に警戒感",
+   "link": "https://www.digitaltoday.co.kr/jp/view/120982/bitcoin-volatility-bet-put-to-test-as-options-market-watches-fed-rate-hold",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T23:57:04.000Z",
+   "publisher": "디지털투데이",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "digitaltoday.co.kr",
+   "relevance": 6,
+   "hits": [
+    "FOMC",
+    "市場",
+    "ビットコイン"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "米連邦準備制度理事会（Fed）が政策金利を据え置いたことを受け、ビットコインのオプション市場では、政策発表前に膨らんでいたボラティリティ・プレミアムが縮小するかどうかに関心が集まっている。",
+    "ブロックチェーンメディアのCryptoSlateが28日付（現地時間）で報じたところによると、米連邦公開市場委員会（FOMC）は同日、政策金利を年3.75〜4.00％に据え置いた。",
+    "デリバティブ分析会社Laevitasが26日に集計したデータでは、ビットコインの7日物の内在変動性は36.1％、実現変動性は26.9％だった。"
+   ],
+   "impact": "",
+   "sentiment": "negative",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "アップル初のタッチ画面搭載ノート発表高価格が普及の課題にロイター",
+   "title": "アップル、初のタッチ画面搭載ノート発表 高価格が普及の課題に(ロイター)",
+   "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQTlAwczViNkRhMHJiSllPM0dQOWkxSFBVeVlKRGN3UTZqWVc1NFNIVDVrd1FYVnV2VG9sV2JqQjdFcUJQODJKSEMxSUVpU2QzQlY5V0VPdGtEbFBhNzhGN09WcEhYbTdiRzZoQVJnd3RuS1JISTdZaFdoNWs3Vi04X1Eyallwa28?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T23:57:02.000Z",
+   "publisher": "Yahoo!ファイナンス",
+   "via": [
+    "Google ニュース「アップル 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.yahoo.co.jp",
+   "relevance": 2,
+   "hits": [],
+   "tickers": [
+    "AAPL"
+   ],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "アップル、初のタッチ画面搭載ノート発表 高価格が普及の課題に(ロイター)",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "アップル"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "寄前成行注文売り越しランキングソニーgmaruwanec[0835]株探ニュース",
+   "title": "寄前【成行注文】売り越しランキング ソニーＧ、ＭＡＲＵＷＡ、ＮＥＣ [08:35](株探ニュース)",
+   "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOZS1qSTB5bDYzNEZKUlpCTWYzQUt6SzNpNnJ3V2c3RGg3WFlZQ25iWDg2MVUzZzRULXlYOVM2dXcwVExiVWtOak9BN3J3aVI5MjV3UnpUcmxnSUhrVFcxVW50ajRkYzRKUWJPQXNoSVdDQ2dEYlRZcU9UclFEdXpROElOUHRYYUU?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T23:51:02.000Z",
+   "publisher": "Yahoo!ファイナンス",
+   "via": [
+    "Google ニュース「ソニーグループ 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.yahoo.co.jp",
+   "relevance": 2,
+   "hits": [],
+   "tickers": [
+    "6758"
+   ],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "寄前【成行注文】売り越しランキング ソニーＧ、ＭＡＲＵＷＡ、ＮＥＣ [08:35](株探ニュース)",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "ソニーグループ"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "本日10月29日の金価格sjc金は勢いを失いさらなる下落のリスクがある",
+   "title": "本日（10月29日）の金価格：SJC金は勢いを失い、さらなる下落のリスクがある。",
+   "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPZEZLN1lhV1psTzZmVVpIRTFDWTJ6d3REcjRuVWMwS2VLOTRMSUt5eTQyZkpXaGpxbldvNlZtamhkUUYwUlg0MkN4cW5ZSGFWZXpybFFFekg1eGNGWG1rdGRJVkQwdF9MbE9WZnNFYk44ZVdxc3ByX3M3NFd0ZFBXZks4dWRaWDNEd0hTam5Bbw?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T23:47:56.000Z",
+   "publisher": "Vietnam.vn",
+   "via": [
+    "Google ニュース「原油価格 金価格」"
+   ],
+   "sourceHint": "商品",
+   "sourceHost": "vietnam.vn",
+   "relevance": 1,
+   "hits": [
+    "金価格"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "commodity",
+   "summary": [
+    "本日（10月29日）の金価格：SJC金は勢いを失い、さらなる下落のリスクがある。",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "negative",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "メタプラネット株価272円転換社債の払込期日──中期の下落リスク減少も上昇判断には条件",
+   "title": "メタプラネット株価272円、転換社債の払込期日──中期の下落リスク減少も上昇判断には条件",
+   "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5vV0JpTG5WcTdDUTloaDZqNzJ0OTh2NEFuOFJxOE84WUlYdnpJUzhMM29xbHkxa1ZsOW9tUC1KV1BJOW1XYXBzZHEtTVBWMGhfX3VJNWxweHZYWm43aDRRTzNERWZBS3IyNnc?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T23:39:47.000Z",
+   "publisher": "JinaCoin",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "jinacoin.ne.jp",
+   "relevance": 1,
+   "hits": [
+    "株価"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "メタプラネット株価272円、転換社債の払込期日──中期の下落リスク減少も上昇判断には条件",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "frb金利据え置きでビットコイン8.1万ドル回復",
+   "title": "FRB金利据え置きでビットコイン8.1万ドル回復",
+   "link": "https://biz.chosun.com/jp/jp-finance/2026/10/29/VMZK2VV5Q5D6FCAVHTP73AB7MA/",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T23:37:00.000Z",
+   "publisher": "Chosunbiz",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "biz.chosun.com",
+   "relevance": 4,
+   "hits": [
+    "ドル",
+    "金利",
+    "FRB",
+    "ビットコイン"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "米国の中央銀行である連邦準備制度（Fed・FRB）が金利を据え置いたとの知らせを受け、ビットコインは8万1000ドル台を回復した。",
+    "スタンダード・アンド・プアーズ（S&P）500種指数は21.77ポイント（0.28%）高の7744.37、ナスダック総合指数は72.04ポイント（0.27%）高の2万6549.85でそれぞれ取引を終えた。",
+    "FRBは28日（現地時間）、連邦公開市場委員会（FOMC）の定例会合を終え、政策金利を年3.75〜4.00%で維持すると発表した。"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "決算速報ノジマ今期経常を9%上方修正最高益予想を上乗せ株探ニュース",
+   "title": "【決算速報】ノジマ、今期経常を9％上方修正・最高益予想を上乗せ(株探ニュース)",
+   "link": "https://finance.yahoo.co.jp/news/detail/f5e9120e4d220d67e6a70439c3099980ade05127",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T23:30:55.000Z",
+   "publisher": "Yahoo!ファイナンス",
+   "via": [
+    "Google ニュース「決算 上方修正 最高益」"
+   ],
+   "sourceHint": "決算",
+   "sourceHost": "finance.yahoo.co.jp",
+   "relevance": 9,
+   "hits": [
+    "上方修正",
+    "最高益",
+    "決算"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "jpstock",
+   "summary": [
+    "ノジマ 7419 > [東証Ｐ] が10月29日朝(08:30)に決算を発表。",
+    "併せて、通期の同利益を従来予想の760億円→830億円(前期は622億円)に9.2％上方修正し、増益率が22.0％増→33.2％増に拡大し、従来の6期ぶりの過去最高益予想をさらに上乗せした。",
+    "ノジマとよく比較される銘柄：ビックカメラ 3048 > 、ケーズＨＤ 8282 > 、エディオン 2730 > 、Ｊｏｓｈｉｎ 8173 > 、ヤマダＨＤ 9831 >"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "本日10月29日の金価格若干回復市場はfrb議長の声明を評価",
+   "title": "本日10月29日の金価格：若干回復、市場はFRB議長の声明を評価。",
+   "link": "https://www.vietnam.vn/ja/gia-vang-hom-nay-29-10-hoi-phuc-nhe-thi-truong-danh-gia-phat-bieu-cua-chu-tich-fed",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T23:30:28.000Z",
+   "publisher": "Vietnam.vn",
+   "via": [
+    "Google ニュース「原油価格 金価格」"
+   ],
+   "sourceHint": "商品",
+   "sourceHost": "vietnam.vn",
+   "relevance": 3,
+   "hits": [
+    "市場",
+    "FRB",
+    "金価格"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "原油価格の上昇がインフレ懸念を煽る中、金価格は水曜日の取引で小幅に回復した。",
+    "Kitco によると 、金現物価格は東部標準時17時45分（グリニッジ標準時21時45分、ベトナム時間10月29日午前4時45分）時点で0.17%上昇し、1オンスあたり4,066.6ドルとなった。",
+    "CMEのFedWatchツールによると、市場は12月のFRB利上げ確率を86%と織り込んでおり、利上げ決定発表前の88%からわずかに低下している。"
+   ],
+   "impact": "",
+   "sentiment": "negative",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ノジマ今期経常を9%上方修正最高益予想を上乗せ",
+   "title": "ノジマ、今期経常を9％上方修正・最高益予想を上乗せ",
+   "link": "https://kabutan.jp/news/marketnews/?&b=k202610290001",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T23:30:00.000Z",
+   "publisher": "株探",
+   "via": [
+    "Google ニュース「決算 上方修正 最高益」"
+   ],
+   "sourceHint": "決算",
+   "sourceHost": "kabutan.jp",
+   "relevance": 8,
+   "hits": [
+    "上方修正",
+    "最高益"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "jpstock",
+   "summary": [
+    "ノジマ、今期経常を9％上方修正・最高益予想を上乗せ",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "frb議長政治の話出なかった金利据え置き決定で配慮否定",
+   "title": "ＦＲＢ議長「政治の話出なかった」、金利据え置き決定で配慮否定",
+   "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxON1llNDlSWjZkY2VBTUlYTjZUSklWWU1uZUt4cnMwYUU3c0pTbWg0ckFXakFoLWplOTExcDB2Q0pHeTFjblNDVFZqdTFLTUhaNUlqcC1ZMVg2Tm83dERkSDdTQkRVdWtkQno4T18xSjB4WlJqZmlVdVZyVVpHNUpBdUhFa0oyclHSAYcBQVVfeXFMTjdZZTQ5Ulo2ZGNlQU1JWE42VEpJVllNbmVLeHJzMGFFN3NKU21oNHJBV2pBaC1qZTkxMXAwdkNKR3kxY25TQ1RWanUxS01IWjVJanAtWTFYNk5vN3REZEg3U0JEVXVrZEJ6OE9fMUoweFpSamZpVXVWclVaRzVKQXVIRWtKMnJR?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T23:18:00.000Z",
+   "publisher": "ｄメニューニュース",
+   "via": [
+    "Google ニュース「FRB FOMC 利下げ」"
+   ],
+   "sourceHint": "金融政策",
+   "sourceHost": "topics.smt.docomo.ne.jp",
+   "relevance": 1,
+   "hits": [
+    "金利"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "ＦＲＢ議長「政治の話出なかった」、金利据え置き決定で配慮否定",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "本日2026年10月29日の金価格sjc金地金btmc9999プレーンリングおよび世界の金価格",
+   "title": "本日（2026年10月29日）の金価格：SJC金地金、BTMC 9999プレーンリング、および世界の金価格。",
+   "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNaWxtMXVnRnRiQlB1UDYzWEgyZUE4OUpveUx5d3RqdjFIOVZSbzRadEgtYnkxY2dfUzZnRnU3bWxlR2FKa25ST18wd3VyWVpibUl3a2RZYWFhZ21PclBGclFCNS1ZM1YwMkM2SkttYm5BbjhfSnJnbHFmdHdRdEdkX0FKNmd1dmUtUFZ1RDlyMWFjQkFzbzhkT3Qzcm43SUNJZzh5RkctdFI?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T23:17:05.000Z",
+   "publisher": "Vietnam.vn",
+   "via": [
+    "Google ニュース「原油価格 金価格」"
+   ],
+   "sourceHint": "商品",
+   "sourceHost": "vietnam.vn",
+   "relevance": 1,
+   "hits": [
+    "金価格"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "commodity",
+   "summary": [
+    "本日（2026年10月29日）の金価格：SJC金地金、BTMC 9999プレーンリング、および世界の金価格。",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "今日の為替市場ポイント本日から明日にかけて日銀金融政策決定会合開催",
+   "title": "今日の為替市場ポイント：本日から明日にかけて日銀金融政策決定会合開催",
+   "link": "https://topics.smt.docomo.ne.jp/article/fisco/business/fisco-0009340020261029012?utm_source=dnews&utm_medium=article&utm_campaign=contentsmatch3&redirect=1",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T23:12:00.000Z",
+   "publisher": "ｄメニューニュース",
+   "via": [
+    "Google ニュース「日銀 金融政策 利上げ」"
+   ],
+   "sourceHint": "金融政策",
+   "sourceHost": "topics.smt.docomo.ne.jp",
+   "relevance": 7,
+   "hits": [
+    "金融政策決定会合",
+    "市場",
+    "為替",
+    "日銀",
+    "金融政策"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "FISCO 株・企業報 10/29(木) 10:02",
+    "FISCO 株・企業報 10/29(木) 9:45",
+    "TBS CROSS DIG with Bloomberg 10/29(木) 9:41"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "gta6発売を前にテイクツー株を買い推奨bofaが目標株価330ドルで62%上昇余地",
+   "title": "GTA6発売を前にテイクツー株を「買い」推奨、BofAが目標株価330ドルで62%上昇余地",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1zTEYtOGZGWlRIcGt5NTl1cUNkWUJyendaNk5VSGJZV2ZxSjBjdlpMLUR0alNabmtBRkw3Mlk4UXBLMjNabGI0VG1wZE9Hc3ZxTktOd3NRdFNEejNlMDRtM25SQ2kzbWVtTGZvSk1mNUxJZW43?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T23:05:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「ソニーグループ 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 2,
+   "hits": [
+    "株価",
+    "ドル"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "GTA6発売を前にテイクツー株を「買い」推奨、BofAが目標株価330ドルで62%上昇余地",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "シカゴ日経平均先物大取終値比460円高10月28日株探ニュース",
+   "title": "シカゴ日経平均先物 大取終値比 460円高 （10月28日）(株探ニュース)",
+   "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPYmJuT0JaM0lxNFVJaFNJaTR3WU84SnE4QU9LemxUbW10UWljd2tiMnRhN2lyWVgzRU4wdGNuZHlqa2l4QnZ1dlE0aG1NOHFpbFJ3ZjVSdFYzZlRVQmxpVk5mcTZEVkphakFneVNRdUJyUFJIWTFObVVwUHNXaTBxVGkzbDBiakU?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T22:43:09.000Z",
+   "publisher": "Yahoo!ファイナンス",
+   "via": [
+    "Google ニュース「日経平均 株価 終値」"
+   ],
+   "sourceHint": "日本株",
+   "sourceHost": "finance.yahoo.co.jp",
+   "relevance": 2,
+   "hits": [
+    "日経平均",
+    "円高"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "シカゴ日経平均先物 大取終値比 460円高 （10月28日）(株探ニュース)",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ドル円午前の為替予想frb議長会見後の下落は一時的200日移動平均線を試す可能性2026/10/29",
+   "title": "ドル円午前の為替予想、FRB議長会見後の下落は一時的 200日移動平均線を試す可能性 2026/10/29",
+   "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1WVS1McURES092SXhRekRxaUNrVzNWSUhpUml4eWVRQ2tqaEFwUXJVRm5XSDduc2pCaFg4RTBNbERXRTd4TGlzaUVlQndBaV9ySzRXellzN01PNmtsanVxQ1ZfMA?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T22:27:00.000Z",
+   "publisher": "外為どっとコム",
+   "via": [
+    "Google ニュース「円相場 為替 ドル円」"
+   ],
+   "sourceHint": "為替",
+   "sourceHost": "gaitame.com",
+   "relevance": 3,
+   "hits": [
+    "為替",
+    "ドル",
+    "FRB"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "ドル円午前の為替予想、FRB議長会見後の下落は一時的 200日移動平均線を試す可能性 2026/10/29",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "negative",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ny市場サマリー28日frb据え置きでドル売り長期金利上昇株は続伸ロイター",
+   "title": "ＮＹ市場サマリー（28日）ＦＲＢ据え置きでドル売り 長期金利上昇 株は続伸（ロイター）",
+   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE4zSDYtQ3M2XzNyYW1VOVMyVzdTR2I4dm9UTlEwbXRILXNzaVZMNkhFVE9tNEFGQ2RDeFpMR2dQbXh4RUFhX3VZYl9Ua0VyQnlOSi01bHVLNXhuMk5ySVJzaFY5TDdJSnZKUm14WnMwX2Qzc0dsNmdaY25EaE44bEE?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T22:25:31.000Z",
+   "publisher": "Yahoo!ニュース",
+   "via": [
+    "Google ニュース「長期金利 国債 利回り」"
+   ],
+   "sourceHint": "債券",
+   "sourceHost": "news.yahoo.co.jp",
+   "relevance": 3,
+   "hits": [
+    "市場",
+    "ドル",
+    "金利"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "ＮＹ市場サマリー（28日）ＦＲＢ据え置きでドル売り 長期金利上昇 株は続伸（ロイター）",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "米frb金利据え置きインフレ加速も様子見―利上げ主張で2人反対",
+   "title": "米ＦＲＢ、金利据え置き インフレ加速も様子見―利上げ主張で２人反対",
+   "link": "https://www.jiji.com/jc/article?k=2026102900118&g=int&m=rss",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T22:14:00.000Z",
+   "publisher": "時事通信",
+   "via": [
+    "時事通信"
+   ],
+   "sourceHint": "通信社",
+   "sourceHost": "jiji.com",
+   "relevance": 6,
+   "hits": [
+    "利上げ",
+    "金利",
+    "インフレ"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "記者会見する米連邦準備制度理事会（ＦＲＢ）のウォーシュ議長＝２８日、ワシントン（ＥＰＡ時事）",
+    "【ワシントン時事】米連邦準備制度理事会（ＦＲＢ）は２８日、連邦公開市場委員会（ＦＯＭＣ）で、政策金利を年３．７５～４．００％で維持することを決めた。",
+    "植田日銀総裁、物価上振れ「容認できず」 ２％目標に接近、利上げ継続"
+   ],
+   "impact": "",
+   "sentiment": "negative",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "bitwiseビットコインの2036年価格を160万ドルと予測nadanews",
+   "title": "Bitwise、ビットコインの2036年価格を160万ドルと予測（NADA NEWS）",
+   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1rTnZRcWd4RnpiVDAzUHJWQXhEVG16R1VvcnM5d2VoRnlHWUpHbjhzZjUwWWQxdDF5MjczMVpsRmJiU182Z1k4ZklQM3JLZHl1MVlZOHctWVRBOHF5S21CSDNWQXkwRzluMUZwZVRhaDZGWjNUQl9XdmNHMTNRYVU?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T22:04:39.000Z",
+   "publisher": "Yahoo!ニュース",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "news.yahoo.co.jp",
+   "relevance": 2,
+   "hits": [
+    "ドル",
+    "ビットコイン"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "commodity",
+   "summary": [
+    "Bitwise、ビットコインの2036年価格を160万ドルと予測（NADA NEWS）",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ホンダのように業界が沈む中で株価独り勝ち銘柄トップ22",
+   "title": "ホンダのように｢業界が沈む中で株価独り勝ち｣銘柄トップ22",
+   "link": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE52cDJPaXJoUDVxTFZpbWctbnV4SVhkYVBxWTBiTVNKOUJEd0xUXzM3dHNrQk9aTVpEVGttc3dQZ1B5VmYyQVpEVlpNRlg2azlNQmM0d2FhUQ?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T22:00:00.000Z",
+   "publisher": "四季報オンライン",
+   "via": [
+    "Google ニュース「トヨタ自動車 株」",
+    "Google ニュース「ソニーグループ 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "shikiho.toyokeizai.net",
+   "relevance": 1,
+   "hits": [
+    "株価"
+   ],
+   "tickers": [],
+   "pickups": 2,
+   "category": "jpstock",
+   "summary": [
+    "ホンダのように｢業界が沈む中で株価独り勝ち｣銘柄トップ22",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "予見できなかったは通るのかトヨタ系販社イベントで2歳児死亡函館カート事故が問う責任の空白ライフ東洋経済オンライン",
+   "title": "｢予見できなかった｣は通るのか トヨタ系販社イベントで2歳児死亡･函館カート事故が問う\"責任の空白\" | ライフ | 東洋経済オンライン",
+   "link": "https://toyokeizai.net/articles/-/962328?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+   "isGoogleLink": false,
+   "description": "2022年､函館のトヨタ系販売会社が主催した子ども向けカート体験イベントで､11歳の女児が運転するカートが暴走し､2歳の男児が死亡しました。刑事裁判で弁護側は､女児の運転操作が原因だとして無罪を主張…",
+   "publishedAt": "2026-10-28T21:45:00.000Z",
+   "publisher": "東洋経済オンライン",
+   "via": [
+    "東洋経済オンライン"
+   ],
+   "sourceHint": "経済誌",
+   "sourceHost": "toyokeizai.net",
+   "relevance": 2,
+   "hits": [],
+   "tickers": [
+    "7203"
+   ],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "2022年､函館のトヨタ系販売会社が主催した子ども向けカート体験イベントで､11歳の女児が運転するカートが暴走し､2歳の男児が死亡しました。",
+    "刑事裁判で弁護側は､女児の運転操作が原因だとして無罪を主張…",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "トヨタ自動車"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "nisa利用実態調査旧nisa?新nisa?いつから始めた?どの金融機関にした?その決め手は?",
+   "title": "【NISA利用実態調査】旧NISA？新NISA？いつから始めた？どの金融機関にした？その決め手は？",
+   "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE82Z2pmMGtsSzNaSkwzRGtrYTF5ZHVjRWxZY2M0bE5jLWJndUt2OEFCV0Qzcko2NDRpSGpYOXlXTmxWMkNNWnh5TDdHbkQ2WnlKQzJ4VzlkZzBSZ2VwS3RPZ216Y08xLUh2aWc?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T21:40:02.000Z",
+   "publisher": "PR TIMES",
+   "via": [
+    "Google ニュース「新NISA 投資信託」"
+   ],
+   "sourceHint": "資産形成",
+   "sourceHost": "prtimes.jp",
+   "relevance": 1,
+   "hits": [
+    "NISA"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "personal",
+   "summary": [
+    "【NISA利用実態調査】旧NISA？新NISA？いつから始めた？どの金融機関にした？その決め手は？",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "円相場1ドル=157円台後半に一時値上がりfrb議長会見を受け",
+   "title": "円相場 1ドル＝157円台後半に一時値上がり FRB議長会見を受け",
+   "link": "https://news.web.nhk/newsweb/na/nd-20261029de67462",
+   "isGoogleLink": false,
+   "description": "28日のニューヨーク外国為替市場では、FRB＝連邦準備制度理事会のウォーシュ議長の記者会見をうけて、利上げを急いでいないとの見方からドルを売って円を買う動きが進み、円相場は一時、1ドル＝157円台後半…",
+   "publishedAt": "2026-10-28T21:17:06.000Z",
+   "publisher": "NHK 経済",
+   "via": [
+    "NHK 経済"
+   ],
+   "sourceHint": "総合",
+   "sourceHost": "news.web.nhk",
+   "relevance": 10,
+   "hits": [
+    "利上げ",
+    "相場",
+    "市場",
+    "円相場",
+    "為替",
+    "ドル",
+    "FRB"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "28日のニューヨーク外国為替市場では、FRB＝連邦準備制度理事会のウォーシュ議長の記者会見をうけて、利上げを急いでいないとの見方からドルを売って円を買う動きが進み、円相場は一時、1ドル＝157円台後半…",
+    "FRB 政策金利据え置き 12月会合で追加利上げ踏み切るかが焦点",
+    "製造業の再建目指す「トランプ関税」"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "消費税減税の財源外為特会活用は解決策にならず“財政悪化につながる可能性は赤字国債と変わらない野口悠紀雄新しい経済成長の経路を探る",
+   "title": "消費税減税の財源「外為特会活用」は解決策にならず、“財政悪化”につながる可能性は赤字国債と変わらない - 野口悠紀雄 新しい経済成長の経路を探る",
+   "link": "https://diamond.jp/articles/-/402088",
+   "isGoogleLink": false,
+   "description": "消費税減税の財源として、「外為特会の資金の一部を一般会計に繰り入れる」という案は、繰入金をいまより増やす必要があるが、その分、他の歳入を増やすか、一般会計の歳出が減らなければ、財政を悪化させることになる。「赤字国債はだめで外為特会繰入金ならよい」という論理は成り立たない。",
+   "publishedAt": "2026-10-28T21:15:00.000Z",
+   "publisher": "ダイヤモンド・オンライン",
+   "via": [
+    "ダイヤモンド・オンライン"
+   ],
+   "sourceHint": "経済誌",
+   "sourceHost": "diamond.jp",
+   "relevance": 4,
+   "hits": [
+    "赤字",
+    "国債"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "fx",
+   "summary": [
+    "高市早苗首相は、10月19日の参議院予算委員会で、食料品の消費税減税の財源について、 岸田内閣が防衛費の財源確保のために外国為替特別会計に留保すべき剰余金を活用した実績や、過去5年間で30兆円以上に達した税収の上振れに言及し、これらによって",
+    "2024年度決算では、外為特会の剰余金は約5.36兆円となり、そのうち約3.20兆円が25年度の一般会計に繰り入れられた。",
+    "税収上振れを、消費税減税の財源とすることについては、必ずしも自然増収が新たな財源として増えたことにならず、財政が悪化する場合もあることを前回コラム 『税の自然増収を消費税減税の財源にしてよいか?『赤字国債に頼らず』は本質問題ではない』 （2"
+   ],
+   "impact": "",
+   "sentiment": "negative",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "高市政権の財政拡張による悪い円安論は間違い――強い経済のために円安を過度に恐れるべきでない理由何が日本経済を壊したのか",
+   "title": "高市政権の財政拡張による「悪い円安」論は間違い――「強い経済」のために円安を過度に恐れるべきでない理由 - 何が日本経済を壊したのか",
+   "link": "https://diamond.jp/articles/-/402074",
+   "isGoogleLink": false,
+   "description": "円安が物価高を招き、家計を圧迫しているとして、日銀に積極的な利上げを求める声が根強くあります。高市政権が政府支出を増やす政策を進めることで、「日本売り（円安）」を引き起こしているとの批判もあります。しかし、『何が日本経済を壊したのか』の著者であり、高市政権の経済ブレーンである会田卓司氏と松本賢氏は、こうした見方では円安の背景と日本経済への影響を十分に捉えられないと指摘します。円安には企業の国内投資を促す側面があり、その効果を生かすことが、高市政権が目指す「強い経済」への足がかりになるといいます。円安を過度に恐れるべきでない理由を、詳しく論じていただきました。",
+   "publishedAt": "2026-10-28T21:15:00.000Z",
+   "publisher": "ダイヤモンド・オンライン",
+   "via": [
+    "ダイヤモンド・オンライン"
+   ],
+   "sourceHint": "経済誌",
+   "sourceHost": "diamond.jp",
+   "relevance": 7,
+   "hits": [
+    "利上げ",
+    "円安",
+    "日銀",
+    "物価"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "fx",
+   "summary": [
+    "円安が物価高を招き、家計を圧迫しているとして、日銀に積極的な利上げを求める声が根強くあります。",
+    "これに対して、2012年末以降は、アベノミクスによるデフレ脱却への期待と日銀の大胆な金融緩和を背景に、およそ110円台の円安方向への転換が進みました。",
+    "現在、円安を巡っては、物価高を招く主因である「悪い円安」であり、その是正には日銀の積極的な利上げが避けられないという見方が広がっています。"
+   ],
+   "impact": "",
+   "sentiment": "negative",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ビットコインアップトーバー不発の背景──米国需要の弱さと7万4000ドルの攻防エックスウィンnadanews",
+   "title": "ビットコイン、「アップトーバー」不発の背景──米国需要の弱さと7万4000ドルの攻防【エックスウィン】（NADA NEWS）",
+   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE56VjFaYmItbjk4TFEzWk50bllIdmlVU2tjYjZkeGlMdFFWZW04TmM2SnIydFlGZ2FjWWQwMllsVGJ3eThjSmZKOV9UNTJ1Q0hOMzhBZ2RGdTBTQVdrb2hCUEhFMmpTR2s1WEpzUHpWRV9XUkQwYVFXTFZ4SGhXLTA?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T21:07:41.000Z",
+   "publisher": "Yahoo!ニュース",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "news.yahoo.co.jp",
+   "relevance": 2,
+   "hits": [
+    "ドル",
+    "ビットコイン"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "commodity",
+   "summary": [
+    "ビットコイン、「アップトーバー」不発の背景──米国需要の弱さと7万4000ドルの攻防【エックスウィン】（NADA NEWS）",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "日経平均半導体高で買い先行の公算米sox1.76%上昇が追い風",
+   "title": "日経平均、半導体高で買い先行の公算 米SOX1.76％上昇が追い風",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBzNkFIb3RUS1RPMzRGNEpwcTJLTzNRQ1JZOHFtakcyVTc3VC1VYTgtV0FZSGZkbWlCTU94UmVzeVdBQjZPRFNiYVUtd0JkdXJ2amJXb21VNmZkXy1zbG1fRjdHS0xRbmRvVHNVdlFrbTV0RmJo?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T21:05:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「米国株 ナスダック S&P500」"
+   ],
+   "sourceHint": "米国株",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 2,
+   "hits": [
+    "日経平均",
+    "半導体"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "日経平均、半導体高で買い先行の公算 米SOX1.76％上昇が追い風",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "日経225先物29日夜間取引終値=170円安6万4360円",
+   "title": "日経225先物：29日夜間取引終値＝170円安、6万4360円",
+   "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBvcm9NdllEbGtoaFdxQzJtcXd3MjQ4Y0Q2d0hUd1NjSzlhRjB4NGlveHZnMDNjYktma0dCOGV5WXJmUEZUeXFMV2d6cnBxc2NaZThNRzdyYk5LcC1Ha0RB?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T21:03:16.000Z",
+   "publisher": "ライブドアニュース",
+   "via": [
+    "Google ニュース「日経平均 株価 終値」"
+   ],
+   "sourceHint": "日本株",
+   "sourceHost": "news.livedoor.com",
+   "relevance": 1,
+   "hits": [
+    "円安"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "日経225先物：29日夜間取引終値＝170円安、6万4360円",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "メタ最大950億ドルの株式調達...なぜ競合のエヌビディアとamdが同じ増資に並んだのか",
+   "title": "メタ、最大950億ドルの株式調達…なぜ競合のエヌビディアとAMDが同じ増資に並んだのか",
+   "link": "https://biz-journal.jp/company/post_396427.html",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T21:00:22.000Z",
+   "publisher": "ビジネスジャーナル",
+   "via": [
+    "Google ニュース「エヌビディア 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "biz-journal.jp",
+   "relevance": 4,
+   "hits": [
+    "株式",
+    "ドル"
+   ],
+   "tickers": [
+    "NVDA"
+   ],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "jpstock",
+   "summary": [
+    "●この記事のポイント",
+    "メタは2026年10月、最大950億ドル（約15兆円）の株式調達計画を発表し、エヌビディア、AMD、ブロードコムの3社が最大50億ドル分の購入意向を示した。",
+    "米メタ・プラットフォームズは10月26日、株式による最大950億ドル（約15兆円、1ドル＝158円換算）の資金調達計画を発表した。"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "エヌビディア"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "<時価総額300兆円超>アンソロピックがipo申請目論見書で浮き彫りとなった倫理的で安全なai開発のジレンマビジネス東洋経済オンライン",
+   "title": "＜時価総額300兆円超＞アンソロピックがIPO申請､目論見書で浮き彫りとなった｢倫理的で安全なAI開発｣のジレンマ | ビジネス | 東洋経済オンライン",
+   "link": "https://toyokeizai.net/articles/-/962785?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+   "isGoogleLink": false,
+   "description": "AI企業の米アンソロピックがIPOを申請しました。目論見書を読み解くと､成長性や収益構造､米中覇権争い､莫大な計算資源とセキュリティの課題などが浮き彫りになっています。AI開発における安全性重視と､…",
+   "publishedAt": "2026-10-28T21:00:00.000Z",
+   "publisher": "東洋経済オンライン",
+   "via": [
+    "東洋経済オンライン"
+   ],
+   "sourceHint": "経済誌",
+   "sourceHost": "toyokeizai.net",
+   "relevance": 2,
+   "hits": [
+    "IPO",
+    "時価総額"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "AI企業の米アンソロピックがIPOを申請しました。",
+    "目論見書を読み解くと､成長性や収益構造､米中覇権争い､莫大な計算資源とセキュリティの課題などが浮き彫りになっています。",
+    "AI開発における安全性重視と､…"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "22期ぶり最高益はまだ序章か?高松コンストラクショングループ1762会社計画とアナリスト予想の約28億円ギャップが示す11月上方修正シナリオと配当144円の本当の実力日本個別株デューデリジェンスセンター",
+   "title": "「22期ぶり最高益」はまだ序章か？高松コンストラクショングループ（1762）、会社計画とアナリスト予想の\"約28億円ギャップ\"が示す11月上方修正シナリオと、配当144円の本当の実力｜日本個別株デューデリジェンスセンター",
+   "link": "https://note.com/tatsuya_sabato/n/n719a4be0ec8b",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T20:36:08.000Z",
+   "publisher": "note",
+   "via": [
+    "Google ニュース「決算 上方修正 最高益」"
+   ],
+   "sourceHint": "決算",
+   "sourceHost": "note.com",
+   "relevance": 9,
+   "hits": [
+    "上方修正",
+    "最高益",
+    "配当"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "jpstock",
+   "summary": [
+    "高松コンストラクショングループは、大正時代に大阪の工務店として始まり、いまでは約20社を束ねる建設グループです。",
+    "上方修正はあり得るのか、そのとき配当144円という予想はどう動きうるのか、そもそもこの好業績は一過性なのか構造的なのか。",
+    "2026年3月期には、株探の集計で経常利益が22期ぶりに過去最高を更新し、配当も期初予想から大きく引き上げられました。"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "米連邦準備制度理事会frb金利を3.75~4.00%に据え置き12月利上げ確率87%に急上昇韓国のskハイニックスadrは13%急騰",
+   "title": "米連邦準備制度理事会（FRB）、金利を3.75～4.00%に据え置き 12月利上げ確率87%に急上昇、韓国のSKハイニックスADRは13%急騰",
+   "link": "https://finance.biggo.jp/news/bd228558-089e-4e41-a3cb-fa406b09c074",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T20:35:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「米国株 ナスダック S&P500」"
+   ],
+   "sourceHint": "米国株",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 9,
+   "hits": [
+    "利上げ",
+    "急騰",
+    "金利",
+    "FRB"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "macro",
+   "summary": [
+    "米連邦準備制度理事会（FRB）、金利を3.75～4.00%に据え置き 12月利上げ確率87%に急上昇、韓国のSKハイニックスADRは13%急騰",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ダウ平均は3日続伸ナスダックは小幅高fomcは無難に通過=米国株概況",
+   "title": "ダウ平均は３日続伸 ナスダックは小幅高 ＦＯＭＣは無難に通過＝米国株概況",
+   "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE9STmxzNXFrTGQ5aXRmYURIVVVLZEJneE44SG5ad0JHbGxUSmNDVEhhNHJHMl9HLWtXYmp3QVNLX2phN3Iyb05aQg?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T20:26:29.000Z",
+   "publisher": "みんかぶ FX/為替",
+   "via": [
+    "Google ニュース「米国株 ナスダック S&P500」"
+   ],
+   "sourceHint": "米国株",
+   "sourceHost": "fx.minkabu.jp",
+   "relevance": 3,
+   "hits": [
+    "ナスダック",
+    "ダウ",
+    "米国株"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "global",
+   "summary": [
+    "ダウ平均は３日続伸 ナスダックは小幅高 ＦＯＭＣは無難に通過＝米国株概況",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "米国株式市場=続伸半導体株が高いfrbは据え置き",
+   "title": "米国株式市場＝続伸、半導体株が高い ＦＲＢは据え置き",
+   "link": "https://news.infoseek.co.jp/article/28reutersJAPAN_KCN3W8345/",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T20:24:24.000Z",
+   "publisher": "Infoseek",
+   "via": [
+    "Google ニュース「米国株 ナスダック S&P500」"
+   ],
+   "sourceHint": "米国株",
+   "sourceHost": "news.infoseek.co.jp",
+   "relevance": 4,
+   "hits": [
+    "株式",
+    "市場",
+    "米国株",
+    "半導体"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "毎日Infoseekニュースを使って、楽しくポイントを貯めよう",
+    "ＣＭＥのフェドウオッチによると、市場が織り⁠込む１２月の２５ベーシスポイント（ｂｐ）利上げ確率は８５．０％と、前日の７８．３％から上昇した。",
+    "ロイター / 2026年10月29日 6時17分"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "アップル11月2日の決算発表を前にナスダック100との連動性が消失",
+   "title": "アップル、11月2日の決算発表を前にナスダック100との連動性が消失",
+   "link": "https://finance.biggo.jp/news/b395fc84-113d-4db2-b1ba-3f6c151c7631",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T20:05:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「アップル 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 4,
+   "hits": [
+    "決算",
+    "ナスダック"
+   ],
+   "tickers": [
+    "AAPL"
+   ],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "global",
+   "summary": [
+    "アップル、11月2日の決算発表を前にナスダック100との連動性が消失",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "アップル"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "nec通期見通し上方修正営業最高益インフラit関連好調",
+   "title": "NEC、通期見通し上方修正 営業最高益 インフラ・IT関連好調",
+   "link": "https://www.nikkan.co.jp/articles/view/795730",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T20:00:00.000Z",
+   "publisher": "日刊工業新聞",
+   "via": [
+    "Google ニュース「決算 上方修正 最高益」"
+   ],
+   "sourceHint": "決算",
+   "sourceHost": "nikkan.co.jp",
+   "relevance": 8,
+   "hits": [
+    "上方修正",
+    "最高益"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "jpstock",
+   "summary": [
+    "NEC、通期見通し上方修正 営業最高益 インフラ・IT関連好調",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "galaxy売り圧力は半減短期資金は退場ビットコインの弱気相場は6月に底入れ済み",
+   "title": "Galaxy：売り圧力は半減、短期資金は退場、ビットコインの弱気相場は6月に底入れ済み",
+   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1ud3BfUzJnRHFCQzUwY0tZSEVja2lORmNXX3B3aVI3MWlHYW5TUTdyLVBMYnFLZnVxNk1fcXdCM0NySFk3SkowcnlyRUFXRUdGVUs0R1NyRGxscnBheEVzUWZkX0JMdUFPZlRpbkxnWGRSa0I2SmRjWi0yNnlpdlE?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T19:26:49.000Z",
+   "publisher": "PANews",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "panewslab.com",
+   "relevance": 2,
+   "hits": [
+    "相場",
+    "ビットコイン"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "commodity",
+   "summary": [
+    "Galaxy：売り圧力は半減、短期資金は退場、ビットコインの弱気相場は6月に底入れ済み",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "米司法省エヌビディアによる129.3億ドルのハギングフェイス買収がai支配を固めるか調査",
+   "title": "米司法省、エヌビディアによる129.3億ドルのハギングフェイス買収がAI支配を固めるか調査",
+   "link": "https://finance.biggo.jp/news/19d1c27a-cafa-45ee-b806-a4f393fe3197",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T19:05:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「エヌビディア 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 7,
+   "hits": [
+    "買収",
+    "ドル"
+   ],
+   "tickers": [
+    "NVDA"
+   ],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "jpstock",
+   "summary": [
+    "米司法省、エヌビディアによる129.3億ドルのハギングフェイス買収がAI支配を固めるか調査",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "エヌビディア"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "〔fomc〕frb金利据え置き=インフレ加速も様子見―利上げ主張2人反対☆差替時事通信",
+   "title": "〔FOMC〕FRB金利据え置き＝インフレ加速も様子見―利上げ主張2人反対☆差替（時事通信）",
+   "link": "https://news.yahoo.co.jp/articles/1bb3577def45de841ae5e561266c4cc6cb7e9169",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T18:36:36.000Z",
+   "publisher": "Yahoo!ニュース",
+   "via": [
+    "Google ニュース「FRB FOMC 利下げ」"
+   ],
+   "sourceHint": "金融政策",
+   "sourceHost": "news.yahoo.co.jp",
+   "relevance": 11,
+   "hits": [
+    "利上げ",
+    "FOMC",
+    "金利",
+    "FRB",
+    "インフレ"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "【ワシントン時事】米連邦準備制度理事会（FRB）は28日、連邦公開市場委員会（FOMC）で、政策金利を年3．75～4．00％で維持することを決めた。",
+    "根強いインフレ圧力を問題視するクックFRB理事ら2人が利上げを主張し、金利据え置きに反対票を投じた。",
+    "こうした中、FRBは先月踏み切った3年2カ月ぶりの利上げの効果や、基調的な物価動向を見極める考えだ。"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ビットコインの弱気相場時計10年来の底値パターン崩壊まで残り20日",
+   "title": "ビットコインの弱気相場時計、10年来の底値パターン崩壊まで残り20日",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1ZdHJoREVuM3lleG9TeFFtV1BCV0NIOG9pU09WbXBCRHJ2M2dXQjBGYnhxc08wNFRaaXJtbkw3dF8yMHNaWG5YQ2dIZndrbkpraG1RamhSSThIS29MbmdwV2hQeFVrY2tsWXVTY1p0N3VkMGVN?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T18:36:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 2,
+   "hits": [
+    "相場",
+    "ビットコイン"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "commodity",
+   "summary": [
+    "ビットコインの弱気相場時計、10年来の底値パターン崩壊まで残り20日",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "日経平均続伸で始まるai半導体株に買い殺到し一時900円高",
+   "title": "日経平均、続伸で始まる AI・半導体株に買い殺到し一時900円高",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE93d0RnSUFjcTd1dFFSQkg0TmkxWkwxaTFySjJhaWlPSHd6dVhQNjRwTmNGMkFjal9xb2xRdEpWM2poaXhZNFFlUE9aVG9PVThpeHhHZWo5TWxNazhmWXZic2k3LVg4Y1RKZU1aZUdjMGZpWUpY?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T18:28:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「トヨタ自動車 株」",
+    "Google ニュース「ソニーグループ 株」",
+    "Google ニュース「ソフトバンクグループ 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 3,
+   "hits": [
+    "日経平均",
+    "円高",
+    "半導体"
+   ],
+   "tickers": [],
+   "pickups": 3,
+   "category": "fx",
+   "summary": [
+    "日経平均、続伸で始まる AI・半導体株に買い殺到し一時900円高",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ビットコイン8万ドル付近を維持実現時価総額が上向き2023年の回復局面を想起させる動きに",
+   "title": "ビットコイン、8万ドル付近を維持 実現時価総額が上向き、2023年の回復局面を想起させる動きに",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE85b0NIT3JkMk0tWkJkQjd4MWNOaEpCcW80Nm5SQ1U1MVVJbEZIV09iN1FfZFE1SWVTaFNIdDRVNHBlQ0ZDWFlaZlM1WDZPbFpDaDkxTEFSdU0zTTFXcjZnTW1zeDhUb3FEdDNuUXYwbm1OTE92?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T18:26:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 3,
+   "hits": [
+    "ドル",
+    "ビットコイン",
+    "時価総額"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "commodity",
+   "summary": [
+    "ビットコイン、8万ドル付近を維持 実現時価総額が上向き、2023年の回復局面を想起させる動きに",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "米シーゲイト好決算も警戒の壁に直面アナリストが目標株価を引き下げ",
+   "title": "米シーゲイト、好決算も警戒の壁に直面 アナリストが目標株価を引き下げ",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTFA4bjRVUmgxRjEwQTdNRTVYMFBzQUVSWTNnZ2w1dFVTR1ROMFBweFVBYjd3d0FyMF8zSWQtaGxBMVpUV3dwUWU5eEhrYmw3Z0dSSE16XzJDTkpzdm5wOXJXUzRvWkFOZHFSUlJ4M29Xd2VCbEpf?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T18:25:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「自社株買い 増配」"
+   ],
+   "sourceHint": "株主還元",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 2,
+   "hits": [
+    "株価",
+    "決算"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "米シーゲイト、好決算も警戒の壁に直面 アナリストが目標株価を引き下げ",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "negative",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "10月fomcは政策金利を据え置き声明会見の要点と12月利上げの見通し今後のドル円ゴールド",
+   "title": "10月FOMCは政策金利を据え置き 声明・会見の要点と12月利上げの見通し、今後のドル円・ゴールド",
+   "link": "https://www.oanda.jp/lab-education/market_news/fomc-oct-2026-review/",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T18:07:51.000Z",
+   "publisher": "OANDA",
+   "via": [
+    "Google ニュース「日銀 金融政策 利上げ」"
+   ],
+   "sourceHint": "金融政策",
+   "sourceHost": "oanda.jp",
+   "relevance": 10,
+   "hits": [
+    "利上げ",
+    "FOMC",
+    "ドル",
+    "金利"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "米連邦準備制度理事会（FRB）は日本時間10月29日3時に FOMC の結果を公表し、政策金利を3.75～4.00%で据え置くことを決めました。",
+    "9月のドット・チャートでは、2026年末の政策金利見通し（中央値）が4.1%と、現在のレンジの中央値（3.875%）から0.25%高い水準で、年内にもう1回の利上げを示唆していました。",
+    "本記事では、声明・ウォーシュFRB議長の会見の要点と12月会合に向けた利上げ観測の変化を整理したうえで、翌日の米GDP・PCE、30日の 日銀金融政策決定会合 もにらんだ、今後の ドル円（USD/JPY） と ゴールド（XAU/USD） の"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "米frbは政策金利を3.75~4.00%に据え置くことを決めた",
+   "title": "米ＦＲＢは政策金利を３．７５～４．００％に据え置くことを決めた",
+   "link": "https://www.jiji.com/jc/article?k=2026102900078&g=flash&m=rss",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T18:03:00.000Z",
+   "publisher": "時事通信",
+   "via": [
+    "時事通信"
+   ],
+   "sourceHint": "通信社",
+   "sourceHost": "jiji.com",
+   "relevance": 1,
+   "hits": [
+    "金利"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "米ＦＲＢは政策金利を３．７５～４．００％に据え置くことを決めた",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "アップルmacbookproにタッチ操作機能を追加しoledディスプレイを採用",
+   "title": "アップル、「MacBook Pro」にタッチ操作機能を追加し、OLEDディスプレイを採用",
+   "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQMklDNENYRE1ZckZERHhmMWRYdDVxU0J5VHlOYTYxLUNJUWM1MEtzQXNab1dXVnJpT2JlbmtXcnFIZzNJZzF0bkgxVjlpVUZqdGE4R3pvdHFoS05HVER6UXFmUUYwX1NPMDlsSnBQSWZyS0Rra19VclRibU1TQkJYV2UwS0ZSUFBfYmdsNFJwWTlLVVM3ZUVFaTg1N2F4S1p1endPVDJCd2F4UkFCSUdF?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T17:41:36.000Z",
+   "publisher": "Moomoo",
+   "via": [
+    "Google ニュース「アップル 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "moomoo.com",
+   "relevance": 2,
+   "hits": [],
+   "tickers": [
+    "AAPL"
+   ],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "アップル、「MacBook Pro」にタッチ操作機能を追加し、OLEDディスプレイを採用",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "アップル"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "欧州マーケットダイジェスト28日株高円安ユーロ高fx為替ニュース",
+   "title": "欧州マーケットダイジェスト・28日 株高・円安・ユーロ高｜FX・為替ニュース",
+   "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBzY2NEcmcxUDNrN2Naekg2dFBXRkJ4VXYtNFVNR0xYanktclo5OFdSUDl2QTYtYXVmbjJTZmVyWjJGNGY1b3dJYXJfM2swaWs0TGc?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T17:21:00.000Z",
+   "publisher": "ザイFX！",
+   "via": [
+    "Google ニュース「円相場 為替 ドル円」"
+   ],
+   "sourceHint": "為替",
+   "sourceHost": "zai.diamond.jp",
+   "relevance": 2,
+   "hits": [
+    "円安",
+    "為替"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "欧州マーケットダイジェスト・28日 株高・円安・ユーロ高｜FX・為替ニュース",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "28日の英国債10年物利回りは5.321%に低下トレーダーズウェブ",
+   "title": "28日の英国債、10年物利回りは5.321％に低下(トレーダーズ・ウェブ)",
+   "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNUUxSQW0tTkk0X3NrNjNMWmhGd00tbk5JVjg0SWlRdTktZlM1bW5TTGZpd1Q0b0xVNXRXQTVNTnFiOTBiWmFqYmlhbDF6OXc1LWdCOThGZDhtLWhZMGhUZ3lmdmJIQUlkTnFlZVktTWQyY2xpSFZoTVpWSFU4bnFEZmhxbEpGUjA?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T17:10:04.000Z",
+   "publisher": "Yahoo!ファイナンス",
+   "via": [
+    "Google ニュース「長期金利 国債 利回り」"
+   ],
+   "sourceHint": "債券",
+   "sourceHost": "finance.yahoo.co.jp",
+   "relevance": 2,
+   "hits": [
+    "利回り",
+    "国債"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "28日の英国債、10年物利回りは5.321％に低下(トレーダーズ・ウェブ)",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ビットコインに大きな値動き?fomc前に予想変動率が1週間で上昇",
+   "title": "ビットコインに大きな値動き？FOMC前に予想変動率が1週間で上昇",
+   "link": "https://crypto-times.jp/news-bitcoin-options-volatility-fomc/",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T17:04:27.000Z",
+   "publisher": "CRYPTO TIMES",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "crypto-times.jp",
+   "relevance": 5,
+   "hits": [
+    "FOMC",
+    "ビットコイン"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "米連邦公開市場委員会（FOMC）の政策決定を前に、ビットコインのオプション（あらかじめ決めた価格で売買する権利）市場で短期的な価格変動を見込む動きが強まっています。",
+    "Laevitasが10月26日時点で算出した別の比較では、7日物の予想変動率36.1%に対し、実際の値動きを示す実現ボラティリティは26.9%でした。",
+    "FRBは日本時間10月29日午前3時に政策金利を発表し、同3時30分から議長会見を開く予定です。"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "米ウォール街年末ラリー前のs&p500の8%下落を警告",
+   "title": "米ウォール街、年末ラリー前のS&P500の8%下落を警告",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9tTVNCZkpLVjVNT3B0UGp0dTlPUVlqZWxCLVM2ZzVzVnNyMkVQMGVMNnB1MDdTR1h2dFlFSFk0WDR0SXpaRG1LQk15QmFQejhVeEVfaGtzUEotNzIzVjJsVjlRSmRHN2NWOGpySEVZUGRabkdU?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T16:55:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「米国株 ナスダック S&P500」"
+   ],
+   "sourceHint": "米国株",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 1,
+   "hits": [
+    "S&P"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "global",
+   "summary": [
+    "米ウォール街、年末ラリー前のS&P500の8%下落を警告",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "negative",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "トヨタ紡織株3116企業情報決算時期代表者名大株主情報ir動画など",
+   "title": "トヨタ紡織(株)【3116】：企業情報（決算時期・代表者名・大株主情報・IR動画など）",
+   "link": "https://finance.yahoo.co.jp/quote/3116.T/profile?styl=shareholders",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T16:54:46.000Z",
+   "publisher": "Yahoo!ファイナンス",
+   "via": [
+    "Google ニュース「トヨタ自動車 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.yahoo.co.jp",
+   "relevance": 4,
+   "hits": [
+    "株主",
+    "決算"
+   ],
+   "tickers": [
+    "7203"
+   ],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "jpstock",
+   "summary": [
+    "現在 JavaScriptが無効 になっています。",
+    "2,015 前日比 -26.5 ( -1.30 % )",
+    "決算発表予定日： 2026/10/29"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "トヨタ自動車"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "今日の仮想通貨ビットコイン8.2万ドルで売り圧かリップルの信託銀行認可でxrpに追い風?",
+   "title": "【今日の仮想通貨】ビットコイン8.2万ドルで売り圧か。リップルの信託銀行認可でXRPに追い風？",
+   "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE05cGtKdHZObWsxOGRVVDk2QlJraEFJVUVjVXhhU1V4Y2VNSXl6OV9wVlFWNTgzZlhrSXlIU1JHSF9iOHF6STA2cDNBM1JyNTdJZjBvZ1hCWDFLczFxdmtyZjRn?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T16:36:28.000Z",
+   "publisher": "CRYPTO TIMES",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "crypto-times.jp",
+   "relevance": 3,
+   "hits": [
+    "ドル",
+    "ビットコイン",
+    "仮想通貨"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "commodity",
+   "summary": [
+    "【今日の仮想通貨】ビットコイン8.2万ドルで売り圧か。リップルの信託銀行認可でXRPに追い風？",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "いよぎんhd5830過去最高益更新!業績予想も上方修正!増配決定で見せるいよぎんの本気katiearchibaldcyclingretirementbyc1cyshc9",
+   "title": "いよぎんＨＤ（5830）過去最高益更新！業績予想も上方修正！増配決定で見せる「いよぎん」の本気 Katie Archibald Cycling Retirement (BYC1cySHc9)",
+   "link": "https://media.unisba.ac.id/5e1d48fd/fd8cf643qB6zYiYz4Yw",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T15:52:05.000Z",
+   "publisher": "Unisba Media",
+   "via": [
+    "Google ニュース「決算 上方修正 最高益」"
+   ],
+   "sourceHint": "決算",
+   "sourceHost": "media.unisba.ac.id",
+   "relevance": 10,
+   "hits": [
+    "上方修正",
+    "最高益",
+    "業績",
+    "増配"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "jpstock",
+   "summary": [
+    "いよぎんＨＤ（5830）過去最高益更新！業績予想も上方修正！増配決定で見せる「いよぎん」の本気 Katie Archibald Cycling Retirement (BYC1cySHc9)",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "$エヌビディアnvda.us$焦げるまで加熱",
+   "title": "$エヌビディア (NVDA.US)$ 焦げるまで加熱",
+   "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOdGxUdVVyUVhUV0NldmtrR0ZieUltMWRuMTJ4RVNEcFJlbjlyUW02U3VnSndOWVFUeUU3SWM0UTktd0w1Z0RSRVVQM3R5Q1dDUWRYYVpGWWdZREdvQlJXSHZ3WkhGMVhDaDEtb3dneEJueF9Uajd2UEhybWNiZ21EZDRwR1F6LWR4U0JxTklZVEw3R1k?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T15:31:48.000Z",
+   "publisher": "Moomoo",
+   "via": [
+    "Google ニュース「エヌビディア 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "moomoo.com",
+   "relevance": 2,
+   "hits": [],
+   "tickers": [
+    "NVDA"
+   ],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "$エヌビディア (NVDA.US)$ 焦げるまで加熱",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "エヌビディア"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "サムスン229ドルのgalaxybudsonを11月に米国で発売9.5時間バッテリー搭載",
+   "title": "サムスン、229ドルの「Galaxy Buds On」を11月に米国で発売 9.5時間バッテリー搭載",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5Dc0VtS2tBY19xaEFGY2M1WUZkaTZOQXg4VU1QZW1ydURKQV9xRnV3dFdiRDN2T2psOENKN3dSRnFsXzFKOEI4REUwd0t6Y1FkdmhscEM3czVmbzV3ZGR3ZWdlc3dBd1N4NlBmUkttUGlGa29C?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T14:05:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「ソニーグループ 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 1,
+   "hits": [
+    "ドル"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "サムスン、229ドルの「Galaxy Buds On」を11月に米国で発売 9.5時間バッテリー搭載",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "$エヌビディアnvda.us$@keithfarnsworthのトレードをしばらく追っています👀",
+   "title": "$エヌビディア (NVDA.US)$ @Keith Farnsworth のトレードをしばらく追っています。👀",
+   "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNTlIxZkJvSzVuX24zVHJCN3dGZkxYaXhtZUN5WHNXTnlaVllHS2RMRGNBa3ZFaVpXaEdCLUtfT0NESUdvN0RkOThhVUdxNnVpRGhoZjBaOU5EV0JMckpCNEpJQkM4TENlRzNqR2pVV0VRdmRaZFhlNHd2TVBQSGx1elRiWERYTlk3MlYzRnBLMGFGU21FTEx0bGdOb2Znai1ISldIS1RjSFBFMkZQQnc4?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T14:03:47.000Z",
+   "publisher": "Moomoo",
+   "via": [
+    "Google ニュース「エヌビディア 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "moomoo.com",
+   "relevance": 2,
+   "hits": [],
+   "tickers": [
+    "NVDA"
+   ],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "$エヌビディア (NVDA.US)$ @Keith Farnsworth のトレードをしばらく追っています。👀",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "エヌビディア"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "bitwise2036年のビットコイン価格目標を160万ドルに引き上げ2027年版ビットコイン長期資本市場想定を発表",
+   "title": "Bitwise、2036年のビットコイン価格目標を160万ドルに引き上げ、2027年版ビットコイン長期資本市場想定を発表",
+   "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQMVd3U1gzeFF3elliUkxnbXFGZjZ1bVo2NGxMdWd4bGFoYmRYUWs5ZkkxSW9kcHBETmVySi1CWHNVcldicFZzV1A4X1R3cUMwLWxmZE1nVkZId1U4Sm4tU3dONW51Mk9VeGU1NVBYcUQ4N2VQV29YOUhwbHhMQWxsQ2trOUt1MGVzYWJZTUotRGZnXzA1dkFmWDhYcHgzUEE?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T14:00:00.000Z",
+   "publisher": "Moomoo",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "moomoo.com",
+   "relevance": 3,
+   "hits": [
+    "市場",
+    "ドル",
+    "ビットコイン"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "commodity",
+   "summary": [
+    "Bitwise、2036年のビットコイン価格目標を160万ドルに引き上げ、2027年版ビットコイン長期資本市場想定を発表",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ジェフリーズバリュエーション改善でソフトバンクグループの格付けを引き上げ執筆",
+   "title": "ジェフリーズ、バリュエーション改善でソフトバンクグループの格付けを引き上げ 執筆",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5mQjJKZU5jS1lKdGlaeUVoODZzSHNpU3hnTFdLMF9ZRTRSMnNsNlJKazFNbUlBaEtNdTE3bTFPaXBveUl2dnNvNk5zbXdRN0NScVE1UkZCS0tjRzc1NGlKRWQza0VFRHlJNm5hYmJGdGVXTjV0?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T13:49:00.000Z",
+   "publisher": "Investing.com - FX | 株式市場 | ファイナンス | 金融ニュース",
+   "via": [
+    "Google ニュース「ソフトバンクグループ 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "jp.investing.com",
+   "relevance": 2,
+   "hits": [],
+   "tickers": [
+    "9984"
+   ],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "ジェフリーズ、バリュエーション改善でソフトバンクグループの格付けを引き上げ 執筆",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "ソフトバンクグループ"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
   {
    "key": "採用,職員を募集しています金融モニタリング業務資金移動業者や暗号資産交換業者等の法令等遵守態勢関連法令の解釈等に従事する職員",
    "title": "採用,職員を募集しています。（金融モニタリング業務（資金移動業者や暗号資産交換業者等の法令等遵守態勢、関連法令の解釈等）に従事する職員)",
@@ -262,6 +2822,41 @@
    "impact": "",
    "sentiment": "negative",
    "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "アマゾンechoshow16を500ドルで発表アップルの299ドルhomeviewを下回る価格設定でスマートホーム競争が激化",
+   "title": "アマゾン、Echo Show 16を500ドルで発表 アップルの299ドル「HomeView」を下回る価格設定でスマートホーム競争が激化",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9IWnliUHBsUmgyZGNZVGxUQ3MyQUVQdlpiQVVUemw1WkI4RXhXeGN3Q0FTNW9ianpZbTdZcmFPbmJYM3NMclhMZjhPZnBRcEg1N3ZCc2lsb1BwaE5wSC1UZjZOU0tKYkptTFd1WFJJcjdkRVpB?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T12:55:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「アップル 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 3,
+   "hits": [
+    "ドル"
+   ],
+   "tickers": [
+    "AAPL"
+   ],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "アマゾン、Echo Show 16を500ドルで発表 アップルの299ドル「HomeView」を下回る価格設定でスマートホーム競争が激化",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "アップル"
+   ],
    "importance": "high",
    "generatedBy": "extractive"
   },
@@ -393,6 +2988,40 @@
    "sentiment": "neutral",
    "assets": [],
    "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "advantestfy2026q2決算説明会aiメガサイクルで四半期最高益通期営業益予想を9670億円に上方修正socテスタ生産能力1万台前倒しへ",
+   "title": "【Advantest FY2026 Q2 決算説明会】AIメガサイクルで四半期最高益 通期営業益予想を9670億円に上方修正、SoCテスタ生産能力1万台前倒しへ",
+   "link": "https://finance.biggo.jp/news/JP_6857.T_2026-10-28",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T12:24:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「決算 上方修正 最高益」"
+   ],
+   "sourceHint": "決算",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 9,
+   "hits": [
+    "上方修正",
+    "最高益",
+    "決算"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "jpstock",
+   "summary": [
+    "【Advantest FY2026 Q2 決算説明会】AIメガサイクルで四半期最高益 通期営業益予想を9670億円に上方修正、SoCテスタ生産能力1万台前倒しへ",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "high",
    "generatedBy": "extractive"
   },
   {
@@ -717,6 +3346,43 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "frbの金利据え置き後にボラティリティが高まるなか暗号資産市場が上昇ビットコインは8万1,000ドルを突破",
+   "title": "FRBの金利据え置き後にボラティリティが高まるなか暗号資産市場が上昇、ビットコインは8万1,000ドルを突破",
+   "link": "https://www.tradingkey.com/jp/analysis/cryptocurrencies/btc/262250475-crypto-fed-fomc-bitcoin-btc-80000-etf-tradingkey",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T09:33:00.000Z",
+   "publisher": "TradingKey",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "tradingkey.com",
+   "relevance": 6,
+   "hits": [
+    "市場",
+    "ドル",
+    "金利",
+    "FRB",
+    "ビットコイン",
+    "暗号資産"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "FRBが予想通り金利を据え置いたことで市場のリスク選好姿勢が回復し、ビットコインは出来高を伴って81,000ドル台へと大幅に上昇した。",
+    "米国ハイテク株の堅調さとマクロ経済の不確実性の後退に支えられ、ビットコイン（ BTC ）はこれまでの79,000〜80,000ドルのレンジ相場を抜け出し、出来高を伴って81,000ドルの大台を突破、本日高値の81,560ドルに達しました。",
+    "北京時間10月29日、米連邦準備制度理事会（FRB）は最新のFOMC金利決議を発表し、フェデラルファンド（FF）金利の誘導目標レンジを3.75%〜4.00%で据え置くことを決定しました。"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "株価指数先物引け後アドバンテスト決算を評価したロング対応へ株探ニュース",
    "title": "株価指数先物【引け後】 アドバンテスト決算を評価したロング対応へ(株探ニュース)",
    "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxONlUxWkRnNXlTQkJQSmg3eXBoREZEbGZqaTYtaGpZeUN0Qmc2QTI4LUJSRW44cmt3TnhMbkRqWmdhSnliaXdGNTlaZDRzMkhTWEVsSGJEN0xqNXI5NnhZcWdTNURjelptaXd5SUxHX3Q2VnhlRmFBTVdEVEtLcGo4SHpnd3JQNEU?oc=5",
@@ -749,6 +3415,37 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "日清製粉g売上高予想を9,000億円に引き上げ最大200億円の自社株買いも決議",
+   "title": "日清製粉G、売上高予想を9,000億円に引き上げ 最大200億円の自社株買いも決議",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5lZkxOMGx6eDg0dzhhd3hwZDlmOTBpSzFnaGRMSnkxanRnaUVkdTA3RkUyem1MVzN4Q3dqRFRnN3BpT0dxaVJ0dHY1LWpQVTd3OHVnMWo3b2ttS2ZDN2NUNXZCem1ldDFoZHp0RGEtYUNNR0NH?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T09:25:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「自社株買い 増配」"
+   ],
+   "sourceHint": "株主還元",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 1,
+   "hits": [
+    "自社株買い"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "日清製粉G、売上高予想を9,000億円に引き上げ 最大200億円の自社株買いも決議",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "↑日経平均大引け続伸ai半導体関連が引き続き買われる10月28日投稿日時2026/10/281814[株探]",
    "title": "【↑】日経平均 大引け｜ 続伸、AI・半導体関連が引き続き買われる (10月28日) 投稿日時： 2026/10/28 18:14[株探]",
    "link": "https://news.google.com/rss/articles/CBMiRkFVX3lxTFBQRHo4bHp2MDV2ajhKZHduVVpEaVhtRjF2ekM5SW5GSW1FSkh5ekFnN09XQnBwcy15cV9GUFBZQXpQeTktVWc?oc=5",
@@ -776,6 +3473,37 @@
    ],
    "impact": "",
    "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "本日のサプライズ決算続報10月28日株探ニュース",
+   "title": "本日の【サプライズ決算】続報 (10月28日)(株探ニュース)",
+   "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOVDdrS2c1ckNvS1ZzSmtmNWljNjZQWm9UaGpudUxyQm9SYS1sSWVkYmxPcE5OZ2syOXYtOE95bVFxaXQ1QnNBVWxrMHhPWXptN0hnUkdua1o2VVp1c2tscE0tWnFGSWlpTEhBdHpGM3B5WjdpOFkzdHN6UGx6WUtXNTlZQ1dNeE0?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T09:03:28.000Z",
+   "publisher": "Yahoo!ファイナンス",
+   "via": [
+    "Google ニュース「決算 上方修正 最高益」"
+   ],
+   "sourceHint": "決算",
+   "sourceHost": "finance.yahoo.co.jp",
+   "relevance": 1,
+   "hits": [
+    "決算"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "本日の【サプライズ決算】続報 (10月28日)(株探ニュース)",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
    "assets": [],
    "importance": "normal",
    "generatedBy": "extractive"
@@ -1010,6 +3738,74 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "エヌビディア株217.94ドルmsftgoogl投資計画前強気243",
+   "title": "エヌビディア株 217.94ドル MSFT・GOOGL投資計画前 強気243",
+   "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE8xN3laNUxjSk9EMXVlMkp6SUpWUk9TNElRemh3V1JDekZVQWJLRURSTk5JanpHZ3BiNE5sdE9PTDZZZFhhOFhUaVNCMVJ3cktydm5MMTFTRkhlcUFJLXFYcVFXa0ZENmg0Q1YwaWJ5OVB5Y1V4aG9HYw?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T08:18:08.000Z",
+   "publisher": "FinanceFeeds",
+   "via": [
+    "Google ニュース「エヌビディア 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "financefeeds.com",
+   "relevance": 3,
+   "hits": [
+    "ドル"
+   ],
+   "tickers": [
+    "NVDA"
+   ],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "エヌビディア株 217.94ドル MSFT・GOOGL投資計画前 強気243",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "エヌビディア"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "自動車用品卸のムラキ株価が急反落...tobで人気化も資金の逃げ足速い",
+   "title": "自動車用品卸のムラキ、株価が急反落…TOBで人気化も資金の逃げ足速い",
+   "link": "https://response.jp/article/2026/10/28/418330.html",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T08:15:02.000Z",
+   "publisher": "レスポンス（Response.jp）",
+   "via": [
+    "Google ニュース「トヨタ自動車 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "response.jp",
+   "relevance": 5,
+   "hits": [
+    "TOB",
+    "株価"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "global",
+   "summary": [
+    "28日の日経平均株価は前日比685円82銭高の6万3954円19銭と続伸。",
+    "外国為替市場で円相場は1ドル＝157円台後半で推移。",
+    "27日のニューヨークダウは15ドル高の5万2377ドルと小幅続伸。"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "トヨタst社債が抽選に申込10倍超自己募集型への転換が需要喚起",
    "title": "トヨタST社債が抽選に「申込10倍超」自己募集型への転換が需要喚起",
    "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1MZFRBZDZ2QkMxbC01X2g1UFBsMm9nY3ZhTkY0TC02cjkxcS1mV0NpTko5WlBzbXAycEFieDI0bGF6aXM3VG1jZU9rVXl0UQ?oc=5",
@@ -1043,6 +3839,77 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "創業30周年記念配当&最終益11.8倍の上方修正を発表...株主還元強化と好業績でストップ高となった〈増配銘柄〉の正体10月28日の国内株式市場概況thegoldonlineゴールドオンライン",
+   "title": "創業30周年「記念配当」＆最終益「11.8倍」の上方修正を発表…株主還元強化と好業績でストップ高となった〈増配銘柄〉の正体【10月28日の国内株式市場概況】 (THE GOLD ONLINE（ゴールドオンライン）)",
+   "link": "https://news.yahoo.co.jp/articles/82a6dc5fabd1cd485bd5059ee7099882ba9df663/images/000",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T08:12:16.000Z",
+   "publisher": "Yahoo!ニュース",
+   "via": [
+    "Google ニュース「自社株買い 増配」"
+   ],
+   "sourceHint": "株主還元",
+   "sourceHost": "news.yahoo.co.jp",
+   "relevance": 13,
+   "hits": [
+    "上方修正",
+    "ストップ高",
+    "株式",
+    "株主",
+    "市場",
+    "業績",
+    "配当",
+    "増配"
+   ],
+   "tickers": [],
+   "pickups": 2,
+   "hasBody": true,
+   "category": "jpstock",
+   "summary": [
+    "（※画像はイメージです／PIXTA） （ ゴールドオンライン ）",
+    "創業30周年「記念配当」＆最終益「11.8倍」の上方修正を発表…株主還元強化と好業績でストップ高となった〈増配銘柄〉の正体【10月28日の国内株式市場概況】",
+    "「年間配当62円→72円」へ増配＆自社株買いを発表…株主還元強化で急反発した〈注目銘柄〉の正体【10月27日の国内株式市場概況】"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "欧州系ファンドのeqtカカクコムへのtob期間を再延長10度目",
+   "title": "欧州系ファンドのEQT、カカクコムへのTOB期間を再延長 10度目",
+   "link": "https://www.nikkei.com/article/DGXZQOUC287BF0Y6A021C2000000/",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T08:09:10.000Z",
+   "publisher": "日本経済新聞",
+   "via": [
+    "Google ニュース「TOB 買収 株式」"
+   ],
+   "sourceHint": "M&A",
+   "sourceHost": "nikkei.com",
+   "relevance": 4,
+   "hits": [
+    "TOB"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "jpstock",
+   "summary": [
+    "企業での記事共有や会議資料への転載・複製、注文印刷などをご希望の方は、リンク先をご覧ください。",
+    "カカクコム大株主の KDDI から協力が得られない場合の価格を3597円から3700円に上げ、得られる場合の価格は3720円に据え置いた。",
+    "欧州系投資ファンドのEQTは28日、「食べログ」などを運営する カカクコム に対し実施しているTOB（株式公開買い付け）期間を11月12日まで延長すると発表した。"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "eqtがカカクコムtob再延長3回連続で価格1円上げ買収戦長期化",
    "title": "EQTがカカクコムTOB再延長、3回連続で価格1円上げ－買収戦長期化",
    "link": "https://newsdig.tbs.co.jp/articles/withbloomberg/3045525?display=1",
@@ -1073,6 +3940,38 @@
    "sentiment": "neutral",
    "assets": [],
    "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "ビットコイン価格予測83,388ドルのレジスタンスに注目?btcが1.51%上昇",
+   "title": "ビットコイン価格予測：83,388ドルのレジスタンスに注目？BTCが1.51%上昇",
+   "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQeUVPek5FQ0RBdU42MnNwdVVHazl6UzdOdjUtTXlLNzhGbGRQbExzemZMM0hEcEZJcng5eHFkTms0MHpZTlA4R3JkTzBQOHBfS1B3Ry1oZXdNOWlnU0VuWXhGUWhWNzVGSGl0aDVrQVlJb1I1Q2t1VklZSjhTOW40MjlwRm4xUG9kSGhFR0xvdTV5ZXYwVU14NEJuQW84ZVFhMFBV?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T08:03:37.000Z",
+   "publisher": "Traders Union",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "tradersunion.com",
+   "relevance": 2,
+   "hits": [
+    "ドル",
+    "ビットコイン"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "commodity",
+   "summary": [
+    "ビットコイン価格予測：83,388ドルのレジスタンスに注目？BTCが1.51%上昇",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
    "generatedBy": "extractive"
   },
   {
@@ -1141,6 +4040,37 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "株式会社スピード愛知県stationai協力のもとepalette乗車オリジナルキャラクター募集を開始!〜採用作品は3dcg化!未来のprキャラクターを全国からプロアマ不問で公募〜",
+   "title": "株式会社スピード、愛知県・STATION Ai協力のもと「e-Palette乗車オリジナルキャラクター募集」を開始！ 〜採用作品は3DCG化！未来のPRキャラクターを全国からプロ・アマ不問で公募〜",
+   "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBsSDU4T2xGdjR4cEZvUE5iWldURWcwVHBIUE1sOF9nV1lLU3hQMDVDR3U1a0pnczFHanpkaTdkNEtrTlVKVzVVNk9uUmVad2ZZTThaT0YtZkxGYWZsZEs2di12MEJlT1JOQUE?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T08:00:01.000Z",
+   "publisher": "PR TIMES",
+   "via": [
+    "Google ニュース「トヨタ自動車 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "prtimes.jp",
+   "relevance": 1,
+   "hits": [
+    "株式"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "株式会社スピード、愛知県・STATION Ai協力のもと「e-Palette乗車オリジナルキャラクター募集」を開始！ 〜採用作品は3DCG化！未来のPRキャラクターを全国からプロ・アマ不問で公募〜",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "日銀の利上げで最も損をするのは誰か...住宅ローンと賃上げの両方で不利になる谷間の世代の理不尽",
    "title": "｢日銀の利上げ｣で最も損をするのは誰か…住宅ローンと賃上げの両方で不利になる｢谷間の世代｣の理不尽",
    "link": "https://president.jp/articles/-/121042?page=1",
@@ -1159,7 +4089,7 @@
     "日銀"
    ],
    "tickers": [],
-   "pickups": 1,
+   "pickups": 3,
    "hasBody": true,
    "category": "macro",
    "summary": [
@@ -1269,6 +4199,40 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "指標発表fomc29日未明発表ビットコインは8万ドル攻防のなかウォーシュ会見に注目",
+   "title": "【指標発表】FOMC、29日未明発表｜ビットコインは8万ドル攻防のなかウォーシュ会見に注目",
+   "link": "https://coinotaku.com/news/articles/255606",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T07:56:31.000Z",
+   "publisher": "CoinPartner",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "coinotaku.com",
+   "relevance": 6,
+   "hits": [
+    "FOMC",
+    "ドル",
+    "ビットコイン"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "macro",
+   "summary": [
+    "【指標発表】FOMC、29日未明発表｜ビットコインは8万ドル攻防のなかウォーシュ会見に注目",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "$エヌビディアnvda.us$このプットオプションを見てなんて勇気があるんだ!!!",
    "title": "$エヌビディア (NVDA.US)$ このプットオプションを見て、なんて勇気があるんだ！！！",
    "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQd1V6Z1FmOVJWQnRXUEg4V0I1MTdPQ0ZGY2tKeE56N1ktbXp5RlU0QXlKcWxPWGZpSEVaR2ZzVFZJMjBCbkJVekVmbDNsRzktRG1iQS15b0NpQ1hfZTRrMU1ZS1h0bzd1eDNBbkp5VlllVi1MdXI2ZHlXRmFSZTM3MDBsWG84aDZvbVBnSHpUNEU5X0Izd2Z6bG44cllhRExWWFJRczBxUQ?oc=5",
@@ -1297,6 +4261,43 @@
    "sentiment": "neutral",
    "assets": [
     "エヌビディア"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "アップルの目標株価を引き上げ380ドル390ドルの予想と上昇余地を分析",
+   "title": "アップルの目標株価を引き上げ、380ドル・390ドルの予想と上昇余地を分析",
+   "link": "https://www.ebc.com/jp/forex/316671.html",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T07:39:00.000Z",
+   "publisher": "EBC Financial Group",
+   "via": [
+    "Google ニュース「アップル 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "ebc.com",
+   "relevance": 4,
+   "hits": [
+    "株価",
+    "ドル"
+   ],
+   "tickers": [
+    "AAPL"
+   ],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "jpstock",
+   "summary": [
+    "公開日: 2026-10-28",
+    "2026年10月28日時点で確認できる最新情報では、Goldman Sachsが10月27日付で目標株価を360ドルから390ドルへ引き上げました。",
+    "2026年10月28日付の報道によると、Counterpoint Researchの集計では、iPhone 18 Proシリーズの発売後3週間の販売台数は世界全体で前年同期比3.1%増、中国では29%増となった一方、米国では4%減、日本では"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "アップル"
    ],
    "importance": "high",
    "generatedBy": "extractive"
@@ -1362,6 +4363,39 @@
    "sentiment": "neutral",
    "assets": [],
    "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "アップルのm6はさらにリードを広げるのかそれともインテルが追いつくのか?",
+   "title": "アップルのM6はさらにリードを広げるのか、それともインテルが追いつくのか？",
+   "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBfUnJwZWlXNVdtQlB3THcwMnVVZXRRTzdTa0d0MWQ3T3RxTUhWdUlLR3dqVW1vN3k4RHVfdlBHU25oUUF1U3U0Qnp5MU83bDJ1NUdBRE9HbDNiRGR3ZTRia2N1UlppUGs?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T07:17:11.000Z",
+   "publisher": "Moomoo",
+   "via": [
+    "Google ニュース「アップル 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "moomoo.com",
+   "relevance": 2,
+   "hits": [],
+   "tickers": [
+    "AAPL"
+   ],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "アップルのM6はさらにリードを広げるのか、それともインテルが追いつくのか？",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "アップル"
+   ],
+   "importance": "high",
    "generatedBy": "extractive"
   },
   {
@@ -1753,6 +4787,39 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "$エヌビディアnvda.us$$スペースxspcx.us$引け後までずっと頭が痛い[苦しい]",
+   "title": "$エヌビディア (NVDA.US)$$スペースX (SPCX.US)$ 引け後までずっと頭が痛い [苦しい]",
+   "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQeWtRanZVRGVPUW9vQjhKdlBjOWxUSEVub1JBU1dGM2RXbkxMU01oeTZUMWMyRE9mWko2dkZZclpNM2dWWEphemNxQk5OUW5OdHF2TzNpSFFwNXA5bWstaGlOdWpzY3JpUGV4NlltMEVtM0hTTXJoelVhTDczdTVNRUlzSEszdk1CU1dYOWpmQmNLR0YwUHRtcmtfeXJTVm93UFJsWVlHU0Z0LXot?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T07:00:00.000Z",
+   "publisher": "Moomoo",
+   "via": [
+    "Google ニュース「エヌビディア 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "moomoo.com",
+   "relevance": 2,
+   "hits": [],
+   "tickers": [
+    "NVDA"
+   ],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "$エヌビディア (NVDA.US)$$スペースX (SPCX.US)$ 引け後までずっと頭が痛い [苦しい]",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "エヌビディア"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "日経平均続伸終値は685円高の6万3954円topixは反落",
    "title": "日経平均続伸、終値は685円高の６万3954円 ＴＯＰＩＸ は反落",
    "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE00ZEljT2hpemdvUW4ySUJZTnFRaDUxTklqd2ZFSGtPcUt2Q0NBQnVyS2ZaTUl0amJKaENGZUlKWXd2bXpfdEYzdUNxeTRGOTVWUkpwVHVUOTNDZ2lY?oc=5",
@@ -1874,6 +4941,38 @@
    "category": "fx",
    "summary": [
     "【速報】東証終値685円高",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "東証終値685円高全国のニュースweb東奥",
+   "title": "東証終値６８５円高｜全国のニュース｜Web東奥",
+   "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1rZV82Yko2TmJockFzdHB5QXR5U2tqbkZHM2ZsZTl4SG5SbFdPTjhZX01iclI3Z1U2T2FkMmRXVURfT1FxQXdiU0RwbFROa2EzWG1Yd0E2UFU?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T06:34:27.000Z",
+   "publisher": "東奥日報社",
+   "via": [
+    "Google ニュース「日経平均 株価 終値」"
+   ],
+   "sourceHint": "日本株",
+   "sourceHost": "toonippo.co.jp",
+   "relevance": 2,
+   "hits": [
+    "東証",
+    "円高"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "東証終値６８５円高｜全国のニュース｜Web東奥",
     "（自動要約なし。原文を参照してください）",
     "（自動要約なし。原文を参照してください）"
    ],
@@ -2216,6 +5315,70 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "ソシオネクス今期経常を11%上方修正",
+   "title": "ソシオネクス、今期経常を11％上方修正",
+   "link": "https://kabutan.jp/news/?b=k202610280044",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T06:30:00.000Z",
+   "publisher": "株探",
+   "via": [
+    "Google ニュース「決算 上方修正 最高益」"
+   ],
+   "sourceHint": "決算",
+   "sourceHost": "kabutan.jp",
+   "relevance": 4,
+   "hits": [
+    "上方修正"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "jpstock",
+   "summary": [
+    "ソシオネクス、今期経常を11％上方修正",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "◎〔金利債券市況〕先物続落=現物も売られる28日",
+   "title": "◎〔金利・債券市況〕先物、続落＝現物も売られる（２８日）",
+   "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE0yQ2FDMS1YSlhsSklaa3NYODEydzlwejBWN3BCNEtZRFljRDZWMVg1WHdSYlJvM2xqWW9KWGJ0eTRIT3U3MTJpWjJBay1fcHoxdm85ZG1RcnV2MWl1SWc?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T06:27:00.000Z",
+   "publisher": "時事通信ニュース",
+   "via": [
+    "Google ニュース「長期金利 国債 利回り」"
+   ],
+   "sourceHint": "債券",
+   "sourceHost": "sp.m.jiji.com",
+   "relevance": 2,
+   "hits": [
+    "金利",
+    "債券"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "◎〔金利・債券市況〕先物、続落＝現物も売られる（２８日）",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "negative",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "etf異動csop两倍レバレッジエヌビディア07788が3%超上昇エヌビディアがmetaに出資両社はmuseおよびmuseシリーズモデルを中心に協力を拡大",
    "title": "ETF異動｜CSOP两倍レバレッジ・エヌビディア（07788）が3％超上昇 エヌビディアがMetaに出資、両社は「Muse」およびMuseシリーズモデルを中心に協力を拡大",
    "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNTjFuY3c3Vi1KaEVJT0w2TzdiQ2JRa295UkhmRmVsb1dob2ljMTMyM3hfLWxKMGQ4QllvSHU2WEpvS1NUUTFUcF9KYjJCWWpXekdRWWduR1o1VEtxR2hkNVpKckhqVWZDTjF2M1ZNWVNveE1fRkFDWWx1cWVXdmpSRHBmNHdyV3Zaa0lGaEkyM2ctTkI3TkpmalFscUtnaV8yOGc?oc=5",
@@ -2246,6 +5409,37 @@
     "エヌビディア"
    ],
    "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "中国30年債利回り2.05%割れ...ハイテク株調整で安全資産に資金流入",
+   "title": "中国30年債利回り2.05%割れ…ハイテク株調整で安全資産に資金流入",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1pNHd4VDM1Tk5XSW5qamlzZ3ZyRVZ4Q201YmtSaHR0ZVBKdEdxVm4yY3pfM05WZnh3akxfbVVJcEZvRFEzZXV1TTNkX29NX2lDcXR6Tk1qTDJBTkdNWVBaWEZXMi0zWXd6SC14dU9aREZYcFFr?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T06:05:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「長期金利 国債 利回り」"
+   ],
+   "sourceHint": "債券",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 1,
+   "hits": [
+    "利回り"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "中国30年債利回り2.05%割れ…ハイテク株調整で安全資産に資金流入",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
    "generatedBy": "extractive"
   },
   {
@@ -2418,6 +5612,74 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "小糸製今期経常を3%上方修正配当も6円増額",
+   "title": "小糸製、今期経常を3％上方修正、配当も6円増額",
+   "link": "https://kabutan.jp/news/?b=k202610280027",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T06:00:00.000Z",
+   "publisher": "株探",
+   "via": [
+    "Google ニュース「決算 上方修正 最高益」"
+   ],
+   "sourceHint": "決算",
+   "sourceHost": "kabutan.jp",
+   "relevance": 5,
+   "hits": [
+    "上方修正",
+    "配当"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "jpstock",
+   "summary": [
+    "小糸製、今期経常を3％上方修正、配当も6円増額",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "日経平均は783円高内外企業決算やfomcに関心フィスコ",
+   "title": "日経平均は783円高、内外企業決算やFOMCに関心(フィスコ)",
+   "link": "https://finance.yahoo.co.jp/news/detail/caf6c4f44175b61d40cc923d2447d148fc890f0b",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T05:52:38.000Z",
+   "publisher": "Yahoo!ファイナンス",
+   "via": [
+    "Google ニュース「ソフトバンクグループ 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.yahoo.co.jp",
+   "relevance": 7,
+   "hits": [
+    "FOMC",
+    "日経平均",
+    "円高",
+    "決算"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "jpstock",
+   "summary": [
+    "日経平均は783円高（14時50分現在）。",
+    "日経平均寄与度では、アドバンテスト 6857 >、東エレク 8035 >、ソフトバンクG 9984 >などがプラス寄与上位となっており、一方、コナミG 9766 >、バンナムHD 7832 >、日東電 6988 >などがマイナス寄与上位とな",
+    "今日はこの後、日立 6501 >、ソシオネクスト 6526 >、NEC 6701 >、アドバンテスト 6857 >、野村HD 8604 >、JR東海 9022 >などが四半期決算発表を予定している。"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "アングルカカクコムにみる買収競争の新局面シナジーが入札価格押し上げ",
    "title": "アングル：カカクコムにみる買収競争の新局面、シナジーが「入札価格」押し上げ",
    "link": "https://www.reuters.com/jp/markets/japan/XFPIKMQBUBIMZF2E4S5WWW4PJA-2026-10-28/",
@@ -2478,6 +5740,39 @@
    "sentiment": "positive",
    "assets": [],
    "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "dunlopgrandtrekシリーズがトヨタ自動車のlexuslxに装着",
+   "title": "DUNLOP「GRANDTREK」シリーズがトヨタ自動車の「LEXUS LX」に装着",
+   "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTFAybjNCM2o3c05ncWlTMEU1ZGhNdnlCSUktd3BPeXgxWC15MWFEVVNhaHpCYkxSYnNkY0czQUItZTdObExMbWxhZXhmQjdPQk5Rd1lKazV5X2lUQ2FMMUdTR0xkLWFINzBCbUlaX3p5Rl8?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T05:05:00.000Z",
+   "publisher": "東京バーゲンマニア",
+   "via": [
+    "Google ニュース「トヨタ自動車 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "bg-mania.jp",
+   "relevance": 2,
+   "hits": [],
+   "tickers": [
+    "7203"
+   ],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "DUNLOP「GRANDTREK」シリーズがトヨタ自動車の「LEXUS LX」に装着",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "トヨタ自動車"
+   ],
+   "importance": "high",
    "generatedBy": "extractive"
   },
   {
@@ -2580,6 +5875,38 @@
    "sentiment": "positive",
    "assets": [],
    "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "日経平均は687円高イベント控え上値追いには慎重フィスコ",
+   "title": "日経平均は687円高、イベント控え上値追いには慎重(フィスコ)",
+   "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPRTEweUJEVmo5akJ0YUdOQnpGQzc3WVU4NFhxbkxiNFdKX25qNWt3WHgxU0NSdkhwOWdjR1RRbUE1R2gzTXJxanAzdkV0cDF5WGdfbmVPa1RtZHVvay1NWmwtaXJpTzUxU3l6WU9sVXIxMV9nQXpjSWZNT3BhOHNwV2MxelQ1UkU?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T04:51:48.000Z",
+   "publisher": "Yahoo!ファイナンス",
+   "via": [
+    "Google ニュース「ソフトバンクグループ 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.yahoo.co.jp",
+   "relevance": 2,
+   "hits": [
+    "日経平均",
+    "円高"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "日経平均は687円高、イベント控え上値追いには慎重(フィスコ)",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
    "generatedBy": "extractive"
   },
   {
@@ -2778,6 +6105,44 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "日経平均一時1040円高も大引けは685円高半導体株に買い米fomcと日銀待ちで上値重し",
+   "title": "日経平均、一時1040円高も大引けは685円高 半導体株に買い、米FOMCと日銀待ちで上値重し",
+   "link": "https://finance.biggo.jp/news/52a9beef-6ef1-4734-b20e-6fbbc2a0de03",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T04:35:00.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「ソニーグループ 株」",
+    "Google ニュース「三菱UFJ FG 株」",
+    "Google ニュース「ソフトバンクグループ 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 8,
+   "hits": [
+    "FOMC",
+    "日経平均",
+    "円高",
+    "日銀",
+    "半導体"
+   ],
+   "tickers": [],
+   "pickups": 3,
+   "hasBody": false,
+   "category": "macro",
+   "summary": [
+    "日経平均、一時1040円高も大引けは685円高 半導体株に買い、米FOMCと日銀待ちで上値重し",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "本日10月28日の国内金価格sjc金は1オンスあたり約100万ベトナムドン上昇",
    "title": "本日10月28日の国内金価格：SJC金は1オンスあたり約100万ベトナムドン上昇。",
    "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPSjR2WEcxTE1CQmVwcWQ4MVRENzUtazBHbUdxaWpfaklDdFhnTWNpZXpnbmxKTmhYektLVlNGWXVTUEhGbmxPRXNwUXpoX0NkaURfajVxV2tVczhtRklCdnJncjJnakEtWkJtZ2RHUWJneXoxbFUyTHplWERZa1N5N2NqSzJ6MlRLNXdkVWE2NUM1dnhsU1ZURC1JVVM?oc=5",
@@ -2804,6 +6169,38 @@
    ],
    "impact": "",
    "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "日銀決定会合物価目標達成はまだ入り口と強調かtbscrossdigwithbloomberg",
+   "title": "日銀決定会合 物価目標達成はまだ「入り口」と強調か（TBS CROSS DIG with Bloomberg）",
+   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1ONlI2R3dmVm1TdkhkZF9BQmNMLXRVbUxRdmtFUEJDSUUwanl6QVAyUXhvLUlITVo1LWNmQnhJMEtlM1o3LWg4NlgwQUFVOEo2THZrbl8yZmZYUkxPSmNTTjNhYmRtNjhCNmdXanM5N0s2OFlhc3RxRUtydzVqcGs?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T04:30:35.000Z",
+   "publisher": "Yahoo!ニュース",
+   "via": [
+    "Google ニュース「日銀 金融政策 利上げ」"
+   ],
+   "sourceHint": "金融政策",
+   "sourceHost": "news.yahoo.co.jp",
+   "relevance": 2,
+   "hits": [
+    "日銀",
+    "物価"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "macro",
+   "summary": [
+    "日銀決定会合 物価目標達成はまだ「入り口」と強調か（TBS CROSS DIG with Bloomberg）",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
    "assets": [],
    "importance": "normal",
    "generatedBy": "extractive"
@@ -2935,6 +6332,39 @@
    "sentiment": "neutral",
    "assets": [
     "エヌビディア"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "トヨタの人型ロボット布陣が本格化ikkakyのサプライチェーンでの地位に注目集まる",
+   "title": "トヨタの人型ロボット布陣が本格化、IKKA-KYのサプライチェーンでの地位に注目集まる",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE13Y2JtMmpBQnN0bnFmLTRYQjJ0ZjMxN29PODVCVGtrdkhUMTNsNm83ZjdqT19LM3VqZGllNjlPX3lfSkFuT0RYZ0tWQ015cHRpSGZNZ2RsZkQ3dWZsdEJTbUFqVXFqNTBQVkVmbWdvc1pBbWhf?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T04:00:25.000Z",
+   "publisher": "BigGo ファイナンス",
+   "via": [
+    "Google ニュース「トヨタ自動車 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.biggo.jp",
+   "relevance": 2,
+   "hits": [],
+   "tickers": [
+    "7203"
+   ],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "トヨタの人型ロボット布陣が本格化、IKKA-KYのサプライチェーンでの地位に注目集まる",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "トヨタ自動車"
    ],
    "importance": "high",
    "generatedBy": "extractive"
@@ -3238,6 +6668,38 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "後場に注目すべき3つのポイント~大幅続伸半導体関連株への買いが相場をけん引する一方ゲーム関連株は軟調フィスコ",
+   "title": "後場に注目すべき3つのポイント～大幅続伸、半導体関連株への買いが相場をけん引する一方、ゲーム関連株は軟調(フィスコ)",
+   "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQNTgwQnI2ckxIZXVNUVFVblVtVWZrR3REbGNYaWtjREoyVmhuX3NkeE45QXpKZkJTbFh5V3IxYmNJREJGT0g4dXo5c3hyY29IVWRhelFuUThTVC1aTXBJcGxTZHd1Q0s3blhabW81LURJanpieUhiWmJ3blBzS2V3R2NVRG4tLTQ?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T03:28:04.000Z",
+   "publisher": "Yahoo!ファイナンス",
+   "via": [
+    "Google ニュース「ソフトバンクグループ 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.yahoo.co.jp",
+   "relevance": 2,
+   "hits": [
+    "相場",
+    "半導体"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "後場に注目すべき3つのポイント～大幅続伸、半導体関連株への買いが相場をけん引する一方、ゲーム関連株は軟調(フィスコ)",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "ビットコインbtc相場分析btcはai株高に連れ高fomcより大型テック決算に注目",
    "title": "ビットコイン（BTC）相場分析｜BTCはAI株高に連れ高 FOMCより大型テック決算に注目",
    "link": "https://bitbank.cc/knowledge/markets/article/bitbank-daily-2026-10-28",
@@ -3307,6 +6769,38 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "ビットコインの上値に87万btcの壁?8.2万ドルで売り圧か",
+   "title": "ビットコインの上値に「87万BTCの壁」？8.2万ドルで売り圧か",
+   "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9MQVIyU3d2b0ZaWFUwN2tZOGRKNE5zZllTQXc2ek1VOE9UQ2ZvNzVWLWFod1lFR1BjdmdyYi1veTZMRHF6UzdQTS1vTUJvSHJXb1FXLTdRWHFtSTVLcy1Ja2MtYkgyMHNZ?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T03:23:29.000Z",
+   "publisher": "CRYPTO TIMES",
+   "via": [
+    "Google ニュース「ビットコイン 相場」"
+   ],
+   "sourceHint": "暗号資産",
+   "sourceHost": "crypto-times.jp",
+   "relevance": 2,
+   "hits": [
+    "ドル",
+    "ビットコイン"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "commodity",
+   "summary": [
+    "ビットコインの上値に「87万BTCの壁」？8.2万ドルで売り圧か",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "日経平均は大幅続伸半導体関連株への買いが相場をけん引する一方ゲーム関連株は軟調/ランチタイムコメント",
    "title": "日経平均は大幅続伸、半導体関連株への買いが相場をけん引する一方、ゲーム関連株は軟調／ランチタイムコメント",
    "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5DZ2pENGdpNTRGRjBSMUtDOGZ5R0xBMTcwMTVFR3hlbDlfVlQ0S0I2dURaYjVmWXR6RlJBRWVqMUNwcnRUT0gxcXh6WHQxa1hhLWtDNmxYbi1rSmp3R2JzMlRn?oc=5",
@@ -3330,6 +6824,39 @@
    "category": "jpstock",
    "summary": [
     "日経平均は大幅続伸、半導体関連株への買いが相場をけん引する一方、ゲーム関連株は軟調／ランチタイムコメント",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "日経平均は大幅続伸半導体関連株への買いが相場をけん引する一方ゲーム関連株は軟調/ランチタイムコメントフィスコ",
+   "title": "日経平均は大幅続伸、半導体関連株への買いが相場をけん引する一方、ゲーム関連株は軟調／ランチタイムコメント(フィスコ)",
+   "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNQzFnUm52Z2VvSkhVb2dPc2ZsUk1CaEExeUo1V21CUktvR2lxNFhrNV9tTzdiYVpOeXNaSkxHSnc1c3lISmh4YWhIcmhKYzg5Y29GdDBoancteTJMRmdpTTljZDdVMm1jQmxhbDlwU2xBRmVnU2M2SGZzZVFNZWxsS3YyRDZtaUU?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T03:20:42.000Z",
+   "publisher": "Yahoo!ファイナンス",
+   "via": [
+    "Google ニュース「ソフトバンクグループ 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.yahoo.co.jp",
+   "relevance": 3,
+   "hits": [
+    "日経平均",
+    "相場",
+    "半導体"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "日経平均は大幅続伸、半導体関連株への買いが相場をけん引する一方、ゲーム関連株は軟調／ランチタイムコメント(フィスコ)",
     "（自動要約なし。原文を参照してください）",
     "（自動要約なし。原文を参照してください）"
    ],
@@ -3462,6 +6989,38 @@
    "category": "fx",
    "summary": [
     "円相場、１５７円９０〜９１銭。２８日正午現在",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "円相場157円90~91銭28日正午現在",
+   "title": "円相場、１５７円９０～９１銭。２８日正午現在",
+   "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFA0NmVBZ0I2YURFRXp1dzlwU0lJT3FDbVNpMHI2Y3NQVUYyM1BEb1V4QWtWYUNNRUxFenlTenBJd0NGc1lTQld1RnU3bkl4eHNyMnJDbw?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T03:12:00.000Z",
+   "publisher": "時事通信ニュース",
+   "via": [
+    "Google ニュース「円相場 為替 ドル円」"
+   ],
+   "sourceHint": "為替",
+   "sourceHost": "sp.m.jiji.com",
+   "relevance": 2,
+   "hits": [
+    "相場",
+    "円相場"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "円相場、１５７円９０～９１銭。２８日正午現在",
     "（自動要約なし。原文を参照してください）",
     "（自動要約なし。原文を参照してください）"
    ],
@@ -3606,7 +7165,8 @@
    "publishedAt": "2026-10-28T02:57:27.000Z",
    "publisher": "Yahoo!ファイナンス",
    "via": [
-    "Google ニュース「ソニーグループ 株」"
+    "Google ニュース「ソニーグループ 株」",
+    "Google ニュース「トヨタ自動車 株」"
    ],
    "sourceHint": "ウォッチ銘柄",
    "sourceHost": "finance.yahoo.co.jp",
@@ -3616,7 +7176,7 @@
     "ドル"
    ],
    "tickers": [],
-   "pickups": 1,
+   "pickups": 2,
    "category": "fx",
    "summary": [
     "ドル円158円台から157円台へ反落、輸出株に温度差【今日の市場はどう動いた？】",
@@ -3638,7 +7198,8 @@
    "publishedAt": "2026-10-28T02:57:27.000Z",
    "publisher": "Yahoo!ファイナンス",
    "via": [
-    "Google ニュース「ソニーグループ 株」"
+    "Google ニュース「ソニーグループ 株」",
+    "Google ニュース「三菱UFJ FG 株」"
    ],
    "sourceHint": "ウォッチ銘柄",
    "sourceHost": "finance.yahoo.co.jp",
@@ -3649,7 +7210,7 @@
     "CPI"
    ],
    "tickers": [],
-   "pickups": 1,
+   "pickups": 2,
    "category": "macro",
    "summary": [
     "豪CPIが4.3%へ加速、インフレ警戒が再点火【今日の市場はどう動いた？】",
@@ -4243,6 +7804,41 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "djロウリュウのチャート分析日経平均1,889円安!原油高金利上昇で更なる下落も!?キオクシアjx金属フジクラなど徹底分析!naomiosakapsjqztrhlu",
+   "title": "【DJロウリュウのチャート分析】日経平均1,889円安！原油高・金利上昇で更なる下落も！？キオクシア・JX金属・フジクラなど徹底分析！ Naomi Osaka (PsjQztrHLU)",
+   "link": "https://media.unisba.ac.id/571d9611/a14880a4BgISMTlxWD4-CwU//?share=telegram&nb=1",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T01:45:23.000Z",
+   "publisher": "Unisba Media",
+   "via": [
+    "Google ニュース「三菱UFJ FG 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "media.unisba.ac.id",
+   "relevance": 4,
+   "hits": [
+    "日経平均",
+    "円安",
+    "金利",
+    "原油"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "fx",
+   "summary": [
+    "【DJロウリュウのチャート分析】日経平均1,889円安！原油高・金利上昇で更なる下落も！？キオクシア・JX金属・フジクラなど徹底分析！ Naomi Osaka (PsjQztrHLU)",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "nvidiaのジェンソン·ファン最高経営者ceoの長女であるnvidiaのマディソン·ファン首席理事が来月韓国を訪問するというニュースに国内ロボット関連株が取引序盤に一斉に強気を見せている韓..",
    "title": "NVIDIAのジェンソン·ファン最高経営者(CEO)の長女であるNVIDIAのマディソン·ファン首席理事が来月、韓国を訪問するというニュースに、国内ロボット関連株が取引序盤に一斉に強気を見せている。韓..",
    "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5uVngyZE1FTWxYQVg0bGtQOWpLdW5odGE4NDdUeWNtTlNiazk4aWd1NTVFWkFMSFpZQ3o1R29lN3pkWWZOSW5FcnIwZDR1d28?oc=5",
@@ -4368,6 +7964,37 @@
     "米国のAI半導体関連株が火曜日（27日）に全面高となり、台湾株は28日の寄り付きから勢いよく上昇した。",
     "ナスダック総合指数は308.43ポイント（1.18%）高の26477.81、S&P500指数は45.83ポイント（0.60%）高の7722.60、ダウ工業株30種平均は15.99ポイント（0.03%）高の52377.57だった。",
     "個別銘柄では、AI半導体大手のエヌビディアが0.90%高で引けた一方、TSMCのADRはさらに強く、12.50ドル（2.95%）高の436.87ドル（約6.9万円）で取引を終えた。"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "東証午前終値6万4067円続伸ハイテク銘柄に買い共同通信",
+   "title": "東証、午前終値6万4067円 続伸、ハイテク銘柄に買い（共同通信）",
+   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBlWWlxOUcxZXNWeFg3Mlh1a19NY29iNW1YVnNySkNWd1NVUXp5WnIyZTdqaVVRQjRLRHVZQkdPZkpWMFRSbnVuWlp0YS1WdHFkaHZHMWo4RFdWb3Y1eW1Ka1lwQ3IxbTY0cS00NDQzUVZpTGtmVkstWmtnUGVpdUU?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-28T01:23:01.000Z",
+   "publisher": "Yahoo!ニュース",
+   "via": [
+    "Google ニュース「日経平均 株価 終値」"
+   ],
+   "sourceHint": "日本株",
+   "sourceHost": "news.yahoo.co.jp",
+   "relevance": 1,
+   "hits": [
+    "東証"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "東証、午前終値6万4067円 続伸、ハイテク銘柄に買い（共同通信）",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
    ],
    "impact": "",
    "sentiment": "positive",
@@ -5058,6 +8685,38 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "トランスユニオン第3四半期売上高12%増を受け2026年調整後eps見通しを上方修正",
+   "title": "トランスユニオン、第3四半期売上高12%増を受け2026年調整後EPS見通しを上方修正",
+   "link": "https://www.tradingkey.com/jp/news/presentation/262245000-tradingkey",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-28T00:06:38.000Z",
+   "publisher": "TradingKey",
+   "via": [
+    "Google ニュース「自社株買い 増配」"
+   ],
+   "sourceHint": "株主還元",
+   "sourceHost": "tradingkey.com",
+   "relevance": 4,
+   "hits": [
+    "上方修正"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "jpstock",
+   "summary": [
+    "トランスユニオンの第3四半期決算は、米国金融サービスおよび国際市場の堅調な成長に牽引され、売上高が12％増の13億1000万ドルとなりました。",
+    "調整後EBITDAは10％〜11％増の18億1000万ドル〜18億3000万ドル、利益率は35.2％〜35.4％と試算されています。",
+    "トランスユニオンは現在、2026年の調整後希薄化後EPSを従来の4.75ドル〜4.83ドルから4.81ドル〜4.88ドル（12％〜13％増に相当）へ引き上げています。"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "半導体株高がナスダックを牽引マイクロンは時間外取引で上昇",
    "title": "半導体株高がナスダックを牽引、マイクロンは時間外取引で上昇",
    "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPakVONktucnUwTFZGUFdiRmlWbzRUT0NjdEYxcFdSY2N2ZE91dnE4Mk9ULWdDbnpOQ3VUX0F1NkN2bHJfX0dzdmw2UTI4MmNYTG5UZTExVXJhU2lMSUxDcVFRQnJkeEMzV0IycUdoa0RiN1NqakV4UjNlWExvalc5M1dObU5oRDlPN2tTczVjaWtoMThSSkNpU19tdEJXNGxtZjc1cHhXZk1Ydw?oc=5",
@@ -5628,6 +9287,39 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "三菱ufjフィナンシャルグループ8306グローバルtop5をめざす国内米州アジアを中心とした多様な事業ポートフォリオを強みに持続的成長へ",
+   "title": "三菱UFJフィナンシャル・グループ（8306）、「グローバルTop5」をめざす 国内・米州・アジアを中心とした多様な事業ポートフォリオを強みに持続的成長へ",
+   "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE41YlhneC1wNzJMQmpnUl9maC1pUlJFaWM1SkNZU2pzVDlSYkY4QUtFcG9nV1lRV1lIdDVNdXBJdDdEWHVrYU5nYlIyekJ5SnY4Ync?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-27T23:00:01.000Z",
+   "publisher": "ログミーFinance",
+   "via": [
+    "Google ニュース「三菱UFJ FG 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "finance.logmi.jp",
+   "relevance": 2,
+   "hits": [],
+   "tickers": [
+    "8306"
+   ],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "三菱UFJフィナンシャル・グループ（8306）、「グローバルTop5」をめざす 国内・米州・アジアを中心とした多様な事業ポートフォリオを強みに持続的成長へ",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "三菱UFJ FG"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "日銀10月利上げ見送りへ...基調物価2%到達を認める本当の意味愛宕伸康",
    "title": "日銀、10月利上げ「見送り」へ…基調物価2％到達を認める本当の意味（愛宕伸康）",
    "link": "https://news.infoseek.co.jp/article/toushiru_53883/",
@@ -5647,7 +9339,7 @@
     "物価"
    ],
    "tickers": [],
-   "pickups": 1,
+   "pickups": 2,
    "hasBody": true,
    "category": "macro",
    "summary": [
@@ -5657,6 +9349,37 @@
    ],
    "impact": "",
    "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "日銀10月会合ではどのような議論が展開されるのか?",
+   "title": "日銀10月会合ではどのような議論が展開されるのか？",
+   "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1qR2daU1YySzF0bG5ELUM2Z2F3U254M1dnTk1LaWlqeGxpSzk5SlZZa3ZoZERKR2tBSGRtcWVlMHJldlNvcTE0cnVEZGQxclZQS1dlU282Y1JiMjZabFc1ME45X1ZkUUNDT3c?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-27T23:00:00.000Z",
+   "publisher": "Nomura Research Institute (NRI)",
+   "via": [
+    "Google ニュース「日銀 金融政策 利上げ」"
+   ],
+   "sourceHint": "金融政策",
+   "sourceHost": "nri.com",
+   "relevance": 1,
+   "hits": [
+    "日銀"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "macro",
+   "summary": [
+    "日銀10月会合ではどのような議論が展開されるのか？",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
    "assets": [],
    "importance": "normal",
    "generatedBy": "extractive"
@@ -7130,6 +10853,41 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "frbのニュースが落ち着きskhyorclmuvrtが高騰ダウ平均s&p500ナスダック総合は上昇ウォール街今日",
+   "title": "FRBのニュースが落ち着き、SKHY、ORCL、MU、VRTが高騰：ダウ平均、S&P500、ナスダック総合は上昇 - ウォール街今日",
+   "link": "https://www.moomoo.com/ja/community/feed/dow-s-p-500-nasdaq-comp-rise-on-tame-fed-117520313417733?chain_id=Name1K9-3FXPhg.1le4s30&global_content=%7B%22promote_id%22%3A13328%2C%22sub_promote_id%22%3A91%2C%22f%22%3A%22www.moomoo.com%2Fja%2Fsectors%2FKamala-Harris-BK22990%22%7D",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-27T17:13:00.000Z",
+   "publisher": "Moomoo",
+   "via": [
+    "Google ニュース「米国株 ナスダック S&P500」"
+   ],
+   "sourceHint": "米国株",
+   "sourceHost": "moomoo.com",
+   "relevance": 4,
+   "hits": [
+    "FRB",
+    "S&P",
+    "ナスダック",
+    "ダウ"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "global",
+   "summary": [
+    "FRBは金利を据え置き、ウォーシュ氏は慎重姿勢を維持：市場の先行きは？",
+    "市場は $S&P500 (.SPX.US)$ 21.38ポイント（0.28%）上昇し、7,743.98で引けた一方、 $ナスダック総合 (.IXIC.US)$ は72.04ティック（0.27%）上昇して26,549.85となり、 $NYダウ",
+    "米連邦準備制度理事会（FRB）の利上げ判断が穏当だったことに加え、SKハイニックス、オラクル、マイクロン、バーティブなどAI関連銘柄が大きく上昇したことで市場心理が改善し、水曜日はS&P500、ダウ工業株30種、ナスダック総合指数がいずれも"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "エバーコアisi新m6mac発表後もアップル株のアウトパフォーム評価を維持執筆",
    "title": "エバーコアISI、新M6 Mac発表後もアップル株の「アウトパフォーム」評価を維持 執筆",
    "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE83VUxNaDRhTngxbEJpdWZtSk5oM1JFWmcwWnNHT19QRXMxMVNNM1N2ZXJJbFlZSFNVRVJLXzB2akYyYXYwLUVFc01uaGxCcHlMSGNDWjY5UjNmSnc0cDVZU0g4UGs0YVg1QnB3RmJMOUhSY04w?oc=5",
@@ -8386,6 +12144,43 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "ゴールドマンサックスグループはアップルの株価目標額を360ドルから390ドルに引き上げました",
+   "title": "ゴールドマン・サックス・グループはアップルの株価目標額を360ドルから390ドルに引き上げました。",
+   "link": "https://www.moomoo.com/ja/news/post/1002472589/goldman-sachs-adjusts-price-target-on-apple-to-390-from?level=0&global_content=%7B%22promote_content%22%3A%22mm%3A1002472589%22%7D",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-27T10:54:35.000Z",
+   "publisher": "Moomoo",
+   "via": [
+    "Google ニュース「アップル 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "moomoo.com",
+   "relevance": 4,
+   "hits": [
+    "株価",
+    "ドル"
+   ],
+   "tickers": [
+    "AAPL"
+   ],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "jpstock",
+   "summary": [
+    "ゴールドマン・サックス・グループはアップルの株価目標額を360ドルから390ドルに引き上げました。",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "アップル"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "消費減税極めてコスパ悪い物価抑制効果に疑問―衆院参考人質疑",
    "title": "消費減税「極めてコスパ悪い」 物価抑制効果に疑問―衆院参考人質疑",
    "link": "https://www.jiji.com/jc/article?k=2026102701075&g=pol&m=rss",
@@ -9049,6 +12844,37 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "日経平均テクニカル4日ぶり反発終値は3週間ぶり5日線突破投稿日時2026/10/271815[フィスコ]",
+   "title": "日経平均テクニカル： 4日ぶり反発、終値は3週間ぶり5日線突破 投稿日時： 2026/10/27 18:15[フィスコ]",
+   "link": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE4wZjFfU09FMnBVVktqSHkxT1JOcVcyajhfY0FUMjR1cm1WTFFQSjZ1TnpmSjliV1Bkemh0RWotSDlYS0drT3c?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-27T09:15:00.000Z",
+   "publisher": "みんかぶ",
+   "via": [
+    "Google ニュース「日経平均 株価 終値」"
+   ],
+   "sourceHint": "日本株",
+   "sourceHost": "minkabu.jp",
+   "relevance": 1,
+   "hits": [
+    "日経平均"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "日経平均テクニカル： 4日ぶり反発、終値は3週間ぶり5日線突破 投稿日時： 2026/10/27 18:15[フィスコ]",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "↑日経平均大引け4日ぶり反発米アンソロピックのipo申請を好感10月27日株探ニュース",
    "title": "【↑】日経平均 大引け｜ 4日ぶり反発、米アンソロピックのIPO申請を好感 (10月27日)(株探ニュース)",
    "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPMXBTbHFydVI4TVpBTGhzYUh4QmFXazJleV85MEdTcHF2RElScW1NcWNVSVBKQ09DbklPY0ZLZTAtWmhBNDhMbGtzdVh0ai0taUFFd3JfbldZYjZZSWZVMDJ4SzZCRV9IcGhobnZQVFFhREo5QmJidVRMSUJaVjExNnQtNE9TLVk?oc=5",
@@ -9510,6 +13336,43 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "米株プレマーケットskハイニックス決算控え時間外1.9%高エヌビディアメタはmuse協業拡大30億ドル投資へ両社株は軟調coreweaveネビウスは小幅安",
+   "title": "【米株プレマーケット】SKハイニックス、決算控え時間外1.9％高 エヌビディア・メタは「Muse」協業拡大、30億ドル投資へ 両社株は軟調、CoreWeave・ネビウスは小幅安",
+   "link": "https://www.moomoo.com/ja/news/post/1002460388?level=0&global_content=%7B%22promote_content%22%3A%22mm%3A1002460388%22%7D",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-27T08:16:00.000Z",
+   "publisher": "Moomoo",
+   "via": [
+    "Google ニュース「エヌビディア 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "moomoo.com",
+   "relevance": 4,
+   "hits": [
+    "ドル",
+    "決算"
+   ],
+   "tickers": [
+    "NVDA"
+   ],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "jpstock",
+   "summary": [
+    "【米株プレマーケット】SKハイニックス、決算控え時間外1.9％高 エヌビディア・メタは「Muse」協業拡大、30億ドル投資へ 両社株は軟調、CoreWeave・ネビウスは小幅安",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [
+    "エヌビディア"
+   ],
+   "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "株価値上がり米ai企業上場向け書類の公開で",
    "title": "株価 値上がり 米AI企業上場向け書類の公開で",
    "link": "https://news.web.nhk/newsweb/na/nd-20261027de66214",
@@ -9832,10 +13695,42 @@
     "自社株買い"
    ],
    "tickers": [],
-   "pickups": 2,
+   "pickups": 3,
    "category": "jpstock",
    "summary": [
     "日東電工、2.58％上限に自社株買い 配当予想も引き上げ",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "日東電工2.58%上限に自社株買い配当予想も引き上げロイター",
+   "title": "日東電工、2.58％上限に自社株買い 配当予想も引き上げ（ロイター）",
+   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5CSFpQSThhZGZuV2IxTzRiSWtveWU4NWc4bThHbVFONEE4Q2xRSlF4WHg0OHZNY1ZKelBsNW9GV1NGTF9wUkV3UkZwa25GWHppU2tCV21Kd3Z6Tk1rb2J1NXFMemFQSzBDSlo1dWhZczB5VlNLRWpKZjVSQTJPWkE?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-27T07:45:00.000Z",
+   "publisher": "Yahoo!ニュース",
+   "via": [
+    "Google ニュース「自社株買い 増配」"
+   ],
+   "sourceHint": "株主還元",
+   "sourceHost": "news.yahoo.co.jp",
+   "relevance": 2,
+   "hits": [
+    "配当",
+    "自社株買い"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "日東電工、2.58％上限に自社株買い 配当予想も引き上げ（ロイター）",
     "（自動要約なし。原文を参照してください）",
     "（自動要約なし。原文を参照してください）"
    ],
@@ -11975,7 +15870,7 @@
     "日銀"
    ],
    "tickers": [],
-   "pickups": 1,
+   "pickups": 2,
    "category": "macro",
    "summary": [
     "黒田氏は利上げ路線支持、若田部氏は慎重論 日銀元首脳が相次ぎ著書",
@@ -12571,6 +16466,38 @@
    "category": "fx",
    "summary": [
     "2026年米中間選挙でドル円はどうなる？3つのシナリオで為替相場を予想 2026年10月27日",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "東京海上vsms&ad株価激強の損保株時価総額ワンツーの2社どちらが気になる?",
+   "title": "東京海上 vs MS＆AD 株価激強の損保株 時価総額ワンツーの2社 どちらが気になる？",
+   "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5RMW9uU2JwQkYxanZOa01NM3RXZlo5ZnA5YndMdEt5UkpZOHNtSjhHLTREeGpWbXJMTGVfeEsxbW1OSjNCQ1NTazBBOXNiem8zWlpncFFxMWRYT0tOM3hoMg?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-27T04:36:00.000Z",
+   "publisher": "Infoseek",
+   "via": [
+    "Google ニュース「自社株買い 増配」"
+   ],
+   "sourceHint": "株主還元",
+   "sourceHost": "news.infoseek.co.jp",
+   "relevance": 2,
+   "hits": [
+    "株価",
+    "時価総額"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "東京海上 vs MS＆AD 株価激強の損保株 時価総額ワンツーの2社 どちらが気になる？",
     "（自動要約なし。原文を参照してください）",
     "（自動要約なし。原文を参照してください）"
    ],
@@ -16544,6 +20471,38 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "anthropicipoを正式申請上半期売上高は約14倍純損失807億ドル",
+   "title": "Anthropic、IPOを正式申請 上半期売上高は約14倍、純損失807億ドル",
+   "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBzNzYtLWhodHZZQ0xPU21icWFEZkU5anBkUEQ3MTF3OGZ0Qkg4Qlk0RGdvcXFnb2lMUW9yajBxSDU2YlBSRDNMZlRKaU55RXZuT29Pa1RNMjhvY2lWb1hRdnVjMzg3VFA1WlJET05oR3pibl91U1N0LU1rajnSAXxBVV95cUxQczc2LS1oaHR2WUNMT1NtYnFhRGZFOWpwZFBENzExdzhmdEJIOEJZNERnb3FxZ29pTFFvcmowcUg1NmJQUkQzTGZUSmlOeUV2bk9vT2tUTTI4b2NpVm9YUXZ1YzM4N1RQNVpSRE9OaEd6Ym5fdVNTdC1Na2o5?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-26T22:27:48.000Z",
+   "publisher": "Infoseek",
+   "via": [
+    "Google ニュース「三菱UFJ FG 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "news.infoseek.co.jp",
+   "relevance": 2,
+   "hits": [
+    "ドル",
+    "IPO"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "Anthropic、IPOを正式申請 上半期売上高は約14倍、純損失807億ドル",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "オルカン高配当vsオルカンあなたに合うのはどっち!?比べるべき3つの視点ショート#資産形成#お金#nisa#高配当#お金#インデックス#新nisa#オルカン#投資",
    "title": "【オルカン高配当vsオルカン】あなたに合うのはどっち⁉比べるべき3つの視点ショート #資産形成 #お金 #nisa #高配当 #お金 #インデックス #新nisa #オルカン #投資",
    "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFByby1ZdlNVSlJ0TmNDZHVmc0RGcFprR01iTG5Idzh5a3ByaDdsNDl3TFZKeXdJcjE3YjNTSnlaMVVST0xLVzNGM180Nllobjd0eXV0U0FueVBackNr?oc=5",
@@ -18206,6 +22165,38 @@
     "本格的な金利ある世界の到来で、存在感が高まっているのが個人向け国債だ。",
     "満期前でも債券市場で売買することができ、買いたい人が多く価格が上がれば利回りは下がり、価格が下がれば逆に利回りが上がる関係にある。",
     "10年物国債の利回りが長期金利と呼ばれ、固定型の住…"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "生保利回り高い国債へ入れ替え活発明治安田の購入額は計画比2倍に",
+   "title": "生保、利回り高い国債へ入れ替え活発 明治安田の購入額は計画比2倍に",
+   "link": "https://news.google.com/rss/articles/CBMibEFVX3lxTE92N0tUZU9MbDBEN2J5WnZHNlRuN05CMVVvWnVVa3ExTzM5RF9hMUo5UzZYblg3SHh5azNZT2ItbW5COGJCeXF6bWNVc0NxOUdENGEwd3RDYXEtNzExR2t4bWx4akwyMndtMnNHRA?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-26T17:00:00.000Z",
+   "publisher": "日本経済新聞",
+   "via": [
+    "Google ニュース「長期金利 国債 利回り」"
+   ],
+   "sourceHint": "債券",
+   "sourceHost": "nikkei.com",
+   "relevance": 2,
+   "hits": [
+    "利回り",
+    "国債"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "fx",
+   "summary": [
+    "生保、利回り高い国債へ入れ替え活発 明治安田の購入額は計画比2倍に",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
    ],
    "impact": "",
    "sentiment": "neutral",
@@ -20849,6 +24840,38 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "↓日経平均大引け3日続落ai半導体株中心に売り優勢10月26日投稿日時2026/10/261818[株探]",
+   "title": "【↓】日経平均 大引け｜ 3日続落、AI・半導体株中心に売り優勢 (10月26日) 投稿日時： 2026/10/26 18:18[株探]",
+   "link": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE9TSGZVUnV6eFIzdTJtZFhoZ1k1amNSS2hfbWNZRVBUb1EydVBSdEtIT0ptT25WcXRjQkl0b3hyencwV2wwT1E?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-26T09:18:10.000Z",
+   "publisher": "みんかぶ",
+   "via": [
+    "Google ニュース「三菱UFJ FG 株」"
+   ],
+   "sourceHint": "ウォッチ銘柄",
+   "sourceHost": "minkabu.jp",
+   "relevance": 2,
+   "hits": [
+    "日経平均",
+    "半導体"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "【↓】日経平均 大引け｜ 3日続落、AI・半導体株中心に売り優勢 (10月26日) 投稿日時： 2026/10/26 18:18[株探]",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "negative",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "読売333終値前週末比235円高の5万1903円...日経平均は下落",
    "title": "読売３３３終値、前週末比２３５円高の５万１９０３円…日経平均は下落",
    "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9PYkUwY2U2U0hqb3ZYd240WGV5cGhTaXN1YXk1U2VrS0R4eVcxdFJzRkR2eE9sYnpVbUlTVTlqUHdYQkVQYnZhZFRmSzhpank3LUhDMy1PQW1pbzlpRmhxWEpBRHc?oc=5",
@@ -20978,6 +25001,37 @@
    "sentiment": "negative",
    "assets": [],
    "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "決算雑まとめ2026年10月26日月~30日金の個人的注目決算",
+   "title": "【決算雑まとめ】2026年10月26日(月)～30日(金)の個人的注目決算",
+   "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE9OcXFMR3FYbDlyQmZLTUV5V1Bfb053SlRtY0ZxcnkzUHhiYXVETjFucHRJNkRNNy1WdTZTdlZNUjVVZHlnYkR0ajAybw?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-26T09:10:28.000Z",
+   "publisher": "かりんの株レポ",
+   "via": [
+    "Google ニュース「自社株買い 増配」"
+   ],
+   "sourceHint": "株主還元",
+   "sourceHost": "kabukarin.net",
+   "relevance": 1,
+   "hits": [
+    "決算"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "【決算雑まとめ】2026年10月26日(月)～30日(金)の個人的注目決算",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "normal",
    "generatedBy": "extractive"
   },
   {
@@ -21806,6 +25860,40 @@
    "sentiment": "positive",
    "assets": [],
    "importance": "high",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "金ゴールドの下げ止まりはfomcと大手it決算次第米イラン膠着で原油高も重し",
+   "title": "金（ゴールド）の下げ止まりはFOMCと大手IT決算次第、米イラン膠着で原油高も重し",
+   "link": "https://media.monex.co.jp/articles/-/30381",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-26T07:40:00.000Z",
+   "publisher": "マネクリ",
+   "via": [
+    "Google ニュース「原油価格 金価格」"
+   ],
+   "sourceHint": "商品",
+   "sourceHost": "media.monex.co.jp",
+   "relevance": 6,
+   "hits": [
+    "FOMC",
+    "決算",
+    "原油"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": true,
+   "category": "macro",
+   "summary": [
+    "米ドル建て金価格は、10月16日の4,166ドルから10月23日に3,996ドルへ下落し、週間では約4.1％安となった。",
+    "CFTCが10月23日に公表した10月20日時点のデータでは、CME金先物の投機筋（Non-Commercial）のロングは237,142枚と前週から8,158枚減り、ショートは144枚減って37,277枚となった。",
+    "米10年実質金利は2.72％から2.64％へ低下し、ドル指数も101.84から101.81へ小幅に下がったが、金の支えにはならなかった。"
+   ],
+   "impact": "",
+   "sentiment": "negative",
+   "assets": [],
+   "importance": "normal",
    "generatedBy": "extractive"
   },
   {
@@ -24138,6 +28226,37 @@
    "generatedBy": "extractive"
   },
   {
+   "key": "ナガワ後場上げ幅拡大上期営業益11%増増配も発表トレーダーズウェブ",
+   "title": "ナガワ－後場上げ幅拡大 上期営業益11％増 増配も発表(トレーダーズ・ウェブ)",
+   "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQWGIzSUNWR3RqZWV5ZGlMMlQzdF9iSVB1WkVKRm9fcy1jemxBbGlHTFUyc0ZTVzdwLWQ0ODhkTjNpVmlBTVowNE5rdjVIcU9GdTI2NlozYVZnRzdpVUt3Rm9MeE92RHhiejFUbEhWcURSel9JVTlhQjF3TU55S2VuT2tYOU9UdWc?oc=5",
+   "isGoogleLink": true,
+   "description": "",
+   "publishedAt": "2026-10-26T04:09:02.000Z",
+   "publisher": "Yahoo!ファイナンス",
+   "via": [
+    "Google ニュース「自社株買い 増配」"
+   ],
+   "sourceHint": "株主還元",
+   "sourceHost": "finance.yahoo.co.jp",
+   "relevance": 1,
+   "hits": [
+    "増配"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "category": "jpstock",
+   "summary": [
+    "ナガワ－後場上げ幅拡大 上期営業益11％増 増配も発表(トレーダーズ・ウェブ)",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "positive",
+   "assets": [],
+   "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
    "key": "日経平均は反落中東緊迫と米株安で一時600円安割安株が下支え",
    "title": "日経平均は反落、中東緊迫と米株安で一時600円安 割安株が下支え",
    "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9BSkVLVjJxTHhDc0N5ZGJkSFJuWTRtby1qZnNLLWpWMUFDQWFHMVFBNC1CNHpBWkZfYkdwcW9yWVlIMlFJRTlpRlctS195cEF1WHh5M0dieDlJT2gwYWNzeWlKcFpyMHB0NEtqWnJ5UWpTU2Rw?oc=5",
@@ -25892,6 +30011,42 @@
    "sentiment": "neutral",
    "assets": [],
    "importance": "normal",
+   "generatedBy": "extractive"
+  },
+  {
+   "key": "原油価格の急騰がインフレ懸念を再燃させ金価格は4,000ドルを下回り7月以来の安値を更新",
+   "title": "原油価格の急騰がインフレ懸念を再燃させ、金価格は4,000ドルを下回り7月以来の安値を更新",
+   "link": "https://www.moomoo.com/ja/news/post/1002308978/surging-oil-prices-reignite-inflation-concerns-gold-falls-below-4000?level=0&global_content=%7B%22promote_content%22%3A%22mm%3A1002308978%22%7D",
+   "isGoogleLink": false,
+   "description": "",
+   "publishedAt": "2026-10-26T02:05:06.000Z",
+   "publisher": "Moomoo",
+   "via": [
+    "Google ニュース「原油価格 金価格」"
+   ],
+   "sourceHint": "商品",
+   "sourceHost": "moomoo.com",
+   "relevance": 7,
+   "hits": [
+    "急騰",
+    "ドル",
+    "インフレ",
+    "原油",
+    "金価格"
+   ],
+   "tickers": [],
+   "pickups": 1,
+   "hasBody": false,
+   "category": "commodity",
+   "summary": [
+    "原油価格の急騰がインフレ懸念を再燃させ、金価格は4,000ドルを下回り7月以来の安値を更新",
+    "（自動要約なし。原文を参照してください）",
+    "（自動要約なし。原文を参照してください）"
+   ],
+   "impact": "",
+   "sentiment": "neutral",
+   "assets": [],
+   "importance": "high",
    "generatedBy": "extractive"
   },
   {
