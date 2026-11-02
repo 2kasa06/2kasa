@@ -1,0 +1,1215 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>2026-11-01 | 投資情報ウォッチ</title>
+<meta name="description" content="主要マーケットの値動きと、投資判断に関わるニュースを毎日まとめる">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%232a78d6%22%2F%3E%3Cpath%20d%3D%22M6%2022l6-7%205%204%209-10%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f6f6f3; --surface: #ffffff; --surface-2: #f0efea; --line: #e2e0d8;
+  --ink: #16161a; --ink-2: #4d4c48; --muted: #7a7872;
+  --accent: #2a78d6; --accent-soft: #e5effb;
+  --up: #d23a2e; --down: #1f63c7;
+  --key: #b26b00; --key-soft: #fff4de;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111113; --surface: #1a1a1d; --surface-2: #232327; --line: #2f2f34;
+    --ink: #f2f2ef; --ink-2: #c3c2b7; --muted: #8d8c86;
+    --accent: #5a9bea; --accent-soft: #1b2a3d;
+    --up: #ff6b5e; --down: #6aa4ff;
+    --key: #f0b24a; --key-soft: #2e2415;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111113; --surface: #1a1a1d; --surface-2: #232327; --line: #2f2f34;
+  --ink: #f2f2ef; --ink-2: #c3c2b7; --muted: #8d8c86;
+  --accent: #5a9bea; --accent-soft: #1b2a3d;
+  --up: #ff6b5e; --down: #6aa4ff;
+  --key: #f0b24a; --key-soft: #2e2415;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 15px/1.7 system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", Meiryo, sans-serif;
+  font-feature-settings: "palt";
+}
+a { color: inherit; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+.muted { color: var(--muted); }
+.up { color: var(--up); } .down { color: var(--down); } .flat { color: var(--muted); }
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.top { background: var(--surface); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; justify-content: space-between; padding-top: 18px; padding-bottom: 14px; }
+.top h1 { margin: 0; font-size: 22px; letter-spacing: .02em; }
+.top h1 a { text-decoration: none; }
+.top .sub { margin: 2px 0 0; color: var(--ink-2); font-size: 13px; }
+.top nav { display: flex; gap: 16px; font-size: 14px; }
+.top nav a { color: var(--ink-2); text-decoration: none; }
+.top nav a[aria-current] { color: var(--ink); font-weight: 700; }
+.updated { font-size: 12px; color: var(--muted); }
+
+section { margin: 28px 0; }
+section > h2 { font-size: 17px; margin: 0 0 12px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+section > h2 > small { flex: 1 1 14em; }
+section > h2 small { font-weight: 400; font-size: 12px; color: var(--muted); }
+
+.mgroup + .mgroup { margin-top: 16px; }
+.glabel { font-size: 12px; color: var(--muted); font-weight: 600; margin: 0 0 6px; letter-spacing: .08em; }
+.mgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.mcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; min-width: 0; }
+.mcard header { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.mcard h3 { margin: 0; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.mcard h3 small { color: var(--muted); font-weight: 400; }
+.mcard .asof { font-size: 11px; color: var(--muted); white-space: nowrap; }
+.mcard .price { margin: 4px 0 0; font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.25; }
+.unit { font-size: 12px; font-weight: 400; color: var(--muted); margin-left: 3px; }
+.mcard .chg { margin: 0 0 6px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.mcard .abs { color: var(--ink-2); font-weight: 400; font-size: 13px; margin-left: 4px; }
+.mcard.stale { border-style: dashed; }
+.mcard.failed .note { color: var(--muted); font-size: 13px; margin: 0; }
+.periods { display: grid; grid-template-columns: repeat(3, 1fr); margin: 8px 0 0; font-size: 12px; }
+.periods div { text-align: center; }
+.periods dt { color: var(--muted); }
+.periods dd { margin: 0; font-variant-numeric: tabular-nums; }
+.range { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.range-track { position: relative; flex: 1; height: 4px; border-radius: 2px; background: var(--surface-2); }
+.range-mark { position: absolute; top: -3px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--ink); border: 2px solid var(--surface); }
+
+.spark { position: relative; height: 48px; }
+.spark-cell .spark { height: 32px; width: 120px; }
+.spark svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.spark .line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; stroke: var(--muted); }
+.spark .area { fill: var(--muted); opacity: .08; stroke: none; }
+.spark.up .line { stroke: var(--up); } .spark.up .area { fill: var(--up); }
+.spark.down .line { stroke: var(--down); } .spark.down .area { fill: var(--down); }
+.spark .cross { stroke: var(--ink-2); stroke-width: 1; opacity: 0; }
+.spark .dot { fill: var(--ink); stroke: var(--surface); stroke-width: 2; opacity: 0; }
+.spark.hover .cross, .spark.hover .dot { opacity: 1; }
+.spark .tip { position: absolute; bottom: -26px; transform: translateX(-50%); background: var(--ink); color: var(--bg); font-size: 11px; padding: 2px 7px; border-radius: 6px; white-space: nowrap; pointer-events: none; z-index: 2; font-variant-numeric: tabular-nums; }
+.spark.empty { font-size: 12px; color: var(--muted); display: flex; align-items: center; }
+
+.digest { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius); padding: 14px 18px; }
+.digest ol { margin: 0; padding-left: 1.4em; }
+.digest li + li { margin-top: 6px; }
+
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+table.watch { width: 100%; border-collapse: collapse; font-size: 14px; }
+.watch th, .watch td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+.watch thead th { font-size: 12px; color: var(--muted); font-weight: 600; background: var(--surface-2); }
+.watch th.num, .watch td.num { text-align: right; }
+.watch tbody tr:last-child > * { border-bottom: 0; }
+.wname { display: block; font-weight: 600; min-width: 7.5em; }
+.wcode { font-size: 12px; color: var(--muted); font-weight: 400; }
+.wnews { min-width: 220px; font-size: 13px; }
+.wnews a { color: var(--ink-2); }
+.stale-tag { margin-left: 6px; font-size: 11px; color: var(--muted); border: 1px dashed var(--line); padding: 0 4px; border-radius: 4px; }
+.linkish { font: inherit; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 24px; align-items: start; }
+.side > * + * { margin-top: 16px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; }
+.panel h3 { margin: 0 0 10px; font-size: 14px; }
+
+.filters { position: sticky; top: 0; z-index: 3; background: var(--bg); padding: 8px 0 6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: inherit; font-size: 13px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); border-radius: 999px; padding: 3px 12px; cursor: pointer; min-height: 32px; }
+.chip .n { color: var(--muted); font-variant-numeric: tabular-nums; }
+.chip.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip.on .n { color: inherit; opacity: .7; }
+.row2 { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-top: 8px; font-size: 13px; color: var(--ink-2); }
+.row2 select, .row2 input[type=search] { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; min-height: 32px; }
+.row2 input[type=search] { flex: 1; min-width: 160px; }
+.count { margin: 6px 0 0; font-size: 12px; color: var(--muted); }
+
+.news { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; margin-top: 10px; }
+.news.key { border-left: 4px solid var(--key); }
+.nmeta { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; font-size: 12px; color: var(--muted); }
+.cat { color: var(--ink-2); font-weight: 600; }
+.sent { font-weight: 600; }
+.sent-positive { color: var(--up); } .sent-negative { color: var(--down); } .sent-neutral { color: var(--muted); }
+.imp { color: var(--key); font-weight: 700; }
+.nmeta time { margin-left: auto; font-variant-numeric: tabular-nums; }
+.news h3 { margin: 6px 0 6px; font-size: 16px; line-height: 1.5; }
+.news h3 a { text-decoration: none; }
+.news h3 a:hover { text-decoration: underline; }
+.summary { margin: 0; padding-left: 1.2em; color: var(--ink-2); font-size: 14px; }
+.impact { margin: 8px 0 0; font-size: 13px; background: var(--surface-2); border-radius: 6px; padding: 6px 10px; }
+.impact b { font-size: 11px; color: var(--muted); margin-right: 8px; }
+.news footer { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 10px; font-size: 12px; }
+.pub { color: var(--ink-2); margin-right: 4px; }
+.tag { border: 1px solid var(--line); border-radius: 999px; padding: 0 8px; color: var(--ink-2); }
+.tag.watch { background: var(--accent-soft); border-color: transparent; color: var(--ink); }
+.tag.auto { border-style: dashed; color: var(--muted); }
+.empty-note { text-align: center; color: var(--muted); padding: 30px 0; }
+
+.bars { display: grid; gap: 6px; font-size: 12px; }
+.bar-row { display: grid; grid-template-columns: 7.5em 1fr 2em; gap: 8px; align-items: center; }
+.bar-lab { color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-track { height: 10px; }
+.bar-fill { display: block; height: 100%; background: var(--accent); border-radius: 0 4px 4px 0; min-width: 2px; }
+.bar-n { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+
+details.status summary { cursor: pointer; font-size: 13px; color: var(--ink-2); }
+details.status ul { list-style: none; padding: 0; margin: 8px 0 0; font-size: 12px; }
+details.status li { padding: 2px 0; overflow-wrap: anywhere; }
+details.status li.ok span:first-child { color: var(--accent); }
+details.status li.ng span:first-child { color: var(--down); }
+
+.days { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.days a { display: flex; justify-content: space-between; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; text-decoration: none; font-variant-numeric: tabular-nums; }
+
+.foot { border-top: 1px solid var(--line); margin-top: 40px; padding: 20px 0 40px; font-size: 12px; color: var(--muted); }
+.foot p { margin: 4px 0; }
+.disclaimer { background: var(--surface-2); border-radius: 8px; padding: 10px 12px; color: var(--ink-2); }
+
+@media (max-width: 900px) {
+  .cols { grid-template-columns: 1fr; }
+  .side { order: -1; }
+}
+@media (max-width: 640px) {
+  .hide-sm { display: none; }
+  .mgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .mcard { padding: 10px; }
+  .mcard .price { font-size: 19px; }
+  .mcard header { flex-direction: column; gap: 0; }
+  .range-lab { display: none; }
+  .periods { font-size: 11px; gap: 2px; letter-spacing: -.02em; }
+  .watch th, .watch td { padding: 8px; }
+  .wnews { min-width: 180px; }
+  .nmeta time { margin-left: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .news, .mcard { transition: border-color .15s; }
+}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <div>
+    <h1><a href="../index.html">投資情報ウォッチ</a></h1>
+    <p class="sub">主要マーケットの値動きと、投資判断に関わるニュースを毎日まとめる</p>
+  </div>
+  <div>
+    <nav aria-label="ページ">
+      <a href="../index.html">今日</a>
+      <a href="../archive.html" aria-current="page">過去のニュース</a>
+    </nav>
+    <div class="updated">最終更新 2026年11月2日(月) 10:49</div>
+  </div>
+</div></header>
+<main class="wrap">
+<section id="news">
+  <h2>2026-11-01 のニュース <small>56件</small></h2>
+  <div class="filters" role="group" aria-label="ニュースの絞り込み">
+  <div class="chips" data-group="cat">
+    <button type="button" class="chip on" data-value="">すべて <span class="n">56</span></button>
+    <button type="button" class="chip" data-value="macro" title="日銀・FRB・ECBの政策、金利見通し、物価、雇用、GDP、景気指標">金融政策・景気 <span class="n">6</span></button><button type="button" class="chip" data-value="jpstock" title="国内企業の決算・業績修正、TOB・M&amp;A、株主還元、新規上場、日本株の相場">日本株・企業 <span class="n">23</span></button><button type="button" class="chip" data-value="global" title="米国株・欧州・中国市場の相場、海外企業の決算、地政学が市場に与える影響">米国・海外市場 <span class="n">2</span></button><button type="button" class="chip" data-value="fx" title="円相場、介入、国債利回り、債券市場">為替・債券 <span class="n">3</span></button><button type="button" class="chip" data-value="commodity" title="原油・金などの商品、ビットコインなど暗号資産">商品・暗号資産 <span class="n">20</span></button><button type="button" class="chip" data-value="personal" title="新NISA・iDeCo・税制・金融庁の制度変更、投資信託、個人投資家の動向">資産形成・制度 <span class="n">2</span></button>
+  </div>
+  <div class="row2">
+    <label>向き <select data-group="sent">
+      <option value="">すべて</option><option value="positive">▲ 追い風</option><option value="negative">▼ 向かい風</option><option value="neutral">－ 中立</option>
+    </select></label>
+    <label>銘柄 <select data-group="ticker">
+      <option value="">すべて</option><option value="7203">トヨタ自動車</option><option value="6758">ソニーグループ</option><option value="9984">ソフトバンクグループ</option><option value="NVDA">エヌビディア</option><option value="AAPL">アップル</option>
+    </select></label>
+    <label class="only-key"><input type="checkbox" data-group="key"> 注目のみ</label>
+    <input type="search" data-group="q" placeholder="キーワードで検索" aria-label="キーワードで検索">
+  </div>
+  <p class="count" aria-live="polite"></p>
+</div>
+  <div data-news>
+    <article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="7203" data-text="社会人野球日本選手権2026 subaru―トヨタ自動車（1回戦）ダイジェスト 社会人野球日本選手権2026 subaru―トヨタ自動車（1回戦）ダイジェスト （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  トヨタ自動車 毎日新聞">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-01T14:03:32.000Z">11/1 23:03</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTE56T1o5WE1CWndzR2JhZ3llU0R1NUtucFVkRU5nSEw2TnhnM1BCZWpXLUVNTkJyaENzejBUbGw1NllUZ2dtRzF2SkZSbXN4VzgtNGZGRmQxWk14TG5pRDg5WkE2ZFc2dw?oc=5" target="_blank" rel="noopener">社会人野球日本選手権2026 SUBARU―トヨタ自動車（1回戦）ダイジェスト</a></h3>
+  <ul class="summary"><li>社会人野球日本選手権2026 SUBARU―トヨタ自動車（1回戦）ダイジェスト</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">毎日新聞</span>
+    <span class="tag watch">トヨタ自動車</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="AAPL" data-text="アップルは現在、時価総額5兆300億ドルで世界最大の企業となっています。 アップルは現在、時価総額5兆300億ドルで世界最大の企業となっています。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  アップル moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-01T12:33:59.000Z">11/1 21:33</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxQZFhuZEZDLWJsRUJLNUNEUlllZmdFTER1U213djZfOXZGSnF2WklsUWxPWkw1WS1wLUkzemRCbGZSOGNza3hvZkE3a0pnaE1IblB1N1lDS1VNY2t1Z2lQVnl1UHJRM1BOV2Y1THVKWVhodEotLTZ3VWo4bGFPZmtMckNOdTUyRlNfU01FQlJLZUhVaWxEd09wNEZqUHNiUjdfcEtwZWVKQzlEalNK?oc=5" target="_blank" rel="noopener">アップルは現在、時価総額5兆300億ドルで世界最大の企業となっています。</a></h3>
+  <ul class="summary"><li>アップルは現在、時価総額5兆300億ドルで世界最大の企業となっています。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">アップル</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="macro" data-sent="neutral" data-tickers="AAPL" data-text="週間予告 | 米中間選挙、非農業部門雇用統計、apple決算が到来；bitway（btw）が1億ドル超相当のトークンをアンロック 香港フィンテックプロジェクト実行統括グループ第6回会議：フィンテックウィーク2026は11月2日〜6日に開催 投票は北京時間10月26日23:02に開始され、11月2日23:02に終了する。 11月2日（月）から、国際金銀と米国産原油は北京時間7:00に取引を開始し、米国株は北京時間22:30に取引を開始する。  アップル panews">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-01T11:50:54.000Z">11/1 20:50</time>
+  </div>
+  <h3><a href="https://www.panewslab.com/ja/articles/01a196e3-1d79-71ce-a629-9f5226e7cd25" target="_blank" rel="noopener">週間予告 | 米中間選挙、非農業部門雇用統計、Apple決算が到来；Bitway（BTW）が1億ドル超相当のトークンをアンロック</a></h3>
+  <ul class="summary"><li>香港フィンテックプロジェクト実行統括グループ第6回会議：フィンテックウィーク2026は11月2日〜6日に開催</li><li>投票は北京時間10月26日23:02に開始され、11月2日23:02に終了する。</li><li>11月2日（月）から、国際金銀と米国産原油は北京時間7:00に取引を開始し、米国株は北京時間22:30に取引を開始する。</li></ul>
+  
+  <footer>
+    <span class="pub">PANews</span>
+    <span class="tag watch">アップル</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="" data-text="【注目決算】村田製作所、通期営業利益５２００億円へ上方修正――ａｉ需要拡大で最高益更新へ、株価は７．７２％安 【注目決算】村田製作所、通期営業利益５２００億円へ上方修正――ａｉ需要拡大で最高益更新へ、株価は７．７２％安 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  https://kabu-ir.com/">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-01T10:00:00.000Z">11/1 19:00</time>
+  </div>
+  <h3><a href="https://kabu-ir.com/article/521908546.html" target="_blank" rel="noopener">【注目決算】村田製作所、通期営業利益５２００億円へ上方修正――ＡＩ需要拡大で最高益更新へ、株価は７．７２％安</a></h3>
+  <ul class="summary"><li>【注目決算】村田製作所、通期営業利益５２００億円へ上方修正――ＡＩ需要拡大で最高益更新へ、株価は７．７２％安</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">https://kabu-ir.com/</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="7203" data-text="大衆車の代表格「カローラ」 発売60年で式典 トヨタ自動車 日本の大衆車の代表格で、世界的なロングセラーとなったトヨタ自動車の「カローラ」が、2026年で発売から60年となり、愛知県の生産工場で歴代のモデルを展示して記念の式典が開かれました。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  トヨタ自動車 nhk 経済">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-01T09:39:00.000Z">11/1 18:39</time>
+  </div>
+  <h3><a href="https://news.web.nhk/newsweb/na/nd-20261101de69214" target="_blank" rel="noopener">大衆車の代表格「カローラ」 発売60年で式典 トヨタ自動車</a></h3>
+  <ul class="summary"><li>日本の大衆車の代表格で、世界的なロングセラーとなったトヨタ自動車の「カローラ」が、2026年で発売から60年となり、愛知県の生産工場で歴代のモデルを展示して記念の式典が開かれました。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">NHK 経済</span>
+    <span class="tag watch">トヨタ自動車</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="macro" data-sent="negative" data-tickers="AAPL" data-text="来週の注目点（雇用統計；アップル、amd、パランティア・テクノロジーズ、マクドナルドの決算） アップル株の急騰、決算で現実味を帯びた検証へ：iphone需要は期待に応えられるか $intc -24% ：今週を象徴する大惨事：第3四半期の売上高は 165億ドル （前年比21%増）となり、調整後epsも $0.52 と市場予想を上回りましたが、第4四半期のガイダンスが150〜160億ドル（ウォール街予想は171億ドル） 10月雇用統計（午前8時30分発表）で週を締めくくる予定で、コンセンサスは 62,000 雇用統計が2.9万人増となり、失業率は横ばいの 4.2% ——frb（連邦準備制度理事会）が12月の利据え置きという道筋から逸れることはないだろうとい  アップル moomoo">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-01T08:41:12.000Z">11/1 17:41</time>
+  </div>
+  <h3><a href="https://www.moomoo.com/ja/community/feed/what-to-expect-in-the-week-ahead-jobs-report-earnings-117540288724998" target="_blank" rel="noopener">来週の注目点（雇用統計；アップル、AMD、パランティア・テクノロジーズ、マクドナルドの決算）</a></h3>
+  <ul class="summary"><li>アップル株の急騰、決算で現実味を帯びた検証へ：iPhone需要は期待に応えられるか</li><li>$INTC -24% ：今週を象徴する大惨事：第3四半期の売上高は 165億ドル （前年比21%増）となり、調整後EPSも $0.52 と市場予想を上回りましたが、第4四半期のガイダンスが150〜160億ドル（ウォール街予想は171億ドル）</li><li>10月雇用統計（午前8時30分発表）で週を締めくくる予定で、コンセンサスは 62,000 雇用統計が2.9万人増となり、失業率は横ばいの 4.2% ——FRB（連邦準備制度理事会）が12月の利据え置きという道筋から逸れることはないだろうとい</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">アップル</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="macro" data-sent="positive" data-tickers="" data-text="日銀、14年半ぶり物価2％到達 12月利上げ視野に政策軸足をインフレ抑制へ 日本銀行は30日まで開いた金融政策決定会合で、政策金利の現状維持を決めた。 中立金利が1.1～2.5％とされる中、市場関係者の一部には、景気を過熱も冷ましもしない水準としてレンジ中央の1.8％よりやや手前の1.75％で一度様子を見るのが妥当との声もある。 11月には1400品目以上の食料品が値上がりする見通しで、マヨネーズが9％、缶コーヒーが12％など、2年間限定の消費税減税分の7％を上回る上げ幅となる品目もある。  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-01T05:37:09.000Z">11/1 14:37</time>
+  </div>
+  <h3><a href="https://finance.biggo.jp/news/bbb1d097-8959-4a1b-a52b-43798fbb4279" target="_blank" rel="noopener">日銀、14年半ぶり物価2％到達 12月利上げ視野に政策軸足をインフレ抑制へ</a></h3>
+  <ul class="summary"><li>日本銀行は30日まで開いた金融政策決定会合で、政策金利の現状維持を決めた。</li><li>中立金利が1.1～2.5％とされる中、市場関係者の一部には、景気を過熱も冷ましもしない水準としてレンジ中央の1.8％よりやや手前の1.75％で一度様子を見るのが妥当との声もある。</li><li>11月には1400品目以上の食料品が値上がりする見通しで、マヨネーズが9％、缶コーヒーが12％など、2年間限定の消費税減税分の7％を上回る上げ幅となる品目もある。</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="6758" data-text="【海外在住日本人を日本の介護で応援！】ソニー・ライフケアグループのライフケアデザイン(株)×一社）hearth（ハース）コラボ企画。「日本の老人ホーム見学会」 【海外在住日本人を日本の介護で応援！】ソニー・ライフケアグループのライフケアデザイン(株)×一社）hearth（ハース）コラボ企画。「日本の老人ホーム見学会」 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  ソニーグループ valuepress">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-01T05:00:00.000Z">11/1 14:00</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTFA0UXR5ZlZhNVczOERscmNMSWJyOWZsZFZfV2FsTmZuY2tNdlVQSzJKZUwtM0VNSENtdmlLa0dhbDBPVGNIZi10cTh3MW9EaTlsTHJSTlh4V2tsR3lmdWc?oc=5" target="_blank" rel="noopener">【海外在住日本人を日本の介護で応援！】ソニー・ライフケアグループのライフケアデザイン(株)×一社）Hearth（ハース）コラボ企画。「日本の老人ホーム見学会」</a></h3>
+  <ul class="summary"><li>【海外在住日本人を日本の介護で応援！】ソニー・ライフケアグループのライフケアデザイン(株)×一社）Hearth（ハース）コラボ企画。「日本の老人ホーム見学会」</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">valuepress</span>
+    <span class="tag watch">ソニーグループ</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="commodity" data-sent="negative" data-tickers="" data-text="ビットコイン、急落し1200万円台に ai関連決算と雇用統計が焦点｜bitbankアナリスト寄稿 coinpost編集部 今週のビットコイン（btc）対円相場は、底堅い推移の後、1275万円周辺から急落し、10月30日正午時点では1220万円台で推移している。 その後は米連邦公開市場委員会（fomc）を控え戻り売りが入り、1275万円まで押したが、同委員会ではサプライズもなく、イベント通過後は一時1290万円にタッチした。  coinpost">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-01T02:30:13.000Z">11/1 11:30</time>
+  </div>
+  <h3><a href="https://coinpost.jp/?p=745685" target="_blank" rel="noopener">ビットコイン、急落し1200万円台に AI関連決算と雇用統計が焦点｜bitbankアナリスト寄稿</a></h3>
+  <ul class="summary"><li>CoinPost編集部</li><li>今週のビットコイン（BTC）対円相場は、底堅い推移の後、1275万円周辺から急落し、10月30日正午時点では1220万円台で推移している。</li><li>その後は米連邦公開市場委員会（FOMC）を控え戻り売りが入り、1275万円まで押したが、同委員会ではサプライズもなく、イベント通過後は一時1290万円にタッチした。</li></ul>
+  
+  <footer>
+    <span class="pub">CoinPost</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="6758" data-text="信用残ランキング【売り残増加】 インフロニア、ｃｋｄ、ソニーｆｇ(株探ニュース) 信用残ランキング【売り残増加】 インフロニア、ｃｋｄ、ソニーｆｇ(株探ニュース) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  ソニーグループ yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-10-31T23:15:36.000Z">11/1 08:15</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxOZno0Y3B3Q0Q0bnljTTU5Z2I3eGVHLTlGOUt0V013T2dxS1l5S0tMR3pEZUVqSHA3a2ROaGRxdngyMUVxWFItZm5rcEo3aFpHV0pFOWJDTWJzbFdsTHdMbm5nWmFmNkd2SFdRcVBCdTUtejFaWVVXV0lQcDdockY2N3BtTDdHZVk?oc=5" target="_blank" rel="noopener">信用残ランキング【売り残増加】 インフロニア、ＣＫＤ、ソニーＦＧ(株探ニュース)</a></h3>
+  <ul class="summary"><li>信用残ランキング【売り残増加】 インフロニア、ＣＫＤ、ソニーＦＧ(株探ニュース)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">ソニーグループ</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="6758" data-text="信用残ランキング【買い残増加】 ソニーｆｇ、ｓｂｇ、日産自(株探ニュース) 信用残ランキング【買い残増加】 ソニーｆｇ、ｓｂｇ、日産自(株探ニュース) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  ソニーグループ yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-10-31T23:10:29.000Z">11/1 08:10</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxQNk9XQUJVRlFjZFlqLXZsTVFNTHgxZERqdmNvenNPaHIwNVpqdjdrZExQZkhUYjk3a1Y4cGZNME13bmtLWXlnYkxwWlJ6aElnQjNOZk1zNXhueXFmMHYyRkY4bWFTS3pwWFBfSF9vV2tmUnFTbmt1UzNjdjhOTGtQQk9GemwwRU0?oc=5" target="_blank" rel="noopener">信用残ランキング【買い残増加】 ソニーＦＧ、ＳＢＧ、日産自(株探ニュース)</a></h3>
+  <ul class="summary"><li>信用残ランキング【買い残増加】 ソニーＦＧ、ＳＢＧ、日産自(株探ニュース)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">ソニーグループ</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="AAPL" data-text="【apple株価・業績ウォッチ｜2026年11月】高値圏で決算を待つ、iphone duoとaiが焦点 【apple株価・業績ウォッチ｜2026年11月】高値圏で決算を待つ、iphone duoとaiが焦点 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  アップル smart watch life">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-10-31T23:06:08.000Z">11/1 08:06</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiTEFVX3lxTFB4S3BhZmFJVlJ6OFV4WFFoMnk0WjEtTGlGTkFIRTFmYmZzTWRqam1Jam5lYU10blY4ZmFIZGtBVHpCRF9MbFFOV0JCdnM?oc=5" target="_blank" rel="noopener">【Apple株価・業績ウォッチ｜2026年11月】高値圏で決算を待つ、iPhone DuoとAIが焦点</a></h3>
+  <ul class="summary"><li>【Apple株価・業績ウォッチ｜2026年11月】高値圏で決算を待つ、iPhone DuoとAIが焦点</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Smart Watch Life</span>
+    <span class="tag watch">アップル</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="AAPL" data-text="アップル株の急騰、決算で現実味を帯びた検証へ：iphone需要は期待に応えられるか 超大型株は確かに堅調ですが、下落トレンドからは逃れられないでしょう ハハハハハ デフォルトレート保険は1000倍必要だよ。 したがって、市場を予測したり、レバレッジをかけたりしてはいけません。  アップル moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-10-31T22:30:28.000Z">11/1 07:30</time>
+  </div>
+  <h3><a href="https://www.moomoo.com/ja/community/discussion/apple-s-rally-faces-an-earnings-reality-check-can-iphone-2301624337" target="_blank" rel="noopener">アップル株の急騰、決算で現実味を帯びた検証へ：iPhone需要は期待に応えられるか</a></h3>
+  <ul class="summary"><li>超大型株は確かに堅調ですが、下落トレンドからは逃れられないでしょう</li><li>ハハハハハ デフォルトレート保険は1000倍必要だよ。</li><li>したがって、市場を予測したり、レバレッジをかけたりしてはいけません。</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">アップル</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="9984" data-text="《億り人・古賀真人氏が解説》アンソロピックipo「巨額aiインフラ投資」で注目の日本株 nec、日立、アドバンテストほか「提携組」「インフラ組」の有望銘柄 ソフトバンクグループへの影響も必至 《億り人・古賀真人氏が解説》アンソロピックipo「巨額aiインフラ投資」で注目の日本株 nec、日立、アドバンテストほか「提携組」「インフラ組」の有望銘柄 ソフトバンクグループへの影響も必至 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  ソフトバンクグループ マネーポストweb">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-10-31T22:02:00.000Z">11/1 07:02</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiR0FVX3lxTE9UaUZtbVBEUklEZHo0RVZ4OFlGVXJkU3d5aklha05nSnNZbTVjeU9KRUhSU0JkWHpYTmlZSFg2V0Z4Nm1mYnhR?oc=5" target="_blank" rel="noopener">《億り人・古賀真人氏が解説》アンソロピックIPO「巨額AIインフラ投資」で注目の日本株 NEC、日立、アドバンテストほか「提携組」「インフラ組」の有望銘柄 ソフトバンクグループへの影響も必至</a></h3>
+  <ul class="summary"><li>《億り人・古賀真人氏が解説》アンソロピックIPO「巨額AIインフラ投資」で注目の日本株 NEC、日立、アドバンテストほか「提携組」「インフラ組」の有望銘柄 ソフトバンクグループへの影響も必至</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">マネーポストWEB</span>
+    <span class="tag watch">ソフトバンクグループ</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="macro" data-sent="neutral" data-tickers="" data-text="【ポイント解説】日銀・植田総裁の会見読み解き＆エコノミストの利上げ予想・政策金利2％超えも・基調物価2％って何？ 日銀・植田総裁は会見で「利上げ見送り」や「基調物価2％事実上到達」についてどう説明したのか。 政府と日銀は2013年から2％の物価安定目標を掲げてきましたが、日銀が30日に発表した物価などに関するレポート（※1）では、「基調物価」について、“2％の物価安定目標とおおむね整合的な水準となっている&quot;と明記されました。 反対した高田委員からは、1.5％への利上げの提案がありました。  日テレnews nnn">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-10-31T21:00:00.000Z">11/1 06:00</time>
+  </div>
+  <h3><a href="https://news.ntv.co.jp/category/economy/ef5816dcdbd340e8b7eb2eeba8782f0a" target="_blank" rel="noopener">【ポイント解説】日銀・植田総裁の会見読み解き＆エコノミストの利上げ予想・政策金利2％超えも・基調物価2％って何？</a></h3>
+  <ul class="summary"><li>日銀・植田総裁は会見で「利上げ見送り」や「基調物価2％事実上到達」についてどう説明したのか。</li><li>政府と日銀は2013年から2％の物価安定目標を掲げてきましたが、日銀が30日に発表した物価などに関するレポート（※1）では、「基調物価」について、“2％の物価安定目標とおおむね整合的な水準となっている&quot;と明記されました。</li><li>反対した高田委員からは、1.5％への利上げの提案がありました。</li></ul>
+  
+  <footer>
+    <span class="pub">日テレNEWS NNN</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="7203" data-text="安間 地元で勝利貢献 トヨタ自動車開幕戦飾る バスケ女子wリーグ 安間 地元で勝利貢献 トヨタ自動車開幕戦飾る バスケ女子wリーグ （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  トヨタ自動車 沖縄タイムス社">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-10-31T18:57:00.000Z">11/1 03:57</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTFBPX1U4eEdmbjgtRnN6RHRYb2tTVHlUM3NDQUFjQUlPZXBCMXkxTktaLXZZZktnMk1ONWRwRHQ0aFc4QlE1cDhqSWZ3SWhQeTgzenV2dUpIR3dPcTJqbVE?oc=5" target="_blank" rel="noopener">安間 地元で勝利貢献 トヨタ自動車開幕戦飾る バスケ女子Wリーグ</a></h3>
+  <ul class="summary"><li>安間 地元で勝利貢献 トヨタ自動車開幕戦飾る バスケ女子Wリーグ</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">沖縄タイムス社</span>
+    <span class="tag watch">トヨタ自動車</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="NVDA AAPL" data-text="ai支出への懸念強まる中、アップルが時価総額5.03兆ドルでエヌビディアを抜き首位返り咲き アップル（apple）は10月30日の米国株式市場の終値時点で、時価総額5.03兆ドル（約792.3兆円）となり、世界で最も時価総額の高い上場企業の座に返り咲き、エヌビディア（nvidia）を首位から引きずり下ろした。 一方、エヌビディアは4.2%下落して204.64ドルとなり、時価総額は4.93兆ドル（約776.6兆円）に減少した。 これに対し、アップルは2026会計年度（9月30日締め）のフリーキャッシュフローが38%増の1,420億ドル（約22.4兆円）に拡大する見通しだ。  エヌビディア アップル biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-10-31T18:15:00.000Z">11/1 03:15</time>
+  </div>
+  <h3><a href="https://finance.biggo.jp/news/53826599-84d9-4c23-a257-429f409a6887" target="_blank" rel="noopener">AI支出への懸念強まる中、アップルが時価総額5.03兆ドルでエヌビディアを抜き首位返り咲き</a></h3>
+  <ul class="summary"><li>アップル（Apple）は10月30日の米国株式市場の終値時点で、時価総額5.03兆ドル（約792.3兆円）となり、世界で最も時価総額の高い上場企業の座に返り咲き、エヌビディア（NVIDIA）を首位から引きずり下ろした。</li><li>一方、エヌビディアは4.2%下落して204.64ドルとなり、時価総額は4.93兆ドル（約776.6兆円）に減少した。</li><li>これに対し、アップルは2026会計年度（9月30日締め）のフリーキャッシュフローが38%増の1,420億ドル（約22.4兆円）に拡大する見通しだ。</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス<span class="muted">・2経路</span></span>
+    <span class="tag watch">エヌビディア</span><span class="tag watch">アップル</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="7203" data-text="waymo・トヨタ提携で車両不足が解消、ロボタクシー競争は世界規模に＝アナリスト waymo・トヨタ提携で車両不足が解消、ロボタクシー競争は世界規模に＝アナリスト （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  トヨタ自動車 biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-10-31T17:08:00.000Z">11/1 02:08</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE9Dak1XcVhzbTBsZEhDbkxYZGF3Vl93bzZ3eE1NdUpVYjJnbGFoV1dLQmdtWVVmYXF2MUxxOXpuQmhTODcxRkY3M1VqeENGUTdJN0VKVmRiT21ZUQ?oc=5" target="_blank" rel="noopener">Waymo・トヨタ提携で車両不足が解消、ロボタクシー競争は世界規模に＝アナリスト</a></h3>
+  <ul class="summary"><li>Waymo・トヨタ提携で車両不足が解消、ロボタクシー競争は世界規模に＝アナリスト</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">トヨタ自動車</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア（nvda）株式分析 – エントリー＆エグジット戦略 エヌビディア（nvda）株式分析 – エントリー＆エグジット戦略 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-10-31T16:32:19.000Z">11/1 01:32</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxNSElpMlFsVmgxRF9fNGxjMlFaSzZBeDdGZDAwTWl4TFcwSDJHdVViZmlCenBOeGpKcGt2VG5qaS02MnpCTDdsU0VQSDByYk1kZE9iZFRpYmtZX00yQU4yeUNLM1BoR1FNR1piZVV5SkpXcUxNa2lxSG9xUEhfaEl5Rg?oc=5" target="_blank" rel="noopener">エヌビディア（NVDA）株式分析 – エントリー＆エグジット戦略</a></h3>
+  <ul class="summary"><li>エヌビディア（NVDA）株式分析 – エントリー＆エグジット戦略</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="「株価も配当も右肩上がり。優待の図書カードも助かる」48歳女性の株主優待 「株価も配当も右肩上がり。優待の図書カードも助かる」48歳女性の株主優待 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  au webポータル">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T13:20:00.000Z">11/1 22:20</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMibkFVX3lxTFBJR2h6Rm9kNE0wLW4yQmMxZk5RbU9LU29VUS11OGpTZEhZRmxfaVFGRVNUTTI4N2JsZGhTM24yR2xLV0o2aHg3b1NxZ05rbG0yTnNKT3Jua0ZQOHlOQjY5LVZtd0hwWk5aeDMyUC1n?oc=5" target="_blank" rel="noopener">「株価も配当も右肩上がり。優待の図書カードも助かる」48歳女性の株主優待</a></h3>
+  <ul class="summary"><li>「株価も配当も右肩上がり。優待の図書カードも助かる」48歳女性の株主優待</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">au Webポータル</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="来週の金価格リスク 来週の金価格リスク （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  vietnam.vn">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T12:52:01.000Z">11/1 21:52</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTFBZZF90MjFUdTNxWmszTnZqc0wxNEVHWXdKQlFKSDUwZGE5YVc5ZlF1aFZwcEI4c1ZxenByZXNIWHQyYWVrcW94MEVoV3hCaVpuc0pQMEtuUWQtRFJvXzVZ?oc=5" target="_blank" rel="noopener">来週の金価格リスク</a></h3>
+  <ul class="summary"><li>来週の金価格リスク</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Vietnam.vn</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="彼の市場分析をしばらく追っていますが、来週の見通しは明確で注目する価値があります。市場がどう動くか見てみましょう。 彼の市場分析をしばらく追っていますが、来週の見通しは明確で注目する価値があります。市場がどう動くか見てみましょう。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T12:43:50.000Z">11/1 21:43</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQbm9tV3Jld2JpOF9HRGFmd2RVemVmRDdlaHcybFVQZjdXYTFmZUluazJZYlV4OUtQckFtMUd6dmo4aDhmM3BwdmpNQmtrWXZYNnQwQ09QdGJocU5SelIzMmtDUWhpN0NFaGJxTy1hUWJadjczbVFiS3dxVUVCU0Fyc0dVVm8ybllWQU1RemhqMkkyUWZjWlVkVmlfMlQ0Mi0zT1lDRXA0T252Vk5tLXhQaA?oc=5" target="_blank" rel="noopener">彼の市場分析をしばらく追っていますが、来週の見通しは明確で注目する価値があります。市場がどう動くか見てみましょう。</a></h3>
+  <ul class="summary"><li>彼の市場分析をしばらく追っていますが、来週の見通しは明確で注目する価値があります。市場がどう動くか見てみましょう。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="uptober再び不発、ビットコイン7%安・イーサリアム16%安 uptober再び不発、ビットコイン7%安・イーサリアム16%安 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  traders union">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T12:24:40.000Z">11/1 21:24</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxPSUYxUGtPb2VqT0FWZk13Z0dZTURxcjhQRTdSZHUzc2U5UzRpX1VjUWZsZVBjNHNWOW5tM0ozQ3hGZjVXUXBmcmhqOFFpeW5vRnNZWE1nLXZJV0JNdzJ6X01qMnZ0dXZZeE9CaFlsMXctaGFFdjRiaXNLQ3ZuTTZKbXAwc1Z3eW5GbW93MG9GWjRLMEpJaXBDcWVvemx5WG5P?oc=5" target="_blank" rel="noopener">Uptober再び不発、ビットコイン7%安・イーサリアム16%安</a></h3>
+  <ul class="summary"><li>Uptober再び不発、ビットコイン7%安・イーサリアム16%安</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Traders Union</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="ビットコイン、7.6万ドル付近で足踏み 後追い買い組の利益ほぼゼロに ビットコイン、7.6万ドル付近で足踏み 後追い買い組の利益ほぼゼロに （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T12:05:00.000Z">11/1 21:05</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE5GSU9TV3BfUHlJRi1tSmc5dGZETnNiOWtIX180T0lERXJFZkFmaFhUWElVMENfTXpkYk84NDlkZmpDTlRNdjFnLVVsUjUwb3FCX0RWU01NS05HcHh4VzRNZ2JYV192ci1FdHRNcGhudy1vOTVC?oc=5" target="_blank" rel="noopener">ビットコイン、7.6万ドル付近で足踏み 後追い買い組の利益ほぼゼロに</a></h3>
+  <ul class="summary"><li>ビットコイン、7.6万ドル付近で足踏み 後追い買い組の利益ほぼゼロに</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="ビットコイン価格変動カレンダー：重要な日付と誤解 ビットコイン価格変動カレンダー：重要な日付と誤解 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  bitcoin news">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T11:45:31.000Z">11/1 20:45</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxPM0ZhZjhmb2FpWTlhSXVxYjBBOFE1enJXaWlVU0lzQTdXNm9Eak9TVkdUbVY1WHppbDFyMWRHTXRFZEdVcTltTm9YZ3QtTFlPN1lfUUVlRGdwak1obnBBeFF1ZVdNLUdxc0czTV9BeEJ3c0NCOFhiWXRjTHB2MDZiZ1AwNGM1eWM1ejU3TkFwcklSODZTZFBidWh4ZGFHWXFMSkRVUjdIVm4?oc=5" target="_blank" rel="noopener">ビットコイン価格変動カレンダー：重要な日付と誤解</a></h3>
+  <ul class="summary"><li>ビットコイン価格変動カレンダー：重要な日付と誤解</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Bitcoin News</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="【速報】スペースxは買うべきか？売るべきか？今後の株価と投資戦略について解説 isaiah stewart (xpihnezmmd) 【速報】スペースxは買うべきか？売るべきか？今後の株価と投資戦略について解説 isaiah stewart (xpihnezmmd) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  unisba media">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T09:36:36.000Z">11/1 18:36</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE04UzBFUHJhUm9JX3hFa0ZXRnZ1LUVSOXVlNzB3MDJaeFhVMkJKSGwzVnY5UVFsWWVRZU5aYllxdTFDTE9iRi11ZW02eDdOZzEzb3FXYzRGU0o0U0MwaGM0b3ltODJZNm4xam5UMA?oc=5" target="_blank" rel="noopener">【速報】スペースXは買うべきか？売るべきか？今後の株価と投資戦略について解説 Isaiah Stewart (XPiHNEZMMD)</a></h3>
+  <ul class="summary"><li>【速報】スペースXは買うべきか？売るべきか？今後の株価と投資戦略について解説 Isaiah Stewart (XPiHNEZMMD)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Unisba Media</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="positive" data-tickers="" data-text="【注目決算】東京エレクトロン、通期営業利益８７．１％増の１兆１６９０億円予想――１５００億円自社株買い枠・増配も 【注目決算】東京エレクトロン、通期営業利益８７．１％増の１兆１６９０億円予想――１５００億円自社株買い枠・増配も （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  https://kabu-ir.com/">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-01T09:00:00.000Z">11/1 18:00</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE5aclVkbmR1eEZzbmZhdXZ0TFd1LVBJSHExdVQ0Sms1Y3U1T2ZNUVpnTDRWd0sxWml6OTR1ekNqaWRObnJCQjJvb2NseUo5N3M1VWRVNg?oc=5" target="_blank" rel="noopener">【注目決算】東京エレクトロン、通期営業利益８７．１％増の１兆１６９０億円予想――１５００億円自社株買い枠・増配も</a></h3>
+  <ul class="summary"><li>【注目決算】東京エレクトロン、通期営業利益８７．１％増の１兆１６９０億円予想――１５００億円自社株買い枠・増配も</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">https://kabu-ir.com/</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="negative" data-tickers="" data-text="パニック売りが米国株を直撃：ナスダックは3日続落で約8%安、ai資金調達への懸念と中間選挙が焦点 パニック売りが米国株を直撃：ナスダックは3日続落で約8%安、ai資金調達への懸念と中間選挙が焦点 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-11-01T08:31:20.000Z">11/1 17:31</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE55ajA3bmllT2p5ZUpHUVlaY2JneDdrcXFmUnlIWTI2VjF5Nllkd3V4Mjd0V2ZGMlBJNGU5VjZEcWhPemM5d0FneE9zSTNLUmhxblF4MWpHMHFrcGlIU0ZKZ3Bjek9seDZOcmVVY1p2VjZfaFJq?oc=5" target="_blank" rel="noopener">パニック売りが米国株を直撃：ナスダックは3日続落で約8%安、AI資金調達への懸念と中間選挙が焦点</a></h3>
+  <ul class="summary"><li>パニック売りが米国株を直撃：ナスダックは3日続落で約8%安、AI資金調達への懸念と中間選挙が焦点</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="negative" data-tickers="" data-text="金価格の予測（1週間の急落後）。 金価格の予測（1週間の急落後）。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  vietnam.vn">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-11-01T08:29:29.000Z">11/1 17:29</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFA2Z2lpSk1xeUFmRHgzTV9pSVZtb3FRNjhmcWVNSG1jbTJwc0h2OS1kR252MW1PZ00wS0t5bndGZXl2di1vX0F3QjZIZkI0R1EzR3RPVm9tSmFIeHZmU19ITGxQVWlTVDVFOTk4bVJwUXg?oc=5" target="_blank" rel="noopener">金価格の予測（1週間の急落後）。</a></h3>
+  <ul class="summary"><li>金価格の予測（1週間の急落後）。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Vietnam.vn</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="$79,148のレジスタンスがビットコインの値動きを狭いレンジに抑える $79,148のレジスタンスがビットコインの値動きを狭いレンジに抑える （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  traders union">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T08:02:44.000Z">11/1 17:02</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQTkk1bFlIY0pCdWhqSzFJVkJmRzdKbkJfcjU2NWJpVm54T3hlNi1rbHVFdjlhVkY3RUxpdlYzb2M1Zm1mUk5iRmo3REp2N1dYb2sxcnVoelJJT1JsVmc2VHdzVkhZVDRHNEJGblFGOWJDYUhueTgxdjVQN2tQbWZOdTI1UGhFWGlwMU1jUXdTWHU2WmtQdjNsRHBqaUFaZGtq?oc=5" target="_blank" rel="noopener">$79,148のレジスタンスがビットコインの値動きを狭いレンジに抑える</a></h3>
+  <ul class="summary"><li>$79,148のレジスタンスがビットコインの値動きを狭いレンジに抑える</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Traders Union</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="fx・為替相場の注目指標や予想を解説 - 【11月2日～の週】為替相場の注目材料スケジュールと焦点 fx・為替相場の注目指標や予想を解説 - 【11月2日～の週】為替相場の注目材料スケジュールと焦点 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  ザイfx！">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T07:10:00.000Z">11/1 16:10</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE1tNjZyVFBxRlJ5ZEI5S1k2WXVHS25WYUhTR1NqQ1NHay02d0dtUERuSmRyblpxQWV5MUdmM3RPSmpEQWFuOUhzWWFNa3BpMHRYa1E?oc=5" target="_blank" rel="noopener">FX・為替相場の注目指標や予想を解説 - 【11月2日～の週】為替相場の注目材料スケジュールと焦点</a></h3>
+  <ul class="summary"><li>FX・為替相場の注目指標や予想を解説 - 【11月2日～の週】為替相場の注目材料スケジュールと焦点</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">ザイFX！</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="バイナンスが出金再開へ､流出したトークン63億ドルのうち95％を補填…fbiは北朝鮮の関与を指摘 | 政治・経済・投資 | 東洋経済オンライン 暗号資産業界最大規模のハッキング被害に見舞われたバイナンスが､流出トークンの95％を補填し出金を段階的に再開する決断を発表しました。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  東洋経済オンライン">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T07:00:00.000Z">11/1 16:00</time>
+  </div>
+  <h3><a href="https://toyokeizai.net/articles/-/963196?utm_source=rss&amp;utm_medium=http&amp;utm_campaign=link_back" target="_blank" rel="noopener">バイナンスが出金再開へ､流出したトークン63億ドルのうち95％を補填…FBIは北朝鮮の関与を指摘 | 政治・経済・投資 | 東洋経済オンライン</a></h3>
+  <ul class="summary"><li>暗号資産業界最大規模のハッキング被害に見舞われたバイナンスが､流出トークンの95％を補填し出金を段階的に再開する決断を発表しました。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">東洋経済オンライン</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="ビットコインのテクニカル分析：価格は77,505ドルのサポート付近で保ち合い、モメンタムはまちまち ビットコインのテクニカル分析：価格は77,505ドルのサポート付近で保ち合い、モメンタムはまちまち （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  traders union">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T06:07:36.000Z">11/1 15:07</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxORkh2eVQzSDB4a3JHN0VGQVVNbVV3eFdhRUs3STN0Q3lQMTFjZzZmblZiZHFzYThka3pDTnFkSVp4aTVEWkVuUXlNOXExSElVNi1WN2txajZGT3NITG1wWTF0OEw3Tk1CZEVrbnFCOEVQZzlpNGtHQkJzcmNObXc0RUdJQm56QUZEaTFuUmF0bXRQU2hxUVlmRUhCTjhvbzhPQ3FlOGo4Zw?oc=5" target="_blank" rel="noopener">ビットコインのテクニカル分析：価格は77,505ドルのサポート付近で保ち合い、モメンタムはまちまち</a></h3>
+  <ul class="summary"><li>ビットコインのテクニカル分析：価格は77,505ドルのサポート付近で保ち合い、モメンタムはまちまち</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Traders Union</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="personal" data-sent="neutral" data-tickers="" data-text="【70代から投資信託・100万円】年金積立金（gpif）の2001〜2025年度の収益率で試算すると、10年置けば16通りすべてで元本を上回った。5年では2通りで元本割れ (limo) 【70代から投資信託・100万円】年金積立金（gpif）の2001〜2025年度の収益率で試算すると、10年置けば16通りすべてで元本を上回った。5年では2通りで元本割れ (limo) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  yahoo!ニュース">
+  <div class="nmeta">
+    <span class="cat">資産形成・制度</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T05:40:54.000Z">11/1 14:40</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxNeDdYUllyRVBYclZkVTllSW9wY1pSNF9ZTTlUa2YwVGV2OGN6WHdjeGlrT1JQMk5fVWRxYm1QVEtwTkpVUEduM3NRMHFPT1dEMGFCeGZtdjk4anRYMy0zMkZxSDNmQTNYM0NCVkxCWDVFalBmOVk0OHZGNHVoTUVDZFpwQ3I4Z055Wm41WVhR?oc=5" target="_blank" rel="noopener">【70代から投資信託・100万円】年金積立金（GPIF）の2001〜2025年度の収益率で試算すると、10年置けば16通りすべてで元本を上回った。5年では2通りで元本割れ (LIMO)</a></h3>
+  <ul class="summary"><li>【70代から投資信託・100万円】年金積立金（GPIF）の2001〜2025年度の収益率で試算すると、10年置けば16通りすべてで元本を上回った。5年では2通りで元本割れ (LIMO)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ニュース</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="ビットコインの市場心理が「恐怖」に転換、7万5000ドル割れも視野に 執筆 ビットコインの市場心理が「恐怖」に転換、7万5000ドル割れも視野に 執筆 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  investing.com - fx | 株式市場 | ファイナンス | 金融ニュース">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T05:17:00.000Z">11/1 14:17</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE9STy10c1E4OEllU2g5OHNyU280LW4teHpoTUtpMWNZVUEzTVFpWDIxam9OUXpYd1BkTksxOS1XUGR0NmltUE8wVWpPYnh1YUpsQW5jR1oxQ0xtTnR3NEdPMEhEbmJlQnpVMXJ4Q2V5TmVCVmM?oc=5" target="_blank" rel="noopener">ビットコインの市場心理が「恐怖」に転換、7万5000ドル割れも視野に 執筆</a></h3>
+  <ul class="summary"><li>ビットコインの市場心理が「恐怖」に転換、7万5000ドル割れも視野に 執筆</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Investing.com - FX | 株式市場 | ファイナンス | 金融ニュース</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="暗号資産大手バイナンスへのサイバー攻撃 fbi“北朝鮮が関与” 暗号資産の取引所として世界的な大手の「バイナンス」が、サイバー攻撃を受けた問題で、アメリカのfbi＝連邦捜査局は北朝鮮が関与していたと発表しました。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  nhk 経済">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T02:56:00.000Z">11/1 11:56</time>
+  </div>
+  <h3><a href="https://news.web.nhk/newsweb/na/nd-20261101de69102" target="_blank" rel="noopener">暗号資産大手バイナンスへのサイバー攻撃 FBI“北朝鮮が関与”</a></h3>
+  <ul class="summary"><li>暗号資産の取引所として世界的な大手の「バイナンス」が、サイバー攻撃を受けた問題で、アメリカのFBI＝連邦捜査局は北朝鮮が関与していたと発表しました。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">NHK 経済</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="市場最新情報 1/11：金価格が急落、世界の原油価格は6カ月ぶりの高値に | newzmoney （htv） - 市場最新情報 11月1日：石油市場は地政学的緊張による圧力の中、3週連続で上昇傾向を維持しています。 newzmoneyのウェブサイトで毎日更新される詳細な金融分析記事をフォローし、毎週土曜日の午後5時30分からhtv9で放送されるnewzmoney番組をご覧ください。 この専門コンテンツは、kafi securities joint stock companyとの共同制作です。  vietnam.vn">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T02:50:30.000Z">11/1 11:50</time>
+  </div>
+  <h3><a href="https://www.vietnam.vn/ja/bat-song-thi-truong-1-11-gia-vang-lao-doc-manh-xang-dau-the-gioi-lap-dinh-6-thang-newzmoney" target="_blank" rel="noopener">市場最新情報 1/11：金価格が急落、世界の原油価格は6カ月ぶりの高値に | NewZMoney</a></h3>
+  <ul class="summary"><li>（HTV） - 市場最新情報 11月1日：石油市場は地政学的緊張による圧力の中、3週連続で上昇傾向を維持しています。</li><li>NewZMoneyのウェブサイトで毎日更新される詳細な金融分析記事をフォローし、毎週土曜日の午後5時30分からHTV9で放送されるNewZMoney番組をご覧ください。</li><li>この専門コンテンツは、Kafi Securities Joint Stock Companyとの共同制作です。</li></ul>
+  
+  <footer>
+    <span class="pub">Vietnam.vn</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="金相場価格デイリーコメント週間まとめ（10/26〜10/30）｜水野崇 金相場価格デイリーコメント週間まとめ（10/26〜10/30）｜水野崇 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  jijico">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T02:09:11.000Z">11/1 11:09</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTFAtT1kyUkd1OElsN0ZoeE9hdlpxOUVUUVBBUC1JWTRtS2NKeDI1UzhpRGNpQnVGMGdheWl0VU9JM19rVndyVE5takJBV0xQSkt1UWxtTS13QnRSd2hySzlV?oc=5" target="_blank" rel="noopener">金相場価格デイリーコメント週間まとめ（10/26〜10/30）｜水野崇</a></h3>
+  <ul class="summary"><li>金相場価格デイリーコメント週間まとめ（10/26〜10/30）｜水野崇</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">JIJICO</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="光通信 レオパレス２１買収 アパート５４万戸にサブスク 家賃収入との相乗効果狙う【モヤモヤ経済！クリアファイル】 光通信 レオパレス２１買収 アパート５４万戸にサブスク 家賃収入との相乗効果狙う【モヤモヤ経済！クリアファイル】 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  静岡新聞digital">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T02:07:00.000Z">11/1 11:07</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE82b0ZRY05sNEpKSnFqQXVPN29LaGs3Z0l3YUpBMU1wYzJJTThRZU1mdC1RMjRVY3hqZ0k2NWNNZzlGWWx0YkdHS2JFdXRVUQ?oc=5" target="_blank" rel="noopener">光通信 レオパレス２１買収 アパート５４万戸にサブスク 家賃収入との相乗効果狙う【モヤモヤ経済！クリアファイル】</a></h3>
+  <ul class="summary"><li>光通信 レオパレス２１買収 アパート５４万戸にサブスク 家賃収入との相乗効果狙う【モヤモヤ経済！クリアファイル】</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">静岡新聞DIGITAL</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="negative" data-tickers="" data-text="中東情勢の緊張高まるも金価格は急落…株価と同時下落の背景とは…1年ぶりの安値水準に…ハイテク株の損失補填で安全資産も売却 中東情勢の緊張高まるも金価格は急落…株価と同時下落の背景とは…1年ぶりの安値水準に…ハイテク株の損失補填で安全資産も売却 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  재경일보">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-11-01T01:50:07.000Z">11/1 10:50</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE9zSEJkalVvR3BjVkRsZTNiekZWb0phN3ZmaENmMmw5bVRYQlUzWGs1OFV2VWVzbE1CZ0lOTzBjNTNNLURKTEVyQm12OGw2c1pjOTh0bjlqVV9tbjFYaEIyYmpDSQ?oc=5" target="_blank" rel="noopener">中東情勢の緊張高まるも金価格は急落…株価と同時下落の背景とは…1年ぶりの安値水準に…ハイテク株の損失補填で安全資産も売却</a></h3>
+  <ul class="summary"><li>中東情勢の緊張高まるも金価格は急落…株価と同時下落の背景とは…1年ぶりの安値水準に…ハイテク株の損失補填で安全資産も売却</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">재경일보</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="personal" data-sent="neutral" data-tickers="" data-text="事業承継の相続税節税で評価方法検討 自民党内から反対論も 来年度の税制改正に向けて政府・与党は、事業を相続する際に非上場企業が株式の評価を意図的に圧縮して相続税の節税を図るケースが指摘されていることを踏まえ、評価方法のあり方を議論することにしています。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  nhk 経済">
+  <div class="nmeta">
+    <span class="cat">資産形成・制度</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T01:22:00.000Z">11/1 10:22</time>
+  </div>
+  <h3><a href="https://news.web.nhk/newsweb/na/nd-20261101de69080" target="_blank" rel="noopener">事業承継の相続税節税で評価方法検討 自民党内から反対論も</a></h3>
+  <ul class="summary"><li>来年度の税制改正に向けて政府・与党は、事業を相続する際に非上場企業が株式の評価を意図的に圧縮して相続税の節税を図るケースが指摘されていることを踏まえ、評価方法のあり方を議論することにしています。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">NHK 経済</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="週刊仮想通貨ニュース（10/30）｜バイナンス流出・btc価格予測・リップルの発表のまとめ 週刊仮想通貨ニュース（10/30）｜バイナンス流出・btc価格予測・リップルの発表のまとめ （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  coinpost">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-01T00:25:25.000Z">11/1 09:25</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiQ0FVX3lxTFB6Yy1rUWZmY1RQcjN4UmtGXzVxeTltS1NKbkhSUHptNEcyNWpUcmRFODRJNjk0blZlZ1BiVE5KdVNNYWM?oc=5" target="_blank" rel="noopener">週刊仮想通貨ニュース（10/30）｜バイナンス流出・BTC価格予測・リップルの発表のまとめ</a></h3>
+  <ul class="summary"><li>週刊仮想通貨ニュース（10/30）｜バイナンス流出・BTC価格予測・リップルの発表のまとめ</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">CoinPost</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="negative" data-tickers="" data-text="本日（11月1日）の金価格：sjcの金地金は1オンスあたり480万ベトナムドン下落。 本日（11月1日）の金価格：sjcの金地金は1オンスあたり480万ベトナムドン下落。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  vietnam.vn">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-11-01T00:17:06.000Z">11/1 09:17</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxPVURscmtZZlotbGhXdmdzbUNUU0loN0RqRnpuWm5GWVhzQ0dQNWJYS2RsRWlhSURMTC1Lcjc5aVQ0NGpTd2NDWV94bURDZ3pyMGVJRFVzNXg3RUpWSEJodVk3aURnc0NmTzVEaFV4R09OMURMYWJKUWdrSHB4RTJPaXNlV0oyeHlvMzliZ3FQblk?oc=5" target="_blank" rel="noopener">本日（11月1日）の金価格：SJCの金地金は1オンスあたり480万ベトナムドン下落。</a></h3>
+  <ul class="summary"><li>本日（11月1日）の金価格：SJCの金地金は1オンスあたり480万ベトナムドン下落。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Vietnam.vn</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="openaiが資金調達目標を100億ドル引き下げ、ai株安響く－ft紙 openaiが資金調達目標を100億ドル引き下げ、ai株安響く－ft紙 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  tbs news dig">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-10-31T23:31:00.000Z">11/1 08:31</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE9JQlhibGlMRm9fXzhvSGsyNmVvaHktRnlGUVhGMk9iRk1nMmprUUxrZWpvV29NbmZoakxUZHhjbmdkYjc1VlB6R3R3U0NFVDRkVElWMTd0Ty1EajNPaXZUQkJSNERqbnFtNGZBS2hiUmtIT1l3?oc=5" target="_blank" rel="noopener">OpenAIが資金調達目標を100億ドル引き下げ、AI株安響く－FT紙</a></h3>
+  <ul class="summary"><li>OpenAIが資金調達目標を100億ドル引き下げ、AI株安響く－FT紙</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">TBS NEWS DIG</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="negative" data-tickers="" data-text="日経平均株価は&quot;3カ月ぶり&quot;下落､モメンタム低下が続くのか 日経平均株価は&quot;3カ月ぶり&quot;下落､モメンタム低下が続くのか （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  四季報オンライン">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-10-31T23:00:00.000Z">11/1 08:00</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiV0FVX3lxTFBEWE5uOU02N3dYWVJMenRPdkJRQXFIbmRGU2hWcFVnUjd6QzV5aElJS1p0NURFZDdvYzFLQnZUdWZpX2gyOVphUmc5dlI1ME9KMmR3VE1uYw?oc=5" target="_blank" rel="noopener">日経平均株価は&quot;3カ月ぶり&quot;下落､モメンタム低下が続くのか</a></h3>
+  <ul class="summary"><li>日経平均株価は&quot;3カ月ぶり&quot;下落､モメンタム低下が続くのか</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">四季報オンライン</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="negative" data-tickers="" data-text="本日（11月1日）の金価格：急落、ここ数ヶ月で最大の下げ幅。 本日（11月1日）の金価格：急落、ここ数ヶ月で最大の下げ幅。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  vietnam.vn">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-10-31T22:45:18.000Z">11/1 07:45</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxNVkZqOVVVSlItbjZ6R0lwLU10UG0zSnVxNnF2R1U5RFZmTHlobWxtLXJFSzEwUzl6M3c5NXBTLU0ycEltZVctZkxkU0ZxUXlfd0xwVWx3d091NUl0Z3Q1UGZDeERVWUpIVHFqRHFWWXZkemdFQ3hnTy1VaVF3c0dnQTJudnl5TmNMbUtR?oc=5" target="_blank" rel="noopener">本日（11月1日）の金価格：急落、ここ数ヶ月で最大の下げ幅。</a></h3>
+  <ul class="summary"><li>本日（11月1日）の金価格：急落、ここ数ヶ月で最大の下げ幅。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Vietnam.vn</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="本日（2026年11月1日）の金価格：sjc金地金、btmc 9999プレーンリング、および世界の金価格。 本日（2026年11月1日）の金価格：sjc金地金、btmc 9999プレーンリング、および世界の金価格。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  vietnam.vn">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-10-31T22:29:31.000Z">11/1 07:29</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxQbmxwQ0xtQlNhY2k5R1l0OWdmbkVJRFhyeEhXOHJDekY5OVVQc1FEZW94dzFRV0lubFBSaV9rMzVJX3ZDLUZYWmRJQmNjM1M5NUFpSWFFNzQ4bXJXV2MzRWI4TGkwTDVVVW9odHdUa3ViLUdnWjViVzMta0ZmLU5kTDQzQlBaRDVnaDFWMWozNE03djdtY1Y0RDlyYVZxSTFmTGhsSjZuNA?oc=5" target="_blank" rel="noopener">本日（2026年11月1日）の金価格：SJC金地金、BTMC 9999プレーンリング、および世界の金価格。</a></h3>
+  <ul class="summary"><li>本日（2026年11月1日）の金価格：SJC金地金、BTMC 9999プレーンリング、および世界の金価格。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Vietnam.vn</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="来週のドル円相場はどうなる？11/2週のイベント予定 2026年11月1日 来週のドル円相場はどうなる？11/2週のイベント予定 2026年11月1日 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  外為どっとコム">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-10-31T22:00:19.000Z">11/1 07:00</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE1qOEtTbXJrVHVtbXdMRVVYcXYzVmZDYWM1bXNDUXljMWVCRHR3M2RDMk1qQVZtX3A5b2gyM0x1OVFrdGtyRDBTNFpJd3lTSkRmcE5CMlFTN0VkUXR0OURMYWNRQQ?oc=5" target="_blank" rel="noopener">来週のドル円相場はどうなる？11/2週のイベント予定 2026年11月1日</a></h3>
+  <ul class="summary"><li>来週のドル円相場はどうなる？11/2週のイベント予定 2026年11月1日</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">外為どっとコム</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="g20外相会合閉幕 茂木外相“サプライチェーンでもg20協調を” アメリカで開かれたg20＝主要20か国の外相会合が閉幕しました。 茂木外務大臣は最後の討議で、中国を念頭に市場原理に基づかない過剰生産がサプライチェーンをぜい弱なものにしているなどと指摘し、g20の協… （自動要約なし。原文を参照してください）  nhk 経済">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-10-31T21:53:08.000Z">11/1 06:53</time>
+  </div>
+  <h3><a href="https://news.web.nhk/newsweb/na/nd-20261101de69059" target="_blank" rel="noopener">G20外相会合閉幕 茂木外相“サプライチェーンでもG20協調を”</a></h3>
+  <ul class="summary"><li>アメリカで開かれたG20＝主要20か国の外相会合が閉幕しました。</li><li>茂木外務大臣は最後の討議で、中国を念頭に市場原理に基づかない過剰生産がサプライチェーンをぜい弱なものにしているなどと指摘し、G20の協…</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">NHK 経済</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="macro" data-sent="negative" data-tickers="" data-text="豪ドル/円 見通し「利上げか据え置きか...3日に政策金利発表」注目の高金利通貨 11月1日号 メキシコペソや豪ドルなど投資家にとって魅力的な通貨の最新状況について、これまでの動向や注目ポイントについて解説します。 26日に110.70円台まで、27日に111.00円台まで、28日には豪7-9月期消費者物価指数（cpi）・トリム平均の上振れもあって111.50円台までと、順調に上値を切り上げ29日には9月24日以来の高値となる111.56円前後を付けま 米ai・半導体関連の株価が崩れる中、ny市場で111円台を割り込んで反落すると、30日の東京市場では一時110.30円台まで下落して週前半の上昇をほぼ吐き出す場面もありました。  外為どっとコム">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-10-31T20:59:58.000Z">11/1 05:59</time>
+  </div>
+  <h3><a href="https://www.gaitame.com/media/entry/2026/11/01/060000_1" target="_blank" rel="noopener">豪ドル/円 見通し「利上げか据え置きか...3日に政策金利発表」注目の高金利通貨 11月1日号</a></h3>
+  <ul class="summary"><li>メキシコペソや豪ドルなど投資家にとって魅力的な通貨の最新状況について、これまでの動向や注目ポイントについて解説します。</li><li>26日に110.70円台まで、27日に111.00円台まで、28日には豪7-9月期消費者物価指数（CPI）・トリム平均の上振れもあって111.50円台までと、順調に上値を切り上げ29日には9月24日以来の高値となる111.56円前後を付けま</li><li>米AI・半導体関連の株価が崩れる中、NY市場で111円台を割り込んで反落すると、30日の東京市場では一時110.30円台まで下落して週前半の上昇をほぼ吐き出す場面もありました。</li></ul>
+  
+  <footer>
+    <span class="pub">外為どっとコム</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="ビットコイン 価格 10月終値7万7000ドル近く ビットコイン 価格 10月終値7万7000ドル近く （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  financefeeds">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-10-31T20:40:14.000Z">11/1 05:40</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE51TmNadm9aMXlkTlBrSmlPZ29OUTlRajhFazlIczNQT3JzclJOd1dTQjlDcnl2QjhHemxZZDdHVGY0TnpXSGdlUWUzRUtjaDExa0w4ckhRaE5wMEhZRGpZZG1hekEzZ0ZqUmRLbW50c2ttb2lJenc?oc=5" target="_blank" rel="noopener">ビットコイン 価格 10月終値7万7000ドル近く</a></h3>
+  <ul class="summary"><li>ビットコイン 価格 10月終値7万7000ドル近く</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">FinanceFeeds</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="gmo 子会社が2年前にシステムのぜい弱性を指摘 社長あす会見へ gmoインターネットグループの為替取引に関するサービスが不正アクセスを受けた問題で、2年前に子会社のセキュリティー企業がシステムのぜい弱性を指摘していたことが関係者への取材でわかりました。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  nhk 経済">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-10-31T20:09:00.000Z">11/1 05:09</time>
+  </div>
+  <h3><a href="https://news.web.nhk/newsweb/na/nd-20261031de69037" target="_blank" rel="noopener">GMO 子会社が2年前にシステムのぜい弱性を指摘 社長あす会見へ</a></h3>
+  <ul class="summary"><li>GMOインターネットグループの為替取引に関するサービスが不正アクセスを受けた問題で、2年前に子会社のセキュリティー企業がシステムのぜい弱性を指摘していたことが関係者への取材でわかりました。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">NHK 経済</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="negative" data-tickers="" data-text="中国、aiバブルで4800億ドル消失 star50指数が40%下落 中国、aiバブルで4800億ドル消失 star50指数が40%下落 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-10-31T19:05:00.000Z">11/1 04:05</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE1xeVJ3cHRqYTl0cEFLb0twV1E3RmhrRkxrWlZQbDRFSjhtdFhEYnBfNGFyTkg2bW1KRlVrVVFZSm9wdUdJdFJ3V3FNQ3kwRmZNZHc4eHpTbFRlTXpsZ0hhRkhOcEo5Z1dMc1hqOTRiUG9xbFQ1?oc=5" target="_blank" rel="noopener">中国、AIバブルで4800億ドル消失 STAR50指数が40%下落</a></h3>
+  <ul class="summary"><li>中国、AIバブルで4800億ドル消失 STAR50指数が40%下落</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="macro" data-sent="negative" data-tickers="" data-text="米国中間選挙・雇用統計・大手ハイテク決算が集中、ai懸念と重なる正念場の一週間 米国中間選挙・雇用統計・大手ハイテク決算が集中、ai懸念と重なる正念場の一週間 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-10-31T18:35:00.000Z">11/1 03:35</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE5mM3JSTXRuX2Jwb09teWRweVhlWVdBcXdlOWh0Yk90VlhGSzAwZEJaT25TYmhxWldGWGhFUkV5TENkRzR2ODRSal82UXlsakhyOU9yUERBTHBzZUl2elNiV1RLNVEtRFFvSHYxSHlaNnZwQzE3?oc=5" target="_blank" rel="noopener">米国中間選挙・雇用統計・大手ハイテク決算が集中、AI懸念と重なる正念場の一週間</a></h3>
+  <ul class="summary"><li>米国中間選挙・雇用統計・大手ハイテク決算が集中、AI懸念と重なる正念場の一週間</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="2009年の米国m2マネーサプライで調整したbtc価格は27,663ドルとジェイムソン・ロップ氏が指摘 2009年の米国m2マネーサプライで調整したbtc価格は27,663ドルとジェイムソン・ロップ氏が指摘 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  traders union">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-10-31T17:25:28.000Z">11/1 02:25</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxQd1N4V3dzMTFWbzBMNmxnWmlqUnVYZDRobzFhRGxhek9wN0NqOTQ3dl9IOUIwZkpSNlZ4OHhSSXFlME1EUG9EcU0tT1V2OHVIQko2Q1AzV3gzVENBUS1ROFJjWldCYnVHeUJwTmxUdWpORU1aekREaERXZFY0ZjdweXR3MA?oc=5" target="_blank" rel="noopener">2009年の米国M2マネーサプライで調整したBTC価格は27,663ドルとジェイムソン・ロップ氏が指摘</a></h3>
+  <ul class="summary"><li>2009年の米国M2マネーサプライで調整したBTC価格は27,663ドルとジェイムソン・ロップ氏が指摘</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Traders Union</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="セイラー氏、戦略で300億ドルのデジタルクレジットを創出しビットコイン追加購入が可能と発言 セイラー氏、戦略で300億ドルのデジタルクレジットを創出しビットコイン追加購入が可能と発言 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-10-31T15:05:00.000Z">11/1 00:05</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE5zVWRldE9fWHMtOE1Va1NLb215TXdOTjFQRHBKNWZzbm5sQ0tQMWFzUTVEeUZBYlNKc2NqOFlucmtIVFU0Xzc1RVE2aGRkV0FsTlliWjJyNzNLVXVvUTZQSFlHMDdHS19UR1gzZ1U1QlcwVl9f?oc=5" target="_blank" rel="noopener">セイラー氏、戦略で300億ドルのデジタルクレジットを創出しビットコイン追加購入が可能と発言</a></h3>
+  <ul class="summary"><li>セイラー氏、戦略で300億ドルのデジタルクレジットを創出しビットコイン追加購入が可能と発言</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+    <p class="empty-note" hidden>該当するニュースはありません</p>
+  </div>
+</section>
+<p><a href="../archive.html">← 日付の一覧へ</a></p>
+</main>
+<footer class="wrap foot">
+  <p class="disclaimer">このページは公開情報を自動で集めて要約したものです。投資の勧誘や売買の推奨を目的としたものではありません。価格は遅延しており、要約には誤りが含まれることがあります。投資判断は必ず原文と一次情報を確認のうえ、ご自身の責任で行ってください。</p>
+  <p>要約: 本文からの自動抽出（Claude 未使用） ／ 価格データ: Yahoo Finance（予備: Stooq）／ 情報源 26 / 26 件から取得</p>
+</footer>
+<script>
+(() => {
+  const fmt = (v, d) => v.toLocaleString('ja-JP', { minimumFractionDigits: d, maximumFractionDigits: d })
+  for (const el of document.querySelectorAll('.spark[data-pts]')) {
+    let pts
+    try { pts = JSON.parse(el.dataset.pts) } catch { continue }
+    const d = Number(el.dataset.digits || 2)
+    const svg = el.querySelector('svg')
+    const vb = svg.viewBox.baseVal
+    const vals = pts.map((p) => p[1])
+    const min = Math.min(...vals), max = Math.max(...vals), span = (max - min) || 1
+    const cross = el.querySelector('.cross'), dot = el.querySelector('.dot'), tip = el.querySelector('.tip')
+    const move = (clientX) => {
+      const r = svg.getBoundingClientRect()
+      const ratio = Math.min(1, Math.max(0, (clientX - r.left) / r.width))
+      const i = Math.round(ratio * (pts.length - 1))
+      const x = (i / (pts.length - 1)) * vb.width
+      const y = 3 + (1 - (pts[i][1] - min) / span) * (vb.height - 6)
+      cross.setAttribute('x1', x); cross.setAttribute('x2', x)
+      dot.setAttribute('cx', x); dot.setAttribute('cy', y)
+      tip.textContent = pts[i][0] + '  ' + fmt(pts[i][1], d)
+      tip.style.left = (i / (pts.length - 1)) * 100 + '%'
+      tip.hidden = false
+      el.classList.add('hover')
+    }
+    const leave = () => { tip.hidden = true; el.classList.remove('hover') }
+    el.addEventListener('pointermove', (e) => move(e.clientX))
+    el.addEventListener('pointerleave', leave)
+  }
+
+  const list = document.querySelector('[data-news]')
+  if (!list) return
+  const items = [...list.querySelectorAll('.news')]
+  const state = { cat: '', sent: '', ticker: '', key: false, q: '' }
+  const countEl = document.querySelector('.filters .count')
+  const empty = list.querySelector('.empty-note')
+  const apply = () => {
+    const q = state.q.trim().toLowerCase()
+    let shown = 0
+    for (const it of items) {
+      const ok = (!state.cat || it.dataset.cat === state.cat)
+        && (!state.sent || it.dataset.sent === state.sent)
+        && (!state.ticker || it.dataset.tickers.split(' ').includes(state.ticker))
+        && (!state.key || it.classList.contains('key'))
+        && (!q || it.dataset.text.includes(q))
+      it.hidden = !ok
+      if (ok) shown++
+    }
+    if (countEl) countEl.textContent = shown + ' / ' + items.length + ' 件を表示'
+    if (empty) empty.hidden = shown > 0
+  }
+  for (const chip of document.querySelectorAll('.chips[data-group=cat] .chip')) {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.chips[data-group=cat] .chip').forEach((c) => c.classList.toggle('on', c === chip))
+      state.cat = chip.dataset.value
+      apply()
+    })
+  }
+  const sent = document.querySelector('select[data-group=sent]')
+  const ticker = document.querySelector('select[data-group=ticker]')
+  const key = document.querySelector('input[data-group=key]')
+  const q = document.querySelector('input[data-group=q]')
+  sent && sent.addEventListener('change', () => { state.sent = sent.value; apply() })
+  ticker && ticker.addEventListener('change', () => { state.ticker = ticker.value; apply() })
+  key && key.addEventListener('change', () => { state.key = key.checked; apply() })
+  q && q.addEventListener('input', () => { state.q = q.value; apply() })
+  for (const btn of document.querySelectorAll('[data-filter-ticker]')) {
+    btn.addEventListener('click', () => {
+      if (ticker) ticker.value = btn.dataset.filterTicker
+      state.ticker = btn.dataset.filterTicker
+      apply()
+      document.getElementById('news').scrollIntoView({ behavior: 'smooth' })
+    })
+  }
+  apply()
+})()
+</script>
+</body>
+</html>
