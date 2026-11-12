@@ -1,0 +1,2959 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>2026-11-12 | 投資情報ウォッチ</title>
+<meta name="description" content="主要マーケットの値動きと、投資判断に関わるニュースを毎日まとめる">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%232a78d6%22%2F%3E%3Cpath%20d%3D%22M6%2022l6-7%205%204%209-10%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f6f6f3; --surface: #ffffff; --surface-2: #f0efea; --line: #e2e0d8;
+  --ink: #16161a; --ink-2: #4d4c48; --muted: #7a7872;
+  --accent: #2a78d6; --accent-soft: #e5effb;
+  --up: #d23a2e; --down: #1f63c7;
+  --key: #b26b00; --key-soft: #fff4de;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111113; --surface: #1a1a1d; --surface-2: #232327; --line: #2f2f34;
+    --ink: #f2f2ef; --ink-2: #c3c2b7; --muted: #8d8c86;
+    --accent: #5a9bea; --accent-soft: #1b2a3d;
+    --up: #ff6b5e; --down: #6aa4ff;
+    --key: #f0b24a; --key-soft: #2e2415;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111113; --surface: #1a1a1d; --surface-2: #232327; --line: #2f2f34;
+  --ink: #f2f2ef; --ink-2: #c3c2b7; --muted: #8d8c86;
+  --accent: #5a9bea; --accent-soft: #1b2a3d;
+  --up: #ff6b5e; --down: #6aa4ff;
+  --key: #f0b24a; --key-soft: #2e2415;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 15px/1.7 system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", Meiryo, sans-serif;
+  font-feature-settings: "palt";
+}
+a { color: inherit; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+.muted { color: var(--muted); }
+.up { color: var(--up); } .down { color: var(--down); } .flat { color: var(--muted); }
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.top { background: var(--surface); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; justify-content: space-between; padding-top: 18px; padding-bottom: 14px; }
+.top h1 { margin: 0; font-size: 22px; letter-spacing: .02em; }
+.top h1 a { text-decoration: none; }
+.top .sub { margin: 2px 0 0; color: var(--ink-2); font-size: 13px; }
+.top nav { display: flex; gap: 16px; font-size: 14px; }
+.top nav a { color: var(--ink-2); text-decoration: none; }
+.top nav a[aria-current] { color: var(--ink); font-weight: 700; }
+.updated { font-size: 12px; color: var(--muted); }
+
+section { margin: 28px 0; }
+section > h2 { font-size: 17px; margin: 0 0 12px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+section > h2 > small { flex: 1 1 14em; }
+section > h2 small { font-weight: 400; font-size: 12px; color: var(--muted); }
+
+.mgroup + .mgroup { margin-top: 16px; }
+.glabel { font-size: 12px; color: var(--muted); font-weight: 600; margin: 0 0 6px; letter-spacing: .08em; }
+.mgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.mcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; min-width: 0; }
+.mcard header { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.mcard h3 { margin: 0; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.mcard h3 small { color: var(--muted); font-weight: 400; }
+.mcard .asof { font-size: 11px; color: var(--muted); white-space: nowrap; }
+.mcard .price { margin: 4px 0 0; font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.25; }
+.unit { font-size: 12px; font-weight: 400; color: var(--muted); margin-left: 3px; }
+.mcard .chg { margin: 0 0 6px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.mcard .abs { color: var(--ink-2); font-weight: 400; font-size: 13px; margin-left: 4px; }
+.mcard.stale { border-style: dashed; }
+.mcard.failed .note { color: var(--muted); font-size: 13px; margin: 0; }
+.periods { display: grid; grid-template-columns: repeat(3, 1fr); margin: 8px 0 0; font-size: 12px; }
+.periods div { text-align: center; }
+.periods dt { color: var(--muted); }
+.periods dd { margin: 0; font-variant-numeric: tabular-nums; }
+.range { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.range-track { position: relative; flex: 1; height: 4px; border-radius: 2px; background: var(--surface-2); }
+.range-mark { position: absolute; top: -3px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--ink); border: 2px solid var(--surface); }
+
+.spark { position: relative; height: 48px; }
+.spark-cell .spark { height: 32px; width: 120px; }
+.spark svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.spark .line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; stroke: var(--muted); }
+.spark .area { fill: var(--muted); opacity: .08; stroke: none; }
+.spark.up .line { stroke: var(--up); } .spark.up .area { fill: var(--up); }
+.spark.down .line { stroke: var(--down); } .spark.down .area { fill: var(--down); }
+.spark .cross { stroke: var(--ink-2); stroke-width: 1; opacity: 0; }
+.spark .dot { fill: var(--ink); stroke: var(--surface); stroke-width: 2; opacity: 0; }
+.spark.hover .cross, .spark.hover .dot { opacity: 1; }
+.spark .tip { position: absolute; bottom: -26px; transform: translateX(-50%); background: var(--ink); color: var(--bg); font-size: 11px; padding: 2px 7px; border-radius: 6px; white-space: nowrap; pointer-events: none; z-index: 2; font-variant-numeric: tabular-nums; }
+.spark.empty { font-size: 12px; color: var(--muted); display: flex; align-items: center; }
+
+.digest { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius); padding: 14px 18px; }
+.digest ol { margin: 0; padding-left: 1.4em; }
+.digest li + li { margin-top: 6px; }
+
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+table.watch { width: 100%; border-collapse: collapse; font-size: 14px; }
+.watch th, .watch td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+.watch thead th { font-size: 12px; color: var(--muted); font-weight: 600; background: var(--surface-2); }
+.watch th.num, .watch td.num { text-align: right; }
+.watch tbody tr:last-child > * { border-bottom: 0; }
+.wname { display: block; font-weight: 600; min-width: 7.5em; }
+.wcode { font-size: 12px; color: var(--muted); font-weight: 400; }
+.wnews { min-width: 220px; font-size: 13px; }
+.wnews a { color: var(--ink-2); }
+.stale-tag { margin-left: 6px; font-size: 11px; color: var(--muted); border: 1px dashed var(--line); padding: 0 4px; border-radius: 4px; }
+.linkish { font: inherit; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 24px; align-items: start; }
+.side > * + * { margin-top: 16px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; }
+.panel h3 { margin: 0 0 10px; font-size: 14px; }
+
+.filters { position: sticky; top: 0; z-index: 3; background: var(--bg); padding: 8px 0 6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: inherit; font-size: 13px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); border-radius: 999px; padding: 3px 12px; cursor: pointer; min-height: 32px; }
+.chip .n { color: var(--muted); font-variant-numeric: tabular-nums; }
+.chip.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip.on .n { color: inherit; opacity: .7; }
+.row2 { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-top: 8px; font-size: 13px; color: var(--ink-2); }
+.row2 select, .row2 input[type=search] { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; min-height: 32px; }
+.row2 input[type=search] { flex: 1; min-width: 160px; }
+.count { margin: 6px 0 0; font-size: 12px; color: var(--muted); }
+
+.news { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; margin-top: 10px; }
+.news.key { border-left: 4px solid var(--key); }
+.nmeta { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; font-size: 12px; color: var(--muted); }
+.cat { color: var(--ink-2); font-weight: 600; }
+.sent { font-weight: 600; }
+.sent-positive { color: var(--up); } .sent-negative { color: var(--down); } .sent-neutral { color: var(--muted); }
+.imp { color: var(--key); font-weight: 700; }
+.nmeta time { margin-left: auto; font-variant-numeric: tabular-nums; }
+.news h3 { margin: 6px 0 6px; font-size: 16px; line-height: 1.5; }
+.news h3 a { text-decoration: none; }
+.news h3 a:hover { text-decoration: underline; }
+.summary { margin: 0; padding-left: 1.2em; color: var(--ink-2); font-size: 14px; }
+.impact { margin: 8px 0 0; font-size: 13px; background: var(--surface-2); border-radius: 6px; padding: 6px 10px; }
+.impact b { font-size: 11px; color: var(--muted); margin-right: 8px; }
+.news footer { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 10px; font-size: 12px; }
+.pub { color: var(--ink-2); margin-right: 4px; }
+.tag { border: 1px solid var(--line); border-radius: 999px; padding: 0 8px; color: var(--ink-2); }
+.tag.watch { background: var(--accent-soft); border-color: transparent; color: var(--ink); }
+.tag.auto { border-style: dashed; color: var(--muted); }
+.empty-note { text-align: center; color: var(--muted); padding: 30px 0; }
+
+.bars { display: grid; gap: 6px; font-size: 12px; }
+.bar-row { display: grid; grid-template-columns: 7.5em 1fr 2em; gap: 8px; align-items: center; }
+.bar-lab { color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-track { height: 10px; }
+.bar-fill { display: block; height: 100%; background: var(--accent); border-radius: 0 4px 4px 0; min-width: 2px; }
+.bar-n { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+
+details.status summary { cursor: pointer; font-size: 13px; color: var(--ink-2); }
+details.status ul { list-style: none; padding: 0; margin: 8px 0 0; font-size: 12px; }
+details.status li { padding: 2px 0; overflow-wrap: anywhere; }
+details.status li.ok span:first-child { color: var(--accent); }
+details.status li.ng span:first-child { color: var(--down); }
+
+.days { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.days a { display: flex; justify-content: space-between; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; text-decoration: none; font-variant-numeric: tabular-nums; }
+
+.foot { border-top: 1px solid var(--line); margin-top: 40px; padding: 20px 0 40px; font-size: 12px; color: var(--muted); }
+.foot p { margin: 4px 0; }
+.disclaimer { background: var(--surface-2); border-radius: 8px; padding: 10px 12px; color: var(--ink-2); }
+
+@media (max-width: 900px) {
+  .cols { grid-template-columns: 1fr; }
+  .side { order: -1; }
+}
+@media (max-width: 640px) {
+  .hide-sm { display: none; }
+  .mgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .mcard { padding: 10px; }
+  .mcard .price { font-size: 19px; }
+  .mcard header { flex-direction: column; gap: 0; }
+  .range-lab { display: none; }
+  .periods { font-size: 11px; gap: 2px; letter-spacing: -.02em; }
+  .watch th, .watch td { padding: 8px; }
+  .wnews { min-width: 180px; }
+  .nmeta time { margin-left: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .news, .mcard { transition: border-color .15s; }
+}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <div>
+    <h1><a href="../index.html">投資情報ウォッチ</a></h1>
+    <p class="sub">主要マーケットの値動きと、投資判断に関わるニュースを毎日まとめる</p>
+  </div>
+  <div>
+    <nav aria-label="ページ">
+      <a href="../index.html">今日</a>
+      <a href="../archive.html" aria-current="page">過去のニュース</a>
+    </nav>
+    <div class="updated">最終更新 2026年11月12日(木) 12:21</div>
+  </div>
+</div></header>
+<main class="wrap">
+<section id="news">
+  <h2>2026-11-12 のニュース <small>165件</small></h2>
+  <div class="filters" role="group" aria-label="ニュースの絞り込み">
+  <div class="chips" data-group="cat">
+    <button type="button" class="chip on" data-value="">すべて <span class="n">165</span></button>
+    <button type="button" class="chip" data-value="macro" title="日銀・FRB・ECBの政策、金利見通し、物価、雇用、GDP、景気指標">金融政策・景気 <span class="n">15</span></button><button type="button" class="chip" data-value="jpstock" title="国内企業の決算・業績修正、TOB・M&amp;A、株主還元、新規上場、日本株の相場">日本株・企業 <span class="n">103</span></button><button type="button" class="chip" data-value="global" title="米国株・欧州・中国市場の相場、海外企業の決算、地政学が市場に与える影響">米国・海外市場 <span class="n">18</span></button><button type="button" class="chip" data-value="fx" title="円相場、介入、国債利回り、債券市場">為替・債券 <span class="n">21</span></button><button type="button" class="chip" data-value="commodity" title="原油・金などの商品、ビットコインなど暗号資産">商品・暗号資産 <span class="n">8</span></button><button type="button" class="chip" data-value="personal" title="新NISA・iDeCo・税制・金融庁の制度変更、投資信託、個人投資家の動向">資産形成・制度 <span class="n">0</span></button>
+  </div>
+  <div class="row2">
+    <label>向き <select data-group="sent">
+      <option value="">すべて</option><option value="positive">▲ 追い風</option><option value="negative">▼ 向かい風</option><option value="neutral">－ 中立</option>
+    </select></label>
+    <label>銘柄 <select data-group="ticker">
+      <option value="">すべて</option><option value="7203">トヨタ自動車</option><option value="6758">ソニーグループ</option><option value="NVDA">エヌビディア</option><option value="AAPL">アップル</option>
+    </select></label>
+    <label class="only-key"><input type="checkbox" data-group="key"> 注目のみ</label>
+    <input type="search" data-group="q" placeholder="キーワードで検索" aria-label="キーワードで検索">
+  </div>
+  <p class="count" aria-live="polite"></p>
+</div>
+  <div data-news>
+    <article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア報道で一時マイナス圏も持ち直す／後場の投資戦略(フィスコ) エヌビディア報道で一時マイナス圏も持ち直す／後場の投資戦略(フィスコ) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T03:13:39.000Z">11/12 12:13</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxQT3d6a3BORDVPdFBoRkx0eGFQQ0k2YVhoc09GLWNlcUU5T1otRW9mVDA0b0M3OHU1Q1ZtOUt3WTQtLWNKMWNkY3VHMEhWOHZzRlhRMlc4VkF3QWJVZHU2OWQxWS1Dc2tLNlhZUkFaQnE5emxLLTVrODc1MVFRWUtkOWdsSFA5Slk?oc=5" target="_blank" rel="noopener">エヌビディア報道で一時マイナス圏も持ち直す／後場の投資戦略(フィスコ)</a></h3>
+  <ul class="summary"><li>エヌビディア報道で一時マイナス圏も持ち直す／後場の投資戦略(フィスコ)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="午前の日経平均は続伸、米ａｉ株高を好感 エヌビディア関連の下げが上値抑制(ロイター) 午前の日経平均は続伸、米ａｉ株高を好感 エヌビディア関連の下げが上値抑制(ロイター) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T03:13:14.000Z">11/12 12:13</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxOYUNPdjZTalQ5YjdIQ1VXdzQ5S25oeGNFTlRNYWM5U0ZmZlMwVWJRMTRiMkhGOHYxMWFyVWtjdVRWbmNKalhpaHRoY05XSGh2T19zbnVNVWtES1d5RklENGtnUkNhMnJPOW5CLVBXWXltYlJPRzN4Zzg1V1NoUXBGODFhTXM2SXM?oc=5" target="_blank" rel="noopener">午前の日経平均は続伸、米ＡＩ株高を好感 エヌビディア関連の下げが上値抑制(ロイター)</a></h3>
+  <ul class="summary"><li>午前の日経平均は続伸、米ＡＩ株高を好感 エヌビディア関連の下げが上値抑制(ロイター)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="午前の日経平均は続伸、米ａｉ株高を好感 エヌビディア関連の下げが上値抑制 午前の日経平均は続伸、米ａｉ株高を好感 エヌビディア関連の下げが上値抑制 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア ニューズウィーク日本版">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T03:13:00.000Z">11/12 12:13</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE4zWnV0VDh4Zi1YZ3pDcUM4Q0RWNTNjaDJtdERTblNDOVNIOHg4bmlGYWd6UWNhSTUwLTcxU0doVXRaX0dWbFFOWnY2T21yUEloQUZuY3F5TFNodw?oc=5" target="_blank" rel="noopener">午前の日経平均は続伸、米ＡＩ株高を好感 エヌビディア関連の下げが上値抑制</a></h3>
+  <ul class="summary"><li>午前の日経平均は続伸、米ＡＩ株高を好感 エヌビディア関連の下げが上値抑制</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">ニューズウィーク日本版</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="日経平均は続伸、エヌビディア報道で一時マイナス圏も持ち直す／ランチタイムコメント(フィスコ) 日経平均は続伸、エヌビディア報道で一時マイナス圏も持ち直す／ランチタイムコメント(フィスコ) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T03:09:39.000Z">11/12 12:09</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxNRlA0NngwVDlTQy1qRWNEdkcxZVBzMEZ2YWkyal9tTlRUcVl6OHRaQ2tfYW1FMTNmdzg0T2ViX2VENXQ3WnIzaWEtVDJSN1BSdThuZVV2NEtwSjZhVHc4Wi0tVDJwUmF1UEFGN0tQWUliWWktUjdxVEJrYTBVYVM3eHZ3RUQzTkU?oc=5" target="_blank" rel="noopener">日経平均は続伸、エヌビディア報道で一時マイナス圏も持ち直す／ランチタイムコメント(フィスコ)</a></h3>
+  <ul class="summary"><li>日経平均は続伸、エヌビディア報道で一時マイナス圏も持ち直す／ランチタイムコメント(フィスコ)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="" data-text="【決算速報】ｄｉｃ、今期経常を34％上方修正・最高益予想を上乗せ(株探ニュース) ｄｉｃ 4631 &gt; [東証ｐ] が11月12日昼(12:00)に決算を発表。 併せて、通期の同利益を従来予想の730億円→980億円(前期は442億円)に34.2％上方修正し、増益率が65.0％増→2.2倍に拡大し、従来の9期ぶりの過去最高益予想をさらに上乗せした。 会社側が発表した上方修正後の通期計画に基づいて、当社が試算した7-12月期(下期)の連結経常利益も従来予想の206億円→456億円(前年同期は239億円)に2.2倍増額し、一転して90.7％増益計算になる。  yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T03:01:07.000Z">11/12 12:01</time>
+  </div>
+  <h3><a href="https://finance.yahoo.co.jp/news/detail/30db393c999d74fc83f516c9432081835bce1904" target="_blank" rel="noopener">【決算速報】ＤＩＣ、今期経常を34％上方修正・最高益予想を上乗せ(株探ニュース)</a></h3>
+  <ul class="summary"><li>ＤＩＣ 4631 &gt; [東証Ｐ] が11月12日昼(12:00)に決算を発表。</li><li>併せて、通期の同利益を従来予想の730億円→980億円(前期は442億円)に34.2％上方修正し、増益率が65.0％増→2.2倍に拡大し、従来の9期ぶりの過去最高益予想をさらに上乗せした。</li><li>会社側が発表した上方修正後の通期計画に基づいて、当社が試算した7-12月期(下期)の連結経常利益も従来予想の206億円→456億円(前年同期は239億円)に2.2倍増額し、一転して90.7％増益計算になる。</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="株価指数先物【昼】 エヌビディアの時間外急落でショートが入るも持ち直す 株価指数先物【昼】 エヌビディアの時間外急落でショートが入るも持ち直す （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 株探">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:50:59.000Z">11/12 11:50</time>
+  </div>
+  <h3><a href="https://kabutan.jp/news/marketnews/?b=n202611120524" target="_blank" rel="noopener">株価指数先物【昼】 エヌビディアの時間外急落でショートが入るも持ち直す</a></h3>
+  <ul class="summary"><li>株価指数先物【昼】 エヌビディアの時間外急落でショートが入るも持ち直す</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">株探</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="" data-text="ユニオンツール---ai関連需要が業績を牽引、通期予想を上方修正し過去最高益へ(フィスコ) ユニオンツール---ai関連需要が業績を牽引、通期予想を上方修正し過去最高益へ 11日に発表した2026年12月期第3四半期累計（1～9月）決算は、売上高が前年同期比54.7％増の... 11/12(木) 11:48 最終更新  yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:48:08.000Z">11/12 11:48</time>
+  </div>
+  <h3><a href="https://finance.yahoo.co.jp/news/detail/41ba45cdcec864308b09f1d065524242d67a23c7" target="_blank" rel="noopener">ユニオンツール---AI関連需要が業績を牽引、通期予想を上方修正し過去最高益へ(フィスコ)</a></h3>
+  <ul class="summary"><li>ユニオンツール---AI関連需要が業績を牽引、通期予想を上方修正し過去最高益へ</li><li>11日に発表した2026年12月期第3四半期累計（1～9月）決算は、売上高が前年同期比54.7％増の...</li><li>11/12(木) 11:48 最終更新</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="" data-text="ユニオンツール---ai関連需要が業績を牽引、通期予想を上方修正し過去最高益へ *11:48jst ユニオンツール 12400 +630 11日に発表した2026年12月期第3四半期累計（1～9月）決算は、売上高が前年同期比54.7％増の433億3000万円、営業利益は同105.3％増の135億8100万円だった。 通期営業利益予想を168億円から190億円に上方修正し、過去最高益を見込む。  47news">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:48:08.000Z">11/12 11:48</time>
+  </div>
+  <h3><a href="https://www.47news.jp/15218829.html" target="_blank" rel="noopener">ユニオンツール---AI関連需要が業績を牽引、通期予想を上方修正し過去最高益へ</a></h3>
+  <ul class="summary"><li>*11:48JST ユニオンツール 12400 +630</li><li>11日に発表した2026年12月期第3四半期累計（1～9月）決算は、売上高が前年同期比54.7％増の433億3000万円、営業利益は同105.3％増の135億8100万円だった。</li><li>通期営業利益予想を168億円から190億円に上方修正し、過去最高益を見込む。</li></ul>
+  
+  <footer>
+    <span class="pub">47NEWS</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="ai相場が一夜で急変：ジェンスン・フアン氏、取締役会による退任要求の噂でエヌビディアが時間外で8％超下落 ai相場が一夜で急変：ジェンスン・フアン氏、取締役会による退任要求の噂でエヌビディアが時間外で8％超下落 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:45:00.000Z">11/12 11:45</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTFBpM2dkS1RNZnFpRi1ISVp1cmY0N1hISS02Nmc5TU1lS0FjcHFVV1hGNE1DdHhUbzNuYmd3VGt1aTFjaVVUNlZvNXZBM1o1V1B4N0tNTzZ2cUdoQTItY3pQb01WVm15UDhfVmR3Q25FSzVRQkZT?oc=5" target="_blank" rel="noopener">AI相場が一夜で急変：ジェンスン・フアン氏、取締役会による退任要求の噂でエヌビディアが時間外で8％超下落</a></h3>
+  <ul class="summary"><li>AI相場が一夜で急変：ジェンスン・フアン氏、取締役会による退任要求の噂でエヌビディアが時間外で8％超下落</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="" data-text="dic、通期営業益1000億円に上方修正 ai半導体材料好調、過去最高益へ 政治・経済・テクノロジーなどの知りたい情報をお届け dic（4631）が2026年11月12日に発表した2026年12月期第3四半期決算（1～9月期）は、売上高が前年同期比13.9％増の8953億20百万円、営業利益が96.5％増の795億24百万円となり、第3四半期累計として過去最高益を更 営業利益は780億円から1000億円（同28.2％増）へ220億円、経常利益は730億円から980億円（同34.2％増）へ250億円、親会社株主に帰属する当期純利益は480億円から580億円（同20.8％増）へ100億円それぞれ上方修正して  エコノミックニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:42:00.000Z">11/12 11:42</time>
+  </div>
+  <h3><a href="http://economic.jp/?p=121607" target="_blank" rel="noopener">DIC、通期営業益1000億円に上方修正 AI半導体材料好調、過去最高益へ</a></h3>
+  <ul class="summary"><li>政治・経済・テクノロジーなどの知りたい情報をお届け</li><li>DIC（4631）が2026年11月12日に発表した2026年12月期第3四半期決算（1～9月期）は、売上高が前年同期比13.9％増の8953億20百万円、営業利益が96.5％増の795億24百万円となり、第3四半期累計として過去最高益を更</li><li>営業利益は780億円から1000億円（同28.2％増）へ220億円、経常利益は730億円から980億円（同34.2％増）へ250億円、親会社株主に帰属する当期純利益は480億円から580億円（同20.8％増）へ100億円それぞれ上方修正して</li></ul>
+  
+  <footer>
+    <span class="pub">エコノミックニュース</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="positive" data-tickers="NVDA" data-text="エヌビディア下落止まる、coreweave好決算も 台湾株は朝方に325ポイント急落、tsmcは10元下落 米国株は水曜日（11日）、クラウドコンピューティング新興企業coreweaveの好決算とエヌビディア（nvidia）株の下落止まり・持ち直しに支えられ全面高となり、フィラデルフィア半導体指数は5.66%急騰した。 ダウ工業株30種平均は254.60ポイント（0.49%）高の52,486.49、s&amp;p500種株価指数は98.45ポイント（1.31%）高の7,619.38、ナスダック総合指数は400.31ポイント（1.60%）高の25,466.19、フィ 金融株も同様に軟調で、fubon financial（2881.tw）は158.5元で寄り付き1元安、國泰金（2882.tw）は112.5元で寄り付き0.5元安、中信金（2891.tw）は0.1元安の74.6元、兆豐金（2886.tw）は5  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:35:00.000Z">11/12 11:35</time>
+  </div>
+  <h3><a href="https://finance.biggo.jp/news/0ea3a684-0b76-4026-a307-14538dc468c8" target="_blank" rel="noopener">エヌビディア下落止まる、CoreWeave好決算も 台湾株は朝方に325ポイント急落、TSMCは10元下落</a></h3>
+  <ul class="summary"><li>米国株は水曜日（11日）、クラウドコンピューティング新興企業CoreWeaveの好決算とエヌビディア（Nvidia）株の下落止まり・持ち直しに支えられ全面高となり、フィラデルフィア半導体指数は5.66%急騰した。</li><li>ダウ工業株30種平均は254.60ポイント（0.49%）高の52,486.49、S&amp;P500種株価指数は98.45ポイント（1.31%）高の7,619.38、ナスダック総合指数は400.31ポイント（1.60%）高の25,466.19、フィ</li><li>金融株も同様に軟調で、Fubon Financial（2881.TW）は158.5元で寄り付き1元安、國泰金（2882.TW）は112.5元で寄り付き0.5元安、中信金（2891.TW）は0.1元安の74.6元、兆豐金（2886.TW）は5</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="NVDA" data-text="s&amp;p500先物は、エヌビディア株への新たな圧力で下落しています s&amp;p500先物は、エヌビディア株への新たな圧力で下落しています （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア portalcripto.com.br">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:34:42.000Z">11/12 11:34</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQTWJUNHJxZ1RyT0FVVzY3d0dFTDJKWEhkekNWSzI2ZlRicTJuOFhQc2ZuNENobkdUbjlDRVJkaVhkN3R5TndqMnQ2ckJZUHFGMEMwOEhEcldhc2pHb3U4R1FUa0NEdE91OTg2bTdyMWtwejdtc3RHRkNIQ3BJMHZTRnFpcl9TZ2ZUWU9CSWVtaEdkd0wyZUtR?oc=5" target="_blank" rel="noopener">S&amp;P500先物は、エヌビディア株への新たな圧力で下落しています</a></h3>
+  <ul class="summary"><li>S&amp;P500先物は、エヌビディア株への新たな圧力で下落しています</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">portalcripto.com.br</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="フアンｃｅｏの解任準備 米エヌビディア取締役会―報道 フアンｃｅｏの解任準備 米エヌビディア取締役会―報道 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 時事通信">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:33:00.000Z">11/12 11:33</time>
+  </div>
+  <h3><a href="https://www.jiji.com/jc/article?k=2026111200166&amp;g=int&amp;m=rss" target="_blank" rel="noopener">フアンＣＥＯの解任準備 米エヌビディア取締役会―報道</a></h3>
+  <ul class="summary"><li>フアンＣＥＯの解任準備 米エヌビディア取締役会―報道</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">時事通信</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="" data-text="【決算速報】セグエｇ、今期経常を17％上方修正・最高益予想を上乗せ、配当も10円増額(株探ニュース) セグエグループ 3968 &gt; [東証ｐ] が11月12日昼(11:30)に決算を発表。 併せて、通期の同利益を従来予想の26億円→30.5億円(前期は20億円)に17.3％上方修正し、増益率が29.9％増→52.4％増に拡大し、従来の3期連続での過去最高益予想をさらに上乗せした。 会社側が発表した上方修正後の通期計画に基づいて、当社が試算した7-12月期(下期)の連結経常利益も従来予想の4億円→8.5億円(前年同期は13.2億円)に2.1倍増額し、減益率が69.1％減→35.1％減に縮小する計算になる。  yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:32:45.000Z">11/12 11:32</time>
+  </div>
+  <h3><a href="https://finance.yahoo.co.jp/news/detail/ca6a45f5ca8b9ee9602f850aac91a42d8551aefe" target="_blank" rel="noopener">【決算速報】セグエＧ、今期経常を17％上方修正・最高益予想を上乗せ、配当も10円増額(株探ニュース)</a></h3>
+  <ul class="summary"><li>セグエグループ 3968 &gt; [東証Ｐ] が11月12日昼(11:30)に決算を発表。</li><li>併せて、通期の同利益を従来予想の26億円→30.5億円(前期は20億円)に17.3％上方修正し、増益率が29.9％増→52.4％増に拡大し、従来の3期連続での過去最高益予想をさらに上乗せした。</li><li>会社側が発表した上方修正後の通期計画に基づいて、当社が試算した7-12月期(下期)の連結経常利益も従来予想の4億円→8.5億円(前年同期は13.2億円)に2.1倍増額し、減益率が69.1％減→35.1％減に縮小する計算になる。</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="6758" data-text="【決算速報】ソニーｆｇ、今期最終を26％下方修正(株探ニュース) ソニーフィナンシャルグループ 8729 &gt; [東証ｐ] が11月12日昼(11:30)に決算(国際会計基準=ifrs)を発表。 直近3ヵ月の実績である7-9月期(2q)の連結最終利益は前年同期比53.4％減の194億円に大きく落ち込み、売上営業利益率は前年同期の23.8％→6.2％に急低下した。 しかしながら、併せて通期の同利益を従来予想の230億円→170億円に26.1％下方修正した。  ソニーグループ yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:32:45.000Z">11/12 11:32</time>
+  </div>
+  <h3><a href="https://finance.yahoo.co.jp/news/detail/ac50f04582f464a3e8b2eb68ebf44020677f6c79" target="_blank" rel="noopener">【決算速報】ソニーＦＧ、今期最終を26％下方修正(株探ニュース)</a></h3>
+  <ul class="summary"><li>ソニーフィナンシャルグループ 8729 &gt; [東証Ｐ] が11月12日昼(11:30)に決算(国際会計基準=IFRS)を発表。</li><li>直近3ヵ月の実績である7-9月期(2Q)の連結最終利益は前年同期比53.4％減の194億円に大きく落ち込み、売上営業利益率は前年同期の23.8％→6.2％に急低下した。</li><li>しかしながら、併せて通期の同利益を従来予想の230億円→170億円に26.1％下方修正した。</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">ソニーグループ</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="6758" data-text="【決算速報】ソニーｆｇ、中間税引前41,694百万。(アイフィス株予報) 【決算速報】ソニーｆｇ、中間税引前41,694百万。(アイフィス株予報) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  ソニーグループ yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:30:19.000Z">11/12 11:30</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxPQWFrVUVWd3Znd0Y3TUJlbDFTM1B5eGJzTlNQMGlDTFNsSWtmN3hOVmp5akQ5UV9EMHJFNzBOWFZtZmVRQ2tYdTI4c0FmM2NmbDB2bVZzRHp0ZWNwNVNhUndlSk5KZVlaaXhGOENYdk5MTFVyazV2SzVENGp4LTgzdnp1SVFLU1E?oc=5" target="_blank" rel="noopener">【決算速報】ソニーＦＧ、中間税引前41,694百万。(アイフィス株予報)</a></h3>
+  <ul class="summary"><li>【決算速報】ソニーＦＧ、中間税引前41,694百万。(アイフィス株予報)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">ソニーグループ</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="アジア株 ファンceoが水を差す 韓国上下動、エヌビディア混乱で明暗分かれる アジア株 ファンceoが水を差す 韓国上下動、エヌビディア混乱で明暗分かれる （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア みんかぶ fx/為替">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:20:29.000Z">11/12 11:20</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTFAwaEZrQ0NiQnFndVpRVmVMd2hXc29PVHY0b0k4NkpMMi1RTzNaWVlhODg5WVhOeDJYbm1YQU10b3hPbXJxQ0dldQ?oc=5" target="_blank" rel="noopener">アジア株 ファンCEOが水を差す 韓国上下動、エヌビディア混乱で明暗分かれる</a></h3>
+  <ul class="summary"><li>アジア株 ファンCEOが水を差す 韓国上下動、エヌビディア混乱で明暗分かれる</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">みんかぶ FX/為替</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="" data-text="千葉県内の地銀3行とも最高益 9月中間決算、日銀利上げで好業績（朝日新聞） 千葉県内地銀3行の2026年9月中間決算が11日、出そろった。 千葉興業銀行も純利益が60億5200万円（同24.2％増）で、19年ぶりに過去最高益となり、通期予想を96億円から102億円に引き上げた。 貸出金残高 14兆2960億 4兆6505億 2兆5356億  yahoo!ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:15:01.000Z">11/12 11:15</time>
+  </div>
+  <h3><a href="https://news.yahoo.co.jp/articles/119750c4328df9ef7e536493d40007e389fdbc25" target="_blank" rel="noopener">千葉県内の地銀3行とも最高益 9月中間決算、日銀利上げで好業績（朝日新聞）</a></h3>
+  <ul class="summary"><li>千葉県内地銀3行の2026年9月中間決算が11日、出そろった。</li><li>千葉興業銀行も純利益が60億5200万円（同24.2％増）で、19年ぶりに過去最高益となり、通期予想を96億円から102億円に引き上げた。</li><li>貸出金残高 14兆2960億 4兆6505億 2兆5356億</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ニュース</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア取締役会の一部、暫定ceoにクレスcfo支持 エヌビディア取締役会の一部、暫定ceoにクレスcfo支持 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア みんかぶ fx/為替">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:11:29.000Z">11/12 11:11</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE1FejZJUWh5Z3NWRFJUcEg1R2dGc09lbUdoQTktNkt6ZThaalI5Z2JTV0JyOVd4MEV4N2tPV3ZFUDBkOTR6Ykxveg?oc=5" target="_blank" rel="noopener">エヌビディア取締役会の一部、暫定CEOにクレスCFO支持</a></h3>
+  <ul class="summary"><li>エヌビディア取締役会の一部、暫定CEOにクレスCFO支持</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">みんかぶ FX/為替</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="fx" data-sent="positive" data-tickers="NVDA" data-text="米長期国債上昇､エヌビディア巡る混乱で逃避需要－30年債利回り5.34% 米長期国債上昇､エヌビディア巡る混乱で逃避需要－30年債利回り5.34% （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア bloomberg.com">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:03:00.000Z">11/12 11:03</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE91T193U1hlVDR1eE1EYUt1QmxMTXRmX1pZcExiclFxRVU2V083U3hQMWRVRlplaV8xVFhYVXZtM0lLYjBieGdXbzg4dUtKcG5EVUlTNVYwUVpxb3FBLUI1Q3JTMDJMTEVFQUExMFc1Wk1sUGlRanU4?oc=5" target="_blank" rel="noopener">米長期国債上昇､エヌビディア巡る混乱で逃避需要－30年債利回り5.34%</a></h3>
+  <ul class="summary"><li>米長期国債上昇､エヌビディア巡る混乱で逃避需要－30年債利回り5.34%</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Bloomberg.com</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="ceoの解任可否を決定へ nvidia ceoの解任可否を決定へ nvidia （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ニュース 経済">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:01:03.000Z">11/12 11:01</time>
+  </div>
+  <h3><a href="https://news.yahoo.co.jp/pickup/6602271?source=rss" target="_blank" rel="noopener">CEOの解任可否を決定へ NVIDIA</a></h3>
+  <ul class="summary"><li>CEOの解任可否を決定へ NVIDIA</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ニュース 経済</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア、今週だけで時価総額49.6兆円減少 ceo巡る騒動が株価を直撃（cnn.co.jp） エヌビディア、今週だけで時価総額49.6兆円減少 ceo巡る騒動が株価を直撃（cnn.co.jp） （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:01:00.000Z">11/12 11:01</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE9sLW9hY3N6N1ZTRVV3ZEt5cmY4NnpUNXhMd0YzUE1CSWpwVGIweDlhZ0tkUzczUDdSb3FOUnIzZUFMRm1LaXRfaGxXN29ocG1lZ3NRRUl5NlZFQzBzZ3F0R3R1a1FUclNhaGJLZ2pLcU1ibTFpOXBRSzJEanZncG8?oc=5" target="_blank" rel="noopener">エヌビディア、今週だけで時価総額49.6兆円減少 CEO巡る騒動が株価を直撃（CNN.co.jp）</a></h3>
+  <ul class="summary"><li>エヌビディア、今週だけで時価総額49.6兆円減少 CEO巡る騒動が株価を直撃（CNN.co.jp）</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ニュース</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="ジェンスン・フアン氏が退任すれば、エヌビディアの株価は30％下落する可能性があると、テクノロジー株強気派が指摘 ジェンスン・フアン氏が退任すれば、エヌビディアの株価は30％下落する可能性があると、テクノロジー株強気派が指摘 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア business insider japan">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T02:00:00.000Z">11/12 11:00</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQU3VITkM3MG52MVdMNEtWcE1oRU4yTkljQUdGaTNRa3FpR2ZxMl9OVUxjajkzZVFJYWkwb3pRem5WVE00NTlqeDFDNEx1ZHVYdWFSNmY0eTRnYk14Q3ItZ051M2hyTGdqcldNVzZqLTRhQVRLQ0RXZGRIYU81eW1lWEtmZUZLeWFwbjhtenJ5V1ptUmlKRHJZdk5ZaHE4QmVz?oc=5" target="_blank" rel="noopener">ジェンスン・フアン氏が退任すれば、エヌビディアの株価は30％下落する可能性があると、テクノロジー株強気派が指摘</a></h3>
+  <ul class="summary"><li>ジェンスン・フアン氏が退任すれば、エヌビディアの株価は30％下落する可能性があると、テクノロジー株強気派が指摘</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Business Insider Japan</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="エヌビディア、フアンceo更迭準備報道で時間外9%急落 ウォール街は「押し目」判断も エヌビディア、フアンceo更迭準備報道で時間外9%急落 ウォール街は「押し目」判断も （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:56:00.000Z">11/12 10:56</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTFBTUWVyM2txY0tiVTFrQ1pyOVgyYXZyMTFWcHdxbVkyVWRSRXZtNUpkcE9uSGFHa3ZXdVo0Q1o3OHZfZUpCSlE4bkhpcTVIRldvVkVkZVExNGNoYXVlektIc20zTkIzM1owTDJSeHhiMlZFUy1f?oc=5" target="_blank" rel="noopener">エヌビディア、フアンCEO更迭準備報道で時間外9%急落 ウォール街は「押し目」判断も</a></h3>
+  <ul class="summary"><li>エヌビディア、フアンCEO更迭準備報道で時間外9%急落 ウォール街は「押し目」判断も</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="イビデン株価が一時7%安 米nvidiaのceo解任巡る報道で連想売り イビデン株価が一時7%安 米nvidiaのceo解任巡る報道で連想売り （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 日本経済新聞">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:55:14.000Z">11/12 10:55</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE0xZFFwdDJvX3FrZ0FpdnVkN0cyOXZobDBySzNWT1g5cEtvS2xoeHAyWkVlX0I5d09HS0ZuZjdfaXVtMzZBTEk0V21vVDhRc0k1a0VBZjRRaEJScV8wNjgteG9YR3hfOGV4NnFsWA?oc=5" target="_blank" rel="noopener">イビデン株価が一時7%安 米NVIDIAのCEO解任巡る報道で連想売り</a></h3>
+  <ul class="summary"><li>イビデン株価が一時7%安 米NVIDIAのCEO解任巡る報道で連想売り</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">日本経済新聞</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア フアンceo解任へ準備 米紙報道 アメリカの有力紙、「ウォール・ストリート・ジャーナル」は11日、アメリカの半導体大手「エヌビディア」がジェンスン・フアンceoを解任する準備を進めていると報じました。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア nhk 経済">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:48:02.000Z">11/12 10:48</time>
+  </div>
+  <h3><a href="https://news.web.nhk/newsweb/na/nd-20261112de74529" target="_blank" rel="noopener">エヌビディア フアンCEO解任へ準備 米紙報道</a></h3>
+  <ul class="summary"><li>アメリカの有力紙、「ウォール・ストリート・ジャーナル」は11日、アメリカの半導体大手「エヌビディア」がジェンスン・フアンCEOを解任する準備を進めていると報じました。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">NHK 経済</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="イビデンとアドバンテスが下落、エヌビディアｃｅｏ去就を警戒(ウエルスアドバイザー) イビデンとアドバンテスが下落、エヌビディアｃｅｏ去就を警戒(ウエルスアドバイザー) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:44:37.000Z">11/12 10:44</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxPREdNSDZBVDJIRFV3MW9PaDdXMkxUYTZTc2RzZjlaLVBVWXFfU1FXdGQzN1Bkd3BSZzBKallvRTByUlhuWGIwX0tpOF90OERGSHpEZzlwSXppSFZuOVhSbjY3RlgzOE5PZzBjbndyNDJlQVNzVVBqQjRxaWIySmR5OHFGWEdHR1U?oc=5" target="_blank" rel="noopener">イビデンとアドバンテスが下落、エヌビディアＣＥＯ去就を警戒(ウエルスアドバイザー)</a></h3>
+  <ul class="summary"><li>イビデンとアドバンテスが下落、エヌビディアＣＥＯ去就を警戒(ウエルスアドバイザー)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア､フアンceoの解任準備とwsj報道 時間外で株価8％安 | ビジネス | 東洋経済オンライン 米半導体大手エヌビディアのceo､ジェンスン･フアン氏が不倫関係と中国スパイ疑惑を巡り､取締役会による解任の動きが急速に進んでいます。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 東洋経済オンライン">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:41:00.000Z">11/12 10:41</time>
+  </div>
+  <h3><a href="https://toyokeizai.net/articles/-/964534?utm_source=rss&amp;utm_medium=http&amp;utm_campaign=link_back" target="_blank" rel="noopener">エヌビディア､フアンCEOの解任準備とWSJ報道 時間外で株価8％安 | ビジネス | 東洋経済オンライン</a></h3>
+  <ul class="summary"><li>米半導体大手エヌビディアのCEO､ジェンスン･フアン氏が不倫関係と中国スパイ疑惑を巡り､取締役会による解任の動きが急速に進んでいます。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">東洋経済オンライン</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア､フアンceoの解任準備とwsj報道 時間外で株価8％安 エヌビディア､フアンceoの解任準備とwsj報道 時間外で株価8％安 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 東洋経済オンライン">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:41:00.000Z">11/12 10:41</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTFBxM2s4TDBLOUdYX0hCLW42T3F3LXZfa0F4VEE2U19RSDNXVjBQSUY3a2FLVFRJc1c0bVRiN0VzV3pzUkdrb1RpTHdqNmFYRVlsd2c?oc=5" target="_blank" rel="noopener">エヌビディア､フアンCEOの解任準備とWSJ報道 時間外で株価8％安</a></h3>
+  <ul class="summary"><li>エヌビディア､フアンCEOの解任準備とWSJ報道 時間外で株価8％安</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">東洋経済オンライン</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="macro" data-sent="neutral" data-tickers="" data-text="円相場1ドル＝159円台後半 frbの追加利上げ観測で 11日の外国為替市場ではアメリカのfrb＝連邦準備制度理事会が来月の会合で追加の利上げに踏み切るとの観測から円を売ってドルを買う動きが進み、円相場は一時、1ドル＝159円台後半まで値下がりしました。 2026年度の国家公務員の給与引き上げ 改正給与法が成立 1人1か月90万円？  nhk 経済">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:39:00.000Z">11/12 10:39</time>
+  </div>
+  <h3><a href="https://news.web.nhk/newsweb/na/nd-20261112de74514" target="_blank" rel="noopener">円相場1ドル＝159円台後半 FRBの追加利上げ観測で</a></h3>
+  <ul class="summary"><li>11日の外国為替市場ではアメリカのFRB＝連邦準備制度理事会が来月の会合で追加の利上げに踏み切るとの観測から円を売ってドルを買う動きが進み、円相場は一時、1ドル＝159円台後半まで値下がりしました。</li><li>2026年度の国家公務員の給与引き上げ 改正給与法が成立</li><li>1人1か月90万円？</li></ul>
+  
+  <footer>
+    <span class="pub">NHK 経済<span class="muted">・2経路</span></span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア取締役会、フアンｃｅｏ解任の可否決定へ＝関係筋（ロイター） エヌビディア取締役会、フアンｃｅｏ解任の可否決定へ＝関係筋（ロイター） （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:37:13.000Z">11/12 10:37</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTFAxdGV6SENiRnRNQlpULVRWbndDSWgxemE3UHpaakEzMElCYWNyMEEwekdac0MtWXVkTFNNV2dkVzNtWEZtbXVDeHZSN1N6UERMUXVldTdUdHVBRHhNTS1YUDJNcDk2RnRxRy1zWFUyNDZQSmFMMHplQ1Qta3M2LTQ?oc=5" target="_blank" rel="noopener">エヌビディア取締役会、フアンＣＥＯ解任の可否決定へ＝関係筋（ロイター）</a></h3>
+  <ul class="summary"><li>エヌビディア取締役会、フアンＣＥＯ解任の可否決定へ＝関係筋（ロイター）</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ニュース</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="【かどや製油】買収提案の経緯やインテグラル･創業家株主によるtob賛同理由を説明 かどや製油は10日、同社の買収に関する提案の検討状況について北川淳一社長がオンラインで会見を行った。 c社は、tobの1株当たりの買付価格が3,000円と最も高い提案となるが、創業家株主が買収に協力しない意向を示したので実現困難と判断したという。 3社から買収提案が行われた経緯とともに、投資ファンドのインテグラルと創業家株主によるtob(株式公開買付け)に賛同･応募推奨した理由が説明された。  ｄメニューニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:37:00.000Z">11/12 10:37</time>
+  </div>
+  <h3><a href="https://topics.smt.docomo.ne.jp/article/ssnp/business/ssnp-20261112-711071?redirect=1" target="_blank" rel="noopener">【かどや製油】買収提案の経緯やインテグラル･創業家株主によるTOB賛同理由を説明</a></h3>
+  <ul class="summary"><li>かどや製油は10日、同社の買収に関する提案の検討状況について北川淳一社長がオンラインで会見を行った。</li><li>C社は、TOBの1株当たりの買付価格が3,000円と最も高い提案となるが、創業家株主が買収に協力しない意向を示したので実現困難と判断したという。</li><li>3社から買収提案が行われた経緯とともに、投資ファンドのインテグラルと創業家株主によるTOB(株式公開買付け)に賛同･応募推奨した理由が説明された。</li></ul>
+  
+  <footer>
+    <span class="pub">ｄメニューニュース</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="エヌビディア株が時間外9%急落｜フアンceo更迭準備と報道 エヌビディア株が時間外9%急落｜フアンceo更迭準備と報道 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア crypto times">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:34:17.000Z">11/12 10:34</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBEQXRPckhKRXFaUzU5QWdDNlVZY0kzZnBvNnRNcnJzY09fWEhVTVJQU0lSeWdPWjNkNmtYd0pLcmpXQTRBTDQtdXpxQ045LWpJRDhZenFMUWxSSktrbl9NRWt6NFhHM28?oc=5" target="_blank" rel="noopener">エヌビディア株が時間外9%急落｜フアンCEO更迭準備と報道</a></h3>
+  <ul class="summary"><li>エヌビディア株が時間外9%急落｜フアンCEO更迭準備と報道</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">CRYPTO TIMES</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="台湾株下落して始まる、エヌビディアceo解任準備 台湾株下落して始まる、エヌビディアceo解任準備 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア みんかぶ fx/為替">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:32:29.000Z">11/12 10:32</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTFBfZzZmRWZaZUdHRUxvSUwxSFQtU2ktaWtHbU5odlZEdVBOYzVLc1ZFX0xqR0VFZzRuMTRDOWhLbFNhQVpSelJtSg?oc=5" target="_blank" rel="noopener">台湾株下落して始まる、エヌビディアCEO解任準備</a></h3>
+  <ul class="summary"><li>台湾株下落して始まる、エヌビディアCEO解任準備</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">みんかぶ FX/為替</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="時間外でnvidia急落も日本株は意外に底堅く - 日替わりコメンテーター解説・前場のマーケット 時間外でnvidia急落も日本株は意外に底堅く - 日替わりコメンテーター解説・前場のマーケット （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 日経cnbc online">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:30:00.000Z">11/12 10:30</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE5UMmw3TWljOTFfUjVZOVRXUmFvMVhXVUhlSEZJejRCQ21VYWM5RXlHd295Z013MWliaGY4NUZGVHM5NmZDWHhQek1OVVBJZ2dLNk81bQ?oc=5" target="_blank" rel="noopener">時間外でNVIDIA急落も日本株は意外に底堅く - 日替わりコメンテーター解説・前場のマーケット</a></h3>
+  <ul class="summary"><li>時間外でNVIDIA急落も日本株は意外に底堅く - 日替わりコメンテーター解説・前場のマーケット</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">日経CNBC online</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="fx" data-sent="neutral" data-tickers="NVDA" data-text="日経平均は４日続伸、エヌビディア急落で一時マイナスも持ち直す＝１２日前場(ウエルスアドバイザー) １２日午前１０時過ぎの日経平均株価は４日続伸。 半面、ブロドリーフ 3673 &gt; がストップ安気配となっているほか、弁護士コム 6027 &gt; 、デクセリアル 4980 &gt; 、楽天銀行 5838 &gt; 、松田産業 7456 &gt; が下落している。 そのほか、テイカ 4027 &gt; 、ダイワボｈｄ 3107 &gt; 、レゾナック 4004 &gt; 、ｉｔｍ 2148 &gt; 、ｄｏｗａ 5714 &gt; が上昇。  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:27:14.000Z">11/12 10:27</time>
+  </div>
+  <h3><a href="https://finance.yahoo.co.jp/news/detail/167b13059808f03bae5fa4cc816b3df30e547707" target="_blank" rel="noopener">日経平均は４日続伸、エヌビディア急落で一時マイナスも持ち直す＝１２日前場(ウエルスアドバイザー)</a></h3>
+  <ul class="summary"><li>１２日午前１０時過ぎの日経平均株価は４日続伸。</li><li>半面、ブロドリーフ 3673 &gt; がストップ安気配となっているほか、弁護士コム 6027 &gt; 、デクセリアル 4980 &gt; 、楽天銀行 5838 &gt; 、松田産業 7456 &gt; が下落している。</li><li>そのほか、テイカ 4027 &gt; 、ダイワボＨＤ 3107 &gt; 、レゾナック 4004 &gt; 、ＩＴＭ 2148 &gt; 、ＤＯＷＡ 5714 &gt; が上昇。</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="ceo去就巡る報道 nvidia株下落 ceo去就巡る報道 nvidia株下落 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ニュース 経済">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:27:01.000Z">11/12 10:27</time>
+  </div>
+  <h3><a href="https://news.yahoo.co.jp/pickup/6602266?source=rss" target="_blank" rel="noopener">CEO去就巡る報道 NVIDIA株下落</a></h3>
+  <ul class="summary"><li>CEO去就巡る報道 NVIDIA株下落</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ニュース 経済<span class="muted">・2経路</span></span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="エヌビディアの経営混乱でai提携に暗雲、コアウィーブ株が時間外で下落 エヌビディアの経営混乱でai提携に暗雲、コアウィーブ株が時間外で下落 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:25:00.000Z">11/12 10:25</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTFBUYUVvMXRaZTVtQl9hUUFKeWgxMkE1dGdTc0hzRER0ZEs1QWx2NGRyOHMtTm5oYWZwdGZ6SHJhOXlXeVNqcllNVklWQTdPd3BQZFQwT01tbUFaZXI5dHlWYWEtemdORVZxUWF1TDVOeUs2T3RF?oc=5" target="_blank" rel="noopener">エヌビディアの経営混乱でAI提携に暗雲、コアウィーブ株が時間外で下落</a></h3>
+  <ul class="summary"><li>エヌビディアの経営混乱でAI提携に暗雲、コアウィーブ株が時間外で下落</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="東証10時 日経平均はじり高 米エヌビディア株急落受けた売り一巡 企業での記事共有や会議資料への転載・複製、注文印刷などをご希望の方は、リンク先をご覧ください。 10時現在の東証プライムの売買代金は概算で2兆7023億円、売買高は7億5697万株だった。 12日前場中ごろの東京株式市場で 日経平均株価 はじりじりと上昇している。  エヌビディア 日本経済新聞">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:21:42.000Z">11/12 10:21</time>
+  </div>
+  <h3><a href="https://www.nikkei.com/article/DGXZQOFL1209B0S6A111C2000000/" target="_blank" rel="noopener">東証10時 日経平均はじり高 米エヌビディア株急落受けた売り一巡</a></h3>
+  <ul class="summary"><li>企業での記事共有や会議資料への転載・複製、注文印刷などをご希望の方は、リンク先をご覧ください。</li><li>10時現在の東証プライムの売買代金は概算で2兆7023億円、売買高は7億5697万株だった。</li><li>12日前場中ごろの東京株式市場で 日経平均株価 はじりじりと上昇している。</li></ul>
+  
+  <footer>
+    <span class="pub">日本経済新聞</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="NVDA" data-text="エヌビディア株が時間外取引で急落､｢ジェンスン･フアンceo不在の将来｣を投資家が意識 | 政治・経済・投資 | 東洋経済オンライン 米半導体大手エヌビディアの株価は11日の時間外取引で急落した。 ニューヨーク時間午後5時30分（日本時間12日午前7時30分）現在､株価は9%安。 ｢ジェンスン氏は今年の売上高が70%伸びると予想していた。  エヌビディア 東洋経済オンライン">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:13:00.000Z">11/12 10:13</time>
+  </div>
+  <h3><a href="https://toyokeizai.net/articles/-/964483?utm_source=rss&amp;utm_medium=http&amp;utm_campaign=link_back" target="_blank" rel="noopener">エヌビディア株が時間外取引で急落､｢ジェンスン･フアンCEO不在の将来｣を投資家が意識 | 政治・経済・投資 | 東洋経済オンライン</a></h3>
+  <ul class="summary"><li>米半導体大手エヌビディアの株価は11日の時間外取引で急落した。</li><li>ニューヨーク時間午後5時30分（日本時間12日午前7時30分）現在､株価は9%安。</li><li>｢ジェンスン氏は今年の売上高が70%伸びると予想していた。</li></ul>
+  
+  <footer>
+    <span class="pub">東洋経済オンライン</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="NVDA" data-text="エヌビディア株が時間外取引で急落､｢ジェンスン･フアンceo不在の将来｣を投資家が意識 米半導体大手エヌビディアの株価は11日の時間外取引で急落した。 ニューヨーク時間午後5時30分（日本時間12日午前7時30分）現在､株価は9%安。 ｢ジェンスン氏は今年の売上高が70%伸びると予想していた。  エヌビディア 東洋経済オンライン">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T01:13:00.000Z">11/12 10:13</time>
+  </div>
+  <h3><a href="https://toyokeizai.net/articles/-/964483?display=b" target="_blank" rel="noopener">エヌビディア株が時間外取引で急落､｢ジェンスン･フアンCEO不在の将来｣を投資家が意識</a></h3>
+  <ul class="summary"><li>米半導体大手エヌビディアの株価は11日の時間外取引で急落した。</li><li>ニューヨーク時間午後5時30分（日本時間12日午前7時30分）現在､株価は9%安。</li><li>｢ジェンスン氏は今年の売上高が70%伸びると予想していた。</li></ul>
+  
+  <footer>
+    <span class="pub">東洋経済オンライン</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="$エヌビディア (nvda.us)$ nvdaは10月6日の高値から現在35.8%安 $エヌビディア (nvda.us)$ nvdaは10月6日の高値から現在35.8%安 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:59:23.000Z">11/12 09:59</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxOdlk0bUpkQnhkcjdSY1h5Zm5yY0NEVVB0aEhLeTlxY0xycEdMRDB3R3VHVWQ1LW5tUXBuWkJ1Z21ELTVDaTByb29lc21YSUIxYWFEc2Y3Mng4SGdYR09yeC1aUFAtM1hZd3Z4cVpzNkU3RndTd1JUSEVPVW1vZzBTV0lwWHZ5TjN6WU15aVBlSTR1VXI2UXFGdnB3UHFjMTFI?oc=5" target="_blank" rel="noopener">$エヌビディア (NVDA.US)$ NVDAは10月6日の高値から現在35.8%安</a></h3>
+  <ul class="summary"><li>$エヌビディア (NVDA.US)$ NVDAは10月6日の高値から現在35.8%安</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="NVDA" data-text="米国株情報＞エヌビディア、フアンｃｅｏ解任準備報道で株価急落(ウエルスアドバイザー) ａｉ（人工知能）向け半導体大手エヌビディア＜ｎｖｄａ＞が１１日の時間外取引で、日中終値（前日比２．８７％高の１７３．７３ドル）に対して一時１０％超下落した。 ｎａｓｄ投信 1545 &gt; 、ｎｙダウ投信 1546 &gt; 、上場米国 1547 &gt; 、 ｓｐｄ５００ 1557 &gt; 、ｎｙダウ 1679 &gt; 、ｎｙダウブル 2040 &gt; 、  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:48:12.000Z">11/12 09:48</time>
+  </div>
+  <h3><a href="https://finance.yahoo.co.jp/news/detail/ad41f11c55e49e4ab7a3d851488f0b4c82ce9403" target="_blank" rel="noopener">米国株情報＞エヌビディア、フアンＣＥＯ解任準備報道で株価急落(ウエルスアドバイザー)</a></h3>
+  <ul class="summary"><li>ＡＩ（人工知能）向け半導体大手エヌビディア＜ＮＶＤＡ＞が１１日の時間外取引で、日中終値（前日比２．８７％高の１７３．７３ドル）に対して一時１０％超下落した。</li><li>ＮＡＳＤ投信 1545 &gt; 、ＮＹダウ投信 1546 &gt; 、上場米国 1547 &gt; 、</li><li>ＳＰＤ５００ 1557 &gt; 、ＮＹダウ 1679 &gt; 、ＮＹダウブル 2040 &gt; 、</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="エヌビディア株が下落、取締役会がフアンceoの去就検討との報道受け エヌビディア株が下落、取締役会がフアンceoの去就検討との報道受け （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア cnn">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:41:00.000Z">11/12 09:41</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTFBTaTFOamNjeWZiVGJObDNwdnl1OTNfQUxWU2pyVV9idUcxQ1g3NmlqYkxiZTVIQWZxUGZUeTJmZERMdTdyOUg2SUlpZnZSeXVYTUE?oc=5" target="_blank" rel="noopener">エヌビディア株が下落、取締役会がフアンCEOの去就検討との報道受け</a></h3>
+  <ul class="summary"><li>エヌビディア株が下落、取締役会がフアンCEOの去就検討との報道受け</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">CNN</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="東証寄り付き 日経平均はもみ合い 米エヌビディアceoの解任準備報道が重荷 東証寄り付き 日経平均はもみ合い 米エヌビディアceoの解任準備報道が重荷 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 日本経済新聞">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:38:56.000Z">11/12 09:38</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMibEFVX3lxTFBvbjFaa1oxVDBQek5nb3B0Z3R2ZW81SE1nT251XzNMV3lwdW56aVJraFRzY3cxWkhCRnV2bWJrb3J4ejVjeExzbHVFY0VRdUNtUldFYmhVUXZtSjM1cXc1WmVkbm8waHFlMzI5aQ?oc=5" target="_blank" rel="noopener">東証寄り付き 日経平均はもみ合い 米エヌビディアCEOの解任準備報道が重荷</a></h3>
+  <ul class="summary"><li>東証寄り付き 日経平均はもみ合い 米エヌビディアCEOの解任準備報道が重荷</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">日本経済新聞</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="$エヌビディア (nvda.us)$ 底入れしたね…🤣🤣 $エヌビディア (nvda.us)$ 底入れしたね…🤣🤣 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:38:00.000Z">11/12 09:38</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxQcURaaUVZQkt0eF9kS0NOUHRwVnpHcTBxSk1GbHJCMWJCVVdNa1NvMDhWblEyMU1JOGFNd0gxMTlkWDY0MW9XSnN5dmtCSEVoSU9XZWo2NTB6RW5BZDVWU2pJRXdDOWRWM1AzbDk2MVhFSl96b3Q5bTlsQmxyV2NaQWdaaXFDc0ZlLU9TS0dUQ3hSZw?oc=5" target="_blank" rel="noopener">$エヌビディア (NVDA.US)$ 底入れしたね…🤣🤣</a></h3>
+  <ul class="summary"><li>$エヌビディア (NVDA.US)$ 底入れしたね…🤣🤣</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="macro" data-sent="neutral" data-tickers="" data-text="米金価格は4,050ドル台へ小幅高 frb利下げ観測の後退で上値重く、ドルは高値圏維持 米金価格は4,050ドル台へ小幅高 frb利下げ観測の後退で上値重く、ドルは高値圏維持 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  vt markets">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:27:17.000Z">11/12 09:27</time>
+  </div>
+  <h3><a href="https://www.vtmarkets.com/jp-asia/live-updates/gold-edges-above-4050-as-firmer-fed-rate-bets-curb-gains-dollar-holds-highs/" target="_blank" rel="noopener">米金価格は4,050ドル台へ小幅高 FRB利下げ観測の後退で上値重く、ドルは高値圏維持</a></h3>
+  <ul class="summary"><li>米金価格は4,050ドル台へ小幅高 FRB利下げ観測の後退で上値重く、ドルは高値圏維持</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">VT Markets</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="$アドバンスト・マイクロ・デバイス(amd) (amd.us)$ $エヌビディア (nvda.us)$ $アドバンスト・マイクロ・デバイス(amd) (amd.us)$ $エヌビディア (nvda.us)$ （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:25:52.000Z">11/12 09:25</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxNQWZsallreHNza2h5bVp6bUJtVzRVWEc0RDBpRnQ3LXdZUXFwZlAyU2djZ0NpOUhBbXllR25OaklKbHlwdkV6RDNndkRDU25UNTJRYjhoXzU3bWhydk83S1d4YVhqVVZUcWRBUUoyTmtnQkhOTE5UblJJSHFfV1d5S3pueG5wMzR2M1pwZDlsc1BSb2lHZFpBX1hBbHpsWkx6QzFB?oc=5" target="_blank" rel="noopener">$アドバンスト・マイクロ・デバイス(AMD) (AMD.US)$ $エヌビディア (NVDA.US)$</a></h3>
+  <ul class="summary"><li>$アドバンスト・マイクロ・デバイス(AMD) (AMD.US)$ $エヌビディア (NVDA.US)$</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="アドテストやイビデン反落、エヌビディアｃｅｏ解任準備報道で下押し圧力 アドテストやイビデン反落、エヌビディアｃｅｏ解任準備報道で下押し圧力 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 株探">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:23:00.000Z">11/12 09:23</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE1QckZwV1ZTTWN3emVRNVpxbzk5UUMyWElpNVFvNmVoRmZZWFcyVWlwcDBqVGNBUy05cmNwbHItaWc3ck05bGF0Z0s1N1h1OVllT3J0RFIwTWhTd184YUxCZw?oc=5" target="_blank" rel="noopener">アドテストやイビデン反落、エヌビディアＣＥＯ解任準備報道で下押し圧力</a></h3>
+  <ul class="summary"><li>アドテストやイビデン反落、エヌビディアＣＥＯ解任準備報道で下押し圧力</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">株探</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="日経平均は続伸で寄り付く、エヌビディアｃｅｏ解任準備との報道は上値抑制 日経平均は続伸で寄り付く、エヌビディアｃｅｏ解任準備との報道は上値抑制 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア infoseek">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:21:38.000Z">11/12 09:21</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE00UlJJQTZSMGotSlhDcEdranBoMXRsTXJRSVhRc3pmdXd6Ym5YMWN3X05zWWZnaHFwbTI5cWpkdVMxOGx0TUx0NVdHNl9XWF9KaHFFRzJZcGFMWXY2eVNLbXdJamJ5M3FNbjhaRWtB?oc=5" target="_blank" rel="noopener">日経平均は続伸で寄り付く、エヌビディアＣＥＯ解任準備との報道は上値抑制</a></h3>
+  <ul class="summary"><li>日経平均は続伸で寄り付く、エヌビディアＣＥＯ解任準備との報道は上値抑制</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Infoseek<span class="muted">・2経路</span></span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="日経平均は続伸で寄り付く、エヌビディアｃｅｏ解任準備との報道は上値抑制（ロイター） 日経平均は続伸で寄り付く、エヌビディアｃｅｏ解任準備との報道は上値抑制（ロイター） （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:21:38.000Z">11/12 09:21</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTFB5cXFVSFFKaGtLWnl6dU1wX25DLTdKVGgzY0lJT1RRcUZjQkFMeG1lZG56TnAwYVVXbHhfRjBieTFmQUtONExBeTJ6dkVfRzlGbjdyUnJMd0lIcnRaUmpkekRXS3lXdm1VWWY1MmRYM1lLZEo0UWtWMWlfQW9fWVE?oc=5" target="_blank" rel="noopener">日経平均は続伸で寄り付く、エヌビディアＣＥＯ解任準備との報道は上値抑制（ロイター）</a></h3>
+  <ul class="summary"><li>日経平均は続伸で寄り付く、エヌビディアＣＥＯ解任準備との報道は上値抑制（ロイター）</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ニュース<span class="muted">・2経路</span></span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="イビデン－急落 エヌビディアのファンceo解任準備が伝わる 半導体関連の一角に売り(トレーダーズ・ウェブ) イビデン 4062 &gt;が急落。 ai・半導体関連の一角が弱含んでおり、アドバンテスト 6857 &gt;、レーザーテック 6920 &gt;、ｓｃｒｅｅｎホールディングス 7735 &gt;、三井金属 5706 &gt;、村田製作所 6981 &gt;なども下落している。 報道を受け、エヌビディア株は時間外で急落している。  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:20:02.000Z">11/12 09:20</time>
+  </div>
+  <h3><a href="https://finance.yahoo.co.jp/news/detail/4b5d05a1459b989d911e8858ac9813edf80ca0e7" target="_blank" rel="noopener">イビデン－急落 エヌビディアのファンCEO解任準備が伝わる 半導体関連の一角に売り(トレーダーズ・ウェブ)</a></h3>
+  <ul class="summary"><li>イビデン 4062 &gt;が急落。</li><li>AI・半導体関連の一角が弱含んでおり、アドバンテスト 6857 &gt;、レーザーテック 6920 &gt;、ＳＣＲＥＥＮホールディングス 7735 &gt;、三井金属 5706 &gt;、村田製作所 6981 &gt;なども下落している。</li><li>報道を受け、エヌビディア株は時間外で急落している。</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="エヌビディア株が時間外取引で急落、ceoの解任報道が背景に エヌビディア株が時間外取引で急落、ceoの解任報道が背景に （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア investing.com - fx | 株式市場 | ファイナンス | 金融ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:16:00.000Z">11/12 09:16</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE9OajEtUWNTdHVVQTFkaEtzRmVwMmhvb0xLejQ0RXBGTEV3cnRDM2hEQlE4VEgyN01MMFp2cGw0dDJMamJ0aS1HT2E3VVNMaTBTVE4xSjhGUnpnZjFtZjVVbF9NcjJQZkcwRlhWX2ZvV3pGUUdXcnJz?oc=5" target="_blank" rel="noopener">エヌビディア株が時間外取引で急落、CEOの解任報道が背景に</a></h3>
+  <ul class="summary"><li>エヌビディア株が時間外取引で急落、CEOの解任報道が背景に</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Investing.com - FX | 株式市場 | ファイナンス | 金融ニュース</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="日経平均は４連騰スタート、エヌビディアｃｅｏ解任準備の報も買い優勢＝１２日寄り付き(ウエルスアドバイザー) 日経平均は４連騰スタート、エヌビディアｃｅｏ解任準備の報も買い優勢＝１２日寄り付き(ウエルスアドバイザー) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:14:28.000Z">11/12 09:14</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxPMTdGM3I4TVUyb0hqRXpJRlBQaUlXZUFrb3B6dk5pYjlyZWRCV0pIdlc4VFZsRzJGd2pNLUktUW4tNlA4d3ZvTXB1ZHVnWDUwTVVUcGhJSk1GXzF0SkdFWE5VMUF4LWl2dlg1OFRnUTkyZmhKdGYxSUZrOVNBSkQ2MEtDaVc2dVU?oc=5" target="_blank" rel="noopener">日経平均は４連騰スタート、エヌビディアＣＥＯ解任準備の報も買い優勢＝１２日寄り付き(ウエルスアドバイザー)</a></h3>
+  <ul class="summary"><li>日経平均は４連騰スタート、エヌビディアＣＥＯ解任準備の報も買い優勢＝１２日寄り付き(ウエルスアドバイザー)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="日経平均マイナス転換、エヌビディアがファンceo解任を準備 2人と不倫 日経平均マイナス転換、エヌビディアがファンceo解任を準備 2人と不倫 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア みんかぶ fx/為替">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:13:29.000Z">11/12 09:13</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTFBpaXNkLXl3cndySW1QLTdzNzZsQUJJelFaczJCMDVHdlJVMXhqRUxRRzc2akg3WHk3TnNpZVc3V2R2THhUb1QyaA?oc=5" target="_blank" rel="noopener">日経平均マイナス転換、エヌビディアがファンCEO解任を準備 2人と不倫</a></h3>
+  <ul class="summary"><li>日経平均マイナス転換、エヌビディアがファンCEO解任を準備 2人と不倫</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">みんかぶ FX/為替</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="韓国株マイナス転換、エヌビディアが水を差す ファンceo解任準備 韓国株マイナス転換、エヌビディアが水を差す ファンceo解任準備 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア みんかぶ fx/為替">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:09:29.000Z">11/12 09:09</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE5FX0lCN1RpU1JqWEVWT0g3VXc5SGduYnlkRW1jNm96Y3lMN3k1R2ttaHBtNnB5UnJVYmxGSTlkY3dBYlNsMGJPdA?oc=5" target="_blank" rel="noopener">韓国株マイナス転換、エヌビディアが水を差す ファンCEO解任準備</a></h3>
+  <ul class="summary"><li>韓国株マイナス転換、エヌビディアが水を差す ファンCEO解任準備</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">みんかぶ FX/為替</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="フアンceoの解任準備＝米エヌビディア取締役会―報道(時事通信) フアンceoの解任準備＝米エヌビディア取締役会―報道(時事通信) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-12T00:00:29.000Z">11/12 09:00</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxNRlh0TGxzbDgzZlBVVlVQRVV1Q0JULVpJNFdWV0pXNWJBaVoyRV9zUlhyQ3dfaGxrOWVLV080Rzl5cW1jOTRpMzJUdGpDaWlndGVUWWJYRS1kbDVfeWlrTFlYeFNxVlUwX1VkNGwtbTMzQWtEcWU0dWpxSjQ0VHlyQ0U4bTRYZ2M?oc=5" target="_blank" rel="noopener">フアンCEOの解任準備＝米エヌビディア取締役会―報道(時事通信)</a></h3>
+  <ul class="summary"><li>フアンCEOの解任準備＝米エヌビディア取締役会―報道(時事通信)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="7203" data-text="トヨタ自動車の宮本眞志氏 デミング賞特別功労・実践賞（中部経済新聞） トヨタ自動車の宮本眞志氏 デミング賞特別功労・実践賞（中部経済新聞） （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  トヨタ自動車 yahoo!ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T23:56:26.000Z">11/12 08:56</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxQVUdXNG1sMkNDa3NPOU5ud1F5WFBlSV9ORHpSZGpmYUVBaXVyRlpMYU85QnJLc3p6N1NTUzhIcTJOcE1ySVdZS2NaYmFxam5XdkRxbEVfWVMydGRXUGhKNWktcTBMbDgyREJVVzA3MkYyaVdEaUdVRHBxanJOcFRyaHlPSmdmOUpidFZNVS13?oc=5" target="_blank" rel="noopener">トヨタ自動車の宮本眞志氏 デミング賞特別功労・実践賞（中部経済新聞）</a></h3>
+  <ul class="summary"><li>トヨタ自動車の宮本眞志氏 デミング賞特別功労・実践賞（中部経済新聞）</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ニュース</span>
+    <span class="tag watch">トヨタ自動車</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="エヌビディア、時間外取引で9%超急落 取締役会が最早12日にジェンスン・フアンceoの去就を採決と報道 エヌビディア、時間外取引で9%超急落 取締役会が最早12日にジェンスン・フアンceoの去就を採決と報道 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T23:56:00.000Z">11/12 08:56</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE5CS1l0WFRMUXBoS0w4OGdBUVNGdGE3M2JLWW1JRm5aeDhEVl81ZWFSSk5jZVA4OWVmTDlBVVY5cldTVHhBeFFpMjh0a1VlVnN4eXVETkt2YWJMLV94VV9jRWVJbnRicmdLbGJxMDdxSEtJeUFC?oc=5" target="_blank" rel="noopener">エヌビディア、時間外取引で9%超急落 取締役会が最早12日にジェンスン・フアンCEOの去就を採決と報道</a></h3>
+  <ul class="summary"><li>エヌビディア、時間外取引で9%超急落 取締役会が最早12日にジェンスン・フアンCEOの去就を採決と報道</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア 暫定ceoの任命を検討 次期ceo候補探しで外部企業と連携 エヌビディア 暫定ceoの任命を検討 次期ceo候補探しで外部企業と連携 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア みんかぶ fx/為替">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T23:40:28.000Z">11/12 08:40</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTFBHN2xmSGQ2ZkszX2tBRnFGdS1iZGZvY0pNZTNBQU9TSk0yRmIxSlYySEgtMFktTVA5cmFselgwekx4Vk81UnAzeg?oc=5" target="_blank" rel="noopener">エヌビディア 暫定CEOの任命を検討 次期CEO候補探しで外部企業と連携</a></h3>
+  <ul class="summary"><li>エヌビディア 暫定CEOの任命を検討 次期CEO候補探しで外部企業と連携</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">みんかぶ FX/為替</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="＜米国・時間外＞エヌビディア急落 ファンceo解任準備と報道 ＜米国・時間外＞エヌビディア急落 ファンceo解任準備と報道 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 日本経済新聞">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T23:39:14.000Z">11/12 08:39</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMibEFVX3lxTFBVUkxTWTNQR2JNVnZyd1VLeDhjV05XSVp3Tl9oSktaLWl5aUctZm9kQnVXTHFJemthb0xURy1SSHdGbHBoODVaVkttd0ZjMXdDQXlMRUpDekFKRG5pdU9lMkdQZUVtcV80dDk1ZQ?oc=5" target="_blank" rel="noopener">＜米国・時間外＞エヌビディア急落 ファンCEO解任準備と報道</a></h3>
+  <ul class="summary"><li>＜米国・時間外＞エヌビディア急落 ファンCEO解任準備と報道</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">日本経済新聞</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="米商務長官が先送りか エヌビディア半導体の密輸規制 米商務長官が先送りか エヌビディア半導体の密輸規制 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 時事通信">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T23:39:00.000Z">11/12 08:39</time>
+  </div>
+  <h3><a href="https://www.jiji.com/jc/article?k=2026111200177&amp;g=int&amp;m=rss" target="_blank" rel="noopener">米商務長官が先送りか エヌビディア半導体の密輸規制</a></h3>
+  <ul class="summary"><li>米商務長官が先送りか エヌビディア半導体の密輸規制</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">時事通信</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="jensen huangリスクでnvidia時間外8%急落…samsung electronics・skハイニックスはプレマーケットで強含み jensen huangリスクでnvidia時間外8%急落…samsung electronics・skハイニックスはプレマーケットで強含み （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T23:35:00.000Z">11/12 08:35</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE93X0pPdzAyRW1oejM3U05wN2NUamZhSXhEUHRNWDdFb19lQWo0Z25ENzB3Z3FfMGxYRmFObjZSRFU1X2plLXZ4WTVWNHNMY3M1VEhVak9oRjFHVU54Yi1qSjNUWGVUd2RDQW5Oc2dLajViRTVG?oc=5" target="_blank" rel="noopener">Jensen HuangリスクでNVIDIA時間外8%急落…Samsung Electronics・SKハイニックスはプレマーケットで強含み</a></h3>
+  <ul class="summary"><li>Jensen HuangリスクでNVIDIA時間外8%急落…Samsung Electronics・SKハイニックスはプレマーケットで強含み</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="fx" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディアが時間外で急落、フアンｃｅｏ解任準備と米紙報道、日経平均ｃｆｄも軟化(ウエルスアドバイザー) 米半導体大手エヌビディアがフアンｃｅｏ（最高経営責任者）を解任する準備を進めていると、米メディアが報じた。 通常取引を前日比２．９％高の１７３．７３ドルで終えた後、日本時間午前８時２１分時点では通常取引の終値比８．６％安の１５８．７２ドルで推移している。 米メディアの報道を受けて、日経平均株価のｃｆｄ（差金決済取引）は午前８時２４分時点で前日終値比５０２．５円安の６万１５３７．５円で推移している。  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T23:30:22.000Z">11/12 08:30</time>
+  </div>
+  <h3><a href="https://finance.yahoo.co.jp/news/detail/26eadeef9bf8451cc2e4111c922ab5384a473f70" target="_blank" rel="noopener">エヌビディアが時間外で急落、フアンＣＥＯ解任準備と米紙報道、日経平均ＣＦＤも軟化(ウエルスアドバイザー)</a></h3>
+  <ul class="summary"><li>米半導体大手エヌビディアがフアンＣＥＯ（最高経営責任者）を解任する準備を進めていると、米メディアが報じた。</li><li>通常取引を前日比２．９％高の１７３．７３ドルで終えた後、日本時間午前８時２１分時点では通常取引の終値比８．６％安の１５８．７２ドルで推移している。</li><li>米メディアの報道を受けて、日経平均株価のＣＦＤ（差金決済取引）は午前８時２４分時点で前日終値比５０２．５円安の６万１５３７．５円で推移している。</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="エヌビディアceo解任準備でオラクルやコアウィーブも下落 エヌビディアceo解任準備でオラクルやコアウィーブも下落 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 株探">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T23:25:00.000Z">11/12 08:25</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE9BbVFwSncyNGRDYWdFdTlEZlI3d2hsaXlVNDltcDRRYW9ybnNlTW1XNlJyWkVBeG01b0RMb25odC1Kbk5Bek9UOGFTVDZzcEpFZ3c?oc=5" target="_blank" rel="noopener">エヌビディアCEO解任準備でオラクルやコアウィーブも下落</a></h3>
+  <ul class="summary"><li>エヌビディアCEO解任準備でオラクルやコアウィーブも下落</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">株探</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="NVDA" data-text="jensen huang、直属の部下との2度目の不倫疑惑…nvidia時間外株価が7%台急落 nvidia（nvda）の最高経営責任者（ceo）jensen huang氏が、自身に直接報告する直属の役員と婚外関係を維持してきたとの報道が出たことで、同社株価は時間外取引で7%超下落した。 この価格基準でのnvidiaの時価総額は約3兆8,500億ドル（約615兆円）で、huang ceoが不倫を認める前の最後の取引日である11月6日の終値より約6,580億ドル（約105.1兆円）減少した水準だ。 nvidia株はこの日、ニューヨーク株式市場の通常取引で2.96%高の173.73ドル（約2.8万円）で取引を終えたが、取引終了直後に追加報道が出ると売りが殺到した。  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T23:25:00.000Z">11/12 08:25</time>
+  </div>
+  <h3><a href="https://finance.biggo.jp/news/7af6f6db-0004-440c-a9e4-e8d2bde878d0" target="_blank" rel="noopener">Jensen Huang、直属の部下との2度目の不倫疑惑…NVIDIA時間外株価が7%台急落</a></h3>
+  <ul class="summary"><li>Nvidia（NVDA）の最高経営責任者（CEO）Jensen Huang氏が、自身に直接報告する直属の役員と婚外関係を維持してきたとの報道が出たことで、同社株価は時間外取引で7%超下落した。</li><li>この価格基準でのNvidiaの時価総額は約3兆8,500億ドル（約615兆円）で、Huang CEOが不倫を認める前の最後の取引日である11月6日の終値より約6,580億ドル（約105.1兆円）減少した水準だ。</li><li>Nvidia株はこの日、ニューヨーク株式市場の通常取引で2.96%高の173.73ドル（約2.8万円）で取引を終えたが、取引終了直後に追加報道が出ると売りが殺到した。</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="今日の株式見通し＝もみ合い、米ａｉ株高とエヌビディアｃｅｏ解任準備との報道が綱引き 今日の株式見通し＝もみ合い、米ａｉ株高とエヌビディアｃｅｏ解任準備との報道が綱引き （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア reuters">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T23:21:46.000Z">11/12 08:21</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQTGpyTWFSXzBXWUZPMnF3ZmtYalRRWXFNd0NKbUJwdm9PQjNTSnVPMDlRZHRvT0lRcGYyXy0zd25NWWhiTTFKaHd0TmVYZEN4d2h2c0JTcFF3bzZvNjBFbFVDWFNfd0xhZHEwZWhCanl5aFN1Z3hrd1NyQ01OV3NqZzJlbUNwZw?oc=5" target="_blank" rel="noopener">今日の株式見通し＝もみ合い、米ＡＩ株高とエヌビディアＣＥＯ解任準備との報道が綱引き</a></h3>
+  <ul class="summary"><li>今日の株式見通し＝もみ合い、米ＡＩ株高とエヌビディアＣＥＯ解任準備との報道が綱引き</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Reuters</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="NVDA" data-text="時間外ナスダック下落、2人と不倫でエヌビディアがファンceo解任準備 時間外ナスダック下落、2人と不倫でエヌビディアがファンceo解任準備 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 株探">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T23:20:00.000Z">11/12 08:20</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE1HNk1zb0tVZTFmcjB1V3lxOE5kX05yTU5wUmdsbVZobUdCUHJPNkVTTTl1Y3R1TVZpckRlQVZmdk43VGFhNWZLenV1ckV2ZWFHYkE?oc=5" target="_blank" rel="noopener">時間外ナスダック下落、2人と不倫でエヌビディアがファンCEO解任準備</a></h3>
+  <ul class="summary"><li>時間外ナスダック下落、2人と不倫でエヌビディアがファンCEO解任準備</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">株探</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="NVDA" data-text="エヌビディア株急落、フアンceo不在の将来を投資家が意識 米半導体大手 エヌビディア の株価は11日の時間外取引で急落した。 エヌビディア株は時間外取引で一時10%下落。 ジェンスン・フアン 最高経営責任者（ceo）の退任を巡る懸念が投資家の間で強まった。  エヌビディア bloomberg.com">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T23:19:28.000Z">11/12 08:19</time>
+  </div>
+  <h3><a href="https://www.bloomberg.com/jp/news/articles/2026-11-11/TOD0ZOT9NJLW00" target="_blank" rel="noopener">エヌビディア株急落、フアンCEO不在の将来を投資家が意識</a></h3>
+  <ul class="summary"><li>米半導体大手 エヌビディア の株価は11日の時間外取引で急落した。</li><li>エヌビディア株は時間外取引で一時10%下落。</li><li>ジェンスン・フアン 最高経営責任者（CEO）の退任を巡る懸念が投資家の間で強まった。</li></ul>
+  
+  <footer>
+    <span class="pub">Bloomberg.com</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="AAPL" data-text="米52週高値－ アップル、バークシャー・ハサウェイ 、コカ・コーラ、ヴィアトリスなど(トレーダーズ・ウェブ) 米52週高値－ アップル、バークシャー・ハサウェイ 、コカ・コーラ、ヴィアトリスなど(トレーダーズ・ウェブ) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  アップル yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T23:10:02.000Z">11/12 08:10</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxQdTJfMjE1eDBwSFRYek9LTlRJU3VHRlRMRGpZX2hHTWViQV9UNzdSemFERU5JZENJUERyREI2VHM4U1A1ckpkX3pwVVhnQU1KSGI5SFRubGYxSVd6cDR5WGJUT001U3I3SVEwRWo1Q24zdS02cFpTeHJybWdMRjhZdzVLOTJadm8?oc=5" target="_blank" rel="noopener">米52週高値－ アップル、バークシャー・ハサウェイ 、コカ・コーラ、ヴィアトリスなど(トレーダーズ・ウェブ)</a></h3>
+  <ul class="summary"><li>米52週高値－ アップル、バークシャー・ハサウェイ 、コカ・コーラ、ヴィアトリスなど(トレーダーズ・ウェブ)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">アップル</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="エヌビディアが2.87%反発、wachtell法律事務所を起用しジェンスン・フアン氏巡る問題を調査 モルガン・スタンレーは同時にトップピックから除外 エヌビディアが2.87%反発、wachtell法律事務所を起用しジェンスン・フアン氏巡る問題を調査 モルガン・スタンレーは同時にトップピックから除外 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:55:00.000Z">11/12 07:55</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE9OU2hMdkhyb2hxWEgzcWtxcTNUZWdrU1l2ZGNnSWxGYlM2UE9nYWJwX2xjWHl2VG96RmFHTjVZTF8wWHRfVU1PT0F0ODVGZWdzck5XME1lYmVVUkg2cGZ4azBRcFFNUC10TnprazhDMHROV3NW?oc=5" target="_blank" rel="noopener">エヌビディアが2.87%反発、Wachtell法律事務所を起用しジェンスン・フアン氏巡る問題を調査 モルガン・スタンレーは同時にトップピックから除外</a></h3>
+  <ul class="summary"><li>エヌビディアが2.87%反発、Wachtell法律事務所を起用しジェンスン・フアン氏巡る問題を調査 モルガン・スタンレーは同時にトップピックから除外</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="時間外でコアウィーブ5%安、エヌビディアに追随 時間外でコアウィーブ5%安、エヌビディアに追随 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 株探">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:46:00.000Z">11/12 07:46</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE0tWWJUWHRMM3ZLT1BXVzBGUXFDSjVmOWppWjMxQVRHaFdUQTNtcVZOTl9fd3psNEhvSHlabko5R05DekNheklBSnpqOXZpd2ZVYnc?oc=5" target="_blank" rel="noopener">時間外でコアウィーブ5%安、エヌビディアに追随</a></h3>
+  <ul class="summary"><li>時間外でコアウィーブ5%安、エヌビディアに追随</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">株探</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="不倫認めたジェンスン・フアンceo、エヌビディア取締役会が解任準備 不倫認めたジェンスン・フアンceo、エヌビディア取締役会が解任準備 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 조선일보">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:45:00.000Z">11/12 07:45</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxQX19RcFhSWURrSzE5cEdfekVYSVZIQXAzV3VNbk5pcFhzb3U5b2NYSWZLWW1LOVd2d1Nza1NzNGE0dzktNWVoMC1MTXN1T3phTlhwT1hGcWczZjNPMTNYc21YZ3Y4YWtqT0I0Ml81SF91R1lMc2dtM0szaUMwUWRDag?oc=5" target="_blank" rel="noopener">不倫認めたジェンスン・フアンCEO、エヌビディア取締役会が解任準備</a></h3>
+  <ul class="summary"><li>不倫認めたジェンスン・フアンCEO、エヌビディア取締役会が解任準備</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">조선일보</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="米エヌビディア、フアンｃｅｏの解任を準備＝ｗｓｊ(ロイター) 米エヌビディア、フアンｃｅｏの解任を準備＝ｗｓｊ(ロイター) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:41:32.000Z">11/12 07:41</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxNampYdUxRRkhCa0R0dWxmX3hyd3lFNnM1VUdON09JVXhyTTZicUEtSXktY215blN0b1F1Q3oyY2xHZmRwa3JCTU84d1pTdXZBQUk2OUlvc1V4d3FkUnB2ZVU5RW5jYW55OElLazJqY0FsX0dXM2gweFBWZy1fVGJiQlZiMjdYM2c?oc=5" target="_blank" rel="noopener">米エヌビディア、フアンＣＥＯの解任を準備＝ＷＳＪ(ロイター)</a></h3>
+  <ul class="summary"><li>米エヌビディア、フアンＣＥＯの解任を準備＝ＷＳＪ(ロイター)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア取締役会、フアンｃｅｏ解任の可否決定へ＝関係筋 エヌビディア取締役会、フアンｃｅｏ解任の可否決定へ＝関係筋 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア reuters">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:41:00.000Z">11/12 07:41</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTFA0cnBOdlZ3TVZmY0lUUFA1R2hzQzZVX3FxREVPMnIzZ1VWdzJOaDBTTkptMXpfU2I5M3BoUFFUdjY4Y3FYOVQ2bXN4M0JaX09xWVZxOXFlZXRKUVhRVWZvRTNQQTJDdFZkampwUW52bm50ZVgyaWxXcGNNVllJQQ?oc=5" target="_blank" rel="noopener">エヌビディア取締役会、フアンＣＥＯ解任の可否決定へ＝関係筋</a></h3>
+  <ul class="summary"><li>エヌビディア取締役会、フアンＣＥＯ解任の可否決定へ＝関係筋</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Reuters</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="nvidia、フアンceoの「解任」準備開始、時間外で株価8%急落 nvidia、フアンceoの「解任」準備開始、時間外で株価8%急落 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア investing.com - fx | 株式市場 | ファイナンス | 金融ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:40:00.000Z">11/12 07:40</time>
+  </div>
+  <h3><a href="https://jp.investing.com/news/stock-market-news/article-1753465" target="_blank" rel="noopener">NVIDIA、フアンCEOの「解任」準備開始、時間外で株価8%急落</a></h3>
+  <ul class="summary"><li>NVIDIA、フアンCEOの「解任」準備開始、時間外で株価8%急落</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Investing.com - FX | 株式市場 | ファイナンス | 金融ニュース</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア取締役会、早ければ本日にも開催 wsj エヌビディア取締役会、早ければ本日にも開催 wsj （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア みんかぶ fx/為替">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:31:29.000Z">11/12 07:31</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTFB2RENldDJDdjhhUG1qRWVwbkN5c1NlbmxxQWI4WEtYaG94T0V0d0QtdXMtdEF6Q0ZLb1hVM1RpbjBxU3RKWTZ1cQ?oc=5" target="_blank" rel="noopener">エヌビディア取締役会、早ければ本日にも開催 WSJ</a></h3>
+  <ul class="summary"><li>エヌビディア取締役会、早ければ本日にも開催 WSJ</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">みんかぶ FX/為替</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア時間外で下げ拡大、ファンceo解任に向け準備か エヌビディア時間外で下げ拡大、ファンceo解任に向け準備か （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア みんかぶ fx/為替">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:30:29.000Z">11/12 07:30</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE5qYUxqaEM3bnl1X3NJTHhoZkZpeUdWUkdpci1NUVU3d3d6T1Y3N2MzTi1LVGZodkxYLXRxbF9DRWRPRXIwa3A1LQ?oc=5" target="_blank" rel="noopener">エヌビディア時間外で下げ拡大、ファンCEO解任に向け準備か</a></h3>
+  <ul class="summary"><li>エヌビディア時間外で下げ拡大、ファンCEO解任に向け準備か</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">みんかぶ FX/為替</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="" data-text="【森永乳業】営業利益390億円へ上方修正、株価10％急騰、追い風の理由は筋トレブーム？ 毎日infoseekニュースを使って、楽しくポイントを貯めよう 第２四半期決算（4～9月）の売上高は3,008億円（前年同期比2.6%増）、営業利益は211億円（同1.5%増）で、中間期として過去最高益です。 森永乳業（2264）が11月9日に2027年3月期の中間決算を発表し、通期の営業利益予想を340億円から390億円に引き上げました。  infoseek">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:30:00.000Z">11/12 07:30</time>
+  </div>
+  <h3><a href="https://news.infoseek.co.jp/article/moneyplus_11085/" target="_blank" rel="noopener">【森永乳業】営業利益390億円へ上方修正、株価10％急騰、追い風の理由は筋トレブーム？</a></h3>
+  <ul class="summary"><li>毎日Infoseekニュースを使って、楽しくポイントを貯めよう</li><li>第２四半期決算（4～9月）の売上高は3,008億円（前年同期比2.6%増）、営業利益は211億円（同1.5%増）で、中間期として過去最高益です。</li><li>森永乳業（2264）が11月9日に2027年3月期の中間決算を発表し、通期の営業利益予想を340億円から390億円に引き上げました。</li></ul>
+  
+  <footer>
+    <span class="pub">Infoseek</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア フアンceoの解任を準備中 wsj エヌビディア フアンceoの解任を準備中 wsj （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア みんかぶ fx/為替">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:29:29.000Z">11/12 07:29</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE1hc19oVU1CS1g0Tkk0RTEzZ1Mwb2ZVd1dGOFRSSENYcl85V1FpaHNWVHdiM0IwdjNXRV8wX3VJTkN2eW96b20taw?oc=5" target="_blank" rel="noopener">エヌビディア フアンCEOの解任を準備中 WSJ</a></h3>
+  <ul class="summary"><li>エヌビディア フアンCEOの解任を準備中 WSJ</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">みんかぶ FX/為替</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="エヌビディア株下落、フアンceoの2件目の交際報道で 取締役会調査が拡大 エヌビディア株下落、フアンceoの2件目の交際報道で 取締役会調査が拡大 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:25:00.000Z">11/12 07:25</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE5LdUxnNGJMUnFJaFpCWVJFcWRwckp6WXBEX1o2OS1MeTBEbWJsZUtPaVJYYnVOci1LZWdRR1hNVl9ISTl0MURmV2d5VnQ3aWhuRVd4bWxXZUJlU0M1OHZhLS1vWDNaSlBkZTctdENWWEJLNmdN?oc=5" target="_blank" rel="noopener">エヌビディア株下落、フアンCEOの2件目の交際報道で 取締役会調査が拡大</a></h3>
+  <ul class="summary"><li>エヌビディア株下落、フアンCEOの2件目の交際報道で 取締役会調査が拡大</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="フアン氏、エヌビディア幹部と不倫関係にあったと関係者－nyタイムズ フアン氏、エヌビディア幹部と不倫関係にあったと関係者－nyタイムズ （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア bloomberg.com">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:17:09.000Z">11/12 07:17</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE53ZU1QTmR5V3Z5MUpmZHZWcUZmTkY4ZjhPaWlvSEZCQlF5ZVlpelhEa1ZsUmFlS1BQZFBJSTZYNkNzbVB4aGpMSjl1YktmOVEtRk44azR5M1Y1emtZR3BOSXdfNEhnQllickFoenlxNGhNak1yQ3Br?oc=5" target="_blank" rel="noopener">フアン氏、エヌビディア幹部と不倫関係にあったと関係者－NYタイムズ</a></h3>
+  <ul class="summary"><li>フアン氏、エヌビディア幹部と不倫関係にあったと関係者－NYタイムズ</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Bloomberg.com</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="三菱商事、三井物産、創業家が前代未聞の争い…「純正ごま油」かどや製油で起きている買収合戦《tob価格の行く末は？》 三菱商事、三井物産、創業家が前代未聞の争い…「純正ごま油」かどや製油で起きている買収合戦《tob価格の行く末は？》 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  au webポータル">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:10:00.000Z">11/12 07:10</time>
+  </div>
+  <h3><a href="https://article.auone.jp/96e5817d-7a26-463a-8f19-9809bc4a7fc7" target="_blank" rel="noopener">三菱商事、三井物産、創業家が前代未聞の争い…「純正ごま油」かどや製油で起きている買収合戦《TOB価格の行く末は？》</a></h3>
+  <ul class="summary"><li>三菱商事、三井物産、創業家が前代未聞の争い…「純正ごま油」かどや製油で起きている買収合戦《TOB価格の行く末は？》</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">au Webポータル</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="negative" data-tickers="NVDA" data-text="エヌビディアceoに「新たな不倫疑惑」浮上、時間外で株価急落 エヌビディアceoに「新たな不倫疑惑」浮上、時間外で株価急落 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア investing.com - fx | 株式市場 | ファイナンス | 金融ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:07:00.000Z">11/12 07:07</time>
+  </div>
+  <h3><a href="https://jp.investing.com/news/stock-market-news/article-1753427" target="_blank" rel="noopener">エヌビディアCEOに「新たな不倫疑惑」浮上、時間外で株価急落</a></h3>
+  <ul class="summary"><li>エヌビディアCEOに「新たな不倫疑惑」浮上、時間外で株価急落</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Investing.com - FX | 株式市場 | ファイナンス | 金融ニュース</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="macro" data-sent="negative" data-tickers="" data-text="fx・為替相場の注目指標や予想を解説 - 11月12日(木)■『米ドル、日本円、ユーロの方向性』と『米国の国債利回りの動向(米国の長期金利)』、そして『米国の金融政策への思惑』に注目！ - 初心者必見のfx総合情報サイト 本日は、 米ドル、日本円、ユーロの方向性 、 米国の長期金利の動向(米国債利回りの動向) 、 米国の金融政策への思惑 、 為替介入への思惑 が重要となる。 本日の為替相場の焦点は、『米ドル、日本円、ユーロの方向性』と『米国の国債利回りの動向(米国の長期金利)』、そして『米国の金融政策への思惑』にあり。  ザイfx！">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:04:00.000Z">11/12 07:04</time>
+  </div>
+  <h3><a href="https://zai.diamond.jp/articles/-/498889" target="_blank" rel="noopener">FX・為替相場の注目指標や予想を解説 - 11月12日(木)■『米ドル、日本円、ユーロの方向性』と『米国の国債利回りの動向(米国の長期金利)』、そして『米国の金融政策への思惑』に注目！</a></h3>
+  <ul class="summary"><li>- 初心者必見のFX総合情報サイト</li><li>本日は、 米ドル、日本円、ユーロの方向性 、 米国の長期金利の動向(米国債利回りの動向) 、 米国の金融政策への思惑 、 為替介入への思惑 が重要となる。</li><li>本日の為替相場の焦点は、『米ドル、日本円、ユーロの方向性』と『米国の国債利回りの動向(米国の長期金利)』、そして『米国の金融政策への思惑』にあり。</li></ul>
+  
+  <footer>
+    <span class="pub">ザイFX！</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="6758" data-text="ソニーも！ai売りの震源｢電機株｣なのに逆に値上がりした21社 ソニーも！ai売りの震源｢電機株｣なのに逆に値上がりした21社 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  ソニーグループ 四季報オンライン">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T22:00:00.000Z">11/12 07:00</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiV0FVX3lxTFBvVlVYNTVvZHl5bEc5QVl6Y054REQwcEhoQTVuT1Vwa29zWFZ5VlN4RGtMYkpBLXp1blQzRi1IeGFjR09tWDAzSGlSU1N4dU03SjdRV2hCaw?oc=5" target="_blank" rel="noopener">ソニーも！AI売りの震源｢電機株｣なのに逆に値上がりした21社</a></h3>
+  <ul class="summary"><li>ソニーも！AI売りの震源｢電機株｣なのに逆に値上がりした21社</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">四季報オンライン</span>
+    <span class="tag watch">ソニーグループ</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="macro" data-sent="positive" data-tickers="" data-text="【今日のドル円】昨日の振り返りと今日のドル円相場見通し「米利上げ観測で160円目前へ急伸、本邦介入への警戒強まる」 2026年11月12日 ニューヨーク市場： 米利上げ観測の再燃でドル全面高、一時159円94銭まで急伸 10月米消費者物価指数（cpi）が上振れたことを背景に、 シカゴ連銀のグールズビー総裁が「インフレは間違った方向に推移」「サービスインフレが高すぎる」と発言したほか、 ウォラー理事やローガン総裁らも高インフレへの懸念と0. 50%（50bp 12月fomcをはじめ来年にかけての米利上げ観測が急浮上し、 日米金利差の拡大を見込んだドル買いが強まった。  外為どっとコム">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T21:59:00.000Z">11/12 06:59</time>
+  </div>
+  <h3><a href="https://www.gaitame.com/media/entry/2026/11/12/065921" target="_blank" rel="noopener">【今日のドル円】昨日の振り返りと今日のドル円相場見通し「米利上げ観測で160円目前へ急伸、本邦介入への警戒強まる」 2026年11月12日</a></h3>
+  <ul class="summary"><li>ニューヨーク市場： 米利上げ観測の再燃でドル全面高、一時159円94銭まで急伸</li><li>10月米消費者物価指数（CPI）が上振れたことを背景に、 シカゴ連銀のグールズビー総裁が「インフレは間違った方向に推移」「サービスインフレが高すぎる」と発言したほか、 ウォラー理事やローガン総裁らも高インフレへの懸念と0. 50%（50bp</li><li>12月FOMCをはじめ来年にかけての米利上げ観測が急浮上し、 日米金利差の拡大を見込んだドル買いが強まった。</li></ul>
+  
+  <footer>
+    <span class="pub">外為どっとコム</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="neutral" data-tickers="NVDA" data-text="〔ny株式のポイント〕コアウィーブ24％超急騰、エヌビディアも反発（11日）(時事通信) 〔ny株式のポイント〕コアウィーブ24％超急騰、エヌビディアも反発（11日） △コアウィーブ＝24．71％高の60．77ドルに急騰。 ny株、237ドル安＝ナスダックは反発  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T21:37:29.000Z">11/12 06:37</time>
+  </div>
+  <h3><a href="https://finance.yahoo.co.jp/news/detail/d6aced7ed9aa50df63b7dd2ce6334a2232f92262" target="_blank" rel="noopener">〔NY株式のポイント〕コアウィーブ24％超急騰、エヌビディアも反発（11日）(時事通信)</a></h3>
+  <ul class="summary"><li>〔NY株式のポイント〕コアウィーブ24％超急騰、エヌビディアも反発（11日）</li><li>△コアウィーブ＝24．71％高の60．77ドルに急騰。</li><li>NY株、237ドル安＝ナスダックは反発</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="positive" data-tickers="NVDA" data-text="nyダウ、反発し254ドル高 コアウィーブやnvidiaに買い nyダウ、反発し254ドル高 コアウィーブやnvidiaに買い （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 日本経済新聞">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T21:27:24.000Z">11/12 06:27</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE1uU0o2V1dkdE9tbzVUZ0RSWlN2TEFDYjhLT0RRM0NXbWdjTTFjQ241SEJDQVpWSUJUTGtLb1JwZnhyY1RrVzNrWWR1aDZKNlZlbkdZTHk1VkEyQ3ZPVW9HMUNlbXUxeHppbmMxag?oc=5" target="_blank" rel="noopener">NYダウ、反発し254ドル高 コアウィーブやNVIDIAに買い</a></h3>
+  <ul class="summary"><li>NYダウ、反発し254ドル高 コアウィーブやNVIDIAに買い</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">日本経済新聞</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="7203" data-text="【本日の材料と銘柄】トヨタ、米で軽トラ発売トヨタ、米で軽トラ「kei-01」発売(フィスコ) 【本日の材料と銘柄】トヨタ、米で軽トラ発売トヨタ、米で軽トラ「kei-01」発売(フィスコ) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  トヨタ自動車 yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T21:22:53.000Z">11/12 06:22</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxObUFkUFJoUEV2cGM4VkZBU3U4QWtrRTU3Nk5Cb3cxLWNoZXVlOUlEc19TcHNlR0xJSGRiMEVSMHRKREdOR1ZnT3hDdUpnT0h3Q25hUzRIWFlxa1l0WTUydDVSWHVzOWQwWnU4RDdwN2xvUTJXWm1pMkJ4ZDhtRUFvSngwSGhZd2M?oc=5" target="_blank" rel="noopener">【本日の材料と銘柄】トヨタ、米で軽トラ発売トヨタ、米で軽トラ「KEI-01」発売(フィスコ)</a></h3>
+  <ul class="summary"><li>【本日の材料と銘柄】トヨタ、米で軽トラ発売トヨタ、米で軽トラ「KEI-01」発売(フィスコ)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">トヨタ自動車</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="AAPL" data-text="アップル株が最高値更新、時価総額5兆ドル突破 米証券各社も強気 アップル株が最高値更新、時価総額5兆ドル突破 米証券各社も強気 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  アップル investing.com - fx | 株式市場 | ファイナンス | 金融ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T20:45:00.000Z">11/12 05:45</time>
+  </div>
+  <h3><a href="https://jp.investing.com/news/company-news/article-93CH-1753321" target="_blank" rel="noopener">アップル株が最高値更新、時価総額5兆ドル突破 米証券各社も強気</a></h3>
+  <ul class="summary"><li>アップル株が最高値更新、時価総額5兆ドル突破 米証券各社も強気</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Investing.com - FX | 株式市場 | ファイナンス | 金融ニュース</span>
+    <span class="tag watch">アップル</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="7203" data-text="トヨタ自動車の宮本眞志氏 デミング賞特別功労・実践賞 トヨタ自動車の宮本眞志氏 デミング賞特別功労・実践賞 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  トヨタ自動車 中部経済新聞">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T20:00:00.000Z">11/12 05:00</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE5BWGtObEZzVmwwTmNMa3U2X0FCWHRyNzFPNWppcVlfY0RvREJpR19ldkdfYlhPenloY1dxeFoyTjZJVGk4SmJLSlFnV3dQUUhqUzhNcHNzN2tfZjJDeF9Da3c1d0ppRU9QU1F4bEwxRjdzZkk?oc=5" target="_blank" rel="noopener">トヨタ自動車の宮本眞志氏 デミング賞特別功労・実践賞</a></h3>
+  <ul class="summary"><li>トヨタ自動車の宮本眞志氏 デミング賞特別功労・実践賞</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">中部経済新聞</span>
+    <span class="tag watch">トヨタ自動車</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA AAPL" data-text="アナリスト、アップル・マイクロソフト・エヌビディアを「5,000ドルのバイ・アンド・ホールド」テック銘柄に選定 アナリスト、アップル・マイクロソフト・エヌビディアを「5,000ドルのバイ・アンド・ホールド」テック銘柄に選定 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア アップル biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T19:25:00.000Z">11/12 04:25</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTFBWSUlKdTNuaWNENmVVd0hLSFBYbWpXcENMY2o3aHUwbUhfTEJ0T1FPSkt2NndlZGwwOUxUVW9tRXMyMnZSUEktWEx3aHJNLUlqUHJ4TEZrVTl3MmxKSzNpQ1ZOTWlpcS1EekdEazVPbDNpeVAy?oc=5" target="_blank" rel="noopener">アナリスト、アップル・マイクロソフト・エヌビディアを「5,000ドルのバイ・アンド・ホールド」テック銘柄に選定</a></h3>
+  <ul class="summary"><li>アナリスト、アップル・マイクロソフト・エヌビディアを「5,000ドルのバイ・アンド・ホールド」テック銘柄に選定</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス<span class="muted">・2経路</span></span>
+    <span class="tag watch">エヌビディア</span><span class="tag watch">アップル</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="coreweave好決算でai株が反撃、エヌビディアは醜聞の陰り払い4%超反発 coreweave好決算でai株が反撃、エヌビディアは醜聞の陰り払い4%超反発 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T19:09:49.000Z">11/12 04:09</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE9SSWVNYnoya3p4ZFFteTY5bW03ZkdYQmxNM3Y5cXloeUhjWGdPLURhRHJpZWhld3I1V3Z2MTh2eFdNOXZ1enpJdm1UbVQteEEwb3JVR3RsZDNLVEZVQWJrVExkTm42dEhkZlBKN2dpRUhjVDlH?oc=5" target="_blank" rel="noopener">CoreWeave好決算でAI株が反撃、エヌビディアは醜聞の陰り払い4%超反発</a></h3>
+  <ul class="summary"><li>CoreWeave好決算でAI株が反撃、エヌビディアは醜聞の陰り払い4%超反発</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディアの1.7兆ドル消失、バリュー投資家は「まだ」と慎重姿勢 アルファベット、asml、マイクロソフトを選好 エヌビディアの1.7兆ドル消失、バリュー投資家は「まだ」と慎重姿勢 アルファベット、asml、マイクロソフトを選好 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T19:09:45.000Z">11/12 04:09</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE5Jd0h6NmdyWkR6dm5odU5pQ1owMmtYemQ0NVc2VENZdXMzRktvUEFhLXRJLTZYRm9ra0ZfeENwdjBCWXRFVlczOHAzeTltWE5wTUZPSHV1MzZsaURLNGFRcGZXZExObS0zS1Nza1RNdFMzbkxj?oc=5" target="_blank" rel="noopener">エヌビディアの1.7兆ドル消失、バリュー投資家は「まだ」と慎重姿勢 アルファベット、ASML、マイクロソフトを選好</a></h3>
+  <ul class="summary"><li>エヌビディアの1.7兆ドル消失、バリュー投資家は「まだ」と慎重姿勢 アルファベット、ASML、マイクロソフトを選好</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="速報：エヌビディアの反発でテクノロジー株が急伸、株式市場は盘中上昇 速報：エヌビディアの反発でテクノロジー株が急伸、株式市場は盘中上昇 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T18:41:02.000Z">11/12 03:41</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQbUJpYkVjSmFQbW5IZHhVX0RPNmFZSDZueFd3bno4RlhNcE0tdXBKWDBnbUd2YnVnTUxhTjBCXzd1YTZhd0dobjNyby1wWXR2cEE0QjZCRVBfMm50WXB2a0ptOXY1a010cnpaQWo3Y1JBT2ZtdUJQd3JjQTExVS01dWVmYm1wSnlrdjlmSlQxUHgtbTJxT0xIRXNBSEU5Y3gtbGZKVWhhRkE1MnRWX2ZTdg?oc=5" target="_blank" rel="noopener">速報：エヌビディアの反発でテクノロジー株が急伸、株式市場は盘中上昇</a></h3>
+  <ul class="summary"><li>速報：エヌビディアの反発でテクノロジー株が急伸、株式市場は盘中上昇</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="AAPL" data-text="アップルの「iphone pro」シリーズ、duoモデルの待ち時間が短縮傾向にあるとubsが指摘 アップルの「iphone pro」シリーズ、duoモデルの待ち時間が短縮傾向にあるとubsが指摘 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  アップル moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T17:07:02.000Z">11/12 02:07</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxNaE9SXzg3S21iVzRtTWN4QmdNZVBsek9DNXJIMVZOR3h2REhvN0FCb2tGbk9ybmkzbWRSeXlCTC1ZSzEzdUpkbERFZGpVM2U5dDZlc0hZZUV3TmNMcHg1ZWJKeF9UUlhXSUVXbmw3cUNNbC0xSEV5V1pUTVlncU5DVXRoT3JDMGxpU2o0ODJLeC1TNDJ0aDZocVhmNDZXMUFaV09NMl9iRQ?oc=5" target="_blank" rel="noopener">アップルの「iPhone Pro」シリーズ、Duoモデルの待ち時間が短縮傾向にあるとUBSが指摘</a></h3>
+  <ul class="summary"><li>アップルの「iPhone Pro」シリーズ、Duoモデルの待ち時間が短縮傾向にあるとUBSが指摘</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">アップル</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="米財務長官、商務長官に禁輸先送りを追及 エヌビディアceo交際相手の企業巡り 米財務長官、商務長官に禁輸先送りを追及 エヌビディアceo交際相手の企業巡り （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T17:05:00.000Z">11/12 02:05</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE9kNkhxQjdfU3M3S0JWbnNsenZkSEFDN3NMQXBIN2daRm01eHZmZWEyYXFSemlmeE1qdk9HNTR3ZjZnM1NWb1h5MENKeVpyY1NuLUF6d1ViNEhqWnVZTFVQZi1xbDlSMWFtYW5jcVgtRHNCZEdE?oc=5" target="_blank" rel="noopener">米財務長官、商務長官に禁輸先送りを追及 エヌビディアCEO交際相手の企業巡り</a></h3>
+  <ul class="summary"><li>米財務長官、商務長官に禁輸先送りを追及 エヌビディアCEO交際相手の企業巡り</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="NVDA" data-text="フィラデルフィア半導体指数が月間で21%急落、ゴールドマン・サックスは逆張りで「売られ過ぎ」と指摘、エヌビディアなどai半導体株3銘柄を挙げる 米国のai算力関連株は最近、激しい売りにさらされている。 投資家は選挙結果がaiデータセンター建設のペースに与える潜在的な影響を評価し始め、s&amp;p 500指数は1日で4.3%急落し、時価総額は一気に3兆ドル（約479.5兆円）消失した。 ダウ工業株30種平均は1,800ポイント急落し、2020年以来最悪の1日下落を記録。  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T16:26:00.000Z">11/12 01:26</time>
+  </div>
+  <h3><a href="https://finance.biggo.jp/news/3cf5156f-0912-4bc1-a6cb-befc6d12a717" target="_blank" rel="noopener">フィラデルフィア半導体指数が月間で21%急落、ゴールドマン・サックスは逆張りで「売られ過ぎ」と指摘、エヌビディアなどAI半導体株3銘柄を挙げる</a></h3>
+  <ul class="summary"><li>米国のAI算力関連株は最近、激しい売りにさらされている。</li><li>投資家は選挙結果がAIデータセンター建設のペースに与える潜在的な影響を評価し始め、S&amp;P 500指数は1日で4.3%急落し、時価総額は一気に3兆ドル（約479.5兆円）消失した。</li><li>ダウ工業株30種平均は1,800ポイント急落し、2020年以来最悪の1日下落を記録。</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="コアウィーブが21%急騰、エヌビディアも連れ高となり空売り勢を痛撃：ショートセラー・トラッカー コアウィーブが21%急騰、エヌビディアも連れ高となり空売り勢を痛撃：ショートセラー・トラッカー （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T15:46:12.000Z">11/12 00:46</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxOek50LUVKUTN2YnZxWTE1U3M4QUl6OWFFSTlRSWZ1VFczVDUzbmVUUnpwMjloMDAwcU1JdHZBUmRMTXhkbVNQRXJOLVZETHVqRndCbnhveGZvYWpsUFFxdGsxdXdPTHV2ejNDOHNORndmdzgtODljcW5MdzdwUnY0enhsemtHNV9mUDJYc1JvZU1BTzVwUXNtWExaRXlGOC1OM3ZIRndQMkkwdnAxeUxROHVMa1JXUjA?oc=5" target="_blank" rel="noopener">コアウィーブが21%急騰、エヌビディアも連れ高となり空売り勢を痛撃：ショートセラー・トラッカー</a></h3>
+  <ul class="summary"><li>コアウィーブが21%急騰、エヌビディアも連れ高となり空売り勢を痛撃：ショートセラー・トラッカー</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="AAPL" data-text="$アップル (aapl.us)$[しかめつら] $アップル (aapl.us)$[しかめつら] （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  アップル moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T15:33:39.000Z">11/12 00:33</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiekFVX3lxTE1UUGFkWkVSdXpJTWtvc1dUalBBbU5fX3h4dDBWc0FrWTFZM0dzd0FFeHY3SV9VR2pNTnNadEtxbnZCcHR0T0JlZVQwTmljZk9ZOGNIYk5qS2VrTlROYmt2djZMVUlGZ19Kb3dRQjlTNXM4d25JcFR1U3hB?oc=5" target="_blank" rel="noopener">$アップル (AAPL.US)$[しかめつら]</a></h3>
+  <ul class="summary"><li>$アップル (AAPL.US)$[しかめつら]</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">アップル</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="エヌビディア株が反発、従業員の9割はファンceo続投を支持 エヌビディア株が反発、従業員の9割はファンceo続投を支持 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア investing.com - fx | 株式市場 | ファイナンス | 金融ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T15:10:00.000Z">11/12 00:10</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE5rampFVHV4TzVYRFhNZXpIQ3pCanVERy1SQWhKTEV0VUw1RHZuNU9PaVpjMGtOM3AyMFpmOGFDTEtMcmR3U1dvMUFaNjF3cGdaa19TS2hUQUdaaGM0OVloaGgyUDQ5LThyWk1BOXVBMHM?oc=5" target="_blank" rel="noopener">エヌビディア株が反発、従業員の9割はファンCEO続投を支持</a></h3>
+  <ul class="summary"><li>エヌビディア株が反発、従業員の9割はファンCEO続投を支持</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Investing.com - FX | 株式市場 | ファイナンス | 金融ニュース</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="英個人投資家がエヌビディアに殺到、ceo不倫スキャンダルで時価総額4,300億ドル消失 英個人投資家がエヌビディアに殺到、ceo不倫スキャンダルで時価総額4,300億ドル消失 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T15:05:00.000Z">11/12 00:05</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE1LVDFEWkZHbjRxVGFnNEhXTW1IbklTYV92azk1SlY1UEhkdlVobFBtczdJRHVBdFV3eFJ1dGo2SDJkWGoxeG1BWEZBdndvZnQ3SXI5TGl5VTFBanRTTFB4RVJBTDd5WklTOHI3QThfbkhiSFdv?oc=5" target="_blank" rel="noopener">英個人投資家がエヌビディアに殺到、CEO不倫スキャンダルで時価総額4,300億ドル消失</a></h3>
+  <ul class="summary"><li>英個人投資家がエヌビディアに殺到、CEO不倫スキャンダルで時価総額4,300億ドル消失</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="macro" data-sent="positive" data-tickers="" data-text="ビットコイン反発の鍵は「利上げ鈍化」 利下げ前でも追い風に＝binance research 主要国の中央銀行による利上げペースが鈍化すれば、実際の利下げ開始を待たずにビットコイン相場の追い風になる可能性がある。 coinmarketcapベースでは7万3700ドル（約1105万5000円）近辺で推移しており、直近1週間では3.4%下落、過去1年では約30%下落した。 史上最高値（ath）の12万6198ドル（約1892万9700円）と比べると、なお約41%低い水準にある。  디지털투데이">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-11T15:01:00.000Z">11/12 00:01</time>
+  </div>
+  <h3><a href="https://www.digitaltoday.co.kr/jp/view/124394/when-will-bitcoin-rebound-binance-points-to-interest-rate-conditions" target="_blank" rel="noopener">ビットコイン反発の鍵は「利上げ鈍化」 利下げ前でも追い風に＝Binance Research</a></h3>
+  <ul class="summary"><li>主要国の中央銀行による利上げペースが鈍化すれば、実際の利下げ開始を待たずにビットコイン相場の追い風になる可能性がある。</li><li>CoinMarketCapベースでは7万3700ドル（約1105万5000円）近辺で推移しており、直近1週間では3.4%下落、過去1年では約30%下落した。</li><li>史上最高値（ATH）の12万6198ドル（約1892万9700円）と比べると、なお約41%低い水準にある。</li></ul>
+  
+  <footer>
+    <span class="pub">디지털투데이</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="positive" data-tickers="" data-text="株価 値上がり 多くの銘柄に買い注文 ny市場の流れ受け 12日の東京株式市場、ニューヨーク市場で株価が上昇した流れを受けて、多くの銘柄に買い注文が広がり、日経平均株価は値上がりしています。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  nhk 経済">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-12T03:17:49.000Z">11/12 12:17</time>
+  </div>
+  <h3><a href="https://news.web.nhk/newsweb/na/nd-20261112de74676" target="_blank" rel="noopener">株価 値上がり 多くの銘柄に買い注文 NY市場の流れ受け</a></h3>
+  <ul class="summary"><li>12日の東京株式市場、ニューヨーク市場で株価が上昇した流れを受けて、多くの銘柄に買い注文が広がり、日経平均株価は値上がりしています。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">NHK 経済</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="日経平均、午前の終値は４６５円高の６万１７１４円 日経平均、午前の終値は４６５円高の６万１７１４円 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  infoseek">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T03:13:00.000Z">11/12 12:13</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMickFVX3lxTE9WME5jNHN3NVA5QS0yUWlfSmxnZ0dOaGhqNmtib05yYlY1cWRFc1lyazhFVDJuc2lDWG1YZ1p6T2hZc29lNkY2S2R3MjZWalYtZVZPOWdHcGdTN0R6QkVRYkZPeGZnMHp6ZUdnS2RUUGpnUQ?oc=5" target="_blank" rel="noopener">日経平均、午前の終値は４６５円高の６万１７１４円</a></h3>
+  <ul class="summary"><li>日経平均、午前の終値は４６５円高の６万１７１４円</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Infoseek</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="positive" data-tickers="" data-text="日経平均株価は続伸 午前終値は465円高の6万1714円 日経平均株価は続伸 午前終値は465円高の6万1714円 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  日本経済新聞">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-12T03:07:04.000Z">11/12 12:07</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE00LUhDZDJpTlVreEJjOGVucGViOXRMWjQwVlBiU2F4R2UyN0lBcDVPZ25HXzk3dnF5MWIzdXVWM2FocVRZQldTaEVvUGZEUVRvdWctOVVoMTR6UFFQSGZMcXYtZER6dE5sdWZWQg?oc=5" target="_blank" rel="noopener">日経平均株価は続伸 午前終値は465円高の6万1714円</a></h3>
+  <ul class="summary"><li>日経平均株価は続伸 午前終値は465円高の6万1714円</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">日本経済新聞</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="macro" data-sent="positive" data-tickers="" data-text="日銀・浅田委員、利上げペースに慎重論 物価高は「需要主導でない」 日本銀行の浅田統一郎審議委員は12日、長崎市で開いた金融経済懇談会で挨拶し、足元の物価上昇について「必ずしも需要主導で生じているわけではない」との認識を示した。 日銀は9月の金融政策決定会合で政策金利を1.0％程度から1.25％へ引き上げ、10月の会合では据え置きを決めている。 浅田委員は、物価上昇率が日銀の目標である2％を上回る状態が続けば経済に悪影響を及ぼし得る一方、過去および今後の利上げが経済活動や基調的な物価上昇率を押し下げるリスクも排除できないと指摘。  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-12T02:56:00.000Z">11/12 11:56</time>
+  </div>
+  <h3><a href="https://finance.biggo.jp/news/2c91622c-927c-4ae5-bfe9-8881d2046e95" target="_blank" rel="noopener">日銀・浅田委員、利上げペースに慎重論 物価高は「需要主導でない」</a></h3>
+  <ul class="summary"><li>日本銀行の浅田統一郎審議委員は12日、長崎市で開いた金融経済懇談会で挨拶し、足元の物価上昇について「必ずしも需要主導で生じているわけではない」との認識を示した。</li><li>日銀は9月の金融政策決定会合で政策金利を1.0％程度から1.25％へ引き上げ、10月の会合では据え置きを決めている。</li><li>浅田委員は、物価上昇率が日銀の目標である2％を上回る状態が続けば経済に悪影響を及ぼし得る一方、過去および今後の利上げが経済活動や基調的な物価上昇率を押し下げるリスクも排除できないと指摘。</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="４６５円高の６万１７１４円１６銭＝１２日午前の平均株価 ４６５円高の６万１７１４円１６銭＝１２日午前の平均株価 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  excite エキサイト">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T02:50:00.000Z">11/12 11:50</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTFBvTV9JSkZQMWFILUVVNUZXT0dKNFpOMjRVYTN6azYwTDJPSWlQb1pKcXA5RDJLOTlianJOcXpUMlJyZVNFSl9hYTdXQWtxeDdDTjBNd1p0cGV5YnlDOWJVYw?oc=5" target="_blank" rel="noopener">４６５円高の６万１７１４円１６銭＝１２日午前の平均株価</a></h3>
+  <ul class="summary"><li>４６５円高の６万１７１４円１６銭＝１２日午前の平均株価</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Excite エキサイト</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="【速報】東証、午前終値465円高 【速報】東証、午前終値465円高 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  47news">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T02:34:33.000Z">11/12 11:34</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiS0FVX3lxTE1TVF8xOWZVcF9udHVtblhiUTMyRzlrN09HTHEwTUg2XzhnajV6NFNyVU9qSlJYcElaLVNSU1E3VWVWYjVuTE53cW5Lbw?oc=5" target="_blank" rel="noopener">【速報】東証、午前終値465円高</a></h3>
+  <ul class="summary"><li>【速報】東証、午前終値465円高</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">47NEWS</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="東証、午前終値４６５円高｜全国のニュース｜web東奥 東証、午前終値４６５円高｜全国のニュース｜web東奥 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  東奥日報社">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T02:34:33.000Z">11/12 11:34</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiWEFVX3lxTE5yRFJnbzFPeFFidzVORkRidnI4anZkRTVvUnY2ckpsdHlRQmlVZzVmYnNJUmJsb1FYQm5Fd3A2YXg3ZlVfQURWMGwzWUZNblYtN2dCMkR2ZVc?oc=5" target="_blank" rel="noopener">東証、午前終値４６５円高｜全国のニュース｜Web東奥</a></h3>
+  <ul class="summary"><li>東証、午前終値４６５円高｜全国のニュース｜Web東奥</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">東奥日報社</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="東証、午前終値465円高 東証、午前終値465円高 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  ｄメニューニュース">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T02:34:00.000Z">11/12 11:34</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxNWEtmZ3pnVkFJSjFYYWYxWE9jVUc2d0JoekszM2pRMllSTUYzN0t4VVlpTTVxRm9RVkR5WGtCZndDcVVRbnA3MVloRzFlblpMWkZiTnEwM2xpOXBYOU5uUFNLNVBpYnNjY3FMdHNsdUM2QWpHTWhpRGZWZHdSM200NzM0dlBZMGptblJnODBiV3M3a3NybzA1T2Z0dHJmTDRwbUxSeWd4Y2pqS014R0NJV3hBZlUyZGxVNzRQTGV5UTRicVI3aC1qWlo1NDE3OEp2bXpBZzZ6YV9qSUFWU2Z2MXp6VdIBkwFBVV95cUxOQk1INjJpajRVS0wxdkN3d2JmNWQ2M0ppQUlFTjlyN0F0ZTRNa0I0cFNnRnR4Y1hLVW5XWjlxMnozUS1JYkdSSjBMUEE0dFYxWXNPZXlMNzk5S3QwLVgySzg0SkVaSnJGZkRic0pnR0NOUU5NVmg5RENSUjdzcU9mdTRnQVV6aVdKZ2djTWVmaVR0Q2s?oc=5" target="_blank" rel="noopener">東証、午前終値465円高</a></h3>
+  <ul class="summary"><li>東証、午前終値465円高</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">ｄメニューニュース</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="positive" data-tickers="" data-text="菓子大手のブルボン､主力のビスケットが好調で通期営業益を上方修正 大袋商品の販売も伸長 | 政治・経済・投資 | 東洋経済オンライン 菓子大手のブルボンが今2027年3月期の通期会社計画を上方修正しました。 その背景には会社の主力商品であるビスケット部門の好調があります。 （自動要約なし。原文を参照してください）  東洋経済オンライン">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-12T02:30:00.000Z">11/12 11:30</time>
+  </div>
+  <h3><a href="https://toyokeizai.net/articles/-/963922?utm_source=rss&amp;utm_medium=http&amp;utm_campaign=link_back" target="_blank" rel="noopener">菓子大手のブルボン､主力のビスケットが好調で通期営業益を上方修正 大袋商品の販売も伸長 | 政治・経済・投資 | 東洋経済オンライン</a></h3>
+  <ul class="summary"><li>菓子大手のブルボンが今2027年3月期の通期会社計画を上方修正しました。</li><li>その背景には会社の主力商品であるビスケット部門の好調があります。</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">東洋経済オンライン</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="macro" data-sent="negative" data-tickers="" data-text="日銀委員、利上げで経済減速懸念 「ペースに留意する必要ある」 日銀の浅田統一郎審議委員は１２日、長崎市で講演し「利上げが経済を下振れさせ、基調的な物価上昇率の押し下げにつながるリスクに留意する必要がある」と述べ、経済の減速に警戒感を示した。 日銀は９月の金融政策決定会合で政策金利を１・０％程度から１・２５％に引き上げることを決定。 浅田氏は９月会合で「経済の状況は必ずしも強いとは言えない」として利上げに反対した。  沖縄タイムス社">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-11-12T02:16:24.000Z">11/12 11:16</time>
+  </div>
+  <h3><a href="https://www.okinawatimes.co.jp/articles/-/1964590" target="_blank" rel="noopener">日銀委員、利上げで経済減速懸念 「ペースに留意する必要ある」</a></h3>
+  <ul class="summary"><li>日銀の浅田統一郎審議委員は１２日、長崎市で講演し「利上げが経済を下振れさせ、基調的な物価上昇率の押し下げにつながるリスクに留意する必要がある」と述べ、経済の減速に警戒感を示した。</li><li>日銀は９月の金融政策決定会合で政策金利を１・０％程度から１・２５％に引き上げることを決定。</li><li>浅田氏は９月会合で「経済の状況は必ずしも強いとは言えない」として利上げに反対した。</li></ul>
+  
+  <footer>
+    <span class="pub">沖縄タイムス社</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="macro" data-sent="neutral" data-tickers="" data-text="米ｆｒｂ、利上げペース加速も インフレ上振れ、後手回避 米連邦準備制度理事会（ｆｒｂ）のビル＝ワシントン（ａｆｐ時事） 金利先物市場では、ｆｒｂが１２月会合で通常の２倍に当たる０．５％利上げを決めるとの見方が浮上。 景気が底堅さを保つ中、ｆｒｂは物価安定の実現を優先し、１２月の金融政策会合で２会合ぶりの利上げに踏み切る公算が大きい。  時事通信">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T02:00:00.000Z">11/12 11:00</time>
+  </div>
+  <h3><a href="https://www.jiji.com/jc/article?k=2026111100633&amp;g=int&amp;m=rss" target="_blank" rel="noopener">米ＦＲＢ、利上げペース加速も インフレ上振れ、後手回避</a></h3>
+  <ul class="summary"><li>米連邦準備制度理事会（ＦＲＢ）のビル＝ワシントン（ＡＦＰ時事）</li><li>金利先物市場では、ＦＲＢが１２月会合で通常の２倍に当たる０．５％利上げを決めるとの見方が浮上。</li><li>景気が底堅さを保つ中、ＦＲＢは物価安定の実現を優先し、１２月の金融政策会合で２会合ぶりの利上げに踏み切る公算が大きい。</li></ul>
+  
+  <footer>
+    <span class="pub">時事通信</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="negative" data-tickers="" data-text="円相場、1ドル159円台後半に下落 財務官が円買い介入示唆（毎日新聞） 12日未明の外国為替市場で円相場が下落し、一時1ドル＝159円台後半を付けて節目の160円に迫った。 午前9時現在は、前日比86銭円安・ドル高の1ドル＝159円73～75銭。 根強い物価上昇（インフレ）への懸念から米国の利上げ観測が強まり、日米の金利差拡大が意識され、円売り・ドル買いが進んだ。  yahoo!ニュース">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-11-12T01:59:23.000Z">11/12 10:59</time>
+  </div>
+  <h3><a href="https://news.yahoo.co.jp/articles/4bb4ef8ed6656d1a4951fb7560ceb667974465b9" target="_blank" rel="noopener">円相場、1ドル159円台後半に下落 財務官が円買い介入示唆（毎日新聞）</a></h3>
+  <ul class="summary"><li>12日未明の外国為替市場で円相場が下落し、一時1ドル＝159円台後半を付けて節目の160円に迫った。</li><li>午前9時現在は、前日比86銭円安・ドル高の1ドル＝159円73～75銭。</li><li>根強い物価上昇（インフレ）への懸念から米国の利上げ観測が強まり、日米の金利差拡大が意識され、円売り・ドル買いが進んだ。</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ニュース</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="macro" data-sent="neutral" data-tickers="" data-text="浅田日銀委員、利上げは「ペースに十分留意」－早期実施に慎重姿勢 浅田日銀委員、利上げは「ペースに十分留意」－早期実施に慎重姿勢 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  bloomberg">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T01:42:00.000Z">11/12 10:42</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTFB2M1V3TU5zcEVKeVFpSW5YX3JwM1dyVnRRZnRuUjB2d1B5ajV3WWdIWWs0X2VJUGR6RjZXQUJVdVdvYkw2YVYxX0MwX0FfMVZMaEhXZUYwX3A0aUhlMlhfM2hnZ3kwRmxHeEZjR0lyS3ZoektyZjN3?oc=5" target="_blank" rel="noopener">浅田日銀委員、利上げは「ペースに十分留意」－早期実施に慎重姿勢</a></h3>
+  <ul class="summary"><li>浅田日銀委員、利上げは「ペースに十分留意」－早期実施に慎重姿勢</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Bloomberg</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="財務官、円安ドル高けん制 「動き速過ぎる」（共同通信） 財務官、円安ドル高けん制 「動き速過ぎる」（共同通信） （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  yahoo!ニュース">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T01:41:38.000Z">11/12 10:41</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTFBfdjROaVVNS2h0QmppQXFVRmFSS2NQT09mbEx0TlBObWwxMjdScFRRT1ZTSjVNaGw2eGw3RGw0Mnp0eHlkbmdKbUQxY0Jqb0JpcG44UGhfT2dxZzlpQjZwbm52c1hSendIYjBzeU1hLXV0Rjh0NTZnVXd0aVZLYkk?oc=5" target="_blank" rel="noopener">財務官、円安ドル高けん制 「動き速過ぎる」（共同通信）</a></h3>
+  <ul class="summary"><li>財務官、円安ドル高けん制 「動き速過ぎる」（共同通信）</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ニュース</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="財務官、円安ドル高けん制 「動き速過ぎる」 財務官、円安ドル高けん制 「動き速過ぎる」 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  静岡新聞digital">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T01:41:00.000Z">11/12 10:41</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE5yNmRSVE1VVk50NmdFNG9Md2s3R0w5cThnSXNHbm1faExjbDU1bEN0emZzT3Z0WllyZHEyQi1TSXVwU01RWmZDUFA5amxrQQ?oc=5" target="_blank" rel="noopener">財務官、円安ドル高けん制 「動き速過ぎる」</a></h3>
+  <ul class="summary"><li>財務官、円安ドル高けん制 「動き速過ぎる」</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">静岡新聞DIGITAL</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="aiから自動車へ、出遅れ株に資金シフト－原油安で再評価機運が高まる aiから自動車へ、出遅れ株に資金シフト－原油安で再評価機運が高まる （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  tbs news dig">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T01:34:00.000Z">11/12 10:34</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE9qRlJidDRTRVdub3JMbjJlQjYzN2FVOXlyQm1iYTBQRjFLdHVTdGVuOTdubExyZkt3SV9CMUpqTnFEYUlmR25qQ18wQWg0M2doUzdiR2ZkLTFzYllfLUFtN3ZUa0R4VjVDR2VXUTFuQ0hqUEQ0?oc=5" target="_blank" rel="noopener">AIから自動車へ、出遅れ株に資金シフト－原油安で再評価機運が高まる</a></h3>
+  <ul class="summary"><li>AIから自動車へ、出遅れ株に資金シフト－原油安で再評価機運が高まる</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">TBS NEWS DIG</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="macro" data-sent="neutral" data-tickers="" data-text="【挨拶】浅田審議委員「わが国の経済・物価情勢と金融政策」（長崎） 【挨拶】浅田審議委員「わが国の経済・物価情勢と金融政策」（長崎） （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  日本銀行 新着情報">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T01:30:00.000Z">11/12 10:30</time>
+  </div>
+  <h3><a href="http://www.boj.or.jp/about/press/koen_2026/ko261112a.htm" target="_blank" rel="noopener">【挨拶】浅田審議委員「わが国の経済・物価情勢と金融政策」（長崎）</a></h3>
+  <ul class="summary"><li>【挨拶】浅田審議委員「わが国の経済・物価情勢と金融政策」（長崎）</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">日本銀行 新着情報</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="macro" data-sent="neutral" data-tickers="" data-text="日産自動車 中間決算 赤字幅縮小も2期連続の最終赤字 経営再建中の日産自動車はことし4月から9月までのグループ全体の中間決算を発表し、最終的な損益は397億円の赤字と、コスト削減が進み為替が円安で推移したことなどで赤字幅は縮小したものの、中間決算として2… 10月企業物価指数 前年同月比7.1％上昇 中東背景に伸び率拡大 中国の自動車輸出急増 年間1100万台を超える見通し  nhk 経済">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T01:22:00.000Z">11/12 10:22</time>
+  </div>
+  <h3><a href="https://news.web.nhk/newsweb/na/nd-20261112de74555" target="_blank" rel="noopener">日産自動車 中間決算 赤字幅縮小も2期連続の最終赤字</a></h3>
+  <ul class="summary"><li>経営再建中の日産自動車はことし4月から9月までのグループ全体の中間決算を発表し、最終的な損益は397億円の赤字と、コスト削減が進み為替が円安で推移したことなどで赤字幅は縮小したものの、中間決算として2…</li><li>10月企業物価指数 前年同月比7.1％上昇 中東背景に伸び率拡大</li><li>中国の自動車輸出急増 年間1100万台を超える見通し</li></ul>
+  
+  <footer>
+    <span class="pub">NHK 経済</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="negative" data-tickers="" data-text="本日11月12日の金価格：世界の金価格は4,000ドルを下回り、sjcの金価格は1オンスあたり約100万ベトナムドン下落しました。 本日11月12日の金価格：世界の金価格は4,000ドルを下回り、sjcの金価格は1オンスあたり約100万ベトナムドン下落しました。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  vietnam.vn">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-11-12T01:21:48.000Z">11/12 10:21</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxNWW43Z2NpakVTMnlEbGRLQ0s1TjMyTVBvTzNOaVFjallYMHJvalRISGpySWIwdmNVQkJCYUcwbHhVRmYtcjVTdzIzejY2Umg3QU1YazZ2QXFLZktVcElFMzRFdW56WURSOXhJVHB6cGIwbDllMnRJZUNscE1SOGduUXFkVXMwczdlenZ1MWFZRlZtS0xVLWljelBPSjB2Z2s0eDFlYUs2RDhLSkcyaU10V21VZw?oc=5" target="_blank" rel="noopener">本日11月12日の金価格：世界の金価格は4,000ドルを下回り、SJCの金価格は1オンスあたり約100万ベトナムドン下落しました。</a></h3>
+  <ul class="summary"><li>本日11月12日の金価格：世界の金価格は4,000ドルを下回り、SJCの金価格は1オンスあたり約100万ベトナムドン下落しました。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Vietnam.vn</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="positive" data-tickers="" data-text="速報（12月11日）：ナスダックとs&amp;p500指数が1％以上上昇、別のデジタル資産企業が10兆ドルの資金調達を実施。 速報（12月11日）：ナスダックとs&amp;p500指数が1％以上上昇、別のデジタル資産企業が10兆ドルの資金調達を実施。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  vietnam.vn">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-12T01:21:47.000Z">11/12 10:21</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxNRE1zVkdtQmxFeWFBbGYtbG1PdmFuRkRRMkpEZmRnOFlzUFkwVndySXN3OV83Y3ZMN0JxMm83NTV0RGM5S0ZteTZrMTNKNDlrUmR1QmkyQms0QnYtNnVydzJKVW5UanBuSkRNZ3QteDJvT19pZks5b2Ryd280cDlLN2NOWjVSTHJXb1A3TEs3REk1WVZha3MxSXFranktaGpXb001UWI3MVRENGhiSGMwYTlLdWJnSFB0d21uakJ3?oc=5" target="_blank" rel="noopener">速報（12月11日）：ナスダックとS&amp;P500指数が1％以上上昇、別のデジタル資産企業が10兆ドルの資金調達を実施。</a></h3>
+  <ul class="summary"><li>速報（12月11日）：ナスダックとS&amp;P500指数が1％以上上昇、別のデジタル資産企業が10兆ドルの資金調達を実施。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Vietnam.vn</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="東京為替：ドル・円はもみ合い、159円60銭前後で推移 東京為替：ドル・円はもみ合い、159円60銭前後で推移 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  ｄメニューニュース">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T01:02:00.000Z">11/12 10:02</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxNY1lKREl6TElsaWxpYTYxREpNb0pYbnpSYVB2N0h6bUlWcU9Pakc0MktrNnd0YjVHRm9oR0xNRGhETm9tOG1td1JfSnF6MjVITEEtRlJQeFRvdElDZmJVSDYtR2ZCNTRsWkJlekMwT0d0T0JtNFRZZVdZd2NsbEF0WEQ4WXJlM3PSAYwBQVVfeXFMTjdQS1VmNUJPcElRc3B0MU1qVTJKb2ZiWmJQSW9DUWZzRlJtZnQtNURGc2xHVW5mMEY4Q3lGaGU5VnJZQlN4SVFqNGs2Y3lJQm95MVdlVGl0cjdQNXNwSV9MbUh0M0FXdnY1U0QxUkVxeUdDT2dBREZMWm1NYVIzazRkS3hma2tqakJWRlo?oc=5" target="_blank" rel="noopener">東京為替：ドル・円はもみ合い、159円60銭前後で推移</a></h3>
+  <ul class="summary"><li>東京為替：ドル・円はもみ合い、159円60銭前後で推移</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">ｄメニューニュース</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="「夏の記憶忘れるにはまだ早い」 円安160円目前、財務官が牽制 「夏の記憶忘れるにはまだ早い」 円安160円目前、財務官が牽制 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  朝日新聞">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T01:00:59.000Z">11/12 10:00</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9ZUk50WTVmcUNib0EySFNjQ1hQeElqcm93b0sybDRpbEZibHBUT3NDSXE1cTNmTEQtcUFxNWxodjk1aS03RUo2VzhiZ0h5ODRkNFpibmRzcG5Pb3NjRUtSdEYtT3A4Y1E?oc=5" target="_blank" rel="noopener">「夏の記憶忘れるにはまだ早い」 円安160円目前、財務官が牽制</a></h3>
+  <ul class="summary"><li>「夏の記憶忘れるにはまだ早い」 円安160円目前、財務官が牽制</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">朝日新聞</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="営業毎旬報告（11月10日現在） 営業毎旬報告（11月10日現在） （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  日本銀行 新着情報">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T01:00:00.000Z">11/12 10:00</time>
+  </div>
+  <h3><a href="http://www.boj.or.jp/statistics/boj/other/acmai/release/2026/ac261110.htm" target="_blank" rel="noopener">営業毎旬報告（11月10日現在）</a></h3>
+  <ul class="summary"><li>営業毎旬報告（11月10日現在）</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">日本銀行 新着情報</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="日経平均0.37%高で寄り付き…nvidia ceo解任説で上げ幅限定 日経平均0.37%高で寄り付き…nvidia ceo解任説で上げ幅限定 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T00:55:00.000Z">11/12 09:55</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE81UnBUcjVUNkRqRFhYQURkcmtlWjJ3bDVJQnhfTC02dktxbWVKbm5veHVhOVFoOWEzLTZwaXQwQzBzS3lGdVVSZWttTGp5U0NiVHNDbkRVS0p1SWliRDlCWnI0aVFuSmZSQlE2Rkwwejg3d1hw?oc=5" target="_blank" rel="noopener">日経平均0.37%高で寄り付き…Nvidia CEO解任説で上げ幅限定</a></h3>
+  <ul class="summary"><li>日経平均0.37%高で寄り付き…Nvidia CEO解任説で上げ幅限定</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="positive" data-tickers="" data-text="バークレイズのibit保有株が四半期で48%増、銀行業界のビットコインetf保有比率4.9%に上昇 バークレイズのibit保有株が四半期で48%増、銀行業界のビットコインetf保有比率4.9%に上昇 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-12T00:35:00.000Z">11/12 09:35</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE5LajJSN0hlTzlMUWVVRno2V2xVRVhYY0NZcHp0V01NRzVLX2R3S01obU9LRTE0aHkxVDE2cW5LY0I1a291MW9ZX1BrbGxnY21jRlg3aDFIQlJwY0I1cUtjX0NtMk5maW40S1ptY19hcXRBSWRs?oc=5" target="_blank" rel="noopener">バークレイズのIBIT保有株が四半期で48%増、銀行業界のビットコインETF保有比率4.9%に上昇</a></h3>
+  <ul class="summary"><li>バークレイズのIBIT保有株が四半期で48%増、銀行業界のビットコインETF保有比率4.9%に上昇</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="positive" data-tickers="" data-text="今日のfx予想：ドル円160円目前 frbの利上げ加速観測が背景 2026/11/12 「ドル/円」を中心に前日の振り返りと当日の見通しをギュッとまとめて動画配信しました。 frbの利上げ観測の高まりからドル買い・円売りが優勢となり、心理的節目となる160円手前まで上昇した dollar/yen is likely to encounter resistance near the psychologically significant 160 level, as well as around 160.39, t  外為どっとコム">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-12T00:32:00.000Z">11/12 09:32</time>
+  </div>
+  <h3><a href="https://www.gaitame.com/media/entry/2026/11/12/093241" target="_blank" rel="noopener">今日のFX予想：ドル円160円目前 FRBの利上げ加速観測が背景 2026/11/12</a></h3>
+  <ul class="summary"><li>「ドル/円」を中心に前日の振り返りと当日の見通しをギュッとまとめて動画配信しました。</li><li>FRBの利上げ観測の高まりからドル買い・円売りが優勢となり、心理的節目となる160円手前まで上昇した</li><li>Dollar/yen is likely to encounter resistance near the psychologically significant 160 level, as well as around 160.39, t</li></ul>
+  
+  <footer>
+    <span class="pub">外為どっとコム</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="negative" data-tickers="" data-text="本日（11月12日）の金価格：sjcの金価格が急落、今後数ヶ月は厳しい状況が続く見込み。 本日（11月12日）の金価格：sjcの金価格が急落、今後数ヶ月は厳しい状況が続く見込み。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  vietnam.vn">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-11-12T00:22:40.000Z">11/12 09:22</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMingFBVV95cUxNVnQyOWM4ZTNDYjd2bWdCM1MzLVRrMTlpV3BYSzh5dm9xay1IMGpWcHBNRndEYmxtVzNoeWtLWHVBS2hXanhqNXd0R0VQYk05cjNPdy1uUG50b0hlWHVQMl9wcnV2eGNkVjl4dkI2M1RlMVpjekRWNEQ4QzlqLTlQcjFTLXBJSnBvZ1FyOXBYTFBfQzFjakpMVzFIV2VpUQ?oc=5" target="_blank" rel="noopener">本日（11月12日）の金価格：SJCの金価格が急落、今後数ヶ月は厳しい状況が続く見込み。</a></h3>
+  <ul class="summary"><li>本日（11月12日）の金価格：SJCの金価格が急落、今後数ヶ月は厳しい状況が続く見込み。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Vietnam.vn</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="macro" data-sent="positive" data-tickers="" data-text="10月企業物価指数 前年同月比7.1％上昇 中東背景に伸び率拡大 企業の間で取り引きされるモノの価格を示す先月の企業物価指数は、去年の同じ月と比べて7.1％上昇しました。 9月と比べて伸び率は拡大していて、中東情勢の影響による石油関連製品の値上がりを反映して高い水準… （自動要約なし。原文を参照してください）  nhk 経済">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-12T00:20:00.000Z">11/12 09:20</time>
+  </div>
+  <h3><a href="https://news.web.nhk/newsweb/na/nd-20261112de74538" target="_blank" rel="noopener">10月企業物価指数 前年同月比7.1％上昇 中東背景に伸び率拡大</a></h3>
+  <ul class="summary"><li>企業の間で取り引きされるモノの価格を示す先月の企業物価指数は、去年の同じ月と比べて7.1％上昇しました。</li><li>9月と比べて伸び率は拡大していて、中東情勢の影響による石油関連製品の値上がりを反映して高い水準…</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">NHK 経済</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="円相場、１５９円７４～７４銭＝１２日午前９時現在 円相場、１５９円７４～７４銭＝１２日午前９時現在 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  時事通信ニュース">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-12T00:13:00.000Z">11/12 09:13</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE00NkQ5T1g1LUVIQUxMSktOZ1prUjFwYkRMOGZaelFZaGtubE9EcEM1R2VhU3M1bmVTeTNDTUZYV3YwZU5yTHBpVmxCSTJTY0NNOFdFdQ?oc=5" target="_blank" rel="noopener">円相場、１５９円７４～７４銭＝１２日午前９時現在</a></h3>
+  <ul class="summary"><li>円相場、１５９円７４～７４銭＝１２日午前９時現在</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">時事通信ニュース</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="positive" data-tickers="" data-text="ステーブルコイン供給量、30日で142億ドル減 ビットコイン反発の重荷に ステーブルコイン供給量、30日で142億ドル減 ビットコイン反発の重荷に （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  디지털투데이">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-12T00:10:50.000Z">11/12 09:10</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxQaDhvVVR2dlNMSFRxUW4zWGEyWWU5UGVUaDBlalhocnhaYlhLWS1zWVBVYzVScHF2eUVvXzZmRTdiLU1CSnBnemJUUGNaMS04ekZTaEgxaUtYNThPbHhBa0hTQjZ1WUN4Q1BTUldVYUc0d0JhV2NQZnRLNVV0Mktpa3ExemFqZ0ZKSkRzUWhGRHdyN0lrQWNrRVFZM0kwN0c0QTNGOGZSQm52NXZEY2hraE9CdmpWWEJOMnNVcDl4MA?oc=5" target="_blank" rel="noopener">ステーブルコイン供給量、30日で142億ドル減 ビットコイン反発の重荷に</a></h3>
+  <ul class="summary"><li>ステーブルコイン供給量、30日で142億ドル減 ビットコイン反発の重荷に</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">디지털투데이</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="positive" data-tickers="" data-text="11日の日経平均株価は上昇 11日の日経平均株価は上昇 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  forex.com">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-12T00:10:00.000Z">11/12 09:10</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQbXRoZmxCbmpobTFzWkd3WDh2RWhBTUkwVnZzYktQem5iNnNmai1odkwzMkF6R0Z5T3JXcDEtQkx2VWZORXBERGtMSmtNOFFXU0tiaFlOZ0pwLXByWU41NVE2c0pLaGhMamdKdzd6RThmQmJfaG5pZDY4d0txNmNXcktRQ0FWdw?oc=5" target="_blank" rel="noopener">11日の日経平均株価は上昇</a></h3>
+  <ul class="summary"><li>11日の日経平均株価は上昇</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">FOREX.com<span class="muted">・2経路</span></span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="macro" data-sent="neutral" data-tickers="" data-text="企業物価指数（10月） 企業物価指数（10月） （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  日本銀行 新着情報">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T23:50:00.000Z">11/12 08:50</time>
+  </div>
+  <h3><a href="http://www.boj.or.jp/statistics/pi/cgpi_release/cgpi2610.pdf" target="_blank" rel="noopener">企業物価指数（10月）</a></h3>
+  <ul class="summary"><li>企業物価指数（10月）</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">日本銀行 新着情報</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="「預金者別預金」（2026年9月）等の公表について 「預金者別預金」（2026年9月）等の公表について （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  日本銀行 新着情報">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T23:50:00.000Z">11/12 08:50</time>
+  </div>
+  <h3><a href="http://www.boj.or.jp/statistics/outline/notice_2026/not261112a.htm" target="_blank" rel="noopener">「預金者別預金」（2026年9月）等の公表について</a></h3>
+  <ul class="summary"><li>「預金者別預金」（2026年9月）等の公表について</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">日本銀行 新着情報</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="ビットコイン小幅高もetf資金流出で先安観 ビットコイン小幅高もetf資金流出で先安観 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  chosunbiz">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T23:46:00.000Z">11/12 08:46</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxNd0xGamtrTmJlUkYtcUpRVnJMejJ2NXJRNjl2bkpVZWFJRmNQckpmV204T2VGX0hWVHI2VVZZUWcyYU5Yai1LLVZ5cXNqUzlQdmlXZmVYc0hjVHFyelR2RWtTLWJhUzVuRDFWWmw0a3U0ZXpDUXFTXzBrQVZiMjVEMg?oc=5" target="_blank" rel="noopener">ビットコイン小幅高もETF資金流出で先安観</a></h3>
+  <ul class="summary"><li>ビットコイン小幅高もETF資金流出で先安観</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Chosunbiz</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="negative" data-tickers="" data-text="メタプラネット株価、btc持ち直しのなか231円に下落──日足短期hma上抜けまでは様子見 メタプラネット株価、btc持ち直しのなか231円に下落──日足短期hma上抜けまでは様子見 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  jinacoin">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-11-11T23:39:43.000Z">11/12 08:39</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE1sanRESkI1LUVWTzBJWTRrZm45ejljQWlwcThxUUlLRlJvdFhEenllU2pLZXY2VGFLVlJZbUdWTkZyZndIdGFhVE5IR1VMRWJJUnlfSXFTM1Y4XzJEZ2xkTWFZbzdFTDNSWlE?oc=5" target="_blank" rel="noopener">メタプラネット株価、BTC持ち直しのなか231円に下落──日足短期HMA上抜けまでは様子見</a></h3>
+  <ul class="summary"><li>メタプラネット株価、BTC持ち直しのなか231円に下落──日足短期HMA上抜けまでは様子見</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">JinaCoin</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="positive" data-tickers="" data-text="【注目銘柄】エバラ食品工業、鍋需要期入りと業績上方修正・自社株買いの合わせ技に注目 【注目銘柄】エバラ食品工業、鍋需要期入りと業績上方修正・自社株買いの合わせ技に注目 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  https://kabu-ir.com/">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-11T23:28:17.000Z">11/12 08:28</time>
+  </div>
+  <h3><a href="https://kabu-ir.com/article/521998116.html" target="_blank" rel="noopener">【注目銘柄】エバラ食品工業、鍋需要期入りと業績上方修正・自社株買いの合わせ技に注目</a></h3>
+  <ul class="summary"><li>【注目銘柄】エバラ食品工業、鍋需要期入りと業績上方修正・自社株買いの合わせ技に注目</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">https://kabu-ir.com/</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="ドル円見通し｜2026年末は160円突破か？為替相場を動かす「決定打イベント」完全ガイド 2026年11月12日 ドル円見通し｜2026年末は160円突破か？為替相場を動かす「決定打イベント」完全ガイド 2026年11月12日 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  外為どっとコム">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T23:20:45.000Z">11/12 08:20</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE5LZ0FKUWo3Y0w1OVlHMVpQYzBNM3lzOEhjc1kzakF0cE9iXzlOdDlFc3BqdWJlNWxsQWJjTTZBcFBsQzQzVkZwcGJuUXM5YkJlcWpBSC0wQjMwdDVzZEJZcHR3TQ?oc=5" target="_blank" rel="noopener">ドル円見通し｜2026年末は160円突破か？為替相場を動かす「決定打イベント」完全ガイド 2026年11月12日</a></h3>
+  <ul class="summary"><li>ドル円見通し｜2026年末は160円突破か？為替相場を動かす「決定打イベント」完全ガイド 2026年11月12日</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">外為どっとコム</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="｢aiに&quot;中学生らしく書いて&quot;と指示｣教員が｢もう見抜けない｣とお手上げ ｢全面禁止論｣に納得も現場が直面する残酷な現実 | ライフ | 東洋経済オンライン 生成aiをめぐる議論が続く教育現場。 しかし一方で､生徒たちはすでにaiを巧みに使いこなし､教師も｢見抜けない｣と語ります。 （自動要約なし。原文を参照してください）  東洋経済オンライン">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T23:00:00.000Z">11/12 08:00</time>
+  </div>
+  <h3><a href="https://toyokeizai.net/articles/-/963951?utm_source=rss&amp;utm_medium=http&amp;utm_campaign=link_back" target="_blank" rel="noopener">｢AIに&quot;中学生らしく書いて&quot;と指示｣教員が｢もう見抜けない｣とお手上げ ｢全面禁止論｣に納得も現場が直面する残酷な現実 | ライフ | 東洋経済オンライン</a></h3>
+  <ul class="summary"><li>生成AIをめぐる議論が続く教育現場。</li><li>しかし一方で､生徒たちはすでにAIを巧みに使いこなし､教師も｢見抜けない｣と語ります。</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">東洋経済オンライン</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="ntt社長が警告 「aiで省人化」では成長できない――では、どうする？ すかいらーく、キーエンスに学ぶ勝ち筋 人口減少に伴い、市場が縮小する日本で、aiを単なる省人化のために使うだけでは、企業は成長し続けられない。 nttの島田明ceoが説くai経営の戦略と実践論に迫る。 （自動要約なし。原文を参照してください）  itmedia ビジネス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T23:00:00.000Z">11/12 08:00</time>
+  </div>
+  <h3><a href="https://www.itmedia.co.jp/business/articles/2611/12/news011.html" target="_blank" rel="noopener">NTT社長が警告 「AIで省人化」では成長できない――では、どうする？ すかいらーく、キーエンスに学ぶ勝ち筋</a></h3>
+  <ul class="summary"><li>人口減少に伴い、市場が縮小する日本で、AIを単なる省人化のために使うだけでは、企業は成長し続けられない。</li><li>NTTの島田明CEOが説くAI経営の戦略と実践論に迫る。</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">ITmedia ビジネス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="広がるaiデータセンター「日本は世界2～3位の市場に」 設備を担う大手バーティブ幹部が見据える、2030年のai事情 生成aiの普及でデータセンターの設計思想が変化している。 データセンター設備大手、vertivの幹部らが捉えた市場動向から、日本のaiインフラの最前線を追う。 （自動要約なし。原文を参照してください）  itmedia ビジネス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T23:00:00.000Z">11/12 08:00</time>
+  </div>
+  <h3><a href="https://www.itmedia.co.jp/business/articles/2611/12/news013.html" target="_blank" rel="noopener">広がるAIデータセンター「日本は世界2～3位の市場に」 設備を担う大手バーティブ幹部が見据える、2030年のAI事情</a></h3>
+  <ul class="summary"><li>生成AIの普及でデータセンターの設計思想が変化している。</li><li>データセンター設備大手、Vertivの幹部らが捉えた市場動向から、日本のAIインフラの最前線を追う。</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">ITmedia ビジネス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="neutral" data-tickers="" data-text="1年経った《ダウンタウンプラス》｢会員維持は大変…｣｢2人揃った新コンテンツはあるのか｣キーマン語る&quot;本音とこれから&quot; | ライフ | 東洋経済オンライン 昨年からスタートした､ダウンタウンの配信サービス･downtown+（ダウンタウンプラス）。 1年経ったことで課題も見えてきたようです。 （自動要約なし。原文を参照してください）  東洋経済オンライン">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T22:30:00.000Z">11/12 07:30</time>
+  </div>
+  <h3><a href="https://toyokeizai.net/articles/-/964203?utm_source=rss&amp;utm_medium=http&amp;utm_campaign=link_back" target="_blank" rel="noopener">1年経った《ダウンタウンプラス》｢会員維持は大変…｣｢2人揃った新コンテンツはあるのか｣キーマン語る&quot;本音とこれから&quot; | ライフ | 東洋経済オンライン</a></h3>
+  <ul class="summary"><li>昨年からスタートした､ダウンタウンの配信サービス･DOWNTOWN+（ダウンタウンプラス）。</li><li>1年経ったことで課題も見えてきたようです。</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">東洋経済オンライン</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="そりゃ成果が出るわ…仕事ができる人が会議の後でchatgptに聞いていること - ニュースな本 同じ会議に出席し、同じ話を聞いているのに、仕事ができる人は次々と成果につなげ、そうでない人は何も変わらない。 ※本稿は、株式会社カルペ・ディエム代表の西岡壱誠『東大式 問い力 aiのしつけ方』（徳間書店）の一部を抜粋・編集したものです。 その差は、頭のよさでも経験でもなかった。  ダイヤモンド・オンライン">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T22:30:00.000Z">11/12 07:30</time>
+  </div>
+  <h3><a href="https://diamond.jp/articles/-/402695" target="_blank" rel="noopener">そりゃ成果が出るわ…仕事ができる人が会議の後でChatGPTに聞いていること - ニュースな本</a></h3>
+  <ul class="summary"><li>同じ会議に出席し、同じ話を聞いているのに、仕事ができる人は次々と成果につなげ、そうでない人は何も変わらない。</li><li>※本稿は、株式会社カルペ・ディエム代表の西岡壱誠『東大式 問い力 AIのしつけ方』（徳間書店）の一部を抜粋・編集したものです。</li><li>その差は、頭のよさでも経験でもなかった。</li></ul>
+  
+  <footer>
+    <span class="pub">ダイヤモンド・オンライン</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="本日注目すべき【好決算】銘柄 ｄｏｗａ、出光興産、スクエニｈｄ (11日引け後 発表分) 本日注目すべき【好決算】銘柄 ｄｏｗａ、出光興産、スクエニｈｄ (11日引け後 発表分) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  株探">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T22:01:00.000Z">11/12 07:01</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTFBsUjZubDlhQjhkS1JnNTFZNGZnNFhqVTdmVG1xOFY4OVdmc0E1alo5elVOOGJzVW0wMldmZDdfRWhiejRlZHhEc2owOGNmeWdpamc?oc=5" target="_blank" rel="noopener">本日注目すべき【好決算】銘柄 ＤＯＷＡ、出光興産、スクエニＨＤ (11日引け後 発表分)</a></h3>
+  <ul class="summary"><li>本日注目すべき【好決算】銘柄 ＤＯＷＡ、出光興産、スクエニＨＤ (11日引け後 発表分)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">株探</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="positive" data-tickers="" data-text="coreweaveの決算サプライズでナスダック1.6%反発…nvidiaも3%台回復 coreweaveの決算サプライズでナスダック1.6%反発…nvidiaも3%台回復 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-11T21:55:00.000Z">11/12 06:55</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE5GWnNDamlYMEtBakhic3RiU2VXRGlRTkV0YnFhdnM3WTV6UmRnY3BPZ2xnV0Jhc1NpMW1fR28xeDQ5dWJWcnc5ckhmN2ROSEFPc1FnSzVVdWNOM0l4eXdsNllPVmlhR0tqRHBkRS04LWk2OXNM?oc=5" target="_blank" rel="noopener">CoreWeaveの決算サプライズでナスダック1.6%反発…Nvidiaも3%台回復</a></h3>
+  <ul class="summary"><li>CoreWeaveの決算サプライズでナスダック1.6%反発…Nvidiaも3%台回復</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="negative" data-tickers="" data-text="ai取引ブーム再燃、ナスダック100指数は中間選挙後の下落分を回復へ ai取引ブーム再燃、ナスダック100指数は中間選挙後の下落分を回復へ （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-11-11T21:35:00.000Z">11/12 06:35</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE9hOGtYXzUxM19YU1JKWjlCbndscHFLb1kyWE5oYU1IMW1uWll2M085QWQxem5pMWJoUk1rY3dVTGdGS1lxQ0V4SUJWZllJdGRsdDZkamhPUHVJcF9acEhaRkpieFZBUzVuNGdLcjdZUUFhdFZE?oc=5" target="_blank" rel="noopener">AI取引ブーム再燃、ナスダック100指数は中間選挙後の下落分を回復へ</a></h3>
+  <ul class="summary"><li>AI取引ブーム再燃、ナスダック100指数は中間選挙後の下落分を回復へ</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="「人間に残された仕事なんて、食って寝て排便するくらいですよね？」と思い込んでいる若者が、本当にやるべきこととは？ - やっぱり権力 「生成aiがなんでも作ってくれるんだから、人間がわざわざ頭を絞って働く意味なんてない」「人間に残された仕事なんて食って寝るくらいじゃないか」。 しかし、ai時代だからこそ「人間にしか出せない価値」の市場価値は跳ね上がっている。 aiの全自動化を前に、早くも働く意欲を失いかけている若者は少なくない。  ダイヤモンド・オンライン">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T21:30:00.000Z">11/12 06:30</time>
+  </div>
+  <h3><a href="https://diamond.jp/articles/-/402777" target="_blank" rel="noopener">「人間に残された仕事なんて、食って寝て排便するくらいですよね？」と思い込んでいる若者が、本当にやるべきこととは？ - やっぱり権力</a></h3>
+  <ul class="summary"><li>「生成AIがなんでも作ってくれるんだから、人間がわざわざ頭を絞って働く意味なんてない」「人間に残された仕事なんて食って寝るくらいじゃないか」。</li><li>しかし、AI時代だからこそ「人間にしか出せない価値」の市場価値は跳ね上がっている。</li><li>AIの全自動化を前に、早くも働く意欲を失いかけている若者は少なくない。</li></ul>
+  
+  <footer>
+    <span class="pub">ダイヤモンド・オンライン</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="negative" data-tickers="" data-text="モノタロウに殴り込んだアスクルがわずか1年で撤退…巨大企業が勝てなかった意外な理由 - ニュースな本 今や年商3300億円を超える工場向け通販大手のモノタロウも、創業当初はアスクルとの価格競争を警戒していた。 ※本稿は、ジャーナリストの秋場大輔『時価総額1兆円企業の作り方 モノタロウの9000日戦記』（講談社）の一部を抜粋・編集したものです。 なぜ巨大ライバルは、わずか1年で撤退したのか。  ダイヤモンド・オンライン">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-11-11T21:30:00.000Z">11/12 06:30</time>
+  </div>
+  <h3><a href="https://diamond.jp/articles/-/402717" target="_blank" rel="noopener">モノタロウに殴り込んだアスクルがわずか1年で撤退…巨大企業が勝てなかった意外な理由 - ニュースな本</a></h3>
+  <ul class="summary"><li>今や年商3300億円を超える工場向け通販大手のモノタロウも、創業当初はアスクルとの価格競争を警戒していた。</li><li>※本稿は、ジャーナリストの秋場大輔『時価総額1兆円企業の作り方 モノタロウの9000日戦記』（講談社）の一部を抜粋・編集したものです。</li><li>なぜ巨大ライバルは、わずか1年で撤退したのか。</li></ul>
+  
+  <footer>
+    <span class="pub">ダイヤモンド・オンライン</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="positive" data-tickers="" data-text="ダウ平均は反発 ナスダックは大幅高 コアウィーブの決算に安心感＝米国株概況 ダウ平均は反発 ナスダックは大幅高 コアウィーブの決算に安心感＝米国株概況 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  みんかぶ fx/為替">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-11T21:23:29.000Z">11/12 06:23</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTFBzSXNLalBCcVctTHRwVlE1RXZTX3p0S01jRW44QWZZQlJyazVKN0Z0bm8yTWFpZ3RCV2dYTkZzLXowdk44T0dkNw?oc=5" target="_blank" rel="noopener">ダウ平均は反発 ナスダックは大幅高 コアウィーブの決算に安心感＝米国株概況</a></h3>
+  <ul class="summary"><li>ダウ平均は反発 ナスダックは大幅高 コアウィーブの決算に安心感＝米国株概況</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">みんかぶ FX/為替</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="トランプ“中間選挙大敗”の当然、「アフォーダビリティー」問題では高市政権も同じ誤り - 野口悠紀雄 新しい経済成長の経路を探る トランプ大統領が率いる共和党が中間選挙で大敗したのは、高関税政策やイラン攻撃など目先の政治的成果を求めてインフレを再燃させ、国民の暮らしを逆に悪化させたことが敗因だ。 一国主義の外交政策も含めトランプ大統領は今後の残任期間では政策変更を余儀なくされそうだが、国民生活の改善という点では高市政権も同じ轍（てつ）を踏む恐れがある。 （自動要約なし。原文を参照してください）  ダイヤモンド・オンライン">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T21:15:00.000Z">11/12 06:15</time>
+  </div>
+  <h3><a href="https://diamond.jp/articles/-/403134" target="_blank" rel="noopener">トランプ“中間選挙大敗”の当然、「アフォーダビリティー」問題では高市政権も同じ誤り - 野口悠紀雄 新しい経済成長の経路を探る</a></h3>
+  <ul class="summary"><li>トランプ大統領が率いる共和党が中間選挙で大敗したのは、高関税政策やイラン攻撃など目先の政治的成果を求めてインフレを再燃させ、国民の暮らしを逆に悪化させたことが敗因だ。</li><li>一国主義の外交政策も含めトランプ大統領は今後の残任期間では政策変更を余儀なくされそうだが、国民生活の改善という点では高市政権も同じ轍（てつ）を踏む恐れがある。</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">ダイヤモンド・オンライン</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="日経225先物：12日夜間取引終値＝580円高、6万2020円 投稿日時： 2026/11/12 06:03[株探] 日経225先物：12日夜間取引終値＝580円高、6万2020円 投稿日時： 2026/11/12 06:03[株探] （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  みんかぶ">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T21:03:17.000Z">11/12 06:03</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiRkFVX3lxTE4xb1JaZWtlQ0tCVkpfTGpMaU5pcmpwWG9XRUtIejl6QVUtd0hFdlJKLXlTb1JHM0diMjRiRnpacm45V08yMUE?oc=5" target="_blank" rel="noopener">日経225先物：12日夜間取引終値＝580円高、6万2020円 投稿日時： 2026/11/12 06:03[株探]</a></h3>
+  <ul class="summary"><li>日経225先物：12日夜間取引終値＝580円高、6万2020円 投稿日時： 2026/11/12 06:03[株探]</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">みんかぶ</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="positive" data-tickers="" data-text="長期金利、再び3%台に上昇も 「時間分散」で国債投資有効 長期金利、再び3%台に上昇も 「時間分散」で国債投資有効 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  日本経済新聞">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-11T20:00:00.000Z">11/12 05:00</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE1mMl9xWDl4TTdORng0XzBFZWZPbDQ0VlNIZVZJRTMyZXBmcVFhSHQ2UFpmUzdkR3pEaFJveW9lamFyUnBaRWE3MExDU3ctUjVVVGM0Rlc3RkJBNXpsOUJhV05NOEhLRUZDR0poTUJCMlVTUnBTWlNmTHRISnN4Zw?oc=5" target="_blank" rel="noopener">長期金利、再び3%台に上昇も 「時間分散」で国債投資有効</a></h3>
+  <ul class="summary"><li>長期金利、再び3%台に上昇も 「時間分散」で国債投資有効</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">日本経済新聞</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="長期金利、一時２・９３０％ ２９年１０カ月ぶり高水準 長期金利、一時２・９３０％ ２９年１０カ月ぶり高水準 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  山陽新聞">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T19:52:30.000Z">11/12 04:52</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE5aVVc5b1hfTjhQMlB6aGQ1VEpYb1JESHVrdEItODVvZUVzTGRidll6LWl6SHR6ek9mQWl3Qmh6eHp6c3VpU3VjWmF0Y2FubUlFSVdoMmVRc3pUZw?oc=5" target="_blank" rel="noopener">長期金利、一時２・９３０％ ２９年１０カ月ぶり高水準</a></h3>
+  <ul class="summary"><li>長期金利、一時２・９３０％ ２９年１０カ月ぶり高水準</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">山陽新聞</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="negative" data-tickers="" data-text="午後にやや回復したものの、世界の金価格は予想外にも1オンスあたり4000ドルまで下落した。 午後にやや回復したものの、世界の金価格は予想外にも1オンスあたり4000ドルまで下落した。 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  vietnam.vn">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-11-11T19:45:53.000Z">11/12 04:45</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxNUHdSdEtsT1lFeGNxUl9lajJNT2dJNE9QcFN0LVV2WEExbzBOSVFsUjExQnNGdWlTaUdCLVIxR0dVbVZBNnB3d0hfTDNFMWMzR002YWhfRjJVbU1uYlR2RkxjM25uRjkxb2JCQUlHY0VIdVVQeTU2aGpJbElQODNHY2w0V19mLTNXMjlJUUFsZU5yb3poVF90cXhwbjQ0bVFw?oc=5" target="_blank" rel="noopener">午後にやや回復したものの、世界の金価格は予想外にも1オンスあたり4000ドルまで下落した。</a></h3>
+  <ul class="summary"><li>午後にやや回復したものの、世界の金価格は予想外にも1オンスあたり4000ドルまで下落した。</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Vietnam.vn</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="bitcoin 7.56万ドル割れ…短期保有者65%が損失、7.3万ドルが支持線の試練に bitcoin 7.56万ドル割れ…短期保有者65%が損失、7.3万ドルが支持線の試練に （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T18:35:00.000Z">11/12 03:35</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE0wZEk1QVVIMTJnWkdFNDBNb0pPWWNxQVJDTXFKWmVQZEx0YVNkRkRIbGNYeXdrTVBnUXhyc3o1UUZhdGNBWVdrSUY2bUR6ckNwakFMZ2N6OUk5dFRqQjU2S1g1dnNndVN2Zms3Ql93NTdUSnBr?oc=5" target="_blank" rel="noopener">Bitcoin 7.56万ドル割れ…短期保有者65%が損失、7.3万ドルが支持線の試練に</a></h3>
+  <ul class="summary"><li>Bitcoin 7.56万ドル割れ…短期保有者65%が損失、7.3万ドルが支持線の試練に</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="macro" data-sent="positive" data-tickers="" data-text="【見通し】株式明日の戦略ー米国の利上げを織り込み3日続伸、金融株の買い安心感が高まるか 【見通し】株式明日の戦略ー米国の利上げを織り込み3日続伸、金融株の買い安心感が高まるか （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  外為どっとコム">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-11T18:35:00.000Z">11/12 03:35</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE1OTEthWTRadjBFMkZISy00WWZfbzZqbGhDN2UyWmtLMHF0Y2hXa0VVdEROOHhaUGdjbGVOZ285dEFZQml6emh3NDFQQXFab3ZhMDcxRHF1SDJmcm5EZzc2ckhodw?oc=5" target="_blank" rel="noopener">【見通し】株式明日の戦略ー米国の利上げを織り込み3日続伸、金融株の買い安心感が高まるか</a></h3>
+  <ul class="summary"><li>【見通し】株式明日の戦略ー米国の利上げを織り込み3日続伸、金融株の買い安心感が高まるか</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">外為どっとコム</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="positive" data-tickers="" data-text="長期金利上昇２・９４５％ ２９年１０カ月ぶり高水準 長期金利上昇２・９４５％ ２９年１０カ月ぶり高水準 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  山陽新聞">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-11T17:50:54.000Z">11/12 02:50</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE5ZRkxGaXVpaVpaU1dsMzNkT2s3c19OVktXWkJ2b0VfVVhQakN5NmN6RnpRaVNoNkVjS2dYdlBLWWxWbXRPaGZkWEZfTThPclhqajAxUjMwTHNKOG9ibWxzOXNSUQ?oc=5" target="_blank" rel="noopener">長期金利上昇２・９４５％ ２９年１０カ月ぶり高水準</a></h3>
+  <ul class="summary"><li>長期金利上昇２・９４５％ ２９年１０カ月ぶり高水準</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">山陽新聞</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="macro" data-sent="negative" data-tickers="" data-text="円相場159円台後半まで下落、米利上げ観測で約2カ月ぶり安値圏 節目160円が視野に 11日の外国為替市場で円相場は対ドルで下落し、1ドル=159円台後半まで円安・ドル高が進んだ。 ニューヨーク市場でもドル高基調が続き、日本時間12日午前2時時点のドル円は159.86円と、同0時時点（159.75円）から11銭程度ドル高水準で推移した。 英ポンドは対ドルで0.47%安の1.33ドルと2週間ぶりの安値付近で推移し、ドルは対スイスフランでも0.86%高の0.832フランと10月半ば以来の高値をつけている。  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-11-11T17:25:00.000Z">11/12 02:25</time>
+  </div>
+  <h3><a href="https://finance.biggo.jp/news/b881c286-b0c2-4309-92ab-875fbc9564aa" target="_blank" rel="noopener">円相場159円台後半まで下落、米利上げ観測で約2カ月ぶり安値圏 節目160円が視野に</a></h3>
+  <ul class="summary"><li>11日の外国為替市場で円相場は対ドルで下落し、1ドル=159円台後半まで円安・ドル高が進んだ。</li><li>ニューヨーク市場でもドル高基調が続き、日本時間12日午前2時時点のドル円は159.86円と、同0時時点（159.75円）から11銭程度ドル高水準で推移した。</li><li>英ポンドは対ドルで0.47%安の1.33ドルと2週間ぶりの安値付近で推移し、ドルは対スイスフランでも0.86%高の0.832フランと10月半ば以来の高値をつけている。</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="ai支出への疑念高まり、ウォール街は2027年の弱気相場に備え ai支出への疑念高まり、ウォール街は2027年の弱気相場に備え （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T16:35:00.000Z">11/12 01:35</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTFBGWmdiVnJUeHNucjlTU1hIbkhKSVM1TVZEcWJIUVdXRXZ2MS1YdmlkcUtERFBOT2t0dVM4dlNqc0w4RlBwOG43d3pjbHdpblUzTFFfbTl5MzBYYV9vc19lR3QtX3pGQlkxVHh0elFjSXRXN19H?oc=5" target="_blank" rel="noopener">AI支出への疑念高まり、ウォール街は2027年の弱気相場に備え</a></h3>
+  <ul class="summary"><li>AI支出への疑念高まり、ウォール街は2027年の弱気相場に備え</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="positive" data-tickers="" data-text="coreweave決算が予想上回る、ナスダック寄り付き1.5%超上昇もダウは小幅高にとどまる coreweave決算が予想上回る、ナスダック寄り付き1.5%超上昇もダウは小幅高にとどまる （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-11T16:05:00.000Z">11/12 01:05</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTFBFeFotcWdPcUhERDNaTFdyRk01aVBEd0pkVnZheWpGTGUzYVNmaXprMkx4akdMRFZXdk5FYmgwYVJfQnUtWnBPUUJ3ZS1SWV9LMTFKOG05T0NvZU94aWR1c24yYjhtclVIbC1LRzAxVGFPWVo1?oc=5" target="_blank" rel="noopener">CoreWeave決算が予想上回る、ナスダック寄り付き1.5%超上昇もダウは小幅高にとどまる</a></h3>
+  <ul class="summary"><li>CoreWeave決算が予想上回る、ナスダック寄り付き1.5%超上昇もダウは小幅高にとどまる</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="neutral" data-tickers="" data-text="【テクニカル】日経平均株価テクニカル分析－はらみ足から陽線が2日連続 【テクニカル】日経平均株価テクニカル分析－はらみ足から陽線が2日連続 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  外為どっとコム">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-11T15:55:26.000Z">11/12 00:55</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE1tWlNNYk02RFBCS3BTRmJtOHlRazlpUEkzemUxcUxWeDJobEw1eUEzNmNNY2JQSnRRTXhCUW5tS2R2X1pPcWM0X1VUaVljbHlZM3BtMjAweE5pOG9BdDhfREpzMA?oc=5" target="_blank" rel="noopener">【テクニカル】日経平均株価テクニカル分析－はらみ足から陽線が2日連続</a></h3>
+  <ul class="summary"><li>【テクニカル】日経平均株価テクニカル分析－はらみ足から陽線が2日連続</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">外為どっとコム</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="positive" data-tickers="" data-text="boom 🚀 ビットコインのハッシュレートと採掘難易度が急騰中。 これは非常に好材料です $ビットコイン (btc.cc)$ boom 🚀 ビットコインのハッシュレートと採掘難易度が急騰中。 これは非常に好材料です $ビットコイン (btc.cc)$ （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  moomoo">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-11T15:11:11.000Z">11/12 00:11</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxONEhtenhhWkI1ODZJdTg5Tl9lNVVCZXFDMngzdExEcm1hR2RZY1RUaE02RlMxWllHd09vc3NMWF9QZ3NxV0pqYkhWZ1ViU2EyeThVYUx3ZGpody1Jdk1ZamhzNFdqOEdFOEZHNlNnTmFUZk5HUXc0R1J1UHQ1RTBTcnc0VjY5ckJueUtfSnh0UHZnUi1oUG5kWVNVT21sU1BGWXVEX05KVFNVdmp6eEdPX1Q0X19DTDJOTTFHeHlaZXliTDA?oc=5" target="_blank" rel="noopener">BOOM 🚀 ビットコインのハッシュレートと採掘難易度が急騰中。 これは非常に好材料です $ビットコイン (BTC.CC)$</a></h3>
+  <ul class="summary"><li>BOOM 🚀 ビットコインのハッシュレートと採掘難易度が急騰中。 これは非常に好材料です $ビットコイン (BTC.CC)$</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+    <p class="empty-note" hidden>該当するニュースはありません</p>
+  </div>
+</section>
+<p><a href="../archive.html">← 日付の一覧へ</a></p>
+</main>
+<footer class="wrap foot">
+  <p class="disclaimer">このページは公開情報を自動で集めて要約したものです。投資の勧誘や売買の推奨を目的としたものではありません。価格は遅延しており、要約には誤りが含まれることがあります。投資判断は必ず原文と一次情報を確認のうえ、ご自身の責任で行ってください。</p>
+  <p>要約: 本文からの自動抽出（Claude 未使用） ／ 価格データ: Yahoo Finance（予備: Stooq）／ 情報源 26 / 26 件から取得</p>
+</footer>
+<script>
+(() => {
+  const fmt = (v, d) => v.toLocaleString('ja-JP', { minimumFractionDigits: d, maximumFractionDigits: d })
+  for (const el of document.querySelectorAll('.spark[data-pts]')) {
+    let pts
+    try { pts = JSON.parse(el.dataset.pts) } catch { continue }
+    const d = Number(el.dataset.digits || 2)
+    const svg = el.querySelector('svg')
+    const vb = svg.viewBox.baseVal
+    const vals = pts.map((p) => p[1])
+    const min = Math.min(...vals), max = Math.max(...vals), span = (max - min) || 1
+    const cross = el.querySelector('.cross'), dot = el.querySelector('.dot'), tip = el.querySelector('.tip')
+    const move = (clientX) => {
+      const r = svg.getBoundingClientRect()
+      const ratio = Math.min(1, Math.max(0, (clientX - r.left) / r.width))
+      const i = Math.round(ratio * (pts.length - 1))
+      const x = (i / (pts.length - 1)) * vb.width
+      const y = 3 + (1 - (pts[i][1] - min) / span) * (vb.height - 6)
+      cross.setAttribute('x1', x); cross.setAttribute('x2', x)
+      dot.setAttribute('cx', x); dot.setAttribute('cy', y)
+      tip.textContent = pts[i][0] + '  ' + fmt(pts[i][1], d)
+      tip.style.left = (i / (pts.length - 1)) * 100 + '%'
+      tip.hidden = false
+      el.classList.add('hover')
+    }
+    const leave = () => { tip.hidden = true; el.classList.remove('hover') }
+    el.addEventListener('pointermove', (e) => move(e.clientX))
+    el.addEventListener('pointerleave', leave)
+  }
+
+  const list = document.querySelector('[data-news]')
+  if (!list) return
+  const items = [...list.querySelectorAll('.news')]
+  const state = { cat: '', sent: '', ticker: '', key: false, q: '' }
+  const countEl = document.querySelector('.filters .count')
+  const empty = list.querySelector('.empty-note')
+  const apply = () => {
+    const q = state.q.trim().toLowerCase()
+    let shown = 0
+    for (const it of items) {
+      const ok = (!state.cat || it.dataset.cat === state.cat)
+        && (!state.sent || it.dataset.sent === state.sent)
+        && (!state.ticker || it.dataset.tickers.split(' ').includes(state.ticker))
+        && (!state.key || it.classList.contains('key'))
+        && (!q || it.dataset.text.includes(q))
+      it.hidden = !ok
+      if (ok) shown++
+    }
+    if (countEl) countEl.textContent = shown + ' / ' + items.length + ' 件を表示'
+    if (empty) empty.hidden = shown > 0
+  }
+  for (const chip of document.querySelectorAll('.chips[data-group=cat] .chip')) {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.chips[data-group=cat] .chip').forEach((c) => c.classList.toggle('on', c === chip))
+      state.cat = chip.dataset.value
+      apply()
+    })
+  }
+  const sent = document.querySelector('select[data-group=sent]')
+  const ticker = document.querySelector('select[data-group=ticker]')
+  const key = document.querySelector('input[data-group=key]')
+  const q = document.querySelector('input[data-group=q]')
+  sent && sent.addEventListener('change', () => { state.sent = sent.value; apply() })
+  ticker && ticker.addEventListener('change', () => { state.ticker = ticker.value; apply() })
+  key && key.addEventListener('change', () => { state.key = key.checked; apply() })
+  q && q.addEventListener('input', () => { state.q = q.value; apply() })
+  for (const btn of document.querySelectorAll('[data-filter-ticker]')) {
+    btn.addEventListener('click', () => {
+      if (ticker) ticker.value = btn.dataset.filterTicker
+      state.ticker = btn.dataset.filterTicker
+      apply()
+      document.getElementById('news').scrollIntoView({ behavior: 'smooth' })
+    })
+  }
+  apply()
+})()
+</script>
+</body>
+</html>
