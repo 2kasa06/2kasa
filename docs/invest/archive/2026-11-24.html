@@ -1,0 +1,1183 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>2026-11-24 | 投資情報ウォッチ</title>
+<meta name="description" content="主要マーケットの値動きと、投資判断に関わるニュースを毎日まとめる">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%232a78d6%22%2F%3E%3Cpath%20d%3D%22M6%2022l6-7%205%204%209-10%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f6f6f3; --surface: #ffffff; --surface-2: #f0efea; --line: #e2e0d8;
+  --ink: #16161a; --ink-2: #4d4c48; --muted: #7a7872;
+  --accent: #2a78d6; --accent-soft: #e5effb;
+  --up: #d23a2e; --down: #1f63c7;
+  --key: #b26b00; --key-soft: #fff4de;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111113; --surface: #1a1a1d; --surface-2: #232327; --line: #2f2f34;
+    --ink: #f2f2ef; --ink-2: #c3c2b7; --muted: #8d8c86;
+    --accent: #5a9bea; --accent-soft: #1b2a3d;
+    --up: #ff6b5e; --down: #6aa4ff;
+    --key: #f0b24a; --key-soft: #2e2415;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111113; --surface: #1a1a1d; --surface-2: #232327; --line: #2f2f34;
+  --ink: #f2f2ef; --ink-2: #c3c2b7; --muted: #8d8c86;
+  --accent: #5a9bea; --accent-soft: #1b2a3d;
+  --up: #ff6b5e; --down: #6aa4ff;
+  --key: #f0b24a; --key-soft: #2e2415;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 15px/1.7 system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", Meiryo, sans-serif;
+  font-feature-settings: "palt";
+}
+a { color: inherit; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+.muted { color: var(--muted); }
+.up { color: var(--up); } .down { color: var(--down); } .flat { color: var(--muted); }
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.top { background: var(--surface); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; justify-content: space-between; padding-top: 18px; padding-bottom: 14px; }
+.top h1 { margin: 0; font-size: 22px; letter-spacing: .02em; }
+.top h1 a { text-decoration: none; }
+.top .sub { margin: 2px 0 0; color: var(--ink-2); font-size: 13px; }
+.top nav { display: flex; gap: 16px; font-size: 14px; }
+.top nav a { color: var(--ink-2); text-decoration: none; }
+.top nav a[aria-current] { color: var(--ink); font-weight: 700; }
+.updated { font-size: 12px; color: var(--muted); }
+
+section { margin: 28px 0; }
+section > h2 { font-size: 17px; margin: 0 0 12px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+section > h2 > small { flex: 1 1 14em; }
+section > h2 small { font-weight: 400; font-size: 12px; color: var(--muted); }
+
+.mgroup + .mgroup { margin-top: 16px; }
+.glabel { font-size: 12px; color: var(--muted); font-weight: 600; margin: 0 0 6px; letter-spacing: .08em; }
+.mgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.mcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; min-width: 0; }
+.mcard header { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.mcard h3 { margin: 0; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.mcard h3 small { color: var(--muted); font-weight: 400; }
+.mcard .asof { font-size: 11px; color: var(--muted); white-space: nowrap; }
+.mcard .price { margin: 4px 0 0; font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.25; }
+.unit { font-size: 12px; font-weight: 400; color: var(--muted); margin-left: 3px; }
+.mcard .chg { margin: 0 0 6px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.mcard .abs { color: var(--ink-2); font-weight: 400; font-size: 13px; margin-left: 4px; }
+.mcard.stale { border-style: dashed; }
+.mcard.failed .note { color: var(--muted); font-size: 13px; margin: 0; }
+.periods { display: grid; grid-template-columns: repeat(3, 1fr); margin: 8px 0 0; font-size: 12px; }
+.periods div { text-align: center; }
+.periods dt { color: var(--muted); }
+.periods dd { margin: 0; font-variant-numeric: tabular-nums; }
+.range { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.range-track { position: relative; flex: 1; height: 4px; border-radius: 2px; background: var(--surface-2); }
+.range-mark { position: absolute; top: -3px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--ink); border: 2px solid var(--surface); }
+
+.spark { position: relative; height: 48px; }
+.spark-cell .spark { height: 32px; width: 120px; }
+.spark svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.spark .line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; stroke: var(--muted); }
+.spark .area { fill: var(--muted); opacity: .08; stroke: none; }
+.spark.up .line { stroke: var(--up); } .spark.up .area { fill: var(--up); }
+.spark.down .line { stroke: var(--down); } .spark.down .area { fill: var(--down); }
+.spark .cross { stroke: var(--ink-2); stroke-width: 1; opacity: 0; }
+.spark .dot { fill: var(--ink); stroke: var(--surface); stroke-width: 2; opacity: 0; }
+.spark.hover .cross, .spark.hover .dot { opacity: 1; }
+.spark .tip { position: absolute; bottom: -26px; transform: translateX(-50%); background: var(--ink); color: var(--bg); font-size: 11px; padding: 2px 7px; border-radius: 6px; white-space: nowrap; pointer-events: none; z-index: 2; font-variant-numeric: tabular-nums; }
+.spark.empty { font-size: 12px; color: var(--muted); display: flex; align-items: center; }
+
+.digest { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius); padding: 14px 18px; }
+.digest ol { margin: 0; padding-left: 1.4em; }
+.digest li + li { margin-top: 6px; }
+
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+table.watch { width: 100%; border-collapse: collapse; font-size: 14px; }
+.watch th, .watch td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+.watch thead th { font-size: 12px; color: var(--muted); font-weight: 600; background: var(--surface-2); }
+.watch th.num, .watch td.num { text-align: right; }
+.watch tbody tr:last-child > * { border-bottom: 0; }
+.wname { display: block; font-weight: 600; min-width: 7.5em; }
+.wcode { font-size: 12px; color: var(--muted); font-weight: 400; }
+.wnews { min-width: 220px; font-size: 13px; }
+.wnews a { color: var(--ink-2); }
+.stale-tag { margin-left: 6px; font-size: 11px; color: var(--muted); border: 1px dashed var(--line); padding: 0 4px; border-radius: 4px; }
+.linkish { font: inherit; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 24px; align-items: start; }
+.side > * + * { margin-top: 16px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; }
+.panel h3 { margin: 0 0 10px; font-size: 14px; }
+
+.filters { position: sticky; top: 0; z-index: 3; background: var(--bg); padding: 8px 0 6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: inherit; font-size: 13px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); border-radius: 999px; padding: 3px 12px; cursor: pointer; min-height: 32px; }
+.chip .n { color: var(--muted); font-variant-numeric: tabular-nums; }
+.chip.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip.on .n { color: inherit; opacity: .7; }
+.row2 { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-top: 8px; font-size: 13px; color: var(--ink-2); }
+.row2 select, .row2 input[type=search] { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; min-height: 32px; }
+.row2 input[type=search] { flex: 1; min-width: 160px; }
+.count { margin: 6px 0 0; font-size: 12px; color: var(--muted); }
+
+.news { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; margin-top: 10px; }
+.news.key { border-left: 4px solid var(--key); }
+.nmeta { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; font-size: 12px; color: var(--muted); }
+.cat { color: var(--ink-2); font-weight: 600; }
+.sent { font-weight: 600; }
+.sent-positive { color: var(--up); } .sent-negative { color: var(--down); } .sent-neutral { color: var(--muted); }
+.imp { color: var(--key); font-weight: 700; }
+.nmeta time { margin-left: auto; font-variant-numeric: tabular-nums; }
+.news h3 { margin: 6px 0 6px; font-size: 16px; line-height: 1.5; }
+.news h3 a { text-decoration: none; }
+.news h3 a:hover { text-decoration: underline; }
+.summary { margin: 0; padding-left: 1.2em; color: var(--ink-2); font-size: 14px; }
+.impact { margin: 8px 0 0; font-size: 13px; background: var(--surface-2); border-radius: 6px; padding: 6px 10px; }
+.impact b { font-size: 11px; color: var(--muted); margin-right: 8px; }
+.news footer { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 10px; font-size: 12px; }
+.pub { color: var(--ink-2); margin-right: 4px; }
+.tag { border: 1px solid var(--line); border-radius: 999px; padding: 0 8px; color: var(--ink-2); }
+.tag.watch { background: var(--accent-soft); border-color: transparent; color: var(--ink); }
+.tag.auto { border-style: dashed; color: var(--muted); }
+.empty-note { text-align: center; color: var(--muted); padding: 30px 0; }
+
+.bars { display: grid; gap: 6px; font-size: 12px; }
+.bar-row { display: grid; grid-template-columns: 7.5em 1fr 2em; gap: 8px; align-items: center; }
+.bar-lab { color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-track { height: 10px; }
+.bar-fill { display: block; height: 100%; background: var(--accent); border-radius: 0 4px 4px 0; min-width: 2px; }
+.bar-n { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+
+details.status summary { cursor: pointer; font-size: 13px; color: var(--ink-2); }
+details.status ul { list-style: none; padding: 0; margin: 8px 0 0; font-size: 12px; }
+details.status li { padding: 2px 0; overflow-wrap: anywhere; }
+details.status li.ok span:first-child { color: var(--accent); }
+details.status li.ng span:first-child { color: var(--down); }
+
+.days { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.days a { display: flex; justify-content: space-between; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; text-decoration: none; font-variant-numeric: tabular-nums; }
+
+.foot { border-top: 1px solid var(--line); margin-top: 40px; padding: 20px 0 40px; font-size: 12px; color: var(--muted); }
+.foot p { margin: 4px 0; }
+.disclaimer { background: var(--surface-2); border-radius: 8px; padding: 10px 12px; color: var(--ink-2); }
+
+@media (max-width: 900px) {
+  .cols { grid-template-columns: 1fr; }
+  .side { order: -1; }
+}
+@media (max-width: 640px) {
+  .hide-sm { display: none; }
+  .mgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .mcard { padding: 10px; }
+  .mcard .price { font-size: 19px; }
+  .mcard header { flex-direction: column; gap: 0; }
+  .range-lab { display: none; }
+  .periods { font-size: 11px; gap: 2px; letter-spacing: -.02em; }
+  .watch th, .watch td { padding: 8px; }
+  .wnews { min-width: 180px; }
+  .nmeta time { margin-left: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .news, .mcard { transition: border-color .15s; }
+}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <div>
+    <h1><a href="../index.html">投資情報ウォッチ</a></h1>
+    <p class="sub">主要マーケットの値動きと、投資判断に関わるニュースを毎日まとめる</p>
+  </div>
+  <div>
+    <nav aria-label="ページ">
+      <a href="../index.html">今日</a>
+      <a href="../archive.html" aria-current="page">過去のニュース</a>
+    </nav>
+    <div class="updated">最終更新 2026年11月24日(火) 03:47</div>
+  </div>
+</div></header>
+<main class="wrap">
+<section id="news">
+  <h2>2026-11-24 のニュース <small>54件</small></h2>
+  <div class="filters" role="group" aria-label="ニュースの絞り込み">
+  <div class="chips" data-group="cat">
+    <button type="button" class="chip on" data-value="">すべて <span class="n">54</span></button>
+    <button type="button" class="chip" data-value="macro" title="日銀・FRB・ECBの政策、金利見通し、物価、雇用、GDP、景気指標">金融政策・景気 <span class="n">0</span></button><button type="button" class="chip" data-value="jpstock" title="国内企業の決算・業績修正、TOB・M&amp;A、株主還元、新規上場、日本株の相場">日本株・企業 <span class="n">37</span></button><button type="button" class="chip" data-value="global" title="米国株・欧州・中国市場の相場、海外企業の決算、地政学が市場に与える影響">米国・海外市場 <span class="n">11</span></button><button type="button" class="chip" data-value="fx" title="円相場、介入、国債利回り、債券市場">為替・債券 <span class="n">4</span></button><button type="button" class="chip" data-value="commodity" title="原油・金などの商品、ビットコインなど暗号資産">商品・暗号資産 <span class="n">2</span></button><button type="button" class="chip" data-value="personal" title="新NISA・iDeCo・税制・金融庁の制度変更、投資信託、個人投資家の動向">資産形成・制度 <span class="n">0</span></button>
+  </div>
+  <div class="row2">
+    <label>向き <select data-group="sent">
+      <option value="">すべて</option><option value="positive">▲ 追い風</option><option value="negative">▼ 向かい風</option><option value="neutral">－ 中立</option>
+    </select></label>
+    <label>銘柄 <select data-group="ticker">
+      <option value="">すべて</option><option value="NVDA">エヌビディア</option><option value="AAPL">アップル</option>
+    </select></label>
+    <label class="only-key"><input type="checkbox" data-group="key"> 注目のみ</label>
+    <input type="search" data-group="q" placeholder="キーワードで検索" aria-label="キーワードで検索">
+  </div>
+  <p class="count" aria-live="polite"></p>
+</div>
+  <div data-news>
+    <article class="news key" data-cat="global" data-sent="positive" data-tickers="NVDA" data-text="米国株急反発、エヌビディアがジェンスン・フアン氏のceo復帰を決定 米国株急反発、エヌビディアがジェンスン・フアン氏のceo復帰を決定 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア tbs news dig">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T18:35:00.000Z">11/24 03:35</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE9UN2NOM3ZOcHFzOXo0d1hCNHhTTVRSdkx2eHFrOXdkZ295MktxeHpuYXJ0MHl0V1F6VkJHX2tGa3o1Y2VGeTBuMjRUM0o5cW50WDNaZzVwNkgyejJlMkpNRU9pNU41T3AxR05DMlljRllvMnVI?oc=5" target="_blank" rel="noopener">米国株急反発、エヌビディアがジェンスン・フアン氏のCEO復帰を決定</a></h3>
+  <ul class="summary"><li>米国株急反発、エヌビディアがジェンスン・フアン氏のCEO復帰を決定</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">TBS NEWS DIG</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="エヌビディアのフアン氏ceo復帰でai電力・送配電株が急騰 エヌビディア（nvda）の取締役会がジェンスン・フアン氏を最高経営責任者（ceo）に復帰させたことを受け、月曜日には電力生産者や送配電設備メーカーの株価が急騰した。 同社の第3四半期売上高は前年同期比138%増の12.4億ドル（約2,000億円）となり、経営陣は2026年通年の売上高見通しを3度目となる上方修正で44億～46億ドル（約7,000億～7,300億円）に引き上げた。 コンステレーションは11月9日、カルパイン買収を受けて2026年の調整後営業利益見通しを1株当たり12.50～12.80ドル（約2,000円）に引き上げた。  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T18:35:00.000Z">11/24 03:35</time>
+  </div>
+  <h3><a href="https://finance.biggo.jp/news/d3e85ffe-df80-40a6-a38a-8bb5db47d814" target="_blank" rel="noopener">エヌビディアのフアン氏CEO復帰でAI電力・送配電株が急騰</a></h3>
+  <ul class="summary"><li>エヌビディア（NVDA）の取締役会がジェンスン・フアン氏を最高経営責任者（CEO）に復帰させたことを受け、月曜日には電力生産者や送配電設備メーカーの株価が急騰した。</li><li>同社の第3四半期売上高は前年同期比138%増の12.4億ドル（約2,000億円）となり、経営陣は2026年通年の売上高見通しを3度目となる上方修正で44億～46億ドル（約7,000億～7,300億円）に引き上げた。</li><li>コンステレーションは11月9日、カルパイン買収を受けて2026年の調整後営業利益見通しを1株当たり12.50～12.80ドル（約2,000円）に引き上げた。</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="fx" data-sent="positive" data-tickers="NVDA" data-text="エヌビディアのニュースで市場揺れる中、ビットコインは6.4万ドルから6.1万ドルの間で3,000ドル振幅 ビットコインは月曜日、約3,000ドルの値幅で振れた。 ジェンスン・フアン氏がエヌビディアの最高経営責任者（ceo）に復帰するとのニュースがリスク資産全体の上昇を引き起こした後、6.4万ドル（約1,000万円）に達したが、その後上昇分の大半を吐き出し、6万1,500ドル（約980万円）付近で取引 総額の公表値は報道によって異なっており、ある報道はsosovalueのデータを引用して先週の流出額を12.4億ドル（約2,000億円）とした一方、別の報道は約18億ドル（約2,900億円）と伝えた。  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T18:35:00.000Z">11/24 03:35</time>
+  </div>
+  <h3><a href="https://finance.biggo.jp/news/5be3acac-c54e-479a-b493-aed8d0d7d8ff" target="_blank" rel="noopener">エヌビディアのニュースで市場揺れる中、ビットコインは6.4万ドルから6.1万ドルの間で3,000ドル振幅</a></h3>
+  <ul class="summary"><li>ビットコインは月曜日、約3,000ドルの値幅で振れた。</li><li>ジェンスン・フアン氏がエヌビディアの最高経営責任者（CEO）に復帰するとのニュースがリスク資産全体の上昇を引き起こした後、6.4万ドル（約1,000万円）に達したが、その後上昇分の大半を吐き出し、6万1,500ドル（約980万円）付近で取引</li><li>総額の公表値は報道によって異なっており、ある報道はSoSoValueのデータを引用して先週の流出額を12.4億ドル（約2,000億円）とした一方、別の報道は約18億ドル（約2,900億円）と伝えた。</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア、フアン氏の復帰を経営陣抜きで決定と伝わる＝米国株個別 エヌビディア、フアン氏の復帰を経営陣抜きで決定と伝わる＝米国株個別 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 株探">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T18:24:00.000Z">11/24 03:24</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE5FUTlWSHFBNXNORWdpM0RnUWd3THRqRjJsRTNvemlRUlpZb3hwU21MMkpESDYtRmJPcTNjQTJfRUJ6Vi1iZGJlVTJzUU1SNkhtZ1E?oc=5" target="_blank" rel="noopener">エヌビディア、フアン氏の復帰を経営陣抜きで決定と伝わる＝米国株個別</a></h3>
+  <ul class="summary"><li>エヌビディア、フアン氏の復帰を経営陣抜きで決定と伝わる＝米国株個別</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">株探</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア空売り筋に122億ドルの含み損、フアン氏ｃｅｏ復帰で エヌビディア空売り筋に122億ドルの含み損、フアン氏ｃｅｏ復帰で （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア reuters">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T17:57:44.000Z">11/24 02:57</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNWjZpSVI2ZjI3bTdVSEUxVHhwcmZEdlhxdF9XZzA2azR2SDVrMkNJaWJrcDcwbXNmdHBST0hnRW4zc2xVNFc4MDdmYjhnZnlCOWs3ajRzTTVXRnY2RmZLczV0OEI3eGVUWEY2MFA3YUpRM3lac2FEaTViVGd2c09aZ3RtNVVNNHFTNFFwMThicno?oc=5" target="_blank" rel="noopener">エヌビディア空売り筋に122億ドルの含み損、フアン氏ＣＥＯ復帰で</a></h3>
+  <ul class="summary"><li>エヌビディア空売り筋に122億ドルの含み損、フアン氏ＣＥＯ復帰で</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Reuters</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア空売り筋に122億ドルの含み損、フアン氏ｃｅｏ復帰で（ロイター） エヌビディア空売り筋に122億ドルの含み損、フアン氏ｃｅｏ復帰で（ロイター） （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T17:56:01.000Z">11/24 02:56</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE1ERWFoSUVWaGFMRE9DSk4tRjdvZF9MNURsNE81eEI2b09PWTliUlhQNEZrb2JSSkkySktGRnFJejc2aGZwb3RSVWZuSkxUZGoyS0N0aS1BcXkyWXNIcHV3YzZkVWNwTjlQaWpqVFFPd2hhOHVkOWhFY0R6QjFWRWM?oc=5" target="_blank" rel="noopener">エヌビディア空売り筋に122億ドルの含み損、フアン氏ＣＥＯ復帰で（ロイター）</a></h3>
+  <ul class="summary"><li>エヌビディア空売り筋に122億ドルの含み損、フアン氏ＣＥＯ復帰で（ロイター）</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ニュース</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="ジェンスン・フアン氏がceo復帰で救済、nvidiaが1日で33%急騰 空売り勢は122億ドル損失 nvidiaのジェンスン・フアンceoの劇的な復帰は、世界で最も時価総額の高い半導体企業の株価走势を一変させ、株価のさらなる下落に賭けていた空売り投資家に痛手を負わせた。 11月12日当日に166ドルで引けた株価は、11月20日には125ドルまで下落し、半月足らずで相当な下げ幅となったことで、空売り投資家は甘い汁を吸った。 台湾指数先物の夜間取引は23日、当初は横ばい圏でもみ合い、取引時間中には一時223ポイント下落して最低3万6436ポイントを付けたが、nvidiaがフアン氏の復職を発表すると、買いが短時間で3000ポイント超急伸し、一気に4万0324ポイン  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T17:55:00.000Z">11/24 02:55</time>
+  </div>
+  <h3><a href="https://finance.biggo.jp/news/81827517-f476-4b3b-a548-4128f03761d9" target="_blank" rel="noopener">ジェンスン・フアン氏がCEO復帰で救済、NVIDIAが1日で33%急騰 空売り勢は122億ドル損失</a></h3>
+  <ul class="summary"><li>NVIDIAのジェンスン・フアンCEOの劇的な復帰は、世界で最も時価総額の高い半導体企業の株価走势を一変させ、株価のさらなる下落に賭けていた空売り投資家に痛手を負わせた。</li><li>11月12日当日に166ドルで引けた株価は、11月20日には125ドルまで下落し、半月足らずで相当な下げ幅となったことで、空売り投資家は甘い汁を吸った。</li><li>台湾指数先物の夜間取引は23日、当初は横ばい圏でもみ合い、取引時間中には一時223ポイント下落して最低3万6436ポイントを付けたが、NVIDIAがフアン氏の復職を発表すると、買いが短時間で3000ポイント超急伸し、一気に4万0324ポイン</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="マスク氏、「間違い正された」＝フアン氏のエヌビディアceo復帰に(時事通信) マスク氏、「間違い正された」＝フアン氏のエヌビディアceo復帰に(時事通信) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T17:54:52.000Z">11/24 02:54</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxNVHRHUmNQQzZjNGFVNVljQ0tKYXA2YlIzYmhSNmZmMzJQUURpM1E4MDJrLW13LUg3cTFOZXpBV2NiZkE3bEVpRlNQQUtCWml1Nm9SM3d6SnhsbEJkQkR1OFBiRTRIbFB5OXBlNk8yclhTMmRfVXJiU3hFREFqU1I2NTl1TEdxQUU?oc=5" target="_blank" rel="noopener">マスク氏、「間違い正された」＝フアン氏のエヌビディアCEO復帰に(時事通信)</a></h3>
+  <ul class="summary"><li>マスク氏、「間違い正された」＝フアン氏のエヌビディアCEO復帰に(時事通信)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディアのジェンセン・フアン最高経営責任者（ceo）が12月3日、米上院銀行委員会で証言を行う予定 エヌビディアのジェンセン・フアン最高経営責任者（ceo）が12月3日、米上院銀行委員会で証言を行う予定 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T17:42:03.000Z">11/24 02:42</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxQaHNUR0FjXzJaejFIbEQ2dU9jazJzMmw1UlZHOUZ2MUxaZ3QzV3J5Mk9haHZYc2h4LW9jd1dyWjZENkhXN2dOSks2VVFBWldnTktBS3F3MDVMMTU1eVFYbGItemxuc05ZT0JRRHZPU0Fvdm1rMU9aUlduX1k2U3FtcTVTZjRtWDZLdU1TLUswZFZrck1UVGVCeS1hZnVYbThUY1JMbVhKR0Y?oc=5" target="_blank" rel="noopener">エヌビディアのジェンセン・フアン最高経営責任者（CEO）が12月3日、米上院銀行委員会で証言を行う予定</a></h3>
+  <ul class="summary"><li>エヌビディアのジェンセン・フアン最高経営責任者（CEO）が12月3日、米上院銀行委員会で証言を行う予定</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディアだけでなく同業他社やデータセンター株にも買い…ａｉ関連企業へ巨額投資行ってきたフアン氏復帰で波及効果 エヌビディアだけでなく同業他社やデータセンター株にも買い…ａｉ関連企業へ巨額投資行ってきたフアン氏復帰で波及効果 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 読売新聞">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T17:38:00.000Z">11/24 02:38</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE9pclEtX3JEWEU4OTJFZVkwVm44emktTTlLbXBkdTR0bzBsbXlxcThZaWZtbWFyNlZOMnRiR3FtU1BsMjFHWkNYWU1BaWtiOHJwS1llb0diYnNyaENfYmdnRlJWUUM?oc=5" target="_blank" rel="noopener">エヌビディアだけでなく同業他社やデータセンター株にも買い…ＡＩ関連企業へ巨額投資行ってきたフアン氏復帰で波及効果</a></h3>
+  <ul class="summary"><li>エヌビディアだけでなく同業他社やデータセンター株にも買い…ＡＩ関連企業へ巨額投資行ってきたフアン氏復帰で波及効果</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">読売新聞</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディアceo復帰後の米国株｜s&amp;p500とナスダックの底打ちを分析 エヌビディアceo復帰後の米国株｜s&amp;p500とナスダックの底打ちを分析 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア investlingo">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T17:32:42.000Z">11/24 02:32</time>
+  </div>
+  <h3><a href="https://www.investlingo.jp/content/3MW8XcSSlUQ9nzVmudh2YR4v5wL" target="_blank" rel="noopener">エヌビディアCEO復帰後の米国株｜S&amp;P500とナスダックの底打ちを分析</a></h3>
+  <ul class="summary"><li>エヌビディアCEO復帰後の米国株｜S&amp;P500とナスダックの底打ちを分析</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Investlingo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="エヌビディアceo 辞任のフアン氏が復帰へ 株価一時36％超上昇 アメリカの半導体大手「エヌビディア」は、中国の情報機関の協力者とされる女性と親密な関係にあったと報じられ、辞任したジェンスン・フアン氏がceoに復帰したと発表しました。 会社はフアン氏の復帰が国家安全… （自動要約なし。原文を参照してください）  エヌビディア nhk 経済">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T17:30:50.000Z">11/24 02:30</time>
+  </div>
+  <h3><a href="https://news.web.nhk/newsweb/na/nd-20261123de80304" target="_blank" rel="noopener">エヌビディアCEO 辞任のフアン氏が復帰へ 株価一時36％超上昇</a></h3>
+  <ul class="summary"><li>アメリカの半導体大手「エヌビディア」は、中国の情報機関の協力者とされる女性と親密な関係にあったと報じられ、辞任したジェンスン・フアン氏がCEOに復帰したと発表しました。</li><li>会社はフアン氏の復帰が国家安全…</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">NHK 経済</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="人気テーマ株速報：大手ハイテク株大幅高 エヌビディアなどが注目＝米株ザラ場 人気テーマ株速報：大手ハイテク株大幅高 エヌビディアなどが注目＝米株ザラ場 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T17:20:00.000Z">11/24 02:20</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxNclpFS3ZZRW5Wbkx4VEZhVURrQVBhVm1rWlRqUWdPT2l0NDBKQUNHVGhXalloMFZkcERSb05iaG11RWlrSXVwdlNDWFp3WjVuaERLd0FBOWNuMENlbS1PcWZOcXhZc3JsRGRpU2dldnJKXzVHcFh4YlM5RlNESWY2cThmOFI2VTBPWnk4RU9CMjZpRDM2QWVtUzk3cGtlWW9sZnRQTlJUVTV1cElXazN3N3pR?oc=5" target="_blank" rel="noopener">人気テーマ株速報：大手ハイテク株大幅高 エヌビディアなどが注目＝米株ザラ場</a></h3>
+  <ul class="summary"><li>人気テーマ株速報：大手ハイテク株大幅高 エヌビディアなどが注目＝米株ザラ場</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディアがジェンスン・ファン氏のceo復帰を決定 辞任から11日、株価31%超急伸（ビジネス＋it） エヌビディアがジェンスン・ファン氏のceo復帰を決定 辞任から11日、株価31%超急伸（ビジネス＋it） （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T17:15:06.000Z">11/24 02:15</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE4zYmtmeFExNDJ0endTNVgzbjIyUXZkUGdHamE4aElsaVR4ZmpOaGNZNGNzQWtrZjIwWHFtLXR0ZkpuRUxvV1l4ZExTckxZX1FoTVoxeVY4OEs3SnVJSEN5c19TcTZHOU5FV0x3OE50SXItRnFlQjFwZVYtTGtfS0U?oc=5" target="_blank" rel="noopener">エヌビディアがジェンスン・ファン氏のCEO復帰を決定 辞任から11日、株価31%超急伸（ビジネス＋IT）</a></h3>
+  <ul class="summary"><li>エヌビディアがジェンスン・ファン氏のCEO復帰を決定 辞任から11日、株価31%超急伸（ビジネス＋IT）</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ニュース</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="AAPL" data-text="アップル（aapl）の株価は、キャッシュフローから見ると依然として割高に見える アップル（aapl）の株価は、キャッシュフローから見ると依然として割高に見える （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  アップル simply wall st">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T17:12:32.000Z">11/24 02:12</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQbjRfYV9QZEhKcmF4OURpczZHdWFWMkRTQ0NjdUVfeWtlUEtnN1A4R2NIVzFobnVXXzJybFh0QVgydlJsdXZka1RqUXhmQmtwY3J5RU1OOHcySXZhM1BYdGY5MEc0OWRwbWQ5dDlZYUFlQXF0RjNaWkhkN1BieTFzUmZvdVZ5dw?oc=5" target="_blank" rel="noopener">アップル（AAPL）の株価は、キャッシュフローから見ると依然として割高に見える</a></h3>
+  <ul class="summary"><li>アップル（AAPL）の株価は、キャッシュフローから見ると依然として割高に見える</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Simply Wall St</span>
+    <span class="tag watch">アップル</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア空売り勢、122億ドルの評価損 フアン氏復帰で株価33%高 エヌビディア空売り勢、122億ドルの評価損 フアン氏復帰で株価33%高 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T17:05:00.000Z">11/24 02:05</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE4xOG5EaEVKM2h3ZVVocGlBWjdCamFsdTFSbTNGUWs0ek9vbnppVHd1NkJDaUlVUTFaTVc4ZXJ6NkxHY0tER2NPbUpfbWN2Y1d2ckxaaEl1d0FiWFB3SlF5Y1k0bXJoWVVfNWc4WGxEclV2Qlcy?oc=5" target="_blank" rel="noopener">エヌビディア空売り勢、122億ドルの評価損 フアン氏復帰で株価33%高</a></h3>
+  <ul class="summary"><li>エヌビディア空売り勢、122億ドルの評価損 フアン氏復帰で株価33%高</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア、ジェンスン・フアン氏がceoに復帰―株価は一時33%急騰 エヌビディアは23日、11月12日に辞任したジェンスン・フアン氏を即日付でceoに復帰させると発表した。 辞任当日の12日の終値は166.19ドルだったが、21日には125.53ドルで取引を終えていた。 （2026年4月30日、米スタンフォード大学にて、anders eidesvik, cc by 4.0, via wikimedia commons） [写真拡大]  エヌビディア 財経新聞">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T16:45:19.000Z">11/24 01:45</time>
+  </div>
+  <h3><a href="https://www.zaikei.co.jp/article/20261124/878783.html" target="_blank" rel="noopener">エヌビディア、ジェンスン・フアン氏がCEOに復帰―株価は一時33%急騰</a></h3>
+  <ul class="summary"><li>エヌビディアは23日、11月12日に辞任したジェンスン・フアン氏を即日付でCEOに復帰させると発表した。</li><li>辞任当日の12日の終値は166.19ドルだったが、21日には125.53ドルで取引を終えていた。</li><li>（2026年4月30日、米スタンフォード大学にて、Anders Eidesvik, CC BY 4.0, via Wikimedia Commons） [写真拡大]</li></ul>
+  
+  <footer>
+    <span class="pub">財経新聞</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="フアン氏、ceoに復帰＝「復帰、光栄」―米エヌビディア☆差替(時事通信) フアン氏、ceoに復帰＝「復帰、光栄」―米エヌビディア☆差替(時事通信) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T16:43:16.000Z">11/24 01:43</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxNNmE2MEhDRUE3RG9tenZTSGpjRVpGdTFSMzlROHpXY0s5UWJLWTYyU2NGeFE0SzBIWGprT1FhZnFUdXc5Rk40MnBCQTVSTEFJRzJoS0RnSzBGQmZhZGZIY0ZvUXg1WW0xOTRDTzZ5UHlGaGJ4VUtoaDlRWmp3a0RFYl95bDZ2X2s?oc=5" target="_blank" rel="noopener">フアン氏、CEOに復帰＝「復帰、光栄」―米エヌビディア☆差替(時事通信)</a></h3>
+  <ul class="summary"><li>フアン氏、CEOに復帰＝「復帰、光栄」―米エヌビディア☆差替(時事通信)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="人気テーマ株速報：自動運転大幅高 エヌビディアなどが注目＝米株ザラ場 人気テーマ株速報：自動運転大幅高 エヌビディアなどが注目＝米株ザラ場 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T16:34:57.000Z">11/24 01:34</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxOcUZaUERRUVNqOU93NHNWM2M0QV9IYzU3MzV4VVcyU2ZuaUNKUndDeHV5UzktYjJaREFfRHFfRFpocGtQanpEMjBhdFNRZERMaVhMeFNVTUVDX1dvbWtwZXNuNlJtRk1uaWJPX0pQelItTGJlT3lHZWFHdTJPZ0Z3YU9TY3FpX1U0UDRNdl94bi1MSElXVUxYM0VxQlNYNS1DTjI2ZkJ2b3JOSDNLNVN0NlZ5dHZ3LWk5UnNmMw?oc=5" target="_blank" rel="noopener">人気テーマ株速報：自動運転大幅高 エヌビディアなどが注目＝米株ザラ場</a></h3>
+  <ul class="summary"><li>人気テーマ株速報：自動運転大幅高 エヌビディアなどが注目＝米株ザラ場</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="人気テーマ株速報：ai メガネのコンセプト株大幅高 エヌビディアなどが注目＝米株ザラ場 人気テーマ株速報：ai メガネのコンセプト株大幅高 エヌビディアなどが注目＝米株ザラ場 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T16:30:00.000Z">11/24 01:30</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxOcHhCUTVMR0xyZ3RWTjFDTHF0VkRCLW0xaUdDcU1od3h3NnpBVVF4V2lESlBLNkZ5MVloVDhrOWhQckg2S3hnb3lheXFGS2hkME1qdVRnWXFvbUNQS1FVMExZTF95dmlIbWR1R0EtdWs3c0piYjRCakNWZHYtQXh0U2lZQWQ3TTIzaEh6b2h1bWVQNFNzdE93d1RMUmlKaWFGNmp2R3BIUzhrZnV5b1Bncw?oc=5" target="_blank" rel="noopener">人気テーマ株速報：AI メガネのコンセプト株大幅高 エヌビディアなどが注目＝米株ザラ場</a></h3>
+  <ul class="summary"><li>人気テーマ株速報：AI メガネのコンセプト株大幅高 エヌビディアなどが注目＝米株ザラ場</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="commodity" data-sent="positive" data-tickers="NVDA" data-text="金価格が14ヶ月ぶりの安値から反発、エヌビディアは黄仁勲氏をceoに再任 金価格が14ヶ月ぶりの安値から反発、エヌビディアは黄仁勲氏をceoに再任 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T16:25:29.000Z">11/24 01:25</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxQWDFNOW1JWW4yVHJPeWs5LUM3Q1FaNndvZmpiVlVwTXF4dGM3UWhpZEJMRWMyVEZDdWN1TmJUZ0pMVVVCM0ZVdXc5eGF6cjQ2TjVlNHB4cjhtQUZnU0pGYUpEb2Ric2I0MVZPRGlYbXo1OV82d0t5T3l5YmFhTE13cEdsa29nMHJyY20xdWVVbDNxTDhwUEFqd1JRRGdZQVdDOHBORFFURjVySjVOakE?oc=5" target="_blank" rel="noopener">金価格が14ヶ月ぶりの安値から反発、エヌビディアは黄仁勲氏をCEOに再任</a></h3>
+  <ul class="summary"><li>金価格が14ヶ月ぶりの安値から反発、エヌビディアは黄仁勲氏をCEOに再任</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="シティグループ、エヌビディアの目標株価を225ドルから240ドルに引き上げ シティグループ、エヌビディアの目標株価を225ドルから240ドルに引き上げ （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T16:14:14.000Z">11/24 01:14</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxOcllGdmtnM2dJVldyd3doRElPTWlCZWcybnpzUHYtR2RmVFViV04tRE9kZFQwRDVuR1p6TlpKcHctSWdjMVduZ09xc2syOWd0dzN3RkxZZ19YS3FQdGdqSFV4bFB0eDlKUjF5azhKT05aV3JwTklDZlNXeVVfb0dGMXJSZGdUajlsd2h1N25WOFJrbWlETThuNG1CNVlyeTJ6U0JPMUVn?oc=5" target="_blank" rel="noopener">シティグループ、エヌビディアの目標株価を225ドルから240ドルに引き上げ</a></h3>
+  <ul class="summary"><li>シティグループ、エヌビディアの目標株価を225ドルから240ドルに引き上げ</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="人気テーマ株速報：人工知能(ai)大幅高 エヌビディアなどが注目＝米株ザラ場 人気テーマ株速報：人工知能(ai)大幅高 エヌビディアなどが注目＝米株ザラ場 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T16:12:08.000Z">11/24 01:12</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxOT0UyZ1RGc2c1emlycTFZZE5nUTJPbDREOFowZTZLRkdQa1JGWjFqYml3T3dFUEtwZ3hmUXhzXy1SejN0VjQtSXFjQWxZSld6akhLOUFQT1A2dy1RT1A1cWJBWk5OVUFFazZvel83cFNicHR2TDY0WlVMWDBlWHJsc1Y1S1FjSzBqM3I3OWlwMjFvdkxmTkF5NjFzV3VNLTF1RFAtZ3dVTlJGSVgzSk9Na2tXN1FPemtvMWYzYmJMYlg?oc=5" target="_blank" rel="noopener">人気テーマ株速報：人工知能(AI)大幅高 エヌビディアなどが注目＝米株ザラ場</a></h3>
+  <ul class="summary"><li>人気テーマ株速報：人工知能(AI)大幅高 エヌビディアなどが注目＝米株ザラ場</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="フアン氏がceoに復帰＝米エヌビディアが発表(時事通信) フアン氏がceoに復帰＝米エヌビディアが発表(時事通信) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T16:10:58.000Z">11/24 01:10</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxQOTR0QlhOZHdXZVJGQ1hzTWlSYnB3WnNPVTdFNmgyck9zSGk5bi01MWxlc2dFaXJpaFhaeE1DTk10Y0lLVnU5OXhLZkpCQ3FPQ0VvYTZIX3NldmpvSGFTMUZEMDY1TUxUY0ZzbGZiS1NVRGc4NGMwNGlJcFNKVC1rNEFySXZEYkE?oc=5" target="_blank" rel="noopener">フアン氏がCEOに復帰＝米エヌビディアが発表(時事通信)</a></h3>
+  <ul class="summary"><li>フアン氏がCEOに復帰＝米エヌビディアが発表(時事通信)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア株一時35％超急伸、フアン氏のｃｅｏ復帰決定受け エヌビディア株一時35％超急伸、フアン氏のｃｅｏ復帰決定受け （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア reuters">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:57:44.000Z">11/24 00:57</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNaHY5UU40czg0akJ6NTA2NzZPcHdwLUNHc3hVaHdmOGRWdTBWNkgzRFQzMW41eURWdWlvYW04VHlDUDJpdW5WMURWYVZTRGhRdE52RTd6NjkxVDl1eXVkSnpwRm92NUtVY0w0SXNhSjQwWl8zYlJLaE9iMjFqNm5qNXowTVdRZFVsNDBsalpyLTQ?oc=5" target="_blank" rel="noopener">エヌビディア株一時35％超急伸、フアン氏のＣＥＯ復帰決定受け</a></h3>
+  <ul class="summary"><li>エヌビディア株一時35％超急伸、フアン氏のＣＥＯ復帰決定受け</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Reuters</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア株一時35％超急伸、フアン氏のｃｅｏ復帰決定受け（ロイター） エヌビディア株一時35％超急伸、フアン氏のｃｅｏ復帰決定受け（ロイター） （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:56:40.000Z">11/24 00:56</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE8xQ1BvN2lsMnpBR25YcmlFTk1tbUhGZjR6WnpwY1doemJUTmRuSzJDWFRlemIxRDBNdEREN2pMc3M1Ykl2dzdsVXRmdVc0SDc4N2ZyWnQ0LW95WHpUSWdjVlNkcnpaV3VnUlhJX1NZbjFUTGRhU0s3SVdEdGduUGM?oc=5" target="_blank" rel="noopener">エヌビディア株一時35％超急伸、フアン氏のＣＥＯ復帰決定受け（ロイター）</a></h3>
+  <ul class="summary"><li>エヌビディア株一時35％超急伸、フアン氏のＣＥＯ復帰決定受け（ロイター）</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ニュース</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア、取締役会がフアン氏のceo復帰を承認 時価総額8,880億ドル増で過去最大 エヌビディア、取締役会がフアン氏のceo復帰を承認 時価総額8,880億ドル増で過去最大 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:55:00.000Z">11/24 00:55</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE1mdnhCZVZnLXV2ZXdpZnd3R2xCYXBEQTNqdnN6NVB3c0tvUTVmT3FOOW5mNklHM252V0dOZ0lRVGdZcHY0ZlZXY181MDl1anpZQXUwZWZRTUxMUWIxU2NXc0tqZVM3dVNJNEZCbVhrZ1U5Tmww?oc=5" target="_blank" rel="noopener">エヌビディア、取締役会がフアン氏のCEO復帰を承認 時価総額8,880億ドル増で過去最大</a></h3>
+  <ul class="summary"><li>エヌビディア、取締役会がフアン氏のCEO復帰を承認 時価総額8,880億ドル増で過去最大</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="エヌビディアの株価が168.5ドルに上昇したことで、空売り勢は約122億ドルの含み損を計上 エヌビディアの株価が168.5ドルに上昇したことで、空売り勢は約122億ドルの含み損を計上 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:51:58.000Z">11/24 00:51</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxNT1BMWEpWYXRiMC0weDZ6dU56ejFSRl9oMVRtYXhDVEZuYjFYa1dzVnJSUUZINWdGaV92alppbGlYajVVUkxxdC0zV0ttTDYwWkZobEJTTXpIT3hmNndXcHI1Y3BEdFRScmpWdEswUWNlcnpkdVkzYm1sSzlRZk9nY1IwdTlNYW8tbm4ybHY3bUhLaEhXVWdMNGhJNk0?oc=5" target="_blank" rel="noopener">エヌビディアの株価が168.5ドルに上昇したことで、空売り勢は約122億ドルの含み損を計上</a></h3>
+  <ul class="summary"><li>エヌビディアの株価が168.5ドルに上昇したことで、空売り勢は約122億ドルの含み損を計上</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="フアン氏がエヌビディアｃｅｏに復帰、トランプ氏ら歓迎 株価35％高 フアン氏がエヌビディアｃｅｏに復帰、トランプ氏ら歓迎 株価35％高 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア reuters">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:50:54.000Z">11/24 00:50</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxPRUU0TzVGaWJaejk4ZzRxSTlWRlZHOTlKYkw3Wkx6Q25fR0o3MkdfajZQYWxJQ1pWR3IxUTRrU1V2M3pqbG9PQU0zX0lRQlhfNnR0MWNVSXI1RzVieFJQMlY3Z3hwbmdQRDVPUm1kQk85UUJYRnBucTZaaXdCam5sbmhoMm1BeTFXbVJpQ2xB?oc=5" target="_blank" rel="noopener">フアン氏がエヌビディアＣＥＯに復帰、トランプ氏ら歓迎 株価35％高</a></h3>
+  <ul class="summary"><li>フアン氏がエヌビディアＣＥＯに復帰、トランプ氏ら歓迎 株価35％高</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Reuters</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア、フアン氏が11日でceo復帰 株価一時31%高の裏に残る3つの疑問 エヌビディア、フアン氏が11日でceo復帰 株価一時31%高の裏に残る3つの疑問 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア coki">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:45:47.000Z">11/24 00:45</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE9INHVxYnU5WThVcUxzUTNDUEc1T01KRnBJOWIxS0tTSHJnTFUtZW9DM01iQXVodXhpUEdfSEFzUHhkc0NlVV9KRWhzYWQ0UQ?oc=5" target="_blank" rel="noopener">エヌビディア、フアン氏が11日でCEO復帰 株価一時31%高の裏に残る3つの疑問</a></h3>
+  <ul class="summary"><li>エヌビディア、フアン氏が11日でCEO復帰 株価一時31%高の裏に残る3つの疑問</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">coki</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="人気テーマ株速報：ブレイン・マシン・インターフェース大幅高 エヌビディアなどが注目＝米株ザラ場 人気テーマ株速報：ブレイン・マシン・インターフェース大幅高 エヌビディアなどが注目＝米株ザラ場 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:40:01.000Z">11/24 00:40</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxNRlJFbEJsdVRtNE5WWE5UWW9zTlR4b1RRVVNvN3dVQ2NZSEtYTlhnTUU5VWZBeGl1eHgtOEFmOUdRRmFHQXFfZjVOT3BVUkN3OEJDSVFsQXdSaDgxMXJVWHJBaGRlUm9FV2FTTzZtNERHRWM1S0VSSnlpSXNrWGk4VGFnZFJPeXlBbTVoWEI3M1BkVUVwdkZrN2M0cDhfcGY0bVpMcndWTHBiMWFyOWVGa0ZfOGlXd1lh?oc=5" target="_blank" rel="noopener">人気テーマ株速報：ブレイン・マシン・インターフェース大幅高 エヌビディアなどが注目＝米株ザラ場</a></h3>
+  <ul class="summary"><li>人気テーマ株速報：ブレイン・マシン・インターフェース大幅高 エヌビディアなどが注目＝米株ザラ場</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="人気テーマ株速報：ロボティクス大幅高 エヌビディアなどが注目＝米株ザラ場 人気テーマ株速報：ロボティクス大幅高 エヌビディアなどが注目＝米株ザラ場 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:32:37.000Z">11/24 00:32</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxQNDJ1X25wOWwydnlUTTg2VjRWSXZyQ0FFa0RGdW9va2I4VHl2ejBfLTlnZ2paNG9WdDVEVDVkd29KcmlqUVpGVk9iOVlUMTktbFl0YXRwUTd5S1NCb085NnVvR29TTU9uRzRLaGdQSEZWQUJyV21EWkIyazRkOU8wU193U2ZzclI1bW1kV201dm0tNWVnTFZEcF9taGJJaDFEempTQ1hHOFRWQ29R?oc=5" target="_blank" rel="noopener">人気テーマ株速報：ロボティクス大幅高 エヌビディアなどが注目＝米株ザラ場</a></h3>
+  <ul class="summary"><li>人気テーマ株速報：ロボティクス大幅高 エヌビディアなどが注目＝米株ザラ場</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディア：波乱の展開と、そこから得た教訓 エヌビディア：波乱の展開と、そこから得た教訓 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:31:32.000Z">11/24 00:31</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxPX2JubFgxN1c1VWEwNmtWbHhTLUxRa1otbXRhc21QNjFrbFRubDlfemVBVjdtbDZzcE5ueXBINktsY3FQMTBZUlVfZjNxQV8xYjJzZUJPSFV4Q3pqaGZ4b2IzaEJvREF3WXJRUklyaEx3cFZrWHNhOS1Ib09wUXVVR1lSS2FaaDMyT0RzcEpwUHV1WGt6T0FndklUZXM5TDJF?oc=5" target="_blank" rel="noopener">エヌビディア：波乱の展開と、そこから得た教訓</a></h3>
+  <ul class="summary"><li>エヌビディア：波乱の展開と、そこから得た教訓</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="フアン氏、ｃｅｏに復帰 安保リスクなしと判断―米エヌビディア フアン氏、ｃｅｏに復帰 安保リスクなしと判断―米エヌビディア （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 時事通信">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:28:00.000Z">11/24 00:28</time>
+  </div>
+  <h3><a href="https://www.jiji.com/jc/article?k=2026112300537&amp;g=int&amp;m=rss" target="_blank" rel="noopener">フアン氏、ＣＥＯに復帰 安保リスクなしと判断―米エヌビディア</a></h3>
+  <ul class="summary"><li>フアン氏、ＣＥＯに復帰 安保リスクなしと判断―米エヌビディア</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">時事通信</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="トランプ大統領、エヌビディアのフアンｃｅｏは「何も悪いことをしていない」 トランプ大統領、エヌビディアのフアンｃｅｏは「何も悪いことをしていない」 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 株探">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:22:00.000Z">11/24 00:22</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE1DWUhKUGE0cHFKbFNsdU8xQUtLQzlUeXlZUWtId2tiSEZlakZ1Tm1vYmdfTVI4TERzQUVHVWJCajIyNklSYUViUjVHWkF4cS1tczhxQng5LU1sVHRUOGZUeQ?oc=5" target="_blank" rel="noopener">トランプ大統領、エヌビディアのフアンＣＥＯは「何も悪いことをしていない」</a></h3>
+  <ul class="summary"><li>トランプ大統領、エヌビディアのフアンＣＥＯは「何も悪いことをしていない」</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">株探</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="人気テーマ株速報：スターゲート計画大幅高 エヌビディアなどが注目＝米株ザラ場 人気テーマ株速報：スターゲート計画大幅高 エヌビディアなどが注目＝米株ザラ場 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア moomoo">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:20:01.000Z">11/24 00:20</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxPME93UG1UZ0JCdlBfWjk2OXJoRy16cE1lbUN3bTdxVi0tS1B0elBkMjVMYkQ0Nk1GUTdlUGNaakU2RzF3c3NXYnFaWkdQOGtCNjRqa3ZTOGkxMXhYNlhoV0IwYjU4TG9MMXdvamdQSFBFTVF0WEZtMVRJM2JpbG95S29RR0dtWDl3V0FuSDJYTEV5WWswVE00cktrTmNNYXE3YWxKOFFMM0R6UGE1S0sxWnhWRS13Q3M?oc=5" target="_blank" rel="noopener">人気テーマ株速報：スターゲート計画大幅高 エヌビディアなどが注目＝米株ザラ場</a></h3>
+  <ul class="summary"><li>人気テーマ株速報：スターゲート計画大幅高 エヌビディアなどが注目＝米株ザラ場</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Moomoo<span class="muted">・2経路</span></span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="neutral" data-tickers="NVDA" data-text="ダウ、ナスダックとも急伸 慎重な声は根強い エヌビディアのフアン氏がｃｅｏに復帰＝米国株序盤 ダウ、ナスダックとも急伸 慎重な声は根強い エヌビディアのフアン氏がｃｅｏに復帰＝米国株序盤 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 株探">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:16:00.000Z">11/24 00:16</time>
+  </div>
+  <h3><a href="https://kabutan.jp/news/marketnews/?b=n202611240007" target="_blank" rel="noopener">ダウ、ナスダックとも急伸 慎重な声は根強い エヌビディアのフアン氏がＣＥＯに復帰＝米国株序盤</a></h3>
+  <ul class="summary"><li>ダウ、ナスダックとも急伸 慎重な声は根強い エヌビディアのフアン氏がＣＥＯに復帰＝米国株序盤</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">株探</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="positive" data-tickers="NVDA" data-text="ｎｙ株、一時１３００ドル超高 ハイテク買い戻し、エヌビディア急騰 【ニューヨーク時事】週明け２３日のニューヨーク株式相場は、ハイテク株が買い戻される中、大幅反発して始まった。 午前９時３２分現在、ダウは１２２４．８７ドル高の４万９３７２．２０ドル、ハイテク株中心のナスダック総合指数は１５６１．３８ポイント高の２万４１７９．１１で推移している。 優良株で構成するダウ工業株３０種平均の前週末終値比の上げ幅は一時、１３００ドルを超えた。  エヌビディア 時事通信">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:14:00.000Z">11/24 00:14</time>
+  </div>
+  <h3><a href="https://www.jiji.com/jc/article?k=2026112300565&amp;g=int&amp;m=rss" target="_blank" rel="noopener">ＮＹ株、一時１３００ドル超高 ハイテク買い戻し、エヌビディア急騰</a></h3>
+  <ul class="summary"><li>【ニューヨーク時事】週明け２３日のニューヨーク株式相場は、ハイテク株が買い戻される中、大幅反発して始まった。</li><li>午前９時３２分現在、ダウは１２２４．８７ドル高の４万９３７２．２０ドル、ハイテク株中心のナスダック総合指数は１５６１．３８ポイント高の２万４１７９．１１で推移している。</li><li>優良株で構成するダウ工業株３０種平均の前週末終値比の上げ幅は一時、１３００ドルを超えた。</li></ul>
+  
+  <footer>
+    <span class="pub">時事通信</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="ｎｙ市場でａｉ関連株に買い戻し、一時１３００ドル超上昇…フアン氏のエヌビディアｃｅｏ復帰受け（読売新聞オンライン） ｎｙ市場でａｉ関連株に買い戻し、一時１３００ドル超上昇…フアン氏のエヌビディアｃｅｏ復帰受け（読売新聞オンライン） （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:07:50.000Z">11/24 00:07</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE12Z0MyYUdGNU40NU83QjNxeDdkOGRGQXVsREExNlJZN1BFZmp0TzBTVDY5QnJZZWY0TFdjYThETmNkQzQ5MHJxVG9iRUpVQXFhcjU0UjNJb05hNER4SDFoajBfOFEycUEzeU9nbzFtcFhJV3BxbzRPdFN2YWN0aFU?oc=5" target="_blank" rel="noopener">ＮＹ市場でＡＩ関連株に買い戻し、一時１３００ドル超上昇…フアン氏のエヌビディアＣＥＯ復帰受け（読売新聞オンライン）</a></h3>
+  <ul class="summary"><li>ＮＹ市場でＡＩ関連株に買い戻し、一時１３００ドル超上昇…フアン氏のエヌビディアＣＥＯ復帰受け（読売新聞オンライン）</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ニュース</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="ｎｙ株、一時１３００ドル超高＝ハイテク買い戻し、エヌビディア急騰 tbs cross dig with bloomberg 11/24(火) 1:41 finasee（フィナシー） 11/23(月) 19:00 テレ朝news 11/23(月) 18:07  エヌビディア ｄメニューニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:07:17.000Z">11/24 00:07</time>
+  </div>
+  <h3><a href="https://topics.smt.docomo.ne.jp/article/jiji/business/jiji-2026112300565?redirect=1" target="_blank" rel="noopener">ＮＹ株、一時１３００ドル超高＝ハイテク買い戻し、エヌビディア急騰</a></h3>
+  <ul class="summary"><li>TBS CROSS DIG with Bloomberg 11/24(火) 1:41</li><li>Finasee（フィナシー） 11/23(月) 19:00</li><li>テレ朝NEWS 11/23(月) 18:07</li></ul>
+  
+  <footer>
+    <span class="pub">ｄメニューニュース</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="neutral" data-tickers="NVDA" data-text="ai株反発でネビウス急騰、nvidiaのフアン氏がceoに復帰 ネビウス・グループn.v.（nbis）は月曜に急騰し、ここ数年で最も厳しいテクノロジー株売りを経た人工知能（ai）インフラ関連株の広範な回復に加わった。 月曜の上昇を経ても、株価は20日移動平均線を約24.7%下回り、50日線を44.1%下回り、100日線を48.4%下回り、200日線を43.6%下回っている。 nvidiaは四半期売上高が過去最高の1,158億ドル（約18.4兆円）に達したと報告し、翌四半期については約1,300億ドル（約20.7兆円）の売上高を見込んでいた。  エヌビディア biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:05:00.000Z">11/24 00:05</time>
+  </div>
+  <h3><a href="https://finance.biggo.jp/news/27380051-11a8-4c2e-a89f-da53c9863bb2" target="_blank" rel="noopener">AI株反発でネビウス急騰、NVIDIAのフアン氏がCEOに復帰</a></h3>
+  <ul class="summary"><li>ネビウス・グループN.V.（NBIS）は月曜に急騰し、ここ数年で最も厳しいテクノロジー株売りを経た人工知能（AI）インフラ関連株の広範な回復に加わった。</li><li>月曜の上昇を経ても、株価は20日移動平均線を約24.7%下回り、50日線を44.1%下回り、100日線を48.4%下回り、200日線を43.6%下回っている。</li><li>NVIDIAは四半期売上高が過去最高の1,158億ドル（約18.4兆円）に達したと報告し、翌四半期については約1,300億ドル（約20.7兆円）の売上高を見込んでいた。</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="エヌビディア株が一時、大幅上昇 ny株、大幅反発して始まる エヌビディア株が一時、大幅上昇 ny株、大幅反発して始まる （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 産経ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:04:13.000Z">11/24 00:04</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE56VEV4b29CVm9NOTNHbklJTHp5RlI1UWs2TmZqSDZUa3lHRUdGOGowejVmVXRxeGRLY09FVDBPUmZLcG5QYktvWDhNMjQxV1hNbUZ3eFpFajBIb0JPdEcxQS01V0pJUGwtOEw3cmJiV3NhT2tRaVE?oc=5" target="_blank" rel="noopener">エヌビディア株が一時、大幅上昇 NY株、大幅反発して始まる</a></h3>
+  <ul class="summary"><li>エヌビディア株が一時、大幅上昇 NY株、大幅反発して始まる</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">産経ニュース</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="positive" data-tickers="NVDA" data-text="ｎｙ市場はフアン氏復帰を好感、一時１６００ドル超上昇…エヌビディア株も３０％超値上がり ｎｙ市場はフアン氏復帰を好感、一時１６００ドル超上昇…エヌビディア株も３０％超値上がり （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア 読売新聞">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:03:00.000Z">11/24 00:03</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE1YU0xpZjFtdHR6cGpzblpmN2g2V2RyWEVzOEhQWWFJemVZWTF5cVdnU0FNdWZYWDRadmpEYmJzZEpTaGpHV2NkT3FRUlpvU2VEdk5aaVEzMmxXRzFWY0ExbFFBOUY?oc=5" target="_blank" rel="noopener">ＮＹ市場はフアン氏復帰を好感、一時１６００ドル超上昇…エヌビディア株も３０％超値上がり</a></h3>
+  <ul class="summary"><li>ＮＹ市場はフアン氏復帰を好感、一時１６００ドル超上昇…エヌビディア株も３０％超値上がり</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">読売新聞</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news key" data-cat="jpstock" data-sent="neutral" data-tickers="NVDA" data-text="フアン氏、ceoに復帰＝米エヌビディア(時事通信) フアン氏、ceoに復帰＝米エヌビディア(時事通信) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  エヌビディア yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-23T15:00:17.000Z">11/24 00:00</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxPVXRQUTVBcWV4aDZmNFVhRFNIeDFFRmNyaHQyQnVnNzBINGpxQVhFcHFzS2xfZzJ3STEtTzhfUFFveU51RW5rMktHaTlhOHhycElyVmlrSHkyRlNHVXN1UEhjZHZJdmdqYVgwVXRTYTVhd2RBZW1iemRuY3ZNS2pUMzA4WVlXMFU?oc=5" target="_blank" rel="noopener">フアン氏、CEOに復帰＝米エヌビディア(時事通信)</a></h3>
+  <ul class="summary"><li>フアン氏、CEOに復帰＝米エヌビディア(時事通信)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    <span class="tag watch">エヌビディア</span>
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="neutral" data-tickers="" data-text="23日の英国債、10年物利回りは5.209％に低下(トレーダーズ・ウェブ) 23日の英国債、10年物利回りは5.209％に低下(トレーダーズ・ウェブ) （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  yahoo!ファイナンス">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-23T18:10:05.000Z">11/24 03:10</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxQNUZsVV9qVHQyUGNvWGkxSVJBVU1yZ3RyOWYzUnEzTThTNU5BYWg4SVJ2VVpNd0h5OFFRWnMwWjdNUVhobjBkTFc4bzlmOVhWZUswUk5fQkhfcWpoc0ZadlNqM0k5RV9aVFMxQ1JlUEF3LVF6N2JaQlRYTTFaYlZzdjdOaldiQTQ?oc=5" target="_blank" rel="noopener">23日の英国債、10年物利回りは5.209％に低下(トレーダーズ・ウェブ)</a></h3>
+  <ul class="summary"><li>23日の英国債、10年物利回りは5.209％に低下(トレーダーズ・ウェブ)</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Yahoo!ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="positive" data-tickers="" data-text="欧州国債概況23日 独10年債利回り低下、米株上昇受け上昇に転じる場面も 欧州国債概況23日 独10年債利回り低下、米株上昇受け上昇に転じる場面も （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  日本経済新聞">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-23T17:55:47.000Z">11/24 02:55</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9xc2FDSzY0ZnFWTm5tWkpfcHlYX01FZnFMc0hXVEdJcW5oZjdxb3JNNldaam80Tm80STdTbzNFZURsZWEtTnN6dlhYYk95bWhfWWxJNGoxN0w5RUU5a09lX1FVdFBOMGtnYkRQcg?oc=5" target="_blank" rel="noopener">欧州国債概況23日 独10年債利回り低下、米株上昇受け上昇に転じる場面も</a></h3>
+  <ul class="summary"><li>欧州国債概況23日 独10年債利回り低下、米株上昇受け上昇に転じる場面も</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">日本経済新聞</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="positive" data-tickers="" data-text="ny市場動向（午後0時台）：ダウ1500ドル高、原油先物3.07ドル安｜fx・為替ニュース - 初心者必見のfx総合情報サイト ＊ナスダック 24120.38 ＋1502.65＋7.35％ 24353.65 23794.96 2424 598 ＊ダウ30種平均 49646.98＋1499.65＋3.11％ 49810.26 49033.31 26 5  ザイfx！">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-23T17:25:00.000Z">11/24 02:25</time>
+  </div>
+  <h3><a href="https://zai.diamond.jp/articles/-/499528" target="_blank" rel="noopener">NY市場動向（午後0時台）：ダウ1500ドル高、原油先物3.07ドル安｜FX・為替ニュース</a></h3>
+  <ul class="summary"><li>- 初心者必見のFX総合情報サイト</li><li>＊ナスダック 24120.38 ＋1502.65＋7.35％ 24353.65 23794.96 2424 598</li><li>＊ダウ30種平均 49646.98＋1499.65＋3.11％ 49810.26 49033.31 26 5</li></ul>
+  
+  <footer>
+    <span class="pub">ザイFX！</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="neutral" data-tickers="" data-text="ｎｙ各市場 ２時台 ダウ平均は１４５３ドル高 ナスダックは６．７％急伸 ｎｙ各市場 ２時台 ダウ平均は１４５３ドル高 ナスダックは６．７％急伸 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  みんかぶ fx/為替">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-23T17:06:51.000Z">11/24 02:06</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTFAtREU5OUVia3h4Q0t1cy1hb19GcXp3SlNmOGhyVlJKZXVuRUhHOXROYXktbmdCdUhtX2duWVlUcU84M3ZPZUpfaw?oc=5" target="_blank" rel="noopener">ＮＹ各市場 ２時台 ダウ平均は１４５３ドル高 ナスダックは６．７％急伸</a></h3>
+  <ul class="summary"><li>ＮＹ各市場 ２時台 ダウ平均は１４５３ドル高 ナスダックは６．７％急伸</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">みんかぶ FX/為替</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="positive" data-tickers="" data-text="米国株テック「7強」が寄り前そろって上昇、nvidiaが8%超の急騰で先導 米国株テック「7強」が寄り前そろって上昇、nvidiaが8%超の急騰で先導 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-23T17:05:00.000Z">11/24 02:05</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE1SeTE2TUx3U3I1Tzc4T2RwYThJWXh5VXQ1Y2FVbVozU05uRlRaQWhlV1VRcHV2UUxyQmh4OXFwam85blZGenZkUnBjcXNtVlpKRVV4ZS1RMnN0U2JOQWFYWmRTWnQyelNLYVltbmNpNWg3NUwx?oc=5" target="_blank" rel="noopener">米国株テック「7強」が寄り前そろって上昇、Nvidiaが8%超の急騰で先導</a></h3>
+  <ul class="summary"><li>米国株テック「7強」が寄り前そろって上昇、Nvidiaが8%超の急騰で先導</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="positive" data-tickers="" data-text="s&amp;p500が5%超上昇、2025年4月以来の上げ幅 sox指数は15%高 s&amp;p500が5%超上昇、2025年4月以来の上げ幅 sox指数は15%高 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  howl.link">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-23T16:06:00.000Z">11/24 01:06</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiO0FVX3lxTE5QOWtERXlkZGJSU1BrTUFiak52cnI3SEhoR1lmcUdsU1RhZ2VLcktKSFF2VDZETlI2RTNN?oc=5" target="_blank" rel="noopener">S&amp;P500が5%超上昇、2025年4月以来の上げ幅 SOX指数は15%高</a></h3>
+  <ul class="summary"><li>S&amp;P500が5%超上昇、2025年4月以来の上げ幅 SOX指数は15%高</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Howl.Link</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="neutral" data-tickers="" data-text="ｎｙ各市場 １時台 ダウ平均は１４５２ドル高 ナスダックは６．６％の急伸 ｎｙ各市場 １時台 ダウ平均は１４５２ドル高 ナスダックは６．６％の急伸 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  みんかぶ fx/為替">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-23T16:04:51.000Z">11/24 01:04</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE5rN1ZXN2FvZGROdklocGNNa0dYNFA1dTg4WUhwajctd2tiVjRMQ1dYeHFZbDBBemg2QU1nd01vRkthNl9OekFsQw?oc=5" target="_blank" rel="noopener">ＮＹ各市場 １時台 ダウ平均は１４５２ドル高 ナスダックは６．６％の急伸</a></h3>
+  <ul class="summary"><li>ＮＹ各市場 １時台 ダウ平均は１４５２ドル高 ナスダックは６．６％の急伸</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">みんかぶ FX/為替</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="fx" data-sent="positive" data-tickers="" data-text="【日本株】いまが“買い”の｢配当利回りが高い株ランキング｣ベスト10を紹介！ 配当利回りが6％後半で連続増配を継続している｢エクセディ｣や｢東計電算｣に注目 【日本株】いまが“買い”の｢配当利回りが高い株ランキング｣ベスト10を紹介！ 配当利回りが6％後半で連続増配を継続している｢エクセディ｣や｢東計電算｣に注目 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  ダイヤモンド・オンライン">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-23T15:56:02.000Z">11/24 00:56</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE55TktYU29hLVhjS3ZYWW9BWlJMNFk0MldsZVB1QW96OHFFaEU2SVpmY2NhUmJReWozU1Y2am5JTXlxMTdpTV9pcW94NHJUaWFYSzQ0?oc=5" target="_blank" rel="noopener">【日本株】いまが“買い”の｢配当利回りが高い株ランキング｣ベスト10を紹介！ 配当利回りが6％後半で連続増配を継続している｢エクセディ｣や｢東計電算｣に注目</a></h3>
+  <ul class="summary"><li>【日本株】いまが“買い”の｢配当利回りが高い株ランキング｣ベスト10を紹介！ 配当利回りが6％後半で連続増配を継続している｢エクセディ｣や｢東計電算｣に注目</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">ダイヤモンド・オンライン</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="positive" data-tickers="" data-text="nvidiaの株価が35%急騰、取締役会がジェンセン・ファンのceo復帰を発表 nvidiaの株価が35%急騰、取締役会がジェンセン・ファンのceo復帰を発表 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  investing.com - fx | 株式市場 | ファイナンス | 金融ニュース">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-23T15:41:17.000Z">11/24 00:41</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE1JLWdvVEpRLS13RlpxVzE0VXd2UmdSbXF1aHozMEZobE1KRnBULTdoUVlUNTVOTmhPQ3ROTlNGb19SWVFITDRJVHpBckJZUHpESlZBSjEyRFpsbzFocWdHWE54dVVyNUVrak0zNkR6eHQ?oc=5" target="_blank" rel="noopener">Nvidiaの株価が35%急騰、取締役会がジェンセン・ファンのCEO復帰を発表</a></h3>
+  <ul class="summary"><li>Nvidiaの株価が35%急騰、取締役会がジェンセン・ファンのCEO復帰を発表</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">Investing.com - FX | 株式市場 | ファイナンス | 金融ニュース</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="ビットコイン失速後の新材料、ウォール街のブロックチェーン活用に注目 ビットコイン失速後の新材料、ウォール街のブロックチェーン活用に注目 （自動要約なし。原文を参照してください） （自動要約なし。原文を参照してください）  디지털투데이">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-23T15:03:00.000Z">11/24 00:03</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxOZlBlbzVSTEJmQWxwZzFyNzBRY0oxNkxOMlhMbjBTUGlNVC13Q0owQlFnUjV6WFJ4MVVNTGE3emY4SXdmNkZ0eklZWUdKaTQ4Q0dRQTdjcEdzSWZMRmlKSU02S1BybEU5M1lSa1VuQjA1dGk0WDM1MWxQb0Q4cUZIQmhTcWJBcFk2N3ZoanhWU1hZbWlkZzllSjFxY0FjYTA4NVBLaEctR2NsVlFocHZ3WWFZWlJyN0p4cnJhS0YtdnY0eHpEOGc?oc=5" target="_blank" rel="noopener">ビットコイン失速後の新材料、ウォール街のブロックチェーン活用に注目</a></h3>
+  <ul class="summary"><li>ビットコイン失速後の新材料、ウォール街のブロックチェーン活用に注目</li><li>（自動要約なし。原文を参照してください）</li><li>（自動要約なし。原文を参照してください）</li></ul>
+  
+  <footer>
+    <span class="pub">디지털투데이</span>
+    
+    <span class="tag auto" title="Claude を使わず本文から機械的に抜き出した要約">自動抽出</span>
+  </footer>
+</article>
+    <p class="empty-note" hidden>該当するニュースはありません</p>
+  </div>
+</section>
+<p><a href="../archive.html">← 日付の一覧へ</a></p>
+</main>
+<footer class="wrap foot">
+  <p class="disclaimer">このページは公開情報を自動で集めて要約したものです。投資の勧誘や売買の推奨を目的としたものではありません。価格は遅延しており、要約には誤りが含まれることがあります。投資判断は必ず原文と一次情報を確認のうえ、ご自身の責任で行ってください。</p>
+  <p>要約: 本文からの自動抽出（Claude 未使用） ／ 価格データ: Yahoo Finance（予備: Stooq）／ 情報源 26 / 26 件から取得</p>
+</footer>
+<script>
+(() => {
+  const fmt = (v, d) => v.toLocaleString('ja-JP', { minimumFractionDigits: d, maximumFractionDigits: d })
+  for (const el of document.querySelectorAll('.spark[data-pts]')) {
+    let pts
+    try { pts = JSON.parse(el.dataset.pts) } catch { continue }
+    const d = Number(el.dataset.digits || 2)
+    const svg = el.querySelector('svg')
+    const vb = svg.viewBox.baseVal
+    const vals = pts.map((p) => p[1])
+    const min = Math.min(...vals), max = Math.max(...vals), span = (max - min) || 1
+    const cross = el.querySelector('.cross'), dot = el.querySelector('.dot'), tip = el.querySelector('.tip')
+    const move = (clientX) => {
+      const r = svg.getBoundingClientRect()
+      const ratio = Math.min(1, Math.max(0, (clientX - r.left) / r.width))
+      const i = Math.round(ratio * (pts.length - 1))
+      const x = (i / (pts.length - 1)) * vb.width
+      const y = 3 + (1 - (pts[i][1] - min) / span) * (vb.height - 6)
+      cross.setAttribute('x1', x); cross.setAttribute('x2', x)
+      dot.setAttribute('cx', x); dot.setAttribute('cy', y)
+      tip.textContent = pts[i][0] + '  ' + fmt(pts[i][1], d)
+      tip.style.left = (i / (pts.length - 1)) * 100 + '%'
+      tip.hidden = false
+      el.classList.add('hover')
+    }
+    const leave = () => { tip.hidden = true; el.classList.remove('hover') }
+    el.addEventListener('pointermove', (e) => move(e.clientX))
+    el.addEventListener('pointerleave', leave)
+  }
+
+  const list = document.querySelector('[data-news]')
+  if (!list) return
+  const items = [...list.querySelectorAll('.news')]
+  const state = { cat: '', sent: '', ticker: '', key: false, q: '' }
+  const countEl = document.querySelector('.filters .count')
+  const empty = list.querySelector('.empty-note')
+  const apply = () => {
+    const q = state.q.trim().toLowerCase()
+    let shown = 0
+    for (const it of items) {
+      const ok = (!state.cat || it.dataset.cat === state.cat)
+        && (!state.sent || it.dataset.sent === state.sent)
+        && (!state.ticker || it.dataset.tickers.split(' ').includes(state.ticker))
+        && (!state.key || it.classList.contains('key'))
+        && (!q || it.dataset.text.includes(q))
+      it.hidden = !ok
+      if (ok) shown++
+    }
+    if (countEl) countEl.textContent = shown + ' / ' + items.length + ' 件を表示'
+    if (empty) empty.hidden = shown > 0
+  }
+  for (const chip of document.querySelectorAll('.chips[data-group=cat] .chip')) {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.chips[data-group=cat] .chip').forEach((c) => c.classList.toggle('on', c === chip))
+      state.cat = chip.dataset.value
+      apply()
+    })
+  }
+  const sent = document.querySelector('select[data-group=sent]')
+  const ticker = document.querySelector('select[data-group=ticker]')
+  const key = document.querySelector('input[data-group=key]')
+  const q = document.querySelector('input[data-group=q]')
+  sent && sent.addEventListener('change', () => { state.sent = sent.value; apply() })
+  ticker && ticker.addEventListener('change', () => { state.ticker = ticker.value; apply() })
+  key && key.addEventListener('change', () => { state.key = key.checked; apply() })
+  q && q.addEventListener('input', () => { state.q = q.value; apply() })
+  for (const btn of document.querySelectorAll('[data-filter-ticker]')) {
+    btn.addEventListener('click', () => {
+      if (ticker) ticker.value = btn.dataset.filterTicker
+      state.ticker = btn.dataset.filterTicker
+      apply()
+      document.getElementById('news').scrollIntoView({ behavior: 'smooth' })
+    })
+  }
+  apply()
+})()
+</script>
+</body>
+</html>
