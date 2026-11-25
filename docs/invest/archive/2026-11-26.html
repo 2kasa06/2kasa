@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>2026-11-26 | 投資情報ウォッチ</title>
+<meta name="description" content="主要マーケットの値動きと、投資判断に関わるニュースを毎日まとめる">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%232a78d6%22%2F%3E%3Cpath%20d%3D%22M6%2022l6-7%205%204%209-10%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f6f6f3; --surface: #ffffff; --surface-2: #f0efea; --line: #e2e0d8;
+  --ink: #16161a; --ink-2: #4d4c48; --muted: #7a7872;
+  --accent: #2a78d6; --accent-soft: #e5effb;
+  --up: #d23a2e; --down: #1f63c7;
+  --key: #b26b00; --key-soft: #fff4de;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111113; --surface: #1a1a1d; --surface-2: #232327; --line: #2f2f34;
+    --ink: #f2f2ef; --ink-2: #c3c2b7; --muted: #8d8c86;
+    --accent: #5a9bea; --accent-soft: #1b2a3d;
+    --up: #ff6b5e; --down: #6aa4ff;
+    --key: #f0b24a; --key-soft: #2e2415;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111113; --surface: #1a1a1d; --surface-2: #232327; --line: #2f2f34;
+  --ink: #f2f2ef; --ink-2: #c3c2b7; --muted: #8d8c86;
+  --accent: #5a9bea; --accent-soft: #1b2a3d;
+  --up: #ff6b5e; --down: #6aa4ff;
+  --key: #f0b24a; --key-soft: #2e2415;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 15px/1.7 system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", Meiryo, sans-serif;
+  font-feature-settings: "palt";
+}
+a { color: inherit; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+.muted { color: var(--muted); }
+.up { color: var(--up); } .down { color: var(--down); } .flat { color: var(--muted); }
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.top { background: var(--surface); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; justify-content: space-between; padding-top: 18px; padding-bottom: 14px; }
+.top h1 { margin: 0; font-size: 22px; letter-spacing: .02em; }
+.top h1 a { text-decoration: none; }
+.top .sub { margin: 2px 0 0; color: var(--ink-2); font-size: 13px; }
+.top nav { display: flex; gap: 16px; font-size: 14px; }
+.top nav a { color: var(--ink-2); text-decoration: none; }
+.top nav a[aria-current] { color: var(--ink); font-weight: 700; }
+.updated { font-size: 12px; color: var(--muted); }
+
+section { margin: 28px 0; }
+section > h2 { font-size: 17px; margin: 0 0 12px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+section > h2 > small { flex: 1 1 14em; }
+section > h2 small { font-weight: 400; font-size: 12px; color: var(--muted); }
+
+.mgroup + .mgroup { margin-top: 16px; }
+.glabel { font-size: 12px; color: var(--muted); font-weight: 600; margin: 0 0 6px; letter-spacing: .08em; }
+.mgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.mcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; min-width: 0; }
+.mcard header { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.mcard h3 { margin: 0; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.mcard h3 small { color: var(--muted); font-weight: 400; }
+.mcard .asof { font-size: 11px; color: var(--muted); white-space: nowrap; }
+.mcard .price { margin: 4px 0 0; font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.25; }
+.unit { font-size: 12px; font-weight: 400; color: var(--muted); margin-left: 3px; }
+.mcard .chg { margin: 0 0 6px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.mcard .abs { color: var(--ink-2); font-weight: 400; font-size: 13px; margin-left: 4px; }
+.mcard.stale { border-style: dashed; }
+.mcard.failed .note { color: var(--muted); font-size: 13px; margin: 0; }
+.periods { display: grid; grid-template-columns: repeat(3, 1fr); margin: 8px 0 0; font-size: 12px; }
+.periods div { text-align: center; }
+.periods dt { color: var(--muted); }
+.periods dd { margin: 0; font-variant-numeric: tabular-nums; }
+.range { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.range-track { position: relative; flex: 1; height: 4px; border-radius: 2px; background: var(--surface-2); }
+.range-mark { position: absolute; top: -3px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--ink); border: 2px solid var(--surface); }
+
+.spark { position: relative; height: 48px; }
+.spark-cell .spark { height: 32px; width: 120px; }
+.spark svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.spark .line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; stroke: var(--muted); }
+.spark .area { fill: var(--muted); opacity: .08; stroke: none; }
+.spark.up .line { stroke: var(--up); } .spark.up .area { fill: var(--up); }
+.spark.down .line { stroke: var(--down); } .spark.down .area { fill: var(--down); }
+.spark .cross { stroke: var(--ink-2); stroke-width: 1; opacity: 0; }
+.spark .dot { fill: var(--ink); stroke: var(--surface); stroke-width: 2; opacity: 0; }
+.spark.hover .cross, .spark.hover .dot { opacity: 1; }
+.spark .tip { position: absolute; bottom: -26px; transform: translateX(-50%); background: var(--ink); color: var(--bg); font-size: 11px; padding: 2px 7px; border-radius: 6px; white-space: nowrap; pointer-events: none; z-index: 2; font-variant-numeric: tabular-nums; }
+.spark.empty { font-size: 12px; color: var(--muted); display: flex; align-items: center; }
+
+.digest { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius); padding: 14px 18px; }
+.digest ol { margin: 0; padding-left: 1.4em; }
+.digest li + li { margin-top: 6px; }
+
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+table.watch { width: 100%; border-collapse: collapse; font-size: 14px; }
+.watch th, .watch td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+.watch thead th { font-size: 12px; color: var(--muted); font-weight: 600; background: var(--surface-2); }
+.watch th.num, .watch td.num { text-align: right; }
+.watch tbody tr:last-child > * { border-bottom: 0; }
+.wname { display: block; font-weight: 600; min-width: 7.5em; }
+.wcode { font-size: 12px; color: var(--muted); font-weight: 400; }
+.wnews { min-width: 220px; font-size: 13px; }
+.wnews a { color: var(--ink-2); }
+.stale-tag { margin-left: 6px; font-size: 11px; color: var(--muted); border: 1px dashed var(--line); padding: 0 4px; border-radius: 4px; }
+.linkish { font: inherit; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 24px; align-items: start; }
+.side > * + * { margin-top: 16px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; }
+.panel h3 { margin: 0 0 10px; font-size: 14px; }
+
+.filters { position: sticky; top: 0; z-index: 3; background: var(--bg); padding: 8px 0 6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: inherit; font-size: 13px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); border-radius: 999px; padding: 3px 12px; cursor: pointer; min-height: 32px; }
+.chip .n { color: var(--muted); font-variant-numeric: tabular-nums; }
+.chip.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip.on .n { color: inherit; opacity: .7; }
+.row2 { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-top: 8px; font-size: 13px; color: var(--ink-2); }
+.row2 select, .row2 input[type=search] { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; min-height: 32px; }
+.row2 input[type=search] { flex: 1; min-width: 160px; }
+.count { margin: 6px 0 0; font-size: 12px; color: var(--muted); }
+
+.news { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; margin-top: 10px; }
+.news.key { border-left: 4px solid var(--key); }
+.nmeta { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; font-size: 12px; color: var(--muted); }
+.cat { color: var(--ink-2); font-weight: 600; }
+.sent { font-weight: 600; }
+.sent-positive { color: var(--up); } .sent-negative { color: var(--down); } .sent-neutral { color: var(--muted); }
+.imp { color: var(--key); font-weight: 700; }
+.nmeta time { margin-left: auto; font-variant-numeric: tabular-nums; }
+.news h3 { margin: 6px 0 6px; font-size: 16px; line-height: 1.5; }
+.news h3 a { text-decoration: none; }
+.news h3 a:hover { text-decoration: underline; }
+.summary { margin: 0; padding-left: 1.2em; color: var(--ink-2); font-size: 14px; }
+.impact { margin: 8px 0 0; font-size: 13px; background: var(--surface-2); border-radius: 6px; padding: 6px 10px; }
+.impact b { font-size: 11px; color: var(--muted); margin-right: 8px; }
+.news footer { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 10px; font-size: 12px; }
+.pub { color: var(--ink-2); margin-right: 4px; }
+.tag { border: 1px solid var(--line); border-radius: 999px; padding: 0 8px; color: var(--ink-2); }
+.tag.watch { background: var(--accent-soft); border-color: transparent; color: var(--ink); }
+.tag.auto { border-style: dashed; color: var(--muted); }
+.empty-note { text-align: center; color: var(--muted); padding: 30px 0; }
+
+.bars { display: grid; gap: 6px; font-size: 12px; }
+.bar-row { display: grid; grid-template-columns: 7.5em 1fr 2em; gap: 8px; align-items: center; }
+.bar-lab { color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-track { height: 10px; }
+.bar-fill { display: block; height: 100%; background: var(--accent); border-radius: 0 4px 4px 0; min-width: 2px; }
+.bar-n { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+
+details.status summary { cursor: pointer; font-size: 13px; color: var(--ink-2); }
+details.status ul { list-style: none; padding: 0; margin: 8px 0 0; font-size: 12px; }
+details.status li { padding: 2px 0; overflow-wrap: anywhere; }
+details.status li.ok span:first-child { color: var(--accent); }
+details.status li.ng span:first-child { color: var(--down); }
+
+.days { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.days a { display: flex; justify-content: space-between; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; text-decoration: none; font-variant-numeric: tabular-nums; }
+
+.foot { border-top: 1px solid var(--line); margin-top: 40px; padding: 20px 0 40px; font-size: 12px; color: var(--muted); }
+.foot p { margin: 4px 0; }
+.disclaimer { background: var(--surface-2); border-radius: 8px; padding: 10px 12px; color: var(--ink-2); }
+
+@media (max-width: 900px) {
+  .cols { grid-template-columns: 1fr; }
+  .side { order: -1; }
+}
+@media (max-width: 640px) {
+  .hide-sm { display: none; }
+  .mgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .mcard { padding: 10px; }
+  .mcard .price { font-size: 19px; }
+  .mcard header { flex-direction: column; gap: 0; }
+  .range-lab { display: none; }
+  .periods { font-size: 11px; gap: 2px; letter-spacing: -.02em; }
+  .watch th, .watch td { padding: 8px; }
+  .wnews { min-width: 180px; }
+  .nmeta time { margin-left: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .news, .mcard { transition: border-color .15s; }
+}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <div>
+    <h1><a href="../index.html">投資情報ウォッチ</a></h1>
+    <p class="sub">主要マーケットの値動きと、投資判断に関わるニュースを毎日まとめる</p>
+  </div>
+  <div>
+    <nav aria-label="ページ">
+      <a href="../index.html">今日</a>
+      <a href="../archive.html" aria-current="page">過去のニュース</a>
+    </nav>
+    <div class="updated">最終更新 2026年11月26日(木) 02:39</div>
+  </div>
+</div></header>
+<main class="wrap">
+<section id="news">
+  <h2>2026-11-26 のニュース <small>14件</small></h2>
+  <div class="filters" role="group" aria-label="ニュースの絞り込み">
+  <div class="chips" data-group="cat">
+    <button type="button" class="chip on" data-value="">すべて <span class="n">14</span></button>
+    <button type="button" class="chip" data-value="macro" title="日銀・FRB・ECBの政策、金利見通し、物価、雇用、GDP、景気指標">金融政策・景気 <span class="n">3</span></button><button type="button" class="chip" data-value="jpstock" title="国内企業の決算・業績修正、TOB・M&amp;A、株主還元、新規上場、日本株の相場">日本株・企業 <span class="n">1</span></button><button type="button" class="chip" data-value="global" title="米国株・欧州・中国市場の相場、海外企業の決算、地政学が市場に与える影響">米国・海外市場 <span class="n">8</span></button><button type="button" class="chip" data-value="fx" title="円相場、介入、国債利回り、債券市場">為替・債券 <span class="n">1</span></button><button type="button" class="chip" data-value="commodity" title="原油・金などの商品、ビットコインなど暗号資産">商品・暗号資産 <span class="n">1</span></button><button type="button" class="chip" data-value="personal" title="新NISA・iDeCo・税制・金融庁の制度変更、投資信託、個人投資家の動向">資産形成・制度 <span class="n">0</span></button>
+  </div>
+  <div class="row2">
+    <label>向き <select data-group="sent">
+      <option value="">すべて</option><option value="positive">▲ 追い風</option><option value="negative">▼ 向かい風</option><option value="neutral">－ 中立</option>
+    </select></label>
+    <label>銘柄 <select data-group="ticker">
+      <option value="">すべて</option><option value="NVDA">エヌビディア</option>
+    </select></label>
+    <label class="only-key"><input type="checkbox" data-group="key"> 注目のみ</label>
+    <input type="search" data-group="q" placeholder="キーワードで検索" aria-label="キーワードで検索">
+  </div>
+  <p class="count" aria-live="polite"></p>
+</div>
+  <div data-news>
+    <article class="news key" data-cat="fx" data-sent="negative" data-tickers="" data-text="ドル円、159円割れ 一時158.94円まで下げる｜fx・為替ニュース ドル円が159円を割り込む展開 一時158.94円まで下落 円買い圧力が強まった 円高進行で輸出関連日本株の採算悪化懸念が強まる。 ドル円 トヨタ自動車 ソニーグループ ザイfx！">
+  <div class="nmeta">
+    <span class="cat">為替・債券</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-25T16:38:00.000Z">11/26 01:38</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE5hN29OUURPMkNaNkpuRzNOZUJuN1JDRzVpWHRmTWUwZUlPZWQyS3l6WUJ2d3hjOElZOXlHdDhSWTdjTW1nQWhKbjBDNUg3T2xZNlE?oc=5" target="_blank" rel="noopener">ドル円、159円割れ 一時158.94円まで下げる｜FX・為替ニュース</a></h3>
+  <ul class="summary"><li>ドル円が159円を割り込む展開</li><li>一時158.94円まで下落</li><li>円買い圧力が強まった</li></ul>
+  <p class="impact"><b>影響</b>円高進行で輸出関連日本株の採算悪化懸念が強まる。</p>
+  <footer>
+    <span class="pub">ザイFX！</span>
+    <span class="tag">ドル円</span><span class="tag">トヨタ自動車</span><span class="tag">ソニーグループ</span>
+    
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="NVDA" data-text="インフレ加速と301条新関税が重なり、ナスダック指数は一時4%近く急落、エヌビディアは8%超下落 ナスダックが一時4%近く急落、エヌビディアは8%超下落し141.90ドルに pce物価指数は前年比3.8%増、コアpceも予想超え、12月利上げ確率98%に接近 ustrが14経済圏に301条新関税案、中国最大40%・台湾等15-20%の可能性 半導体・ai関連株の評価に重い下押し圧力、台湾サプライチェーン銘柄にも中期的不確実性。 nvda tsmc フィラデルフィア半導体指数 ナスダック総合指数 biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-25T16:25:00.000Z">11/26 01:25</time>
+  </div>
+  <h3><a href="https://finance.biggo.jp/news/1b63ec21-cfd3-454a-9acb-1570b158df55" target="_blank" rel="noopener">インフレ加速と301条新関税が重なり、ナスダック指数は一時4%近く急落、エヌビディアは8%超下落</a></h3>
+  <ul class="summary"><li>ナスダックが一時4%近く急落、エヌビディアは8%超下落し141.90ドルに</li><li>PCE物価指数は前年比3.8%増、コアPCEも予想超え、12月利上げ確率98%に接近</li><li>USTRが14経済圏に301条新関税案、中国最大40%・台湾等15-20%の可能性</li></ul>
+  <p class="impact"><b>影響</b>半導体・AI関連株の評価に重い下押し圧力、台湾サプライチェーン銘柄にも中期的不確実性。</p>
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span><span class="tag">NVDA</span><span class="tag">TSMC</span><span class="tag">フィラデルフィア半導体指数</span><span class="tag">ナスダック総合指数</span>
+    
+  </footer>
+</article>
+<article class="news key" data-cat="macro" data-sent="negative" data-tickers="" data-text="米 過剰生産で日本などに追加関税 既存税率含め日本最大15％に 米ustrが通商法301条に基づき日本などに追加関税を課す方針を発表した 過剰生産を理由に既存税率含め対日関税は最大15％になる 日本の輸出関連企業への影響や日米通商関係の緊張が懸念される 自動車など対米輸出比率の高い日本企業の採算悪化要因となりうる。 トヨタ自動車 日本株 円相場 nhk 経済">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-25T16:21:46.000Z">11/26 01:21</time>
+  </div>
+  <h3><a href="https://news.web.nhk/newsweb/na/nd-20261126de81560" target="_blank" rel="noopener">米 過剰生産で日本などに追加関税 既存税率含め日本最大15％に</a></h3>
+  <ul class="summary"><li>米USTRが通商法301条に基づき日本などに追加関税を課す方針を発表した</li><li>過剰生産を理由に既存税率含め対日関税は最大15％になる</li><li>日本の輸出関連企業への影響や日米通商関係の緊張が懸念される</li></ul>
+  <p class="impact"><b>影響</b>自動車など対米輸出比率の高い日本企業の採算悪化要因となりうる。</p>
+  <footer>
+    <span class="pub">NHK 経済</span>
+    <span class="tag">トヨタ自動車</span><span class="tag">日本株</span><span class="tag">円相場</span>
+    
+  </footer>
+</article>
+<article class="news key" data-cat="macro" data-sent="negative" data-tickers="" data-text="米物価、前年比３．８％上昇 インフレ根強く―１０月 米国の10月物価指標が前年比3.8%上昇と発表された インフレの根強さが示された形 frbの金融政策判断への影響が注目される インフレ高止まりで利下げ期待が後退し、米金利・ドルに上昇圧力がかかりうる。 米国債 ドル 米国株 時事通信">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-25T16:21:00.000Z">11/26 01:21</time>
+  </div>
+  <h3><a href="https://www.jiji.com/jc/article?k=2026112501225&amp;g=int&amp;m=rss" target="_blank" rel="noopener">米物価、前年比３．８％上昇 インフレ根強く―１０月</a></h3>
+  <ul class="summary"><li>米国の10月物価指標が前年比3.8%上昇と発表された</li><li>インフレの根強さが示された形</li><li>FRBの金融政策判断への影響が注目される</li></ul>
+  <p class="impact"><b>影響</b>インフレ高止まりで利下げ期待が後退し、米金利・ドルに上昇圧力がかかりうる。</p>
+  <footer>
+    <span class="pub">時事通信</span>
+    <span class="tag">米国債</span><span class="tag">ドル</span><span class="tag">米国株</span>
+    
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="" data-text="ny株式市場 ナスダック 一時4％超の下落 ハイテク株売りが再び 25日のny株式市場でナスダックが一時4%超下落 aiの先行き不透明感から半導体中心にハイテク株に売りが拡大 エヌビディアceoにフアン氏復帰も政治介入との批判が併存 ai関連株の急落は半導体・ハイテク株全般に下押し圧力、nvdaへの懸念材料。 ナスダック総合指数 エヌビディア 半導体株 nhk 経済">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-25T15:45:44.000Z">11/26 00:45</time>
+  </div>
+  <h3><a href="https://news.web.nhk/newsweb/na/nd-20261126de81556" target="_blank" rel="noopener">NY株式市場 ナスダック 一時4％超の下落 ハイテク株売りが再び</a></h3>
+  <ul class="summary"><li>25日のNY株式市場でナスダックが一時4%超下落</li><li>AIの先行き不透明感から半導体中心にハイテク株に売りが拡大</li><li>エヌビディアCEOにフアン氏復帰も政治介入との批判が併存</li></ul>
+  <p class="impact"><b>影響</b>AI関連株の急落は半導体・ハイテク株全般に下押し圧力、NVDAへの懸念材料。</p>
+  <footer>
+    <span class="pub">NHK 経済</span>
+    <span class="tag">ナスダック総合指数</span><span class="tag">エヌビディア</span><span class="tag">半導体株</span>
+    
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="" data-text="米国株急落、ダウ平均1039ポイント安 ナスダック4.4%下落 根強いインフレと新関税案でai相場に陰り 米国株が急落、ダウ1039ポイント安、ナスダック4.4%安でai関連株が急落 pce物価指数は前年比3.8%上昇、コアも予想上回り12月利上げ観測98%に上昇 トランプ政権が14カ国に新関税案を提示、中国は最大40%超の税率になる可能性 エヌビディア等ai関連株とハイテク比率の高い指数に下落圧力、12月利上げ観測で金利敏感株にも逆風。 nvda ナスダック総合指数 s&amp;p500 半導体関連株 biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-25T15:35:00.000Z">11/26 00:35</time>
+  </div>
+  <h3><a href="https://finance.biggo.jp/news/6cef8ceb-7e93-4a06-b165-ed8256fbcd3a" target="_blank" rel="noopener">米国株急落、ダウ平均1039ポイント安 ナスダック4.4%下落 根強いインフレと新関税案でAI相場に陰り</a></h3>
+  <ul class="summary"><li>米国株が急落、ダウ1039ポイント安、ナスダック4.4%安でAI関連株が急落</li><li>PCE物価指数は前年比3.8%上昇、コアも予想上回り12月利上げ観測98%に上昇</li><li>トランプ政権が14カ国に新関税案を提示、中国は最大40%超の税率になる可能性</li></ul>
+  <p class="impact"><b>影響</b>エヌビディア等AI関連株とハイテク比率の高い指数に下落圧力、12月利上げ観測で金利敏感株にも逆風。</p>
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag">NVDA</span><span class="tag">ナスダック総合指数</span><span class="tag">S&amp;P500</span><span class="tag">半導体関連株</span>
+    
+  </footer>
+</article>
+<article class="news key" data-cat="macro" data-sent="negative" data-tickers="" data-text="米、対日１５％関税へ 過剰生産、中国は２０％ 米国が対日関税を15％に引き上げる方針を示した 過剰生産を理由に中国には20％の関税が課される 日米通商摩擦の再燃が市場の警戒材料となる 輸出関連の日本株や為替市場にリスク要因として影響する可能性がある。 トヨタ自動車 日本株 円相場 時事通信">
+  <div class="nmeta">
+    <span class="cat">金融政策・景気</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-25T15:10:00.000Z">11/26 00:10</time>
+  </div>
+  <h3><a href="https://www.jiji.com/jc/article?k=2026112501247&amp;g=int&amp;m=rss" target="_blank" rel="noopener">米、対日１５％関税へ 過剰生産、中国は２０％</a></h3>
+  <ul class="summary"><li>米国が対日関税を15％に引き上げる方針を示した</li><li>過剰生産を理由に中国には20％の関税が課される</li><li>日米通商摩擦の再燃が市場の警戒材料となる</li></ul>
+  <p class="impact"><b>影響</b>輸出関連の日本株や為替市場にリスク要因として影響する可能性がある。</p>
+  <footer>
+    <span class="pub">時事通信</span>
+    <span class="tag">トヨタ自動車</span><span class="tag">日本株</span><span class="tag">円相場</span>
+    
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="" data-text="米株が急落、ダウ一時1000ドル超安 ai株売り止まらずナスダック4％下落 25日の米国株が急落、ダウ一時1000ドル超安、ナスダックは4%安 米関税案浮上とインフレ統計の上振れで投資家心理が悪化、12月利上げ観測も浮上 東京市場も連れ安し日経平均は1633円安の5万7011円で終了 ai関連株を中心に日米株市場全般に下押し圧力が続く可能性。 ダウ平均 ナスダック 日経平均 nvda biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-25T15:05:00.000Z">11/26 00:05</time>
+  </div>
+  <h3><a href="https://finance.biggo.jp/news/cf1604c9-dce7-4f7d-af31-0c7eef4e099c" target="_blank" rel="noopener">米株が急落、ダウ一時1000ドル超安 AI株売り止まらずナスダック4％下落</a></h3>
+  <ul class="summary"><li>25日の米国株が急落、ダウ一時1000ドル超安、ナスダックは4%安</li><li>米関税案浮上とインフレ統計の上振れで投資家心理が悪化、12月利上げ観測も浮上</li><li>東京市場も連れ安し日経平均は1633円安の5万7011円で終了</li></ul>
+  <p class="impact"><b>影響</b>AI関連株を中心に日米株市場全般に下押し圧力が続く可能性。</p>
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag">ダウ平均</span><span class="tag">ナスダック</span><span class="tag">日経平均</span><span class="tag">NVDA</span>
+    
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="NVDA" data-text="エヌビディアの最大顧客が自社製aiチップを構築、カスタムシリコンが市場の20%に迫る エヌビディアの最大顧客とされる企業が自社製aiチップの開発を進めていると報じられた カスタムシリコンが市場全体の2割に迫る勢いとされる エヌビディアの独占的地位への懸念材料として注目される 大口顧客の内製化進展はエヌビディアの販売シェア低下懸念につながる可能性がある。 nvda 半導体株 biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-25T15:05:00.000Z">11/26 00:05</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE40M3FrYURnLWx4TVpvb1hYQXd1NlhyQm8td1dycDRCMUI5UlJnd3dYRXJPRVZ5cDdNNFZqVGdVQXZMUGhVUmtoRjUwaVYtV2RiT0JnQ3JKS19qUmJ4RVgzc1FxMjJDRTQ0NE9Zd1ZuTEdTQU1x?oc=5" target="_blank" rel="noopener">エヌビディアの最大顧客が自社製AIチップを構築、カスタムシリコンが市場の20%に迫る</a></h3>
+  <ul class="summary"><li>エヌビディアの最大顧客とされる企業が自社製AIチップの開発を進めていると報じられた</li><li>カスタムシリコンが市場全体の2割に迫る勢いとされる</li><li>エヌビディアの独占的地位への懸念材料として注目される</li></ul>
+  <p class="impact"><b>影響</b>大口顧客の内製化進展はエヌビディアの販売シェア低下懸念につながる可能性がある。</p>
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span><span class="tag">NVDA</span><span class="tag">半導体株</span>
+    
+  </footer>
+</article>
+<article class="news key" data-cat="global" data-sent="negative" data-tickers="" data-text="ｎｙ株、一時１０００ドル超安 ハイテク売りで大幅反落 ny株式市場で一時1000ドル超の急落が発生したと報じられた ハイテク株の売りが主導し相場が大幅反落した ハイテク株中心に市場の警戒感が強まっている 米ハイテク株売りの波及でエヌビディアやアップルなど主要銘柄にも下押し圧力がかかる可能性。 nyダウ nasdaq エヌビディア アップル 時事通信">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    <span class="imp">★ 注目</span>
+    <time datetime="2026-11-25T15:01:00.000Z">11/26 00:01</time>
+  </div>
+  <h3><a href="https://www.jiji.com/jc/article?k=2026112600001&amp;g=int&amp;m=rss" target="_blank" rel="noopener">ＮＹ株、一時１０００ドル超安 ハイテク売りで大幅反落</a></h3>
+  <ul class="summary"><li>NY株式市場で一時1000ドル超の急落が発生したと報じられた</li><li>ハイテク株の売りが主導し相場が大幅反落した</li><li>ハイテク株中心に市場の警戒感が強まっている</li></ul>
+  <p class="impact"><b>影響</b>米ハイテク株売りの波及でエヌビディアやアップルなど主要銘柄にも下押し圧力がかかる可能性。</p>
+  <footer>
+    <span class="pub">時事通信</span>
+    <span class="tag">NYダウ</span><span class="tag">NASDAQ</span><span class="tag">エヌビディア</span><span class="tag">アップル</span>
+    
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="neutral" data-tickers="NVDA" data-text="エヌビディアに起きている奇妙な出来事｜coldfusion エヌビディアを巡る異例の動きを扱った動画コンテンツの紹介 詳細は本文取得できず 市場の関心の高さを示す話題 nvdaに関する注目度の高さを示す材料にとどまる。 nvda biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-25T17:01:53.000Z">11/26 02:01</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTFA5Z3N2ZFlLc295SFRTdHpUY2lsVGlkNngzcmxyTDF0ZUpsTFFXQjdnelpSMHFqdldOZERuV1NmX1ZMb0EyV1lIanl4aUlKT3Q4a3RjaVFJX2owUjM4c1E?oc=5" target="_blank" rel="noopener">エヌビディアに起きている奇妙な出来事｜ColdFusion</a></h3>
+  <ul class="summary"><li>エヌビディアを巡る異例の動きを扱った動画コンテンツの紹介</li><li>詳細は本文取得できず</li><li>市場の関心の高さを示す話題</li></ul>
+  <p class="impact"><b>影響</b>NVDAに関する注目度の高さを示す材料にとどまる。</p>
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag watch">エヌビディア</span><span class="tag">NVDA</span>
+    
+  </footer>
+</article>
+<article class="news" data-cat="commodity" data-sent="neutral" data-tickers="" data-text="純金上場信託(現物国内保管型)【1540】：株価・株式情報（夜間pts含む） 純金上場信託（現物国内保管型）の株価情報ページの見出しのみ 夜間ptsを含む株価情報の提供との内容 具体的な価格変動の詳細は本文未取得 金価格連動型etfとして金相場の動向を反映する投資対象として参照される。 純金上場信託 金 yahoo! japan">
+  <div class="nmeta">
+    <span class="cat">商品・暗号資産</span>
+    <span class="sent sent-neutral">－ 中立</span>
+    
+    <time datetime="2026-11-25T16:25:27.000Z">11/26 01:25</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE4wT0pLZFYweEZKZEI1MWVnSDNHYXJfemt1T1FNNDFfai1kRkFoVGp2Y0pLemJYVGRIUDc2VGNXVUlUSUFFdTNscnZBME81Ml9Oenc?oc=5" target="_blank" rel="noopener">純金上場信託(現物国内保管型)【1540】：株価・株式情報（夜間PTS含む）</a></h3>
+  <ul class="summary"><li>純金上場信託（現物国内保管型）の株価情報ページの見出しのみ</li><li>夜間PTSを含む株価情報の提供との内容</li><li>具体的な価格変動の詳細は本文未取得</li></ul>
+  <p class="impact"><b>影響</b>金価格連動型ETFとして金相場の動向を反映する投資対象として参照される。</p>
+  <footer>
+    <span class="pub">Yahoo! JAPAN</span>
+    <span class="tag">純金上場信託</span><span class="tag">金</span>
+    
+  </footer>
+</article>
+<article class="news" data-cat="global" data-sent="negative" data-tickers="" data-text="中国・上海総合指数が3500ポイント割れ、科技株主導で下落 両市売買代金1兆3900億元に縮小 中国・上海総合指数が3500ポイントを割り込んだ ハイテク株（科技株）主導で下落 両市場の売買代金は1兆3900億元に縮小し商いも減少 中国株安が波及すれば他のアジア株やハイテク関連銘柄の投資心理に影響を与える可能性。 上海総合指数 中国株 アジア株 biggo ファイナンス">
+  <div class="nmeta">
+    <span class="cat">米国・海外市場</span>
+    <span class="sent sent-negative">▼ 向かい風</span>
+    
+    <time datetime="2026-11-25T16:05:00.000Z">11/26 01:05</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE53c3ZrLXRZT0JlOHhuOWtkR0xSbm1jSDY5R3c5RmhBc1R1dEkxeUJScnRRNTV3cXBmTVBEdkJJX2VEVXFaLWcwWVBkektiYjJzNkZ3U1lBLTRZTGVMRDNhaFM3b1pGYlhkUFJoUEQxNFRPeVNz?oc=5" target="_blank" rel="noopener">中国・上海総合指数が3500ポイント割れ、科技株主導で下落 両市売買代金1兆3900億元に縮小</a></h3>
+  <ul class="summary"><li>中国・上海総合指数が3500ポイントを割り込んだ</li><li>ハイテク株（科技株）主導で下落</li><li>両市場の売買代金は1兆3900億元に縮小し商いも減少</li></ul>
+  <p class="impact"><b>影響</b>中国株安が波及すれば他のアジア株やハイテク関連銘柄の投資心理に影響を与える可能性。</p>
+  <footer>
+    <span class="pub">BigGo ファイナンス</span>
+    <span class="tag">上海総合指数</span><span class="tag">中国株</span><span class="tag">アジア株</span>
+    
+  </footer>
+</article>
+<article class="news" data-cat="jpstock" data-sent="positive" data-tickers="" data-text="20万円以下で買える、12月権利の連続増配株―アサヒなど3銘柄 12月権利付きで20万円以下で買える連続増配株が紹介された アサヒなど3銘柄が対象として挙げられている 個人投資家の配当狙い銘柄選びの参考情報として報じられた 連続増配銘柄への関心が高まり、配当狙いの個人投資家の売買材料となる。 アサヒグループホールディングス 財経新聞">
+  <div class="nmeta">
+    <span class="cat">日本株・企業</span>
+    <span class="sent sent-positive">▲ 追い風</span>
+    
+    <time datetime="2026-11-25T15:03:35.000Z">11/26 00:03</time>
+  </div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE9lcHBJSWpqbWtfSC1BM0d0bC1OT1pMaGlDNzZCaVJuZEJfZlk5NEcwU0p4c2hZdlJHZkItZGx0QVpndk1RRWRnVWRWT2JsN2lvdEtZSFhqUVg5cUJCUGo5MXNPUdIBaEFVX3lxTE13SkdwOUxjbG1pV0twVjIyblIxX0llRURpYWw2cXQyVWRtZmZ0WU1pa1JjTXFHYkRCUXBJemIwYWozZ09YRURrUHk5M3Z5WDYwTWc2cGFjT0hFWmpjdk1yVEhRWGJuYU1T?oc=5" target="_blank" rel="noopener">20万円以下で買える、12月権利の連続増配株―アサヒなど3銘柄</a></h3>
+  <ul class="summary"><li>12月権利付きで20万円以下で買える連続増配株が紹介された</li><li>アサヒなど3銘柄が対象として挙げられている</li><li>個人投資家の配当狙い銘柄選びの参考情報として報じられた</li></ul>
+  <p class="impact"><b>影響</b>連続増配銘柄への関心が高まり、配当狙いの個人投資家の売買材料となる。</p>
+  <footer>
+    <span class="pub">財経新聞</span>
+    <span class="tag">アサヒグループホールディングス</span>
+    
+  </footer>
+</article>
+    <p class="empty-note" hidden>該当するニュースはありません</p>
+  </div>
+</section>
+<p><a href="../archive.html">← 日付の一覧へ</a></p>
+</main>
+<footer class="wrap foot">
+  <p class="disclaimer">このページは公開情報を自動で集めて要約したものです。投資の勧誘や売買の推奨を目的としたものではありません。価格は遅延しており、要約には誤りが含まれることがあります。投資判断は必ず原文と一次情報を確認のうえ、ご自身の責任で行ってください。</p>
+  <p>要約: Claude による要約 ／ 価格データ: Yahoo Finance（予備: Stooq）／ 情報源 26 / 26 件から取得</p>
+</footer>
+<script>
+(() => {
+  const fmt = (v, d) => v.toLocaleString('ja-JP', { minimumFractionDigits: d, maximumFractionDigits: d })
+  for (const el of document.querySelectorAll('.spark[data-pts]')) {
+    let pts
+    try { pts = JSON.parse(el.dataset.pts) } catch { continue }
+    const d = Number(el.dataset.digits || 2)
+    const svg = el.querySelector('svg')
+    const vb = svg.viewBox.baseVal
+    const vals = pts.map((p) => p[1])
+    const min = Math.min(...vals), max = Math.max(...vals), span = (max - min) || 1
+    const cross = el.querySelector('.cross'), dot = el.querySelector('.dot'), tip = el.querySelector('.tip')
+    const move = (clientX) => {
+      const r = svg.getBoundingClientRect()
+      const ratio = Math.min(1, Math.max(0, (clientX - r.left) / r.width))
+      const i = Math.round(ratio * (pts.length - 1))
+      const x = (i / (pts.length - 1)) * vb.width
+      const y = 3 + (1 - (pts[i][1] - min) / span) * (vb.height - 6)
+      cross.setAttribute('x1', x); cross.setAttribute('x2', x)
+      dot.setAttribute('cx', x); dot.setAttribute('cy', y)
+      tip.textContent = pts[i][0] + '  ' + fmt(pts[i][1], d)
+      tip.style.left = (i / (pts.length - 1)) * 100 + '%'
+      tip.hidden = false
+      el.classList.add('hover')
+    }
+    const leave = () => { tip.hidden = true; el.classList.remove('hover') }
+    el.addEventListener('pointermove', (e) => move(e.clientX))
+    el.addEventListener('pointerleave', leave)
+  }
+
+  const list = document.querySelector('[data-news]')
+  if (!list) return
+  const items = [...list.querySelectorAll('.news')]
+  const state = { cat: '', sent: '', ticker: '', key: false, q: '' }
+  const countEl = document.querySelector('.filters .count')
+  const empty = list.querySelector('.empty-note')
+  const apply = () => {
+    const q = state.q.trim().toLowerCase()
+    let shown = 0
+    for (const it of items) {
+      const ok = (!state.cat || it.dataset.cat === state.cat)
+        && (!state.sent || it.dataset.sent === state.sent)
+        && (!state.ticker || it.dataset.tickers.split(' ').includes(state.ticker))
+        && (!state.key || it.classList.contains('key'))
+        && (!q || it.dataset.text.includes(q))
+      it.hidden = !ok
+      if (ok) shown++
+    }
+    if (countEl) countEl.textContent = shown + ' / ' + items.length + ' 件を表示'
+    if (empty) empty.hidden = shown > 0
+  }
+  for (const chip of document.querySelectorAll('.chips[data-group=cat] .chip')) {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.chips[data-group=cat] .chip').forEach((c) => c.classList.toggle('on', c === chip))
+      state.cat = chip.dataset.value
+      apply()
+    })
+  }
+  const sent = document.querySelector('select[data-group=sent]')
+  const ticker = document.querySelector('select[data-group=ticker]')
+  const key = document.querySelector('input[data-group=key]')
+  const q = document.querySelector('input[data-group=q]')
+  sent && sent.addEventListener('change', () => { state.sent = sent.value; apply() })
+  ticker && ticker.addEventListener('change', () => { state.ticker = ticker.value; apply() })
+  key && key.addEventListener('change', () => { state.key = key.checked; apply() })
+  q && q.addEventListener('input', () => { state.q = q.value; apply() })
+  for (const btn of document.querySelectorAll('[data-filter-ticker]')) {
+    btn.addEventListener('click', () => {
+      if (ticker) ticker.value = btn.dataset.filterTicker
+      state.ticker = btn.dataset.filterTicker
+      apply()
+      document.getElementById('news').scrollIntoView({ behavior: 'smooth' })
+    })
+  }
+  apply()
+})()
+</script>
+</body>
+</html>
