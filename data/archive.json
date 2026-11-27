@@ -1,41 +1,41 @@
 {
-  "updatedAt": "2026-11-26T04:03:48.974Z",
+  "updatedAt": "2026-11-27T04:01:46.400Z",
   "meta": {
-    "updatedAt": "2026-11-26T04:03:48.974Z",
+    "updatedAt": "2026-11-27T04:01:46.400Z",
     "engine": "claude",
-    "sourcesOk": 25,
+    "sourcesOk": 24,
     "sourcesTotal": 29,
-    "totalArticles": 401,
-    "recentArticles": 26,
-    "freshArticles": 3,
+    "totalArticles": 402,
+    "recentArticles": 20,
+    "freshArticles": 1,
     "status": [
       {
         "id": "kokkai:防衛施設",
         "name": "国会会議録「防衛施設」",
         "ok": false,
         "picked": 0,
-        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%98%B2%E8%A1%9B%E6%96%BD%E8%A8%AD&from=2026-11-19&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
+        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%98%B2%E8%A1%9B%E6%96%BD%E8%A8%AD&from=2026-11-20&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
       },
       {
         "id": "kokkai:駐屯地",
         "name": "国会会議録「駐屯地」",
         "ok": false,
         "picked": 0,
-        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%A7%90%E5%B1%AF%E5%9C%B0&from=2026-11-19&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
+        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%A7%90%E5%B1%AF%E5%9C%B0&from=2026-11-20&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
       },
       {
         "id": "kokkai:辺野古",
         "name": "国会会議録「辺野古」",
         "ok": false,
         "picked": 0,
-        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E8%BE%BA%E9%87%8E%E5%8F%A4&from=2026-11-19&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
+        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E8%BE%BA%E9%87%8E%E5%8F%A4&from=2026-11-20&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
       },
       {
         "id": "kokkai:馬毛島",
         "name": "国会会議録「馬毛島」",
         "ok": false,
         "picked": 0,
-        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%A6%AC%E6%AF%9B%E5%B3%B6&from=2026-11-19&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
+        "note": "https://kokkai.ndl.go.jp/api/speech?any=%E9%A6%AC%E6%AF%9B%E5%B3%B6&from=2026-11-20&recordPacking=json&maximumRecords=20 → 応答の形が想定と違う"
       },
       {
         "id": "mlit",
@@ -62,7 +62,7 @@
         "id": "kensetsunews",
         "name": "建設通信新聞",
         "ok": true,
-        "picked": 0,
+        "picked": 1,
         "note": "https://www.kensetsunews.com/feed"
       },
       {
@@ -90,7 +90,7 @@
         "id": "yahoo-domestic",
         "name": "Yahoo!ニュース 国内",
         "ok": true,
-        "picked": 1,
+        "picked": 0,
         "note": "https://news.yahoo.co.jp/rss/topics/domestic.xml"
       },
       {
@@ -111,7 +111,7 @@
         "id": "gnews:馬毛島 基地建設",
         "name": "Google ニュース「馬毛島 基地建設」",
         "ok": true,
-        "picked": 5,
+        "picked": 1,
         "note": "https://news.google.com/rss/search?q=%E9%A6%AC%E6%AF%9B%E5%B3%B6%20%E5%9F%BA%E5%9C%B0%E5%BB%BA%E8%A8%AD%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
@@ -125,7 +125,7 @@
         "id": "gnews:自衛隊 駐屯地 新設 整備",
         "name": "Google ニュース「自衛隊 駐屯地 新設 整備」",
         "ok": true,
-        "picked": 1,
+        "picked": 0,
         "note": "https://news.google.com/rss/search?q=%E8%87%AA%E8%A1%9B%E9%9A%8A%20%E9%A7%90%E5%B1%AF%E5%9C%B0%20%E6%96%B0%E8%A8%AD%20%E6%95%B4%E5%82%99%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
@@ -146,14 +146,14 @@
         "id": "gnews:防衛局 工事 入札 落札",
         "name": "Google ニュース「防衛局 工事 入札 落札」",
         "ok": true,
-        "picked": 1,
+        "picked": 0,
         "note": "https://news.google.com/rss/search?q=%E9%98%B2%E8%A1%9B%E5%B1%80%20%E5%B7%A5%E4%BA%8B%20%E5%85%A5%E6%9C%AD%20%E8%90%BD%E6%9C%AD%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
         "id": "gnews:自衛隊 施設 建設工事 受注",
         "name": "Google ニュース「自衛隊 施設 建設工事 受注」",
         "ok": true,
-        "picked": 2,
+        "picked": 1,
         "note": "https://news.google.com/rss/search?q=%E8%87%AA%E8%A1%9B%E9%9A%8A%20%E6%96%BD%E8%A8%AD%20%E5%BB%BA%E8%A8%AD%E5%B7%A5%E4%BA%8B%20%E5%8F%97%E6%B3%A8%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
@@ -173,9 +173,9 @@
       {
         "id": "gnews:特定利用空港 特定利用港湾 整備",
         "name": "Google ニュース「特定利用空港 特定利用港湾 整備」",
-        "ok": true,
-        "picked": 3,
-        "note": "https://news.google.com/rss/search?q=%E7%89%B9%E5%AE%9A%E5%88%A9%E7%94%A8%E7%A9%BA%E6%B8%AF%20%E7%89%B9%E5%AE%9A%E5%88%A9%E7%94%A8%E6%B8%AF%E6%B9%BE%20%E6%95%B4%E5%82%99%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
+        "ok": false,
+        "picked": 0,
+        "note": "https://news.google.com/rss/search?q=%E7%89%B9%E5%AE%9A%E5%88%A9%E7%94%A8%E7%A9%BA%E6%B8%AF%20%E7%89%B9%E5%AE%9A%E5%88%A9%E7%94%A8%E6%B8%AF%E6%B9%BE%20%E6%95%B4%E5%82%99%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja → HTTP 429"
       },
       {
         "id": "gnews:防衛予算 施設 概算要求",
@@ -202,7 +202,7 @@
         "id": "gnews:鹿児島 自衛隊 施設 建設",
         "name": "Google ニュース「鹿児島 自衛隊 施設 建設」",
         "ok": true,
-        "picked": 3,
+        "picked": 1,
         "note": "https://news.google.com/rss/search?q=%E9%B9%BF%E5%85%90%E5%B3%B6%20%E8%87%AA%E8%A1%9B%E9%9A%8A%20%E6%96%BD%E8%A8%AD%20%E5%BB%BA%E8%A8%AD%20when%3A14d&hl=ja&gl=JP&ceid=JP:ja"
       },
       {
@@ -215,6 +215,36 @@
     ]
   },
   "articles": [
+    {
+      "key": "伊藤喜三郎jvに/青森庁舎新設総合設計/東北防衛",
+      "title": "伊藤喜三郎JVに/青森庁舎新設総合設計/東北防衛",
+      "link": "https://www.kensetsunews.com/archives/1314619",
+      "isGoogleLink": false,
+      "description": "東北防衛局は、「青森外（８）庁舎新設等総合設計」を一般競争入札した結果、５億８６００万円（税別、以下同）の伊藤喜三郎建築研究所・ＮｉＸＣＲＥＡＴＥ・復建技術コンサルタント・オリエンタルコンサルタンツ・キタコンＪＶに決めた。応札は同ＪＶのみだった。予定価格は５億８７４２万９７４０円に設定していた。\n 業務内容は、陸上自衛隊青森駐屯地の隊庁舎（ＲＣ造１０階建て延べ約１万２０００㎡）新設、警衛所（同造平屋建て約３５０㎡）新設と仮設警衛所（Ｓ造平屋建て約２３０㎡）、建物解体一式などと、陸上自衛隊八戸駐屯地の局舎（ＲＣ造３階建て延べ約２２００㎡）新設と建物解体一式、航空自衛隊車力高射教育訓練場の庁舎（同造２階建て延べ約２０００㎡）新設、食堂・体育館（同造３階建て約２５００㎡）新設、建物解体一式などの基本・実施設計。\n ほかに車力高射教育訓練場の基地内ユーティリティ更新の実施設計も行う。履行期限は車力高射教育訓練場が２０２７年６月３０日、八戸駐屯地は２８年３月１５日、青森駐屯地は３０年３月１５日。履行場所は青森市ほか。\n\n◆山田道路検討は日本工営ＪＶに\n また同局は、「山田（８）道路整備基本検討」の公募型プロポーザルを実施した結果、日本工営・日本工営都市空間ＪＶを特定し、１億９７１６万円（税別、以下同）で契約した。５者２ＪＶが参加した。予定価格は１億９７１７万８８６２円に設定していた。\n 業務概要は、航空自衛隊山田分屯基地の防衛道路整備基本検討一式、航空レーザー測量約１０km2、地上測量約０.１km2、ボーリング調査１０本、室内土質試験一式、環境現況調査一式。履行期間は２０２８年６月末まで。業務場所は岩手県山田町。\n The post 伊藤喜三郎JVに/青森庁舎新設総合設計/東北防衛 first appeared on 建設通信新聞Digital .",
+      "publishedAt": "2026-11-26T19:55:00.000Z",
+      "publisher": "建設通信新聞",
+      "via": [
+        "建設通信新聞"
+      ],
+      "sourceHint": "建設専門",
+      "sourceHost": "",
+      "relevance": 18,
+      "pickups": 1,
+      "matchText": "伊藤喜三郎JVに/青森庁舎新設総合設計/東北防衛\n東北防衛局は、「青森外（８）庁舎新設等総合設計」を一般競争入札した結果、５億８６００万円（税別、以下同）の伊藤喜三郎建築研究所・ＮｉＸＣＲＥＡＴＥ・復建技術コンサルタント・オリエンタルコンサルタンツ・キタコンＪＶに決めた。応札は同ＪＶのみだった。予定価格は５億８７４２万９７４０円に設定していた。\n 業務内容は、陸上自衛隊青森駐屯地の隊庁舎（ＲＣ造１０階建て延べ約１万２０００㎡）新設、警衛所（同造平屋建て約３５０㎡）新設と仮設警衛所（Ｓ造平屋建て約２３０㎡）、建物解体一式などと、陸上自衛隊八戸駐屯地の局舎（ＲＣ造３階建て延べ約２２００㎡）新設と建物解体一式、航空自衛隊車力高射教育訓練場の庁舎（同造２階建て延べ約２０００㎡）新設、食堂・体育館（同造３階建て約２５００㎡）新設、建物解体一式などの基本・実施設計。\n ほかに車力高射教育訓練場の基地内ユーティリティ更新の実施設計も行う。履行期限は車力高射教育訓練場が２０２７年６月３０日、八戸駐屯地は２８年３月１５日、青森駐屯地は３０年３月１５日。履行場所は青森市ほか。\n\n◆山田道路検討は日本工営ＪＶに\n また同局は、「山田（８）道路整備基本検討」の公募型プロポーザルを実施した結果、日本工営・日本工営都市空間ＪＶを特定し、１億９７１６万円（税別、以下同）で契約した。５者２ＪＶが参加した。予定価格",
+      "enrichAttempts": 1,
+      "body": "東北防衛局は、「青森外（８）庁舎新設等総合設計」を一般競争入札した結果、５億８６００万円（税別、以下同）の伊藤喜三郎建築研究所・ＮｉＸＣＲＥＡＴＥ・復建技術コンサルタント・オリエンタルコンサルタンツ・キタコンＪＶに決めた。応札は同ＪＶのみだった。予定価格は５億８７４２万９７４０円に設定していた。\n 業務内容は、陸上自衛隊青森駐屯地の隊庁舎（ＲＣ造１０階建て延べ約１万２０００㎡）新設、警衛所（同造平屋建て約３５０㎡）新設と仮設警衛所（Ｓ造平屋建て約２３０㎡）、建物解体一式などと、陸上自衛隊八戸駐屯地の局舎（ＲＣ造３階建て延べ約２２００㎡）新設と建物解体一式、航空自衛隊車力高射教育訓練場の庁舎（同造２階建て延べ約２０００㎡）新設、食堂・体育館（同造３階建て約２５００㎡）新設、建物解体一式などの基本・実施設計。\n ほかに車力高射教育訓練場の基地内ユーティリティ更新の実施設計も行う。履行期限は車力高射教育訓練場が２０２７年６月３０日、八戸駐屯地は２８年３月１５日、青森駐屯地は３０年３月１５日。履行場所は青森市ほか。\n\n◆山田道路検討は日本工営ＪＶに\n また同局は、「山田（８）道路整備基本検討」の公募型プロポーザルを実施した結果、日本工営・日本工営都市空間ＪＶを特定し、１億９７１６万円（税別、以下同）で契約した。５者２ＪＶが参加した。予定価格は１億９７１７万８８６２円に設定していた。\n 業務概要は、航空自衛隊山田分屯基地の防衛道路整備基本検討一式、航空レーザー測量約１０km2、地上測量約０.１km2、ボーリング調査１０本、室内土質試験一式、環境現況調査一式。履行期間は２０２８年６月末まで。業務場所は岩手県山田町。",
+      "hasBody": true,
+      "category": "chotatsu",
+      "summary": [
+        "東北防衛局が「青森外（8）庁舎新設等総合設計」を5億8600万円で伊藤喜三郎建築研究所JVに決定。",
+        "陸自青森駐屯地のRC10階建て延べ約1.2万㎡隊庁舎、八戸駐屯地局舎、空自車力高射教育訓練場庁舎などの基本・実施設計。",
+        "履行期限は車力27年6月、八戸28年3月、青森30年3月。山田分屯基地の道路整備基本検討は日本工営JVが1億9716万円で受注。"
+      ],
+      "why": "東北地方の自衛隊施設の大規模更新設計の受注者と内容・工程が具体的に判明したため。",
+      "importance": "normal",
+      "generatedBy": "claude",
+      "region": "tohoku"
+    },
     {
       "key": "3文書防衛力整備計画の指針判明",
       "title": "3文書 防衛力整備計画の指針判明",
